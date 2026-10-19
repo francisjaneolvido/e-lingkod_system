@@ -1,0 +1,44 @@
+E-LINGKOD BAYAN — BRAND / UI CONTINUITY GUIDE
+=============================================
+Identity: eLB | eLingkod Bayan | Report. Act. Resolve.
+Original generated eLB mark: public/images/elb-mark.svg (keep existing).
+Font: Poppins throughout the site.
+
+COLORS
+Navy / primary          #103C64 / #143D62
+Action/navy             #153F67
+Service blue            #1A78B4
+Pale blue               #EAF5FD
+Warm gold accent        #FFBF43
+Success teal            #118B81
+Primary body text       #56718B
+Border                  #DFE9F2
+Page background         #F8FBFE
+
+LAYOUT
+Max content width       1344px for sections; 1440px header/hero outer wrapper
+Desktop (>=1024px)     split hero, 3-column cards, top navigation
+Tablet (768–1023px)   2-column service grid
+Mobile (<768px)        1-column cards; collapsible menu; stacked feature panels
+Spacing                 generous breathing room, 24px/32px cards
+Corners                 16–28px, not mixed arbitrarily
+Typography              editorial clear headings, concise body, meaningful labels
+
+INTERACTION
+- Real actions should be labelled accurately, including when demo-only.
+- Service preview pop-ups: keyboard closable via Escape and close button.
+- Buttons/links must perform an action (no dead endpoints).
+- Avoid mock statistics masquerading as live government figures.
+- Never publish unverified emergency hotlines or fictional official advisories.
+- Do not expose individually identifiable census information on public pages.
+
+PRODUCT MODULES (APPROVED)
+1 Civic Reporting: photo upload, permission-based GPS, tracking ID/status.
+2 Online LGU Services: permits, taxes, clearances.
+3 Emergency Hotlines & Alerts: PNP/BFP/Hospital/MDRRMO, push advisories.
+4 Municipal Directory & Guide: requirements, fees, offices.
+5 Job matching: jobseekers and businesses.
+6 Worker and social-status census: privacy-conscious aggregated data.
+
+Images in public/images/landing are AI-created illustrations for this prototype.
+They are NOT photographs of actual LGU projects, events or service users.

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="100" viewBox="0 0 88 100" fill="none" role="img" aria-label="E-Lingkod Bayan symbol">
+  <g stroke="#FFB526" stroke-width="5" stroke-linecap="round"><path d="M44 5V14"/><path d="M25 9L30 17"/><path d="M12 23L20 28"/><path d="M63 9L58 17"/><path d="M76 23L68 28"/></g>
+  <path d="M44 14C23 14 8 28 8 48c0 21 20 35 36 49 16-14 36-28 36-49C80 28 65 14 44 14Z" fill="#ffffff"/>
+  <path d="M44 18C26 18 12 31 12 49c0 18 16 31 32 44 16-13 32-26 32-44C76 31 62 18 44 18Z" fill="#0D4B8A"/>
+  <path d="M19 60c7-10 14-13 25-13s19 4 25 13" stroke="#fff" stroke-width="4.5" stroke-linecap="round" />
+  <circle cx="31" cy="37" r="8" fill="#fff"/><circle cx="57" cy="37" r="8" fill="#fff"/><circle cx="44" cy="32" r="9" fill="#fff"/>
+  <path d="M35 50c1-9 5-13 9-13s8 4 9 13" fill="#fff"/>
+  <path d="M12 61c11 11 21 11 32 11s22-3 32-11L44 94 12 61Z" fill="#f9fdfc"/>
+  <path d="M15 68c15 9 41 9 59 0L44 93 15 68Z" fill="#279768"/>
+  <path d="M31 75v-9l13-10 13 10v9H31Z" fill="#fff"/><path d="m28 66 16-13 16 13" stroke="#0D4B8A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M41 66h7v10h-7z" fill="#0D4B8A"/>
+</svg>

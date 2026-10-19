@@ -1,0 +1,37 @@
+E-LINGKOD BAYAN — RESPONSIVE WEB PORTAL (V2)
+
+UPDATED: Fixed Next.js 16 prerender footer issue; used generated eLB logo.
+INCLUDED: Modern desktop-first landing page, login UI, registration UI.
+IMPORTANT: Login / register are UI PREVIEWS ONLY. No database or account saving yet.
+
+START IN VS CODE (WINDOWS)
+1) Extract ZIP to a new folder. Do not work inside the ZIP.
+2) VS Code > File > Open Folder > choose e-lingkod-bayan (contains package.json).
+3) Terminal > New Terminal.
+4) Run: npm install
+5) Run: npm run dev
+6) Open browser: http://localhost:3000
+7) Login page: http://localhost:3000/login
+8) Register page: http://localhost:3000/register
+
+IF UPDATING OLD PROJECT
+- Stop dev server using Ctrl+C.
+- Safest for beginners: extract this as a NEW project folder, open that in VS Code.
+- Your previous folder can stay as a backup.
+- Do NOT copy old .next or node_modules into the new folder.
+
+CHECK RESPONSIVE LAYOUT
+Chrome F12 > Ctrl+Shift+M > test 1920x1080, 1366x768, 768x1024, 390x844, 320x640.
+
+PROJECT MAP
+src/app/page.tsx                      Home
+src/app/(auth)/login/page.tsx         Login URL: /login
+src/app/(auth)/register/page.tsx      Register URL: /register
+src/features/landing/                Landing page modules
+src/features/auth/components/        Shared form components and auth layout
+src/components/layout/               Site header and footer
+src/components/shared/               Shared branding
+public/images/elb-mark.svg           Generated eLB vector mark (used in app)
+
+NEXT STEPS
+Prisma + MySQL, authentication, authorization roles, reporting workflows.

@@ -1,0 +1,16 @@
+E-LINGKOD BAYAN — AUTHENTICATION V6 (REPLACE-ONLY PATCH)
+======================================================
+[ ] Back up current project
+[ ] Extract ZIP and MERGE folders into existing project root
+[ ] Start MySQL / create empty e_lingkod_bayan database
+[ ] npm install better-auth @prisma/client@7 @prisma/adapter-mariadb@7 dotenv
+[ ] npm install -D prisma@7
+[ ] npm pkg set type=module
+[ ] Copy .env.example to .env and edit DB URL + unique secret
+[ ] npx prisma validate
+[ ] npx prisma migrate dev --name init_auth
+[ ] npx prisma generate
+[ ] npm run dev
+[ ] Register -> dashboard -> logout -> redirect -> login
+
+Never send DB passwords or .env file. No change to landing V4/V5. Refer to SETUP-MYSQL-AUTH.md for detailed help.
