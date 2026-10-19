@@ -1,0 +1,63 @@
+flowchart TD
+    A([START - DEVELOPMENT]) --> B[Confirm the six MVP features and their scope]
+    B --> C[Agree on data fields, user roles, statuses and module contracts]
+    C --> D[Replace legacy authentication with Supabase Auth]
+    D --> E[Prepare shared profiles, Supabase database and RLS policies]
+    E --> V[Verify login, roles and access permissions]
+    V --> F{Split development between three developers}
+
+    %% DEVELOPER 1 - CIVIC REPORTING AND EMERGENCY HOTLINES
+    F --> G1[Dev 1 - Build Civic Reporting form and validation]
+    G1 --> G2[Save incidents and generate unique tracking IDs]
+    G2 --> G3[Add secure photo upload and GPS or manual location]
+    G3 --> G4[Build citizen report history and status tracking]
+    G4 --> G5[Build LGU report review and status updates]
+    G5 --> G6[Build verified emergency hotline directory]
+    G6 --> G7[Add click-to-call buttons and check mobile behavior]
+    G7 --> G8[Check Developer 1 modules]
+
+    %% DEVELOPER 2 - ONLINE SERVICES AND MUNICIPAL INFORMATION
+    F --> H1[Dev 2 - Build reusable LGU service request form]
+    H1 --> H2[Validate and save requests with unique reference IDs]
+    H2 --> H3[Build citizen request history and status tracking]
+    H3 --> H4[Build LGU request review and status updates]
+    H4 --> H5[Build office directory and available services]
+    H5 --> H6[Build municipal project list, details and statuses]
+    H6 --> H7[Check Developer 2 modules]
+
+    %% DEVELOPER 3 - WORKER CENSUS AND JOB MATCHING
+    F --> I1[Dev 3 - Define worker, employment and skills data]
+    I1 --> I2[Build staff-only census form, validation and saving]
+    I2 --> I3[Add record management and synthetic SPES import]
+    I3 --> I4[Build aggregate census dashboard]
+    I4 --> I5[Build sample job listings and basic filters]
+    I5 --> I6[Match jobs using authorized census skills, occupation and barangay]
+    I6 --> I7[Check Developer 3 modules]
+
+    %% INTEGRATION - REVIEWED INCREMENTS MAY MERGE EARLIER
+    G8 --> J[Merge reviewed feature increments]
+    H7 --> J
+    I7 --> J
+    J --> K[Integrate navigation, Auth, database and private storage]
+    K --> L[Seed synthetic demo data and verify shared workflows]
+    L --> M{Do all six core workflows pass?}
+    M -->|No| N[Fix the failing module and repeat integration check]
+    N --> K
+    M -->|Yes| O([TESTING])
+
+    %% COLORS
+    classDef setup fill:#FFF2CC,stroke:#B58B00,color:#000,stroke-width:2px;
+    classDef member1 fill:#CFE2F3,stroke:#2F75B5,color:#000,stroke-width:2px;
+    classDef member2 fill:#D9EAD3,stroke:#6AA84F,color:#000,stroke-width:2px;
+    classDef member3 fill:#FCE0ED,stroke:#C27BA0,color:#000,stroke-width:2px;
+    classDef integration fill:#FCE5CD,stroke:#E69138,color:#000,stroke-width:2px;
+    classDef testing fill:#F4CCCC,stroke:#CC0000,color:#000,stroke-width:2px;
+    classDef startend fill:#EAD1DC,stroke:#674EA7,color:#000,stroke-width:2px;
+
+    class A startend;
+    class B,C,D,E,V,F setup;
+    class G1,G2,G3,G4,G5,G6,G7,G8 member1;
+    class H1,H2,H3,H4,H5,H6,H7 member2;
+    class I1,I2,I3,I4,I5,I6,I7 member3;
+    class J,K,L,M integration;
+    class N,O testing;

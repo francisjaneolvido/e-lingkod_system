@@ -1,0 +1,58 @@
+flowchart TD
+    A([DEVELOPMENT]) --> B[Confirm merged revision, test accounts and synthetic data]
+    B --> C[Run lint, TypeScript checks and production build]
+    C --> D{Does the build pass?}
+    D -->|No| X[Assign failure to owner, fix and retest]
+    D -->|Yes| E{Split module testing between three developers}
+
+    %% DEVELOPER 1 MODULE TESTS
+    E --> G1[Dev 1 - Test incident form, validation and photo uploads]
+    G1 --> G2[Test GPS permission, manual location and tracking IDs]
+    G2 --> G3[Test citizen history, staff status, privacy and hotlines]
+    G3 --> G4[Record Developer 1 test results]
+
+    %% DEVELOPER 2 MODULE TESTS
+    E --> H1[Dev 2 - Test service types, submission and reference IDs]
+    H1 --> H2[Test request history, staff updates and access denial]
+    H2 --> H3[Test offices, project details, statuses and empty data]
+    H3 --> H4[Record Developer 2 test results]
+
+    %% DEVELOPER 3 MODULE TESTS
+    E --> I1[Dev 3 - Test worker encoding, editing and validation]
+    I1 --> I2[Test sample import, aggregates and staff-only access]
+    I2 --> I3[Test job filters, matching rules and no-match cases]
+    I3 --> I4[Record Developer 3 test results]
+
+    %% SHARED TESTS AND DECISION GATES
+    G4 --> J[Run integrated citizen-to-staff workflows]
+    H4 --> J
+    I4 --> J
+    J --> K[Test login, RLS permissions, private Storage and persistence]
+    K --> L[Test errors, responsive UI, browser and keyboard behavior]
+    L --> M{Do all required tests pass?}
+    M -->|No| X
+    M -->|Yes| N[Deploy to Vercel and verify live environment]
+    N --> P{Do deployment smoke tests pass?}
+    P -->|No| X
+    P -->|Yes| Q[Run final six-feature demonstration]
+    Q --> R{Does the final demo pass?}
+    R -->|No| X
+    R -->|Yes| S([END - TESTED MVP])
+    X --> C
+
+    %% COLORS
+    classDef setup fill:#FFF2CC,stroke:#B58B00,color:#000,stroke-width:2px;
+    classDef member1 fill:#CFE2F3,stroke:#2F75B5,color:#000,stroke-width:2px;
+    classDef member2 fill:#D9EAD3,stroke:#6AA84F,color:#000,stroke-width:2px;
+    classDef member3 fill:#FCE0ED,stroke:#C27BA0,color:#000,stroke-width:2px;
+    classDef integration fill:#FCE5CD,stroke:#E69138,color:#000,stroke-width:2px;
+    classDef failed fill:#F4CCCC,stroke:#CC0000,color:#000,stroke-width:2px;
+    classDef startend fill:#EAD1DC,stroke:#674EA7,color:#000,stroke-width:2px;
+
+    class A,S startend;
+    class B,C,D,E,M,P,R setup;
+    class G1,G2,G3,G4 member1;
+    class H1,H2,H3,H4 member2;
+    class I1,I2,I3,I4 member3;
+    class J,K,L,N,Q integration;
+    class X failed;
