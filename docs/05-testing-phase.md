@@ -14,122 +14,70 @@ Exit only when required module and shared checks pass on the integrated revision
 
 ## Test flow
 
-Module results are collected from all three developers before the shared checks proceed. A failed gate always returns to correction and retesting. After any correction, rebuild the changed revision, repeat the affected tests and regression checks, and re-enter the gates; an earlier result is not proof for newly changed code.
+Each colored box groups a small set of manual checks; individual test cases and expected results are documented below. Developers test their own modules in parallel. Shared checks begin after all three record results. Automated tests are recommended where available, not assumed or required for entering the chart.
 
 ```mermaid
-flowchart TB
-    DEVELOPMENT["DEVELOPMENT"]:::startEnd
-    PRE["Check test entry conditions<br/>Integrated revision, contracts, accounts and synthetic fixtures"]:::shared
-    PREOK{"Pretest gate ready?"}:::shared
-    PREREQ["Complete missing development prerequisites<br/>Keep dependent tests blocked"]:::correction
-    BUILD["Run lint, typecheck and production build<br/>Start and check the local production app"]:::shared
-    BUILDOK{"Build and integration gate passes?"}:::integration
+flowchart TD
+    A([DEVELOPMENT]) --> B[Confirm merged revision, test accounts and synthetic data]
+    B --> C[Run lint, TypeScript checks and production build]
+    C --> D{Does the build pass?}
+    D -->|No| X[Assign failure to owner, fix and retest]
+    D -->|Yes| E{Split module testing between three developers}
 
-    subgraph TD1["Developer 1 — Module tests; D2 reviews"]
-        D1TEST["Create report and reject invalid fields<br/>Required text, finite coordinates and no fake success"]:::d1
-        D1FILES["Verify private photo lifecycle<br/>Valid bytes, invalid type, size, failed upload and retry"]:::d1
-        D1LOCATION["Allow and deny GPS; test timeout<br/>Manual pin or coordinates survive reload"]:::d1
-        D1TRACK["Check unique tracking and lost-response retry<br/>Owner history, staff status, citizen B denial"]:::d1
-        D1CALL["Check four hotline categories on mobile<br/>Verified-only dial links; cancel before calling"]:::d1
-        D1PASS{"D1 required tests pass?"}:::d1
-    end
+    %% DEVELOPER 1 MODULE TESTS
+    E --> G1[Dev 1 - Test incident form, validation and photo uploads]
+    G1 --> G2[Test GPS permission, manual location and tracking IDs]
+    G2 --> G3[Test citizen history, staff status, privacy and hotlines]
+    G3 --> G4[Record Developer 1 test results]
 
-    subgraph TD2["Developer 2 — Module tests; D3 reviews"]
-        D2TEST["Select and submit each service type<br/>Required fields, invalid input and type-switch behavior"]:::d2
-        D2PERSIST["Check unique references and retry safety<br/>Owner history, staff review and allowed statuses"]:::d2
-        D2FILES["If P2 documents exist, test valid and invalid files<br/>Private parent access and failed upload recovery"]:::d2
-        D2GUIDE["Open office, service and project details<br/>Three project statuses and empty-record recovery"]:::d2
-        D2PASS{"D2 required tests pass?"}:::d2
-    end
+    %% DEVELOPER 2 MODULE TESTS
+    E --> H1[Dev 2 - Test service types, submission and reference IDs]
+    H1 --> H2[Test request history, staff updates and access denial]
+    H2 --> H3[Test offices, project details, statuses and empty data]
+    H3 --> H4[Record Developer 2 test results]
 
-    subgraph TD3["Developer 3 — Module tests; D1 reviews"]
-        D3TEST["Encode and edit synthetic workers<br/>Reject malformed input; deny citizen record access"]:::d3
-        D3IMPORT["Preview and cancel; reject invalid import<br/>Atomic valid batch and duplicate-free repeat"]:::d3
-        D3COUNTS["Restore known fixture and reconcile aggregates<br/>Employment and barangay counts; empty state"]:::d3
-        D3LIST["Open and filter active job listings<br/>Occupation plus skills and reset/no-results"]:::d3
-        D3MATCH["Check exact, partial, tied and no matches<br/>Fresh census projection; no income or age data"]:::d3
-        D3PASS{"D3 required tests pass?"}:::d3
-    end
+    %% DEVELOPER 3 MODULE TESTS
+    E --> I1[Dev 3 - Test worker encoding, editing and validation]
+    I1 --> I2[Test sample import, aggregates and staff-only access]
+    I2 --> I3[Test job filters, matching rules and no-match cases]
+    I3 --> I4[Record Developer 3 test results]
 
-    JOIN["Join all three recorded module results<br/>Wait until every developer reports"]:::integration
-    ALLPASS{"All required module results pass?"}:::integration
-    FUNCTIONAL["Run complete functional flows<br/>Citizen submission through staff update and reread<br/>Census through aggregate and matching"]:::integration
-    FUNCTIONALOK{"Functional flows pass?"}:::integration
-    ACCESS["Test Auth, sessions and role boundaries<br/>Citizen A versus B; direct API RLS and private-record denial"]:::shared
-    ACCESSOK{"Auth and access checks pass?"}:::integration
-    DATA["Test database and private Storage<br/>Persistence, constraints, paths and direct object denial"]:::shared
-    DATAOK{"Database and Storage checks pass?"}:::integration
-    UI["Check responsive UI and accessibility<br/>Keyboard, focus, Chrome, Edge and a mobile phone"]:::shared
-    UIOK{"UI checks pass?"}:::integration
-    EDGE["Exercise error and edge cases<br/>Denied permissions, failed uploads, offline and empty data"]:::shared
-    EDGEOK{"Error and edge checks pass?"}:::integration
-    TRIAGE["Collect defects and classify severity<br/>A failed required gate remains a blocker"]:::correction
-    CRITICAL{"Critical issues found?"}:::correction
-    MAJOR{"Any unresolved Major or core issue<br/>or failed required gate?"}:::correction
-    OWNER["Assign defect owner and reviewer<br/>Include failing test and reproduction evidence"]:::correction
-    CORRECT["Correct implementation, data or policies<br/>Keep the required acceptance criteria"]:::correction
-    RETEST["Rebuild changed revision<br/>Retest defect and affected regression cases"]:::correction
-    DISPOSITION["Record test disposition<br/>Only minor cosmetic items may remain with owners"]:::integration
-    DEPLOY["Deploy the same tested revision to Vercel<br/>Check environment and Auth redirect configuration"]:::integration
-    PRODUCTION["Run production smoke tests<br/>HTTPS, login, saves, private files and mobile routes"]:::integration
-    PRODOK{"Production gate passes?"}:::integration
-    DEMO["Rehearse final demo across all six modules<br/>Use synthetic accounts and the deployed URL"]:::integration
-    DEMOOK{"Final demo gate passes<br/>and evidence is complete?"}:::integration
-    OPTIONAL["Unimplemented P2: record N/A<br/>Realtime, notifications, Cron, document upload and advisories"]:::optional
-    END["END — TESTED MVP"]:::startEnd
+    %% SHARED TESTS AND DECISION GATES
+    G4 --> J[Run integrated citizen-to-staff workflows]
+    H4 --> J
+    I4 --> J
+    J --> K[Test login, RLS permissions, private Storage and persistence]
+    K --> L[Test errors, responsive UI, browser and keyboard behavior]
+    L --> M{Do all required tests pass?}
+    M -->|No| X
+    M -->|Yes| N[Deploy to Vercel and verify live environment]
+    N --> P{Do deployment smoke tests pass?}
+    P -->|No| X
+    P -->|Yes| Q[Run final six-feature demonstration]
+    Q --> R{Does the final demo pass?}
+    R -->|No| X
+    R -->|Yes| S([END - TESTED MVP])
+    X --> C
 
-    DEVELOPMENT --> PRE --> PREOK
-    PREOK -->|No| PREREQ --> PRE
-    PREOK -->|Yes| BUILD --> BUILDOK
-    BUILDOK -->|No| OWNER
-    BUILDOK -->|Yes| D1TEST
-    BUILDOK -->|Yes| D2TEST
-    BUILDOK -->|Yes| D3TEST
-    D1TEST --> D1FILES --> D1LOCATION --> D1TRACK --> D1CALL --> D1PASS
-    D2TEST --> D2PERSIST --> D2FILES --> D2GUIDE --> D2PASS
-    D3TEST --> D3IMPORT --> D3COUNTS --> D3LIST --> D3MATCH --> D3PASS
-    D1PASS -->|Pass| JOIN
-    D2PASS -->|Pass| JOIN
-    D3PASS -->|Pass| JOIN
-    D1PASS -->|Fail recorded| JOIN
-    D2PASS -->|Fail recorded| JOIN
-    D3PASS -->|Fail recorded| JOIN
-    JOIN --> ALLPASS
-    ALLPASS -->|No| TRIAGE
-    ALLPASS -->|Yes| FUNCTIONAL --> FUNCTIONALOK
-    FUNCTIONALOK -->|No| TRIAGE
-    FUNCTIONALOK -->|Yes| ACCESS --> ACCESSOK
-    ACCESSOK -->|No| TRIAGE
-    ACCESSOK -->|Yes| DATA --> DATAOK
-    DATAOK -->|No| TRIAGE
-    DATAOK -->|Yes| UI --> UIOK
-    UIOK -->|No| TRIAGE
-    UIOK -->|Yes| EDGE --> EDGEOK
-    EDGEOK -->|No| TRIAGE
-    EDGEOK -->|Yes| TRIAGE
-    TRIAGE --> CRITICAL
-    CRITICAL -->|Yes| OWNER
-    CRITICAL -->|No| MAJOR
-    MAJOR -->|Yes| OWNER
-    MAJOR -->|No| DISPOSITION --> DEPLOY --> PRODUCTION --> PRODOK
-    OWNER --> CORRECT --> RETEST --> BUILD
-    PRODOK -->|No| OWNER
-    PRODOK -->|Yes| DEMO --> DEMOOK
-    DEMOOK -->|No| OWNER
-    DEMOOK -->|Yes| END
-    PRE -.-> OPTIONAL
+    %% COLORS
+    classDef setup fill:#FFF2CC,stroke:#B58B00,color:#000,stroke-width:2px;
+    classDef member1 fill:#CFE2F3,stroke:#2F75B5,color:#000,stroke-width:2px;
+    classDef member2 fill:#D9EAD3,stroke:#6AA84F,color:#000,stroke-width:2px;
+    classDef member3 fill:#FCE0ED,stroke:#C27BA0,color:#000,stroke-width:2px;
+    classDef integration fill:#FCE5CD,stroke:#E69138,color:#000,stroke-width:2px;
+    classDef failed fill:#F4CCCC,stroke:#CC0000,color:#000,stroke-width:2px;
+    classDef startend fill:#EAD1DC,stroke:#674EA7,color:#000,stroke-width:2px;
 
-    classDef shared fill:#FFF2B3,stroke:#9A7300,color:#2B2400
-    classDef d1 fill:#DBEAFE,stroke:#2563EB,color:#102A56
-    classDef d2 fill:#DCFCE7,stroke:#16803D,color:#123B22
-    classDef d3 fill:#FCE7F3,stroke:#BE185D,color:#55132E
-    classDef integration fill:#FFEDD5,stroke:#C2410C,color:#5B240C
-    classDef correction fill:#FEE2E2,stroke:#B91C1C,color:#7F1D1D
-    classDef optional fill:#F3F4F6,stroke:#6B7280,color:#374151,stroke-dasharray:5 5
-    classDef startEnd fill:#F3E8FF,stroke:#7E22CE,color:#3B1460
+    class A,S startend;
+    class B,C,D,E,M,P,R setup;
+    class G1,G2,G3,G4 member1;
+    class H1,H2,H3,H4 member2;
+    class I1,I2,I3,I4 member3;
+    class J,K,L,N,Q integration;
+    class X failed;
 ```
 
-The diagram source was checked for node/edge consistency, required endpoints and failure/retry paths. No Mermaid renderer/parser is installed in this workspace, so GitHub rendering was not independently verified. No application checks in this plan were executed by the documentation task.
+The Mermaid flow is intentionally compact; detailed step-level expectations are documented below. Rendering in GitHub should be confirmed before merging, so GitHub rendering was not independently verified. No application checks in this plan were executed by the documentation task.
 
 ## People, records and severity
 

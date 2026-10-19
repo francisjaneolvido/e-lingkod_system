@@ -8,130 +8,81 @@ Use the approved target: Next.js App Router, React, TypeScript, Tailwind CSS and
 
 ## Start and finish conditions
 
-Start this phase after [setup](02-installation-and-environment-setup.md) and the [architecture agreement](03-project-architecture.md) are complete. Use the [seven-day schedule](06-seven-day-schedule.md) to pace the slices. Before splitting work, all three developers must agree on roles, ownership fields, tables, statuses, validation, upload rules and the census-to-jobs contract below. Confirm that the shared Supabase Auth/session foundation and database policies can support each developer's first slice.
+Start this phase after [setup](02-installation-and-environment-setup.md) and the [architecture agreement](03-project-architecture.md) are complete. Use the [seven-day schedule](06-seven-day-schedule.md) to pace the slices. The first development milestones migrate the existing authentication to Supabase and establish profiles, roles, RLS, statuses, validation, upload rules and the census-to-jobs contract. Verify the shared foundation before dividing feature implementation among three developers.
 
 Finish development when all six modules have a usable small slice, the three developer checks are complete, joint integration passes, and the essential workflows work against persisted Supabase data. A polished static page, mock success message or in-memory array does not satisfy a save or status workflow. Handoff to [testing](05-testing-phase.md) with a stable revision, seed instructions, known limitations and an empty list of unresolved core integration blockers.
 
 ## Development flow
 
-The three subgraphs start from the same assignments node, so work proceeds concurrently. Within each developer's area, a directory or listing can be built while the form workflow is being completed. Multiple incoming arrows at a join mean that every listed dependency must be ready. Optional work uses dashed gray links and never becomes an integration dependency.
+Follow each colored branch from top to bottom. Each box is an incremental milestone; the implementation details and acceptance criteria remain below. The three developers work concurrently after the shared Supabase foundation is ready. Optional P2 features are outside the required development path.
 
 ```mermaid
-flowchart TB
-    START["START — DEVELOPMENT"]:::startEnd
-    CONTRACTS["Agree architecture and database contracts<br/>Auth, roles, RLS, statuses, uploads, matching projection"]:::shared
-    SLICES["Split six modules into small ordered slices<br/>Agree acceptance evidence and shared interfaces"]:::shared
-    ASSIGN["Assign owners and reviewers<br/>D1 civic + hotlines; D2 services + municipal; D3 census + jobs"]:::shared
+flowchart TD
+    A([START - DEVELOPMENT]) --> B[Confirm the six MVP features and their scope]
+    B --> C[Agree on data fields, user roles, statuses and module contracts]
+    C --> D[Replace legacy authentication with Supabase Auth]
+    D --> E[Prepare shared profiles, Supabase database and RLS policies]
+    E --> V[Verify login, roles and access permissions]
+    V --> F{Split development between three developers}
 
-    subgraph DEV1["Developer 1 — Civic reporting and emergency hotlines"]
-        RDATA["Define incident report fields<br/>Ownership, status and tracking contract"]:::d1
-        RFORM["Build required fields and validation<br/>Category, description and location"]:::d1
-        RPHOTO["Complete optional-photo lifecycle<br/>Reserve path, upload, validate bytes and finalize"]:::d1
-        RMAP["Add permission-based GPS<br/>Manual address and map-pin fallback"]:::d1
-        RSAVE["Save owned report parent with retry key<br/>Generate unique REP- plus full UUID"]:::d1
-        RHISTORY["Show citizen history and report detail<br/>Persisted tracking ID and status"]:::d1
-        RSTAFF["Build staff list, detail and status update<br/>Enforce permitted values and access"]:::d1
-        RVERIFY["Check report happy path and failures<br/>Citizen isolation, upload and staff update"]:::d1
-        HDATA["Prepare contact categories<br/>PNP, BFP, hospital and MDRRMO"]:::d1
-        HDIR["Build readable hotline directory<br/>Source and verification state per contact"]:::d1
-        HCALL["Enable tel links only for verified numbers<br/>Synthetic and unverified rows stay non-callable"]:::d1
-        HVERIFY["Check directory on mobile<br/>Dialer target without placing emergency calls"]:::d1
-        D1DONE["D1 module checks complete<br/>Civic reporting and hotlines ready"]:::d1
-    end
+    %% DEVELOPER 1 - CIVIC REPORTING AND EMERGENCY HOTLINES
+    F --> G1[Dev 1 - Build Civic Reporting form and validation]
+    G1 --> G2[Save incidents and generate unique tracking IDs]
+    G2 --> G3[Add secure photo upload and GPS or manual location]
+    G3 --> G4[Build citizen report history and status tracking]
+    G4 --> G5[Build LGU report review and status updates]
+    G5 --> G6[Build verified emergency hotline directory]
+    G6 --> G7[Add click-to-call buttons and check mobile behavior]
+    G7 --> G8[Check Developer 1 modules]
 
-    subgraph DEV2["Developer 2 — Online services and municipal guide"]
-        STYPES["Define permit, tax and clearance types<br/>Required fields and document flags"]:::d2
-        SFORM["Build reusable request form<br/>Per-type validation and useful errors"]:::d2
-        SDOC["P2: optional document support<br/>PDF, JPEG or PNG in private bucket"]:::optional
-        SSAVE["Save request and returned reference<br/>Generate unique SRV- plus full UUID"]:::d2
-        SHISTORY["Show citizen history and detail<br/>Persisted reference and request status"]:::d2
-        SSTAFF["Build staff review and status update<br/>Enforce request ownership and role rules"]:::d2
-        SVERIFY["Check request types end to end<br/>Validation and review; files only if implemented"]:::d2
-        MDATA["Define offices, contacts and offered services<br/>Label sample and unverified details"]:::d2
-        MOFFICES["Build office directory and detail<br/>Show contact and service information"]:::d2
-        MPROJECTS["Prepare sample projects; build list and detail<br/>Upcoming, ongoing and completed states"]:::d2
-        MVERIFY["Check guide navigation and empty states<br/>No invented official fees or project claims"]:::d2
-        D2DONE["D2 module checks complete<br/>Services and municipal guide ready"]:::d2
-    end
+    %% DEVELOPER 2 - ONLINE SERVICES AND MUNICIPAL INFORMATION
+    F --> H1[Dev 2 - Build reusable LGU service request form]
+    H1 --> H2[Validate and save requests with unique reference IDs]
+    H2 --> H3[Build citizen request history and status tracking]
+    H3 --> H4[Build LGU request review and status updates]
+    H4 --> H5[Build office directory and available services]
+    H5 --> H6[Build municipal project list, details and statuses]
+    H6 --> H7[Check Developer 2 modules]
 
-    subgraph DEV3["Developer 3 — Worker census and deterministic job matching"]
-        CFIELDS["Define synthetic worker record fields<br/>Employment, occupation, skills and bands"]:::d3
-        CFORM["Build census form and validation<br/>Reject invalid enums and malformed fields"]:::d3
-        CSAVE["Save synthetic worker records<br/>Unique external_ref and persisted values"]:::d3
-        CMANAGE["Build authorized staff and admin management<br/>Deny citizen access to individual records"]:::d3
-        CIMPORT["Add synthetic SPES-style JSON import<br/>Preview, validate and upsert external_ref"]:::d3
-        CAGG["Build aggregate counts and dashboard<br/>Reconcile totals against stored records"]:::d3
-        CPROJ["Expose authorized matching projection<br/>Worker ID, occupation, skills and barangay only"]:::d3
-        CVERIFY["Check record, import and aggregate flows<br/>Access controls and idempotence"]:::d3
-        JDATA["Define job records and small sample listings<br/>Occupation, required skills and barangay"]:::d3
-        JLIST["Build job list and detail<br/>Honest sample labels and empty states"]:::d3
-        JFILTER["Add occupation and skills filters<br/>Normalize values and combine filters"]:::d3
-        JMATCH["Implement deterministic score and sorting<br/>Skills 70, occupation 20, barangay 10"]:::d3
-        JRESULT["Show authorized match results<br/>Explain score and handle no matches"]:::d3
-        JVERIFY["Check listing, filtering and matching<br/>Reuse census projection without income"]:::d3
-        D3DONE["D3 module checks complete<br/>Census and jobs ready"]:::d3
-    end
+    %% DEVELOPER 3 - WORKER CENSUS AND JOB MATCHING
+    F --> I1[Dev 3 - Define worker, employment and skills data]
+    I1 --> I2[Build staff-only census form, validation and saving]
+    I2 --> I3[Add record management and synthetic SPES import]
+    I3 --> I4[Build aggregate census dashboard]
+    I4 --> I5[Build sample job listings and basic filters]
+    I5 --> I6[Match jobs using authorized census skills, occupation and barangay]
+    I6 --> I7[Check Developer 3 modules]
 
-    ALLDONE{"All three developer branches done<br/>and module checks recorded?"}:::integration
-    REMAIN["Finish remaining required slices<br/>Owner reruns the affected module check"]:::integration
-    JOINT["Integrate one shared revision<br/>Auth, navigation, RLS, Storage and data contracts"]:::integration
-    INTEGRATIONOK{"Joint integration passes?"}:::integration
-    FIX["Assign integration defect to owner<br/>Correct it and repeat affected module checks"]:::integration
-    ESSENTIAL["Walk essential persisted workflows<br/>Submit, history, staff status, census and matching"]:::integration
-    ESSENTIALOK{"Essential workflows pass<br/>and all six modules are demoable?"}:::integration
-    OPTIONAL["P2 only after core is stable<br/>Realtime, notifications, document upload, Cron or advisories"]:::optional
-    TESTING["TESTING"]:::testingTransition
+    %% INTEGRATION - REVIEWED INCREMENTS MAY MERGE EARLIER
+    G8 --> J[Merge reviewed feature increments]
+    H7 --> J
+    I7 --> J
+    J --> K[Integrate navigation, Auth, database and private storage]
+    K --> L[Seed synthetic demo data and verify shared workflows]
+    L --> M{Do all six core workflows pass?}
+    M -->|No| N[Fix the failing module and repeat integration check]
+    N --> K
+    M -->|Yes| O([TESTING])
 
-    START --> CONTRACTS --> SLICES --> ASSIGN
-    ASSIGN --> RDATA
-    ASSIGN --> HDATA
-    ASSIGN --> STYPES
-    ASSIGN --> MDATA
-    ASSIGN --> CFIELDS
-    ASSIGN --> JDATA
-    RDATA --> RFORM
-    RFORM --> RSAVE --> RPHOTO
-    RFORM --> RMAP
-    RPHOTO --> RHISTORY
-    RMAP --> RHISTORY --> RSTAFF --> RVERIFY --> D1DONE
-    HDATA --> HDIR --> HCALL --> HVERIFY --> D1DONE
-    STYPES --> SFORM --> SSAVE --> SHISTORY --> SSTAFF --> SVERIFY --> D2DONE
-    SFORM -.-> SDOC
-    MDATA --> MOFFICES
-    MDATA --> MPROJECTS
-    MOFFICES --> MVERIFY
-    MPROJECTS --> MVERIFY --> D2DONE
-    CFIELDS --> CFORM --> CSAVE --> CMANAGE
-    CMANAGE --> CIMPORT
-    CMANAGE --> CAGG
-    CMANAGE --> CPROJ
-    CIMPORT --> CVERIFY
-    CAGG --> CVERIFY --> D3DONE
-    JDATA --> JLIST --> JFILTER
-    JFILTER --> JMATCH
-    CPROJ --> JMATCH --> JRESULT --> JVERIFY --> D3DONE
-    D1DONE --> ALLDONE
-    D2DONE --> ALLDONE
-    D3DONE --> ALLDONE
-    ALLDONE -->|No| REMAIN --> ALLDONE
-    ALLDONE -->|Yes| JOINT --> INTEGRATIONOK
-    INTEGRATIONOK -->|No| FIX --> ALLDONE
-    INTEGRATIONOK -->|Yes| ESSENTIAL --> ESSENTIALOK
-    ESSENTIALOK -->|No| FIX
-    ESSENTIALOK -->|Yes| TESTING
-    ASSIGN -.-> OPTIONAL
+    %% COLORS
+    classDef setup fill:#FFF2CC,stroke:#B58B00,color:#000,stroke-width:2px;
+    classDef member1 fill:#CFE2F3,stroke:#2F75B5,color:#000,stroke-width:2px;
+    classDef member2 fill:#D9EAD3,stroke:#6AA84F,color:#000,stroke-width:2px;
+    classDef member3 fill:#FCE0ED,stroke:#C27BA0,color:#000,stroke-width:2px;
+    classDef integration fill:#FCE5CD,stroke:#E69138,color:#000,stroke-width:2px;
+    classDef testing fill:#F4CCCC,stroke:#CC0000,color:#000,stroke-width:2px;
+    classDef startend fill:#EAD1DC,stroke:#674EA7,color:#000,stroke-width:2px;
 
-    classDef shared fill:#FFF2B3,stroke:#9A7300,color:#2B2400
-    classDef d1 fill:#DBEAFE,stroke:#2563EB,color:#102A56
-    classDef d2 fill:#DCFCE7,stroke:#16803D,color:#123B22
-    classDef d3 fill:#FCE7F3,stroke:#BE185D,color:#55132E
-    classDef integration fill:#FFEDD5,stroke:#C2410C,color:#5B240C
-    classDef testingTransition fill:#FEE2E2,stroke:#7E22CE,color:#7F1D1D
-    classDef optional fill:#F3F4F6,stroke:#6B7280,color:#374151,stroke-dasharray:5 5
-    classDef startEnd fill:#F3E8FF,stroke:#7E22CE,color:#3B1460
+    class A startend;
+    class B,C,D,E,V,F setup;
+    class G1,G2,G3,G4,G5,G6,G7,G8 member1;
+    class H1,H2,H3,H4,H5,H6,H7 member2;
+    class I1,I2,I3,I4,I5,I6,I7 member3;
+    class J,K,L,M integration;
+    class N,O testing;
 ```
 
-The diagram source was checked for node/edge consistency, balanced subgraphs, required endpoints and color classes. No Mermaid renderer/parser is installed in this workspace, so GitHub rendering was not independently verified. Use GitHub's preview when the documentation is pushed; no parser was installed for this documentation task.
+The Mermaid flow is intentionally compact; detailed step-level expectations are documented below. Rendering in GitHub should be confirmed before merging, so GitHub rendering was not independently verified. Use GitHub's preview when the documentation is pushed; no parser was installed for this documentation task.
 
 ## Scope and priorities
 
