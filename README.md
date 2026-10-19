@@ -2,8 +2,6 @@
 
 An academic prototype of an **Integrated LGU Management & Citizen Services System**. The target MVP connects citizen reports and service requests to a small LGU dashboard, with public directories, municipal projects, worker census records, and deterministic job matching.
 
-This handoff is for **three student developers working part-time over seven calendar days**. The guides describe planned work and acceptance checks; they do not certify that the workflows already work.
-
 ## Read this before setup
 
 The repository already contains an application. At review on **20 October 2026**, it contained Next.js 16.4.2, React/React DOM 19.3.0, TypeScript, Tailwind CSS 4, shadcn/ui with a Base UI preset, landing sections, login/register forms, and MySQL/Prisma/Better Auth integration code. These observations come from source and package inspection, not a successful runtime test. The previous README's frontend-only description no longer matched all the source files.
