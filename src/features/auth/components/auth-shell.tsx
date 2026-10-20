@@ -117,7 +117,7 @@ export function AuthShell({ children, page }: AuthShellProps) {
           </div>
           {children}
           <div className="mt-7 flex items-center justify-center gap-2 text-center text-[10px] leading-5 text-[#93a6b5]">
-            <ShieldCheck size={14} className="shrink-0 text-[#3a95ab]" /> Prototype preview · Authentication is not yet connected
+            <ShieldCheck size={14} className="shrink-0 text-[#3a95ab]" /> Hackathon prototype · Protected account sign-in
           </div>
           <Link href="/" className="mt-4 flex items-center justify-center gap-1.5 text-[11px] font-semibold text-[#407f9f] transition hover:text-[#0c6b9e]">
             Visit the E-Lingkod Bayan homepage <ArrowUpRight size={13} />

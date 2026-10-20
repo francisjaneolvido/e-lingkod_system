@@ -2,10 +2,10 @@ import Link from "next/link";
 import { ArrowUpRight, Camera, Files, BookOpenText, BriefcaseBusiness } from "lucide-react";
 
 const actions = [
-  { label: "Mag-report", detail: "Community concerns", icon: Camera, href: "/#service-civic" },
+  { label: "Mag-report", detail: "Photo, location & tracking", icon: Camera, href: "/reports/new" },
   { label: "Mag-apply", detail: "Permits & clearances", icon: Files, href: "/#service-services" },
   { label: "Maghanap ng office", detail: "Directory & guides", icon: BookOpenText, href: "/#service-directory" },
-  { label: "Maghanap ng trabaho", detail: "Local opportunities", icon: BriefcaseBusiness, href: "/#service-jobs" },
+  { label: "Maghanap ng trabaho", detail: "Local opportunities", icon: BriefcaseBusiness, href: "/opportunities" },
 ];
 
 export function QuickLinksSection() {

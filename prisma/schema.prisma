@@ -20,6 +20,22 @@ model User {
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  reports       CivicReport[] @relation("ReportedCivicReports")
+  assignedCivicReports CivicReport[] @relation("AssignedCivicReports")
+  reportUpdates ReportUpdate[]
+  resolutionSubmissions ResolutionSubmission[] @relation("ResolutionSubmittedBy")
+  resolutionReviews ResolutionSubmission[] @relation("ResolutionReviewedBy")
+  department    String?  @db.VarChar(120)
+  designation   String?  @db.VarChar(120)
+  staffPermissions StaffPermission[]
+  staffChangesMade StaffAccessAudit[] @relation("StaffAuditActor")
+  staffChangesReceived StaffAccessAudit[] @relation("StaffAuditTarget")
+  issuedStaffInvites StaffInvitation[] @relation("StaffInviteIssuer")
+  citizenFeedbacks CitizenResolutionFeedback[] @relation("CitizenFeedbackReporter")
+  jobseekerProfile JobseekerProfile?
+  postedJobs JobOpportunity[] @relation("JobPostedBy")
+  jobChanges JobActivity[] @relation("JobActivityActor")
+  spesImports SpesImportBatch[] @relation("SpesImportedBy")
 
   @@map("user")
 }
@@ -69,4 +85,316 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+enum ReportPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum ReportVisibility {
+  PUBLIC
+  INTERNAL
+}
+
+enum CivicReportStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  IN_PROGRESS
+  PENDING_VERIFICATION
+  RESOLVED
+  REJECTED
+  REOPENED
+}
+
+model CivicReport {
+  id             String            @id @default(cuid()) @db.VarChar(191)
+  trackingId     String            @unique @db.VarChar(48)
+  submissionKey  String            @db.VarChar(64)
+  reporterId     String            @db.VarChar(191)
+  reporter       User              @relation("ReportedCivicReports", fields: [reporterId], references: [id], onDelete: Restrict)
+  category       String            @db.VarChar(40)
+  title          String            @db.VarChar(120)
+  description    String            @db.Text
+  barangay       String            @db.VarChar(100)
+  address        String            @db.VarChar(300)
+  latitude       Float?
+  longitude      Float?
+  locationSource String            @default("ADDRESS") @db.VarChar(12)
+  gpsAccuracy    Float?
+  status         CivicReportStatus @default(SUBMITTED)
+  assignedOffice String?           @db.VarChar(120)
+  assignedStaffId String?          @db.VarChar(191)
+  assignedStaff   User?            @relation("AssignedCivicReports", fields: [assignedStaffId], references: [id], onDelete: SetNull)
+  priority       ReportPriority    @default(NORMAL)
+  version        Int               @default(1)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  photos         ReportPhoto[]
+  updates        ReportUpdate[]
+  resolutionSubmissions ResolutionSubmission[]
+  citizenFeedbacks CitizenResolutionFeedback[]
+
+  @@unique([reporterId, submissionKey])
+  @@index([reporterId, createdAt])
+  @@index([status, createdAt])
+  @@index([assignedOffice, assignedStaffId, status])
+  @@index([priority, createdAt])
+  @@map("civic_report")
+}
+
+model ReportPhoto {
+  id        String      @id @default(cuid()) @db.VarChar(191)
+  reportId  String      @db.VarChar(191)
+  report    CivicReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  mimeType  String      @default("image/jpeg") @db.VarChar(40)
+  byteSize  Int
+  data      Bytes       @db.MediumBlob
+  createdAt DateTime    @default(now())
+
+  @@index([reportId])
+  @@map("report_photo")
+}
+
+model ReportUpdate {
+  id             String            @id @default(cuid()) @db.VarChar(191)
+  reportId       String            @db.VarChar(191)
+  report         CivicReport       @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  actorId        String?           @db.VarChar(191)
+  actor          User?             @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  status         CivicReportStatus
+  assignedOffice String?           @db.VarChar(120)
+  note           String            @db.Text
+  visibility     ReportVisibility  @default(PUBLIC)
+  action         String            @default("STATUS") @db.VarChar(24)
+  priority       ReportPriority?
+  assignedStaffId String?          @db.VarChar(191)
+  createdAt      DateTime          @default(now())
+
+  @@index([reportId, createdAt])
+  @@map("report_update")
+}
+
+// Access is granted ONLY by an existing administrator from the server.
+// The role column remains the source of truth: STAFF + one or more module grants.
+model StaffPermission {
+  id        String   @id @default(cuid()) @db.VarChar(191)
+  userId    String   @db.VarChar(191)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  module    String   @db.VarChar(32)
+  grantedAt DateTime @default(now())
+
+  @@unique([userId, module])
+  @@index([module])
+  @@map("staff_permission")
+}
+
+model StaffAccessAudit {
+  id           String   @id @default(cuid()) @db.VarChar(191)
+  actorId      String   @db.VarChar(191)
+  targetUserId String   @db.VarChar(191)
+  action       String   @db.VarChar(40)
+  details      String   @db.Text
+  createdAt    DateTime @default(now())
+  actor        User     @relation("StaffAuditActor", fields: [actorId], references: [id], onDelete: Restrict)
+  target       User     @relation("StaffAuditTarget", fields: [targetUserId], references: [id], onDelete: Restrict)
+
+  @@index([targetUserId, createdAt])
+  @@index([actorId, createdAt])
+  @@map("staff_access_audit")
+}
+
+// An invitation is NOT a login account. Its one-time token is stored only as a hash.
+// Role and module access become active only after successful password activation.
+model StaffInvitation {
+  id           String   @id @default(cuid()) @db.VarChar(191)
+  email        String   @unique @db.VarChar(191)
+  name         String   @db.VarChar(191)
+  department   String   @db.VarChar(120)
+  designation  String   @db.VarChar(120)
+  modulesJson  String   @db.Text
+  tokenHash    String   @unique @db.VarChar(64)
+  issuedById   String   @db.VarChar(191)
+  issuedBy     User     @relation("StaffInviteIssuer", fields: [issuedById], references: [id], onDelete: Restrict)
+  expiresAt    DateTime
+  activatedAt  DateTime?
+  revokedAt    DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([expiresAt])
+  @@map("staff_invitation")
+}
+
+// Each proof package belongs to a specific verification attempt. Pending or
+// returned evidence is private to authorized LGU staff; approved evidence is
+// shown to the reporting citizen when the report is officially resolved.
+enum ResolutionReviewStatus {
+  PENDING
+  APPROVED
+  RETURNED
+}
+
+model ResolutionSubmission {
+  id           String                 @id @default(cuid()) @db.VarChar(191)
+  reportId     String                 @db.VarChar(191)
+  report       CivicReport            @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  submittedById String                @db.VarChar(191)
+  submittedBy  User                   @relation("ResolutionSubmittedBy", fields: [submittedById], references: [id], onDelete: Restrict)
+  remarks      String                 @db.Text
+  reviewStatus ResolutionReviewStatus @default(PENDING)
+  reviewedById String?                @db.VarChar(191)
+  reviewedBy   User?                  @relation("ResolutionReviewedBy", fields: [reviewedById], references: [id], onDelete: SetNull)
+  reviewNote   String?                @db.Text
+  createdAt    DateTime               @default(now())
+  reviewedAt   DateTime?
+  photos       ResolutionProofPhoto[]
+  citizenFeedback CitizenResolutionFeedback?
+
+  @@index([reportId, createdAt])
+  @@index([submittedById])
+  @@map("resolution_submission")
+}
+
+model ResolutionProofPhoto {
+  id           String               @id @default(cuid()) @db.VarChar(191)
+  submissionId String               @db.VarChar(191)
+  submission   ResolutionSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  mimeType     String               @default("image/jpeg") @db.VarChar(40)
+  byteSize     Int
+  data         Bytes                @db.MediumBlob
+  createdAt    DateTime             @default(now())
+
+  @@index([submissionId])
+  @@map("resolution_proof_photo")
+}
+
+// One citizen response per approved proof package. A dispute reopens the case
+// without deleting the original resolution photos or admin approval record.
+enum CitizenFeedbackDecision {
+  CONFIRMED
+  DISPUTED
+}
+
+model CitizenResolutionFeedback {
+  id                     String @id @default(cuid()) @db.VarChar(191)
+  reportId               String @db.VarChar(191)
+  report                 CivicReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  resolutionSubmissionId String @unique @db.VarChar(191)
+  resolutionSubmission   ResolutionSubmission @relation(fields: [resolutionSubmissionId], references: [id], onDelete: Restrict)
+  reporterId             String @db.VarChar(191)
+  reporter               User @relation("CitizenFeedbackReporter", fields: [reporterId], references: [id], onDelete: Restrict)
+  decision               CitizenFeedbackDecision
+  reason                 String? @db.Text
+  createdAt              DateTime @default(now())
+  photos                 CitizenFeedbackPhoto[]
+
+  @@index([reportId, createdAt])
+  @@index([reporterId])
+  @@map("citizen_resolution_feedback")
+}
+
+model CitizenFeedbackPhoto {
+  id          String @id @default(cuid()) @db.VarChar(191)
+  feedbackId  String @db.VarChar(191)
+  feedback    CitizenResolutionFeedback @relation(fields: [feedbackId], references: [id], onDelete: Cascade)
+  mimeType    String @default("image/jpeg") @db.VarChar(40)
+  byteSize    Int
+  data        Bytes @db.MediumBlob
+  createdAt   DateTime @default(now())
+
+  @@index([feedbackId])
+  @@map("citizen_feedback_photo")
+}
+
+
+// V10: PESO-curated opportunities, NOT direct employment applications.
+enum JobListingStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model JobOpportunity {
+  id             String @id @default(cuid()) @db.VarChar(191)
+  title          String @db.VarChar(150)
+  employer       String @db.VarChar(150)
+  sector         String @db.VarChar(80)
+  workType       String @db.VarChar(30)
+  barangay       String @db.VarChar(100)
+  location       String @db.VarChar(180)
+  description    String @db.Text
+  skillsJson     String @db.Text
+  interestsJson  String @db.Text
+  education      String @db.VarChar(40)
+  contactInfo    String @db.VarChar(250)
+  externalUrl    String? @db.VarChar(500)
+  status         JobListingStatus @default(DRAFT)
+  expiresAt      DateTime?
+  publishedAt    DateTime?
+  createdById    String @db.VarChar(191)
+  createdBy      User @relation("JobPostedBy", fields: [createdById], references: [id], onDelete: Restrict)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  activities     JobActivity[]
+
+  @@index([status, publishedAt])
+  @@index([sector, workType])
+  @@map("job_opportunity")
+}
+
+// A profile is strictly optional and belongs only to its signed-in citizen.
+// No CV, phone number, salary expectation, or application record is stored.
+model JobseekerProfile {
+  userId         String @id @db.VarChar(191)
+  user           User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skillsJson     String @db.Text
+  interestsJson  String @db.Text
+  education      String @db.VarChar(40)
+  preferredArea  String @db.VarChar(100)
+  availability   String @db.VarChar(30)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  @@map("jobseeker_profile")
+}
+
+// Do not store respondent names, emails, exact addresses or phone numbers.
+// Import is restricted to datasets with explicit use-for-insights consent.
+model SpesImportBatch {
+  id             String @id @default(cuid()) @db.VarChar(191)
+  sourceLabel    String @db.VarChar(120)
+  importedById   String @db.VarChar(191)
+  importedBy     User @relation("SpesImportedBy", fields: [importedById], references: [id], onDelete: Restrict)
+  recordCount    Int
+  createdAt      DateTime @default(now())
+  records        SpesSurveyRecord[]
+  @@index([createdAt])
+  @@map("spes_import_batch")
+}
+
+model SpesSurveyRecord {
+  id             String @id @default(cuid()) @db.VarChar(191)
+  batchId        String @db.VarChar(191)
+  batch          SpesImportBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  barangay       String @db.VarChar(100)
+  education      String @db.VarChar(40)
+  skillsJson     String @db.Text
+  interestsJson  String @db.Text
+  availability   String @db.VarChar(30)
+  @@index([batchId])
+  @@map("spes_survey_record")
+}
+
+model JobActivity {
+  id          String @id @default(cuid()) @db.VarChar(191)
+  jobId       String @db.VarChar(191)
+  job         JobOpportunity @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  actorId     String @db.VarChar(191)
+  actor       User @relation("JobActivityActor", fields: [actorId], references: [id], onDelete: Restrict)
+  action      String @db.VarChar(30)
+  createdAt   DateTime @default(now())
+  @@index([jobId, createdAt])
+  @@map("job_activity")
 }

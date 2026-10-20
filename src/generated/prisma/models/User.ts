@@ -33,6 +33,8 @@ export type UserMinAggregateOutputType = {
   role: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  department: string | null
+  designation: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -44,6 +46,8 @@ export type UserMaxAggregateOutputType = {
   role: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  department: string | null
+  designation: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -55,6 +59,8 @@ export type UserCountAggregateOutputType = {
   role: number
   createdAt: number
   updatedAt: number
+  department: number
+  designation: number
   _all: number
 }
 
@@ -68,6 +74,8 @@ export type UserMinAggregateInputType = {
   role?: true
   createdAt?: true
   updatedAt?: true
+  department?: true
+  designation?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -79,6 +87,8 @@ export type UserMaxAggregateInputType = {
   role?: true
   createdAt?: true
   updatedAt?: true
+  department?: true
+  designation?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -90,6 +100,8 @@ export type UserCountAggregateInputType = {
   role?: true
   createdAt?: true
   updatedAt?: true
+  department?: true
+  designation?: true
   _all?: true
 }
 
@@ -174,6 +186,8 @@ export type UserGroupByOutputType = {
   role: string
   createdAt: Date
   updatedAt: Date
+  department: string | null
+  designation: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -206,8 +220,24 @@ export type UserWhereInput = {
   role?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  department?: Prisma.StringNullableFilter<"User"> | string | null
+  designation?: Prisma.StringNullableFilter<"User"> | string | null
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
+  reports?: Prisma.CivicReportListRelationFilter
+  assignedCivicReports?: Prisma.CivicReportListRelationFilter
+  reportUpdates?: Prisma.ReportUpdateListRelationFilter
+  resolutionSubmissions?: Prisma.ResolutionSubmissionListRelationFilter
+  resolutionReviews?: Prisma.ResolutionSubmissionListRelationFilter
+  staffPermissions?: Prisma.StaffPermissionListRelationFilter
+  staffChangesMade?: Prisma.StaffAccessAuditListRelationFilter
+  staffChangesReceived?: Prisma.StaffAccessAuditListRelationFilter
+  issuedStaffInvites?: Prisma.StaffInvitationListRelationFilter
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackListRelationFilter
+  jobseekerProfile?: Prisma.XOR<Prisma.JobseekerProfileNullableScalarRelationFilter, Prisma.JobseekerProfileWhereInput> | null
+  postedJobs?: Prisma.JobOpportunityListRelationFilter
+  jobChanges?: Prisma.JobActivityListRelationFilter
+  spesImports?: Prisma.SpesImportBatchListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -219,8 +249,24 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  department?: Prisma.SortOrderInput | Prisma.SortOrder
+  designation?: Prisma.SortOrderInput | Prisma.SortOrder
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
+  reports?: Prisma.CivicReportOrderByRelationAggregateInput
+  assignedCivicReports?: Prisma.CivicReportOrderByRelationAggregateInput
+  reportUpdates?: Prisma.ReportUpdateOrderByRelationAggregateInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionOrderByRelationAggregateInput
+  resolutionReviews?: Prisma.ResolutionSubmissionOrderByRelationAggregateInput
+  staffPermissions?: Prisma.StaffPermissionOrderByRelationAggregateInput
+  staffChangesMade?: Prisma.StaffAccessAuditOrderByRelationAggregateInput
+  staffChangesReceived?: Prisma.StaffAccessAuditOrderByRelationAggregateInput
+  issuedStaffInvites?: Prisma.StaffInvitationOrderByRelationAggregateInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackOrderByRelationAggregateInput
+  jobseekerProfile?: Prisma.JobseekerProfileOrderByWithRelationInput
+  postedJobs?: Prisma.JobOpportunityOrderByRelationAggregateInput
+  jobChanges?: Prisma.JobActivityOrderByRelationAggregateInput
+  spesImports?: Prisma.SpesImportBatchOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -236,8 +282,24 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  department?: Prisma.StringNullableFilter<"User"> | string | null
+  designation?: Prisma.StringNullableFilter<"User"> | string | null
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
+  reports?: Prisma.CivicReportListRelationFilter
+  assignedCivicReports?: Prisma.CivicReportListRelationFilter
+  reportUpdates?: Prisma.ReportUpdateListRelationFilter
+  resolutionSubmissions?: Prisma.ResolutionSubmissionListRelationFilter
+  resolutionReviews?: Prisma.ResolutionSubmissionListRelationFilter
+  staffPermissions?: Prisma.StaffPermissionListRelationFilter
+  staffChangesMade?: Prisma.StaffAccessAuditListRelationFilter
+  staffChangesReceived?: Prisma.StaffAccessAuditListRelationFilter
+  issuedStaffInvites?: Prisma.StaffInvitationListRelationFilter
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackListRelationFilter
+  jobseekerProfile?: Prisma.XOR<Prisma.JobseekerProfileNullableScalarRelationFilter, Prisma.JobseekerProfileWhereInput> | null
+  postedJobs?: Prisma.JobOpportunityListRelationFilter
+  jobChanges?: Prisma.JobActivityListRelationFilter
+  spesImports?: Prisma.SpesImportBatchListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -249,6 +311,8 @@ export type UserOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  department?: Prisma.SortOrderInput | Prisma.SortOrder
+  designation?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -266,6 +330,8 @@ export type UserScalarWhereWithAggregatesInput = {
   role?: Prisma.StringWithAggregatesFilter<"User"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  department?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  designation?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
@@ -277,8 +343,24 @@ export type UserCreateInput = {
   role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -290,8 +372,24 @@ export type UserUncheckedCreateInput = {
   role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
 }
 
 export type UserUpdateInput = {
@@ -303,8 +401,24 @@ export type UserUpdateInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -316,8 +430,24 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -329,6 +459,8 @@ export type UserCreateManyInput = {
   role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -340,6 +472,8 @@ export type UserUpdateManyMutationInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -351,6 +485,8 @@ export type UserUncheckedUpdateManyInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserOrderByRelevanceInput = {
@@ -368,6 +504,8 @@ export type UserCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  department?: Prisma.SortOrder
+  designation?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -379,6 +517,8 @@ export type UserMaxOrderByAggregateInput = {
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  department?: Prisma.SortOrder
+  designation?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -390,11 +530,18 @@ export type UserMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  department?: Prisma.SortOrder
+  designation?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -441,6 +588,208 @@ export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountsInput, Prisma.UserUpdateWithoutAccountsInput>, Prisma.UserUncheckedUpdateWithoutAccountsInput>
 }
 
+export type UserCreateNestedOneWithoutReportsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportsInput, Prisma.UserUncheckedCreateWithoutReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutAssignedCivicReportsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignedCivicReportsInput, Prisma.UserUncheckedCreateWithoutAssignedCivicReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignedCivicReportsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportsInput, Prisma.UserUncheckedCreateWithoutReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportsInput
+  upsert?: Prisma.UserUpsertWithoutReportsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReportsInput, Prisma.UserUpdateWithoutReportsInput>, Prisma.UserUncheckedUpdateWithoutReportsInput>
+}
+
+export type UserUpdateOneWithoutAssignedCivicReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignedCivicReportsInput, Prisma.UserUncheckedCreateWithoutAssignedCivicReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignedCivicReportsInput
+  upsert?: Prisma.UserUpsertWithoutAssignedCivicReportsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssignedCivicReportsInput, Prisma.UserUpdateWithoutAssignedCivicReportsInput>, Prisma.UserUncheckedUpdateWithoutAssignedCivicReportsInput>
+}
+
+export type UserCreateNestedOneWithoutReportUpdatesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportUpdatesInput, Prisma.UserUncheckedCreateWithoutReportUpdatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportUpdatesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutReportUpdatesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportUpdatesInput, Prisma.UserUncheckedCreateWithoutReportUpdatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportUpdatesInput
+  upsert?: Prisma.UserUpsertWithoutReportUpdatesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReportUpdatesInput, Prisma.UserUpdateWithoutReportUpdatesInput>, Prisma.UserUncheckedUpdateWithoutReportUpdatesInput>
+}
+
+export type UserCreateNestedOneWithoutStaffPermissionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStaffPermissionsInput, Prisma.UserUncheckedCreateWithoutStaffPermissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStaffPermissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStaffPermissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStaffPermissionsInput, Prisma.UserUncheckedCreateWithoutStaffPermissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStaffPermissionsInput
+  upsert?: Prisma.UserUpsertWithoutStaffPermissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStaffPermissionsInput, Prisma.UserUpdateWithoutStaffPermissionsInput>, Prisma.UserUncheckedUpdateWithoutStaffPermissionsInput>
+}
+
+export type UserCreateNestedOneWithoutStaffChangesMadeInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStaffChangesMadeInput, Prisma.UserUncheckedCreateWithoutStaffChangesMadeInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStaffChangesMadeInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutStaffChangesReceivedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStaffChangesReceivedInput, Prisma.UserUncheckedCreateWithoutStaffChangesReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStaffChangesReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStaffChangesMadeNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStaffChangesMadeInput, Prisma.UserUncheckedCreateWithoutStaffChangesMadeInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStaffChangesMadeInput
+  upsert?: Prisma.UserUpsertWithoutStaffChangesMadeInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStaffChangesMadeInput, Prisma.UserUpdateWithoutStaffChangesMadeInput>, Prisma.UserUncheckedUpdateWithoutStaffChangesMadeInput>
+}
+
+export type UserUpdateOneRequiredWithoutStaffChangesReceivedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStaffChangesReceivedInput, Prisma.UserUncheckedCreateWithoutStaffChangesReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStaffChangesReceivedInput
+  upsert?: Prisma.UserUpsertWithoutStaffChangesReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStaffChangesReceivedInput, Prisma.UserUpdateWithoutStaffChangesReceivedInput>, Prisma.UserUncheckedUpdateWithoutStaffChangesReceivedInput>
+}
+
+export type UserCreateNestedOneWithoutIssuedStaffInvitesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIssuedStaffInvitesInput, Prisma.UserUncheckedCreateWithoutIssuedStaffInvitesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIssuedStaffInvitesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutIssuedStaffInvitesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIssuedStaffInvitesInput, Prisma.UserUncheckedCreateWithoutIssuedStaffInvitesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIssuedStaffInvitesInput
+  upsert?: Prisma.UserUpsertWithoutIssuedStaffInvitesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIssuedStaffInvitesInput, Prisma.UserUpdateWithoutIssuedStaffInvitesInput>, Prisma.UserUncheckedUpdateWithoutIssuedStaffInvitesInput>
+}
+
+export type UserCreateNestedOneWithoutResolutionSubmissionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResolutionSubmissionsInput, Prisma.UserUncheckedCreateWithoutResolutionSubmissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResolutionSubmissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutResolutionReviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResolutionReviewsInput, Prisma.UserUncheckedCreateWithoutResolutionReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResolutionReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutResolutionSubmissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResolutionSubmissionsInput, Prisma.UserUncheckedCreateWithoutResolutionSubmissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResolutionSubmissionsInput
+  upsert?: Prisma.UserUpsertWithoutResolutionSubmissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutResolutionSubmissionsInput, Prisma.UserUpdateWithoutResolutionSubmissionsInput>, Prisma.UserUncheckedUpdateWithoutResolutionSubmissionsInput>
+}
+
+export type UserUpdateOneWithoutResolutionReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResolutionReviewsInput, Prisma.UserUncheckedCreateWithoutResolutionReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResolutionReviewsInput
+  upsert?: Prisma.UserUpsertWithoutResolutionReviewsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutResolutionReviewsInput, Prisma.UserUpdateWithoutResolutionReviewsInput>, Prisma.UserUncheckedUpdateWithoutResolutionReviewsInput>
+}
+
+export type UserCreateNestedOneWithoutCitizenFeedbacksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCitizenFeedbacksInput, Prisma.UserUncheckedCreateWithoutCitizenFeedbacksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCitizenFeedbacksInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCitizenFeedbacksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCitizenFeedbacksInput, Prisma.UserUncheckedCreateWithoutCitizenFeedbacksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCitizenFeedbacksInput
+  upsert?: Prisma.UserUpsertWithoutCitizenFeedbacksInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCitizenFeedbacksInput, Prisma.UserUpdateWithoutCitizenFeedbacksInput>, Prisma.UserUncheckedUpdateWithoutCitizenFeedbacksInput>
+}
+
+export type UserCreateNestedOneWithoutPostedJobsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPostedJobsInput, Prisma.UserUncheckedCreateWithoutPostedJobsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPostedJobsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPostedJobsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPostedJobsInput, Prisma.UserUncheckedCreateWithoutPostedJobsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPostedJobsInput
+  upsert?: Prisma.UserUpsertWithoutPostedJobsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPostedJobsInput, Prisma.UserUpdateWithoutPostedJobsInput>, Prisma.UserUncheckedUpdateWithoutPostedJobsInput>
+}
+
+export type UserCreateNestedOneWithoutJobseekerProfileInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJobseekerProfileInput, Prisma.UserUncheckedCreateWithoutJobseekerProfileInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobseekerProfileInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutJobseekerProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJobseekerProfileInput, Prisma.UserUncheckedCreateWithoutJobseekerProfileInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobseekerProfileInput
+  upsert?: Prisma.UserUpsertWithoutJobseekerProfileInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutJobseekerProfileInput, Prisma.UserUpdateWithoutJobseekerProfileInput>, Prisma.UserUncheckedUpdateWithoutJobseekerProfileInput>
+}
+
+export type UserCreateNestedOneWithoutSpesImportsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSpesImportsInput, Prisma.UserUncheckedCreateWithoutSpesImportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSpesImportsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSpesImportsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSpesImportsInput, Prisma.UserUncheckedCreateWithoutSpesImportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSpesImportsInput
+  upsert?: Prisma.UserUpsertWithoutSpesImportsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSpesImportsInput, Prisma.UserUpdateWithoutSpesImportsInput>, Prisma.UserUncheckedUpdateWithoutSpesImportsInput>
+}
+
+export type UserCreateNestedOneWithoutJobChangesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJobChangesInput, Prisma.UserUncheckedCreateWithoutJobChangesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobChangesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutJobChangesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJobChangesInput, Prisma.UserUncheckedCreateWithoutJobChangesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobChangesInput
+  upsert?: Prisma.UserUpsertWithoutJobChangesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutJobChangesInput, Prisma.UserUpdateWithoutJobChangesInput>, Prisma.UserUncheckedUpdateWithoutJobChangesInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id: string
   name: string
@@ -450,7 +799,23 @@ export type UserCreateWithoutSessionsInput = {
   role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -462,7 +827,23 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -490,7 +871,23 @@ export type UserUpdateWithoutSessionsInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -502,7 +899,23 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -514,7 +927,23 @@ export type UserCreateWithoutAccountsInput = {
   role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -526,7 +955,23 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -554,7 +999,23 @@ export type UserUpdateWithoutAccountsInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -566,7 +1027,1815 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserCreateWithoutReportsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutReportsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutReportsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportsInput, Prisma.UserUncheckedCreateWithoutReportsInput>
+}
+
+export type UserCreateWithoutAssignedCivicReportsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutAssignedCivicReportsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutAssignedCivicReportsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssignedCivicReportsInput, Prisma.UserUncheckedCreateWithoutAssignedCivicReportsInput>
+}
+
+export type UserUpsertWithoutReportsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReportsInput, Prisma.UserUncheckedUpdateWithoutReportsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportsInput, Prisma.UserUncheckedCreateWithoutReportsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReportsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReportsInput, Prisma.UserUncheckedUpdateWithoutReportsInput>
+}
+
+export type UserUpdateWithoutReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUpsertWithoutAssignedCivicReportsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAssignedCivicReportsInput, Prisma.UserUncheckedUpdateWithoutAssignedCivicReportsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssignedCivicReportsInput, Prisma.UserUncheckedCreateWithoutAssignedCivicReportsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAssignedCivicReportsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAssignedCivicReportsInput, Prisma.UserUncheckedUpdateWithoutAssignedCivicReportsInput>
+}
+
+export type UserUpdateWithoutAssignedCivicReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAssignedCivicReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserCreateWithoutReportUpdatesInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutReportUpdatesInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutReportUpdatesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportUpdatesInput, Prisma.UserUncheckedCreateWithoutReportUpdatesInput>
+}
+
+export type UserUpsertWithoutReportUpdatesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReportUpdatesInput, Prisma.UserUncheckedUpdateWithoutReportUpdatesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportUpdatesInput, Prisma.UserUncheckedCreateWithoutReportUpdatesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReportUpdatesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReportUpdatesInput, Prisma.UserUncheckedUpdateWithoutReportUpdatesInput>
+}
+
+export type UserUpdateWithoutReportUpdatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReportUpdatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserCreateWithoutStaffPermissionsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutStaffPermissionsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutStaffPermissionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStaffPermissionsInput, Prisma.UserUncheckedCreateWithoutStaffPermissionsInput>
+}
+
+export type UserUpsertWithoutStaffPermissionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStaffPermissionsInput, Prisma.UserUncheckedUpdateWithoutStaffPermissionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStaffPermissionsInput, Prisma.UserUncheckedCreateWithoutStaffPermissionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStaffPermissionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStaffPermissionsInput, Prisma.UserUncheckedUpdateWithoutStaffPermissionsInput>
+}
+
+export type UserUpdateWithoutStaffPermissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStaffPermissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserCreateWithoutStaffChangesMadeInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutStaffChangesMadeInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutStaffChangesMadeInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStaffChangesMadeInput, Prisma.UserUncheckedCreateWithoutStaffChangesMadeInput>
+}
+
+export type UserCreateWithoutStaffChangesReceivedInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutStaffChangesReceivedInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutStaffChangesReceivedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStaffChangesReceivedInput, Prisma.UserUncheckedCreateWithoutStaffChangesReceivedInput>
+}
+
+export type UserUpsertWithoutStaffChangesMadeInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStaffChangesMadeInput, Prisma.UserUncheckedUpdateWithoutStaffChangesMadeInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStaffChangesMadeInput, Prisma.UserUncheckedCreateWithoutStaffChangesMadeInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStaffChangesMadeInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStaffChangesMadeInput, Prisma.UserUncheckedUpdateWithoutStaffChangesMadeInput>
+}
+
+export type UserUpdateWithoutStaffChangesMadeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStaffChangesMadeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUpsertWithoutStaffChangesReceivedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStaffChangesReceivedInput, Prisma.UserUncheckedUpdateWithoutStaffChangesReceivedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStaffChangesReceivedInput, Prisma.UserUncheckedCreateWithoutStaffChangesReceivedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStaffChangesReceivedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStaffChangesReceivedInput, Prisma.UserUncheckedUpdateWithoutStaffChangesReceivedInput>
+}
+
+export type UserUpdateWithoutStaffChangesReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStaffChangesReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserCreateWithoutIssuedStaffInvitesInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutIssuedStaffInvitesInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutIssuedStaffInvitesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutIssuedStaffInvitesInput, Prisma.UserUncheckedCreateWithoutIssuedStaffInvitesInput>
+}
+
+export type UserUpsertWithoutIssuedStaffInvitesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutIssuedStaffInvitesInput, Prisma.UserUncheckedUpdateWithoutIssuedStaffInvitesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutIssuedStaffInvitesInput, Prisma.UserUncheckedCreateWithoutIssuedStaffInvitesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutIssuedStaffInvitesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutIssuedStaffInvitesInput, Prisma.UserUncheckedUpdateWithoutIssuedStaffInvitesInput>
+}
+
+export type UserUpdateWithoutIssuedStaffInvitesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutIssuedStaffInvitesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserCreateWithoutResolutionSubmissionsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutResolutionSubmissionsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutResolutionSubmissionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutResolutionSubmissionsInput, Prisma.UserUncheckedCreateWithoutResolutionSubmissionsInput>
+}
+
+export type UserCreateWithoutResolutionReviewsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutResolutionReviewsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutResolutionReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutResolutionReviewsInput, Prisma.UserUncheckedCreateWithoutResolutionReviewsInput>
+}
+
+export type UserUpsertWithoutResolutionSubmissionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutResolutionSubmissionsInput, Prisma.UserUncheckedUpdateWithoutResolutionSubmissionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutResolutionSubmissionsInput, Prisma.UserUncheckedCreateWithoutResolutionSubmissionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutResolutionSubmissionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutResolutionSubmissionsInput, Prisma.UserUncheckedUpdateWithoutResolutionSubmissionsInput>
+}
+
+export type UserUpdateWithoutResolutionSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutResolutionSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUpsertWithoutResolutionReviewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutResolutionReviewsInput, Prisma.UserUncheckedUpdateWithoutResolutionReviewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutResolutionReviewsInput, Prisma.UserUncheckedCreateWithoutResolutionReviewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutResolutionReviewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutResolutionReviewsInput, Prisma.UserUncheckedUpdateWithoutResolutionReviewsInput>
+}
+
+export type UserUpdateWithoutResolutionReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutResolutionReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserCreateWithoutCitizenFeedbacksInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutCitizenFeedbacksInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutCitizenFeedbacksInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCitizenFeedbacksInput, Prisma.UserUncheckedCreateWithoutCitizenFeedbacksInput>
+}
+
+export type UserUpsertWithoutCitizenFeedbacksInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCitizenFeedbacksInput, Prisma.UserUncheckedUpdateWithoutCitizenFeedbacksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCitizenFeedbacksInput, Prisma.UserUncheckedCreateWithoutCitizenFeedbacksInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCitizenFeedbacksInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCitizenFeedbacksInput, Prisma.UserUncheckedUpdateWithoutCitizenFeedbacksInput>
+}
+
+export type UserUpdateWithoutCitizenFeedbacksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCitizenFeedbacksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserCreateWithoutPostedJobsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutPostedJobsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutPostedJobsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPostedJobsInput, Prisma.UserUncheckedCreateWithoutPostedJobsInput>
+}
+
+export type UserUpsertWithoutPostedJobsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPostedJobsInput, Prisma.UserUncheckedUpdateWithoutPostedJobsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPostedJobsInput, Prisma.UserUncheckedCreateWithoutPostedJobsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPostedJobsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPostedJobsInput, Prisma.UserUncheckedUpdateWithoutPostedJobsInput>
+}
+
+export type UserUpdateWithoutPostedJobsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPostedJobsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserCreateWithoutJobseekerProfileInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutJobseekerProfileInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutJobseekerProfileInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobseekerProfileInput, Prisma.UserUncheckedCreateWithoutJobseekerProfileInput>
+}
+
+export type UserUpsertWithoutJobseekerProfileInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutJobseekerProfileInput, Prisma.UserUncheckedUpdateWithoutJobseekerProfileInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobseekerProfileInput, Prisma.UserUncheckedCreateWithoutJobseekerProfileInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutJobseekerProfileInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutJobseekerProfileInput, Prisma.UserUncheckedUpdateWithoutJobseekerProfileInput>
+}
+
+export type UserUpdateWithoutJobseekerProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutJobseekerProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserCreateWithoutSpesImportsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutSpesImportsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutSpesImportsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSpesImportsInput, Prisma.UserUncheckedCreateWithoutSpesImportsInput>
+}
+
+export type UserUpsertWithoutSpesImportsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSpesImportsInput, Prisma.UserUncheckedUpdateWithoutSpesImportsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSpesImportsInput, Prisma.UserUncheckedCreateWithoutSpesImportsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSpesImportsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSpesImportsInput, Prisma.UserUncheckedUpdateWithoutSpesImportsInput>
+}
+
+export type UserUpdateWithoutSpesImportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSpesImportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutJobChangesInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+}
+
+export type UserUncheckedCreateWithoutJobChangesInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+}
+
+export type UserCreateOrConnectWithoutJobChangesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobChangesInput, Prisma.UserUncheckedCreateWithoutJobChangesInput>
+}
+
+export type UserUpsertWithoutJobChangesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutJobChangesInput, Prisma.UserUncheckedUpdateWithoutJobChangesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobChangesInput, Prisma.UserUncheckedCreateWithoutJobChangesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutJobChangesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutJobChangesInput, Prisma.UserUncheckedUpdateWithoutJobChangesInput>
+}
+
+export type UserUpdateWithoutJobChangesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutJobChangesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
 }
 
 
@@ -577,11 +2846,37 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
 export type UserCountOutputType = {
   sessions: number
   accounts: number
+  reports: number
+  assignedCivicReports: number
+  reportUpdates: number
+  resolutionSubmissions: number
+  resolutionReviews: number
+  staffPermissions: number
+  staffChangesMade: number
+  staffChangesReceived: number
+  issuedStaffInvites: number
+  citizenFeedbacks: number
+  postedJobs: number
+  jobChanges: number
+  spesImports: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+  reports?: boolean | UserCountOutputTypeCountReportsArgs
+  assignedCivicReports?: boolean | UserCountOutputTypeCountAssignedCivicReportsArgs
+  reportUpdates?: boolean | UserCountOutputTypeCountReportUpdatesArgs
+  resolutionSubmissions?: boolean | UserCountOutputTypeCountResolutionSubmissionsArgs
+  resolutionReviews?: boolean | UserCountOutputTypeCountResolutionReviewsArgs
+  staffPermissions?: boolean | UserCountOutputTypeCountStaffPermissionsArgs
+  staffChangesMade?: boolean | UserCountOutputTypeCountStaffChangesMadeArgs
+  staffChangesReceived?: boolean | UserCountOutputTypeCountStaffChangesReceivedArgs
+  issuedStaffInvites?: boolean | UserCountOutputTypeCountIssuedStaffInvitesArgs
+  citizenFeedbacks?: boolean | UserCountOutputTypeCountCitizenFeedbacksArgs
+  postedJobs?: boolean | UserCountOutputTypeCountPostedJobsArgs
+  jobChanges?: boolean | UserCountOutputTypeCountJobChangesArgs
+  spesImports?: boolean | UserCountOutputTypeCountSpesImportsArgs
 }
 
 /**
@@ -608,6 +2903,97 @@ export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.AccountWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CivicReportWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAssignedCivicReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CivicReportWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReportUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReportUpdateWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountResolutionSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ResolutionSubmissionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountResolutionReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ResolutionSubmissionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStaffPermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StaffPermissionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStaffChangesMadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StaffAccessAuditWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStaffChangesReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StaffAccessAuditWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountIssuedStaffInvitesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StaffInvitationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCitizenFeedbacksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CitizenResolutionFeedbackWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPostedJobsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JobOpportunityWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountJobChangesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JobActivityWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSpesImportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SpesImportBatchWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -618,8 +3004,24 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  department?: boolean
+  designation?: boolean
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
+  assignedCivicReports?: boolean | Prisma.User$assignedCivicReportsArgs<ExtArgs>
+  reportUpdates?: boolean | Prisma.User$reportUpdatesArgs<ExtArgs>
+  resolutionSubmissions?: boolean | Prisma.User$resolutionSubmissionsArgs<ExtArgs>
+  resolutionReviews?: boolean | Prisma.User$resolutionReviewsArgs<ExtArgs>
+  staffPermissions?: boolean | Prisma.User$staffPermissionsArgs<ExtArgs>
+  staffChangesMade?: boolean | Prisma.User$staffChangesMadeArgs<ExtArgs>
+  staffChangesReceived?: boolean | Prisma.User$staffChangesReceivedArgs<ExtArgs>
+  issuedStaffInvites?: boolean | Prisma.User$issuedStaffInvitesArgs<ExtArgs>
+  citizenFeedbacks?: boolean | Prisma.User$citizenFeedbacksArgs<ExtArgs>
+  jobseekerProfile?: boolean | Prisma.User$jobseekerProfileArgs<ExtArgs>
+  postedJobs?: boolean | Prisma.User$postedJobsArgs<ExtArgs>
+  jobChanges?: boolean | Prisma.User$jobChangesArgs<ExtArgs>
+  spesImports?: boolean | Prisma.User$spesImportsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -634,12 +3036,28 @@ export type UserSelectScalar = {
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  department?: boolean
+  designation?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "role" | "createdAt" | "updatedAt" | "department" | "designation", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
+  assignedCivicReports?: boolean | Prisma.User$assignedCivicReportsArgs<ExtArgs>
+  reportUpdates?: boolean | Prisma.User$reportUpdatesArgs<ExtArgs>
+  resolutionSubmissions?: boolean | Prisma.User$resolutionSubmissionsArgs<ExtArgs>
+  resolutionReviews?: boolean | Prisma.User$resolutionReviewsArgs<ExtArgs>
+  staffPermissions?: boolean | Prisma.User$staffPermissionsArgs<ExtArgs>
+  staffChangesMade?: boolean | Prisma.User$staffChangesMadeArgs<ExtArgs>
+  staffChangesReceived?: boolean | Prisma.User$staffChangesReceivedArgs<ExtArgs>
+  issuedStaffInvites?: boolean | Prisma.User$issuedStaffInvitesArgs<ExtArgs>
+  citizenFeedbacks?: boolean | Prisma.User$citizenFeedbacksArgs<ExtArgs>
+  jobseekerProfile?: boolean | Prisma.User$jobseekerProfileArgs<ExtArgs>
+  postedJobs?: boolean | Prisma.User$postedJobsArgs<ExtArgs>
+  jobChanges?: boolean | Prisma.User$jobChangesArgs<ExtArgs>
+  spesImports?: boolean | Prisma.User$spesImportsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -648,6 +3066,20 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     accounts: Prisma.$AccountPayload<ExtArgs>[]
+    reports: Prisma.$CivicReportPayload<ExtArgs>[]
+    assignedCivicReports: Prisma.$CivicReportPayload<ExtArgs>[]
+    reportUpdates: Prisma.$ReportUpdatePayload<ExtArgs>[]
+    resolutionSubmissions: Prisma.$ResolutionSubmissionPayload<ExtArgs>[]
+    resolutionReviews: Prisma.$ResolutionSubmissionPayload<ExtArgs>[]
+    staffPermissions: Prisma.$StaffPermissionPayload<ExtArgs>[]
+    staffChangesMade: Prisma.$StaffAccessAuditPayload<ExtArgs>[]
+    staffChangesReceived: Prisma.$StaffAccessAuditPayload<ExtArgs>[]
+    issuedStaffInvites: Prisma.$StaffInvitationPayload<ExtArgs>[]
+    citizenFeedbacks: Prisma.$CitizenResolutionFeedbackPayload<ExtArgs>[]
+    jobseekerProfile: Prisma.$JobseekerProfilePayload<ExtArgs> | null
+    postedJobs: Prisma.$JobOpportunityPayload<ExtArgs>[]
+    jobChanges: Prisma.$JobActivityPayload<ExtArgs>[]
+    spesImports: Prisma.$SpesImportBatchPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -658,6 +3090,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     role: string
     createdAt: Date
     updatedAt: Date
+    department: string | null
+    designation: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1000,6 +3434,20 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reports<T extends Prisma.User$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CivicReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assignedCivicReports<T extends Prisma.User$assignedCivicReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedCivicReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CivicReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reportUpdates<T extends Prisma.User$reportUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  resolutionSubmissions<T extends Prisma.User$resolutionSubmissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$resolutionSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResolutionSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  resolutionReviews<T extends Prisma.User$resolutionReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$resolutionReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResolutionSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  staffPermissions<T extends Prisma.User$staffPermissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$staffPermissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StaffPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  staffChangesMade<T extends Prisma.User$staffChangesMadeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$staffChangesMadeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StaffAccessAuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  staffChangesReceived<T extends Prisma.User$staffChangesReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$staffChangesReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StaffAccessAuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  issuedStaffInvites<T extends Prisma.User$issuedStaffInvitesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$issuedStaffInvitesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StaffInvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  citizenFeedbacks<T extends Prisma.User$citizenFeedbacksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$citizenFeedbacksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CitizenResolutionFeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  jobseekerProfile<T extends Prisma.User$jobseekerProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jobseekerProfileArgs<ExtArgs>>): Prisma.Prisma__JobseekerProfileClient<runtime.Types.Result.GetResult<Prisma.$JobseekerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  postedJobs<T extends Prisma.User$postedJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postedJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobOpportunityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  jobChanges<T extends Prisma.User$jobChangesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jobChangesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  spesImports<T extends Prisma.User$spesImportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$spesImportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpesImportBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1037,6 +3485,8 @@ export interface UserFieldRefs {
   readonly role: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly department: Prisma.FieldRef<"User", 'String'>
+  readonly designation: Prisma.FieldRef<"User", 'String'>
 }
     
 
@@ -1430,6 +3880,337 @@ export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
+}
+
+/**
+ * User.reports
+ */
+export type User$reportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CivicReport
+   */
+  select?: Prisma.CivicReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CivicReport
+   */
+  omit?: Prisma.CivicReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CivicReportInclude<ExtArgs> | null
+  where?: Prisma.CivicReportWhereInput
+  orderBy?: Prisma.CivicReportOrderByWithRelationInput | Prisma.CivicReportOrderByWithRelationInput[]
+  cursor?: Prisma.CivicReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CivicReportScalarFieldEnum | Prisma.CivicReportScalarFieldEnum[]
+}
+
+/**
+ * User.assignedCivicReports
+ */
+export type User$assignedCivicReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CivicReport
+   */
+  select?: Prisma.CivicReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CivicReport
+   */
+  omit?: Prisma.CivicReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CivicReportInclude<ExtArgs> | null
+  where?: Prisma.CivicReportWhereInput
+  orderBy?: Prisma.CivicReportOrderByWithRelationInput | Prisma.CivicReportOrderByWithRelationInput[]
+  cursor?: Prisma.CivicReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CivicReportScalarFieldEnum | Prisma.CivicReportScalarFieldEnum[]
+}
+
+/**
+ * User.reportUpdates
+ */
+export type User$reportUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReportUpdate
+   */
+  select?: Prisma.ReportUpdateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ReportUpdate
+   */
+  omit?: Prisma.ReportUpdateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReportUpdateInclude<ExtArgs> | null
+  where?: Prisma.ReportUpdateWhereInput
+  orderBy?: Prisma.ReportUpdateOrderByWithRelationInput | Prisma.ReportUpdateOrderByWithRelationInput[]
+  cursor?: Prisma.ReportUpdateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReportUpdateScalarFieldEnum | Prisma.ReportUpdateScalarFieldEnum[]
+}
+
+/**
+ * User.resolutionSubmissions
+ */
+export type User$resolutionSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ResolutionSubmission
+   */
+  select?: Prisma.ResolutionSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ResolutionSubmission
+   */
+  omit?: Prisma.ResolutionSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResolutionSubmissionInclude<ExtArgs> | null
+  where?: Prisma.ResolutionSubmissionWhereInput
+  orderBy?: Prisma.ResolutionSubmissionOrderByWithRelationInput | Prisma.ResolutionSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.ResolutionSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ResolutionSubmissionScalarFieldEnum | Prisma.ResolutionSubmissionScalarFieldEnum[]
+}
+
+/**
+ * User.resolutionReviews
+ */
+export type User$resolutionReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ResolutionSubmission
+   */
+  select?: Prisma.ResolutionSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ResolutionSubmission
+   */
+  omit?: Prisma.ResolutionSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResolutionSubmissionInclude<ExtArgs> | null
+  where?: Prisma.ResolutionSubmissionWhereInput
+  orderBy?: Prisma.ResolutionSubmissionOrderByWithRelationInput | Prisma.ResolutionSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.ResolutionSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ResolutionSubmissionScalarFieldEnum | Prisma.ResolutionSubmissionScalarFieldEnum[]
+}
+
+/**
+ * User.staffPermissions
+ */
+export type User$staffPermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StaffPermission
+   */
+  select?: Prisma.StaffPermissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StaffPermission
+   */
+  omit?: Prisma.StaffPermissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StaffPermissionInclude<ExtArgs> | null
+  where?: Prisma.StaffPermissionWhereInput
+  orderBy?: Prisma.StaffPermissionOrderByWithRelationInput | Prisma.StaffPermissionOrderByWithRelationInput[]
+  cursor?: Prisma.StaffPermissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StaffPermissionScalarFieldEnum | Prisma.StaffPermissionScalarFieldEnum[]
+}
+
+/**
+ * User.staffChangesMade
+ */
+export type User$staffChangesMadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StaffAccessAudit
+   */
+  select?: Prisma.StaffAccessAuditSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StaffAccessAudit
+   */
+  omit?: Prisma.StaffAccessAuditOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StaffAccessAuditInclude<ExtArgs> | null
+  where?: Prisma.StaffAccessAuditWhereInput
+  orderBy?: Prisma.StaffAccessAuditOrderByWithRelationInput | Prisma.StaffAccessAuditOrderByWithRelationInput[]
+  cursor?: Prisma.StaffAccessAuditWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StaffAccessAuditScalarFieldEnum | Prisma.StaffAccessAuditScalarFieldEnum[]
+}
+
+/**
+ * User.staffChangesReceived
+ */
+export type User$staffChangesReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StaffAccessAudit
+   */
+  select?: Prisma.StaffAccessAuditSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StaffAccessAudit
+   */
+  omit?: Prisma.StaffAccessAuditOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StaffAccessAuditInclude<ExtArgs> | null
+  where?: Prisma.StaffAccessAuditWhereInput
+  orderBy?: Prisma.StaffAccessAuditOrderByWithRelationInput | Prisma.StaffAccessAuditOrderByWithRelationInput[]
+  cursor?: Prisma.StaffAccessAuditWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StaffAccessAuditScalarFieldEnum | Prisma.StaffAccessAuditScalarFieldEnum[]
+}
+
+/**
+ * User.issuedStaffInvites
+ */
+export type User$issuedStaffInvitesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StaffInvitation
+   */
+  select?: Prisma.StaffInvitationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StaffInvitation
+   */
+  omit?: Prisma.StaffInvitationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StaffInvitationInclude<ExtArgs> | null
+  where?: Prisma.StaffInvitationWhereInput
+  orderBy?: Prisma.StaffInvitationOrderByWithRelationInput | Prisma.StaffInvitationOrderByWithRelationInput[]
+  cursor?: Prisma.StaffInvitationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StaffInvitationScalarFieldEnum | Prisma.StaffInvitationScalarFieldEnum[]
+}
+
+/**
+ * User.citizenFeedbacks
+ */
+export type User$citizenFeedbacksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CitizenResolutionFeedback
+   */
+  select?: Prisma.CitizenResolutionFeedbackSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CitizenResolutionFeedback
+   */
+  omit?: Prisma.CitizenResolutionFeedbackOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CitizenResolutionFeedbackInclude<ExtArgs> | null
+  where?: Prisma.CitizenResolutionFeedbackWhereInput
+  orderBy?: Prisma.CitizenResolutionFeedbackOrderByWithRelationInput | Prisma.CitizenResolutionFeedbackOrderByWithRelationInput[]
+  cursor?: Prisma.CitizenResolutionFeedbackWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CitizenResolutionFeedbackScalarFieldEnum | Prisma.CitizenResolutionFeedbackScalarFieldEnum[]
+}
+
+/**
+ * User.jobseekerProfile
+ */
+export type User$jobseekerProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobseekerProfile
+   */
+  select?: Prisma.JobseekerProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobseekerProfile
+   */
+  omit?: Prisma.JobseekerProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobseekerProfileInclude<ExtArgs> | null
+  where?: Prisma.JobseekerProfileWhereInput
+}
+
+/**
+ * User.postedJobs
+ */
+export type User$postedJobsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobOpportunity
+   */
+  select?: Prisma.JobOpportunitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobOpportunity
+   */
+  omit?: Prisma.JobOpportunityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobOpportunityInclude<ExtArgs> | null
+  where?: Prisma.JobOpportunityWhereInput
+  orderBy?: Prisma.JobOpportunityOrderByWithRelationInput | Prisma.JobOpportunityOrderByWithRelationInput[]
+  cursor?: Prisma.JobOpportunityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JobOpportunityScalarFieldEnum | Prisma.JobOpportunityScalarFieldEnum[]
+}
+
+/**
+ * User.jobChanges
+ */
+export type User$jobChangesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobActivity
+   */
+  select?: Prisma.JobActivitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobActivity
+   */
+  omit?: Prisma.JobActivityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobActivityInclude<ExtArgs> | null
+  where?: Prisma.JobActivityWhereInput
+  orderBy?: Prisma.JobActivityOrderByWithRelationInput | Prisma.JobActivityOrderByWithRelationInput[]
+  cursor?: Prisma.JobActivityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JobActivityScalarFieldEnum | Prisma.JobActivityScalarFieldEnum[]
+}
+
+/**
+ * User.spesImports
+ */
+export type User$spesImportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SpesImportBatch
+   */
+  select?: Prisma.SpesImportBatchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SpesImportBatch
+   */
+  omit?: Prisma.SpesImportBatchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SpesImportBatchInclude<ExtArgs> | null
+  where?: Prisma.SpesImportBatchWhereInput
+  orderBy?: Prisma.SpesImportBatchOrderByWithRelationInput | Prisma.SpesImportBatchOrderByWithRelationInput[]
+  cursor?: Prisma.SpesImportBatchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SpesImportBatchScalarFieldEnum | Prisma.SpesImportBatchScalarFieldEnum[]
 }
 
 /**

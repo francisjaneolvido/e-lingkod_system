@@ -9,7 +9,58 @@
 * 🟢 You can import this file directly.
 */
 
+export const ReportPriority = {
+  LOW: 'LOW',
+  NORMAL: 'NORMAL',
+  HIGH: 'HIGH',
+  URGENT: 'URGENT'
+} as const
+
+export type ReportPriority = (typeof ReportPriority)[keyof typeof ReportPriority]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const ReportVisibility = {
+  PUBLIC: 'PUBLIC',
+  INTERNAL: 'INTERNAL'
+} as const
+
+export type ReportVisibility = (typeof ReportVisibility)[keyof typeof ReportVisibility]
+
+
+export const CivicReportStatus = {
+  SUBMITTED: 'SUBMITTED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  IN_PROGRESS: 'IN_PROGRESS',
+  PENDING_VERIFICATION: 'PENDING_VERIFICATION',
+  RESOLVED: 'RESOLVED',
+  REJECTED: 'REJECTED',
+  REOPENED: 'REOPENED'
+} as const
+
+export type CivicReportStatus = (typeof CivicReportStatus)[keyof typeof CivicReportStatus]
+
+
+export const ResolutionReviewStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  RETURNED: 'RETURNED'
+} as const
+
+export type ResolutionReviewStatus = (typeof ResolutionReviewStatus)[keyof typeof ResolutionReviewStatus]
+
+
+export const CitizenFeedbackDecision = {
+  CONFIRMED: 'CONFIRMED',
+  DISPUTED: 'DISPUTED'
+} as const
+
+export type CitizenFeedbackDecision = (typeof CitizenFeedbackDecision)[keyof typeof CitizenFeedbackDecision]
+
+
+export const JobListingStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type JobListingStatus = (typeof JobListingStatus)[keyof typeof JobListingStatus]

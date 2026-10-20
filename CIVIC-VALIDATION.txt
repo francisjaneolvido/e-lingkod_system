@@ -1,0 +1,60 @@
+E-LINGKOD BAYAN — CIVIC REPORTING V7 VALIDATION
+===============================================
+Base: the supplied e-lingkod-bayann.rar project
+
+ENVIRONMENT
+Node.js 24.19.0; Next.js 16.4.2; Prisma 7.10.1.
+Real isolated MariaDB 10.11.14 test database using the MySQL Prisma provider.
+Production Next.js server and headless Chromium browser tests.
+No mock API, localStorage reports, or hardcoded tracking statuses were used.
+
+PASSED
+- Prisma client generation and additive migration generation.
+- Both auth and Civic Reporting migrations applied to a fresh test database.
+- Production build with Cache Components / Partial Prefetching enabled.
+- TypeScript typecheck.
+- ESLint (no errors or warnings).
+- 9 framework-independent validation tests via npm run test:civic.
+
+DATABASE / API / BROWSER CHECKS (21)
+01. Better Auth registration and real database sessions
+02. Public registration cannot grant ADMIN privileges
+03. Admin promotion script
+04. Photo + emulated browser GPS + unique tracking ID + saved receipt
+05. Network retry returns the same report without creating a duplicate
+06. Photo decoding, JPEG conversion, and EXIF removal
+07. Guest, cross-account photo/report, non-admin, and cross-origin requests blocked
+08. Public tracking excludes private report data and staff remarks
+09. A disguised non-image payload is rejected by the server
+10. Admin UI review, office assignment, and remarks saved
+11. Concurrent admin updates preserve one version and reject the stale writer
+12. Invalid status transitions rejected
+13. Resolved status and complete audit history visible to the citizen and public tracking
+14. Address-based location fallback and distinct tracking IDs
+15. My Reports list, status filters, and keyword search
+16. Public tracking browser lookup uses the saved database report
+17. 20 viewport/route combinations: no horizontal page overflow
+18. Personalized homepage shows actual recent reports
+19. Protected citizen pages redirect guests to login
+20. Admin revocation is effective for an existing session
+21. No browser JavaScript runtime errors
+
+RESPONSIVE CHECKS
+Widths: 360, 390, 768, and 1440 pixels.
+Routes: new report, My Reports, report detail, LGU desk, public tracking.
+20 route/viewport combinations passed with no horizontal page overflow.
+Desktop and mobile form, queue, receipt, detail, and tracking layouts inspected.
+
+LIMITS OF VERIFICATION
+GPS permissions and location were emulated in the browser. Physical phone GPS,
+phone camera capture, and the user's Windows/XAMPP installation were not tested.
+OpenStreetMap is an external online preview; map tiles were not available in
+the restricted browser test environment. Saved coordinates and written address
+were verified independently of the map.
+Tests used dummy accounts and an isolated test database. These accounts,
+credentials, records, screenshots, database server, and browser tools are not
+included in the ZIP. The user's existing database was not accessed.
+
+INSTALLATION
+Copy/replace the payload, then run npm install, prisma migrate deploy,
+prisma generate, and npm run dev as described in CIVIC-REPORTING-SETUP.md.

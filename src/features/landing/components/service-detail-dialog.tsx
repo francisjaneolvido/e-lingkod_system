@@ -57,7 +57,7 @@ export function ServiceDetailDialog({ service, onClose }: Props) {
             <div className="mt-6 flex items-start gap-3 border-t border-[#e6edf2] pt-5 text-[11px] leading-5 text-[#617d92]"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#168479]" /><p><strong className="text-[#214e72]">Hackathon prototype.</strong> This is a planned service. No real applications, emergency dispatch, or personal data collection happens on this page yet.</p></div>
             <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
               {service.id === "civic" ? (
-                <Link href="/#track-demo" onClick={() => dialogRef.current?.close()} className="inline-flex items-center gap-2 rounded-full bg-[#153e66] px-5 py-3 text-[12px] font-bold text-white transition hover:bg-[#216da2]">Try tracking demo <ArrowRight size={16} /></Link>
+                <Link href="/reports/new" onClick={() => dialogRef.current?.close()} className="inline-flex items-center gap-2 rounded-full bg-[#153e66] px-5 py-3 text-[12px] font-bold text-white transition hover:bg-[#216da2]">Report a concern <ArrowRight size={16} /></Link>
               ) : (
                 <span className="text-[11px] font-semibold text-[#66849a]">Full workflow coming in the next phase</span>
               )}

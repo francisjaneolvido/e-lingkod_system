@@ -29,7 +29,17 @@ export function LoginForm() {
         setError(result.error.message || "Incorrect email or password. Please try again.");
         return;
       }
-      router.replace(getSafeAuthDestination());
+      let destination = getSafeAuthDestination();
+      if (destination === "/") {
+        try {
+          const response = await fetch("/api/account/destination", { cache: "no-store" });
+          if (response.ok) {
+            const result = await response.json() as { destination?: string };
+            if (result.destination?.startsWith("/") && !result.destination.startsWith("//")) destination = result.destination;
+          }
+        } catch { /* Keep the normal citizen homepage if destination lookup is unavailable. */ }
+      }
+      router.replace(destination);
       router.refresh();
     } catch {
       setError("Unable to log in right now. Check your connection and try again.");
@@ -41,7 +51,7 @@ export function LoginForm() {
   return (
     <div>
       <div className="mb-7 text-center lg:mb-8">
-        <span className="mb-3 inline-flex items-center rounded-full bg-[#eef8fd] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#2382ae]">Citizen Account</span>
+        <span className="mb-3 inline-flex items-center rounded-full bg-[#eef8fd] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#2382ae]">Citizen &amp; LGU Staff</span>
         <h2 className="text-[clamp(27px,2.5vw,35px)] font-extrabold leading-tight tracking-[-0.05em] text-[#12466a]">Welcome Back<span className="text-[#ffae24]">!</span></h2>
         <p className="mt-2 text-[12px] leading-6 text-[#6d899b]">Sign in to access reports and community services.</p>
       </div>

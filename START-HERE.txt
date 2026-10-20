@@ -1,37 +1,20 @@
-E-LINGKOD BAYAN — RESPONSIVE WEB PORTAL (V2)
+E-LINGKOD BAYAN — QUICK START (Civic Reporting V7 + Admin Setup)
 
-UPDATED: Fixed Next.js 16 prerender footer issue; used generated eLB logo.
-INCLUDED: Modern desktop-first landing page, login UI, registration UI.
-IMPORTANT: Login / register are UI PREVIEWS ONLY. No database or account saving yet.
+1. Open this folder (containing package.json) in VS Code.
+2. Start MySQL and configure your PRIVATE .env: DATABASE_URL, BETTER_AUTH_SECRET, BETTER_AUTH_URL.
+3. First time only / after installing new code:
+   npm install
+   npx prisma validate
+   npx prisma migrate deploy
+   npx prisma generate
+4. Optional, one time: follow ADMIN-SETUP.md to bootstrap a staff admin account.
+5. Run: npm run dev
+6. Open: http://localhost:3000
 
-START IN VS CODE (WINDOWS)
-1) Extract ZIP to a new folder. Do not work inside the ZIP.
-2) VS Code > File > Open Folder > choose e-lingkod-bayan (contains package.json).
-3) Terminal > New Terminal.
-4) Run: npm install
-5) Run: npm run dev
-6) Open browser: http://localhost:3000
-7) Login page: http://localhost:3000/login
-8) Register page: http://localhost:3000/register
+USUAL DAILY START: Start MySQL then npm run dev. You do NOT reinstall or migrate every time.
 
-IF UPDATING OLD PROJECT
-- Stop dev server using Ctrl+C.
-- Safest for beginners: extract this as a NEW project folder, open that in VS Code.
-- Your previous folder can stay as a backup.
-- Do NOT copy old .next or node_modules into the new folder.
+ROUTES: /reports/new, /reports, /track, /admin/reports, /login, /register.
+Civic Reporting is implemented in source. The other five service modules are landing-page concepts only.
 
-CHECK RESPONSIVE LAYOUT
-Chrome F12 > Ctrl+Shift+M > test 1920x1080, 1366x768, 768x1024, 390x844, 320x640.
-
-PROJECT MAP
-src/app/page.tsx                      Home
-src/app/(auth)/login/page.tsx         Login URL: /login
-src/app/(auth)/register/page.tsx      Register URL: /register
-src/features/landing/                Landing page modules
-src/features/auth/components/        Shared form components and auth layout
-src/components/layout/               Site header and footer
-src/components/shared/               Shared branding
-public/images/elb-mark.svg           Generated eLB vector mark (used in app)
-
-NEXT STEPS
-Prisma + MySQL, authentication, authorization roles, reporting workflows.
+For full details, read README.md and ADMIN-SETUP.md.
+IMPORTANT: Never share/upload .env containing database passwords or auth secrets.

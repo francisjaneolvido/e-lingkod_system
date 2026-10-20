@@ -2,7 +2,7 @@ E-LINGKOD BAYAN — BRAND / UI CONTINUITY GUIDE
 =============================================
 Identity: eLB | eLingkod Bayan | Report. Act. Resolve.
 Original generated eLB mark: public/images/elb-mark.svg (keep existing).
-Font: Poppins throughout the site.
+Font: Poppins throughout the site; V7 bundles the font files in public/fonts.
 
 COLORS
 Navy / primary          #103C64 / #143D62
@@ -33,12 +33,19 @@ INTERACTION
 - Do not expose individually identifiable census information on public pages.
 
 PRODUCT MODULES (APPROVED)
-1 Civic Reporting: photo upload, permission-based GPS, tracking ID/status.
-2 Online LGU Services: permits, taxes, clearances.
+1 Civic Reporting: saved photo uploads, permission-based GPS/manual location, tracking ID/status, citizen history, and protected LGU action desk.
+2 Online LGU Services: permits, IDs, clearances.
 3 Emergency Hotlines & Alerts: PNP/BFP/Hospital/MDRRMO, push advisories.
-4 Municipal Directory & Guide: requirements, fees, offices.
-5 Job matching: jobseekers and businesses.
-6 Worker and social-status census: privacy-conscious aggregated data.
+4 Municipal Projects & Services: offices, service directory, ongoing and future projects.
+5 Job matching: SPES survey imports and hypothetical skills-to-opportunity suggestions; no application processing in this scope.
+6 Worker and social-status census: occupation, employment status, socioeconomic survey data, and aggregated planning statistics.
 
 Images in public/images/landing are AI-created illustrations for this prototype.
 They are NOT photographs of actual LGU projects, events or service users.
+
+V7 CIVIC DESIGN
+- Scoped styles in src/features/civic/civic.module.css.
+- Warm off-white surfaces, navy headings, teal accents, numbered form sections.
+- Photo evidence, visible tracking receipts, and a chronological progress trail.
+- Staff workspace supports assignment, documented status changes, and version checks.
+- Keep the main public landing composition and existing eLB mark.

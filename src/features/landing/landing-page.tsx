@@ -9,14 +9,14 @@ import { WorkflowSection } from "./sections/workflow-section";
 import { PersonalizedWelcomeSection } from "./sections/personalized-welcome-section";
 import { RecentActivitySection } from "./sections/recent-activity-section";
 
-export type PortalViewer = { name: string; email: string };
+export type PortalViewer = { name: string; email: string; role?: string };
 
 export function LandingPage({ viewer }: { viewer: PortalViewer | null }) {
   return (
     <>
       <SiteHeader viewer={viewer} />
       <main>
-        {/* Keep the original Hero V4 and Services V5 unchanged. */}
+        {/* Preserve the landing design while connecting the civic workflow. */}
         <HeroSection />
         {viewer && <PersonalizedWelcomeSection name={viewer.name} />}
         <QuickLinksSection />

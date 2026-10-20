@@ -14,7 +14,9 @@ import { siteConfig } from "@/lib/site-config";
 const citizenNavigation = [
   { label: "Home", href: "/#home" },
   { label: "Services", href: "/#services" },
-  { label: "Tracking demo", href: "/#track-demo" },
+  { label: "My reports", href: "/reports" },
+  { label: "Job opportunities", href: "/opportunities" },
+  { label: "Track a report", href: "/track" },
   { label: "Community", href: "/#about" },
 ];
 
@@ -22,6 +24,7 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
   const [open, setOpen] = useState(false);
   const profileDetails = useRef<HTMLDetailsElement>(null);
   const navigation = viewer ? citizenNavigation : siteConfig.nav;
+  const staffPortal = viewer?.role === "ADMIN" || viewer?.role === "STAFF";
 
   useEffect(() => {
     function closeOnOutsideClick(event: PointerEvent) {
@@ -70,10 +73,11 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                     <p className="truncate text-[13px] font-extrabold text-[#153b63]">{viewer.name}</p>
                     <p className="mt-1 truncate text-[11px] text-[#7290a3]">{viewer.email}</p>
                   </div>
-                  <Link href="/account" className="mt-2 flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><CircleUserRound size={17} className="text-[#153B63]" /> My Account</Link>
-                  <Link href="/account/profile" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><UserRound size={17} className="text-[#153B63]" /> My Profile</Link>
+                  <Link href={staffPortal ? "/admin" : "/account"} className="mt-2 flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><CircleUserRound size={17} className="text-[#153B63]" /> My Account</Link>
+                  <Link href={staffPortal ? "/admin/profile" : "/account/profile"} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><UserRound size={17} className="text-[#153B63]" /> My Profile</Link>
                   <div className="my-1 border-t border-[#e8eef3]" />
-                  <span className="flex cursor-not-allowed items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] text-[#8aa0b0]" title="Coming in a future phase"><ClipboardList size={17} /> My Reports <span className="ml-auto text-[9px]">Soon</span></span>
+                  <Link href="/reports" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><ClipboardList size={17} /> My Reports</Link>
+                  {(viewer.role === "ADMIN" || viewer.role === "STAFF") && <Link href="/admin" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><ShieldCheck size={17} /> LGU workspace</Link>}
                   <span className="flex cursor-not-allowed items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] text-[#8aa0b0]" title="Coming in a future phase"><Files size={17} /> My Applications <span className="ml-auto text-[9px]">Soon</span></span>
                   <div className="my-1 border-t border-[#e8eef3]" />
                   <LogoutButton fullWidth />
@@ -97,9 +101,11 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
               {viewer ? (
                 <div className="mt-3 border-t border-[#e9f0f5] pt-3">
                   <p className="truncate px-4 py-2 text-[12px] font-bold text-[#153b63]">Signed in as {viewer.name}</p>
-                  <Link href="/account" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><CircleUserRound size={17}/> My Account</Link>
-                  <Link href="/account/profile" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><UserRound size={17}/> My Profile</Link>
-                  <p className="px-4 py-2 text-[11px] text-[#8198aa]">Reports, applications and notifications: coming soon</p>
+                  <Link href={staffPortal ? "/admin" : "/account"} onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><CircleUserRound size={17}/> {staffPortal ? "LGU Dashboard" : "My Account"}</Link>
+                  <Link href={staffPortal ? "/admin/profile" : "/account/profile"} onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><UserRound size={17}/> My Profile</Link>
+                  <Link href="/reports" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><ClipboardList size={17}/> My Reports</Link>
+                  {(viewer.role === "ADMIN" || viewer.role === "STAFF") && <Link href="/admin" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><ShieldCheck size={17}/> LGU workspace</Link>}
+                  <p className="px-4 py-2 text-[11px] text-[#8198aa]">Applications and notifications: coming soon</p>
                   <div className="px-2 pt-2"><LogoutButton fullWidth /></div>
                 </div>
               ) : (

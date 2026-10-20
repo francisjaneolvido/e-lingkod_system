@@ -1,5 +1,4 @@
-import { headers } from "next/headers";
-import { auth } from "@/lib/auth";
+import { currentViewer } from "@/lib/access";
 import { LandingPage } from "@/features/landing/landing-page";
 
 /**
@@ -7,9 +6,9 @@ import { LandingPage } from "@/features/landing/landing-page";
  * The session is verified by Better Auth on the server (not localStorage).
  */
 export default async function Home() {
-  const session = await auth.api.getSession({ headers: await headers() });
-  const viewer = session
-    ? { name: session.user.name, email: session.user.email }
+  const user = await currentViewer();
+  const viewer = user
+    ? { name: user.name, email: user.email, role: user.role }
     : null;
 
   return <LandingPage viewer={viewer} />;

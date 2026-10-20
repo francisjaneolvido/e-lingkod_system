@@ -40,11 +40,11 @@ export const services: Service[] = [
   },
   {
     id: "services", number: "02", title: "Online LGU Services", shortTitle: "Apply for a service",
-    description: "Digital applications para sa permits, taxes at clearances, nang hindi na kailangang pumila.",
+    description: "Digital applications para sa permits, IDs at clearances, nang hindi na kailangang pumila.",
     group: "Government", icon: Files, color: SERVICE_ICON_COLOR, surface: SERVICE_ICON_SURFACE,
     details: [
       { icon: FileText, text: "Online forms and document submissions" },
-      { icon: Receipt, text: "Permits, taxes and clearances workflows" },
+      { icon: Receipt, text: "Permits, IDs and clearances workflows" },
       { icon: BadgeCheck, text: "Application review and status updates" },
     ],
   },
@@ -60,13 +60,13 @@ export const services: Service[] = [
     note: "Real-time alerts and phone numbers will only be enabled after official data is connected and verified.",
   },
   {
-    id: "directory", number: "04", title: "Municipal Directory & Guide", shortTitle: "Find an office",
-    description: "Isang gabay sa offices, requirements, fees at mga dapat malaman bago mag-apply.",
+    id: "directory", number: "04", title: "Municipal Projects & Services", shortTitle: "Find an office",
+    description: "Directory ng LGU offices at services, kasama ang ongoing at future municipal projects.",
     group: "Government", icon: BookOpenText, color: SERVICE_ICON_COLOR, surface: SERVICE_ICON_SURFACE,
     details: [
       { icon: Building2, text: "Directory of offices and departments" },
       { icon: ClipboardList, text: "Requirements and step-by-step service guides" },
-      { icon: Search, text: "Searchable fees, guidelines and office details" },
+      { icon: Search, text: "Ongoing and future municipal projects" },
     ],
   },
   {
@@ -74,17 +74,18 @@ export const services: Service[] = [
     description: "Pag-uugnay ng local jobseekers at businesses ayon sa skills at job requirements.",
     group: "Opportunities", icon: BriefcaseBusiness, color: SERVICE_ICON_COLOR, surface: SERVICE_ICON_SURFACE,
     details: [
-      { icon: UsersRound, text: "Jobseeker profiles and skills" },
-      { icon: Building2, text: "Business accounts and job postings" },
-      { icon: Handshake, text: "Basic skills-to-opportunity matching" },
+      { icon: UsersRound, text: "Import of SPES survey data and recorded skills" },
+      { icon: Building2, text: "Local businesses and available opportunity references" },
+      { icon: Handshake, text: "Survey-based skills-to-opportunity suggestions" },
     ],
+    note: "PESO-curated opportunity discovery and optional skills profiles are active. SPES data is for consented aggregate insights only; no job application processing is included.",
   },
   {
     id: "census", number: "06", title: "Workforce & Social Census", shortTitle: "Community insights",
     description: "Organized worker census at social-status information para sa mas maayos na local planning.",
     group: "Opportunities", icon: ClipboardList, color: SERVICE_ICON_COLOR, surface: SERVICE_ICON_SURFACE,
     details: [
-      { icon: Database, text: "Consent-based workforce and social-status data" },
+      { icon: Database, text: "Worker occupation, employment status and socioeconomic survey data" },
       { icon: BarChart3, text: "Aggregated statistics and community insights" },
       { icon: LockKeyhole, text: "Role-based access for personal information" },
     ],

@@ -1,0 +1,55 @@
+E-LINGKOD BAYAN — ADMIN REDESIGN + NEXT.JS 16 ROUTE FIX
+======================================================
+For existing project: C:\e-lingkod-bayan
+
+WHAT THIS PATCH UPDATES
+- Admin overview with clearer dashboard layout, real database metrics,
+  more meaningful empty states, and an LGU module roadmap.
+- Left sidebar uses the existing real brand mark at
+  public/images/elb-mark.svg (not a generic shield icon).
+- Cleaner desktop/mobile nav, keyboard-accessible links, compact mode,
+  and no visible sidebar scrollbar. Menu still scrolls where necessary.
+- Next.js 16 protected admin routes opt into request-time rendering
+  (`connection()` in admin layout and `instant = false` on admin routes).
+  These changes keep Better Auth and role verification intact.
+- Restyles the planned feature module page. These modules remain planned,
+  not functioning backend modules.
+
+INSTALL
+1) Stop the development server (Ctrl+C in VS Code terminal).
+2) Back up your current C:\e-lingkod-bayan folder.
+3) Extract the ZIP, then copy the included `src` folder into
+   C:\e-lingkod-bayan\src (merge folders, replace matching files).
+4) NOTE: Do not replace `.env`, Prisma files or your MySQL database.
+5) From C:\e-lingkod-bayan, run:
+       npm run dev
+6) Open http://localhost:3000/admin and navigate the modules.
+
+IF YOU STILL SEE OLD UI OR TURBOPACK ERRORS:
+- Stop the server first and clear the local Next cache only:
+       Remove-Item -Recurse -Force .next
+       npm run dev
+- This does not erase MySQL data.
+
+BEFORE RUNNING /admin, make sure existing database migrations are applied:
+       npx prisma migrate status
+       npx prisma migrate deploy
+       npx prisma generate
+
+Do NOT run prisma migrate reset on a database with data you want to keep.
+
+VERIFICATION
+- TypeScript TSX syntax: checked (parser).
+- CSS: checked (parser).
+- Full Next.js build / runtime: NOT verified here because the workspace
+  node_modules are incomplete; test using your local project installation.
+- No database or API behavior was modified; no fake metrics were introduced.
+
+IMPORTANT
+- This patch requires the existing actual logo file at
+  public/images/elb-mark.svg. The previous E-Lingkod Bayan full
+  project already included it.
+- The reported Date.now() and uncached-data errors come from dynamic
+  Better Auth/session reads during prerendering of protected admin pages.
+  The fix prioritizes correct per-request authorization, at the cost of
+  potentially blocking initial navigation to protected pages.

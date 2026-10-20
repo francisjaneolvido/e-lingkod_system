@@ -68,10 +68,10 @@ export function HeroSection() {
               <ArrowRight size={17} className="transition group-hover:translate-x-1" />
             </Link>
             <Link
-              href="/#track-demo"
+              href="/track"
               className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/60 bg-white/10 px-6 py-3 text-[12px] font-bold text-white backdrop-blur-sm transition hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto"
             >
-              Try report tracking
+              Track a report
               <ArrowUpRight size={17} />
             </Link>
           </div>

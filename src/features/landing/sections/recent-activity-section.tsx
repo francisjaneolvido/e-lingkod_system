@@ -1,29 +1,20 @@
 import Link from "next/link";
-import { ArrowRight, Clock3 } from "lucide-react";
+import { ArrowRight, ClipboardList } from "lucide-react";
+import { currentViewer } from "@/lib/access";
+import { listReports } from "@/features/civic/server/repository";
+import { ReportCard } from "@/features/civic/components/report-card";
+import type { ReportSummary } from "@/features/civic/types";
+import s from "@/features/civic/civic.module.css";
 
-/**
- * Deliberate empty-state UI: don't invent counts or records before
- * report/application tables are created and connected to this page.
- */
-export function RecentActivitySection() {
-  return (
-    <section aria-labelledby="recent-activity-heading" className="bg-white px-5 py-12 sm:px-8 lg:px-12 lg:py-16">
-      <div className="mx-auto max-w-[1344px]">
-        <p className="text-[11px] font-extrabold uppercase tracking-[.14em] text-[#1b78a9]">Your account activity</p>
-        <h2 id="recent-activity-heading" className="mt-2 text-[clamp(1.55rem,3vw,2.2rem)] font-extrabold tracking-[-.04em] text-[#153b63]">My Recent Activity</h2>
-        <div className="mt-5 flex flex-col items-start gap-5 rounded-[22px] border border-dashed border-[#c7dce9] bg-[#f7fbfe] p-6 sm:flex-row sm:items-center sm:p-8">
-          <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-[#EDF5FB] text-[#153B63]"><Clock3 size={28} strokeWidth={1.8}/></span>
-          <div className="flex-1">
-            <h3 className="text-[15px] font-extrabold text-[#183f63]">Activity tracking is coming soon</h3>
-            <p className="mt-2 max-w-3xl text-[12px] leading-6 text-[#607e94]">
-              When Civic Reporting and online applications are enabled, submitted requests and their verified status updates will appear here. No sample submissions are displayed as real records.
-            </p>
-          </div>
-          <Link href="/#services" className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#bcd7e9] bg-white px-5 py-3 text-[12px] font-bold text-[#153b63] transition hover:bg-[#edf6fc]">
-            See services <ArrowRight size={16}/>
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
+export async function RecentActivitySection() {
+  const viewer = await currentViewer();
+  if (!viewer) return null;
+  let reports: ReportSummary[] = [];
+  let unavailable = false;
+  try { reports = await listReports(viewer, false, 3); }
+  catch { unavailable = true; }
+  return <section aria-labelledby="recent-activity-heading" className={`${s.page} !min-h-0 !bg-white !py-12`}><div className={s.wrap}>
+    <div className="mb-6 flex flex-wrap items-end justify-between gap-4"><div><p className={s.eyebrow}>Your account activity</p><h2 id="recent-activity-heading" className="mt-3 text-2xl font-extrabold tracking-tight text-[#153b63]">Your latest concerns, at a glance.</h2></div><Link href="/reports" className={s.secondary}>All my reports <ArrowRight size={14} /></Link></div>
+    {reports.length ? <div className={s.reportGrid}>{reports.map(report => <ReportCard report={report} key={report.id} />)}</div> : <div className={`${s.emptyState} !min-h-48`}><div><span className={s.emptyIcon}><ClipboardList size={24} /></span><h3 className="text-base font-bold">{unavailable ? "Recent activity is temporarily unavailable" : "Your next contribution starts here."}</h3><p>{unavailable ? "Open My Reports or try again shortly." : "Once you submit a concern, its status and latest updates will appear here."}</p><Link href={unavailable ? "/reports" : "/reports/new"} className={s.primary}>{unavailable ? "Open my reports" : "Report a concern"}<ArrowRight size={14} /></Link></div></div>}
+  </div></section>;
 }

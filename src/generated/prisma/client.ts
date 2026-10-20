@@ -61,3 +61,78 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model CivicReport
+ * 
+ */
+export type CivicReport = Prisma.CivicReportModel
+/**
+ * Model ReportPhoto
+ * 
+ */
+export type ReportPhoto = Prisma.ReportPhotoModel
+/**
+ * Model ReportUpdate
+ * 
+ */
+export type ReportUpdate = Prisma.ReportUpdateModel
+/**
+ * Model StaffPermission
+ * 
+ */
+export type StaffPermission = Prisma.StaffPermissionModel
+/**
+ * Model StaffAccessAudit
+ * 
+ */
+export type StaffAccessAudit = Prisma.StaffAccessAuditModel
+/**
+ * Model StaffInvitation
+ * 
+ */
+export type StaffInvitation = Prisma.StaffInvitationModel
+/**
+ * Model ResolutionSubmission
+ * 
+ */
+export type ResolutionSubmission = Prisma.ResolutionSubmissionModel
+/**
+ * Model ResolutionProofPhoto
+ * 
+ */
+export type ResolutionProofPhoto = Prisma.ResolutionProofPhotoModel
+/**
+ * Model CitizenResolutionFeedback
+ * 
+ */
+export type CitizenResolutionFeedback = Prisma.CitizenResolutionFeedbackModel
+/**
+ * Model CitizenFeedbackPhoto
+ * 
+ */
+export type CitizenFeedbackPhoto = Prisma.CitizenFeedbackPhotoModel
+/**
+ * Model JobOpportunity
+ * 
+ */
+export type JobOpportunity = Prisma.JobOpportunityModel
+/**
+ * Model JobseekerProfile
+ * 
+ */
+export type JobseekerProfile = Prisma.JobseekerProfileModel
+/**
+ * Model SpesImportBatch
+ * 
+ */
+export type SpesImportBatch = Prisma.SpesImportBatchModel
+/**
+ * Model SpesSurveyRecord
+ * 
+ */
+export type SpesSurveyRecord = Prisma.SpesSurveyRecordModel
+/**
+ * Model JobActivity
+ * 
+ */
+export type JobActivity = Prisma.JobActivityModel

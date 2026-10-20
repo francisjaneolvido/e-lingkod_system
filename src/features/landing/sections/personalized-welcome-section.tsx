@@ -27,11 +27,11 @@ export function PersonalizedWelcomeSection({ name }: { name: string }) {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3" aria-label="Planned account modules">
-          <div className="rounded-2xl border border-[#dbe8f1] bg-white p-5 shadow-[0_9px_25px_rgba(15,62,102,0.04)]">
+          <Link href="/reports" className="rounded-2xl border border-[#dbe8f1] bg-white p-5 shadow-[0_9px_25px_rgba(15,62,102,0.04)] transition hover:border-[#7eafc8]">
             <span className="inline-flex size-11 items-center justify-center rounded-xl bg-[#EDF5FB] text-[#153B63]"><ClipboardList size={22} strokeWidth={1.8}/></span>
             <h3 className="mt-4 text-[13px] font-extrabold text-[#153b63]">My reports</h3>
-            <p className="mt-1 text-[11px] leading-5 text-[#668198]">Reporting workflow coming next</p>
-          </div>
+            <p className="mt-1 text-[11px] leading-5 text-[#668198]">Open your concerns and progress updates <ArrowRight size={12} className="inline" /></p>
+          </Link>
           <div className="rounded-2xl border border-[#dbe8f1] bg-white p-5 shadow-[0_9px_25px_rgba(15,62,102,0.04)]">
             <span className="inline-flex size-11 items-center justify-center rounded-xl bg-[#EDF5FB] text-[#153B63]"><Files size={22} strokeWidth={1.8}/></span>
             <h3 className="mt-4 text-[13px] font-extrabold text-[#153b63]">Applications</h3>

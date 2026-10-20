@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowRight, ArrowUpRight, CheckCircle2, ClipboardList,
   FileCheck2, ImagePlus, Info, MapPinned, PhoneCall, Search,
@@ -25,14 +26,15 @@ const searchKeywords: Record<string, string> = {
   civic: "report concern complaint kalsada baha basura streetlight picture larawan gps location geotagging tracking",
   services: "permit tax taxes clearance business license filing document application online",
   emergency: "police pnp bfp fire hospital ospital mdrrmo typhoon bagyo hotline alerts disaster call",
-  directory: "guide offices opisina requirements fees bayarin directory department city hall",
-  jobs: "hiring employment employer business work trabaho skills vacancies jobseeker",
+  directory: "guide offices opisina requirements fees bayarin directory department city hall projects ongoing future",
+  jobs: "hiring employment employer business work trabaho skills vacancies jobseeker SPES survey",
   census: "worker workforce census social status employment household survey statistics data",
 };
 
 function GetDetailsButton({ service, onExplore, children, light = false }: {
   service: Service; onExplore: (service: Service) => void; children: React.ReactNode; light?: boolean;
 }) {
+  if (service.id === "civic") return <Link href="/reports/new" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-[12px] font-extrabold text-[#15466f] transition hover:bg-[#e9f5ff]">Mag-report ng concern <ArrowUpRight size={17} /></Link>;
   return (
     <button type="button" onClick={() => onExplore(service)}
       className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-extrabold transition focus-visible:outline-2 focus-visible:outline-offset-2 ${light ? "bg-white text-[#15466f] hover:bg-[#e9f5ff] focus-visible:outline-white" : "bg-[#153d62] text-white hover:bg-[#216e9d] focus-visible:outline-[#153d62]"}`}>
@@ -115,7 +117,7 @@ export function ServicesSection() {
                     ))}
                   </div>
                 </div>
-                <div className="mt-8"><GetDetailsButton service={civic} onExplore={setSelected} light>Tingnan ang reporting process</GetDetailsButton><p className="mt-3 text-[10px] text-white/70">Feature preview · submissions not active yet</p></div>
+                <div className="mt-8"><GetDetailsButton service={civic} onExplore={setSelected} light>Mag-report ng concern</GetDetailsButton><p className="mt-3 text-[10px] text-white/70">Citizen reports · photos, location & progress history</p></div>
               </div>
               <span className="pointer-events-none absolute bottom-6 right-6 hidden rounded-full border border-white/35 bg-[#143e63]/70 px-3 py-1.5 text-[10px] font-semibold text-white backdrop-blur-sm sm:inline">Community illustration</span>
             </article>
@@ -164,7 +166,7 @@ export function ServicesSection() {
         )}
         <div className="mt-7 flex items-start gap-3 rounded-xl border border-[#d7e7f0] bg-white/90 px-4 py-3.5 text-[11px] leading-[1.7] text-[#607d92]">
           <Info className="mt-0.5 size-4 shrink-0 text-[#2175a9]" />
-          <p><strong className="text-[#245574]">Prototype service directory.</strong> Search, category filters, at service previews ay interactive na. Reports, permits, hotline calls, alerts, job matching, at census records ay ikokonekta pa sa backend at verified data sa susunod na development phases.</p>
+          <p><strong className="text-[#245574]">Civic Reporting is ready for your concerns.</strong> Submit photos and location details, then follow the action desk&apos;s updates. Online applications, hotlines, alerts, municipal projects, jobs, and census remain feature previews in this hackathon prototype.</p>
         </div>
         <p className="mt-4 flex items-center gap-2 text-[11px] font-semibold text-[#64869c]"><CheckCircle2 size={15} className="text-[#159480]" /> Anim na approved modules · Isang portal para sa komunidad</p>
       </div>

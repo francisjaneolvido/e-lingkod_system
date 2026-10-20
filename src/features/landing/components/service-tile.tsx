@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import { ServiceIcon } from "./service-icon";
 import type { Service } from "../data/services";
 
@@ -8,10 +9,10 @@ type Props = {
 };
 
 const descriptionLines: Record<string, string> = {
-  directory: "Mga opisina, requirements, bayarin at gabay sa pagproseso.",
-  jobs: "Hanapin ang trabaho at i-match ang skills sa businesses.",
+  directory: "LGU offices, services, at ongoing at future projects.",
+  jobs: "SPES survey data at suggested local job opportunities.",
   census: "Tulong sa pag-unawa sa workforce at social needs ng komunidad.",
-  services: "Mag-file ng permits, taxes at clearances online.",
+  services: "Mag-file ng permits, IDs at clearances online.",
   emergency: "Emergency contacts at official disaster advisories.",
   civic: "I-report ang concern at i-track ang aksyon.",
 };
@@ -29,8 +30,8 @@ export function ServiceTile({ service, onExplore }: Props) {
         </div>
       </div>
       <div className={`relative mt-6 flex items-center justify-between border-t border-[#eaf0f4] pt-4`}>
-        <span className="text-[10px] font-semibold text-[#839aaa]">Service preview</span>
-        <button type="button" onClick={() => onExplore(service)} className="inline-flex min-h-9 items-center gap-2 rounded-full text-[11px] font-bold text-[#176caa] transition hover:text-[#0c4571] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#176caa]" aria-label={`See ${service.title} details`}>View details <ArrowUpRight size={16} /></button>
+        <span className="text-[10px] font-semibold text-[#839aaa]">{service.id === "civic" ? "Citizen reporting" : "Service preview"}</span>
+        {service.id === "civic" ? <Link href="/reports/new" className="inline-flex min-h-9 items-center gap-2 text-[11px] font-bold text-[#176caa]">Report concern <ArrowUpRight size={16} /></Link> : <button type="button" onClick={() => onExplore(service)} className="inline-flex min-h-9 items-center gap-2 rounded-full text-[11px] font-bold text-[#176caa] transition hover:text-[#0c4571] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#176caa]" aria-label={`See ${service.title} details`}>View details <ArrowUpRight size={16} /></button>}
       </div>
     </article>
   );

@@ -54,7 +54,22 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  CivicReport: 'CivicReport',
+  ReportPhoto: 'ReportPhoto',
+  ReportUpdate: 'ReportUpdate',
+  StaffPermission: 'StaffPermission',
+  StaffAccessAudit: 'StaffAccessAudit',
+  StaffInvitation: 'StaffInvitation',
+  ResolutionSubmission: 'ResolutionSubmission',
+  ResolutionProofPhoto: 'ResolutionProofPhoto',
+  CitizenResolutionFeedback: 'CitizenResolutionFeedback',
+  CitizenFeedbackPhoto: 'CitizenFeedbackPhoto',
+  JobOpportunity: 'JobOpportunity',
+  JobseekerProfile: 'JobseekerProfile',
+  SpesImportBatch: 'SpesImportBatch',
+  SpesSurveyRecord: 'SpesSurveyRecord',
+  JobActivity: 'JobActivity'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -81,7 +96,9 @@ export const UserScalarFieldEnum = {
   image: 'image',
   role: 'role',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  department: 'department',
+  designation: 'designation'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -132,6 +149,228 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const CivicReportScalarFieldEnum = {
+  id: 'id',
+  trackingId: 'trackingId',
+  submissionKey: 'submissionKey',
+  reporterId: 'reporterId',
+  category: 'category',
+  title: 'title',
+  description: 'description',
+  barangay: 'barangay',
+  address: 'address',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  locationSource: 'locationSource',
+  gpsAccuracy: 'gpsAccuracy',
+  status: 'status',
+  assignedOffice: 'assignedOffice',
+  assignedStaffId: 'assignedStaffId',
+  priority: 'priority',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CivicReportScalarFieldEnum = (typeof CivicReportScalarFieldEnum)[keyof typeof CivicReportScalarFieldEnum]
+
+
+export const ReportPhotoScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  data: 'data',
+  createdAt: 'createdAt'
+} as const
+
+export type ReportPhotoScalarFieldEnum = (typeof ReportPhotoScalarFieldEnum)[keyof typeof ReportPhotoScalarFieldEnum]
+
+
+export const ReportUpdateScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  actorId: 'actorId',
+  status: 'status',
+  assignedOffice: 'assignedOffice',
+  note: 'note',
+  visibility: 'visibility',
+  action: 'action',
+  priority: 'priority',
+  assignedStaffId: 'assignedStaffId',
+  createdAt: 'createdAt'
+} as const
+
+export type ReportUpdateScalarFieldEnum = (typeof ReportUpdateScalarFieldEnum)[keyof typeof ReportUpdateScalarFieldEnum]
+
+
+export const StaffPermissionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  module: 'module',
+  grantedAt: 'grantedAt'
+} as const
+
+export type StaffPermissionScalarFieldEnum = (typeof StaffPermissionScalarFieldEnum)[keyof typeof StaffPermissionScalarFieldEnum]
+
+
+export const StaffAccessAuditScalarFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  targetUserId: 'targetUserId',
+  action: 'action',
+  details: 'details',
+  createdAt: 'createdAt'
+} as const
+
+export type StaffAccessAuditScalarFieldEnum = (typeof StaffAccessAuditScalarFieldEnum)[keyof typeof StaffAccessAuditScalarFieldEnum]
+
+
+export const StaffInvitationScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  name: 'name',
+  department: 'department',
+  designation: 'designation',
+  modulesJson: 'modulesJson',
+  tokenHash: 'tokenHash',
+  issuedById: 'issuedById',
+  expiresAt: 'expiresAt',
+  activatedAt: 'activatedAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StaffInvitationScalarFieldEnum = (typeof StaffInvitationScalarFieldEnum)[keyof typeof StaffInvitationScalarFieldEnum]
+
+
+export const ResolutionSubmissionScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  submittedById: 'submittedById',
+  remarks: 'remarks',
+  reviewStatus: 'reviewStatus',
+  reviewedById: 'reviewedById',
+  reviewNote: 'reviewNote',
+  createdAt: 'createdAt',
+  reviewedAt: 'reviewedAt'
+} as const
+
+export type ResolutionSubmissionScalarFieldEnum = (typeof ResolutionSubmissionScalarFieldEnum)[keyof typeof ResolutionSubmissionScalarFieldEnum]
+
+
+export const ResolutionProofPhotoScalarFieldEnum = {
+  id: 'id',
+  submissionId: 'submissionId',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  data: 'data',
+  createdAt: 'createdAt'
+} as const
+
+export type ResolutionProofPhotoScalarFieldEnum = (typeof ResolutionProofPhotoScalarFieldEnum)[keyof typeof ResolutionProofPhotoScalarFieldEnum]
+
+
+export const CitizenResolutionFeedbackScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  resolutionSubmissionId: 'resolutionSubmissionId',
+  reporterId: 'reporterId',
+  decision: 'decision',
+  reason: 'reason',
+  createdAt: 'createdAt'
+} as const
+
+export type CitizenResolutionFeedbackScalarFieldEnum = (typeof CitizenResolutionFeedbackScalarFieldEnum)[keyof typeof CitizenResolutionFeedbackScalarFieldEnum]
+
+
+export const CitizenFeedbackPhotoScalarFieldEnum = {
+  id: 'id',
+  feedbackId: 'feedbackId',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  data: 'data',
+  createdAt: 'createdAt'
+} as const
+
+export type CitizenFeedbackPhotoScalarFieldEnum = (typeof CitizenFeedbackPhotoScalarFieldEnum)[keyof typeof CitizenFeedbackPhotoScalarFieldEnum]
+
+
+export const JobOpportunityScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  employer: 'employer',
+  sector: 'sector',
+  workType: 'workType',
+  barangay: 'barangay',
+  location: 'location',
+  description: 'description',
+  skillsJson: 'skillsJson',
+  interestsJson: 'interestsJson',
+  education: 'education',
+  contactInfo: 'contactInfo',
+  externalUrl: 'externalUrl',
+  status: 'status',
+  expiresAt: 'expiresAt',
+  publishedAt: 'publishedAt',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type JobOpportunityScalarFieldEnum = (typeof JobOpportunityScalarFieldEnum)[keyof typeof JobOpportunityScalarFieldEnum]
+
+
+export const JobseekerProfileScalarFieldEnum = {
+  userId: 'userId',
+  skillsJson: 'skillsJson',
+  interestsJson: 'interestsJson',
+  education: 'education',
+  preferredArea: 'preferredArea',
+  availability: 'availability',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type JobseekerProfileScalarFieldEnum = (typeof JobseekerProfileScalarFieldEnum)[keyof typeof JobseekerProfileScalarFieldEnum]
+
+
+export const SpesImportBatchScalarFieldEnum = {
+  id: 'id',
+  sourceLabel: 'sourceLabel',
+  importedById: 'importedById',
+  recordCount: 'recordCount',
+  createdAt: 'createdAt'
+} as const
+
+export type SpesImportBatchScalarFieldEnum = (typeof SpesImportBatchScalarFieldEnum)[keyof typeof SpesImportBatchScalarFieldEnum]
+
+
+export const SpesSurveyRecordScalarFieldEnum = {
+  id: 'id',
+  batchId: 'batchId',
+  barangay: 'barangay',
+  education: 'education',
+  skillsJson: 'skillsJson',
+  interestsJson: 'interestsJson',
+  availability: 'availability'
+} as const
+
+export type SpesSurveyRecordScalarFieldEnum = (typeof SpesSurveyRecordScalarFieldEnum)[keyof typeof SpesSurveyRecordScalarFieldEnum]
+
+
+export const JobActivityScalarFieldEnum = {
+  id: 'id',
+  jobId: 'jobId',
+  actorId: 'actorId',
+  action: 'action',
+  createdAt: 'createdAt'
+} as const
+
+export type JobActivityScalarFieldEnum = (typeof JobActivityScalarFieldEnum)[keyof typeof JobActivityScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -153,7 +392,9 @@ export const UserOrderByRelevanceFieldEnum = {
   name: 'name',
   email: 'email',
   image: 'image',
-  role: 'role'
+  role: 'role',
+  department: 'department',
+  designation: 'designation'
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
@@ -192,4 +433,183 @@ export const VerificationOrderByRelevanceFieldEnum = {
 } as const
 
 export type VerificationOrderByRelevanceFieldEnum = (typeof VerificationOrderByRelevanceFieldEnum)[keyof typeof VerificationOrderByRelevanceFieldEnum]
+
+
+export const CivicReportOrderByRelevanceFieldEnum = {
+  id: 'id',
+  trackingId: 'trackingId',
+  submissionKey: 'submissionKey',
+  reporterId: 'reporterId',
+  category: 'category',
+  title: 'title',
+  description: 'description',
+  barangay: 'barangay',
+  address: 'address',
+  locationSource: 'locationSource',
+  assignedOffice: 'assignedOffice',
+  assignedStaffId: 'assignedStaffId'
+} as const
+
+export type CivicReportOrderByRelevanceFieldEnum = (typeof CivicReportOrderByRelevanceFieldEnum)[keyof typeof CivicReportOrderByRelevanceFieldEnum]
+
+
+export const ReportPhotoOrderByRelevanceFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  mimeType: 'mimeType'
+} as const
+
+export type ReportPhotoOrderByRelevanceFieldEnum = (typeof ReportPhotoOrderByRelevanceFieldEnum)[keyof typeof ReportPhotoOrderByRelevanceFieldEnum]
+
+
+export const ReportUpdateOrderByRelevanceFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  actorId: 'actorId',
+  assignedOffice: 'assignedOffice',
+  note: 'note',
+  action: 'action',
+  assignedStaffId: 'assignedStaffId'
+} as const
+
+export type ReportUpdateOrderByRelevanceFieldEnum = (typeof ReportUpdateOrderByRelevanceFieldEnum)[keyof typeof ReportUpdateOrderByRelevanceFieldEnum]
+
+
+export const StaffPermissionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  module: 'module'
+} as const
+
+export type StaffPermissionOrderByRelevanceFieldEnum = (typeof StaffPermissionOrderByRelevanceFieldEnum)[keyof typeof StaffPermissionOrderByRelevanceFieldEnum]
+
+
+export const StaffAccessAuditOrderByRelevanceFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  targetUserId: 'targetUserId',
+  action: 'action',
+  details: 'details'
+} as const
+
+export type StaffAccessAuditOrderByRelevanceFieldEnum = (typeof StaffAccessAuditOrderByRelevanceFieldEnum)[keyof typeof StaffAccessAuditOrderByRelevanceFieldEnum]
+
+
+export const StaffInvitationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  email: 'email',
+  name: 'name',
+  department: 'department',
+  designation: 'designation',
+  modulesJson: 'modulesJson',
+  tokenHash: 'tokenHash',
+  issuedById: 'issuedById'
+} as const
+
+export type StaffInvitationOrderByRelevanceFieldEnum = (typeof StaffInvitationOrderByRelevanceFieldEnum)[keyof typeof StaffInvitationOrderByRelevanceFieldEnum]
+
+
+export const ResolutionSubmissionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  submittedById: 'submittedById',
+  remarks: 'remarks',
+  reviewedById: 'reviewedById',
+  reviewNote: 'reviewNote'
+} as const
+
+export type ResolutionSubmissionOrderByRelevanceFieldEnum = (typeof ResolutionSubmissionOrderByRelevanceFieldEnum)[keyof typeof ResolutionSubmissionOrderByRelevanceFieldEnum]
+
+
+export const ResolutionProofPhotoOrderByRelevanceFieldEnum = {
+  id: 'id',
+  submissionId: 'submissionId',
+  mimeType: 'mimeType'
+} as const
+
+export type ResolutionProofPhotoOrderByRelevanceFieldEnum = (typeof ResolutionProofPhotoOrderByRelevanceFieldEnum)[keyof typeof ResolutionProofPhotoOrderByRelevanceFieldEnum]
+
+
+export const CitizenResolutionFeedbackOrderByRelevanceFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  resolutionSubmissionId: 'resolutionSubmissionId',
+  reporterId: 'reporterId',
+  reason: 'reason'
+} as const
+
+export type CitizenResolutionFeedbackOrderByRelevanceFieldEnum = (typeof CitizenResolutionFeedbackOrderByRelevanceFieldEnum)[keyof typeof CitizenResolutionFeedbackOrderByRelevanceFieldEnum]
+
+
+export const CitizenFeedbackPhotoOrderByRelevanceFieldEnum = {
+  id: 'id',
+  feedbackId: 'feedbackId',
+  mimeType: 'mimeType'
+} as const
+
+export type CitizenFeedbackPhotoOrderByRelevanceFieldEnum = (typeof CitizenFeedbackPhotoOrderByRelevanceFieldEnum)[keyof typeof CitizenFeedbackPhotoOrderByRelevanceFieldEnum]
+
+
+export const JobOpportunityOrderByRelevanceFieldEnum = {
+  id: 'id',
+  title: 'title',
+  employer: 'employer',
+  sector: 'sector',
+  workType: 'workType',
+  barangay: 'barangay',
+  location: 'location',
+  description: 'description',
+  skillsJson: 'skillsJson',
+  interestsJson: 'interestsJson',
+  education: 'education',
+  contactInfo: 'contactInfo',
+  externalUrl: 'externalUrl',
+  createdById: 'createdById'
+} as const
+
+export type JobOpportunityOrderByRelevanceFieldEnum = (typeof JobOpportunityOrderByRelevanceFieldEnum)[keyof typeof JobOpportunityOrderByRelevanceFieldEnum]
+
+
+export const JobseekerProfileOrderByRelevanceFieldEnum = {
+  userId: 'userId',
+  skillsJson: 'skillsJson',
+  interestsJson: 'interestsJson',
+  education: 'education',
+  preferredArea: 'preferredArea',
+  availability: 'availability'
+} as const
+
+export type JobseekerProfileOrderByRelevanceFieldEnum = (typeof JobseekerProfileOrderByRelevanceFieldEnum)[keyof typeof JobseekerProfileOrderByRelevanceFieldEnum]
+
+
+export const SpesImportBatchOrderByRelevanceFieldEnum = {
+  id: 'id',
+  sourceLabel: 'sourceLabel',
+  importedById: 'importedById'
+} as const
+
+export type SpesImportBatchOrderByRelevanceFieldEnum = (typeof SpesImportBatchOrderByRelevanceFieldEnum)[keyof typeof SpesImportBatchOrderByRelevanceFieldEnum]
+
+
+export const SpesSurveyRecordOrderByRelevanceFieldEnum = {
+  id: 'id',
+  batchId: 'batchId',
+  barangay: 'barangay',
+  education: 'education',
+  skillsJson: 'skillsJson',
+  interestsJson: 'interestsJson',
+  availability: 'availability'
+} as const
+
+export type SpesSurveyRecordOrderByRelevanceFieldEnum = (typeof SpesSurveyRecordOrderByRelevanceFieldEnum)[keyof typeof SpesSurveyRecordOrderByRelevanceFieldEnum]
+
+
+export const JobActivityOrderByRelevanceFieldEnum = {
+  id: 'id',
+  jobId: 'jobId',
+  actorId: 'actorId',
+  action: 'action'
+} as const
+
+export type JobActivityOrderByRelevanceFieldEnum = (typeof JobActivityOrderByRelevanceFieldEnum)[keyof typeof JobActivityOrderByRelevanceFieldEnum]
 
