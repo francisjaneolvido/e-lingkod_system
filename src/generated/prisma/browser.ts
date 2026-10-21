@@ -108,6 +108,11 @@ export type SpesImportBatch = Prisma.SpesImportBatchModel
  */
 export type SpesSurveyRecord = Prisma.SpesSurveyRecordModel
 /**
+ * Model SpesImportEvent
+ * 
+ */
+export type SpesImportEvent = Prisma.SpesImportEventModel
+/**
  * Model JobActivity
  * 
  */

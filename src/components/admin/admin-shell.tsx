@@ -107,7 +107,7 @@ export function AdminShell({ children, name, email, role, modules, department }:
       </div>
 
       <div className="elb-admin-sidebar-bottom">
-        <Link href="/" className="elb-admin-external" onClick={closeMenu} title="View citizen portal"><ExternalLink size={17}/><span>Citizen website</span><ChevronRight size={14} className="elb-admin-external-arrow"/></Link>
+        <Link href="/" className="elb-admin-external" onClick={closeMenu} title="Browse the public website. Citizen-only actions require a Citizen account."><ExternalLink size={17}/><span>Public website</span><ChevronRight size={14} className="elb-admin-external-arrow"/></Link>
         <Link href="/admin/profile" title="Administrator profile" onClick={closeMenu} className="elb-admin-user">
           <span className="elb-admin-avatar">{initials}</span>
           <span className="elb-admin-user-info"><strong>{name}</strong><small>{superAdmin ? "Super Admin" : "LGU Staff"} · {email}</small></span>

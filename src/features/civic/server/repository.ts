@@ -25,6 +25,7 @@ function serializeSummary(row: SummaryRow, admin: boolean): ReportSummary {
 }
 
 export async function listReports(viewer: CivicViewer, admin = false, limit = 200, cursor?: string): Promise<ReportSummary[]> {
+  if (!admin && viewer.role !== "CITIZEN") return [];
   if (admin && !(await hasModuleAccess(viewer, "REPORTS"))) return [];
   const rows = await prisma.civicReport.findMany({
     where: admin ? reportAdminScope(viewer) : { reporterId: viewer.id },
@@ -37,6 +38,7 @@ export async function listReports(viewer: CivicViewer, admin = false, limit = 20
 }
 
 export async function getReport(id: string, viewer: CivicViewer, admin = false): Promise<ReportDetail | null> {
+  if (!admin && viewer.role !== "CITIZEN") return null;
   if (admin && !(await hasModuleAccess(viewer, "REPORTS"))) return null;
   const row = await prisma.civicReport.findFirst({
     where: { id, ...(admin ? reportAdminScope(viewer) : { reporterId: viewer.id }) },

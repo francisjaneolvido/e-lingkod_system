@@ -36,6 +36,7 @@ async function preparePhotos(data: FormData) {
 }
 
 export async function submitReport(form: FormData, viewer: CivicViewer) {
+  if (viewer.role !== "CITIZEN") throw new CivicError("Only citizens can submit reports.", 403);
   const fields = parseReportForm(form);
   const uniqueSubmission = { reporterId_submissionKey: { reporterId: viewer.id, submissionKey: fields.submissionKey } };
   const existing = await prisma.civicReport.findUnique({ where: uniqueSubmission, select: { id: true, trackingId: true } });
@@ -72,18 +73,19 @@ export async function updateReport(id: string, body: unknown, viewer: CivicViewe
   if (!body || typeof body !== "object" || Array.isArray(body)) throw new CivicError("Invalid update.");
   const data = body as Record<string, unknown>;
   if (data.action === "CLAIM") {
-    if (viewer.role !== "STAFF" || !viewer.department?.trim()) throw new CivicError("Only office staff can claim assigned-office cases.", 403);
+    const claimOffice = viewer.department?.trim();
+    if (viewer.role !== "STAFF" || !claimOffice) throw new CivicError("Only office staff can claim assigned-office cases.", 403);
     if (!Number.isSafeInteger(data.version) || Number(data.version) < 1) throw new CivicError("Reload the case before claiming.");
     return prisma.$transaction(async tx => {
       // Role grants may have been revoked while this request was in flight.
-      const authorized = await tx.user.findFirst({ where: { id: viewer.id, role: "STAFF", department: viewer.department, staffPermissions: { some: { module: "REPORTS" } } }, select: { id: true } });
+      const authorized = await tx.user.findFirst({ where: { id: viewer.id, role: "STAFF", department: claimOffice, staffPermissions: { some: { module: "REPORTS" } } }, select: { id: true } });
       if (!authorized) throw new CivicError("Your Civic Reports access changed. Sign in again or contact the Super Admin.", 403);
       const report = await tx.civicReport.findUnique({ where: { id }, select: { status: true, version: true, assignedOffice: true, assignedStaffId: true, priority: true } });
       if (!report) throw new CivicError("Report not found.", 404);
       if (report.version !== data.version) throw new CivicError("This report has a newer update. Refresh and try again.", 409);
-      if (!sameOffice(report.assignedOffice, viewer.department) || report.assignedStaffId !== null) throw new CivicError("This case is not available in your office queue.", 403);
+      if (!sameOffice(report.assignedOffice, claimOffice) || report.assignedStaffId !== null) throw new CivicError("This case is not available in your office queue.", 403);
       if (["RESOLVED", "REJECTED", "PENDING_VERIFICATION", "REOPENED"].includes(report.status)) throw new CivicError("Closed cases cannot be claimed.", 409);
-      const changed = await tx.civicReport.updateMany({ where: { id, version: report.version, assignedOffice: viewer.department.trim(), assignedStaffId: null }, data: { assignedStaffId: viewer.id, version: { increment: 1 } } });
+      const changed = await tx.civicReport.updateMany({ where: { id, version: report.version, assignedOffice: claimOffice, assignedStaffId: null }, data: { assignedStaffId: viewer.id, version: { increment: 1 } } });
       if (changed.count !== 1) throw new CivicError("Another officer claimed this case. Refresh the queue.", 409);
       await tx.reportUpdate.create({ data: { reportId: id, actorId: viewer.id, status: report.status, assignedOffice: report.assignedOffice, assignedStaffId: viewer.id, priority: report.priority, action: "CLAIM", visibility: "INTERNAL", note: "Case claimed by the responsible officer for their department." } });
       return { ok: true };

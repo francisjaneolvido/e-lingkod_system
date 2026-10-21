@@ -46,6 +46,7 @@ export function parseJob(value:unknown) {
     education:option(d.education,"education",EDUCATION),
     contactInfo:field(d.contactInfo,"Official application/contact instructions",250,8), externalUrl,
     expiresAt:expiry ? new Date(`${expiry}T23:59:59.000Z`) : null,
+    reviewSource:d.reviewSource ? field(d.reviewSource,"Employer/vacancy verification source",300,12) : null,
   };
   if (!parsed.skills.length) throw new CivicError("Select at least one required skill.",400);
   return parsed;
@@ -94,6 +95,33 @@ export function parseCsv(text:string):string[][] {
   row.push(cell);if(row.some(v=>v.trim()))rows.push(row);
   return rows;
 }
+/** Preview-only parser: reject unknown/PII columns outright, but show row-numbered validation errors. */
+export function previewSpesCsv(text: string) {
+  const rows=parseCsv(text);
+  if(rows.length<2) throw new CivicError("CSV needs a header and at least one survey record.",400);
+  const heads=rows[0].map(s=>s.trim().toLowerCase());
+  const expected=["consent","barangay","education","skills","interests","availability"];
+  if(heads.length!==expected.length||heads.some((x,i)=>x!==expected[i])) throw new CivicError("Only these columns are allowed, in order: consent,barangay,education,skills,interests,availability. Remove any names, emails or contact details.",400);
+  if(rows.length>501)throw new CivicError("Import up to 500 survey records at a time.",400);
+  const records: ReturnType<typeof parseSpesCsv>=[];
+  const errors:{row:number;message:string}[]=[];
+  for(let i=1;i<rows.length;i++) {
+    try {
+      const row=rows[i];
+      if(row.length!==6)throw new CivicError("Expected six columns.",400);
+      if(row[0].trim().toUpperCase()!=="YES")throw new CivicError("Missing explicit YES consent; row will not be imported.",400);
+      const education=option(row[2].trim().toUpperCase(),"education",EDUCATION.filter(x=>x!=="ANY"));
+      const availability=option(row[5].trim().toUpperCase(),"availability",["ANY",...WORK_TYPES]);
+      const barangay=field(row[1],"Barangay",100,2);
+      const skills=labels(row[3],SKILLS,12);
+      const interests=labels(row[4],INTERESTS,5);
+      records.push({barangay,education,skills,interests,availability});
+    }catch(error){errors.push({row:i+1,message:error&&typeof error==="object"&&"message" in error&&typeof error.message==="string"?error.message:"Invalid survey row."});}
+  }
+  // Errors carry row numbers and schema messages only, never raw user-provided values.
+  return {records,errors,totalRows:rows.length-1};
+}
+
 export function parseSpesCsv(text:string) {
   const rows=parseCsv(text);
   if(rows.length<2)throw new CivicError("CSV needs a header and at least one consented survey record.",400);

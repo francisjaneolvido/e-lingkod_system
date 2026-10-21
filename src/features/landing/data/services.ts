@@ -71,7 +71,7 @@ export const services: Service[] = [
   },
   {
     id: "jobs", number: "05", title: "Job Matching", shortTitle: "Explore jobs",
-    description: "Pag-uugnay ng local jobseekers at businesses ayon sa skills at job requirements.",
+    description: "Explore published local job opportunities at optional skills-based suggestions.",
     group: "Opportunities", icon: BriefcaseBusiness, color: SERVICE_ICON_COLOR, surface: SERVICE_ICON_SURFACE,
     details: [
       { icon: UsersRound, text: "Import of SPES survey data and recorded skills" },

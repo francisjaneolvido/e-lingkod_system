@@ -12,7 +12,8 @@
     "test:civic": "node --test tests/civic-validation.test.mjs",
     "test:staff": "node --test tests/staff-invitations.test.mjs",
     "admin:seed": "node scripts/seed-admin.mjs",
-    "test:all": "node --test"
+    "test:all": "node --test",
+    "db:clear-data": "node scripts/clear-demo-data.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ChangeEventHandler } from "react";
 import { Eye, EyeOff, LockKeyhole } from "lucide-react";
 
 type PasswordFieldProps = {
@@ -10,9 +10,13 @@ type PasswordFieldProps = {
   placeholder?: string;
   autoComplete?: string;
   minLength?: number;
+  maxLength?: number;
+  value?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  disabled?: boolean;
 };
 
-export function PasswordField({ id, name, label, placeholder = "Enter your password", autoComplete = "current-password", minLength = 8 }: PasswordFieldProps) {
+export function PasswordField({ id, name, label, placeholder = "Enter your password", autoComplete = "current-password", minLength = 8, maxLength, value, onChange, disabled }: PasswordFieldProps) {
   const [show, setShow] = useState(false);
   return (
     <div className="space-y-2">
@@ -27,6 +31,10 @@ export function PasswordField({ id, name, label, placeholder = "Enter your passw
           placeholder={placeholder}
           required
           minLength={minLength}
+          maxLength={maxLength}
+          value={value}
+          onChange={onChange}
+          disabled={disabled}
           className="h-[49px] w-full rounded-[12px] border border-[#d8e4ed] bg-white/90 pl-11 pr-12 text-[13px] text-[#143b5e] outline-none transition placeholder:text-[#a0b2bf] hover:border-[#9bc7df] focus:border-[#2287b4] focus:ring-[3px] focus:ring-[#d5edf9]"
         />
         <button

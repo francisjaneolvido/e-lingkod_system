@@ -12,6 +12,12 @@ datasource db {
 model User {
   id            String    @id @db.VarChar(191)
   name          String    @db.VarChar(191)
+  // Structured fields for new citizens. Nullable for legacy, invited staff and seed admin accounts.
+  firstName     String?   @db.VarChar(100)
+  lastName      String?   @db.VarChar(100)
+  middleInitial String?   @db.VarChar(1)
+  hasNoMiddleName Boolean @default(false)
+  phoneNumber   String?   @db.VarChar(13) // +639XXXXXXXXX
   email         String    @unique @db.VarChar(191)
   emailVerified Boolean   @default(false)
   image         String?   @db.Text
@@ -35,7 +41,9 @@ model User {
   jobseekerProfile JobseekerProfile?
   postedJobs JobOpportunity[] @relation("JobPostedBy")
   jobChanges JobActivity[] @relation("JobActivityActor")
+  reviewedJobs JobOpportunity[] @relation("JobReviewedBy")
   spesImports SpesImportBatch[] @relation("SpesImportedBy")
+  spesImportEvents SpesImportEvent[] @relation("SpesImportEventActor")
 
   @@map("user")
 }
@@ -313,7 +321,11 @@ model CitizenFeedbackPhoto {
 // V10: PESO-curated opportunities, NOT direct employment applications.
 enum JobListingStatus {
   DRAFT
+  PENDING_REVIEW
+  RETURNED
   PUBLISHED
+  CLOSED
+  FILLED
   ARCHIVED
 }
 
@@ -332,6 +344,15 @@ model JobOpportunity {
   contactInfo    String @db.VarChar(250)
   externalUrl    String? @db.VarChar(500)
   status         JobListingStatus @default(DRAFT)
+  version        Int @default(1)
+  reviewSource   String? @db.VarChar(300) // staff's internal employer/vacancy source, never public
+  reviewRequestedAt DateTime?
+  reviewedAt     DateTime?
+  reviewedById   String? @db.VarChar(191)
+  reviewedBy     User? @relation("JobReviewedBy", fields: [reviewedById], references: [id], onDelete: SetNull)
+  reviewNote     String? @db.Text
+  employerVerified Boolean @default(false)
+  vacancyVerified Boolean @default(false)
   expiresAt      DateTime?
   publishedAt    DateTime?
   createdById    String @db.VarChar(191)
@@ -368,9 +389,17 @@ model SpesImportBatch {
   importedById   String @db.VarChar(191)
   importedBy     User @relation("SpesImportedBy", fields: [importedById], references: [id], onDelete: Restrict)
   recordCount    Int
+  datasetKind    String @default("UNCLASSIFIED") @db.VarChar(20)
+  fingerprint    String? @unique @db.VarChar(64)
+  status         String @default("ACTIVE") @db.VarChar(16)
+  voidedAt       DateTime?
+  voidedById     String? @db.VarChar(191)
+  voidReason     String? @db.VarChar(500)
   createdAt      DateTime @default(now())
   records        SpesSurveyRecord[]
+  events         SpesImportEvent[]
   @@index([createdAt])
+  @@index([status, datasetKind])
   @@map("spes_import_batch")
 }
 
@@ -387,6 +416,19 @@ model SpesSurveyRecord {
   @@map("spes_survey_record")
 }
 
+model SpesImportEvent {
+  id        String @id @default(cuid()) @db.VarChar(191)
+  batchId   String @db.VarChar(191)
+  batch     SpesImportBatch @relation(fields: [batchId], references: [id], onDelete: Restrict)
+  actorId   String @db.VarChar(191)
+  actor     User @relation("SpesImportEventActor", fields: [actorId], references: [id], onDelete: Restrict)
+  action    String @db.VarChar(30)
+  note      String? @db.VarChar(500)
+  createdAt DateTime @default(now())
+  @@index([batchId, createdAt])
+  @@map("spes_import_event")
+}
+
 model JobActivity {
   id          String @id @default(cuid()) @db.VarChar(191)
   jobId       String @db.VarChar(191)
@@ -394,6 +436,9 @@ model JobActivity {
   actorId     String @db.VarChar(191)
   actor       User @relation("JobActivityActor", fields: [actorId], references: [id], onDelete: Restrict)
   action      String @db.VarChar(30)
+  note        String? @db.Text
+  previousStatus String? @db.VarChar(30)
+  nextStatus  String? @db.VarChar(30)
   createdAt   DateTime @default(now())
   @@index([jobId, createdAt])
   @@map("job_activity")

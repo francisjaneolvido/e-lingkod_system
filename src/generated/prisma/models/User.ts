@@ -27,6 +27,11 @@ export type AggregateUser = {
 export type UserMinAggregateOutputType = {
   id: string | null
   name: string | null
+  firstName: string | null
+  lastName: string | null
+  middleInitial: string | null
+  hasNoMiddleName: boolean | null
+  phoneNumber: string | null
   email: string | null
   emailVerified: boolean | null
   image: string | null
@@ -40,6 +45,11 @@ export type UserMinAggregateOutputType = {
 export type UserMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  firstName: string | null
+  lastName: string | null
+  middleInitial: string | null
+  hasNoMiddleName: boolean | null
+  phoneNumber: string | null
   email: string | null
   emailVerified: boolean | null
   image: string | null
@@ -53,6 +63,11 @@ export type UserMaxAggregateOutputType = {
 export type UserCountAggregateOutputType = {
   id: number
   name: number
+  firstName: number
+  lastName: number
+  middleInitial: number
+  hasNoMiddleName: number
+  phoneNumber: number
   email: number
   emailVerified: number
   image: number
@@ -68,6 +83,11 @@ export type UserCountAggregateOutputType = {
 export type UserMinAggregateInputType = {
   id?: true
   name?: true
+  firstName?: true
+  lastName?: true
+  middleInitial?: true
+  hasNoMiddleName?: true
+  phoneNumber?: true
   email?: true
   emailVerified?: true
   image?: true
@@ -81,6 +101,11 @@ export type UserMinAggregateInputType = {
 export type UserMaxAggregateInputType = {
   id?: true
   name?: true
+  firstName?: true
+  lastName?: true
+  middleInitial?: true
+  hasNoMiddleName?: true
+  phoneNumber?: true
   email?: true
   emailVerified?: true
   image?: true
@@ -94,6 +119,11 @@ export type UserMaxAggregateInputType = {
 export type UserCountAggregateInputType = {
   id?: true
   name?: true
+  firstName?: true
+  lastName?: true
+  middleInitial?: true
+  hasNoMiddleName?: true
+  phoneNumber?: true
   email?: true
   emailVerified?: true
   image?: true
@@ -180,6 +210,11 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: string
   name: string
+  firstName: string | null
+  lastName: string | null
+  middleInitial: string | null
+  hasNoMiddleName: boolean
+  phoneNumber: string | null
   email: string
   emailVerified: boolean
   image: string | null
@@ -214,6 +249,11 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
+  firstName?: Prisma.StringNullableFilter<"User"> | string | null
+  lastName?: Prisma.StringNullableFilter<"User"> | string | null
+  middleInitial?: Prisma.StringNullableFilter<"User"> | string | null
+  hasNoMiddleName?: Prisma.BoolFilter<"User"> | boolean
+  phoneNumber?: Prisma.StringNullableFilter<"User"> | string | null
   email?: Prisma.StringFilter<"User"> | string
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
   image?: Prisma.StringNullableFilter<"User"> | string | null
@@ -237,12 +277,19 @@ export type UserWhereInput = {
   jobseekerProfile?: Prisma.XOR<Prisma.JobseekerProfileNullableScalarRelationFilter, Prisma.JobseekerProfileWhereInput> | null
   postedJobs?: Prisma.JobOpportunityListRelationFilter
   jobChanges?: Prisma.JobActivityListRelationFilter
+  reviewedJobs?: Prisma.JobOpportunityListRelationFilter
   spesImports?: Prisma.SpesImportBatchListRelationFilter
+  spesImportEvents?: Prisma.SpesImportEventListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  firstName?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastName?: Prisma.SortOrderInput | Prisma.SortOrder
+  middleInitial?: Prisma.SortOrderInput | Prisma.SortOrder
+  hasNoMiddleName?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -266,7 +313,9 @@ export type UserOrderByWithRelationInput = {
   jobseekerProfile?: Prisma.JobseekerProfileOrderByWithRelationInput
   postedJobs?: Prisma.JobOpportunityOrderByRelationAggregateInput
   jobChanges?: Prisma.JobActivityOrderByRelationAggregateInput
+  reviewedJobs?: Prisma.JobOpportunityOrderByRelationAggregateInput
   spesImports?: Prisma.SpesImportBatchOrderByRelationAggregateInput
+  spesImportEvents?: Prisma.SpesImportEventOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -277,6 +326,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
+  firstName?: Prisma.StringNullableFilter<"User"> | string | null
+  lastName?: Prisma.StringNullableFilter<"User"> | string | null
+  middleInitial?: Prisma.StringNullableFilter<"User"> | string | null
+  hasNoMiddleName?: Prisma.BoolFilter<"User"> | boolean
+  phoneNumber?: Prisma.StringNullableFilter<"User"> | string | null
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
   image?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.StringFilter<"User"> | string
@@ -299,12 +353,19 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   jobseekerProfile?: Prisma.XOR<Prisma.JobseekerProfileNullableScalarRelationFilter, Prisma.JobseekerProfileWhereInput> | null
   postedJobs?: Prisma.JobOpportunityListRelationFilter
   jobChanges?: Prisma.JobActivityListRelationFilter
+  reviewedJobs?: Prisma.JobOpportunityListRelationFilter
   spesImports?: Prisma.SpesImportBatchListRelationFilter
+  spesImportEvents?: Prisma.SpesImportEventListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  firstName?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastName?: Prisma.SortOrderInput | Prisma.SortOrder
+  middleInitial?: Prisma.SortOrderInput | Prisma.SortOrder
+  hasNoMiddleName?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -324,6 +385,11 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
+  firstName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  lastName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  middleInitial?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  hasNoMiddleName?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  phoneNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -337,6 +403,11 @@ export type UserScalarWhereWithAggregatesInput = {
 export type UserCreateInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -360,12 +431,19 @@ export type UserCreateInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -389,12 +467,19 @@ export type UserUncheckedCreateInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -418,12 +503,19 @@ export type UserUpdateInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -447,12 +539,19 @@ export type UserUncheckedUpdateInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateManyInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -466,6 +565,11 @@ export type UserCreateManyInput = {
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -479,6 +583,11 @@ export type UserUpdateManyMutationInput = {
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -498,6 +607,11 @@ export type UserOrderByRelevanceInput = {
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  middleInitial?: Prisma.SortOrder
+  hasNoMiddleName?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
   email?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrder
@@ -511,6 +625,11 @@ export type UserCountOrderByAggregateInput = {
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  middleInitial?: Prisma.SortOrder
+  hasNoMiddleName?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
   email?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrder
@@ -524,6 +643,11 @@ export type UserMaxOrderByAggregateInput = {
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  middleInitial?: Prisma.SortOrder
+  hasNoMiddleName?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
   email?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrder
@@ -548,12 +672,12 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -734,10 +858,26 @@ export type UserUpdateOneRequiredWithoutCitizenFeedbacksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCitizenFeedbacksInput, Prisma.UserUpdateWithoutCitizenFeedbacksInput>, Prisma.UserUncheckedUpdateWithoutCitizenFeedbacksInput>
 }
 
+export type UserCreateNestedOneWithoutReviewedJobsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedJobsInput, Prisma.UserUncheckedCreateWithoutReviewedJobsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedJobsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
 export type UserCreateNestedOneWithoutPostedJobsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPostedJobsInput, Prisma.UserUncheckedCreateWithoutPostedJobsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPostedJobsInput
   connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutReviewedJobsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedJobsInput, Prisma.UserUncheckedCreateWithoutReviewedJobsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedJobsInput
+  upsert?: Prisma.UserUpsertWithoutReviewedJobsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewedJobsInput, Prisma.UserUpdateWithoutReviewedJobsInput>, Prisma.UserUncheckedUpdateWithoutReviewedJobsInput>
 }
 
 export type UserUpdateOneRequiredWithoutPostedJobsNestedInput = {
@@ -776,6 +916,20 @@ export type UserUpdateOneRequiredWithoutSpesImportsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSpesImportsInput, Prisma.UserUpdateWithoutSpesImportsInput>, Prisma.UserUncheckedUpdateWithoutSpesImportsInput>
 }
 
+export type UserCreateNestedOneWithoutSpesImportEventsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSpesImportEventsInput, Prisma.UserUncheckedCreateWithoutSpesImportEventsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSpesImportEventsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSpesImportEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSpesImportEventsInput, Prisma.UserUncheckedCreateWithoutSpesImportEventsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSpesImportEventsInput
+  upsert?: Prisma.UserUpsertWithoutSpesImportEventsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSpesImportEventsInput, Prisma.UserUpdateWithoutSpesImportEventsInput>, Prisma.UserUncheckedUpdateWithoutSpesImportEventsInput>
+}
+
 export type UserCreateNestedOneWithoutJobChangesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutJobChangesInput, Prisma.UserUncheckedCreateWithoutJobChangesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobChangesInput
@@ -793,6 +947,11 @@ export type UserUpdateOneRequiredWithoutJobChangesNestedInput = {
 export type UserCreateWithoutSessionsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -815,12 +974,19 @@ export type UserCreateWithoutSessionsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -843,7 +1009,9 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -865,6 +1033,11 @@ export type UserUpdateToOneWithWhereWithoutSessionsInput = {
 export type UserUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -887,12 +1060,19 @@ export type UserUpdateWithoutSessionsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -915,12 +1095,19 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -943,12 +1130,19 @@ export type UserCreateWithoutAccountsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -971,7 +1165,9 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -993,6 +1189,11 @@ export type UserUpdateToOneWithWhereWithoutAccountsInput = {
 export type UserUpdateWithoutAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1015,12 +1216,19 @@ export type UserUpdateWithoutAccountsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1043,12 +1251,19 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1071,12 +1286,19 @@ export type UserCreateWithoutReportsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1099,7 +1321,9 @@ export type UserUncheckedCreateWithoutReportsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -1110,6 +1334,11 @@ export type UserCreateOrConnectWithoutReportsInput = {
 export type UserCreateWithoutAssignedCivicReportsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1132,12 +1361,19 @@ export type UserCreateWithoutAssignedCivicReportsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutAssignedCivicReportsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1160,7 +1396,9 @@ export type UserUncheckedCreateWithoutAssignedCivicReportsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutAssignedCivicReportsInput = {
@@ -1182,6 +1420,11 @@ export type UserUpdateToOneWithWhereWithoutReportsInput = {
 export type UserUpdateWithoutReportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1204,12 +1447,19 @@ export type UserUpdateWithoutReportsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1232,7 +1482,9 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutAssignedCivicReportsInput = {
@@ -1249,6 +1501,11 @@ export type UserUpdateToOneWithWhereWithoutAssignedCivicReportsInput = {
 export type UserUpdateWithoutAssignedCivicReportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1271,12 +1528,19 @@ export type UserUpdateWithoutAssignedCivicReportsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedCivicReportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1299,12 +1563,19 @@ export type UserUncheckedUpdateWithoutAssignedCivicReportsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutReportUpdatesInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1327,12 +1598,19 @@ export type UserCreateWithoutReportUpdatesInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutReportUpdatesInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1355,7 +1633,9 @@ export type UserUncheckedCreateWithoutReportUpdatesInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutReportUpdatesInput = {
@@ -1377,6 +1657,11 @@ export type UserUpdateToOneWithWhereWithoutReportUpdatesInput = {
 export type UserUpdateWithoutReportUpdatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1399,12 +1684,19 @@ export type UserUpdateWithoutReportUpdatesInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportUpdatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1427,12 +1719,19 @@ export type UserUncheckedUpdateWithoutReportUpdatesInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutStaffPermissionsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1455,12 +1754,19 @@ export type UserCreateWithoutStaffPermissionsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutStaffPermissionsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1483,7 +1789,9 @@ export type UserUncheckedCreateWithoutStaffPermissionsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutStaffPermissionsInput = {
@@ -1505,6 +1813,11 @@ export type UserUpdateToOneWithWhereWithoutStaffPermissionsInput = {
 export type UserUpdateWithoutStaffPermissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1527,12 +1840,19 @@ export type UserUpdateWithoutStaffPermissionsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStaffPermissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1555,12 +1875,19 @@ export type UserUncheckedUpdateWithoutStaffPermissionsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutStaffChangesMadeInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1583,12 +1910,19 @@ export type UserCreateWithoutStaffChangesMadeInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutStaffChangesMadeInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1611,7 +1945,9 @@ export type UserUncheckedCreateWithoutStaffChangesMadeInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutStaffChangesMadeInput = {
@@ -1622,6 +1958,11 @@ export type UserCreateOrConnectWithoutStaffChangesMadeInput = {
 export type UserCreateWithoutStaffChangesReceivedInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1644,12 +1985,19 @@ export type UserCreateWithoutStaffChangesReceivedInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutStaffChangesReceivedInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1672,7 +2020,9 @@ export type UserUncheckedCreateWithoutStaffChangesReceivedInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutStaffChangesReceivedInput = {
@@ -1694,6 +2044,11 @@ export type UserUpdateToOneWithWhereWithoutStaffChangesMadeInput = {
 export type UserUpdateWithoutStaffChangesMadeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1716,12 +2071,19 @@ export type UserUpdateWithoutStaffChangesMadeInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStaffChangesMadeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1744,7 +2106,9 @@ export type UserUncheckedUpdateWithoutStaffChangesMadeInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutStaffChangesReceivedInput = {
@@ -1761,6 +2125,11 @@ export type UserUpdateToOneWithWhereWithoutStaffChangesReceivedInput = {
 export type UserUpdateWithoutStaffChangesReceivedInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1783,12 +2152,19 @@ export type UserUpdateWithoutStaffChangesReceivedInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStaffChangesReceivedInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1811,12 +2187,19 @@ export type UserUncheckedUpdateWithoutStaffChangesReceivedInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutIssuedStaffInvitesInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1839,12 +2222,19 @@ export type UserCreateWithoutIssuedStaffInvitesInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutIssuedStaffInvitesInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1867,7 +2257,9 @@ export type UserUncheckedCreateWithoutIssuedStaffInvitesInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutIssuedStaffInvitesInput = {
@@ -1889,6 +2281,11 @@ export type UserUpdateToOneWithWhereWithoutIssuedStaffInvitesInput = {
 export type UserUpdateWithoutIssuedStaffInvitesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1911,12 +2308,19 @@ export type UserUpdateWithoutIssuedStaffInvitesInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIssuedStaffInvitesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1939,12 +2343,19 @@ export type UserUncheckedUpdateWithoutIssuedStaffInvitesInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutResolutionSubmissionsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1967,12 +2378,19 @@ export type UserCreateWithoutResolutionSubmissionsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutResolutionSubmissionsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1995,7 +2413,9 @@ export type UserUncheckedCreateWithoutResolutionSubmissionsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutResolutionSubmissionsInput = {
@@ -2006,6 +2426,11 @@ export type UserCreateOrConnectWithoutResolutionSubmissionsInput = {
 export type UserCreateWithoutResolutionReviewsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -2028,12 +2453,19 @@ export type UserCreateWithoutResolutionReviewsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutResolutionReviewsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -2056,7 +2488,9 @@ export type UserUncheckedCreateWithoutResolutionReviewsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutResolutionReviewsInput = {
@@ -2078,6 +2512,11 @@ export type UserUpdateToOneWithWhereWithoutResolutionSubmissionsInput = {
 export type UserUpdateWithoutResolutionSubmissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2100,12 +2539,19 @@ export type UserUpdateWithoutResolutionSubmissionsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResolutionSubmissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2128,7 +2574,9 @@ export type UserUncheckedUpdateWithoutResolutionSubmissionsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutResolutionReviewsInput = {
@@ -2145,6 +2593,11 @@ export type UserUpdateToOneWithWhereWithoutResolutionReviewsInput = {
 export type UserUpdateWithoutResolutionReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2167,12 +2620,19 @@ export type UserUpdateWithoutResolutionReviewsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResolutionReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2195,12 +2655,19 @@ export type UserUncheckedUpdateWithoutResolutionReviewsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutCitizenFeedbacksInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -2223,12 +2690,19 @@ export type UserCreateWithoutCitizenFeedbacksInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutCitizenFeedbacksInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -2251,7 +2725,9 @@ export type UserUncheckedCreateWithoutCitizenFeedbacksInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutCitizenFeedbacksInput = {
@@ -2273,6 +2749,11 @@ export type UserUpdateToOneWithWhereWithoutCitizenFeedbacksInput = {
 export type UserUpdateWithoutCitizenFeedbacksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2295,12 +2776,19 @@ export type UserUpdateWithoutCitizenFeedbacksInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCitizenFeedbacksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2323,12 +2811,94 @@ export type UserUncheckedUpdateWithoutCitizenFeedbacksInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutReviewedJobsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutReviewedJobsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutReviewedJobsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedJobsInput, Prisma.UserUncheckedCreateWithoutReviewedJobsInput>
 }
 
 export type UserCreateWithoutPostedJobsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -2351,12 +2921,19 @@ export type UserCreateWithoutPostedJobsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutPostedJobsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -2379,12 +2956,95 @@ export type UserUncheckedCreateWithoutPostedJobsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutPostedJobsInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutPostedJobsInput, Prisma.UserUncheckedCreateWithoutPostedJobsInput>
+}
+
+export type UserUpsertWithoutReviewedJobsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReviewedJobsInput, Prisma.UserUncheckedUpdateWithoutReviewedJobsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedJobsInput, Prisma.UserUncheckedCreateWithoutReviewedJobsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReviewedJobsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReviewedJobsInput, Prisma.UserUncheckedUpdateWithoutReviewedJobsInput>
+}
+
+export type UserUpdateWithoutReviewedJobsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReviewedJobsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutPostedJobsInput = {
@@ -2401,6 +3061,11 @@ export type UserUpdateToOneWithWhereWithoutPostedJobsInput = {
 export type UserUpdateWithoutPostedJobsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2423,12 +3088,19 @@ export type UserUpdateWithoutPostedJobsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostedJobsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2451,12 +3123,19 @@ export type UserUncheckedUpdateWithoutPostedJobsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutJobseekerProfileInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -2479,12 +3158,19 @@ export type UserCreateWithoutJobseekerProfileInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutJobseekerProfileInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -2507,7 +3193,9 @@ export type UserUncheckedCreateWithoutJobseekerProfileInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutJobseekerProfileInput = {
@@ -2529,6 +3217,11 @@ export type UserUpdateToOneWithWhereWithoutJobseekerProfileInput = {
 export type UserUpdateWithoutJobseekerProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2551,12 +3244,19 @@ export type UserUpdateWithoutJobseekerProfileInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJobseekerProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2579,12 +3279,19 @@ export type UserUncheckedUpdateWithoutJobseekerProfileInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutSpesImportsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -2608,11 +3315,18 @@ export type UserCreateWithoutSpesImportsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutSpesImportsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -2636,6 +3350,8 @@ export type UserUncheckedCreateWithoutSpesImportsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutSpesImportsInput = {
@@ -2657,6 +3373,11 @@ export type UserUpdateToOneWithWhereWithoutSpesImportsInput = {
 export type UserUpdateWithoutSpesImportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2680,11 +3401,18 @@ export type UserUpdateWithoutSpesImportsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSpesImportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2708,11 +3436,18 @@ export type UserUncheckedUpdateWithoutSpesImportsInput = {
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
-export type UserCreateWithoutJobChangesInput = {
+export type UserCreateWithoutSpesImportEventsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -2735,12 +3470,19 @@ export type UserCreateWithoutJobChangesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
 }
 
-export type UserUncheckedCreateWithoutJobChangesInput = {
+export type UserUncheckedCreateWithoutSpesImportEventsInput = {
   id: string
   name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -2763,28 +3505,35 @@ export type UserUncheckedCreateWithoutJobChangesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
 }
 
-export type UserCreateOrConnectWithoutJobChangesInput = {
+export type UserCreateOrConnectWithoutSpesImportEventsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutJobChangesInput, Prisma.UserUncheckedCreateWithoutJobChangesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSpesImportEventsInput, Prisma.UserUncheckedCreateWithoutSpesImportEventsInput>
 }
 
-export type UserUpsertWithoutJobChangesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutJobChangesInput, Prisma.UserUncheckedUpdateWithoutJobChangesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutJobChangesInput, Prisma.UserUncheckedCreateWithoutJobChangesInput>
+export type UserUpsertWithoutSpesImportEventsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSpesImportEventsInput, Prisma.UserUncheckedUpdateWithoutSpesImportEventsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSpesImportEventsInput, Prisma.UserUncheckedCreateWithoutSpesImportEventsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutJobChangesInput = {
+export type UserUpdateToOneWithWhereWithoutSpesImportEventsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutJobChangesInput, Prisma.UserUncheckedUpdateWithoutJobChangesInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSpesImportEventsInput, Prisma.UserUncheckedUpdateWithoutSpesImportEventsInput>
 }
 
-export type UserUpdateWithoutJobChangesInput = {
+export type UserUpdateWithoutSpesImportEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2807,12 +3556,19 @@ export type UserUpdateWithoutJobChangesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
 }
 
-export type UserUncheckedUpdateWithoutJobChangesInput = {
+export type UserUncheckedUpdateWithoutSpesImportEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2835,7 +3591,165 @@ export type UserUncheckedUpdateWithoutJobChangesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+}
+
+export type UserCreateWithoutJobChangesInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutJobChangesInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutJobChangesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobChangesInput, Prisma.UserUncheckedCreateWithoutJobChangesInput>
+}
+
+export type UserUpsertWithoutJobChangesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutJobChangesInput, Prisma.UserUncheckedUpdateWithoutJobChangesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobChangesInput, Prisma.UserUncheckedCreateWithoutJobChangesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutJobChangesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutJobChangesInput, Prisma.UserUncheckedUpdateWithoutJobChangesInput>
+}
+
+export type UserUpdateWithoutJobChangesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutJobChangesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
 }
 
 
@@ -2858,7 +3772,9 @@ export type UserCountOutputType = {
   citizenFeedbacks: number
   postedJobs: number
   jobChanges: number
+  reviewedJobs: number
   spesImports: number
+  spesImportEvents: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2876,7 +3792,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   citizenFeedbacks?: boolean | UserCountOutputTypeCountCitizenFeedbacksArgs
   postedJobs?: boolean | UserCountOutputTypeCountPostedJobsArgs
   jobChanges?: boolean | UserCountOutputTypeCountJobChangesArgs
+  reviewedJobs?: boolean | UserCountOutputTypeCountReviewedJobsArgs
   spesImports?: boolean | UserCountOutputTypeCountSpesImportsArgs
+  spesImportEvents?: boolean | UserCountOutputTypeCountSpesImportEventsArgs
 }
 
 /**
@@ -2990,14 +3908,33 @@ export type UserCountOutputTypeCountJobChangesArgs<ExtArgs extends runtime.Types
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountReviewedJobsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JobOpportunityWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountSpesImportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SpesImportBatchWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSpesImportEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SpesImportEventWhereInput
 }
 
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  middleInitial?: boolean
+  hasNoMiddleName?: boolean
+  phoneNumber?: boolean
   email?: boolean
   emailVerified?: boolean
   image?: boolean
@@ -3021,7 +3958,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   jobseekerProfile?: boolean | Prisma.User$jobseekerProfileArgs<ExtArgs>
   postedJobs?: boolean | Prisma.User$postedJobsArgs<ExtArgs>
   jobChanges?: boolean | Prisma.User$jobChangesArgs<ExtArgs>
+  reviewedJobs?: boolean | Prisma.User$reviewedJobsArgs<ExtArgs>
   spesImports?: boolean | Prisma.User$spesImportsArgs<ExtArgs>
+  spesImportEvents?: boolean | Prisma.User$spesImportEventsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3030,6 +3969,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type UserSelectScalar = {
   id?: boolean
   name?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  middleInitial?: boolean
+  hasNoMiddleName?: boolean
+  phoneNumber?: boolean
   email?: boolean
   emailVerified?: boolean
   image?: boolean
@@ -3040,7 +3984,7 @@ export type UserSelectScalar = {
   designation?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "role" | "createdAt" | "updatedAt" | "department" | "designation", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "firstName" | "lastName" | "middleInitial" | "hasNoMiddleName" | "phoneNumber" | "email" | "emailVerified" | "image" | "role" | "createdAt" | "updatedAt" | "department" | "designation", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
@@ -3057,7 +4001,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   jobseekerProfile?: boolean | Prisma.User$jobseekerProfileArgs<ExtArgs>
   postedJobs?: boolean | Prisma.User$postedJobsArgs<ExtArgs>
   jobChanges?: boolean | Prisma.User$jobChangesArgs<ExtArgs>
+  reviewedJobs?: boolean | Prisma.User$reviewedJobsArgs<ExtArgs>
   spesImports?: boolean | Prisma.User$spesImportsArgs<ExtArgs>
+  spesImportEvents?: boolean | Prisma.User$spesImportEventsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -3079,11 +4025,18 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     jobseekerProfile: Prisma.$JobseekerProfilePayload<ExtArgs> | null
     postedJobs: Prisma.$JobOpportunityPayload<ExtArgs>[]
     jobChanges: Prisma.$JobActivityPayload<ExtArgs>[]
+    reviewedJobs: Prisma.$JobOpportunityPayload<ExtArgs>[]
     spesImports: Prisma.$SpesImportBatchPayload<ExtArgs>[]
+    spesImportEvents: Prisma.$SpesImportEventPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    firstName: string | null
+    lastName: string | null
+    middleInitial: string | null
+    hasNoMiddleName: boolean
+    phoneNumber: string | null
     email: string
     emailVerified: boolean
     image: string | null
@@ -3447,7 +4400,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   jobseekerProfile<T extends Prisma.User$jobseekerProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jobseekerProfileArgs<ExtArgs>>): Prisma.Prisma__JobseekerProfileClient<runtime.Types.Result.GetResult<Prisma.$JobseekerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   postedJobs<T extends Prisma.User$postedJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postedJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobOpportunityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   jobChanges<T extends Prisma.User$jobChangesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jobChangesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviewedJobs<T extends Prisma.User$reviewedJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobOpportunityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   spesImports<T extends Prisma.User$spesImportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$spesImportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpesImportBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  spesImportEvents<T extends Prisma.User$spesImportEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$spesImportEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpesImportEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3479,6 +4434,11 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
+  readonly firstName: Prisma.FieldRef<"User", 'String'>
+  readonly lastName: Prisma.FieldRef<"User", 'String'>
+  readonly middleInitial: Prisma.FieldRef<"User", 'String'>
+  readonly hasNoMiddleName: Prisma.FieldRef<"User", 'Boolean'>
+  readonly phoneNumber: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly emailVerified: Prisma.FieldRef<"User", 'Boolean'>
   readonly image: Prisma.FieldRef<"User", 'String'>
@@ -4190,6 +5150,30 @@ export type User$jobChangesArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * User.reviewedJobs
+ */
+export type User$reviewedJobsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobOpportunity
+   */
+  select?: Prisma.JobOpportunitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobOpportunity
+   */
+  omit?: Prisma.JobOpportunityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobOpportunityInclude<ExtArgs> | null
+  where?: Prisma.JobOpportunityWhereInput
+  orderBy?: Prisma.JobOpportunityOrderByWithRelationInput | Prisma.JobOpportunityOrderByWithRelationInput[]
+  cursor?: Prisma.JobOpportunityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JobOpportunityScalarFieldEnum | Prisma.JobOpportunityScalarFieldEnum[]
+}
+
+/**
  * User.spesImports
  */
 export type User$spesImportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4211,6 +5195,30 @@ export type User$spesImportsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.SpesImportBatchScalarFieldEnum | Prisma.SpesImportBatchScalarFieldEnum[]
+}
+
+/**
+ * User.spesImportEvents
+ */
+export type User$spesImportEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SpesImportEvent
+   */
+  select?: Prisma.SpesImportEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SpesImportEvent
+   */
+  omit?: Prisma.SpesImportEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SpesImportEventInclude<ExtArgs> | null
+  where?: Prisma.SpesImportEventWhereInput
+  orderBy?: Prisma.SpesImportEventOrderByWithRelationInput | Prisma.SpesImportEventOrderByWithRelationInput[]
+  cursor?: Prisma.SpesImportEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SpesImportEventScalarFieldEnum | Prisma.SpesImportEventScalarFieldEnum[]
 }
 
 /**

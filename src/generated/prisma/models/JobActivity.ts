@@ -29,6 +29,9 @@ export type JobActivityMinAggregateOutputType = {
   jobId: string | null
   actorId: string | null
   action: string | null
+  note: string | null
+  previousStatus: string | null
+  nextStatus: string | null
   createdAt: Date | null
 }
 
@@ -37,6 +40,9 @@ export type JobActivityMaxAggregateOutputType = {
   jobId: string | null
   actorId: string | null
   action: string | null
+  note: string | null
+  previousStatus: string | null
+  nextStatus: string | null
   createdAt: Date | null
 }
 
@@ -45,6 +51,9 @@ export type JobActivityCountAggregateOutputType = {
   jobId: number
   actorId: number
   action: number
+  note: number
+  previousStatus: number
+  nextStatus: number
   createdAt: number
   _all: number
 }
@@ -55,6 +64,9 @@ export type JobActivityMinAggregateInputType = {
   jobId?: true
   actorId?: true
   action?: true
+  note?: true
+  previousStatus?: true
+  nextStatus?: true
   createdAt?: true
 }
 
@@ -63,6 +75,9 @@ export type JobActivityMaxAggregateInputType = {
   jobId?: true
   actorId?: true
   action?: true
+  note?: true
+  previousStatus?: true
+  nextStatus?: true
   createdAt?: true
 }
 
@@ -71,6 +86,9 @@ export type JobActivityCountAggregateInputType = {
   jobId?: true
   actorId?: true
   action?: true
+  note?: true
+  previousStatus?: true
+  nextStatus?: true
   createdAt?: true
   _all?: true
 }
@@ -152,6 +170,9 @@ export type JobActivityGroupByOutputType = {
   jobId: string
   actorId: string
   action: string
+  note: string | null
+  previousStatus: string | null
+  nextStatus: string | null
   createdAt: Date
   _count: JobActivityCountAggregateOutputType | null
   _min: JobActivityMinAggregateOutputType | null
@@ -181,6 +202,9 @@ export type JobActivityWhereInput = {
   jobId?: Prisma.StringFilter<"JobActivity"> | string
   actorId?: Prisma.StringFilter<"JobActivity"> | string
   action?: Prisma.StringFilter<"JobActivity"> | string
+  note?: Prisma.StringNullableFilter<"JobActivity"> | string | null
+  previousStatus?: Prisma.StringNullableFilter<"JobActivity"> | string | null
+  nextStatus?: Prisma.StringNullableFilter<"JobActivity"> | string | null
   createdAt?: Prisma.DateTimeFilter<"JobActivity"> | Date | string
   job?: Prisma.XOR<Prisma.JobOpportunityScalarRelationFilter, Prisma.JobOpportunityWhereInput>
   actor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -191,6 +215,9 @@ export type JobActivityOrderByWithRelationInput = {
   jobId?: Prisma.SortOrder
   actorId?: Prisma.SortOrder
   action?: Prisma.SortOrder
+  note?: Prisma.SortOrderInput | Prisma.SortOrder
+  previousStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  nextStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   job?: Prisma.JobOpportunityOrderByWithRelationInput
   actor?: Prisma.UserOrderByWithRelationInput
@@ -205,6 +232,9 @@ export type JobActivityWhereUniqueInput = Prisma.AtLeast<{
   jobId?: Prisma.StringFilter<"JobActivity"> | string
   actorId?: Prisma.StringFilter<"JobActivity"> | string
   action?: Prisma.StringFilter<"JobActivity"> | string
+  note?: Prisma.StringNullableFilter<"JobActivity"> | string | null
+  previousStatus?: Prisma.StringNullableFilter<"JobActivity"> | string | null
+  nextStatus?: Prisma.StringNullableFilter<"JobActivity"> | string | null
   createdAt?: Prisma.DateTimeFilter<"JobActivity"> | Date | string
   job?: Prisma.XOR<Prisma.JobOpportunityScalarRelationFilter, Prisma.JobOpportunityWhereInput>
   actor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -215,6 +245,9 @@ export type JobActivityOrderByWithAggregationInput = {
   jobId?: Prisma.SortOrder
   actorId?: Prisma.SortOrder
   action?: Prisma.SortOrder
+  note?: Prisma.SortOrderInput | Prisma.SortOrder
+  previousStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  nextStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.JobActivityCountOrderByAggregateInput
   _max?: Prisma.JobActivityMaxOrderByAggregateInput
@@ -229,12 +262,18 @@ export type JobActivityScalarWhereWithAggregatesInput = {
   jobId?: Prisma.StringWithAggregatesFilter<"JobActivity"> | string
   actorId?: Prisma.StringWithAggregatesFilter<"JobActivity"> | string
   action?: Prisma.StringWithAggregatesFilter<"JobActivity"> | string
+  note?: Prisma.StringNullableWithAggregatesFilter<"JobActivity"> | string | null
+  previousStatus?: Prisma.StringNullableWithAggregatesFilter<"JobActivity"> | string | null
+  nextStatus?: Prisma.StringNullableWithAggregatesFilter<"JobActivity"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"JobActivity"> | Date | string
 }
 
 export type JobActivityCreateInput = {
   id?: string
   action: string
+  note?: string | null
+  previousStatus?: string | null
+  nextStatus?: string | null
   createdAt?: Date | string
   job: Prisma.JobOpportunityCreateNestedOneWithoutActivitiesInput
   actor: Prisma.UserCreateNestedOneWithoutJobChangesInput
@@ -245,12 +284,18 @@ export type JobActivityUncheckedCreateInput = {
   jobId: string
   actorId: string
   action: string
+  note?: string | null
+  previousStatus?: string | null
+  nextStatus?: string | null
   createdAt?: Date | string
 }
 
 export type JobActivityUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   job?: Prisma.JobOpportunityUpdateOneRequiredWithoutActivitiesNestedInput
   actor?: Prisma.UserUpdateOneRequiredWithoutJobChangesNestedInput
@@ -261,6 +306,9 @@ export type JobActivityUncheckedUpdateInput = {
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   actorId?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -269,12 +317,18 @@ export type JobActivityCreateManyInput = {
   jobId: string
   actorId: string
   action: string
+  note?: string | null
+  previousStatus?: string | null
+  nextStatus?: string | null
   createdAt?: Date | string
 }
 
 export type JobActivityUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -283,6 +337,9 @@ export type JobActivityUncheckedUpdateManyInput = {
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   actorId?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -307,6 +364,9 @@ export type JobActivityCountOrderByAggregateInput = {
   jobId?: Prisma.SortOrder
   actorId?: Prisma.SortOrder
   action?: Prisma.SortOrder
+  note?: Prisma.SortOrder
+  previousStatus?: Prisma.SortOrder
+  nextStatus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -315,6 +375,9 @@ export type JobActivityMaxOrderByAggregateInput = {
   jobId?: Prisma.SortOrder
   actorId?: Prisma.SortOrder
   action?: Prisma.SortOrder
+  note?: Prisma.SortOrder
+  previousStatus?: Prisma.SortOrder
+  nextStatus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -323,6 +386,9 @@ export type JobActivityMinOrderByAggregateInput = {
   jobId?: Prisma.SortOrder
   actorId?: Prisma.SortOrder
   action?: Prisma.SortOrder
+  note?: Prisma.SortOrder
+  previousStatus?: Prisma.SortOrder
+  nextStatus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -413,6 +479,9 @@ export type JobActivityUncheckedUpdateManyWithoutJobNestedInput = {
 export type JobActivityCreateWithoutActorInput = {
   id?: string
   action: string
+  note?: string | null
+  previousStatus?: string | null
+  nextStatus?: string | null
   createdAt?: Date | string
   job: Prisma.JobOpportunityCreateNestedOneWithoutActivitiesInput
 }
@@ -421,6 +490,9 @@ export type JobActivityUncheckedCreateWithoutActorInput = {
   id?: string
   jobId: string
   action: string
+  note?: string | null
+  previousStatus?: string | null
+  nextStatus?: string | null
   createdAt?: Date | string
 }
 
@@ -458,12 +530,18 @@ export type JobActivityScalarWhereInput = {
   jobId?: Prisma.StringFilter<"JobActivity"> | string
   actorId?: Prisma.StringFilter<"JobActivity"> | string
   action?: Prisma.StringFilter<"JobActivity"> | string
+  note?: Prisma.StringNullableFilter<"JobActivity"> | string | null
+  previousStatus?: Prisma.StringNullableFilter<"JobActivity"> | string | null
+  nextStatus?: Prisma.StringNullableFilter<"JobActivity"> | string | null
   createdAt?: Prisma.DateTimeFilter<"JobActivity"> | Date | string
 }
 
 export type JobActivityCreateWithoutJobInput = {
   id?: string
   action: string
+  note?: string | null
+  previousStatus?: string | null
+  nextStatus?: string | null
   createdAt?: Date | string
   actor: Prisma.UserCreateNestedOneWithoutJobChangesInput
 }
@@ -472,6 +550,9 @@ export type JobActivityUncheckedCreateWithoutJobInput = {
   id?: string
   actorId: string
   action: string
+  note?: string | null
+  previousStatus?: string | null
+  nextStatus?: string | null
   createdAt?: Date | string
 }
 
@@ -505,12 +586,18 @@ export type JobActivityCreateManyActorInput = {
   id?: string
   jobId: string
   action: string
+  note?: string | null
+  previousStatus?: string | null
+  nextStatus?: string | null
   createdAt?: Date | string
 }
 
 export type JobActivityUpdateWithoutActorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   job?: Prisma.JobOpportunityUpdateOneRequiredWithoutActivitiesNestedInput
 }
@@ -519,6 +606,9 @@ export type JobActivityUncheckedUpdateWithoutActorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -526,6 +616,9 @@ export type JobActivityUncheckedUpdateManyWithoutActorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -533,12 +626,18 @@ export type JobActivityCreateManyJobInput = {
   id?: string
   actorId: string
   action: string
+  note?: string | null
+  previousStatus?: string | null
+  nextStatus?: string | null
   createdAt?: Date | string
 }
 
 export type JobActivityUpdateWithoutJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actor?: Prisma.UserUpdateOneRequiredWithoutJobChangesNestedInput
 }
@@ -547,6 +646,9 @@ export type JobActivityUncheckedUpdateWithoutJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   actorId?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -554,6 +656,9 @@ export type JobActivityUncheckedUpdateManyWithoutJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   actorId?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -564,6 +669,9 @@ export type JobActivitySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   jobId?: boolean
   actorId?: boolean
   action?: boolean
+  note?: boolean
+  previousStatus?: boolean
+  nextStatus?: boolean
   createdAt?: boolean
   job?: boolean | Prisma.JobOpportunityDefaultArgs<ExtArgs>
   actor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -576,10 +684,13 @@ export type JobActivitySelectScalar = {
   jobId?: boolean
   actorId?: boolean
   action?: boolean
+  note?: boolean
+  previousStatus?: boolean
+  nextStatus?: boolean
   createdAt?: boolean
 }
 
-export type JobActivityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "jobId" | "actorId" | "action" | "createdAt", ExtArgs["result"]["jobActivity"]>
+export type JobActivityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "jobId" | "actorId" | "action" | "note" | "previousStatus" | "nextStatus" | "createdAt", ExtArgs["result"]["jobActivity"]>
 export type JobActivityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   job?: boolean | Prisma.JobOpportunityDefaultArgs<ExtArgs>
   actor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -596,6 +707,9 @@ export type $JobActivityPayload<ExtArgs extends runtime.Types.Extensions.Interna
     jobId: string
     actorId: string
     action: string
+    note: string | null
+    previousStatus: string | null
+    nextStatus: string | null
     createdAt: Date
   }, ExtArgs["result"]["jobActivity"]>
   composites: {}
@@ -972,6 +1086,9 @@ export interface JobActivityFieldRefs {
   readonly jobId: Prisma.FieldRef<"JobActivity", 'String'>
   readonly actorId: Prisma.FieldRef<"JobActivity", 'String'>
   readonly action: Prisma.FieldRef<"JobActivity", 'String'>
+  readonly note: Prisma.FieldRef<"JobActivity", 'String'>
+  readonly previousStatus: Prisma.FieldRef<"JobActivity", 'String'>
+  readonly nextStatus: Prisma.FieldRef<"JobActivity", 'String'>
   readonly createdAt: Prisma.FieldRef<"JobActivity", 'DateTime'>
 }
     

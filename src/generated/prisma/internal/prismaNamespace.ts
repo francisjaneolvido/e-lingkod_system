@@ -415,6 +415,7 @@ export const ModelName = {
   JobseekerProfile: 'JobseekerProfile',
   SpesImportBatch: 'SpesImportBatch',
   SpesSurveyRecord: 'SpesSurveyRecord',
+  SpesImportEvent: 'SpesImportEvent',
   JobActivity: 'JobActivity'
 } as const
 
@@ -431,7 +432,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "jobActivity"
+    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1623,6 +1624,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SpesImportEvent: {
+      payload: Prisma.$SpesImportEventPayload<ExtArgs>
+      fields: Prisma.SpesImportEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SpesImportEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpesImportEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SpesImportEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpesImportEventPayload>
+        }
+        findFirst: {
+          args: Prisma.SpesImportEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpesImportEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SpesImportEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpesImportEventPayload>
+        }
+        findMany: {
+          args: Prisma.SpesImportEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpesImportEventPayload>[]
+        }
+        create: {
+          args: Prisma.SpesImportEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpesImportEventPayload>
+        }
+        createMany: {
+          args: Prisma.SpesImportEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SpesImportEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpesImportEventPayload>
+        }
+        update: {
+          args: Prisma.SpesImportEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpesImportEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.SpesImportEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SpesImportEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SpesImportEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpesImportEventPayload>
+        }
+        aggregate: {
+          args: Prisma.SpesImportEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSpesImportEvent>
+        }
+        groupBy: {
+          args: Prisma.SpesImportEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SpesImportEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SpesImportEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SpesImportEventCountAggregateOutputType> | number
+        }
+      }
+    }
     JobActivity: {
       payload: Prisma.$JobActivityPayload<ExtArgs>
       fields: Prisma.JobActivityFieldRefs
@@ -1731,6 +1798,11 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  middleInitial: 'middleInitial',
+  hasNoMiddleName: 'hasNoMiddleName',
+  phoneNumber: 'phoneNumber',
   email: 'email',
   emailVerified: 'emailVerified',
   image: 'image',
@@ -1952,6 +2024,14 @@ export const JobOpportunityScalarFieldEnum = {
   contactInfo: 'contactInfo',
   externalUrl: 'externalUrl',
   status: 'status',
+  version: 'version',
+  reviewSource: 'reviewSource',
+  reviewRequestedAt: 'reviewRequestedAt',
+  reviewedAt: 'reviewedAt',
+  reviewedById: 'reviewedById',
+  reviewNote: 'reviewNote',
+  employerVerified: 'employerVerified',
+  vacancyVerified: 'vacancyVerified',
   expiresAt: 'expiresAt',
   publishedAt: 'publishedAt',
   createdById: 'createdById',
@@ -1981,6 +2061,12 @@ export const SpesImportBatchScalarFieldEnum = {
   sourceLabel: 'sourceLabel',
   importedById: 'importedById',
   recordCount: 'recordCount',
+  datasetKind: 'datasetKind',
+  fingerprint: 'fingerprint',
+  status: 'status',
+  voidedAt: 'voidedAt',
+  voidedById: 'voidedById',
+  voidReason: 'voidReason',
   createdAt: 'createdAt'
 } as const
 
@@ -2000,11 +2086,26 @@ export const SpesSurveyRecordScalarFieldEnum = {
 export type SpesSurveyRecordScalarFieldEnum = (typeof SpesSurveyRecordScalarFieldEnum)[keyof typeof SpesSurveyRecordScalarFieldEnum]
 
 
+export const SpesImportEventScalarFieldEnum = {
+  id: 'id',
+  batchId: 'batchId',
+  actorId: 'actorId',
+  action: 'action',
+  note: 'note',
+  createdAt: 'createdAt'
+} as const
+
+export type SpesImportEventScalarFieldEnum = (typeof SpesImportEventScalarFieldEnum)[keyof typeof SpesImportEventScalarFieldEnum]
+
+
 export const JobActivityScalarFieldEnum = {
   id: 'id',
   jobId: 'jobId',
   actorId: 'actorId',
   action: 'action',
+  note: 'note',
+  previousStatus: 'previousStatus',
+  nextStatus: 'nextStatus',
   createdAt: 'createdAt'
 } as const
 
@@ -2030,6 +2131,10 @@ export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 export const UserOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  middleInitial: 'middleInitial',
+  phoneNumber: 'phoneNumber',
   email: 'email',
   image: 'image',
   role: 'role',
@@ -2204,6 +2309,9 @@ export const JobOpportunityOrderByRelevanceFieldEnum = {
   education: 'education',
   contactInfo: 'contactInfo',
   externalUrl: 'externalUrl',
+  reviewSource: 'reviewSource',
+  reviewedById: 'reviewedById',
+  reviewNote: 'reviewNote',
   createdById: 'createdById'
 } as const
 
@@ -2225,7 +2333,12 @@ export type JobseekerProfileOrderByRelevanceFieldEnum = (typeof JobseekerProfile
 export const SpesImportBatchOrderByRelevanceFieldEnum = {
   id: 'id',
   sourceLabel: 'sourceLabel',
-  importedById: 'importedById'
+  importedById: 'importedById',
+  datasetKind: 'datasetKind',
+  fingerprint: 'fingerprint',
+  status: 'status',
+  voidedById: 'voidedById',
+  voidReason: 'voidReason'
 } as const
 
 export type SpesImportBatchOrderByRelevanceFieldEnum = (typeof SpesImportBatchOrderByRelevanceFieldEnum)[keyof typeof SpesImportBatchOrderByRelevanceFieldEnum]
@@ -2244,11 +2357,25 @@ export const SpesSurveyRecordOrderByRelevanceFieldEnum = {
 export type SpesSurveyRecordOrderByRelevanceFieldEnum = (typeof SpesSurveyRecordOrderByRelevanceFieldEnum)[keyof typeof SpesSurveyRecordOrderByRelevanceFieldEnum]
 
 
+export const SpesImportEventOrderByRelevanceFieldEnum = {
+  id: 'id',
+  batchId: 'batchId',
+  actorId: 'actorId',
+  action: 'action',
+  note: 'note'
+} as const
+
+export type SpesImportEventOrderByRelevanceFieldEnum = (typeof SpesImportEventOrderByRelevanceFieldEnum)[keyof typeof SpesImportEventOrderByRelevanceFieldEnum]
+
+
 export const JobActivityOrderByRelevanceFieldEnum = {
   id: 'id',
   jobId: 'jobId',
   actorId: 'actorId',
-  action: 'action'
+  action: 'action',
+  note: 'note',
+  previousStatus: 'previousStatus',
+  nextStatus: 'nextStatus'
 } as const
 
 export type JobActivityOrderByRelevanceFieldEnum = (typeof JobActivityOrderByRelevanceFieldEnum)[keyof typeof JobActivityOrderByRelevanceFieldEnum]
@@ -2512,6 +2639,7 @@ export type GlobalOmitConfig = {
   jobseekerProfile?: Prisma.JobseekerProfileOmit
   spesImportBatch?: Prisma.SpesImportBatchOmit
   spesSurveyRecord?: Prisma.SpesSurveyRecordOmit
+  spesImportEvent?: Prisma.SpesImportEventOmit
   jobActivity?: Prisma.JobActivityOmit
 }
 

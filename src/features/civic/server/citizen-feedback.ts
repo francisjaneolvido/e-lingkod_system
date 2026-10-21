@@ -31,6 +31,7 @@ async function prepareFeedbackPhotos(files: FormDataEntryValue[]) {
 }
 
 export async function submitCitizenFeedback(reportId: string, form: FormData, viewer: CivicViewer) {
+  if (viewer.role !== "CITIZEN") throw new CivicError("Only citizens can respond to resolutions.", 403);
   const input = parseCitizenFeedback(form);
   // Process files before beginning a DB transaction; never keep row locks while decoding.
   const photos = await prepareFeedbackPhotos(input.photos);

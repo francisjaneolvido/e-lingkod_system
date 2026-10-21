@@ -31,10 +31,11 @@ const searchKeywords: Record<string, string> = {
   census: "worker workforce census social status employment household survey statistics data",
 };
 
-function GetDetailsButton({ service, onExplore, children, light = false }: {
-  service: Service; onExplore: (service: Service) => void; children: React.ReactNode; light?: boolean;
+function GetDetailsButton({ service, onExplore, children, light = false, isLgu = false }: {
+  service: Service; onExplore: (service: Service) => void; children: React.ReactNode; light?: boolean; isLgu?: boolean;
 }) {
-  if (service.id === "civic") return <Link href="/reports/new" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-[12px] font-extrabold text-[#15466f] transition hover:bg-[#e9f5ff]">Mag-report ng concern <ArrowUpRight size={17} /></Link>;
+  if (service.id === "jobs") return <Link href="/opportunities" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#153d62] px-5 py-2.5 text-[12px] font-extrabold text-white hover:bg-[#216e9d]">Explore job opportunities <ArrowUpRight size={17} /></Link>;
+  if (service.id === "civic") return <Link href={isLgu ? "/admin" : "/reports/new"} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-[12px] font-extrabold text-[#15466f] transition hover:bg-[#e9f5ff]">{isLgu ? "Open LGU workspace" : "Mag-report ng concern"} <ArrowUpRight size={17} /></Link>;
   return (
     <button type="button" onClick={() => onExplore(service)}
       className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-extrabold transition focus-visible:outline-2 focus-visible:outline-offset-2 ${light ? "bg-white text-[#15466f] hover:bg-[#e9f5ff] focus-visible:outline-white" : "bg-[#153d62] text-white hover:bg-[#216e9d] focus-visible:outline-[#153d62]"}`}>
@@ -43,7 +44,7 @@ function GetDetailsButton({ service, onExplore, children, light = false }: {
   );
 }
 
-export function ServicesSection() {
+export function ServicesSection({ isLgu = false }: { isLgu?: boolean }) {
   const [category, setCategory] = useState<Category>("All");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<Service | null>(null);
@@ -117,7 +118,7 @@ export function ServicesSection() {
                     ))}
                   </div>
                 </div>
-                <div className="mt-8"><GetDetailsButton service={civic} onExplore={setSelected} light>Mag-report ng concern</GetDetailsButton><p className="mt-3 text-[10px] text-white/70">Citizen reports · photos, location & progress history</p></div>
+                <div className="mt-8"><GetDetailsButton service={civic} onExplore={setSelected} isLgu={isLgu} light>Mag-report ng concern</GetDetailsButton><p className="mt-3 text-[10px] text-white/70">Citizen reports · photos, location & progress history</p></div>
               </div>
               <span className="pointer-events-none absolute bottom-6 right-6 hidden rounded-full border border-white/35 bg-[#143e63]/70 px-3 py-1.5 text-[10px] font-semibold text-white backdrop-blur-sm sm:inline">Community illustration</span>
             </article>
@@ -148,13 +149,13 @@ export function ServicesSection() {
                 <div className="relative mt-4 flex flex-wrap items-center justify-between gap-3"><span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#64849c]"><PhoneCall size={13} /> PNP · BFP · Hospital · MDRRMO</span><button type="button" onClick={() => setSelected(emergency)} className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] font-extrabold text-[#153b63] transition hover:bg-[#f8fbff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#153b63]">View details <ArrowRight size={15} /></button></div>
               </article>
             </div>
-            <div className="lg:col-span-4"><ServiceTile service={directory} onExplore={setSelected} /></div>
-            <div className="lg:col-span-4"><ServiceTile service={jobs} onExplore={setSelected} /></div>
-            <div className="lg:col-span-4"><ServiceTile service={census} onExplore={setSelected} /></div>
+            <div className="lg:col-span-4"><ServiceTile service={directory} onExplore={setSelected} isLgu={isLgu} /></div>
+            <div className="lg:col-span-4"><ServiceTile service={jobs} onExplore={setSelected} isLgu={isLgu} /></div>
+            <div className="lg:col-span-4"><ServiceTile service={census} onExplore={setSelected} isLgu={isLgu} /></div>
           </div>
         ) : matches.length > 0 ? (
           <div className="mt-7 grid gap-4 sm:grid-cols-2 xl:grid-cols-3 xl:gap-5">
-            {matches.map(service => <ServiceTile key={service.id} service={service} onExplore={setSelected} />)}
+            {matches.map(service => <ServiceTile key={service.id} service={service} onExplore={setSelected} isLgu={isLgu} />)}
           </div>
         ) : (
           <div className="mt-7 flex min-h-56 flex-col items-center justify-center rounded-[22px] border border-dashed border-[#cbdeeb] bg-white px-6 py-8 text-center">
@@ -166,11 +167,11 @@ export function ServicesSection() {
         )}
         <div className="mt-7 flex items-start gap-3 rounded-xl border border-[#d7e7f0] bg-white/90 px-4 py-3.5 text-[11px] leading-[1.7] text-[#607d92]">
           <Info className="mt-0.5 size-4 shrink-0 text-[#2175a9]" />
-          <p><strong className="text-[#245574]">Civic Reporting is ready for your concerns.</strong> Submit photos and location details, then follow the action desk&apos;s updates. Online applications, hotlines, alerts, municipal projects, jobs, and census remain feature previews in this hackathon prototype.</p>
+          <p><strong className="text-[#245574]">Civic Reporting and Job Matching are available.</strong> Submit and track concerns, or explore published PESO job opportunities. Online LGU applications, emergency alerts, municipal projects, and workforce census remain prototype previews.</p>
         </div>
         <p className="mt-4 flex items-center gap-2 text-[11px] font-semibold text-[#64869c]"><CheckCircle2 size={15} className="text-[#159480]" /> Anim na approved modules · Isang portal para sa komunidad</p>
       </div>
-      <ServiceDetailDialog service={selected} onClose={() => setSelected(null)} />
+      <ServiceDetailDialog service={selected} onClose={() => setSelected(null)} isLgu={isLgu} />
     </section>
   );
 }

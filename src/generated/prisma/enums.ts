@@ -59,7 +59,11 @@ export type CitizenFeedbackDecision = (typeof CitizenFeedbackDecision)[keyof typ
 
 export const JobListingStatus = {
   DRAFT: 'DRAFT',
+  PENDING_REVIEW: 'PENDING_REVIEW',
+  RETURNED: 'RETURNED',
   PUBLISHED: 'PUBLISHED',
+  CLOSED: 'CLOSED',
+  FILLED: 'FILLED',
   ARCHIVED: 'ARCHIVED'
 } as const
 

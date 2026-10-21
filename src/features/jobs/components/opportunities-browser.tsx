@@ -1,17 +1,150 @@
 "use client";
-import Link from "next/link";
-import {useMemo,useState} from "react";
-import {ArrowUpRight, BriefcaseBusiness, CheckCircle2, MapPin, Search, SlidersHorizontal} from "lucide-react";
-import {EDUCATION_LABEL,WORK_LABEL} from "../domain";
 
-type Job={id:string;title:string;employer:string;sector:string;workType:string;barangay:string;location:string;description:string;education:string;contactInfo:string;externalUrl:string|null;expiresAt:string|null;skills:string[];interests:string[];match:{score:number;matchedSkills:string[];missingSkills:string[];matchedInterests:string[];availabilityFit:boolean;locationFit:boolean}|null};
-export function OpportunitiesBrowser({jobs,personalized}:{jobs:Job[];personalized:boolean}){
- const [search,setSearch]=useState("");const [type,setType]=useState("ALL");const [sector,setSector]=useState("ALL");const [selected,setSelected]=useState<string|null>(null);
- const sectors=[...new Set(jobs.map(j=>j.sector))].sort();
- const shown=useMemo(()=>jobs.filter(j=>(type==="ALL"||j.workType===type)&&(sector==="ALL"||j.sector===sector)&&(j.title+" "+j.employer+" "+j.skills.join(" ")+" "+j.barangay).toLowerCase().includes(search.toLowerCase())),[jobs,search,type,sector]);
- return <div className="space-y-5">
-  <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_190px_190px]"><label className="flex min-h-12 items-center gap-2 rounded-xl border border-[#d9e6ee] bg-white px-4"><Search size={18} className="text-[#6b8da2]"/><input aria-label="Search local opportunities" placeholder="Search jobs, employer, skills, barangay..." className="w-full bg-transparent text-sm text-[#204a67] outline-none" value={search} onChange={e=>setSearch(e.target.value)} /></label><label className="space-y-1"><span className="sr-only">Work type</span><select className="h-12 w-full rounded-xl border border-[#d9e6ee] bg-white px-3 text-sm text-[#365f78]" value={type} onChange={e=>setType(e.target.value)}><option value="ALL">All work types</option>{["FULL_TIME","PART_TIME","TEMPORARY","INTERNSHIP"].map(t=><option key={t} value={t}>{WORK_LABEL[t]}</option>)}</select></label><label><span className="sr-only">Sector</span><select className="h-12 w-full rounded-xl border border-[#d9e6ee] bg-white px-3 text-sm text-[#365f78]" value={sector} onChange={e=>setSector(e.target.value)}><option value="ALL">All sectors</option>{sectors.map(v=><option key={v}>{v}</option>)}</select></label></div>
-  <p className="flex items-center gap-2 text-xs font-semibold text-[#647f91]"><SlidersHorizontal size={15}/>{shown.length} published {shown.length===1?"opportunity":"opportunities"}{personalized?" · Ordered by skill/interest overlap":" · Newest listings first"}</p>
-  {shown.length?<div className="grid gap-4 lg:grid-cols-2">{shown.map(job=><article key={job.id} className="flex flex-col justify-between rounded-[20px] border border-[#dde9ef] bg-white p-5 shadow-[0_5px_20px_rgba(20,70,105,.03)] sm:p-6"><div><div className="flex flex-wrap items-start justify-between gap-3"><span className="grid size-11 place-items-center rounded-xl bg-[#eaf5fb] text-[#246b91]"><BriefcaseBusiness size={22}/></span>{personalized&&job.match&&<span className={`rounded-full px-3 py-1.5 text-xs font-extrabold ${job.match.score>=70?"bg-emerald-50 text-emerald-700":job.match.score>=30?"bg-sky-50 text-sky-800":"bg-slate-100 text-slate-600"}`}>{job.match.score>=70?"Strong skills overlap":job.match.score>=30?"Some skills overlap":"Explore opportunity"}</span>}</div><h2 className="mt-4 text-lg font-extrabold tracking-tight text-[#164463]">{job.title}</h2><p className="mt-1 text-sm font-semibold text-[#53778e]">{job.employer}</p><div className="mt-3 flex flex-wrap gap-2"><span className="rounded-full bg-[#edf6fa] px-3 py-1.5 text-xs font-bold text-[#235e7e]">{job.sector}</span><span className="rounded-full bg-[#f2f5f7] px-3 py-1.5 text-xs font-bold text-[#526e82]">{WORK_LABEL[job.workType]||job.workType}</span></div><p className="mt-4 flex items-center gap-2 text-sm text-[#5b7c90]"><MapPin size={15} className="shrink-0"/>{job.location} · {job.barangay}</p><p className="mt-3 line-clamp-3 whitespace-pre-line text-sm leading-6 text-[#52738a]">{job.description}</p>{job.match&&personalized&&<p className="mt-3 text-xs leading-5 text-[#2b6b85]"><CheckCircle2 className="mr-1 inline" size={14}/>Matched skills: {job.match.matchedSkills.length?job.match.matchedSkills.join(", "):"none of the listed skills yet"}. {job.match.missingSkills.length?`Review other listed skills: ${job.match.missingSkills.join(", ")}.`:""}</p>}</div><div className="mt-5 border-t border-[#e8eef2] pt-4"><button type="button" aria-expanded={selected===job.id} aria-controls={`details-${job.id}`} onClick={()=>setSelected(selected===job.id?null:job.id)} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#155778] px-4 py-2.5 text-sm font-extrabold text-white hover:bg-[#0b6b90]">{selected===job.id?"Hide opportunity details":"View details & how to inquire"}<ArrowUpRight size={16}/></button>{selected===job.id&&<div id={`details-${job.id}`} className="mt-4 space-y-3 rounded-xl bg-[#f4f9fc] p-4 text-sm leading-6 text-[#3c6680]"><p className="whitespace-pre-line">{job.description}</p><p><strong>Listed skills:</strong> {job.skills.join(", ")}</p><p><strong>Education requirement:</strong> {EDUCATION_LABEL[job.education]||job.education}</p><p><strong>Contact / inquiry:</strong> {job.contactInfo}</p>{job.expiresAt&&<p><strong>Posting deadline:</strong> {new Date(job.expiresAt).toLocaleDateString("en-PH")}</p>}{job.externalUrl&&<Link target="_blank" rel="noopener noreferrer" className="inline-flex font-bold text-[#156a96] underline" href={job.externalUrl}>Open official employer posting <ArrowUpRight size={15}/></Link>}<p className="text-xs text-[#648296]">This is a discovery listing, not an eLingkod Bayan job application. Confirm current availability directly with the employer.</p></div>}</div></article>)}</div>:<div className="rounded-2xl border border-dashed border-[#bdd3df] bg-white p-10 text-center"><BriefcaseBusiness size={35} className="mx-auto text-[#7394a9]"/><h2 className="mt-3 font-extrabold text-[#205173]">No opportunities match your search</h2><p className="mt-2 text-sm text-[#728b9e]">Try clearing filters, or check back after PESO posts new listings.</p><button className="mt-4 rounded-lg border border-[#aacbdc] px-4 py-2 text-sm font-bold text-[#276f93]" type="button" onClick={()=>{setSearch("");setType("ALL");setSector("ALL");}}>Clear filters</button></div>}
- </div>;
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import {
+  ArrowRight, BriefcaseBusiness, CheckCircle2, MapPin,
+  Search, SlidersHorizontal, Sparkles, X,
+} from "lucide-react";
+import { WORK_LABEL } from "../domain";
+
+type MatchExplanation = {
+  score: number;
+  matchedSkills: string[];
+  missingSkills: string[];
+  matchedInterests: string[];
+  availabilityFit: boolean;
+  locationFit: boolean;
+};
+
+type JobSummary = {
+  id: string;
+  title: string;
+  employer: string;
+  sector: string;
+  workType: string;
+  barangay: string;
+  location: string;
+  description: string;
+  education: string;
+  contactInfo: string;
+  externalUrl: string | null;
+  expiresAt: string | null;
+  skills: string[];
+  interests: string[];
+  match: MatchExplanation | null;
+};
+
+function matchDescription(match: MatchExplanation) {
+  if (match.matchedSkills.length) {
+    return `Shared skills: ${match.matchedSkills.slice(0, 2).join(", ")}${match.matchedSkills.length > 2 ? " + more" : ""}`;
+  }
+  if (match.matchedInterests.length) return `Related interest: ${match.matchedInterests[0]}`;
+  return "Review qualifications to see if this opportunity suits you";
+}
+
+export function OpportunitiesBrowser({ jobs, personalized }: { jobs: JobSummary[]; personalized: boolean }) {
+  const [search, setSearch] = useState("");
+  const [type, setType] = useState("ALL");
+  const [sector, setSector] = useState("ALL");
+  const sectors = useMemo(() => [...new Set(jobs.map(job => job.sector))].sort(), [jobs]);
+  const hasFilters = Boolean(search || type !== "ALL" || sector !== "ALL");
+  const shown = useMemo(() => {
+    const query = search.trim().toLocaleLowerCase();
+    return jobs.filter(job =>
+      (type === "ALL" || job.workType === type) &&
+      (sector === "ALL" || job.sector === sector) &&
+      [job.title, job.employer, job.sector, job.barangay, job.location, ...job.skills]
+        .join(" ").toLocaleLowerCase().includes(query)
+    );
+  }, [jobs, search, type, sector]);
+
+  function clearFilters() {
+    setSearch("");
+    setType("ALL");
+    setSector("ALL");
+  }
+
+  return (
+    <section aria-label="Explore published job opportunities" className="space-y-5">
+      <div className="rounded-[22px] border border-[#dce9ef] bg-white p-4 shadow-[0_5px_22px_rgba(17,63,97,.035)] sm:p-5">
+        <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
+          <div>
+            <h2 className="text-lg font-extrabold tracking-tight text-[#17486a]">Explore available opportunities</h2>
+            <p className="mt-1 text-sm leading-6 text-[#627f90]">Search by role, employer, location or skill.</p>
+          </div>
+          <span className="inline-flex items-center gap-2 rounded-full bg-[#eff6fa] px-3 py-2 text-xs font-bold text-[#376b88]">
+            <SlidersHorizontal size={14} /> Search & filter
+          </span>
+        </div>
+        <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_190px_190px]">
+          <label className="flex min-h-12 items-center gap-3 rounded-xl border border-[#cfdfe9] bg-white px-4 focus-within:border-[#2178a4] focus-within:ring-2 focus-within:ring-[#d4ebf6]">
+            <Search size={18} className="shrink-0 text-[#678a9f]" />
+            <span className="sr-only">Search job opportunities</span>
+            <input type="search" placeholder="Job title, employer, barangay or skill" className="w-full min-w-0 bg-transparent text-sm text-[#16476a] outline-none placeholder:text-[#819bab]" value={search} onChange={event => setSearch(event.target.value)} />
+          </label>
+          <label className="block">
+            <span className="sr-only">Filter by employment type</span>
+            <select aria-label="Filter by employment type" className="h-12 w-full rounded-xl border border-[#cfdfe9] bg-white px-3 text-sm text-[#325f79] focus:border-[#2178a4] focus:outline-none focus:ring-2 focus:ring-[#d4ebf6]" value={type} onChange={event => setType(event.target.value)}>
+              <option value="ALL">All work types</option>
+              {["FULL_TIME", "PART_TIME", "TEMPORARY", "INTERNSHIP"].map(item => <option key={item} value={item}>{WORK_LABEL[item]}</option>)}
+            </select>
+          </label>
+          <label className="block">
+            <span className="sr-only">Filter by sector</span>
+            <select aria-label="Filter by sector" className="h-12 w-full rounded-xl border border-[#cfdfe9] bg-white px-3 text-sm text-[#325f79] focus:border-[#2178a4] focus:outline-none focus:ring-2 focus:ring-[#d4ebf6]" value={sector} onChange={event => setSector(event.target.value)}>
+              <option value="ALL">All sectors</option>
+              {sectors.map(item => <option key={item} value={item}>{item}</option>)}
+            </select>
+          </label>
+        </div>
+        <div className="mt-4 flex min-h-8 flex-wrap items-center justify-between gap-2" role="status" aria-live="polite">
+          <p className="text-sm font-medium text-[#557a8e]">
+            <strong className="text-[#164869]">{shown.length}</strong> of {jobs.length} available {jobs.length === 1 ? "listing" : "listings"}
+            <span className="ml-2 text-xs">{personalized ? "· Suggested matches first" : "· Recently published first"}</span>
+          </p>
+          {hasFilters && <button type="button" onClick={clearFilters} className="inline-flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-bold text-[#246f97] hover:bg-[#eef7fb] focus-visible:outline-2 focus-visible:outline-[#246f97]"><X size={14} /> Clear filters</button>}
+        </div>
+      </div>
+
+      {shown.length > 0 ? (
+        <div className="grid items-stretch gap-4 lg:grid-cols-2">
+          {shown.map(job => (
+            <article key={job.id} className="flex min-w-0 flex-col rounded-[22px] border border-[#dce9f0] bg-white p-5 shadow-[0_7px_24px_rgba(15,64,101,.04)] transition hover:border-[#a9cedf] hover:shadow-[0_12px_30px_rgba(15,64,101,.08)] sm:p-6">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <span className="grid size-11 place-items-center rounded-xl border border-[#d6e8f1] bg-[#edf6fb] text-[#1e6587]"><BriefcaseBusiness size={21} /></span>
+                <span className="inline-flex items-center rounded-full bg-[#e9f6f0] px-3 py-1.5 text-xs font-bold text-[#24785c]">Open listing</span>
+              </div>
+              <div className="mt-4 flex-1">
+                <h3 className="text-[19px] font-extrabold leading-7 tracking-tight text-[#17466a]">{job.title}</h3>
+                <p className="mt-1 text-sm font-semibold text-[#53778b]">{job.employer}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <span className="rounded-full bg-[#edf5fb] px-3 py-1.5 text-xs font-bold text-[#2c6685]">{job.sector}</span>
+                  <span className="rounded-full bg-[#f2f5f7] px-3 py-1.5 text-xs font-bold text-[#526e82]">{WORK_LABEL[job.workType] || job.workType}</span>
+                </div>
+                <p className="mt-4 flex items-start gap-2 text-sm text-[#5a7a90]"><MapPin size={16} className="mt-0.5 shrink-0" />{job.location} · {job.barangay}</p>
+                <p className="mt-3 line-clamp-2 text-sm leading-6 text-[#5a768a]">{job.description}</p>
+                {job.skills.length > 0 && <div className="mt-4 flex flex-wrap items-center gap-1.5" aria-label="Listed skills">
+                  {job.skills.slice(0, 3).map(skill => <span key={skill} className="rounded-md border border-[#e1eaf1] px-2.5 py-1 text-xs font-medium text-[#516f83]">{skill}</span>)}
+                  {job.skills.length > 3 && <span className="px-1 text-xs font-semibold text-[#6b899d]">+{job.skills.length - 3} more</span>}
+                </div>}
+                {personalized && job.match && <p className="mt-4 flex items-start gap-2 rounded-xl bg-[#ecf7f4] px-3.5 py-3 text-xs leading-5 text-[#276e60]"><Sparkles size={16} className="mt-0.5 shrink-0" /><span><strong>Suggested based on your profile.</strong> {matchDescription(job.match)}.</span></p>}
+              </div>
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-[#e6eef3] pt-4">
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#668599]"><CheckCircle2 size={15} className="text-[#318a76]" /> PESO-published listing</span>
+                <Link href={`/opportunities/${encodeURIComponent(job.id)}`} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#155778] px-5 py-2.5 text-sm font-extrabold text-white transition hover:bg-[#0d6e94] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#155778]">View job details <ArrowRight size={16} /></Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div className="rounded-[22px] border border-dashed border-[#bfd5e1] bg-white p-9 text-center sm:p-12">
+          <BriefcaseBusiness size={35} className="mx-auto text-[#7b9bad]" />
+          <h3 className="mt-3 text-lg font-extrabold text-[#205173]">{jobs.length ? "No opportunities match your filters" : "No published opportunities yet"}</h3>
+          <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-[#6c8a9b]">{jobs.length ? "Try a different keyword, work type, or sector." : "PESO opportunities will appear here once they are reviewed and published."}</p>
+          {hasFilters && <button className="mt-5 min-h-11 rounded-xl border border-[#9fc6da] px-5 py-2 text-sm font-bold text-[#276f93] hover:bg-[#eef7fb]" type="button" onClick={clearFilters}>Show all opportunities</button>}
+        </div>
+      )}
+    </section>
+  );
 }

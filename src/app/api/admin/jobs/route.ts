@@ -14,7 +14,7 @@ export async function POST(request:Request) {
         barangay:value.barangay,location:value.location,description:value.description,
         skillsJson:JSON.stringify(value.skills),interestsJson:JSON.stringify(value.interests),
         education:value.education,contactInfo:value.contactInfo,externalUrl:value.externalUrl,
-        expiresAt:value.expiresAt,createdById:viewer.id,
+        expiresAt:value.expiresAt,reviewSource:value.reviewSource,createdById:viewer.id,
       },select:{id:true}});
       await tx.jobActivity.create({data:{jobId:created.id,actorId:viewer.id,action:"CREATE"}});
       return created;

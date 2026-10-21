@@ -19,5 +19,6 @@ export function parseCitizenFeedback(form: FormData) {
   const photos = form.getAll("photos");
   if (photos.length > 3) throw new CivicError("Attach at most 3 additional photos.");
   if (decision === "CONFIRMED" && photos.length > 0) throw new CivicError("Additional evidence is only needed when requesting another review.");
-  return { decision, submissionId, version, reason: decision === "DISPUTED" ? reason : null, photos };
+  const validatedDecision: CitizenFeedbackDecision = decision;
+  return { decision: validatedDecision, submissionId, version, reason: decision === "DISPUTED" ? reason : null, photos };
 }

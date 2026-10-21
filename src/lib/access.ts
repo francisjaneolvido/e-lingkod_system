@@ -23,6 +23,20 @@ export async function requirePageViewer(destination: string) {
   return viewer;
 }
 
+// Citizen-only actions must be checked at the API boundary, not just hidden in the UI.
+export async function requireCitizenApiViewer(request: Request) {
+  const viewer = await requireApiViewer(request);
+  if (viewer.role !== "CITIZEN") throw new CivicError("Only a Citizen account can submit or manage personal civic reports. Use your LGU workspace for staff actions.", 403);
+  return viewer;
+}
+
+// Authenticated LGU personnel may browse the public website, but not its citizen-only workspace.
+export async function requireCitizenPageViewer(destination: string) {
+  const viewer = await requirePageViewer(destination);
+  if (viewer.role !== "CITIZEN") redirect("/admin");
+  return viewer;
+}
+
 export async function requireApiViewer(request: Request, access: boolean | StaffModule = false) {
   const viewer = await viewerFromHeaders(request.headers);
   if (!viewer) throw new CivicError("Please sign in to continue.", 401);

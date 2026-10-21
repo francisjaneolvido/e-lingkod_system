@@ -9,9 +9,10 @@ import { ServiceIcon } from "./service-icon";
 type Props = {
   service: Service | null;
   onClose: () => void;
+  isLgu?: boolean;
 };
 
-export function ServiceDetailDialog({ service, onClose }: Props) {
+export function ServiceDetailDialog({ service, onClose, isLgu = false }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -54,10 +55,12 @@ export function ServiceDetailDialog({ service, onClose }: Props) {
               ))}
             </ul>
             {service.note && <p className="mt-5 flex items-start gap-2 rounded-xl bg-[#fff8e8] px-4 py-3 text-[11px] leading-5 text-[#826c42]"><Info className="mt-0.5 size-4 shrink-0" />{service.note}</p>}
-            <div className="mt-6 flex items-start gap-3 border-t border-[#e6edf2] pt-5 text-[11px] leading-5 text-[#617d92]"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#168479]" /><p><strong className="text-[#214e72]">Hackathon prototype.</strong> This is a planned service. No real applications, emergency dispatch, or personal data collection happens on this page yet.</p></div>
+            <div className="mt-6 flex items-start gap-3 border-t border-[#e6edf2] pt-5 text-[11px] leading-5 text-[#617d92]"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#168479]" /><p><strong className="text-[#214e72]">Hackathon prototype.</strong> {service.id === "jobs" ? "Published job opportunities can be explored now; matching is informational and does not submit applications." : service.id === "civic" ? "Citizen reporting is active in this prototype. This is not an official LGU government website." : "This is a planned service preview. No real applications or emergency dispatch happens on this page."}</p></div>
             <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
               {service.id === "civic" ? (
-                <Link href="/reports/new" onClick={() => dialogRef.current?.close()} className="inline-flex items-center gap-2 rounded-full bg-[#153e66] px-5 py-3 text-[12px] font-bold text-white transition hover:bg-[#216da2]">Report a concern <ArrowRight size={16} /></Link>
+                <Link href={isLgu ? "/admin" : "/reports/new"} onClick={() => dialogRef.current?.close()} className="inline-flex items-center gap-2 rounded-full bg-[#153e66] px-5 py-3 text-[12px] font-bold text-white transition hover:bg-[#216da2]">{isLgu ? "Open LGU workspace" : "Report a concern"} <ArrowRight size={16} /></Link>
+              ) : service.id === "jobs" ? (
+                <Link href="/opportunities" onClick={() => dialogRef.current?.close()} className="inline-flex items-center gap-2 rounded-full bg-[#153e66] px-5 py-3 text-[12px] font-bold text-white transition hover:bg-[#216da2]">Browse opportunities <ArrowRight size={16} /></Link>
               ) : (
                 <span className="text-[11px] font-semibold text-[#66849a]">Full workflow coming in the next phase</span>
               )}
