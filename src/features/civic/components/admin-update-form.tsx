@@ -6,6 +6,7 @@ import { AlertCircle, CheckCircle2, LoaderCircle, Send, UserCheck, ShieldCheck }
 import { STATUS_META, TRANSITIONS, type ReportStatus } from "../config";
 import type { ReportDetail, ReportPriority } from "../types";
 import s from "../civic.module.css";
+import { CIVIC_OFFICE_SUGGESTIONS } from "@/lib/lgu-offices";
 
 export type ReportOfficer = { id: string; name: string; department: string; designation: string };
 const priorities: ReportPriority[] = ["LOW", "NORMAL", "HIGH", "URGENT"];
@@ -26,8 +27,13 @@ export function AdminUpdateForm({ report, role, viewerId, officers = [] }: { rep
   const [error, setError] = useState("");
   const [saved, setSaved] = useState(false);
   const stale = report.version !== baseVersion;
-  const officeNames = [...new Set([...officers.map(o => o.department), ...(report.assignedOffice ? [report.assignedOffice] : [])])].sort();
+  const recommendedOffices = CIVIC_OFFICE_SUGGESTIONS[report.category] ?? [];
+  const officeNames = [...new Set([...officers.map(o => o.department), ...(report.assignedOffice ? [report.assignedOffice] : [])])].sort((a,b) => {
+    const ar = recommendedOffices.indexOf(a), br = recommendedOffices.indexOf(b);
+    return (ar < 0 ? 100 : ar) - (br < 0 ? 100 : br) || a.localeCompare(b);
+  });
   const eligible = officers.filter(o => o.department === office);
+  const suggestedAvailable = recommendedOffices.filter(name => officers.some(person => person.department === name));
   function loadLatest() { setBaseVersion(report.version); setStatus(report.status); setOffice(report.assignedOffice || ""); setOfficerId(report.assignedStaffId || ""); setPriority(report.priority); setNote(""); setVisibleToCitizen(false); setError(""); setSaved(false); }
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -62,7 +68,7 @@ export function AdminUpdateForm({ report, role, viewerId, officers = [] }: { rep
     {canUpdate && <form id="case-update-form" className={`${s.adminForm} mt-4`} onSubmit={submit}>
       <fieldset disabled={saving || refreshing || stale} className={s.fields}>
         {superAdmin && <><div className={s.field}><label htmlFor="case-priority">Priority level</label><select id="case-priority" value={priority} onChange={e => setPriority(e.target.value as ReportPriority)}>{priorities.map(p => <option key={p} value={p}>{p[0] + p.slice(1).toLowerCase()}</option>)}</select><span className={s.hint}>Urgent should be reserved for time-sensitive concerns; this is a triage label, not an emergency dispatch service.</span></div>
-        <div className={s.field}><label htmlFor="case-office">Responsible LGU office</label><select id="case-office" value={office} onChange={e => { setOffice(e.target.value); setOfficerId(""); }}><option value="">Not yet routed</option>{officeNames.map(name => <option key={name} value={name}>{name}</option>)}</select><span className={s.hint}>Office choices come from registered staff with Civic Reports access. If your office is missing, assign a staff member in LGU Staff Management first.</span></div>
+        <div className={s.field}><label htmlFor="case-office">Responsible LGU office</label><select id="case-office" value={office} onChange={e => { setOffice(e.target.value); setOfficerId(""); }}><option value="">Not yet routed</option>{officeNames.map(name => <option key={name} value={name}>{recommendedOffices.includes(name) ? "Suggested · " : ""}{name} ({officers.filter(person => person.department === name).length} staff)</option>)}</select><span className={s.hint}>{suggestedAvailable.length ? `Suggested for this concern: ${suggestedAvailable.join(" / ")}. ` : recommendedOffices.length ? "No suggested office has an authorized Civic Reports staff account yet. " : "Choose the responsible office based on the actual concern. "}Only offices with active Civic Reports staff can receive a new report. Assign staff in LGU Staff Management first; the Admin must confirm the final routing.</span></div>
         <div className={s.field}><label htmlFor="case-officer">Responsible officer</label><select id="case-officer" value={officerId} onChange={e => setOfficerId(e.target.value)} disabled={!office}><option value="">Auto-balance across eligible office staff (recommended)</option>{eligible.map(person => <option key={person.id} value={person.id}>{person.name} — {person.designation}</option>)}</select><span className={s.hint}>Leave this on Auto-balance for fair workload distribution. The selected staff member must accept the offer; Super Admin can still override by choosing an officer. Move to In Progress after an officer accepts.</span></div></>}
         <div className={s.field}><label htmlFor="case-status">Report status</label><select id="case-status" value={status} onChange={e => { setStatus(e.target.value as ReportStatus); setSaved(false); }}>{[report.status, ...TRANSITIONS[report.status]].filter(v => v !== "PENDING_VERIFICATION").map(v => <option value={v} key={v}>{STATUS_META[v].label}{v === report.status ? " (current)" : ""}</option>)}</select>{report.status === "IN_PROGRESS" && <span className={s.hint}>To close this case, use the proof-photo submission panel below. Final approval is restricted to Super Admin.</span>}</div>
         <div className={s.field}><label htmlFor="case-note">Case remarks *</label><textarea id="case-note" value={note} onChange={e => setNote(e.target.value)} required minLength={10} maxLength={1500} rows={4} placeholder="Describe the inspection, assignment reason, or action taken."/><span className={s.hint}>A status change is always shown to the citizen; routing-only remarks stay internal unless you choose otherwise.</span></div>

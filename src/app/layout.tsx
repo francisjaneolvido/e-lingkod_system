@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
       <body className="min-h-screen bg-white font-sans antialiased"><Suspense fallback={<div className="grid min-h-screen place-items-center bg-[#f7f8f5] text-[#143d62]" role="status"><div className="text-center"><p className="text-3xl font-extrabold tracking-tight">eLB<span className="text-[#b88b32]">.</span></p><p className="mt-3 text-xs text-[#718b9b]">Opening your community portal…</p></div></div>}>{children}</Suspense></body>
     </html>
   );

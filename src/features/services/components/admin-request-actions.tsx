@@ -1,9 +1,12 @@
 "use client";
 
+import Link from "next/link";
+
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AlertTriangle, CalendarClock, CheckCircle2, ClipboardCheck, Loader2, Plus, Send, Trash2, UserRoundCheck } from "lucide-react";
 import type { SerializableOnlineServiceDefinition } from "../catalog";
+import { StaffPickupPanel } from "./staff-pickup-panel";
 
 const input = "w-full rounded-xl border border-[#cadde7] bg-white px-3 py-2.5 text-xs text-[#244f69] outline-none transition focus:border-[#4b99b8] focus:ring-2 focus:ring-[#d8eef6]";
 
@@ -41,7 +44,7 @@ export function AdminRequestActions({ request, service, viewerRole, staff, verif
     if (request.status === "APPOINTMENT_CONFIRMED") return "Conduct the confirmed activity first. Record the outcome only after the scheduled time has occurred.";
     if (request.status === "APPOINTMENT_COMPLETED") return "The scheduled activity is complete. Add the staff recommendation and submit for final verification.";
     if (request.status === "FOR_FINAL_VERIFICATION") return releaseAlreadyApproved ? "Release was authorized and delivered. Super Admin must verify final completion." : "Staff actions are locked while Super Admin performs final verification.";
-    if (request.status === "READY_FOR_RELEASE") return `Record the actual release / delivery of ${service.outcomeLabel.toLowerCase()}.`;
+    if (request.status === "READY_FOR_RELEASE") return "Admin approved document release. Offer pickup choices, wait for citizen confirmation, then verify the claimant when the document is handed over.";
     return "Actions are limited by the current workflow state to protect the audit trail.";
   }, [request.status, releaseAlreadyApproved, reviewStage, verificationReady, verifiedRequiredCount, requiredDocumentCount, requiredAppointment, service]);
 
@@ -67,7 +70,6 @@ export function AdminRequestActions({ request, service, viewerRole, staff, verif
     if (request.status === "APPOINTMENT_CONFIRMED") return { label:`Record ${service.appointmentMode === "INSPECTION" ? "inspection" : "appointment"} outcome`, action:"COMPLETE_APPOINTMENT", note:true };
     if (request.status === "APPOINTMENT_COMPLETED") return { label:"Submit staff recommendation", action:"RECOMMEND_FINAL", note:true };
     if (request.status === "VALIDATED" && (!requiredAppointment || service.appointmentMode === "OPTIONAL")) return { label:"Submit staff recommendation", action:"RECOMMEND_FINAL", note:true };
-    if (request.status === "READY_FOR_RELEASE") return { label:"Record release / delivery", action:"MARK_RELEASED", note:true };
     return null;
   })();
 
@@ -84,7 +86,11 @@ export function AdminRequestActions({ request, service, viewerRole, staff, verif
       <div className="flex items-center gap-2"><UserRoundCheck size={16} className="text-[#2c7899]"/><h3 className="text-xs font-black text-[#214e69]">Assignment override</h3></div>
       <p className="mt-1 text-[9px] leading-4 text-[#8296a2]">Normal requests are balanced automatically among eligible {service.processingOffice} staff. Use this only to override or rescue an unaccepted case.</p>
       <div className="mt-3 grid gap-2">
-        <select className={input} value={staffId} onChange={event => setStaffId(event.target.value)}><option value="">Choose staff for manual override</option>{staff.map(person => <option key={person.id} value={person.id}>{person.name} · {person.department || "No department"}{typeof person.activeLoad === "number" ? ` · ${person.activeLoad} active` : ""}</option>)}</select>
+        {staff.length === 0 && <div role="status" className="rounded-xl border border-[#f1d6a2] bg-[#fff9ee] p-3 text-[10px] leading-5 text-[#785d2f]">
+          <strong>No eligible staff for this request yet.</strong> A staff account needs both <strong>Online LGU Services</strong> permission and a department matching <strong>{service.processingOffice}</strong>. Generic “Municipal Office” will not match BPLO.
+          <Link href="/admin/staff" className="mt-2 block font-extrabold text-[#17698e] underline">Open LGU Staff Management to correct office and permissions →</Link>
+        </div>}
+        <select className={input} value={staffId} onChange={event => setStaffId(event.target.value)} disabled={staff.length === 0}><option value="">{staff.length ? "Choose staff for manual override" : "No eligible staff — update staff office first"}</option>{staff.map(person => <option key={person.id} value={person.id}>{person.name} · {person.department || "No department"}{typeof person.activeLoad === "number" ? ` · ${person.activeLoad} active` : ""}</option>)}</select>
         <button disabled={!staffId || !!busy} onClick={() => call(`/api/admin/services/requests/${request.id}/assign`, "PATCH", { staffId })} className="rounded-xl bg-[#175e80] px-3 py-2.5 text-[10px] font-extrabold text-white disabled:opacity-50">Assign / reassign</button>
       </div>
     </section>}
@@ -103,6 +109,8 @@ export function AdminRequestActions({ request, service, viewerRole, staff, verif
       <div className="mt-3 grid gap-2"><input className={input} value={location} onChange={event => setLocation(event.target.value)} placeholder="Office / venue"/><textarea className={input} rows={2} value={agenda} onChange={event => setAgenda(event.target.value)} placeholder="Purpose of interview / inspection"/></div>
       <button disabled={slots.filter(Boolean).length < 2 || !!busy} onClick={() => call(`/api/admin/services/requests/${request.id}/appointment`, "POST", { slots: slots.filter(Boolean).map(scheduledAt => ({ scheduledAt })), location, agenda })} className="mt-3 inline-flex items-center gap-2 rounded-xl bg-[#625d98] px-3.5 py-2.5 text-[10px] font-extrabold text-white disabled:opacity-50"><CalendarClock size={14}/> Send schedule options</button>
     </section>}
+
+    {service.completionMode === "RELEASE" && (request.status === "READY_FOR_RELEASE" || (request.releaseApprovedAt && ["FOR_FINAL_VERIFICATION", "COMPLETED"].includes(request.status))) && <StaffPickupPanel request={request}/>}
 
     {primary && !reviewStage && <section className="rounded-2xl border border-[#dce8ee] bg-white p-4">
       <h3 className="text-xs font-black text-[#214e69]">{primary.note ? "Record outcome / recommendation" : "Case action"}</h3>

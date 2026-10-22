@@ -17,7 +17,7 @@ import { NotificationBell } from "@/components/notifications/notification-bell";
 const serviceDestinations: Record<string, string> = {
   civic: "/reports/new",
   services: "/services",
-  emergency: "/#service-emergency",
+  emergency: "/emergency",
   directory: "/#service-directory",
   jobs: "/community-employment",
   census: "/community-census",
@@ -35,7 +35,7 @@ const serviceDescriptions: Record<string, string> = {
 const serviceNavigation = services.map((service) => ({
   ...service,
   href: serviceDestinations[service.id] ?? "/#services",
-  live: service.id === "civic" || service.id === "services" || service.id === "jobs",
+  live: service.id === "civic" || service.id === "services" || service.id === "jobs" || service.id === "emergency",
   description: serviceDescriptions[service.id] ?? service.description,
 }));
 

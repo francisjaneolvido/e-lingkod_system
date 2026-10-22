@@ -17,7 +17,7 @@ function nextStep(status: ServiceRequestStatus) {
   const steps: Record<ServiceRequestStatus,string> = {
     DRAFT: "Citizen completing draft", FOR_TRIAGE: "Screen intake", FORM_OPEN: "Citizen completing full form", SUBMITTED: "Assign / start review",
     ASSIGNED: "Start requirements review", UNDER_REVIEW: "Verify form & documents", ACTION_REQUIRED: "Wait for citizen correction", VALIDATED: "Schedule or recommend",
-    SCHEDULED: "Citizen confirmation", APPOINTMENT_CONFIRMED: "Conduct scheduled activity", APPOINTMENT_COMPLETED: "Submit staff recommendation", FOR_FINAL_VERIFICATION: "Super Admin verification", READY_FOR_RELEASE: "Release / deliver service",
+    SCHEDULED: "Citizen confirmation", APPOINTMENT_CONFIRMED: "Conduct scheduled activity", APPOINTMENT_COMPLETED: "Submit staff recommendation", FOR_FINAL_VERIFICATION: "Super Admin verification", READY_FOR_RELEASE: "Arrange document pickup",
     COMPLETED: "Completed", DECLINED: "Closed", CANCELLED: "Cancelled",
   };
   return steps[status];

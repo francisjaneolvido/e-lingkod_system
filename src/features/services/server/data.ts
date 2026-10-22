@@ -21,12 +21,14 @@ export async function citizenServiceRequest(id: string, userId: string) {
     documents: { select: { id: true, requirementKey: true, requirementLabel: true, fileName: true, mimeType: true, byteSize: true, uploadedAt: true, verificationStatus: true, verificationNote: true, verifiedAt: true }, orderBy: { uploadedAt: "desc" } },
     events: { where: { visibleToCitizen: true }, select: { id: true, action: true, status: true, note: true, createdAt: true }, orderBy: { createdAt: "asc" } },
     appointments: { select: { id: true, scheduledAt: true, location: true, agenda: true, status: true, citizenNote: true, staffNote: true, confirmedAt: true, completedAt: true, createdAt: true }, orderBy: [{ scheduledAt: "asc" }, { createdAt: "desc" }] },
+    pickupSlots: { select: { id: true, scheduledAt: true, location: true, instructions: true, status: true, citizenNote: true, claimantName: true, confirmedAt: true, claimedAt: true, createdAt: true }, orderBy: [{ createdAt: "desc" }] },
   }});
   if (!row) return null;
   return { ...row, status: isServiceStatus(row.status) ? row.status : "DRAFT", formData: jsonObject(row.formDataJson), formDataJson: undefined, createdAt: row.createdAt.toISOString(), updatedAt: row.updatedAt.toISOString(), submittedAt: row.submittedAt?.toISOString() ?? null, completedAt: row.completedAt?.toISOString() ?? null, releaseApprovedAt: row.releaseApprovedAt?.toISOString() ?? null,
     documents: row.documents.map(document => ({ ...document, uploadedAt: document.uploadedAt.toISOString(), verifiedAt: document.verifiedAt?.toISOString() ?? null })),
     events: row.events.map(event => ({ ...event, createdAt: event.createdAt.toISOString() })),
     appointments: row.appointments.map(appointment => ({ ...appointment, scheduledAt: appointment.scheduledAt.toISOString(), confirmedAt: appointment.confirmedAt?.toISOString() ?? null, completedAt: appointment.completedAt?.toISOString() ?? null, createdAt: appointment.createdAt.toISOString() })),
+    pickupSlots: row.pickupSlots.map(slot => ({ ...slot, scheduledAt: slot.scheduledAt.toISOString(), confirmedAt: slot.confirmedAt?.toISOString() ?? null, claimedAt: slot.claimedAt?.toISOString() ?? null, createdAt: slot.createdAt.toISOString() })),
   };
 }
 
@@ -71,6 +73,7 @@ export async function adminServiceRequest(id: string, viewer: CivicViewer) {
     documents: { select: { id: true, requirementKey: true, requirementLabel: true, fileName: true, mimeType: true, byteSize: true, uploadedAt: true, verificationStatus: true, verificationNote: true, verifiedAt: true, verifiedBy: { select: { name: true } } }, orderBy: { uploadedAt: "desc" } },
     events: { include: { actor: { select: { name: true, role: true } } }, orderBy: { createdAt: "asc" } },
     appointments: { include: { proposedBy: { select: { name: true } } }, orderBy: [{ scheduledAt: "asc" }, { createdAt: "desc" }] },
+    pickupSlots: { include: { proposedBy: { select: { name: true } } }, orderBy: { createdAt: "desc" } },
   }});
   if (!row) return null;
   const workAssignment = await prisma.workAssignment.findUnique({ where: { module_entityType_entityId: { module: "SERVICES", entityType: "SERVICE_REQUEST", entityId: id } }, select: { id: true, status: true, claimDeadline: true, assignedStaffId: true, acceptedAt: true, attemptCount: true } });

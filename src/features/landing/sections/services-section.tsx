@@ -147,7 +147,7 @@ export function ServicesSection({ isLgu = false }: { isLgu?: boolean }) {
                     <p className="mt-2 text-[12px] leading-6 text-[#56788f]">One-tap access sa verified hotlines at mga opisyal na advisory.</p>
                   </div>
                 </div>
-                <div className="relative mt-4 flex flex-wrap items-center justify-between gap-3"><span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#64849c]"><PhoneCall size={13} /> PNP · BFP · Hospital · MDRRMO</span><button type="button" onClick={() => setSelected(emergency)} className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] font-extrabold text-[#153b63] transition hover:bg-[#f8fbff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#153b63]">View details <ArrowRight size={15} /></button></div>
+                <div className="relative mt-4 flex flex-wrap items-center justify-between gap-3"><span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#64849c]"><PhoneCall size={13} /> PNP · BFP · Hospital · MDRRMO</span><Link href={isLgu ? "/admin/emergency" : "/emergency"} className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] font-extrabold text-[#153b63] transition hover:bg-[#f8fbff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#153b63]">{isLgu ? "Open emergency desk" : "Open hotlines"} <ArrowRight size={15} /></Link></div>
               </article>
             </div>
             <div className="lg:col-span-4"><ServiceTile service={directory} onExplore={setSelected} isLgu={isLgu} /></div>
@@ -168,7 +168,7 @@ export function ServicesSection({ isLgu = false }: { isLgu?: boolean }) {
         )}
         <div className="mt-7 flex items-start gap-3 rounded-xl border border-[#d7e7f0] bg-white/90 px-4 py-3.5 text-[11px] leading-[1.7] text-[#607d92]">
           <Info className="mt-0.5 size-4 shrink-0 text-[#2175a9]" />
-          <p><strong className="text-[#245574]">Civic Reporting, Online LGU Services and Job Matching / Opportunity Recommendations are available.</strong> Employment survey insights are part of Job Matching. Community Census, emergency alerts and municipal projects remain planned modules.</p>
+          <p><strong className="text-[#245574]">Civic Reporting, Online LGU Services and Job Matching / Opportunity Recommendations are available.</strong> Employment survey insights are part of Job Matching. Community Census and municipal projects remain planned modules. Emergency Hotlines & Alerts is available with verified numbers and approved advisories.</p>
         </div>
         <p className="mt-4 flex items-center gap-2 text-[11px] font-semibold text-[#64869c]"><CheckCircle2 size={15} className="text-[#159480]" /> Anim na approved modules · Isang portal para sa komunidad</p>
       </div>

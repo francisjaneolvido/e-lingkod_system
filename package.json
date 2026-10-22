@@ -16,7 +16,8 @@
     "db:clear-data": "node scripts/clear-demo-data.mjs",
     "postinstall": "prisma generate",
     "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate deploy"
+    "db:migrate": "prisma migrate deploy",
+    "db:seed-demo": "node scripts/seed-demo-accounts.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

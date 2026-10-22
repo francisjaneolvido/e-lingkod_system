@@ -33,6 +33,19 @@ export async function POST(request: Request) {
       if (target.id === actor.id || target.role === "ADMIN") throw new CivicError("Super Admin accounts cannot be edited here.", 403);
       if (target.role !== "STAFF" && target.role !== "CITIZEN") throw new CivicError("This account cannot be assigned.", 400);
       if (input.mode === "REVOKE" && target.role !== "STAFF") throw new CivicError("This account is not an active staff member.", 400);
+      // Moving an officer or removing SERVICES must not silently strand open cases
+      // on a now-ineligible staff account. Require explicit Admin reassignment.
+      const servicesAccessLost = target.role === "STAFF" && (
+        input.mode === "REVOKE" || !input.modules.includes("SERVICES") || target.department !== input.department
+      );
+      if (servicesAccessLost) {
+        const pendingServices = await tx.serviceRequest.count({
+          where: { assignedStaffId: target.id, status: { notIn: ["COMPLETED", "DECLINED", "CANCELLED"] } },
+        });
+        if (pendingServices > 0) throw new CivicError(
+          `Reassign ${pendingServices} active Online LGU Services request(s) in the Service Request Desk before changing this officer's department or removing access.`, 409,
+        );
+      }
       const updated = await tx.user.updateMany({
         where: { id: target.id, role: { in: input.mode === "SAVE" ? ["CITIZEN", "STAFF"] : ["STAFF"] } },
         data: input.mode === "SAVE" ? { role: "STAFF", department: input.department, designation: input.designation } : { role: "CITIZEN", department: null, designation: null },

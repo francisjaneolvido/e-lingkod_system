@@ -1,7 +1,8 @@
 import { viewerFromHeaders } from "@/lib/access";
 import { hasModuleAccess } from "@/lib/staff-access";
 import { prisma } from "@/lib/prisma";
-import { departmentMatchesService, serviceByKey } from "@/features/services/catalog";
+import { departmentMatchesService } from "@/features/services/catalog";
+import { resolveServiceDefinition } from "@/features/services/server/catalog";
 
 export async function GET(request:Request,{params}:{params:Promise<{documentId:string}>}){
   const viewer=await viewerFromHeaders(request.headers);
@@ -15,5 +16,20 @@ export async function GET(request:Request,{params}:{params:Promise<{documentId:s
     allowed=doc.request.assignedStaffId===viewer.id||Boolean(service&&departmentMatchesService(service,viewer.department));
   }
   if(!allowed)return new Response("Forbidden",{status:403});
-  return new Response(new Uint8Array(doc.data),{headers:{"Content-Type":doc.mimeType,"Content-Disposition":`inline; filename="${doc.fileName.replace(/["\r\n]/g,"")}"`,"Cache-Control":"private, no-store","X-Content-Type-Options":"nosniff"}});
+  // Only approved upload formats are rendered inline. Never trust arbitrary stored MIME values.
+  const safeMime = ["image/jpeg", "image/png", "image/webp", "application/pdf"].includes(doc.mimeType)
+    ? doc.mimeType : "application/octet-stream";
+  const disposition = safeMime === "application/octet-stream" ? "attachment" : "inline";
+  const safeFileName = doc.fileName.replace(/[^\x20-\x7e]|["\\]/g, "_");
+  const encodedFileName = encodeURIComponent(doc.fileName.replace(/[\r\n]/g, "_"));
+  return new Response(new Uint8Array(doc.data), {
+    headers: {
+      "Content-Type": safeMime,
+      "Content-Disposition": `${disposition}; filename="${safeFileName}"; filename*=UTF-8''${encodedFileName}`,
+      "Cache-Control": "private, no-store",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+      "X-Robots-Tag": "noindex, nofollow",
+    },
+  });
 }

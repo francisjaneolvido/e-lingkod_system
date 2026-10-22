@@ -13,6 +13,7 @@ import { activeServiceRequirements, departmentMatchesService } from "../catalog"
 import { resolveServiceDefinition } from "./catalog";
 import { autoOfferServiceRequest, completeWork, manualAssignWork, requireAcceptedWork } from "@/lib/work-distribution/server";
 import { createNotification, notifyAdmins } from "@/lib/notifications/server";
+import { recordServicePickupRelease } from "./pickup";
 
 function canEditCitizen(status: string) { return ["DRAFT", "FORM_OPEN", "ACTION_REQUIRED"].includes(status); }
 
@@ -241,7 +242,6 @@ export async function staffServiceAction(id: string, input: any, viewer: CivicVi
   let next = row.status;
   let eventNote = "";
   let staffRecommendation: string | undefined;
-  let releaseNote: string | undefined;
 
   if (action === "OPEN_FORM") {
     if (row.status !== "FOR_TRIAGE") throw new CivicError("This intake is not waiting for pre-screening.", 409);
@@ -282,10 +282,8 @@ export async function staffServiceAction(id: string, input: any, viewer: CivicVi
     staffRecommendation = note(remarks, "Staff recommendation", 12);
     eventNote = "Staff review and recommendation were submitted for Super Admin final verification.";
   } else if (action === "MARK_RELEASED") {
-    if (row.status !== "READY_FOR_RELEASE") throw new CivicError("This request is not ready for release.", 409);
-    next = "FOR_FINAL_VERIFICATION";
-    releaseNote = note(remarks, "Release / delivery remarks", 8);
-    eventNote = `Actual release / service delivery recorded: ${releaseNote}`;
+    await recordServicePickupRelease(id, input, viewer);
+    return;
   } else if (action === "DECLINE") {
     const allowed = ["FOR_TRIAGE", "SUBMITTED", "ASSIGNED", "UNDER_REVIEW", "ACTION_REQUIRED", "VALIDATED", "SCHEDULED", "APPOINTMENT_CONFIRMED", "APPOINTMENT_COMPLETED"];
     if (!allowed.includes(row.status)) throw new CivicError("This request can no longer be closed by staff at this stage.", 409);
@@ -296,7 +294,7 @@ export async function staffServiceAction(id: string, input: any, viewer: CivicVi
   }
 
   await prisma.$transaction(async tx => {
-    await tx.serviceRequest.update({ where: { id }, data: { status: next, ...(staffRecommendation ? { staffRecommendation } : {}), ...(releaseNote ? { releaseNote } : {}), version: { increment: 1 } } });
+    await tx.serviceRequest.update({ where: { id }, data: { status: next, ...(staffRecommendation ? { staffRecommendation } : {}), version: { increment: 1 } } });
     if (next === "DECLINED") await tx.serviceAppointment.updateMany({ where: { requestId: id, status: { in: ["PROPOSED", "CONFIRMED", "CHANGE_REQUESTED"] } }, data: { status: "CANCELLED" } });
     await tx.serviceRequestEvent.create({ data: { requestId: id, actorId: viewer.id, action, status: next, note: eventNote, visibleToCitizen: true } });
   });
@@ -304,8 +302,8 @@ export async function staffServiceAction(id: string, input: any, viewer: CivicVi
     const title = action === "OPEN_FORM" ? "Continue your LGU request" : action === "REQUEST_CORRECTION" ? "Service request needs your action" : "Service request update";
     await createNotification({ userId: row.requesterId, module: "SERVICES", type: action === "REQUEST_CORRECTION" ? "ACTION_REQUIRED" : action, title, message: eventNote, href: `/services/requests/${id}` });
   }
-  if (action === "RECOMMEND_FINAL" || action === "MARK_RELEASED") {
-    await notifyAdmins({ module: "SERVICES", type: action === "RECOMMEND_FINAL" ? "FINAL_VERIFICATION" : "RELEASE_RECORDED", title: action === "RECOMMEND_FINAL" ? "Service request ready for final verification" : "Release recorded — verify completion", message: `${row.trackingId} · ${service.shortTitle}`, href: `/admin/services/${id}` });
+  if (action === "RECOMMEND_FINAL") {
+    await notifyAdmins({ module: "SERVICES", type: "FINAL_VERIFICATION", title: "Service request ready for final verification", message: `${row.trackingId} · ${service.shortTitle}`, href: `/admin/services/${id}` });
   }
   if (next === "DECLINED") await completeWork("SERVICES", "SERVICE_REQUEST", id);
 }
@@ -399,7 +397,10 @@ export async function adminFinalAction(id: string, input: any, viewer: CivicView
     await tx.serviceRequestEvent.create({ data: { requestId: id, actorId: viewer.id, action, status: next, note: remarks, visibleToCitizen: true } });
   });
   if (next === "COMPLETED") await completeWork("SERVICES", "SERVICE_REQUEST", id);
-  if (next === "READY_FOR_RELEASE") await createNotification({ userId: row.requesterId, module: "SERVICES", type: "READY_FOR_RELEASE", title: `${service.shortTitle} is ready for release`, message: remarks, href: `/services/requests/${id}` });
+  if (next === "READY_FOR_RELEASE") {
+    await createNotification({ userId: row.requesterId, module: "SERVICES", type: "READY_FOR_RELEASE", title: `${service.shortTitle} approved for pickup`, message: "Your document has been approved. Wait for the releasing office to offer pickup date/time options, then choose your schedule.", href: `/services/requests/${id}` });
+    if (row.assignedStaffId) await createNotification({ userId: row.assignedStaffId, module: "SERVICES", type: "PICKUP_SCHEDULING_REQUIRED", title: "Offer document pickup dates", message: `${row.trackingId} has Admin release approval. Send 2–5 pickup date/time options to the citizen.`, href: `/admin/services/${id}` });
+  }
   else if (next === "COMPLETED") await createNotification({ userId: row.requesterId, module: "SERVICES", type: "COMPLETED", title: `${service.shortTitle} completed`, message: "The LGU verified that your service transaction is complete.", href: `/services/requests/${id}` });
   else if (next === "UNDER_REVIEW" && row.assignedStaffId) await createNotification({ userId: row.assignedStaffId, module: "SERVICES", type: "RETURNED_BY_ADMIN", title: "Request returned for review", message: remarks, href: `/admin/services/${id}` });
 }

@@ -157,3 +157,48 @@ export type ServiceRequestEvent = Prisma.ServiceRequestEventModel
  * 
  */
 export type ServiceAppointment = Prisma.ServiceAppointmentModel
+/**
+ * Model ServicePickupSlot
+ * 
+ */
+export type ServicePickupSlot = Prisma.ServicePickupSlotModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model WorkAssignment
+ * 
+ */
+export type WorkAssignment = Prisma.WorkAssignmentModel
+/**
+ * Model ServiceDefinition
+ * 
+ */
+export type ServiceDefinition = Prisma.ServiceDefinitionModel
+/**
+ * Model ServiceDefinitionAudit
+ * 
+ */
+export type ServiceDefinitionAudit = Prisma.ServiceDefinitionAuditModel
+/**
+ * Model EmergencyHotline
+ * 
+ */
+export type EmergencyHotline = Prisma.EmergencyHotlineModel
+/**
+ * Model EmergencyHotlineProposal
+ * 
+ */
+export type EmergencyHotlineProposal = Prisma.EmergencyHotlineProposalModel
+/**
+ * Model EmergencyAlert
+ * 
+ */
+export type EmergencyAlert = Prisma.EmergencyAlertModel
+/**
+ * Model EmergencyActionLog
+ * 
+ */
+export type EmergencyActionLog = Prisma.EmergencyActionLogModel

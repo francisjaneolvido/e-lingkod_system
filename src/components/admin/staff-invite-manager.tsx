@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Copy, Check, MailPlus, RefreshCw, XCircle, AlertCircle, LoaderCircle, Clock3, ShieldCheck } from "lucide-react";
 import { STAFF_MODULES, STAFF_MODULE_LABELS, type StaffModule } from "@/lib/staff-modules";
+import { LGUOfficeSelect, LGUOfficeRecommendation } from "@/components/admin/lgu-office-select";
 
 type Invite = {
   id: string; name: string; email: string; department: string; designation: string;
@@ -69,9 +70,10 @@ export function StaffInviteManager({ initialInvites, deliveryMode }: { initialIn
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         <label className="text-[11px] font-bold text-[#466c84]">Full name<input className="elb-admin-field mt-1.5" required maxLength={191} value={name} onChange={e => setName(e.target.value)} placeholder="e.g. Juan Dela Cruz" disabled={pending}/></label>
         <label className="text-[11px] font-bold text-[#466c84]">Work email<input className="elb-admin-field mt-1.5" type="email" required maxLength={191} autoComplete="off" value={email} onChange={e => setEmail(e.target.value)} placeholder="staff@example.gov.ph" disabled={pending}/></label>
-        <label className="text-[11px] font-bold text-[#466c84]">Department / office<input className="elb-admin-field mt-1.5" required maxLength={120} value={department} onChange={e => setDepartment(e.target.value)} placeholder="e.g. MDRRMO" disabled={pending}/></label>
+        <label className="text-[11px] font-bold text-[#466c84]">Department / office<LGUOfficeSelect className="elb-admin-field mt-1.5" value={department} onChange={setDepartment} disabled={pending}/></label>
         <label className="text-[11px] font-bold text-[#466c84]">Designation<input className="elb-admin-field mt-1.5" required maxLength={120} value={designation} onChange={e => setDesignation(e.target.value)} placeholder="e.g. Response Officer" disabled={pending}/></label>
       </div>
+      <LGUOfficeRecommendation office={department} modules={modules} onApply={setModules} disabled={pending}/>
       <fieldset disabled={pending}><legend className="mb-2 text-[11px] font-bold text-[#466c84]">Authorized service modules</legend><div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">{STAFF_MODULES.map(module => <label key={module} className={`elb-admin-module-check ${modules.includes(module) ? "elb-admin-module-check--selected" : ""}`}><input className="size-4 accent-[#136f98]" type="checkbox" checked={modules.includes(module)} onChange={event => setModules(event.target.checked ? [...modules, module] : modules.filter(item => item !== module))}/><span>{STAFF_MODULE_LABELS[module]}{!(["REPORTS", "JOBS", "COMMUNITY_DATA"] as string[]).includes(module) && <small className="ml-1 font-normal text-[#92a4b2]">(preview)</small>}</span></label>)}</div></fieldset>
       {error && <p role="alert" className="elb-admin-feedback elb-admin-feedback--error"><AlertCircle size={15}/>{error}</p>}
       {notice && <p role="status" className="elb-admin-feedback"><ShieldCheck size={15}/>{notice}</p>}
