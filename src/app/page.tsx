@@ -8,7 +8,7 @@ import { LandingPage } from "@/features/landing/landing-page";
 export default async function Home() {
   const user = await currentViewer();
   const viewer = user
-    ? { name: user.name, email: user.email, role: user.role }
+    ? { id: user.id, name: user.name, email: user.email, role: user.role }
     : null;
 
   return <LandingPage viewer={viewer} />;

@@ -52,6 +52,10 @@ model User {
   proposedServiceAppointments ServiceAppointment[] @relation("ServiceAppointmentProposedBy")
   verifiedServiceDocuments ServiceRequestDocument[] @relation("ServiceDocumentVerifiedBy")
   approvedServiceReleases ServiceRequest[] @relation("ServiceReleaseApprovedBy")
+  notifications Notification[]
+  workAssignments WorkAssignment[] @relation("WorkAssignmentStaff")
+  createdServiceDefinitions ServiceDefinition[] @relation("ServiceDefinitionCreator")
+  serviceDefinitionAudits ServiceDefinitionAudit[] @relation("ServiceDefinitionAuditActor")
 
   @@map("user")
 }
@@ -696,3 +700,93 @@ model ServiceAppointment {
   @@map("service_appointment")
 }
 
+
+
+// V16 — shared notifications, fair work distribution and configurable Online LGU Services.
+model Notification {
+  id        String   @id @default(cuid()) @db.VarChar(191)
+  userId    String   @db.VarChar(191)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  module    String   @db.VarChar(32)
+  type      String   @db.VarChar(48)
+  title     String   @db.VarChar(180)
+  message   String   @db.Text
+  href      String?  @db.VarChar(500)
+  readAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([userId, readAt, createdAt])
+  @@index([module, createdAt])
+  @@map("notification")
+}
+
+model WorkAssignment {
+  id              String   @id @default(cuid()) @db.VarChar(191)
+  module          String   @db.VarChar(32)
+  entityType      String   @db.VarChar(40)
+  entityId        String   @db.VarChar(191)
+  department      String?  @db.VarChar(150)
+  assignedStaffId String?  @db.VarChar(191)
+  assignedStaff   User?    @relation("WorkAssignmentStaff", fields: [assignedStaffId], references: [id], onDelete: SetNull)
+  status          String   @default("OPEN") @db.VarChar(24)
+  claimDeadline   DateTime?
+  acceptedAt      DateTime?
+  declinedAt      DateTime?
+  completedAt     DateTime?
+  attemptCount    Int      @default(0)
+  lastOfferedAt   DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([module, entityType, entityId])
+  @@index([assignedStaffId, status, claimDeadline])
+  @@index([module, department, status, createdAt])
+  @@map("work_assignment")
+}
+
+model ServiceDefinition {
+  id                   String   @id @default(cuid()) @db.VarChar(191)
+  key                  String   @unique @db.VarChar(80)
+  title                String   @db.VarChar(180)
+  shortTitle           String   @db.VarChar(100)
+  category             String   @db.VarChar(80)
+  processingOffice     String   @db.VarChar(150)
+  departmentCode       String   @db.VarChar(80)
+  description          String   @db.Text
+  actionLabel          String   @db.VarChar(100)
+  intakeMode           String   @db.VarChar(20)
+  appointmentMode      String   @db.VarChar(20)
+  completionMode       String   @db.VarChar(20)
+  purposeLabel         String   @db.VarChar(160)
+  purposePlaceholder   String?  @db.Text
+  feeText              String?  @db.VarChar(160)
+  processingTimeText   String?  @db.VarChar(160)
+  assignmentStrategy   String   @default("AUTO_BALANCE") @db.VarChar(30)
+  acceptTimeoutMinutes Int      @default(120)
+  published            Boolean  @default(false)
+  configJson           String   @db.LongText
+  createdById          String   @db.VarChar(191)
+  createdBy            User     @relation("ServiceDefinitionCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  audits               ServiceDefinitionAudit[]
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@index([published, category, title])
+  @@index([departmentCode, published])
+  @@map("service_definition")
+}
+
+model ServiceDefinitionAudit {
+  id                  String            @id @default(cuid()) @db.VarChar(191)
+  serviceDefinitionId String            @db.VarChar(191)
+  serviceDefinition   ServiceDefinition @relation(fields: [serviceDefinitionId], references: [id], onDelete: Cascade)
+  actorId             String            @db.VarChar(191)
+  actor               User              @relation("ServiceDefinitionAuditActor", fields: [actorId], references: [id], onDelete: Restrict)
+  action              String            @db.VarChar(40)
+  snapshotJson        String            @db.LongText
+  createdAt           DateTime          @default(now())
+
+  @@index([serviceDefinitionId, createdAt])
+  @@index([actorId, createdAt])
+  @@map("service_definition_audit")
+}

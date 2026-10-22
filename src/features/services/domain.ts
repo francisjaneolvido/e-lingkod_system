@@ -36,6 +36,16 @@ export const SERVICE_STATUS_META: Record<ServiceRequestStatus, { label: string; 
   CANCELLED: { label: "Cancelled", citizenLabel: "Cancelled", tone: "bg-slate-100 text-slate-700" },
 };
 
+
+export function citizenServiceStatusLabel(status: ServiceRequestStatus, service?: Pick<OnlineServiceDefinition, "appointmentMode" | "completionMode" | "outcomeLabel">) {
+  if (!service) return SERVICE_STATUS_META[status].citizenLabel;
+  if (status === "SCHEDULED") return `Choose ${appointmentStageLabel(service).toLowerCase()} time`;
+  if (status === "APPOINTMENT_CONFIRMED") return `${appointmentStageLabel(service)} scheduled`;
+  if (status === "APPOINTMENT_COMPLETED") return `${appointmentStageLabel(service)} completed`;
+  if (status === "READY_FOR_RELEASE") return service.outcomeLabel ? `${service.outcomeLabel} ready` : "Ready for release";
+  return SERVICE_STATUS_META[status].citizenLabel;
+}
+
 export function appointmentStageLabel(service: Pick<OnlineServiceDefinition, "appointmentMode">) {
   if (service.appointmentMode === "INSPECTION") return "Inspection";
   if (service.appointmentMode === "INTERVIEW") return "Interview";
@@ -143,12 +153,11 @@ function validateField(field: ServiceField, raw: unknown, forceOptional = false)
 }
 
 type ParseMode = "FULL" | "PARTIAL" | "PRESCREEN";
-export function parseCitizenServiceForm(input: unknown, modeOrLegacy: ParseMode | boolean = "FULL") {
+export function parseCitizenServiceFormForService(input: unknown, service: OnlineServiceDefinition, modeOrLegacy: ParseMode | boolean = "FULL") {
   if (!input || typeof input !== "object" || Array.isArray(input)) throw new CivicError("Invalid service request.");
   const data = input as Record<string, unknown>;
-  const serviceKey = string(data.serviceKey, "Service", 80);
-  const service = serviceByKey(serviceKey);
-  if (!service) throw new CivicError("Choose a valid LGU service.");
+  const serviceKey = string(data.serviceKey ?? service.key, "Service", 80);
+  if (serviceKey !== service.key) throw new CivicError("The selected service does not match this request.");
   const mode: ParseMode = typeof modeOrLegacy === "boolean" ? (modeOrLegacy ? "PARTIAL" : "FULL") : modeOrLegacy;
   const purposeRequired = mode !== "PARTIAL";
   const purpose = string(data.purpose, service.purposeLabel || "Purpose", 1200, purposeRequired, purposeRequired ? 4 : 0);
@@ -165,6 +174,16 @@ export function parseCitizenServiceForm(input: unknown, modeOrLegacy: ParseMode 
     else fields[field.key] = validateField(field, source[field.key]);
   }
   return { service, purpose, fields };
+}
+
+/** Backward-compatible parser for the built-in catalog. Runtime-configured services use parseCitizenServiceFormForService. */
+export function parseCitizenServiceForm(input: unknown, modeOrLegacy: ParseMode | boolean = "FULL") {
+  if (!input || typeof input !== "object" || Array.isArray(input)) throw new CivicError("Invalid service request.");
+  const data = input as Record<string, unknown>;
+  const serviceKey = string(data.serviceKey, "Service", 80);
+  const service = serviceByKey(serviceKey);
+  if (!service) throw new CivicError("Choose a valid LGU service.");
+  return parseCitizenServiceFormForService(input, service, modeOrLegacy);
 }
 
 export function requiredDocumentsComplete(service: OnlineServiceDefinition, uploadedKeys: string[], values: Record<string,string> = {}) {

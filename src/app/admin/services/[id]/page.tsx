@@ -4,10 +4,12 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarClock, CheckCircle2, ClipboardCheck, FileText, ShieldCheck, UserRound } from "lucide-react";
 import { requireModulePage } from "@/lib/access";
 import { adminServiceRequest, serviceStaffOptions } from "@/features/services/server/data";
-import { activeServiceRequirements, conditionMatches, serviceByKey, serviceForClient } from "@/features/services/catalog";
+import { activeServiceRequirements, conditionMatches, serviceForClient } from "@/features/services/catalog";
+import { resolveServiceDefinition } from "@/features/services/server/catalog";
 import { SERVICE_STATUS_META, isServiceStatus } from "@/features/services/domain";
 import { AdminRequestActions } from "@/features/services/components/admin-request-actions";
 import { DocumentReviewList } from "@/features/services/components/document-review-list";
+import { WorkOfferPanel } from "@/components/admin/work-offer-panel";
 
 export const instant = false;
 export const metadata: Metadata = { title: "Service Request | Admin" };
@@ -17,7 +19,7 @@ export default async function AdminServiceDetail({ params }: { params: Promise<{
   const { id } = await params;
   const request = await adminServiceRequest(id, viewer);
   if (!request) notFound();
-  const service = serviceByKey(request.serviceKey);
+  const service = await resolveServiceDefinition(request.serviceKey, true);
   if (!service) notFound();
   const staff = viewer.role === "ADMIN" ? await serviceStaffOptions(service.key) : [];
   const status = isServiceStatus(request.status) ? request.status : "DRAFT";
@@ -29,8 +31,12 @@ export default async function AdminServiceDetail({ params }: { params: Promise<{
   const verificationReady = verifiedRequiredCount === requiredRequirements.length;
   const reviewEnabled = ["SUBMITTED", "ASSIGNED", "UNDER_REVIEW", "ACTION_REQUIRED"].includes(status);
 
+  const offeredToViewer = viewer.role === "STAFF" && request.workAssignment?.assignedStaffId === viewer.id && request.workAssignment.status === "OFFERED";
+
   return <div className="space-y-4">
     <Link href="/admin/services" className="inline-flex items-center gap-2 text-xs font-bold text-[#2b7596]"><ArrowLeft size={15}/> Service Request Desk</Link>
+
+    {offeredToViewer && <WorkOfferPanel offer={request.workAssignment as any}/>}
 
     <section className="rounded-[20px] border border-[#d8e7ee] bg-white px-5 py-4 sm:px-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -51,7 +57,7 @@ export default async function AdminServiceDetail({ params }: { params: Promise<{
         <section className="rounded-[18px] border border-[#dfe9ee] bg-white p-4 sm:p-5">
           <div className="flex flex-wrap items-center justify-between gap-3"><div className="flex items-center gap-2"><FileText size={16} className="text-[#337a98]"/><h2 className="text-xs font-black text-[#214e69]">Requirements verification</h2></div><span className={`rounded-full px-2.5 py-1 text-[9px] font-black ${verificationReady ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>{verifiedRequiredCount}/{requiredRequirements.length} required verified</span></div>
           <p className="mt-1.5 text-[10px] leading-4 text-[#8095a2]">Verify each required upload individually. Use “Replace” with a specific reason when the file is unreadable, inconsistent or insufficient.</p>
-          <div className="mt-4"><DocumentReviewList requestId={request.id} requirements={activeServiceRequirements(service, request.formData || {})} documents={request.documents} reviewEnabled={reviewEnabled}/></div>
+          <div className="mt-4"><DocumentReviewList requestId={request.id} requirements={activeServiceRequirements(service, request.formData || {})} documents={request.documents} reviewEnabled={reviewEnabled && !offeredToViewer}/></div>
         </section>
 
         <section className="rounded-[18px] border border-[#dfe9ee] bg-white p-4 sm:p-5">
@@ -73,7 +79,7 @@ export default async function AdminServiceDetail({ params }: { params: Promise<{
         </section>
       </div>
 
-      <aside className="xl:sticky xl:top-4 xl:self-start"><AdminRequestActions request={request} service={serviceForClient(service)} viewerRole={viewer.role} staff={staff} verificationReady={verificationReady} verifiedRequiredCount={verifiedRequiredCount} requiredDocumentCount={requiredRequirements.length}/></aside>
+      <aside className="xl:sticky xl:top-4 xl:self-start">{!offeredToViewer && <AdminRequestActions request={request} service={serviceForClient(service)} viewerRole={viewer.role} staff={staff} verificationReady={verificationReady} verifiedRequiredCount={verifiedRequiredCount} requiredDocumentCount={requiredRequirements.length}/>}</aside>
     </div>
   </div>;
 }

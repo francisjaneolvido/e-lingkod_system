@@ -5,6 +5,7 @@ import { CivicError } from "@/features/civic/validation";
 import { parseJob } from "@/features/jobs/domain";
 import { parseReviewDetails, validateJobTransition, type JobAction, type JobStatus } from "@/features/jobs/review-workflow";
 import { assertSameOrigin, readJson, json, apiFailure } from "@/features/civic/server/http";
+import { createNotification, notifyAdmins } from "@/lib/notifications/server";
 
 // All mutations go through this role-gated and version-checked API.
 // Staff may submit; only the Super Admin can approve or return a vacancy.
@@ -22,7 +23,7 @@ export async function PATCH(request:Request,{params}:{params:Promise<{id:string}
     if(typeof action!=="string"||!actions.includes(action))throw new CivicError("Invalid opportunity action.",400);
     const jobAction=action as JobAction;
     const result=await prisma.$transaction(async tx=>{
-      const job=await tx.jobOpportunity.findUnique({where:{id},select:{id:true,status:true,version:true,reviewSource:true,expiresAt:true}});
+      const job=await tx.jobOpportunity.findUnique({where:{id},select:{id:true,title:true,createdById:true,status:true,version:true,reviewSource:true,expiresAt:true}});
       if(!job)throw new CivicError("Opportunity not found.",404);
       validateJobTransition(jobAction,job.status as JobStatus,viewer.role==="ADMIN");
       let update:Prisma.JobOpportunityUncheckedUpdateManyInput={};let note:string|null=null;
@@ -66,8 +67,10 @@ export async function PATCH(request:Request,{params}:{params:Promise<{id:string}
       if(changed.count!==1)throw new CivicError("This opportunity changed. Refresh and try again.",409);
       await tx.jobActivity.create({data:{jobId:id,actorId:viewer.id,action:jobAction,note,
         previousStatus:job.status,nextStatus}});
-      return {status:nextStatus};
+      return {status:nextStatus,createdById:job.createdById,title:job.title};
     });
-    return json({success:true,...result});
+    if(jobAction==="SUBMIT_REVIEW") await notifyAdmins({module:"JOBS",type:"JOB_REVIEW",title:"Opportunity ready for verification",message:`${result.title} was submitted for Super Admin review.`,href:`/admin/jobs`});
+    if(jobAction==="APPROVE"||jobAction==="RETURN") await createNotification({userId:result.createdById,module:"JOBS",type:jobAction==="APPROVE"?"JOB_APPROVED":"JOB_RETURNED",title:jobAction==="APPROVE"?"Opportunity published":"Opportunity returned for correction",message:result.title,href:"/admin/jobs"});
+    return json({success:true,status:result.status});
   }catch(error){return apiFailure(error);}
 }

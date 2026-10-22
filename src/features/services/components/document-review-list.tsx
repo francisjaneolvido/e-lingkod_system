@@ -47,7 +47,7 @@ export function DocumentReviewList({ requestId, requirements, documents, reviewE
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2"><strong className="text-xs text-[#315a72]">{requirement.label}</strong>{requirement.required && <span className="rounded-full bg-[#edf4f7] px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-[#5f7d8d]">Required</span>}</div>
             {document ? <div className="mt-2 flex flex-wrap items-center gap-2">
-              <a href={`/api/services/documents/${document.id}`} target="_blank" className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#277594]"><FileText size={13}/>{document.fileName}</a>
+              <a href={`/api/services/documents/${document.id}`} target="_blank" className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#277594]"><FileText size={13}/><span>{document.fileName}</span><span className="rounded-md bg-[#edf5f8] px-1.5 py-0.5 text-[8px] uppercase tracking-wide">Preview / download</span></a>
               <span className={`rounded-full border px-2 py-0.5 text-[9px] font-black ${statusTone[document.verificationStatus] || statusTone.PENDING}`}>{document.verificationStatus === "REJECTED" ? "Needs replacement" : document.verificationStatus}</span>
               {previousCount > 0 && <span className="text-[9px] text-[#8aa0ad]">+{previousCount} earlier upload{previousCount === 1 ? "" : "s"}</span>}
             </div> : <p className={`mt-2 text-[11px] ${requirement.required ? "font-bold text-[#aa5d63]" : "text-[#8a9da8]"}`}>{requirement.required ? "Required document not uploaded" : "Optional document not uploaded"}</p>}

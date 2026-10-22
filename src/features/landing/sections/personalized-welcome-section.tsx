@@ -1,44 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CircleUserRound, ClipboardList, Files, ShieldCheck } from "lucide-react";
-
-export function PersonalizedWelcomeSection({ name }: { name: string }) {
-  const firstName = name.trim().split(/\s+/)[0] || "Citizen";
-
-  return (
-    <section aria-labelledby="citizen-welcome-title" className="border-b border-[#e0eaf2] bg-[#f2f8fd] px-5 py-10 sm:px-8 lg:px-12 lg:py-12">
-      <div className="mx-auto grid max-w-[1344px] gap-7 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-12">
-        <div>
-          <p className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[.13em] text-[#1b729e]">
-            <ShieldCheck size={16} /> Your citizen portal
-          </p>
-          <h2 id="citizen-welcome-title" className="mt-3 text-[clamp(1.65rem,3vw,2.5rem)] font-extrabold tracking-[-.045em] text-[#153b63]">
-            Welcome back, {firstName}!
-          </h2>
-          <p className="mt-3 max-w-xl text-[13px] leading-7 text-[#5c7890]">
-            You&apos;re signed in. Explore the same E-Lingkod Bayan services, and manage your account in one place.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <Link href="/#services" className="inline-flex items-center gap-2 rounded-full bg-[#153b63] px-5 py-3 text-[12px] font-bold text-white transition hover:bg-[#236b9d]">
-              Explore services <ArrowRight size={16} />
-            </Link>
-            <Link href="/account" className="inline-flex items-center gap-2 rounded-full border border-[#c5d9e8] bg-white px-5 py-3 text-[12px] font-bold text-[#153b63] transition hover:bg-[#e7f2fa]">
-              <CircleUserRound size={16} /> My account
-            </Link>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-3" aria-label="Planned account modules">
-          <Link href="/reports" className="rounded-2xl border border-[#dbe8f1] bg-white p-5 shadow-[0_9px_25px_rgba(15,62,102,0.04)] transition hover:border-[#7eafc8]">
-            <span className="inline-flex size-11 items-center justify-center rounded-xl bg-[#EDF5FB] text-[#153B63]"><ClipboardList size={22} strokeWidth={1.8}/></span>
-            <h3 className="mt-4 text-[13px] font-extrabold text-[#153b63]">My reports</h3>
-            <p className="mt-1 text-[11px] leading-5 text-[#668198]">Open your concerns and progress updates <ArrowRight size={12} className="inline" /></p>
-          </Link>
-          <div className="rounded-2xl border border-[#dbe8f1] bg-white p-5 shadow-[0_9px_25px_rgba(15,62,102,0.04)]">
-            <span className="inline-flex size-11 items-center justify-center rounded-xl bg-[#EDF5FB] text-[#153B63]"><Files size={22} strokeWidth={1.8}/></span>
-            <h3 className="mt-4 text-[13px] font-extrabold text-[#153b63]">Applications</h3>
-            <p className="mt-1 text-[11px] leading-5 text-[#668198]">Online applications coming next</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+import { AlertTriangle, ArrowRight, BriefcaseBusiness, CalendarClock, CircleUserRound, ClipboardList, Files, ShieldCheck, UserRoundCheck } from "lucide-react";
+type Snapshot={activeRequests:number;actionRequired:number;upcoming:{scheduledAt:string;location:string;agenda:string;request:{id:string;serviceTitle:string}}|null;communityProfileComplete:boolean;recommendationsEnabled:boolean;publishedJobs:number};
+export function PersonalizedWelcomeSection({name,snapshot}:{name:string;snapshot:Snapshot}){const firstName=name.trim().split(/\s+/)[0]||"Citizen";return <section aria-labelledby="citizen-welcome-title" className="border-b border-[#e0eaf2] bg-[#f2f8fd] px-5 py-8 sm:px-8 lg:px-12"><div className="mx-auto max-w-[1344px]"><div className="flex flex-wrap items-end justify-between gap-4"><div><p className="inline-flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[.13em] text-[#1b729e]"><ShieldCheck size={15}/> Your citizen portal</p><h2 id="citizen-welcome-title" className="mt-2 text-[clamp(1.55rem,3vw,2.25rem)] font-extrabold tracking-[-.045em] text-[#153b63]">Welcome back, {firstName}.</h2><p className="mt-2 text-[12px] leading-6 text-[#5c7890]">See what needs your attention before opening another service.</p></div><Link href="/account" className="inline-flex items-center gap-2 rounded-full border border-[#c5d9e8] bg-white px-4 py-2.5 text-[11px] font-bold text-[#153b63]"><CircleUserRound size={15}/> My account</Link></div><div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-5"><Card href="/services/requests" icon={Files} label="Active LGU requests" value={snapshot.activeRequests}/><Card href="/services/requests" icon={AlertTriangle} label="Action required" value={snapshot.actionRequired} alert={snapshot.actionRequired>0}/><Card href="/community-survey" icon={UserRoundCheck} label="Community profile" value={snapshot.communityProfileComplete?"Complete":"Continue"}/><Card href="/opportunities" icon={BriefcaseBusiness} label={snapshot.recommendationsEnabled?"Recommended opportunities":"Available opportunities"} value={snapshot.publishedJobs}/>{snapshot.upcoming?<Card href={`/services/requests/${snapshot.upcoming.request.id}`} icon={CalendarClock} label="Upcoming appointment" value={new Date(snapshot.upcoming.scheduledAt).toLocaleDateString("en-PH",{month:"short",day:"numeric"})}/>:<Card href="/reports" icon={ClipboardList} label="My civic reports" value="Track"/>}</div>{snapshot.upcoming&&<div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#d7d4ec] bg-white px-4 py-3"><div><strong className="text-[11px] text-[#4b4778]">{snapshot.upcoming.request.serviceTitle}</strong><p className="mt-1 text-[10px] text-[#77749a]">{new Date(snapshot.upcoming.scheduledAt).toLocaleString("en-PH")} · {snapshot.upcoming.location}</p></div><Link href={`/services/requests/${snapshot.upcoming.request.id}`} className="text-[10px] font-extrabold text-[#605a96]">View schedule →</Link></div>}</div></section>}
+function Card({href,icon:Icon,label,value,alert=false}:{href:string;icon:any;label:string;value:number|string;alert?:boolean}){return <Link href={href} className={`rounded-2xl border bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-sm ${alert?"border-[#efc5aa]":"border-[#dbe8f1]"}`}><span className={`grid size-9 place-items-center rounded-xl ${alert?"bg-[#fff1e7] text-[#af6935]":"bg-[#edf5fb] text-[#286e92]"}`}><Icon size={18}/></span><strong className="mt-3 block text-xl text-[#153b63]">{value}</strong><p className="mt-1 text-[10px] font-bold text-[#668198]">{label} <ArrowRight size={10} className="inline"/></p></Link>}

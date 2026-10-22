@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AlertCircle, CalendarClock, CheckCircle2, Circle, Clock3, FileCheck2, Loader2, RotateCcw, Save, Trash2, Upload } from "lucide-react";
+import Link from "next/link";
+import { AlertCircle, CalendarClock, CheckCircle2, Circle, Clock3, FileCheck2, Loader2, Printer, RotateCcw, Save, Trash2, Upload } from "lucide-react";
 import type { SerializableOnlineServiceDefinition, ServiceRequirement } from "../catalog";
 import { conditionMatches } from "../catalog";
-import { citizenStatusGuidance, SERVICE_STATUS_META, serviceStage, serviceStageLabels, type ServiceRequestStatus } from "../domain";
+import { citizenServiceStatusLabel, citizenStatusGuidance, SERVICE_STATUS_META, serviceStage, serviceStageLabels, type ServiceRequestStatus } from "../domain";
 import { ServiceFormFields } from "./service-form-fields";
 
 const input = "mt-1.5 w-full rounded-xl border border-[#cadde7] bg-white px-3.5 py-2.5 text-[12px] text-[#244f69] outline-none transition focus:border-[#4b99b8] focus:ring-2 focus:ring-[#d8eef6]";
@@ -72,7 +73,7 @@ export function CitizenRequestDetail({ request, service }: { request:any; servic
 
   return <div className="space-y-4">
     <section className="rounded-[20px] border border-[#d8e7ee] bg-white px-4 py-4 sm:px-5">
-      <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-[9px] font-extrabold uppercase tracking-[.14em] text-[#2c7998]">{request.trackingId}</p><h1 className="mt-1 text-xl font-black text-[#164361]">{request.serviceTitle}</h1><p className="mt-1 text-[10px] text-[#78909e]">{request.assignedDepartment || service.processingOffice}</p></div><span className={`rounded-full px-3 py-1.5 text-[9px] font-extrabold ${meta.tone}`}>{meta.citizenLabel}</span></div>
+      <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-[9px] font-extrabold uppercase tracking-[.14em] text-[#2c7998]">{request.trackingId}</p><h1 className="mt-1 text-xl font-black text-[#164361]">{request.serviceTitle}</h1><p className="mt-1 text-[10px] text-[#78909e]">{request.assignedDepartment || service.processingOffice}</p></div><div className="flex flex-wrap items-center gap-2"><Link href={`/services/requests/${request.id}/print`} className="inline-flex items-center gap-1.5 rounded-xl border border-[#cedfe7] bg-white px-3 py-2 text-[9px] font-extrabold text-[#3d728b]"><Printer size={12}/> Print summary</Link><span className={`rounded-full px-3 py-1.5 text-[9px] font-extrabold ${meta.tone}`}>{citizenServiceStatusLabel(status, service)}</span></div></div>
       <div className="mt-4 overflow-x-auto pb-1"><div className="flex min-w-max items-center">{labels.map((label,index)=><div key={label} className="flex items-center"><div className="flex items-center gap-1.5"><span className={`grid size-5 place-items-center rounded-full border text-[8px] font-black ${index<=stage?"border-[#2c7d9c] bg-[#2c7d9c] text-white":"border-[#cddde5] bg-white text-[#8ca0ab]"}`}>{index<stage?<CheckCircle2 size={11}/>:index+1}</span><span className={`text-[8px] font-bold ${index<=stage?"text-[#2c607a]":"text-[#91a2ab]"}`}>{label}</span></div>{index<labels.length-1&&<span className={`mx-2 h-px w-7 ${index<stage?"bg-[#75adc0]":"bg-[#dce7ec]"}`}/>}</div>)}</div></div>
     </section>
 

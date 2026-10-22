@@ -5,7 +5,8 @@ import { ArrowRight, Building2, CalendarClock, FileCheck2, Search, ShieldCheck, 
 import { currentViewer } from "@/lib/access";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { ONLINE_SERVICES, SERVICE_CATEGORIES } from "@/features/services/catalog";
+import { SERVICE_CATEGORIES } from "@/features/services/catalog";
+import { publishedServiceCatalog } from "@/features/services/server/catalog";
 
 export const instant = false;
 export const metadata: Metadata = { title: "Online LGU Services | eLingkod Bayan" };
@@ -13,6 +14,7 @@ export const metadata: Metadata = { title: "Online LGU Services | eLingkod Bayan
 export default async function ServicesPage() {
   await connection();
   const viewer = await currentViewer();
+  const catalog = await publishedServiceCatalog();
   const citizen = viewer?.role === "CITIZEN";
   return <><SiteHeader viewer={viewer ? { name:viewer.name, email:viewer.email, role:viewer.role } : null}/><main className="min-h-screen bg-[#f6f9fb]">
     <section className="border-b border-[#d9e8ef] bg-[linear-gradient(120deg,#eef7fb,#fff_62%,#fff8eb)] px-5 py-9 sm:px-8 lg:px-12">
@@ -21,8 +23,8 @@ export default async function ServicesPage() {
       </div>
     </section>
 
-    <section id="catalog" className="scroll-mt-24 px-5 py-8 sm:px-8 lg:px-12"><div className="mx-auto max-w-[1200px]"><div className="mb-5 flex items-end justify-between gap-4"><div><p className="text-[9px] font-extrabold uppercase tracking-[.15em] text-[#2a7a9a]">SERVICE CATALOG</p><h2 className="mt-1 text-xl font-black text-[#164361]">What do you need today?</h2></div><span className="hidden items-center gap-2 text-[10px] text-[#78909e] sm:flex"><Search size={13}/> {ONLINE_SERVICES.length} configured services</span></div>
-      {SERVICE_CATEGORIES.map(category => <section key={category} className="mb-7"><div className="mb-2.5 flex items-center gap-2"><span className="h-4 w-1 rounded-full bg-[#4d8ba5]"/><h3 className="text-xs font-extrabold text-[#52748a]">{category}</h3></div><div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">{ONLINE_SERVICES.filter(service => service.category === category).map(service => { const Icon = service.icon; return <Link key={service.key} href={`/services/${service.key}`} className="group flex min-h-[170px] flex-col rounded-[18px] border border-[#dce8ee] bg-white p-4 transition hover:-translate-y-0.5 hover:border-[#9bc9da] hover:shadow-[0_12px_28px_rgba(39,92,120,.07)]"><div className="flex items-start justify-between gap-3"><span className={`grid size-9 place-items-center rounded-xl ${service.accent}`}><Icon size={18}/></span><span className={`rounded-full px-2 py-1 text-[8px] font-black ${service.intakeMode === "PRESCREEN" ? "bg-amber-50 text-amber-700" : "bg-emerald-50 text-emerald-700"}`}>{service.intakeMode === "PRESCREEN" ? "SCREENING FIRST" : "START ONLINE"}</span></div><h4 className="mt-3 text-[14px] font-black leading-5 text-[#1c4c69]">{service.title}</h4><p className="mt-1.5 flex-1 text-[10px] leading-4 text-[#748c9b]">{service.description}</p><div className="mt-3 flex items-end justify-between gap-3 border-t border-[#edf2f5] pt-3"><span className="line-clamp-2 text-[8px] leading-3 text-[#8198a6]">{service.processingOffice}</span><ArrowRight size={14} className="shrink-0 text-[#337a99] transition group-hover:translate-x-1"/></div></Link>; })}</div></section>)}
+    <section id="catalog" className="scroll-mt-24 px-5 py-8 sm:px-8 lg:px-12"><div className="mx-auto max-w-[1200px]"><div className="mb-5 flex items-end justify-between gap-4"><div><p className="text-[9px] font-extrabold uppercase tracking-[.15em] text-[#2a7a9a]">SERVICE CATALOG</p><h2 className="mt-1 text-xl font-black text-[#164361]">What do you need today?</h2></div><span className="hidden items-center gap-2 text-[10px] text-[#78909e] sm:flex"><Search size={13}/> {catalog.length} available services</span></div>
+      {SERVICE_CATEGORIES.map(category => <section key={category} className="mb-7"><div className="mb-2.5 flex items-center gap-2"><span className="h-4 w-1 rounded-full bg-[#4d8ba5]"/><h3 className="text-xs font-extrabold text-[#52748a]">{category}</h3></div><div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">{catalog.filter(service => service.category === category).map(service => { const Icon = service.icon; return <Link key={service.key} href={`/services/${service.key}`} className="group flex min-h-[170px] flex-col rounded-[18px] border border-[#dce8ee] bg-white p-4 transition hover:-translate-y-0.5 hover:border-[#9bc9da] hover:shadow-[0_12px_28px_rgba(39,92,120,.07)]"><div className="flex items-start justify-between gap-3"><span className={`grid size-9 place-items-center rounded-xl ${service.accent}`}><Icon size={18}/></span><span className={`rounded-full px-2 py-1 text-[8px] font-black ${service.intakeMode === "PRESCREEN" ? "bg-amber-50 text-amber-700" : "bg-emerald-50 text-emerald-700"}`}>{service.intakeMode === "PRESCREEN" ? "SCREENING FIRST" : "START ONLINE"}</span></div><h4 className="mt-3 text-[14px] font-black leading-5 text-[#1c4c69]">{service.title}</h4><p className="mt-1.5 flex-1 text-[10px] leading-4 text-[#748c9b]">{service.description}</p><div className="mt-3 flex items-end justify-between gap-3 border-t border-[#edf2f5] pt-3"><span className="line-clamp-2 text-[8px] leading-3 text-[#8198a6]">{service.processingOffice}</span><ArrowRight size={14} className="shrink-0 text-[#337a99] transition group-hover:translate-x-1"/></div></Link>; })}</div></section>)}
     </div></section>
   </main><SiteFooter/></>;
 }

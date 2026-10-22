@@ -7,6 +7,8 @@ import { CivicError } from "../validation";
 import { MAX_PHOTOS, MAX_PHOTO_BYTES } from "../config";
 import { parseResolutionDecision, parseResolutionRemarks, parseResolutionVersion } from "../resolution-validation";
 import type { CivicViewer } from "../types";
+import { completeWork, requireAcceptedWork } from "@/lib/work-distribution/server";
+import { createNotification, notifyAdmins } from "@/lib/notifications/server";
 
 // All image bytes are decoded and re-encoded. This strips device metadata and
 // rejects non-image or oversized/multi-frame files rather than trusting MIME.
@@ -33,10 +35,11 @@ async function prepareProofPhotos(form: FormData) {
 
 export async function submitResolution(reportId: string, form: FormData, viewer: CivicViewer) {
   if (viewer.role !== "STAFF" || !(await hasModuleAccess(viewer, "REPORTS"))) throw new CivicError("Only the assigned LGU Staff member can submit resolution proof.", 403);
+  await requireAcceptedWork(viewer, "REPORTS", "CIVIC_REPORT", reportId);
   const remarks = parseResolutionRemarks(form.get("remarks"));
   const version = parseResolutionVersion(form.get("version"));
   const photos = await prepareProofPhotos(form);
-  return prisma.$transaction(async tx => {
+  const result = await prisma.$transaction(async tx => {
     const staff = await tx.user.findFirst({
       where: { id: viewer.id, role: "STAFF", department: viewer.department, staffPermissions: { some: { module: "REPORTS" } } },
       select: { department: true },
@@ -66,16 +69,18 @@ export async function submitResolution(reportId: string, form: FormData, viewer:
     } });
     return { ok: true, submissionId: submission.id };
   });
+  await notifyAdmins({ module: "REPORTS", type: "RESOLUTION_VERIFICATION", title: "Civic resolution ready for verification", message: "Assigned staff submitted photographic proof for Super Admin verification.", href: `/admin/reports/${reportId}` });
+  return result;
 }
 
 export async function reviewResolution(reportId: string, body: unknown, viewer: CivicViewer) {
   if (viewer.role !== "ADMIN") throw new CivicError("Only the Super Admin can verify a resolution.", 403);
   const input = parseResolutionDecision(body);
-  return prisma.$transaction(async tx => {
+  const result = await prisma.$transaction(async tx => {
     const admin = await tx.user.findFirst({ where: { id: viewer.id, role: "ADMIN" }, select: { id: true } });
     if (!admin) throw new CivicError("Super Admin access is required.", 403);
     const report = await tx.civicReport.findUnique({
-      where: { id: reportId }, select: { version: true, status: true, assignedOffice: true, assignedStaffId: true, priority: true },
+      where: { id: reportId }, select: { version: true, status: true, assignedOffice: true, assignedStaffId: true, priority: true, reporterId: true },
     });
     if (!report) throw new CivicError("Report not found.", 404);
     if (report.version !== input.version) throw new CivicError("Report changed. Refresh before verifying this submission.", 409);
@@ -108,6 +113,10 @@ export async function reviewResolution(reportId: string, body: unknown, viewer: 
       assignedStaffId: report.assignedStaffId, priority: report.priority,
       action: "REVIEW_NOTE", visibility: "INTERNAL", note: input.note,
     } });
-    return { ok: true, status };
+    return { ok: true, status, reporterId: report.reporterId, assignedStaffId: report.assignedStaffId };
   });
+  if (result.status === "RESOLVED") await completeWork("REPORTS", "CIVIC_REPORT", reportId);
+  await createNotification({ userId: result.reporterId, module: "REPORTS", type: result.status === "RESOLVED" ? "REPORT_RESOLVED" : "REPORT_CONTINUING", title: result.status === "RESOLVED" ? "Civic report resolved" : "LGU review will continue", message: result.status === "RESOLVED" ? "Super Admin verified the submitted resolution evidence." : "Super Admin returned the resolution for additional LGU work.", href: `/reports/${reportId}` });
+  if (result.status !== "RESOLVED" && result.assignedStaffId) await createNotification({ userId: result.assignedStaffId, module: "REPORTS", type: "RESOLUTION_RETURNED", title: "Resolution returned for more work", message: input.note || "Super Admin requested additional action.", href: `/admin/reports/${reportId}` });
+  return { ok: true, status: result.status };
 }

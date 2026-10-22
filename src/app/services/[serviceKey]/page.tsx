@@ -5,7 +5,8 @@ import { ArrowLeft, CalendarClock, CheckCircle2, FileUp, Info, ShieldCheck } fro
 import { currentViewer } from "@/lib/access";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { serviceByKey, serviceForClient } from "@/features/services/catalog";
+import { serviceForClient } from "@/features/services/catalog";
+import { resolveServiceDefinition } from "@/features/services/server/catalog";
 import { ServiceStartForm } from "@/features/services/components/service-start-form";
 
 export const instant = false;
@@ -13,7 +14,7 @@ export const metadata: Metadata = { title: "LGU Service | eLingkod Bayan" };
 
 export default async function ServicePage({ params }: { params: Promise<{serviceKey:string}> }) {
   const { serviceKey } = await params;
-  const service = serviceByKey(serviceKey);
+  const service = await resolveServiceDefinition(serviceKey);
   if (!service) notFound();
   const viewer = await currentViewer();
   const citizen = viewer?.role === "CITIZEN";

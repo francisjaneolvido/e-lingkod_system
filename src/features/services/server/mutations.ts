@@ -4,12 +4,15 @@ import type { CivicViewer } from "@/features/civic/types";
 import { CivicError } from "@/features/civic/validation";
 import {
   createTrackingId,
-  parseCitizenServiceForm,
+  parseCitizenServiceFormForService,
   requiredDocumentsComplete,
   requiredDocumentsSubmittable,
   requiredDocumentsVerified,
 } from "../domain";
-import { activeServiceRequirements, departmentMatchesService, serviceByKey } from "../catalog";
+import { activeServiceRequirements, departmentMatchesService } from "../catalog";
+import { resolveServiceDefinition } from "./catalog";
+import { autoOfferServiceRequest, completeWork, manualAssignWork, requireAcceptedWork } from "@/lib/work-distribution/server";
+import { createNotification, notifyAdmins } from "@/lib/notifications/server";
 
 function canEditCitizen(status: string) { return ["DRAFT", "FORM_OPEN", "ACTION_REQUIRED"].includes(status); }
 
@@ -28,12 +31,12 @@ export async function createCitizenServiceRequest(input: unknown, viewer: CivicV
   if (!input || typeof input !== "object" || Array.isArray(input)) throw new CivicError("Invalid service request.");
   const raw = input as Record<string, unknown>;
   const key = typeof raw.serviceKey === "string" ? raw.serviceKey : "";
-  const service = serviceByKey(key);
+  const service = await resolveServiceDefinition(key);
   if (!service) throw new CivicError("Choose a valid LGU service.");
-  const parsed = parseCitizenServiceForm(input, service.intakeMode === "PRESCREEN" ? "PRESCREEN" : "PARTIAL");
+  const parsed = parseCitizenServiceFormForService(input, service, service.intakeMode === "PRESCREEN" ? "PRESCREEN" : "PARTIAL");
   const status = service.intakeMode === "PRESCREEN" ? "FOR_TRIAGE" : "DRAFT";
   const trackingId = createTrackingId();
-  return prisma.$transaction(async tx => {
+  const created = await prisma.$transaction(async tx => {
     const created = await tx.serviceRequest.create({
       data: {
         trackingId,
@@ -60,14 +63,22 @@ export async function createCitizenServiceRequest(input: unknown, viewer: CivicV
     });
     return created;
   });
+  if (status === "FOR_TRIAGE") {
+    if ((service.assignmentStrategy || "AUTO_BALANCE") === "AUTO_BALANCE") {
+      const offered = await autoOfferServiceRequest(created.id, service, [], service.acceptTimeoutMinutes);
+      if (!offered) await notifyAdmins({ module: "SERVICES", type: "UNASSIGNED_SERVICE", title: "Service request needs assignment", message: `${service.shortTitle} has no eligible staff available for automatic assignment.`, href: `/admin/services/${created.id}` });
+    } else await notifyAdmins({ module: "SERVICES", type: "UNASSIGNED_SERVICE", title: "Service request needs assignment", message: `${service.shortTitle} is configured for manual assignment.`, href: `/admin/services/${created.id}` });
+  }
+  await createNotification({ userId: viewer.id, module: "SERVICES", type: "REQUEST_RECEIVED", title: `${service.shortTitle} request saved`, message: status === "FOR_TRIAGE" ? "Your initial intake was received for LGU screening." : "Your draft was saved. You can continue it anytime.", href: `/services/requests/${created.id}` });
+  return created;
 }
 
 export async function updateCitizenServiceRequest(id: string, input: unknown, viewer: CivicViewer, partial = false) {
   const row = await ownedRequest(id, viewer);
   if (!canEditCitizen(row.status)) throw new CivicError("This request can no longer be edited at its current stage.", 409);
-  const service = serviceByKey(row.serviceKey);
+  const service = await resolveServiceDefinition(row.serviceKey, true);
   if (!service) throw new CivicError("This service configuration is unavailable.", 409);
-  const parsed = parseCitizenServiceForm({ ...((input && typeof input === "object") ? input : {}), serviceKey: row.serviceKey }, partial ? "PARTIAL" : "FULL");
+  const parsed = parseCitizenServiceFormForService({ ...((input && typeof input === "object") ? input : {}), serviceKey: row.serviceKey }, service, partial ? "PARTIAL" : "FULL");
   await prisma.$transaction(async tx => {
     await tx.serviceRequest.update({ where: { id }, data: { purpose: parsed.purpose, formDataJson: JSON.stringify(parsed.fields), version: { increment: 1 } } });
     if (!partial) await tx.serviceRequestEvent.create({ data: { requestId: id, actorId: viewer.id, action: "FORM_UPDATED", status: row.status, note: "Citizen updated the service request information.", visibleToCitizen: true } });
@@ -77,11 +88,11 @@ export async function updateCitizenServiceRequest(id: string, input: unknown, vi
 
 export async function submitCitizenServiceRequest(id: string, viewer: CivicViewer) {
   const row = await ownedRequest(id, viewer);
-  const service = serviceByKey(row.serviceKey);
+  const service = await resolveServiceDefinition(row.serviceKey, true);
   if (!service) throw new CivicError("This service configuration is unavailable.", 409);
   if (!["DRAFT", "FORM_OPEN", "ACTION_REQUIRED"].includes(row.status)) throw new CivicError("This request is not ready for submission.", 409);
   const form = JSON.parse(row.formDataJson || "{}");
-  parseCitizenServiceForm({ serviceKey: row.serviceKey, purpose: row.purpose, fields: form }, "FULL");
+  parseCitizenServiceFormForService({ serviceKey: row.serviceKey, purpose: row.purpose, fields: form }, service, "FULL");
   const keys = row.documents.map(document => document.requirementKey);
   if (!requiredDocumentsComplete(service, keys, form)) throw new CivicError("Upload all currently required documents before submitting for review.", 400);
   if (!requiredDocumentsSubmittable(service, row.documents, form)) throw new CivicError("Replace any required document marked as needing correction before submitting again.", 400);
@@ -89,6 +100,11 @@ export async function submitCitizenServiceRequest(id: string, viewer: CivicViewe
     await tx.serviceRequest.update({ where: { id }, data: { status: "SUBMITTED", submittedAt: new Date(), version: { increment: 1 } } });
     await tx.serviceRequestEvent.create({ data: { requestId: id, actorId: viewer.id, action: "SUBMITTED", status: "SUBMITTED", note: "Request form and required documents submitted for LGU review.", visibleToCitizen: true } });
   });
+  if ((service.assignmentStrategy || "AUTO_BALANCE") === "AUTO_BALANCE") {
+    const offered = await autoOfferServiceRequest(id, service, [], service.acceptTimeoutMinutes);
+    if (!offered) await notifyAdmins({ module: "SERVICES", type: "UNASSIGNED_SERVICE", title: "Service request needs assignment", message: `${service.shortTitle} could not be auto-assigned because no eligible staff are available.`, href: `/admin/services/${id}` });
+  } else await notifyAdmins({ module: "SERVICES", type: "UNASSIGNED_SERVICE", title: "Service request needs assignment", message: `${service.shortTitle} is waiting for manual routing.`, href: `/admin/services/${id}` });
+  await createNotification({ userId: viewer.id, module: "SERVICES", type: "REQUEST_SUBMITTED", title: "Request received", message: `${service.shortTitle} was submitted and is now entering the LGU queue.`, href: `/services/requests/${id}` });
   return { success: true };
 }
 
@@ -100,12 +116,13 @@ export async function cancelCitizenServiceRequest(id: string, viewer: CivicViewe
     await tx.serviceRequest.update({ where: { id }, data: { status: "CANCELLED", version: { increment: 1 } } });
     await tx.serviceRequestEvent.create({ data: { requestId: id, actorId: viewer.id, action: "CANCELLED", status: "CANCELLED", note: "Request cancelled by the citizen. Any active schedule options were closed.", visibleToCitizen: true } });
   });
+  await completeWork("SERVICES", "SERVICE_REQUEST", id);
 }
 
 export async function uploadServiceDocument(id: string, form: FormData, viewer: CivicViewer) {
   const row = await ownedRequest(id, viewer);
   if (!canEditCitizen(row.status)) throw new CivicError("Documents cannot be changed at this stage.", 409);
-  const service = serviceByKey(row.serviceKey);
+  const service = await resolveServiceDefinition(row.serviceKey, true);
   if (!service) throw new CivicError("Service unavailable.", 409);
   const values = JSON.parse(row.formDataJson || "{}");
   const key = String(form.get("requirementKey") || "");
@@ -124,6 +141,7 @@ export async function uploadServiceDocument(id: string, form: FormData, viewer: 
     });
     await tx.serviceRequestEvent.create({ data: { requestId: id, actorId: viewer.id, action: "DOCUMENT_UPLOADED", status: row.status, note: `Uploaded requirement: ${requirement.label}.`, visibleToCitizen: true } });
   });
+  if (row.assignedStaffId) await createNotification({ userId: row.assignedStaffId, module: "SERVICES", type: "CITIZEN_RESUBMISSION", title: "Citizen uploaded a requirement", message: `${requirement.label} was uploaded for ${row.trackingId}.`, href: `/admin/services/${id}` });
   return { success: true };
 }
 
@@ -149,7 +167,7 @@ async function adminRequest(id: string, viewer: CivicViewer) {
   });
   if (!row) throw new CivicError("Service request not found.", 404);
   if (viewer.role === "STAFF") {
-    const service = serviceByKey(row.serviceKey);
+    const service = await resolveServiceDefinition(row.serviceKey, true);
     if (!service) throw new CivicError("Service configuration is unavailable.", 409);
     const departmentAccess = departmentMatchesService(service, viewer.department);
     if (row.assignedStaffId !== viewer.id && !departmentAccess) throw new CivicError("This request is not assigned to your service queue.", 403);
@@ -167,7 +185,7 @@ function note(input: unknown, label = "Remarks", min = 4, max = 1800) {
 export async function assignServiceRequest(id: string, input: any, viewer: CivicViewer) {
   if (viewer.role !== "ADMIN") throw new CivicError("Only the Super Admin can assign service requests.", 403);
   const row = await adminRequest(id, viewer);
-  const service = serviceByKey(row.serviceKey);
+  const service = await resolveServiceDefinition(row.serviceKey, true);
   if (!service) throw new CivicError("Service configuration is unavailable.", 409);
   const staffId = typeof input?.staffId === "string" ? input.staffId : "";
   const staff = await prisma.user.findFirst({
@@ -181,10 +199,13 @@ export async function assignServiceRequest(id: string, input: any, viewer: Civic
     await tx.serviceRequest.update({ where: { id }, data: { assignedStaffId: staff.id, assignedDepartment: service.processingOffice, status: nextStatus, version: { increment: 1 } } });
     await tx.serviceRequestEvent.create({ data: { requestId: id, actorId: viewer.id, action: "ASSIGNED", status: nextStatus, note: `Assigned to ${staff.name} · ${service.processingOffice}.`, visibleToCitizen: true } });
   });
+  await manualAssignWork({ module: "SERVICES", entityType: "SERVICE_REQUEST", entityId: id, department: service.departmentCode, staffId: staff.id });
+  await createNotification({ userId: staff.id, module: "SERVICES", type: "MANUAL_ASSIGNMENT", title: `${service.shortTitle} assigned to you`, message: "Super Admin assigned this request directly to you.", href: `/admin/services/${id}` });
 }
 
 export async function verifyServiceDocument(requestId: string, documentId: string, input: any, viewer: CivicViewer) {
   const row = await adminRequest(requestId, viewer);
+  if (viewer.role === "STAFF") await requireAcceptedWork(viewer, "SERVICES", "SERVICE_REQUEST", requestId);
   if (!["SUBMITTED", "ASSIGNED", "UNDER_REVIEW", "ACTION_REQUIRED"].includes(row.status)) throw new CivicError("Documents can only be verified during requirements review.", 409);
   const document = await prisma.serviceRequestDocument.findFirst({ where: { id: documentId, requestId }, select: { id: true, requirementLabel: true } });
   if (!document) throw new CivicError("Document not found.", 404);
@@ -204,6 +225,7 @@ export async function verifyServiceDocument(requestId: string, documentId: strin
       await tx.serviceRequest.update({ where: { id: requestId }, data: { status: "ACTION_REQUIRED", version: { increment: 1 } } });
       await tx.serviceRequestEvent.create({ data: { requestId, actorId: viewer.id, action: "DOCUMENT_REJECTED", status: "ACTION_REQUIRED", note: `${document.requirementLabel} needs replacement or correction: ${reason}`, visibleToCitizen: true } });
     });
+    await createNotification({ userId: row.requesterId, module: "SERVICES", type: "ACTION_REQUIRED", title: "Service request needs your action", message: `${document.requirementLabel} needs replacement: ${reason}`, href: `/services/requests/${requestId}` });
     return;
   }
   throw new CivicError("Choose a valid document verification action.");
@@ -211,9 +233,10 @@ export async function verifyServiceDocument(requestId: string, documentId: strin
 
 export async function staffServiceAction(id: string, input: any, viewer: CivicViewer) {
   const row = await adminRequest(id, viewer);
+  if (viewer.role === "STAFF") await requireAcceptedWork(viewer, "SERVICES", "SERVICE_REQUEST", id);
   const action = String(input?.action || "");
   const remarks = typeof input?.note === "string" ? input.note.trim() : "";
-  const service = serviceByKey(row.serviceKey);
+  const service = await resolveServiceDefinition(row.serviceKey, true);
   if (!service) throw new CivicError("Service configuration is unavailable.", 409);
   let next = row.status;
   let eventNote = "";
@@ -235,7 +258,7 @@ export async function staffServiceAction(id: string, input: any, viewer: CivicVi
   } else if (action === "VALIDATE") {
     if (!["SUBMITTED", "ASSIGNED", "UNDER_REVIEW"].includes(row.status)) throw new CivicError("This request cannot be validated at this stage.", 409);
     const values = JSON.parse(row.formDataJson || "{}");
-    parseCitizenServiceForm({ serviceKey: row.serviceKey, purpose: row.purpose, fields: values }, "FULL");
+    parseCitizenServiceFormForService({ serviceKey: row.serviceKey, purpose: row.purpose, fields: values }, service, "FULL");
     if (!requiredDocumentsVerified(service, row.documents, values)) throw new CivicError("Verify every currently required document before validating the request.", 409);
     next = "VALIDATED";
     eventNote = remarks || "Form information and required documents were validated by LGU staff.";
@@ -277,12 +300,21 @@ export async function staffServiceAction(id: string, input: any, viewer: CivicVi
     if (next === "DECLINED") await tx.serviceAppointment.updateMany({ where: { requestId: id, status: { in: ["PROPOSED", "CONFIRMED", "CHANGE_REQUESTED"] } }, data: { status: "CANCELLED" } });
     await tx.serviceRequestEvent.create({ data: { requestId: id, actorId: viewer.id, action, status: next, note: eventNote, visibleToCitizen: true } });
   });
+  if (["OPEN_FORM", "REQUEST_CORRECTION", "DECLINE"].includes(action)) {
+    const title = action === "OPEN_FORM" ? "Continue your LGU request" : action === "REQUEST_CORRECTION" ? "Service request needs your action" : "Service request update";
+    await createNotification({ userId: row.requesterId, module: "SERVICES", type: action === "REQUEST_CORRECTION" ? "ACTION_REQUIRED" : action, title, message: eventNote, href: `/services/requests/${id}` });
+  }
+  if (action === "RECOMMEND_FINAL" || action === "MARK_RELEASED") {
+    await notifyAdmins({ module: "SERVICES", type: action === "RECOMMEND_FINAL" ? "FINAL_VERIFICATION" : "RELEASE_RECORDED", title: action === "RECOMMEND_FINAL" ? "Service request ready for final verification" : "Release recorded — verify completion", message: `${row.trackingId} · ${service.shortTitle}`, href: `/admin/services/${id}` });
+  }
+  if (next === "DECLINED") await completeWork("SERVICES", "SERVICE_REQUEST", id);
 }
 
 type SlotInput = { scheduledAt?: unknown };
 export async function scheduleServiceAppointment(id: string, input: any, viewer: CivicViewer) {
   const row = await adminRequest(id, viewer);
-  const service = serviceByKey(row.serviceKey);
+  if (viewer.role === "STAFF") await requireAcceptedWork(viewer, "SERVICES", "SERVICE_REQUEST", id);
+  const service = await resolveServiceDefinition(row.serviceKey, true);
   if (!service || service.appointmentMode === "NONE") throw new CivicError("This service does not use scheduling in the current workflow.", 409);
   if (row.status !== "VALIDATED") throw new CivicError("The request must be validated before schedule options can be offered.", 409);
   const rawSlots: SlotInput[] = Array.isArray(input?.slots) ? input.slots : [];
@@ -302,6 +334,7 @@ export async function scheduleServiceAppointment(id: string, input: any, viewer:
     await tx.serviceRequest.update({ where: { id }, data: { status: "SCHEDULED", version: { increment: 1 } } });
     await tx.serviceRequestEvent.create({ data: { requestId: id, actorId: viewer.id, action: "SCHEDULE_OPTIONS_SENT", status: "SCHEDULED", note: `${slots.length} schedule options were offered for ${service.appointmentMode === "INSPECTION" ? "inspection" : "the scheduled LGU activity"}.`, visibleToCitizen: true } });
   });
+  await createNotification({ userId: row.requesterId, module: "SERVICES", type: "SCHEDULE_AVAILABLE", title: "Choose your LGU schedule", message: `${slots.length} schedule options are now available for ${service.shortTitle}.`, href: `/services/requests/${id}` });
 }
 
 export async function citizenAppointmentAction(requestId: string, appointmentId: string, input: any, viewer: CivicViewer) {
@@ -317,6 +350,7 @@ export async function citizenAppointmentAction(requestId: string, appointmentId:
       await tx.serviceRequest.update({ where: { id: requestId }, data: { status: "APPOINTMENT_CONFIRMED", version: { increment: 1 } } });
       await tx.serviceRequestEvent.create({ data: { requestId, actorId: viewer.id, action: "APPOINTMENT_SELECTED", status: "APPOINTMENT_CONFIRMED", note: `Citizen selected the schedule on ${appointment.scheduledAt.toLocaleString("en-PH")}.`, visibleToCitizen: true } });
     });
+    if (row.assignedStaffId) await createNotification({ userId: row.assignedStaffId, module: "SERVICES", type: "SCHEDULE_CONFIRMED", title: "Citizen selected a schedule", message: `A citizen confirmed ${appointment.scheduledAt.toLocaleString("en-PH")}.`, href: `/admin/services/${requestId}` });
   } else if (action === "REQUEST_CHANGE") {
     if (row.status !== "SCHEDULED" || appointment.status !== "PROPOSED") throw new CivicError("Schedule changes are only available while choosing from active options.", 409);
     const reason = note(input?.note, "Reason for schedule change", 4, 800);
@@ -325,6 +359,7 @@ export async function citizenAppointmentAction(requestId: string, appointmentId:
       await tx.serviceRequest.update({ where: { id: requestId }, data: { status: "VALIDATED", version: { increment: 1 } } });
       await tx.serviceRequestEvent.create({ data: { requestId, actorId: viewer.id, action: "SCHEDULE_CHANGE_REQUESTED", status: "VALIDATED", note: `Citizen requested a new set of schedule options: ${reason}`, visibleToCitizen: true } });
     });
+    if (row.assignedStaffId) await createNotification({ userId: row.assignedStaffId, module: "SERVICES", type: "SCHEDULE_CHANGE", title: "Citizen requested new schedule options", message: reason, href: `/admin/services/${requestId}` });
   } else {
     throw new CivicError("Choose a valid schedule response.");
   }
@@ -333,7 +368,7 @@ export async function citizenAppointmentAction(requestId: string, appointmentId:
 export async function adminFinalAction(id: string, input: any, viewer: CivicViewer) {
   if (viewer.role !== "ADMIN") throw new CivicError("Super Admin verification is required.", 403);
   const row = await adminRequest(id, viewer);
-  const service = serviceByKey(row.serviceKey);
+  const service = await resolveServiceDefinition(row.serviceKey, true);
   if (!service) throw new CivicError("Service configuration is unavailable.", 409);
   const action = String(input?.action || "");
   const remarks = note(input?.note, "Verification remarks", 8, 1500);
@@ -363,4 +398,8 @@ export async function adminFinalAction(id: string, input: any, viewer: CivicView
     await tx.serviceRequest.update({ where: { id }, data: { status: next, finalNote: remarks, ...(action === "APPROVE_RELEASE" ? { releaseApprovedAt: new Date(), releaseApprovedById: viewer.id } : {}), completedAt: next === "COMPLETED" ? new Date() : null, version: { increment: 1 } } });
     await tx.serviceRequestEvent.create({ data: { requestId: id, actorId: viewer.id, action, status: next, note: remarks, visibleToCitizen: true } });
   });
+  if (next === "COMPLETED") await completeWork("SERVICES", "SERVICE_REQUEST", id);
+  if (next === "READY_FOR_RELEASE") await createNotification({ userId: row.requesterId, module: "SERVICES", type: "READY_FOR_RELEASE", title: `${service.shortTitle} is ready for release`, message: remarks, href: `/services/requests/${id}` });
+  else if (next === "COMPLETED") await createNotification({ userId: row.requesterId, module: "SERVICES", type: "COMPLETED", title: `${service.shortTitle} completed`, message: "The LGU verified that your service transaction is complete.", href: `/services/requests/${id}` });
+  else if (next === "UNDER_REVIEW" && row.assignedStaffId) await createNotification({ userId: row.assignedStaffId, module: "SERVICES", type: "RETURNED_BY_ADMIN", title: "Request returned for review", message: remarks, href: `/admin/services/${id}` });
 }

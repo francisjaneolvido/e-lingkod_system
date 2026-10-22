@@ -11,6 +11,8 @@ import { formatReportDate, STATUS_META } from "@/features/civic/config";
 import { STAFF_MODULE_LABELS, type StaffModule } from "@/lib/staff-modules";
 import type { CivicViewer } from "@/features/civic/types";
 import { serviceDashboardCounts } from "@/features/services/server/data";
+import { staffWorkOffers } from "@/lib/work-distribution/server";
+import { WorkOfferPanel } from "@/components/admin/work-offer-panel";
 
 const destinations: Record<StaffModule, { href: string; description: string; icon: typeof ClipboardList; live: boolean }> = {
   REPORTS: { href: "/admin/reports", description: "Review, claim and resolve routed cases", icon: ClipboardList, live: true },
@@ -53,14 +55,15 @@ export async function StaffWorkspace({ viewer, modules }: { viewer: CivicViewer;
     : [0, 0, 0, 0, [], []] as const;
 
   const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-  const [myDraftJobs, returnedJobs, recentSurveys, importIssues] = await Promise.all([
+  const [myDraftJobs, returnedJobs, recentSurveys, importIssues, workOffers] = await Promise.all([
     canManageJobs ? prisma.jobOpportunity.count({ where: { createdById: viewer.id, status: "DRAFT" } }) : Promise.resolve(0),
     canManageJobs ? prisma.jobOpportunity.count({ where: { createdById: viewer.id, status: "RETURNED" } }) : Promise.resolve(0),
     canViewInsights ? prisma.communitySurvey.count({ where: { status: "SUBMITTED", consentAggregated: true, updatedAt: { gte: since } } }) : Promise.resolve(0),
     canManageCommunityData ? prisma.communityImportBatch.count({ where: { status: "ACTIVE", OR: [{ warningCount: { gt: 0 } }, { invalidCount: { gt: 0 } }, { duplicateCount: { gt: 0 } }] } }) : Promise.resolve(0),
+    staffWorkOffers(viewer.id),
   ]);
 
-  const serviceCounts = canManageServices ? await serviceDashboardCounts(viewer) : {newCount:0,assignedCount:0,actionCount:0,scheduledCount:0,finalCount:0,completedCount:0};
+  const serviceCounts = canManageServices ? await serviceDashboardCounts(viewer) : {newCount:0,assignedCount:0,actionCount:0,scheduledCount:0,finalCount:0,completedCount:0,offeredCount:0};
 
   const serviceTasks: FocusTask[] = canManageServices ? [
     { title: "New service requests", value: serviceCounts.newCount, detail: "New intake or submitted requests in your accessible queue", href: "/admin/services?view=new", icon: Building2, tone: "bg-[#e8f3fa] text-[#246e94]" },
@@ -71,7 +74,7 @@ export async function StaffWorkspace({ viewer, modules }: { viewer: CivicViewer;
 
   const reportMetrics = [
     { title: "My active cases", value: mineCount, detail: "Cases assigned to you", icon: ClipboardList, tone: "bg-[#e7f3fa] text-[#246e94]" },
-    { title: "Office queue", value: unclaimedCount, detail: "Unclaimed cases in your office", icon: Inbox, tone: "bg-[#fff1dd] text-[#a97b24]" },
+    { title: "Legacy office queue", value: unclaimedCount, detail: "Older/unrouted cases not yet auto-offered", icon: Inbox, tone: "bg-[#fff1dd] text-[#a97b24]" },
     { title: "Urgent concerns", value: urgentCount, detail: "Urgent in your accessible queue", icon: Siren, tone: "bg-[#fce9ed] text-[#af4b5d]" },
     { title: "Cases resolved", value: completedCount, detail: "Resolved cases assigned to you", icon: CheckCircle2, tone: "bg-[#e5f7ef] text-[#25866b]" },
   ];
@@ -95,6 +98,7 @@ export async function StaffWorkspace({ viewer, modules }: { viewer: CivicViewer;
       </div><Link href={canManageCases ? "/admin/reports" : (serviceTasks[0]?.href || employmentTasks[0]?.href || "/admin/profile")} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#174f74] px-5 py-3 text-xs font-extrabold text-white hover:bg-[#0e688f]">{canManageCases ? "Open my action desk" : (serviceTasks.length || employmentTasks.length) ? "Open priority work" : "View my profile"}<ArrowRight size={16}/></Link></div>
     </header>
 
+    {workOffers.length > 0 && <section aria-label="Work offers awaiting acceptance"><div className="mb-4"><p className="elb-admin-eyebrow">FAIR WORK DISTRIBUTION</p><h2 className="mt-1 text-xl font-extrabold text-[#194966]">Work offers waiting for you</h2><p className="mt-2 text-xs text-[#7893a3]">These cases were offered using balanced workload distribution. Accept them before the deadline or decline with a short reason so the system can re-route fairly.</p></div><div className="grid gap-3 xl:grid-cols-2">{workOffers.map(offer=><div key={offer.id}><WorkOfferPanel offer={offer}/><Link href={offer.entityType === "CIVIC_REPORT" ? `/admin/reports/${offer.entityId}` : offer.entityType === "SERVICE_REQUEST" ? `/admin/services/${offer.entityId}` : "/admin"} className="mt-2 inline-flex items-center gap-1 text-[10px] font-extrabold text-[#267a9e]">Open case <ArrowRight size={12}/></Link></div>)}</div></section>}
 
     {serviceTasks.length > 0 && <section aria-label="Online LGU services focus">
       <div className="mb-4 flex flex-wrap items-end justify-between gap-3"><div><p className="elb-admin-eyebrow">ONLINE LGU SERVICES</p><h2 className="mt-1 text-xl font-extrabold text-[#194966]">Service requests that need attention</h2><p className="mt-2 text-xs text-[#7893a3]">Only requests routed to your department or assigned directly to you are shown.</p></div></div>
@@ -112,9 +116,9 @@ export async function StaffWorkspace({ viewer, modules }: { viewer: CivicViewer;
       </section>
       <div className="grid gap-4 xl:grid-cols-2">
         <CasePanel title="My assigned cases" description="Cases waiting for your next action" href="/admin/reports" empty="No active cases are assigned to you yet." cases={myCases}/>
-        <CasePanel title="Unclaimed office queue" description={`Available for an authorized ${office} officer to claim`} href="/admin/reports" empty="Your department has no unclaimed cases." cases={unclaimedCases}/>
+        <CasePanel title="Legacy / unassigned office queue" description={`New routed cases use balanced offers; this shows older or manually unassigned ${office} cases`} href="/admin/reports" empty="Your department has no legacy unassigned cases." cases={unclaimedCases}/>
       </div>
-      <div className="flex items-start gap-3 rounded-xl border border-[#d8e6ed] bg-[#f0f7fa] p-4 text-xs leading-6 text-[#5e7f91]"><Clock3 size={18} className="mt-0.5 shrink-0 text-[#2f799c]"/><p><strong className="text-[#245a74]">Workflow:</strong> Open an office-queue case to claim it, then add inspection or action notes and update the status. Internal notes remain visible only to authorized LGU personnel; citizen-facing updates appear in the citizen tracking timeline.</p></div>
+      <div className="flex items-start gap-3 rounded-xl border border-[#d8e6ed] bg-[#f0f7fa] p-4 text-xs leading-6 text-[#5e7f91]"><Clock3 size={18} className="mt-0.5 shrink-0 text-[#2f799c]"/><p><strong className="text-[#245a74]">Workflow:</strong> New cases are offered fairly based on active workload. Accept your offer first, then add inspection or action notes and update the status. Internal notes remain visible only to authorized LGU personnel; citizen-facing updates appear in the citizen tracking timeline.</p></div>
     </> : <section className="rounded-2xl border border-[#d9e7ee] bg-white p-6"><h2 className="text-lg font-extrabold text-[#174969]">Civic reporting</h2><p className="mt-2 text-xs leading-6 text-[#6c899c]">Civic Reporting is not assigned to your account. Your other authorized service modules remain available below.</p></section>}
 
     <section><div className="mb-4"><p className="elb-admin-eyebrow">AUTHORIZED MODULES</p><h2 className="mt-1 text-xl font-extrabold text-[#194966]">My service tools</h2><p className="mt-2 text-xs text-[#8199a9]">Only approved modules appear in your workspace. Community analytics and community data management are separate permissions.</p></div>

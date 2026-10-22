@@ -81,10 +81,10 @@ export function AdminRequestActions({ request, service, viewerRole, staff, verif
     </section>
 
     {viewerRole === "ADMIN" && <section className="rounded-2xl border border-[#dce8ee] bg-white p-4">
-      <div className="flex items-center gap-2"><UserRoundCheck size={16} className="text-[#2c7899]"/><h3 className="text-xs font-black text-[#214e69]">Assignment</h3></div>
-      <p className="mt-1 text-[9px] leading-4 text-[#8296a2]">Only staff mapped to {service.processingOffice} are listed.</p>
+      <div className="flex items-center gap-2"><UserRoundCheck size={16} className="text-[#2c7899]"/><h3 className="text-xs font-black text-[#214e69]">Assignment override</h3></div>
+      <p className="mt-1 text-[9px] leading-4 text-[#8296a2]">Normal requests are balanced automatically among eligible {service.processingOffice} staff. Use this only to override or rescue an unaccepted case.</p>
       <div className="mt-3 grid gap-2">
-        <select className={input} value={staffId} onChange={event => setStaffId(event.target.value)}><option value="">Choose eligible staff</option>{staff.map(person => <option key={person.id} value={person.id}>{person.name} · {person.department || "No department"}</option>)}</select>
+        <select className={input} value={staffId} onChange={event => setStaffId(event.target.value)}><option value="">Choose staff for manual override</option>{staff.map(person => <option key={person.id} value={person.id}>{person.name} · {person.department || "No department"}{typeof person.activeLoad === "number" ? ` · ${person.activeLoad} active` : ""}</option>)}</select>
         <button disabled={!staffId || !!busy} onClick={() => call(`/api/admin/services/requests/${request.id}/assign`, "PATCH", { staffId })} className="rounded-xl bg-[#175e80] px-3 py-2.5 text-[10px] font-extrabold text-white disabled:opacity-50">Assign / reassign</button>
       </div>
     </section>}

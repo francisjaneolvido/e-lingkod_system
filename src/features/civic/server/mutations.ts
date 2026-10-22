@@ -7,6 +7,8 @@ import { sameOffice } from "@/lib/report-scope";
 import { MAX_PHOTOS, MAX_PHOTO_BYTES } from "../config";
 import { CivicError, checkTransition, parseAdminUpdate, parseReportForm } from "../validation";
 import type { CivicViewer } from "../types";
+import { autoOfferCivicReport, completeWork, manualAssignWork, requireAcceptedWork } from "@/lib/work-distribution/server";
+import { createNotification, notifyAdmins } from "@/lib/notifications/server";
 
 function makeTrackingId() {
   const year = new Intl.DateTimeFormat("en", { year: "numeric", timeZone: "Asia/Manila" }).format(new Date());
@@ -54,6 +56,7 @@ export async function submitReport(form: FormData, viewer: CivicViewer) {
         },
         select: { id: true, trackingId: true },
       });
+      await notifyAdmins({ module: "REPORTS", type: "NEW_CIVIC_REPORT", title: "New civic report received", message: `${report.trackingId} is waiting for routing to the responsible office.`, href: `/admin/reports/${report.id}` });
       return { ...report, repeated: false };
     } catch (error) {
       if (!error || typeof error !== "object" || !("code" in error) || error.code !== "P2002") throw error;
@@ -93,7 +96,8 @@ export async function updateReport(id: string, body: unknown, viewer: CivicViewe
   }
   if (data.action !== undefined && data.action !== "UPDATE") throw new CivicError("Invalid case action.");
   const values = parseAdminUpdate(body);
-  return prisma.$transaction(async tx => {
+  if (viewer.role === "STAFF") await requireAcceptedWork(viewer, "REPORTS", "CIVIC_REPORT", id);
+  const result = await prisma.$transaction(async tx => {
     if (viewer.role === "STAFF") {
       const authorized = await tx.user.findFirst({ where: { id: viewer.id, role: "STAFF", department: viewer.department, staffPermissions: { some: { module: "REPORTS" } } }, select: { id: true } });
       if (!authorized) throw new CivicError("Your Civic Reports access changed. Sign in again or contact the Super Admin.", 403);
@@ -141,6 +145,17 @@ export async function updateReport(id: string, body: unknown, viewer: CivicViewe
     });
     if (updated.count !== 1) throw new CivicError("A newer update is available. Refresh the report before saving.", 409);
     await tx.reportUpdate.create({ data: { reportId: id, actorId: viewer.id, status: values.status, assignedOffice: office, assignedStaffId: assignee, priority, note: values.note, visibility, action } });
-    return { ok: true };
+    return { ok: true, office, assignee, routeChanged, statusChanged, newStatus: values.status };
   });
+  if (viewer.role === "ADMIN" && result.office && result.routeChanged) {
+    if (result.assignee) {
+      await manualAssignWork({ module: "REPORTS", entityType: "CIVIC_REPORT", entityId: id, department: result.office, staffId: result.assignee });
+      await createNotification({ userId: result.assignee, module: "REPORTS", type: "MANUAL_ASSIGNMENT", title: "Civic case assigned to you", message: "Super Admin assigned a civic report directly to you.", href: `/admin/reports/${id}` });
+    } else if (result.routeChanged) {
+      const offer = await autoOfferCivicReport(id, result.office);
+      if (!offer) await notifyAdmins({ module: "REPORTS", type: "UNASSIGNED_REPORT", title: "Civic case needs assignment", message: "No eligible staff member is currently available in the selected office.", href: `/admin/reports/${id}` });
+    }
+  }
+  if (["RESOLVED","REJECTED"].includes(result.newStatus)) await completeWork("REPORTS", "CIVIC_REPORT", id);
+  return { ok: true };
 }

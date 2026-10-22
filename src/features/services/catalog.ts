@@ -68,6 +68,10 @@ export type OnlineServiceDefinition = {
   completionMode: CompletionMode;
   outcomeLabel: string;
   serviceNotice: string;
+  feeText?: string;
+  processingTimeText?: string;
+  assignmentStrategy?: "AUTO_BALANCE" | "MANUAL";
+  acceptTimeoutMinutes?: number;
   reviewChecklist: string[];
   fields: ServiceField[];
   requirements: ServiceRequirement[];

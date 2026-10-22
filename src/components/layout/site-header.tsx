@@ -3,13 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  ArrowRight, ArrowUpRight, BarChart3, Bell, BriefcaseBusiness, ChevronDown, CircleUserRound, ClipboardList,
+  ArrowRight, ArrowUpRight, BarChart3, BriefcaseBusiness, ChevronDown, CircleUserRound, ClipboardList,
   Files, GraduationCap, Menu, ShieldCheck, UserRound, UsersRound, X,
 } from "lucide-react";
 import { BrandLogo } from "@/components/shared/brand-logo";
 import { LogoutButton } from "@/features/auth/components/logout-button";
 import type { PortalViewer } from "@/features/landing/landing-page";
 import { services } from "@/features/landing/data/services";
+import { NotificationBell } from "@/components/notifications/notification-bell";
 
 // Services are drawn from the same six modules as the home page.
 // Unreleased modules point to their existing service previews, never to broken app routes.
@@ -214,9 +215,7 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
           </nav>
           {viewer ? (
             <div className="hidden items-center gap-3 lg:flex">
-              <span className="flex size-10 cursor-not-allowed items-center justify-center rounded-full border border-[#e2ebf3] bg-[#f6f9fc] text-[#88a2b6]" aria-label="Notifications will be available in a future update" title="Notifications coming soon">
-                <Bell size={18} strokeWidth={1.8} aria-hidden />
-              </span>
+              <NotificationBell />
               <details ref={profileDetails} className="group relative">
                 <summary aria-label="Open account menu" className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-[#cbdfea] bg-white px-3.5 py-2 text-xs font-bold text-[#143e65] transition hover:bg-[#f1f8fd] [&::-webkit-details-marker]:hidden">
                   <span className="flex size-7 items-center justify-center rounded-full bg-[#EDF5FB] text-[#153B63]"><UserRound size={16} /></span>
@@ -316,7 +315,7 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                   {citizenPortal && <Link href="/reports" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><ClipboardList size={17}/> My Reports</Link>}
                   {citizenPortal && <Link href="/services/requests" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><Files size={17}/> My LGU Requests</Link>}
                   {(viewer.role === "ADMIN" || viewer.role === "STAFF") && <Link href="/admin" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><ShieldCheck size={17}/> LGU workspace</Link>}
-                  <p className="px-4 py-2 text-[11px] text-[#8198aa]">Notifications: coming soon</p>
+                  <div className="flex items-center justify-between px-4 py-2 text-[11px] text-[#8198aa]"><span>Notifications</span><NotificationBell /></div>
                   <div className="px-2 pt-2"><LogoutButton fullWidth /></div>
                 </div>
               ) : (

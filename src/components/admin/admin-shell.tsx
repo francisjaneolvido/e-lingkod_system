@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { LogoutButton } from "@/features/auth/components/logout-button";
 import type { StaffModule } from "@/lib/staff-modules";
+import { NotificationBell } from "@/components/notifications/notification-bell";
 
 const navSections = [
   { title: "OPERATIONS", items: [
@@ -30,6 +31,9 @@ const navSections = [
     { label: "Emergency & alerts", href: "/admin/emergency", icon: BellRing },
     { label: "Municipal projects", href: "/admin/projects", icon: MapPinned },
   ] },
+  { title: "INSIGHTS", items: [
+    { label: "Community Pulse", href: "/admin/pulse", icon: BarChart3 },
+  ] },
   { title: "TEAM MANAGEMENT", items: [
     { label: "LGU staff", href: "/admin/staff", icon: UserCog },
   ] },
@@ -45,6 +49,7 @@ const modulesByPath: Record<string, StaffModule> = {
   "/admin/jobs/data": "COMMUNITY_DATA",
   "/admin/census": "CENSUS",
 };
+const adminOnlyPaths = new Set(["/admin/pulse"]);
 
 const pageMeta: Record<string, {title: string; subtitle: string}> = {
   "/admin": { title: "Overview", subtitle: "Operations dashboard" },
@@ -58,6 +63,7 @@ const pageMeta: Record<string, {title: string; subtitle: string}> = {
   "/admin/jobs/insights": { title: "Employment insights", subtitle: "Skills, training, barriers and livelihood analytics" },
   "/admin/jobs/data": { title: "Employment data", subtitle: "Historical activity datasets, imports and manual encoding" },
   "/admin/census": { title: "Community census", subtitle: "Planned census module" },
+  "/admin/pulse": { title: "Community Pulse", subtitle: "Aggregated cross-system operations" },
   "/admin/profile": { title: "My profile", subtitle: "LGU account" },
 };
 
@@ -66,7 +72,7 @@ const allNavItems = navSections.flatMap(section => section.items);
 export function AdminShell({ children, name, email, role, modules, department }: { children: ReactNode; name: string; email: string; role: string; modules: StaffModule[]; department: string }) {
   const pathname = usePathname();
   const superAdmin = role === "ADMIN";
-  const canSee = (href: string) => superAdmin || (href !== "/admin/citizens" && href !== "/admin/staff" && (!modulesByPath[href] || modules.includes(modulesByPath[href])));
+  const canSee = (href: string) => adminOnlyPaths.has(href) ? superAdmin : superAdmin || (href !== "/admin/citizens" && href !== "/admin/staff" && (!modulesByPath[href] || modules.includes(modulesByPath[href])));
   const [menuOpen, setMenuOpen] = useState(false);
   const [compact, setCompact] = useState(false);
   const matched = Object.keys(pageMeta)
@@ -151,6 +157,7 @@ export function AdminShell({ children, name, email, role, modules, department }:
           </div>
         </div>
         <div className="elb-admin-topbar-end">
+          <NotificationBell variant="admin" />
           <span className="elb-admin-environment"><ShieldCheck size={15}/> Protected workspace</span>
           <Link href="/admin/profile" className="elb-admin-topbar-profile" aria-label={`View profile for ${name}`} title="Administrator profile"><span className="elb-admin-topbar-avatar">{initials}</span><span className="elb-admin-topbar-name">{name}</span><ChevronRight size={15}/></Link>
         </div>

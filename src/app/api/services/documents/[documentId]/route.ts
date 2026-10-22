@@ -11,7 +11,7 @@ export async function GET(request:Request,{params}:{params:Promise<{documentId:s
   if(!doc)return new Response("Not found",{status:404});
   let allowed=viewer.role==="ADMIN"||doc.request.requesterId===viewer.id;
   if(!allowed&&viewer.role==="STAFF"&&await hasModuleAccess(viewer,"SERVICES")){
-    const service=serviceByKey(doc.request.serviceKey);
+    const service=await resolveServiceDefinition(doc.request.serviceKey,true);
     allowed=doc.request.assignedStaffId===viewer.id||Boolean(service&&departmentMatchesService(service,viewer.department));
   }
   if(!allowed)return new Response("Forbidden",{status:403});

@@ -156,3 +156,5 @@
 .elb-admin .elb-admin-field{font-size:13px}
 .elb-admin .elb-admin-topbar-name{font-size:12px}
 @media(max-width:640px){.elb-admin-content-inner{padding:16px 14px 48px}.elb-admin-topbar{padding:11px 14px}}
+.elb-admin-notification{position:relative;display:grid;width:38px;height:38px;place-items:center;border:1px solid #d7e3ea;border-radius:12px;background:#fff;color:#456f86;transition:.18s ease}
+.elb-admin-notification:hover{background:#f2f8fb;border-color:#b9d4e0}
