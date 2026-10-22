@@ -424,7 +424,11 @@ export const ModelName = {
   ServiceRequest: 'ServiceRequest',
   ServiceRequestDocument: 'ServiceRequestDocument',
   ServiceRequestEvent: 'ServiceRequestEvent',
-  ServiceAppointment: 'ServiceAppointment'
+  ServiceAppointment: 'ServiceAppointment',
+  Notification: 'Notification',
+  WorkAssignment: 'WorkAssignment',
+  ServiceDefinition: 'ServiceDefinition',
+  ServiceDefinitionAudit: 'ServiceDefinitionAudit'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -440,7 +444,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity" | "communitySurvey" | "governmentActivity" | "communityImportBatch" | "communityImportRecord" | "serviceRequest" | "serviceRequestDocument" | "serviceRequestEvent" | "serviceAppointment"
+    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity" | "communitySurvey" | "governmentActivity" | "communityImportBatch" | "communityImportRecord" | "serviceRequest" | "serviceRequestDocument" | "serviceRequestEvent" | "serviceAppointment" | "notification" | "workAssignment" | "serviceDefinition" | "serviceDefinitionAudit"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2292,6 +2296,270 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Notification: {
+      payload: Prisma.$NotificationPayload<ExtArgs>
+      fields: Prisma.NotificationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NotificationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NotificationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        findFirst: {
+          args: Prisma.NotificationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NotificationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        findMany: {
+          args: Prisma.NotificationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        create: {
+          args: Prisma.NotificationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        createMany: {
+          args: Prisma.NotificationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.NotificationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        update: {
+          args: Prisma.NotificationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        deleteMany: {
+          args: Prisma.NotificationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NotificationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.NotificationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        aggregate: {
+          args: Prisma.NotificationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNotification>
+        }
+        groupBy: {
+          args: Prisma.NotificationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NotificationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationCountAggregateOutputType> | number
+        }
+      }
+    }
+    WorkAssignment: {
+      payload: Prisma.$WorkAssignmentPayload<ExtArgs>
+      fields: Prisma.WorkAssignmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WorkAssignmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkAssignmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WorkAssignmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkAssignmentPayload>
+        }
+        findFirst: {
+          args: Prisma.WorkAssignmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkAssignmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WorkAssignmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkAssignmentPayload>
+        }
+        findMany: {
+          args: Prisma.WorkAssignmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkAssignmentPayload>[]
+        }
+        create: {
+          args: Prisma.WorkAssignmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkAssignmentPayload>
+        }
+        createMany: {
+          args: Prisma.WorkAssignmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.WorkAssignmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkAssignmentPayload>
+        }
+        update: {
+          args: Prisma.WorkAssignmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkAssignmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.WorkAssignmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WorkAssignmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.WorkAssignmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkAssignmentPayload>
+        }
+        aggregate: {
+          args: Prisma.WorkAssignmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWorkAssignment>
+        }
+        groupBy: {
+          args: Prisma.WorkAssignmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WorkAssignmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WorkAssignmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WorkAssignmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    ServiceDefinition: {
+      payload: Prisma.$ServiceDefinitionPayload<ExtArgs>
+      fields: Prisma.ServiceDefinitionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ServiceDefinitionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ServiceDefinitionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionPayload>
+        }
+        findFirst: {
+          args: Prisma.ServiceDefinitionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ServiceDefinitionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionPayload>
+        }
+        findMany: {
+          args: Prisma.ServiceDefinitionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionPayload>[]
+        }
+        create: {
+          args: Prisma.ServiceDefinitionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionPayload>
+        }
+        createMany: {
+          args: Prisma.ServiceDefinitionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ServiceDefinitionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionPayload>
+        }
+        update: {
+          args: Prisma.ServiceDefinitionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionPayload>
+        }
+        deleteMany: {
+          args: Prisma.ServiceDefinitionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ServiceDefinitionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ServiceDefinitionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionPayload>
+        }
+        aggregate: {
+          args: Prisma.ServiceDefinitionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateServiceDefinition>
+        }
+        groupBy: {
+          args: Prisma.ServiceDefinitionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceDefinitionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ServiceDefinitionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceDefinitionCountAggregateOutputType> | number
+        }
+      }
+    }
+    ServiceDefinitionAudit: {
+      payload: Prisma.$ServiceDefinitionAuditPayload<ExtArgs>
+      fields: Prisma.ServiceDefinitionAuditFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ServiceDefinitionAuditFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionAuditPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ServiceDefinitionAuditFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionAuditPayload>
+        }
+        findFirst: {
+          args: Prisma.ServiceDefinitionAuditFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionAuditPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ServiceDefinitionAuditFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionAuditPayload>
+        }
+        findMany: {
+          args: Prisma.ServiceDefinitionAuditFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionAuditPayload>[]
+        }
+        create: {
+          args: Prisma.ServiceDefinitionAuditCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionAuditPayload>
+        }
+        createMany: {
+          args: Prisma.ServiceDefinitionAuditCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ServiceDefinitionAuditDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionAuditPayload>
+        }
+        update: {
+          args: Prisma.ServiceDefinitionAuditUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionAuditPayload>
+        }
+        deleteMany: {
+          args: Prisma.ServiceDefinitionAuditDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ServiceDefinitionAuditUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ServiceDefinitionAuditUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceDefinitionAuditPayload>
+        }
+        aggregate: {
+          args: Prisma.ServiceDefinitionAuditAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateServiceDefinitionAudit>
+        }
+        groupBy: {
+          args: Prisma.ServiceDefinitionAuditGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceDefinitionAuditGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ServiceDefinitionAuditCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceDefinitionAuditCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2855,6 +3123,83 @@ export const ServiceAppointmentScalarFieldEnum = {
 export type ServiceAppointmentScalarFieldEnum = (typeof ServiceAppointmentScalarFieldEnum)[keyof typeof ServiceAppointmentScalarFieldEnum]
 
 
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  module: 'module',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  href: 'href',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const WorkAssignmentScalarFieldEnum = {
+  id: 'id',
+  module: 'module',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  department: 'department',
+  assignedStaffId: 'assignedStaffId',
+  status: 'status',
+  claimDeadline: 'claimDeadline',
+  acceptedAt: 'acceptedAt',
+  declinedAt: 'declinedAt',
+  completedAt: 'completedAt',
+  attemptCount: 'attemptCount',
+  lastOfferedAt: 'lastOfferedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorkAssignmentScalarFieldEnum = (typeof WorkAssignmentScalarFieldEnum)[keyof typeof WorkAssignmentScalarFieldEnum]
+
+
+export const ServiceDefinitionScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  title: 'title',
+  shortTitle: 'shortTitle',
+  category: 'category',
+  processingOffice: 'processingOffice',
+  departmentCode: 'departmentCode',
+  description: 'description',
+  actionLabel: 'actionLabel',
+  intakeMode: 'intakeMode',
+  appointmentMode: 'appointmentMode',
+  completionMode: 'completionMode',
+  purposeLabel: 'purposeLabel',
+  purposePlaceholder: 'purposePlaceholder',
+  feeText: 'feeText',
+  processingTimeText: 'processingTimeText',
+  assignmentStrategy: 'assignmentStrategy',
+  acceptTimeoutMinutes: 'acceptTimeoutMinutes',
+  published: 'published',
+  configJson: 'configJson',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceDefinitionScalarFieldEnum = (typeof ServiceDefinitionScalarFieldEnum)[keyof typeof ServiceDefinitionScalarFieldEnum]
+
+
+export const ServiceDefinitionAuditScalarFieldEnum = {
+  id: 'id',
+  serviceDefinitionId: 'serviceDefinitionId',
+  actorId: 'actorId',
+  action: 'action',
+  snapshotJson: 'snapshotJson',
+  createdAt: 'createdAt'
+} as const
+
+export type ServiceDefinitionAuditScalarFieldEnum = (typeof ServiceDefinitionAuditScalarFieldEnum)[keyof typeof ServiceDefinitionAuditScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3286,6 +3631,68 @@ export const ServiceAppointmentOrderByRelevanceFieldEnum = {
 export type ServiceAppointmentOrderByRelevanceFieldEnum = (typeof ServiceAppointmentOrderByRelevanceFieldEnum)[keyof typeof ServiceAppointmentOrderByRelevanceFieldEnum]
 
 
+export const NotificationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  module: 'module',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  href: 'href'
+} as const
+
+export type NotificationOrderByRelevanceFieldEnum = (typeof NotificationOrderByRelevanceFieldEnum)[keyof typeof NotificationOrderByRelevanceFieldEnum]
+
+
+export const WorkAssignmentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  module: 'module',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  department: 'department',
+  assignedStaffId: 'assignedStaffId',
+  status: 'status'
+} as const
+
+export type WorkAssignmentOrderByRelevanceFieldEnum = (typeof WorkAssignmentOrderByRelevanceFieldEnum)[keyof typeof WorkAssignmentOrderByRelevanceFieldEnum]
+
+
+export const ServiceDefinitionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  key: 'key',
+  title: 'title',
+  shortTitle: 'shortTitle',
+  category: 'category',
+  processingOffice: 'processingOffice',
+  departmentCode: 'departmentCode',
+  description: 'description',
+  actionLabel: 'actionLabel',
+  intakeMode: 'intakeMode',
+  appointmentMode: 'appointmentMode',
+  completionMode: 'completionMode',
+  purposeLabel: 'purposeLabel',
+  purposePlaceholder: 'purposePlaceholder',
+  feeText: 'feeText',
+  processingTimeText: 'processingTimeText',
+  assignmentStrategy: 'assignmentStrategy',
+  configJson: 'configJson',
+  createdById: 'createdById'
+} as const
+
+export type ServiceDefinitionOrderByRelevanceFieldEnum = (typeof ServiceDefinitionOrderByRelevanceFieldEnum)[keyof typeof ServiceDefinitionOrderByRelevanceFieldEnum]
+
+
+export const ServiceDefinitionAuditOrderByRelevanceFieldEnum = {
+  id: 'id',
+  serviceDefinitionId: 'serviceDefinitionId',
+  actorId: 'actorId',
+  action: 'action',
+  snapshotJson: 'snapshotJson'
+} as const
+
+export type ServiceDefinitionAuditOrderByRelevanceFieldEnum = (typeof ServiceDefinitionAuditOrderByRelevanceFieldEnum)[keyof typeof ServiceDefinitionAuditOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -3554,6 +3961,10 @@ export type GlobalOmitConfig = {
   serviceRequestDocument?: Prisma.ServiceRequestDocumentOmit
   serviceRequestEvent?: Prisma.ServiceRequestEventOmit
   serviceAppointment?: Prisma.ServiceAppointmentOmit
+  notification?: Prisma.NotificationOmit
+  workAssignment?: Prisma.WorkAssignmentOmit
+  serviceDefinition?: Prisma.ServiceDefinitionOmit
+  serviceDefinitionAudit?: Prisma.ServiceDefinitionAuditOmit
 }
 
 /* Types for Logging */

@@ -77,9 +77,12 @@ export default async function AdminServicesPage({ searchParams }: { searchParams
       <div className="flex items-center justify-between border-b border-[#eaf0f3] px-4 py-3"><div><h2 className="text-xs font-black text-[#214e69]">Accessible request queue</h2><p className="mt-0.5 text-[10px] text-[#8197a5]">{rows.length} request{rows.length === 1 ? "" : "s"}</p></div>{counts.completedCount > 0 && <Link href="/admin/services?view=closed" className="text-[10px] font-bold text-[#47788f]">{counts.completedCount} completed total</Link>}</div>
       {rows.length ? <div className="overflow-x-auto"><table className="w-full min-w-[940px] text-left text-xs">
         <thead className="bg-[#f7fafb] text-[9px] uppercase tracking-wider text-[#7d94a2]"><tr><th className="px-4 py-2.5">Request</th><th className="px-4 py-2.5">Citizen</th><th className="px-4 py-2.5">Status / next step</th><th className="px-4 py-2.5">Assigned</th><th className="px-4 py-2.5">Updated</th><th className="px-4 py-2.5"/></tr></thead>
-        <tbody className="divide-y divide-[#edf2f4]">{rows.map((row:any) => {
-          const key = isServiceStatus(row.status) ? row.status : "DRAFT";
-          const meta = SERVICE_STATUS_META[key];
+        <tbody className="divide-y divide-[#edf2f4]">{rows.map((row) => {
+  const key: ServiceRequestStatus = isServiceStatus(row.status)
+    ? row.status
+    : "DRAFT";
+
+  const meta = SERVICE_STATUS_META[key];
           return <tr key={row.id} className="hover:bg-[#fbfdfe]">
             <td className="px-4 py-3"><strong className="block text-[11px] text-[#287797]">{row.trackingId}</strong><span className="mt-0.5 block font-bold text-[#365e74]">{row.serviceTitle}</span></td>
             <td className="px-4 py-3"><strong className="block text-[#315a72]">{row.requester.name}</strong><span className="text-[10px] text-[#8497a4]">{row.requester.email}</span></td>

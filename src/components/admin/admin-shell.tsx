@@ -67,7 +67,10 @@ const pageMeta: Record<string, {title: string; subtitle: string}> = {
   "/admin/profile": { title: "My profile", subtitle: "LGU account" },
 };
 
-const allNavItems = navSections.flatMap(section => section.items);
+const allNavItems: { href: string }[] = navSections.flatMap(
+  (section): { href: string }[] =>
+    section.items.map((item) => ({ href: item.href }))
+);
 
 export function AdminShell({ children, name, email, role, modules, department }: { children: ReactNode; name: string; email: string; role: string; modules: StaffModule[]; department: string }) {
   const pathname = usePathname();

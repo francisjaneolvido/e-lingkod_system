@@ -78,7 +78,11 @@ export const ModelName = {
   ServiceRequest: 'ServiceRequest',
   ServiceRequestDocument: 'ServiceRequestDocument',
   ServiceRequestEvent: 'ServiceRequestEvent',
-  ServiceAppointment: 'ServiceAppointment'
+  ServiceAppointment: 'ServiceAppointment',
+  Notification: 'Notification',
+  WorkAssignment: 'WorkAssignment',
+  ServiceDefinition: 'ServiceDefinition',
+  ServiceDefinitionAudit: 'ServiceDefinitionAudit'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -621,6 +625,83 @@ export const ServiceAppointmentScalarFieldEnum = {
 export type ServiceAppointmentScalarFieldEnum = (typeof ServiceAppointmentScalarFieldEnum)[keyof typeof ServiceAppointmentScalarFieldEnum]
 
 
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  module: 'module',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  href: 'href',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const WorkAssignmentScalarFieldEnum = {
+  id: 'id',
+  module: 'module',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  department: 'department',
+  assignedStaffId: 'assignedStaffId',
+  status: 'status',
+  claimDeadline: 'claimDeadline',
+  acceptedAt: 'acceptedAt',
+  declinedAt: 'declinedAt',
+  completedAt: 'completedAt',
+  attemptCount: 'attemptCount',
+  lastOfferedAt: 'lastOfferedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorkAssignmentScalarFieldEnum = (typeof WorkAssignmentScalarFieldEnum)[keyof typeof WorkAssignmentScalarFieldEnum]
+
+
+export const ServiceDefinitionScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  title: 'title',
+  shortTitle: 'shortTitle',
+  category: 'category',
+  processingOffice: 'processingOffice',
+  departmentCode: 'departmentCode',
+  description: 'description',
+  actionLabel: 'actionLabel',
+  intakeMode: 'intakeMode',
+  appointmentMode: 'appointmentMode',
+  completionMode: 'completionMode',
+  purposeLabel: 'purposeLabel',
+  purposePlaceholder: 'purposePlaceholder',
+  feeText: 'feeText',
+  processingTimeText: 'processingTimeText',
+  assignmentStrategy: 'assignmentStrategy',
+  acceptTimeoutMinutes: 'acceptTimeoutMinutes',
+  published: 'published',
+  configJson: 'configJson',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceDefinitionScalarFieldEnum = (typeof ServiceDefinitionScalarFieldEnum)[keyof typeof ServiceDefinitionScalarFieldEnum]
+
+
+export const ServiceDefinitionAuditScalarFieldEnum = {
+  id: 'id',
+  serviceDefinitionId: 'serviceDefinitionId',
+  actorId: 'actorId',
+  action: 'action',
+  snapshotJson: 'snapshotJson',
+  createdAt: 'createdAt'
+} as const
+
+export type ServiceDefinitionAuditScalarFieldEnum = (typeof ServiceDefinitionAuditScalarFieldEnum)[keyof typeof ServiceDefinitionAuditScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1050,4 +1131,66 @@ export const ServiceAppointmentOrderByRelevanceFieldEnum = {
 } as const
 
 export type ServiceAppointmentOrderByRelevanceFieldEnum = (typeof ServiceAppointmentOrderByRelevanceFieldEnum)[keyof typeof ServiceAppointmentOrderByRelevanceFieldEnum]
+
+
+export const NotificationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  module: 'module',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  href: 'href'
+} as const
+
+export type NotificationOrderByRelevanceFieldEnum = (typeof NotificationOrderByRelevanceFieldEnum)[keyof typeof NotificationOrderByRelevanceFieldEnum]
+
+
+export const WorkAssignmentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  module: 'module',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  department: 'department',
+  assignedStaffId: 'assignedStaffId',
+  status: 'status'
+} as const
+
+export type WorkAssignmentOrderByRelevanceFieldEnum = (typeof WorkAssignmentOrderByRelevanceFieldEnum)[keyof typeof WorkAssignmentOrderByRelevanceFieldEnum]
+
+
+export const ServiceDefinitionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  key: 'key',
+  title: 'title',
+  shortTitle: 'shortTitle',
+  category: 'category',
+  processingOffice: 'processingOffice',
+  departmentCode: 'departmentCode',
+  description: 'description',
+  actionLabel: 'actionLabel',
+  intakeMode: 'intakeMode',
+  appointmentMode: 'appointmentMode',
+  completionMode: 'completionMode',
+  purposeLabel: 'purposeLabel',
+  purposePlaceholder: 'purposePlaceholder',
+  feeText: 'feeText',
+  processingTimeText: 'processingTimeText',
+  assignmentStrategy: 'assignmentStrategy',
+  configJson: 'configJson',
+  createdById: 'createdById'
+} as const
+
+export type ServiceDefinitionOrderByRelevanceFieldEnum = (typeof ServiceDefinitionOrderByRelevanceFieldEnum)[keyof typeof ServiceDefinitionOrderByRelevanceFieldEnum]
+
+
+export const ServiceDefinitionAuditOrderByRelevanceFieldEnum = {
+  id: 'id',
+  serviceDefinitionId: 'serviceDefinitionId',
+  actorId: 'actorId',
+  action: 'action',
+  snapshotJson: 'snapshotJson'
+} as const
+
+export type ServiceDefinitionAuditOrderByRelevanceFieldEnum = (typeof ServiceDefinitionAuditOrderByRelevanceFieldEnum)[keyof typeof ServiceDefinitionAuditOrderByRelevanceFieldEnum]
 
