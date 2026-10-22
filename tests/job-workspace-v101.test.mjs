@@ -11,6 +11,7 @@ const create=read("src/app/admin/jobs/new/page.tsx");
 const edit=read("src/app/admin/jobs/[id]/edit/page.tsx");
 const css=read("src/features/jobs/components/jobs-workspace.css");
 const types=read("src/features/jobs/components/job-types.ts");
+const legacySpes=read("src/app/admin/jobs/legacy-spes/page.tsx");
 
 test("new and edit routes enforce server-side JOBS permission",()=>{
  assert.match(create,/requireModulePage\("\/admin\/jobs\/new","JOBS"\)/);
@@ -51,7 +52,9 @@ test("SPES and insight modules retain private aggregate workflow",()=>{
  const importer=fs.readFileSync("src/features/jobs/components/spes-import-workspace.tsx","utf8");
  const insights=fs.readFileSync("src/features/jobs/components/spes-insights.tsx","utf8");
  assert.match(importer,/\/api\/admin\/jobs\/import/);
- assert.match(list,/SPES survey import/);
+ assert.doesNotMatch(list,/SPES survey import/);
+ assert.match(legacySpes,/SpesImportWorkspace/);
+ assert.match(legacySpes,/SpesInsights/);
  assert.match(insights,/opportunitySignals/);
  assert.match(insights,/topSkills/);
  assert.match(importer,/Never upload names, emails, phone numbers/);

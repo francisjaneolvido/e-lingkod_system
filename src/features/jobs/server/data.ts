@@ -4,7 +4,7 @@ import { decodeTags, scoreMatch, type MatchProfile } from "../domain";
 
 export async function publishedJobs() {
   const rows=await prisma.jobOpportunity.findMany({where:{status:"PUBLISHED",OR:[{expiresAt:null},{expiresAt:{gte:new Date()}}]},orderBy:{publishedAt:"desc"},take:250});
-  return rows.map(row=>({id:row.id,title:row.title,employer:row.employer,sector:row.sector,workType:row.workType,barangay:row.barangay,location:row.location,description:row.description,education:row.education,contactInfo:row.contactInfo,externalUrl:row.externalUrl,expiresAt:row.expiresAt?.toISOString()??null,skills:decodeTags(row.skillsJson),interests:decodeTags(row.interestsJson)}));
+  return rows.map(row=>({id:row.id,title:row.title,employer:row.employer,sector:row.sector,workType:row.workType,barangay:row.barangay,location:row.location,description:row.description,education:row.education,contactInfo:row.contactInfo,externalUrl:row.externalUrl,publishedAt:row.publishedAt?.toISOString()??row.updatedAt.toISOString(),expiresAt:row.expiresAt?.toISOString()??null,skills:decodeTags(row.skillsJson),interests:decodeTags(row.interestsJson)}));
 }
 /** Public read: only published, non-expired vacancies; never expose reviewer notes or drafts. */
 export async function publishedJobById(id: string) {

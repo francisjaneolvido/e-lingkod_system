@@ -1,5 +1,5 @@
 export type ManagedJob = {
-  id:string;title:string;employer:string;sector:string;workType:string;barangay:string;location:string;
+  id:string;title:string;employer:string;sector:string;workType:string;barangay:string;location:string;createdById:string;
   description:string;skills:string[];interests:string[];education:string;contactInfo:string;
   externalUrl:string|null;expiresAt:string;status:string;createdAt:string;updatedAt:string;publishedAt:string|null;
   reviewSource:string|null;reviewNote:string|null;reviewRequestedAt:string|null;reviewedAt:string|null;employerVerified:boolean;vacancyVerified:boolean;

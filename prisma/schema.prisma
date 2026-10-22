@@ -44,6 +44,14 @@ model User {
   reviewedJobs JobOpportunity[] @relation("JobReviewedBy")
   spesImports SpesImportBatch[] @relation("SpesImportedBy")
   spesImportEvents SpesImportEvent[] @relation("SpesImportEventActor")
+  communitySurveys CommunitySurvey[]
+  communityImports CommunityImportBatch[] @relation("CommunityImportedBy")
+  serviceRequests ServiceRequest[] @relation("ServiceRequestedBy")
+  assignedServiceRequests ServiceRequest[] @relation("ServiceAssignedStaff")
+  serviceRequestEvents ServiceRequestEvent[] @relation("ServiceRequestEventActor")
+  proposedServiceAppointments ServiceAppointment[] @relation("ServiceAppointmentProposedBy")
+  verifiedServiceDocuments ServiceRequestDocument[] @relation("ServiceDocumentVerifiedBy")
+  approvedServiceReleases ServiceRequest[] @relation("ServiceReleaseApprovedBy")
 
   @@map("user")
 }
@@ -443,3 +451,248 @@ model JobActivity {
   @@index([jobId, createdAt])
   @@map("job_activity")
 }
+
+
+// V11: Community employment, skills, training, livelihood and SDG 16 profiling.
+// Citizen survey responses are kept separate from historical/government imports.
+model CommunitySurvey {
+  id                               String   @id @default(cuid()) @db.VarChar(191)
+  userId                           String   @db.VarChar(191)
+  user                             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  surveyYear                       Int
+  surveyVersion                    Int      @default(1)
+  status                           String   @default("DRAFT") @db.VarChar(20)
+  barangay                         String   @db.VarChar(100)
+  ageGroup                         String   @db.VarChar(30)
+  sex                              String?  @db.VarChar(30)
+  civilStatus                      String?  @db.VarChar(30)
+  pwdStatus                        String?  @db.VarChar(30)
+  householdSize                    Int?
+  currentlyStudying                Boolean?
+  educationLevel                   String   @db.VarChar(40)
+  employmentStatus                 String   @db.VarChar(50)
+  occupation                       String?  @db.VarChar(150)
+  industry                         String?  @db.VarChar(120)
+  workArrangement                  String?  @db.VarChar(40)
+  workLocationScope                String?  @db.VarChar(50)
+  employmentLength                 String?  @db.VarChar(50)
+  workRelatedToEducation           Boolean?
+  interestedNewWork                Boolean?
+  skillsJson                       String   @db.Text
+  skillLevelsJson                  String   @db.Text
+  trainingInterest                 String?  @db.VarChar(20)
+  trainingCategoriesJson           String   @db.Text
+  trainingProgramsJson             String   @db.Text
+  trainingReason                   String?  @db.VarChar(60)
+  trainingBarriersJson             String   @db.Text
+  employmentBarriersJson           String   @db.Text
+  preferredOccupationsJson         String   @db.Text
+  preferredIndustry                String?  @db.VarChar(120)
+  preferredWorkArrangement         String?  @db.VarChar(40)
+  preferredWorkLocation            String?  @db.VarChar(120)
+  willingOutsideMunicipality       Boolean?
+  interestedGovPrograms            Boolean?
+  interestedLivelihood             Boolean?
+  interestedEntrepreneurship       Boolean?
+  businessType                     String?  @db.VarChar(120)
+  businessSector                   String?  @db.VarChar(120)
+  businessLocationType             String?  @db.VarChar(40)
+  businessSize                     String?  @db.VarChar(30)
+  businessRegistered               String?  @db.VarChar(30)
+  businessYears                    String?  @db.VarChar(30)
+  businessChallengesJson           String   @db.Text
+  businessSupportJson              String   @db.Text
+  programAwareness                 String?  @db.VarChar(20)
+  informationAccess                String?  @db.VarChar(20)
+  participatedConsultation         String?  @db.VarChar(20)
+  inclusivePlanning                String?  @db.VarChar(30)
+  priorityProgramsJson             String   @db.Text
+  publicServiceBarriersJson        String   @db.Text
+  serviceSatisfaction              Int?
+  feedback                         String?  @db.Text
+  consentAggregated                Boolean  @default(false)
+  consentOpportunityRecommendations Boolean @default(false)
+  consentProgramRecommendations    Boolean  @default(false)
+  submittedAt                      DateTime?
+  createdAt                        DateTime @default(now())
+  updatedAt                        DateTime @updatedAt
+
+  @@unique([userId, surveyYear])
+  @@index([surveyYear, status])
+  @@index([barangay, surveyYear])
+  @@index([employmentStatus, surveyYear])
+  @@index([educationLevel, surveyYear])
+  @@map("community_survey")
+}
+
+model GovernmentActivity {
+  id                String   @id @default(cuid()) @db.VarChar(191)
+  activityName      String   @db.VarChar(180)
+  activityType      String   @db.VarChar(60)
+  implementingOffice String  @db.VarChar(150)
+  activityDate      DateTime?
+  coverage          String?  @db.VarChar(180)
+  originalPurpose   String?  @db.Text
+  originalDataSource String? @db.VarChar(180)
+  intendedUse       String   @default("INTERNAL_STATISTICS") @db.VarChar(40)
+  notes             String?  @db.Text
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  batches           CommunityImportBatch[]
+
+  @@index([activityType, activityDate])
+  @@map("government_activity")
+}
+
+model CommunityImportBatch {
+  id             String   @id @default(cuid()) @db.VarChar(191)
+  activityId     String   @db.VarChar(191)
+  activity       GovernmentActivity @relation(fields: [activityId], references: [id], onDelete: Restrict)
+  importedById   String   @db.VarChar(191)
+  importedBy     User     @relation("CommunityImportedBy", fields: [importedById], references: [id], onDelete: Restrict)
+  sourceFilename String   @db.VarChar(220)
+  fileType       String   @db.VarChar(20)
+  fingerprint    String?  @unique @db.VarChar(64)
+  recordCount    Int      @default(0)
+  validCount     Int      @default(0)
+  invalidCount   Int      @default(0)
+  warningCount   Int      @default(0)
+  duplicateCount Int      @default(0)
+  status         String   @default("ACTIVE") @db.VarChar(20)
+  createdAt      DateTime @default(now())
+  records        CommunityImportRecord[]
+
+  @@index([activityId, createdAt])
+  @@index([status, createdAt])
+  @@map("community_import_batch")
+}
+
+model CommunityImportRecord {
+  id                     String   @id @default(cuid()) @db.VarChar(191)
+  batchId                String   @db.VarChar(191)
+  batch                  CommunityImportBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  originalRowNumber      Int
+  participantRef         String?  @db.VarChar(191)
+  barangay               String?  @db.VarChar(100)
+  ageGroup                String?  @db.VarChar(30)
+  educationLevel          String?  @db.VarChar(40)
+  employmentStatus        String?  @db.VarChar(50)
+  occupation              String?  @db.VarChar(150)
+  industry                String?  @db.VarChar(120)
+  skillsJson              String   @db.Text
+  trainingInterest        String?  @db.VarChar(20)
+  trainingCategoriesJson String   @db.Text
+  trainingProgramsJson   String   @db.Text
+  trainingBarriersJson   String   @db.Text
+  employmentBarriersJson String   @db.Text
+  businessSector         String?  @db.VarChar(120)
+  assistanceNeededJson   String   @db.Text
+  rawJson                 String   @db.LongText
+  qualityFlagsJson        String   @db.Text
+  createdAt               DateTime @default(now())
+
+  @@index([batchId])
+  @@index([barangay])
+  @@index([employmentStatus])
+  @@map("community_import_record")
+}
+
+// Online LGU Services — citizen requests, assignment, validation, scheduling and release.
+// Service definitions/questions remain code-configured so LGU-specific requirements can be adjusted safely.
+model ServiceRequest {
+  id                 String   @id @default(cuid()) @db.VarChar(191)
+  trackingId         String   @unique @db.VarChar(48)
+  serviceKey         String   @db.VarChar(80)
+  serviceTitle       String   @db.VarChar(180)
+  requesterId        String   @db.VarChar(191)
+  requester          User     @relation("ServiceRequestedBy", fields: [requesterId], references: [id], onDelete: Restrict)
+  purpose            String   @db.Text
+  formDataJson       String   @db.LongText
+  status             String   @default("DRAFT") @db.VarChar(40)
+  assignedDepartment String?  @db.VarChar(150)
+  assignedStaffId    String?  @db.VarChar(191)
+  assignedStaff      User?    @relation("ServiceAssignedStaff", fields: [assignedStaffId], references: [id], onDelete: SetNull)
+  staffRecommendation String? @db.Text
+  releaseNote        String?  @db.Text
+  finalNote          String?  @db.Text
+  releaseApprovedAt  DateTime?
+  releaseApprovedById String? @db.VarChar(191)
+  releaseApprovedBy  User? @relation("ServiceReleaseApprovedBy", fields: [releaseApprovedById], references: [id], onDelete: SetNull)
+  version            Int      @default(1)
+  submittedAt        DateTime?
+  completedAt        DateTime?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  documents          ServiceRequestDocument[]
+  events             ServiceRequestEvent[]
+  appointments       ServiceAppointment[]
+
+  @@index([requesterId, createdAt])
+  @@index([status, createdAt])
+  @@index([assignedDepartment, assignedStaffId, status])
+  @@index([serviceKey, status])
+  @@index([releaseApprovedById])
+  @@map("service_request")
+}
+
+model ServiceRequestDocument {
+  id             String         @id @default(cuid()) @db.VarChar(191)
+  requestId      String         @db.VarChar(191)
+  request        ServiceRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  requirementKey String         @db.VarChar(100)
+  requirementLabel String       @db.VarChar(180)
+  fileName       String         @db.VarChar(220)
+  mimeType       String         @db.VarChar(80)
+  byteSize       Int
+  data           Bytes          @db.MediumBlob
+  uploadedAt     DateTime       @default(now())
+  verificationStatus String     @default("PENDING") @db.VarChar(24)
+  verificationNote   String?    @db.Text
+  verifiedById       String?    @db.VarChar(191)
+  verifiedBy         User?      @relation("ServiceDocumentVerifiedBy", fields: [verifiedById], references: [id], onDelete: SetNull)
+  verifiedAt         DateTime?
+
+  @@index([requestId, requirementKey])
+  @@index([verificationStatus, uploadedAt])
+  @@index([verifiedById])
+  @@map("service_request_document")
+}
+
+model ServiceRequestEvent {
+  id               String         @id @default(cuid()) @db.VarChar(191)
+  requestId        String         @db.VarChar(191)
+  request          ServiceRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  actorId          String?        @db.VarChar(191)
+  actor            User?          @relation("ServiceRequestEventActor", fields: [actorId], references: [id], onDelete: SetNull)
+  action           String         @db.VarChar(50)
+  status           String         @db.VarChar(40)
+  note             String         @db.Text
+  visibleToCitizen Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+
+  @@index([requestId, createdAt])
+  @@map("service_request_event")
+}
+
+model ServiceAppointment {
+  id             String         @id @default(cuid()) @db.VarChar(191)
+  requestId      String         @db.VarChar(191)
+  request        ServiceRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  scheduledAt    DateTime
+  location       String         @db.VarChar(220)
+  agenda         String         @db.Text
+  status         String         @default("PROPOSED") @db.VarChar(30)
+  proposedById   String         @db.VarChar(191)
+  proposedBy     User           @relation("ServiceAppointmentProposedBy", fields: [proposedById], references: [id], onDelete: Restrict)
+  citizenNote    String?        @db.Text
+  staffNote      String?        @db.Text
+  confirmedAt    DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([requestId, scheduledAt])
+  @@index([status, scheduledAt])
+  @@map("service_appointment")
+}
+

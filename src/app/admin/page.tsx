@@ -11,6 +11,7 @@ import { StaffWorkspace } from "@/components/admin/staff-workspace";
 import { prisma } from "@/lib/prisma";
 import { listReports } from "@/features/civic/server/repository";
 import { categoryLabel, formatReportDate, STATUS_META, type ReportStatus } from "@/features/civic/config";
+import { serviceDashboardCounts } from "@/features/services/server/data";
 
 // Dynamic LGU counts and session data must only be rendered for the current request.
 export const instant = false;
@@ -18,11 +19,11 @@ export const metadata: Metadata = { title: "Operations Overview | E-Lingkod Baya
 
 const moduleLinks = [
   { title: "Civic reporting", description: "Review reports and document the response", href: "/admin/reports", icon: ClipboardList, available: true },
-  { title: "LGU services", description: "Permits, clearances, and IDs", href: "/admin/services", icon: Building2, available: false },
+  { title: "LGU services", description: "Permits, clearances, assistance and tracked requests", href: "/admin/services", icon: Building2, available: true },
   { title: "Emergency & alerts", description: "Emergency contacts and advisories", href: "/admin/emergency", icon: BellRing, available: false },
   { title: "Municipal projects", description: "Services, project plans, and milestones", href: "/admin/projects", icon: MapPinned, available: false },
-  { title: "Job matching", description: "SPES survey and local opportunities", href: "/admin/jobs", icon: BriefcaseBusiness, available: true },
-  { title: "Worker census", description: "Privacy-aware workforce profiling", href: "/admin/census", icon: UsersRound, available: false },
+  { title: "Job Matching & opportunities", description: "Employment profiling, insights and PESO-reviewed opportunities", href: "/admin/jobs", icon: BriefcaseBusiness, available: true },
+  { title: "Community Census", description: "Separate census workflow planned for a future phase", href: "/admin/census", icon: UsersRound, available: false },
 ];
 
 const reportStatusBars: { label: string; status: ReportStatus; className: string }[] = [
@@ -43,10 +44,15 @@ export default async function AdminDashboard() {
   }
   if (viewer.role !== "ADMIN") return null;
 
-  const [statusCounts, recentReports, citizenCount] = await Promise.all([
+  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  const [statusCounts, recentReports, citizenCount, pendingVacancies, importIssues, recentSurveys, serviceCounts] = await Promise.all([
     prisma.civicReport.groupBy({ by: ["status"], _count: { _all: true } }),
     listReports(viewer, true, 5),
     prisma.user.count({ where: { role: "CITIZEN" } }),
+    prisma.jobOpportunity.count({ where: { status: "PENDING_REVIEW" } }),
+    prisma.communityImportBatch.count({ where: { status: "ACTIVE", OR: [{ warningCount: { gt: 0 } }, { invalidCount: { gt: 0 } }, { duplicateCount: { gt: 0 } }] } }),
+    prisma.communitySurvey.count({ where: { status: "SUBMITTED", consentAggregated: true, updatedAt: { gte: sevenDaysAgo } } }),
+    serviceDashboardCounts(viewer),
   ]);
 
   const counts = Object.fromEntries(statusCounts.map(row => [row.status, row._count._all])) as Partial<Record<ReportStatus, number>>;
@@ -83,6 +89,8 @@ export default async function AdminDashboard() {
       </div>
     </section>
 
+    <section aria-labelledby="admin-action-title" className="space-y-3"><div><p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#2986a5]">Action queue</p><h2 id="admin-action-title" className="mt-1 text-[17px] font-extrabold text-[#143c5b]">What needs attention</h2></div><div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4"><Link href="/admin/services" className="rounded-2xl border border-[#dce9f0] bg-white p-5 transition hover:border-[#a9cddb]"><span className="text-[11px] font-bold text-[#6e8b9d]">LGU service intake</span><strong className="mt-2 block text-3xl text-[#174969]">{serviceCounts.newCount}</strong><p className="mt-2 text-xs text-[#859aa7]">New or pre-screening service requests</p></Link><Link href="/admin/services?status=FOR_FINAL_VERIFICATION" className="rounded-2xl border border-[#dce9f0] bg-white p-5 transition hover:border-[#a9cddb]"><span className="text-[11px] font-bold text-[#6e8b9d]">Service final verification</span><strong className="mt-2 block text-3xl text-[#174969]">{serviceCounts.finalCount}</strong><p className="mt-2 text-xs text-[#859aa7]">Requests waiting for Super Admin verification</p></Link><Link href="/admin/jobs?view=review" className="rounded-2xl border border-[#dce9f0] bg-white p-5 transition hover:border-[#a9cddb]"><span className="text-[11px] font-bold text-[#6e8b9d]">Opportunity verification</span><strong className="mt-2 block text-3xl text-[#174969]">{pendingVacancies}</strong><p className="mt-2 text-xs text-[#859aa7]">Vacancies waiting for Super Admin review</p></Link><Link href="/admin/jobs/insights" className="rounded-2xl border border-[#dce9f0] bg-white p-5 transition hover:border-[#a9cddb]"><span className="text-[11px] font-bold text-[#6e8b9d]">Employment survey</span><strong className="mt-2 block text-3xl text-[#174969]">{recentSurveys}</strong><p className="mt-2 text-xs text-[#859aa7]">Submitted responses in the last 7 days · {importIssues} data-quality flags</p></Link></div></section>
+
     <section className="grid gap-3 md:grid-cols-2" aria-label="Team and citizens"><Link href="/admin/citizens" className="group flex items-center justify-between gap-4 rounded-[16px] border border-[#dfe9ee] bg-white px-5 py-4 transition hover:border-[#a8d1de]"><span className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-xl bg-[#eaf5fa] text-[#287b9d]"><UsersRound size={20}/></span><span><strong className="block text-[12px] text-[#204d6b]">Registered citizens</strong><small className="mt-1 block text-[11px] text-[#8097a7]">{citizenCount.toLocaleString()} accounts · secured contact directory</small></span></span><ArrowUpRight size={17} className="text-[#6994a8]"/></Link><Link href="/admin/staff" className="group flex items-center justify-between gap-4 rounded-[16px] border border-[#dfe9ee] bg-white px-5 py-4 transition hover:border-[#a8d1de]"><span className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-xl bg-[#e7f5f0] text-[#2d917c]"><ShieldCheck size={20}/></span><span><strong className="block text-[12px] text-[#204d6b]">LGU staff permissions</strong><small className="mt-1 block text-[11px] text-[#8097a7]">Manage departments, people, and module access</small></span></span><ArrowUpRight size={17} className="text-[#6994a8]"/></Link></section>
 
     <section aria-labelledby="admin-metrics-title" className="space-y-3">
@@ -112,9 +120,9 @@ export default async function AdminDashboard() {
     </section>
 
     <section aria-labelledby="admin-modules-title" className="space-y-4">
-      <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="text-[10px] font-bold uppercase tracking-[.17em] text-[#2986a5]">Digital public service roadmap</p><h2 id="admin-modules-title" className="mt-1 text-[18px] font-extrabold text-[#16415e]">LGU modules</h2><p className="mt-1 text-[12px] text-[#8194a4]">One integrated platform for more accessible community services.</p></div><span className="inline-flex gap-2 rounded-full border border-[#cfe3e8] bg-[#ebf7f5] px-3 py-1.5 text-[11px] font-bold text-[#257b72]">2 of 6 modules available</span></div>
+      <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="text-[10px] font-bold uppercase tracking-[.17em] text-[#2986a5]">Digital public service roadmap</p><h2 id="admin-modules-title" className="mt-1 text-[18px] font-extrabold text-[#16415e]">LGU modules</h2><p className="mt-1 text-[12px] text-[#8194a4]">One integrated platform for more accessible community services.</p></div><span className="inline-flex gap-2 rounded-full border border-[#cfe3e8] bg-[#ebf7f5] px-3 py-1.5 text-[11px] font-bold text-[#257b72]">3 of 6 modules available</span></div>
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">{moduleLinks.map((module,index) => <Link href={module.href} key={module.href} className="group flex min-h-[114px] items-start gap-3 rounded-2xl border border-[#e0e9ee] bg-white p-4 transition hover:border-[#95c6d7] hover:shadow-[0_8px_24px_rgba(30,83,112,.07)]"><span className={`grid size-10 shrink-0 place-items-center rounded-xl ${module.available ? "bg-[#e5f5ef] text-[#14816c]" : "bg-[#edf3f8] text-[#4c7b95]"}`}><module.icon size={19}/></span><div className="min-w-0 flex-1"><div className="flex items-center justify-between gap-2"><span className="text-[9px] font-bold uppercase tracking-widest text-[#8ba2b0]">MODULE {String(index+1).padStart(2, "0")}</span><span className={`rounded-full px-2 py-1 text-[9px] font-bold ${module.available ? "bg-[#e9f6f0] text-[#27866e]" : "bg-[#f2f5f8] text-[#889baa]"}`}>{module.available ? "ACTIVE" : "PLANNED"}</span></div><h3 className="mt-1 text-[12px] font-extrabold text-[#26516d] group-hover:text-[#176f98]">{module.title}</h3><p className="mt-1 text-[11px] leading-5 text-[#8399a7]">{module.description}</p></div><ArrowUpRight size={15} className="mt-1 shrink-0 text-[#9db1bd] group-hover:text-[#207ca1]"/></Link>)}</div>
     </section>
-    <p className="flex items-center gap-2 text-[10px] text-[#869dac]"><ShieldCheck size={13}/> Figures are based on your connected database. Planned modules contain no live government data. Job listings require PESO verification.</p>
+    <p className="flex items-center gap-2 text-[10px] text-[#869dac]"><ShieldCheck size={13}/> Figures are based on your connected database. Planned modules contain no live government data. LGU service requests and job listings follow role-based verification workflows.</p>
   </div>;
 }

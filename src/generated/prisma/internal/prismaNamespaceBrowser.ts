@@ -70,7 +70,15 @@ export const ModelName = {
   SpesImportBatch: 'SpesImportBatch',
   SpesSurveyRecord: 'SpesSurveyRecord',
   SpesImportEvent: 'SpesImportEvent',
-  JobActivity: 'JobActivity'
+  JobActivity: 'JobActivity',
+  CommunitySurvey: 'CommunitySurvey',
+  GovernmentActivity: 'GovernmentActivity',
+  CommunityImportBatch: 'CommunityImportBatch',
+  CommunityImportRecord: 'CommunityImportRecord',
+  ServiceRequest: 'ServiceRequest',
+  ServiceRequestDocument: 'ServiceRequestDocument',
+  ServiceRequestEvent: 'ServiceRequestEvent',
+  ServiceAppointment: 'ServiceAppointment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -406,6 +414,213 @@ export const JobActivityScalarFieldEnum = {
 export type JobActivityScalarFieldEnum = (typeof JobActivityScalarFieldEnum)[keyof typeof JobActivityScalarFieldEnum]
 
 
+export const CommunitySurveyScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  surveyYear: 'surveyYear',
+  surveyVersion: 'surveyVersion',
+  status: 'status',
+  barangay: 'barangay',
+  ageGroup: 'ageGroup',
+  sex: 'sex',
+  civilStatus: 'civilStatus',
+  pwdStatus: 'pwdStatus',
+  householdSize: 'householdSize',
+  currentlyStudying: 'currentlyStudying',
+  educationLevel: 'educationLevel',
+  employmentStatus: 'employmentStatus',
+  occupation: 'occupation',
+  industry: 'industry',
+  workArrangement: 'workArrangement',
+  workLocationScope: 'workLocationScope',
+  employmentLength: 'employmentLength',
+  workRelatedToEducation: 'workRelatedToEducation',
+  interestedNewWork: 'interestedNewWork',
+  skillsJson: 'skillsJson',
+  skillLevelsJson: 'skillLevelsJson',
+  trainingInterest: 'trainingInterest',
+  trainingCategoriesJson: 'trainingCategoriesJson',
+  trainingProgramsJson: 'trainingProgramsJson',
+  trainingReason: 'trainingReason',
+  trainingBarriersJson: 'trainingBarriersJson',
+  employmentBarriersJson: 'employmentBarriersJson',
+  preferredOccupationsJson: 'preferredOccupationsJson',
+  preferredIndustry: 'preferredIndustry',
+  preferredWorkArrangement: 'preferredWorkArrangement',
+  preferredWorkLocation: 'preferredWorkLocation',
+  willingOutsideMunicipality: 'willingOutsideMunicipality',
+  interestedGovPrograms: 'interestedGovPrograms',
+  interestedLivelihood: 'interestedLivelihood',
+  interestedEntrepreneurship: 'interestedEntrepreneurship',
+  businessType: 'businessType',
+  businessSector: 'businessSector',
+  businessLocationType: 'businessLocationType',
+  businessSize: 'businessSize',
+  businessRegistered: 'businessRegistered',
+  businessYears: 'businessYears',
+  businessChallengesJson: 'businessChallengesJson',
+  businessSupportJson: 'businessSupportJson',
+  programAwareness: 'programAwareness',
+  informationAccess: 'informationAccess',
+  participatedConsultation: 'participatedConsultation',
+  inclusivePlanning: 'inclusivePlanning',
+  priorityProgramsJson: 'priorityProgramsJson',
+  publicServiceBarriersJson: 'publicServiceBarriersJson',
+  serviceSatisfaction: 'serviceSatisfaction',
+  feedback: 'feedback',
+  consentAggregated: 'consentAggregated',
+  consentOpportunityRecommendations: 'consentOpportunityRecommendations',
+  consentProgramRecommendations: 'consentProgramRecommendations',
+  submittedAt: 'submittedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CommunitySurveyScalarFieldEnum = (typeof CommunitySurveyScalarFieldEnum)[keyof typeof CommunitySurveyScalarFieldEnum]
+
+
+export const GovernmentActivityScalarFieldEnum = {
+  id: 'id',
+  activityName: 'activityName',
+  activityType: 'activityType',
+  implementingOffice: 'implementingOffice',
+  activityDate: 'activityDate',
+  coverage: 'coverage',
+  originalPurpose: 'originalPurpose',
+  originalDataSource: 'originalDataSource',
+  intendedUse: 'intendedUse',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GovernmentActivityScalarFieldEnum = (typeof GovernmentActivityScalarFieldEnum)[keyof typeof GovernmentActivityScalarFieldEnum]
+
+
+export const CommunityImportBatchScalarFieldEnum = {
+  id: 'id',
+  activityId: 'activityId',
+  importedById: 'importedById',
+  sourceFilename: 'sourceFilename',
+  fileType: 'fileType',
+  fingerprint: 'fingerprint',
+  recordCount: 'recordCount',
+  validCount: 'validCount',
+  invalidCount: 'invalidCount',
+  warningCount: 'warningCount',
+  duplicateCount: 'duplicateCount',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type CommunityImportBatchScalarFieldEnum = (typeof CommunityImportBatchScalarFieldEnum)[keyof typeof CommunityImportBatchScalarFieldEnum]
+
+
+export const CommunityImportRecordScalarFieldEnum = {
+  id: 'id',
+  batchId: 'batchId',
+  originalRowNumber: 'originalRowNumber',
+  participantRef: 'participantRef',
+  barangay: 'barangay',
+  ageGroup: 'ageGroup',
+  educationLevel: 'educationLevel',
+  employmentStatus: 'employmentStatus',
+  occupation: 'occupation',
+  industry: 'industry',
+  skillsJson: 'skillsJson',
+  trainingInterest: 'trainingInterest',
+  trainingCategoriesJson: 'trainingCategoriesJson',
+  trainingProgramsJson: 'trainingProgramsJson',
+  trainingBarriersJson: 'trainingBarriersJson',
+  employmentBarriersJson: 'employmentBarriersJson',
+  businessSector: 'businessSector',
+  assistanceNeededJson: 'assistanceNeededJson',
+  rawJson: 'rawJson',
+  qualityFlagsJson: 'qualityFlagsJson',
+  createdAt: 'createdAt'
+} as const
+
+export type CommunityImportRecordScalarFieldEnum = (typeof CommunityImportRecordScalarFieldEnum)[keyof typeof CommunityImportRecordScalarFieldEnum]
+
+
+export const ServiceRequestScalarFieldEnum = {
+  id: 'id',
+  trackingId: 'trackingId',
+  serviceKey: 'serviceKey',
+  serviceTitle: 'serviceTitle',
+  requesterId: 'requesterId',
+  purpose: 'purpose',
+  formDataJson: 'formDataJson',
+  status: 'status',
+  assignedDepartment: 'assignedDepartment',
+  assignedStaffId: 'assignedStaffId',
+  staffRecommendation: 'staffRecommendation',
+  releaseNote: 'releaseNote',
+  finalNote: 'finalNote',
+  releaseApprovedAt: 'releaseApprovedAt',
+  releaseApprovedById: 'releaseApprovedById',
+  version: 'version',
+  submittedAt: 'submittedAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceRequestScalarFieldEnum = (typeof ServiceRequestScalarFieldEnum)[keyof typeof ServiceRequestScalarFieldEnum]
+
+
+export const ServiceRequestDocumentScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  requirementKey: 'requirementKey',
+  requirementLabel: 'requirementLabel',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  data: 'data',
+  uploadedAt: 'uploadedAt',
+  verificationStatus: 'verificationStatus',
+  verificationNote: 'verificationNote',
+  verifiedById: 'verifiedById',
+  verifiedAt: 'verifiedAt'
+} as const
+
+export type ServiceRequestDocumentScalarFieldEnum = (typeof ServiceRequestDocumentScalarFieldEnum)[keyof typeof ServiceRequestDocumentScalarFieldEnum]
+
+
+export const ServiceRequestEventScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  actorId: 'actorId',
+  action: 'action',
+  status: 'status',
+  note: 'note',
+  visibleToCitizen: 'visibleToCitizen',
+  createdAt: 'createdAt'
+} as const
+
+export type ServiceRequestEventScalarFieldEnum = (typeof ServiceRequestEventScalarFieldEnum)[keyof typeof ServiceRequestEventScalarFieldEnum]
+
+
+export const ServiceAppointmentScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  scheduledAt: 'scheduledAt',
+  location: 'location',
+  agenda: 'agenda',
+  status: 'status',
+  proposedById: 'proposedById',
+  citizenNote: 'citizenNote',
+  staffNote: 'staffNote',
+  confirmedAt: 'confirmedAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceAppointmentScalarFieldEnum = (typeof ServiceAppointmentScalarFieldEnum)[keyof typeof ServiceAppointmentScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -673,4 +888,166 @@ export const JobActivityOrderByRelevanceFieldEnum = {
 } as const
 
 export type JobActivityOrderByRelevanceFieldEnum = (typeof JobActivityOrderByRelevanceFieldEnum)[keyof typeof JobActivityOrderByRelevanceFieldEnum]
+
+
+export const CommunitySurveyOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  status: 'status',
+  barangay: 'barangay',
+  ageGroup: 'ageGroup',
+  sex: 'sex',
+  civilStatus: 'civilStatus',
+  pwdStatus: 'pwdStatus',
+  educationLevel: 'educationLevel',
+  employmentStatus: 'employmentStatus',
+  occupation: 'occupation',
+  industry: 'industry',
+  workArrangement: 'workArrangement',
+  workLocationScope: 'workLocationScope',
+  employmentLength: 'employmentLength',
+  skillsJson: 'skillsJson',
+  skillLevelsJson: 'skillLevelsJson',
+  trainingInterest: 'trainingInterest',
+  trainingCategoriesJson: 'trainingCategoriesJson',
+  trainingProgramsJson: 'trainingProgramsJson',
+  trainingReason: 'trainingReason',
+  trainingBarriersJson: 'trainingBarriersJson',
+  employmentBarriersJson: 'employmentBarriersJson',
+  preferredOccupationsJson: 'preferredOccupationsJson',
+  preferredIndustry: 'preferredIndustry',
+  preferredWorkArrangement: 'preferredWorkArrangement',
+  preferredWorkLocation: 'preferredWorkLocation',
+  businessType: 'businessType',
+  businessSector: 'businessSector',
+  businessLocationType: 'businessLocationType',
+  businessSize: 'businessSize',
+  businessRegistered: 'businessRegistered',
+  businessYears: 'businessYears',
+  businessChallengesJson: 'businessChallengesJson',
+  businessSupportJson: 'businessSupportJson',
+  programAwareness: 'programAwareness',
+  informationAccess: 'informationAccess',
+  participatedConsultation: 'participatedConsultation',
+  inclusivePlanning: 'inclusivePlanning',
+  priorityProgramsJson: 'priorityProgramsJson',
+  publicServiceBarriersJson: 'publicServiceBarriersJson',
+  feedback: 'feedback'
+} as const
+
+export type CommunitySurveyOrderByRelevanceFieldEnum = (typeof CommunitySurveyOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyOrderByRelevanceFieldEnum]
+
+
+export const GovernmentActivityOrderByRelevanceFieldEnum = {
+  id: 'id',
+  activityName: 'activityName',
+  activityType: 'activityType',
+  implementingOffice: 'implementingOffice',
+  coverage: 'coverage',
+  originalPurpose: 'originalPurpose',
+  originalDataSource: 'originalDataSource',
+  intendedUse: 'intendedUse',
+  notes: 'notes'
+} as const
+
+export type GovernmentActivityOrderByRelevanceFieldEnum = (typeof GovernmentActivityOrderByRelevanceFieldEnum)[keyof typeof GovernmentActivityOrderByRelevanceFieldEnum]
+
+
+export const CommunityImportBatchOrderByRelevanceFieldEnum = {
+  id: 'id',
+  activityId: 'activityId',
+  importedById: 'importedById',
+  sourceFilename: 'sourceFilename',
+  fileType: 'fileType',
+  fingerprint: 'fingerprint',
+  status: 'status'
+} as const
+
+export type CommunityImportBatchOrderByRelevanceFieldEnum = (typeof CommunityImportBatchOrderByRelevanceFieldEnum)[keyof typeof CommunityImportBatchOrderByRelevanceFieldEnum]
+
+
+export const CommunityImportRecordOrderByRelevanceFieldEnum = {
+  id: 'id',
+  batchId: 'batchId',
+  participantRef: 'participantRef',
+  barangay: 'barangay',
+  ageGroup: 'ageGroup',
+  educationLevel: 'educationLevel',
+  employmentStatus: 'employmentStatus',
+  occupation: 'occupation',
+  industry: 'industry',
+  skillsJson: 'skillsJson',
+  trainingInterest: 'trainingInterest',
+  trainingCategoriesJson: 'trainingCategoriesJson',
+  trainingProgramsJson: 'trainingProgramsJson',
+  trainingBarriersJson: 'trainingBarriersJson',
+  employmentBarriersJson: 'employmentBarriersJson',
+  businessSector: 'businessSector',
+  assistanceNeededJson: 'assistanceNeededJson',
+  rawJson: 'rawJson',
+  qualityFlagsJson: 'qualityFlagsJson'
+} as const
+
+export type CommunityImportRecordOrderByRelevanceFieldEnum = (typeof CommunityImportRecordOrderByRelevanceFieldEnum)[keyof typeof CommunityImportRecordOrderByRelevanceFieldEnum]
+
+
+export const ServiceRequestOrderByRelevanceFieldEnum = {
+  id: 'id',
+  trackingId: 'trackingId',
+  serviceKey: 'serviceKey',
+  serviceTitle: 'serviceTitle',
+  requesterId: 'requesterId',
+  purpose: 'purpose',
+  formDataJson: 'formDataJson',
+  status: 'status',
+  assignedDepartment: 'assignedDepartment',
+  assignedStaffId: 'assignedStaffId',
+  staffRecommendation: 'staffRecommendation',
+  releaseNote: 'releaseNote',
+  finalNote: 'finalNote',
+  releaseApprovedById: 'releaseApprovedById'
+} as const
+
+export type ServiceRequestOrderByRelevanceFieldEnum = (typeof ServiceRequestOrderByRelevanceFieldEnum)[keyof typeof ServiceRequestOrderByRelevanceFieldEnum]
+
+
+export const ServiceRequestDocumentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  requirementKey: 'requirementKey',
+  requirementLabel: 'requirementLabel',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  verificationStatus: 'verificationStatus',
+  verificationNote: 'verificationNote',
+  verifiedById: 'verifiedById'
+} as const
+
+export type ServiceRequestDocumentOrderByRelevanceFieldEnum = (typeof ServiceRequestDocumentOrderByRelevanceFieldEnum)[keyof typeof ServiceRequestDocumentOrderByRelevanceFieldEnum]
+
+
+export const ServiceRequestEventOrderByRelevanceFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  actorId: 'actorId',
+  action: 'action',
+  status: 'status',
+  note: 'note'
+} as const
+
+export type ServiceRequestEventOrderByRelevanceFieldEnum = (typeof ServiceRequestEventOrderByRelevanceFieldEnum)[keyof typeof ServiceRequestEventOrderByRelevanceFieldEnum]
+
+
+export const ServiceAppointmentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  location: 'location',
+  agenda: 'agenda',
+  status: 'status',
+  proposedById: 'proposedById',
+  citizenNote: 'citizenNote',
+  staffNote: 'staffNote'
+} as const
+
+export type ServiceAppointmentOrderByRelevanceFieldEnum = (typeof ServiceAppointmentOrderByRelevanceFieldEnum)[keyof typeof ServiceAppointmentOrderByRelevanceFieldEnum]
 

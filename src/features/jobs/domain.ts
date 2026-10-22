@@ -1,6 +1,6 @@
 import { CivicError } from "@/features/civic/validation";
 
-export const SKILLS = ["Data entry", "Microsoft Excel", "Microsoft Word", "Customer service", "Communication", "Basic computer", "Troubleshooting", "Bookkeeping", "Cash handling", "Sales", "Food preparation", "Food service", "Inventory", "Driving", "Graphic design", "Social media", "Photography", "Coding", "Agriculture", "Cleaning", "Caregiving", "Teaching", "Construction", "Electrical repair"] as const;
+export const SKILLS = ["Data entry", "Microsoft Excel", "Microsoft Word", "Customer service", "Communication", "Basic computer", "Troubleshooting", "Bookkeeping", "Cash handling", "Sales", "Food preparation", "Food service", "Inventory", "Driving", "Graphic design", "Social media", "Photography", "Coding", "Agriculture", "Cleaning", "Caregiving", "Teaching", "Construction", "Electrical repair", "Basic Computer Skills", "Microsoft Office", "Data Entry", "Programming", "Web Development", "Graphic Design", "Video Editing", "Social Media Management", "Digital Marketing", "Computer Hardware", "Computer Systems Servicing", "Networking", "Office Administration", "Accounting", "Customer Service", "Inventory Management", "Entrepreneurship", "Business Management", "Electrical Installation", "Welding", "Carpentry", "Plumbing", "Automotive Servicing", "Machine Operation", "Electronics Repair", "Food Preparation", "Baking", "Housekeeping", "Bartending", "Food and Beverage Service", "Tourism", "Beauty Care", "Hairdressing", "Massage / Wellness", "Crop Production", "Animal Production", "Agricultural Machinery", "Organic Agriculture", "Food Processing"] as const;
 export const INTERESTS = ["Office & admin", "Technology", "Retail & sales", "Food & hospitality", "Transport", "Creative services", "Healthcare & care", "Education", "Agriculture", "Public service", "Skilled trades"] as const;
 export const EDUCATION = ["ANY", "ELEMENTARY", "HIGH_SCHOOL", "SENIOR_HIGH", "VOCATIONAL", "COLLEGE"] as const;
 export const WORK_TYPES = ["FULL_TIME", "PART_TIME", "TEMPORARY", "INTERNSHIP"] as const;
@@ -81,14 +81,14 @@ export function scoreMatch(profile:MatchProfile, job:MatchJob) {
 // RFC 4180-style CSV parser: quoted commas/newlines and escaped double quotes.
 // Limited at the HTTP layer and again here; no third-party parser required.
 export function parseCsv(text:string):string[][] {
-  if (text.length>300_000) throw new CivicError("CSV exceeds the 300 KB limit.",413);
+  if (text.length>2_500_000) throw new CivicError("CSV exceeds the 2.5 MB limit.",413);
   const rows:string[][]=[];let row:string[]=[];let cell="";let quoted=false;
   const input=text.replace(/^\uFEFF/,"");
   for(let i=0;i<input.length;i++){
     const c=input[i];
     if(c==='"') {if(quoted&&input[i+1]==='"'){cell+='"';i++;}else if(!quoted && !cell){quoted=true;}else if(quoted){quoted=false;}else throw new CivicError("Invalid CSV quoting.",400);}
     else if(c===','&&!quoted){row.push(cell);cell="";}
-    else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&input[i+1]==='\n')i++;row.push(cell);if(row.some(v=>v.trim()))rows.push(row);row=[];cell="";if(rows.length>502)throw new CivicError("Import up to 500 survey records at a time.",400);}
+    else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&input[i+1]==='\n')i++;row.push(cell);if(row.some(v=>v.trim()))rows.push(row);row=[];cell="";if(rows.length>5002)throw new CivicError("CSV contains too many rows.",400);}
     else cell+=c;
   }
   if(quoted)throw new CivicError("CSV has an unclosed quote.",400);

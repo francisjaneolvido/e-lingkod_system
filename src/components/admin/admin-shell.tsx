@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  BellRing, BriefcaseBusiness, Building2, ChevronLeft, ChevronRight,
-  CircleUserRound, ClipboardList, ExternalLink, LayoutDashboard,
+  BarChart3, BellRing, BriefcaseBusiness, Building2, ChevronRight,
+  ClipboardList, ExternalLink, FileSpreadsheet, LayoutDashboard,
   MapPinned, Menu, PanelLeftClose, PanelLeftOpen, ShieldCheck,
   UsersRound, UserCog, X,
 } from "lucide-react";
@@ -17,34 +17,51 @@ const navSections = [
   { title: "OPERATIONS", items: [
     { label: "Overview", href: "/admin", icon: LayoutDashboard },
     { label: "Citizen reports", href: "/admin/reports", icon: ClipboardList },
+    { label: "Online LGU services", href: "/admin/services", icon: Building2 },
     { label: "Registered citizens", href: "/admin/citizens", icon: UsersRound },
+  ] },
+  { title: "JOB MATCHING & EMPLOYMENT", items: [
+    { label: "Overview & opportunities", href: "/admin/jobs", icon: BriefcaseBusiness },
+    { label: "Employment insights", href: "/admin/jobs/insights", icon: BarChart3 },
+    { label: "Employment data", href: "/admin/jobs/data", icon: FileSpreadsheet },
+  ] },
+  { title: "OTHER SERVICE MODULES", items: [
+    { label: "Community census", href: "/admin/census", icon: BarChart3 },
+    { label: "Emergency & alerts", href: "/admin/emergency", icon: BellRing },
+    { label: "Municipal projects", href: "/admin/projects", icon: MapPinned },
   ] },
   { title: "TEAM MANAGEMENT", items: [
     { label: "LGU staff", href: "/admin/staff", icon: UserCog },
   ] },
-  { title: "SERVICE MODULES", items: [
-    { label: "LGU services", href: "/admin/services", icon: Building2 },
-    { label: "Emergency & alerts", href: "/admin/emergency", icon: BellRing },
-    { label: "Municipal projects", href: "/admin/projects", icon: MapPinned },
-    { label: "Job matching", href: "/admin/jobs", icon: BriefcaseBusiness },
-    { label: "Worker census", href: "/admin/census", icon: UsersRound },
-  ] },
 ] as const;
 
-const modulesByPath: Record<string, StaffModule> = { "/admin/reports": "REPORTS", "/admin/services": "SERVICES", "/admin/emergency": "EMERGENCY", "/admin/projects": "PROJECTS", "/admin/jobs": "JOBS", "/admin/census": "CENSUS" };
+const modulesByPath: Record<string, StaffModule> = {
+  "/admin/reports": "REPORTS",
+  "/admin/services": "SERVICES",
+  "/admin/emergency": "EMERGENCY",
+  "/admin/projects": "PROJECTS",
+  "/admin/jobs": "JOBS",
+  "/admin/jobs/insights": "JOBS",
+  "/admin/jobs/data": "COMMUNITY_DATA",
+  "/admin/census": "CENSUS",
+};
 
 const pageMeta: Record<string, {title: string; subtitle: string}> = {
   "/admin": { title: "Overview", subtitle: "Operations dashboard" },
   "/admin/citizens": { title: "Registered citizens", subtitle: "Citizen account directory" },
   "/admin/staff": { title: "LGU staff", subtitle: "Team and module permissions" },
   "/admin/reports": { title: "Citizen reports", subtitle: "Civic reporting · LGU action desk" },
-  "/admin/services": { title: "LGU services", subtitle: "Digital permits and applications" },
+  "/admin/services": { title: "Online LGU services", subtitle: "Requests, assignments, schedules and verification" },
   "/admin/emergency": { title: "Emergency & alerts", subtitle: "Public safety workspace" },
   "/admin/projects": { title: "Municipal projects", subtitle: "Programs and public services" },
-  "/admin/jobs": { title: "Job matching", subtitle: "Local opportunities and SPES insights" },
-  "/admin/census": { title: "Worker census", subtitle: "Social and workforce profiling" },
+  "/admin/jobs": { title: "Job Matching", subtitle: "Employment, livelihood and opportunity workspace" },
+  "/admin/jobs/insights": { title: "Employment insights", subtitle: "Skills, training, barriers and livelihood analytics" },
+  "/admin/jobs/data": { title: "Employment data", subtitle: "Historical activity datasets, imports and manual encoding" },
+  "/admin/census": { title: "Community census", subtitle: "Planned census module" },
   "/admin/profile": { title: "My profile", subtitle: "LGU account" },
 };
+
+const allNavItems = navSections.flatMap(section => section.items);
 
 export function AdminShell({ children, name, email, role, modules, department }: { children: ReactNode; name: string; email: string; role: string; modules: StaffModule[]; department: string }) {
   const pathname = usePathname();
@@ -57,6 +74,10 @@ export function AdminShell({ children, name, email, role, modules, department }:
     .sort((a, b) => b.length - a.length)[0] ?? "/admin";
   const meta = pageMeta[matched];
   const initials = name.trim().split(/\s+/).slice(0,2).map(piece => piece[0]?.toUpperCase() ?? "").join("") || "LG";
+  const activeHref = useMemo(() => allNavItems
+    .map(item => item.href)
+    .filter(href => pathname === href || (href !== "/admin" && pathname.startsWith(`${href}/`)))
+    .sort((a,b) => b.length - a.length)[0] ?? "/admin", [pathname]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -95,7 +116,7 @@ export function AdminShell({ children, name, email, role, modules, department }:
           <nav aria-label={section.title} className="elb-admin-navigation">
             {section.items.filter(item => canSee(item.href)).map(item => {
               const Icon = item.icon;
-              const active = pathname === item.href || (item.href !== "/admin" && pathname.startsWith(`${item.href}/`));
+              const active = activeHref === item.href;
               return <Link key={item.href} href={item.href} onClick={closeMenu} aria-current={active ? "page" : undefined} title={item.label} className={`elb-admin-nav-link ${active ? "elb-admin-nav-link--active" : ""}`}>
                 <Icon size={19} strokeWidth={active ? 2.3 : 1.85} aria-hidden="true" />
                 <span className="elb-admin-nav-label">{item.label}</span>

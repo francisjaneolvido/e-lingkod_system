@@ -22,7 +22,7 @@ function PermissionPicker({ value, onChange, disabled }: { value: StaffModule[];
     <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">{STAFF_MODULES.map(module =>
       <label key={module} className={`elb-admin-module-check flex min-h-12 items-center gap-2.5 ${value.includes(module) ? "elb-admin-module-check--selected" : ""}`}>
         <input type="checkbox" className="size-4 accent-[#136f98]" checked={value.includes(module)} onChange={event => onChange(event.target.checked ? [...value, module] : value.filter(item => item !== module))}/>
-        <span className="text-[12px] leading-5">{STAFF_MODULE_LABELS[module]}{module !== "REPORTS" && module !== "JOBS" && <small className="ml-1 font-normal text-[#8299a9]">(preview)</small>}</span>
+        <span className="text-[12px] leading-5">{STAFF_MODULE_LABELS[module]}{module !== "REPORTS" && module !== "JOBS" && module !== "COMMUNITY_DATA" && <small className="ml-1 font-normal text-[#8299a9]">(preview)</small>}</span>
       </label>)}</div>
   </fieldset>;
 }

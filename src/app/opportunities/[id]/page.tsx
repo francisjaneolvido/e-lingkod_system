@@ -11,6 +11,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { currentViewer } from "@/lib/access";
 import { publishedJobById, profileForCitizen } from "@/features/jobs/server/data";
+import { communityMatchProfile } from "@/features/community/server/data";
 import { EDUCATION_LABEL, WORK_LABEL, scoreMatch } from "@/features/jobs/domain";
 
 export const instant = false;
@@ -23,7 +24,7 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
   const citizen = viewer?.role === "CITIZEN";
   const job = await publishedJobById(id);
   if (!job) notFound();
-  const profile = citizen ? await profileForCitizen(viewer.id) : null;
+  const profile = citizen ? (await communityMatchProfile(viewer.id)) ?? (await profileForCitizen(viewer.id)) : null;
   const match = profile ? scoreMatch(profile, job) : null;
   const safeExternalUrl = job.externalUrl && /^https?:\/\/[^\s]+$/i.test(job.externalUrl) ? job.externalUrl : null;
 
@@ -68,7 +69,7 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
               </section>
             </div>
 
-            <aside className="min-w-0 space-y-5 lg:sticky lg:top-28" aria-label="Your job matching guide">
+            <aside className="min-w-0 space-y-5 lg:sticky lg:top-28" aria-label="Your opportunity recommendation guide">
               <section className="rounded-[24px] border border-[#d4e5ef] bg-white p-5 shadow-[0_8px_25px_rgba(15,64,101,.045)] sm:p-6">
                 <div className="flex items-center gap-2"><Sparkles size={20} className="text-[#217b93]" /><h2 className="text-lg font-extrabold text-[#17496b]">Your skills match</h2></div>
                 {match ? (
@@ -78,16 +79,16 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
                     <div className="border-t border-[#e6eef3] pt-3"><p className="text-xs font-extrabold uppercase tracking-wide text-[#678299]">Other skills to review</p><p className="mt-2 text-sm leading-6 text-[#56768d]">{match.missingSkills.length ? match.missingSkills.join(", ") : "All listed skills also appear in your profile"}</p></div>
                     {match.matchedInterests.length > 0 && <p className="border-t border-[#e6eef3] pt-3 text-sm leading-6 text-[#52778d]">Related interests: {match.matchedInterests.join(", ")}</p>}
                     <p className="rounded-lg bg-[#f1f7fa] px-3 py-3 text-xs leading-5 text-[#56798b]">Education, work experience and employer screening are not checked by this matching feature.</p>
-                    <Link href="/opportunities/profile" className="inline-flex min-h-11 items-center gap-2 text-sm font-extrabold text-[#176c94] underline underline-offset-4">Update my skills profile <ArrowUpRight size={16} /></Link>
+                    <Link href="/community-survey" className="inline-flex min-h-11 items-center gap-2 text-sm font-extrabold text-[#176c94] underline underline-offset-4">Update my community profile <ArrowUpRight size={16} /></Link>
                   </div>
                 ) : (
                   <div className="mt-4 space-y-4">
-                    <p className="text-sm leading-6 text-[#59798e]">Create an optional skills profile to see which listed skills overlap with yours. You can browse jobs without one.</p>
-                    <Link href={citizen ? "/opportunities/profile" : "/login?next=%2Fopportunities%2Fprofile"} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#155778] px-4 py-3 text-sm font-extrabold text-white hover:bg-[#0b7197]"><CircleHelp size={17} /> {citizen ? "Set my skills" : "Sign in for suggestions"}</Link>
+                    <p className="text-sm leading-6 text-[#59798e]">Complete the optional community survey to see which listed skills overlap with yours. You can browse opportunities without a profile.</p>
+                    <Link href={citizen ? "/community-survey" : "/login?next=%2Fcommunity-survey"} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#155778] px-4 py-3 text-sm font-extrabold text-white hover:bg-[#0b7197]"><CircleHelp size={17} /> {citizen ? "Complete community survey" : "Sign in for suggestions"}</Link>
                   </div>
                 )}
               </section>
-              <div className="flex items-start gap-3 rounded-xl border border-[#d3e8df] bg-[#edf8f2] p-4 text-xs leading-6 text-[#36745c]"><LockKeyhole size={18} className="mt-0.5 shrink-0" /><p>Your saved skills profile is private and is not automatically forwarded to employers.</p></div>
+              <div className="flex items-start gap-3 rounded-xl border border-[#d3e8df] bg-[#edf8f2] p-4 text-xs leading-6 text-[#36745c]"><LockKeyhole size={18} className="mt-0.5 shrink-0" /><p>Your community survey profile is private and is not automatically forwarded to employers. Opportunity recommendations require your separate consent.</p></div>
               <Link href="/opportunities" className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#285d7c]"><BriefcaseBusiness size={17} /> Browse more opportunities</Link>
             </aside>
           </div>

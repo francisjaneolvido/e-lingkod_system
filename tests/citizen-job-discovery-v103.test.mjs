@@ -25,18 +25,19 @@ const updated = [
   "src/features/jobs/components/profile-editor.tsx",
 ];
 
-test("Job Matching tile and heading navigate directly to live /opportunities", () => {
-  assert.match(tile, /service\.id === "jobs" \? <Link href="\/opportunities"/);
-  assert.match(tile, /Browse job opportunities/);
-  assert.match(services, /if \(service\.id === "jobs"\) return <Link href="\/opportunities"/);
-  assert.match(modal, /service\.id === "jobs" \? \(/);
+test("Community Employment tile opens the live umbrella module and keeps opportunities available", () => {
+  assert.match(tile, /service\.id === "jobs" \? <Link href="\/community-employment"/);
+  assert.match(tile, /Open module/);
+  assert.match(services, /if \(service\.id === "jobs"\) return <Link href="\/community-employment"/);
+  assert.match(modal, /href="\/community-employment"/);
 });
 
-test("service notices accurately distinguish working Job Matching from planned features", () => {
-  assert.match(services, /Civic Reporting and Job Matching are available/);
-  assert.doesNotMatch(services, /jobs, and census remain feature previews/);
-  assert.match(tile, /Job discovery · Available/);
-  assert.match(read("src/components/layout/site-footer.tsx"), /PESO job opportunities can also be browsed/);
+test("service notices accurately distinguish live Job Matching from the planned Census module", () => {
+  assert.match(tile, /Survey & opportunity discovery · Available/);
+  assert.match(read("src/features/landing/data/services.ts"), /Community Employment & Livelihood/);
+  assert.match(read("src/features/landing/data/services.ts"), /title: "Community Census", shortTitle: "Census · coming soon"/);
+  assert.match(read("src/features/landing/data/services.ts"), /belongs to Job Matching \/ Employment & Livelihood, not Census/);
+  assert.match(read("src/components/layout/site-footer.tsx"), /Online LGU Services, and PESO opportunities now have working prototype flows/);
 });
 
 test("citizen cards link to dedicated details instead of expanding into long inline content", () => {
@@ -70,9 +71,11 @@ test("job details include qualifications, contact steps and optional non-eligibi
 
 test("public job discovery does not require login; profile remains opt-in", () => {
   const listing = read("src/app/opportunities/page.tsx");
-  assert.match(listing, /citizen \? profileForCitizen\(viewer\.id\) : Promise\.resolve\(null\)/);
+  assert.match(listing, /communityMatchProfile\(viewer\.id\)/);
+  assert.match(listing, /profileForCitizen\(viewer\.id\)/);
   assert.match(listing, /publishedJobs\(\)/);
-  assert.match(detail, /citizen \? await profileForCitizen\(viewer\.id\) : null/);
+  assert.match(detail, /communityMatchProfile\(viewer\.id\)/);
+  assert.match(detail, /profileForCitizen\(viewer\.id\)/);
   assert.doesNotMatch(detail, /requirePageViewer/);
 });
 

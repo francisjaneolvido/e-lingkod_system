@@ -79,5 +79,5 @@ test('review UI exists for Super Admin only with public/private action distincti
   assert.match(list,/isSuperAdmin&&<VacancyReview/);
   assert.match(list,/Approve & publish/);
   assert.match(list,/Return for correction/);
-  assert.match(list,/Submit for review/);
+  assert.match(list,/Submit for verification/);
 });

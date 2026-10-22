@@ -1,0 +1,3 @@
+participant_ref,barangay,age_group,education_level,employment_status,occupation,industry,skills,interested_in_training,training_category,specific_training_interest,training_barriers,employment_barriers,business_sector,assistance_needed
+REF-001,Sample Barangay,18-24,College,Unemployed Looking,,,Basic Computer Skills|Data Entry,Yes,Information Technology,Computer Systems Servicing,Transportation cost,Lack of work experience,,Skills training
+REF-002,Sample Barangay,25-34,Vocational,Self-employed,Food vendor,Food & hospitality,Food Preparation|Sales,Maybe,Business,Entrepreneurship,Schedule conflict,,Food,Financial literacy|Market linkage

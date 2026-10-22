@@ -141,3 +141,43 @@ export type SpesImportEvent = Prisma.SpesImportEventModel
  * 
  */
 export type JobActivity = Prisma.JobActivityModel
+/**
+ * Model CommunitySurvey
+ * 
+ */
+export type CommunitySurvey = Prisma.CommunitySurveyModel
+/**
+ * Model GovernmentActivity
+ * 
+ */
+export type GovernmentActivity = Prisma.GovernmentActivityModel
+/**
+ * Model CommunityImportBatch
+ * 
+ */
+export type CommunityImportBatch = Prisma.CommunityImportBatchModel
+/**
+ * Model CommunityImportRecord
+ * 
+ */
+export type CommunityImportRecord = Prisma.CommunityImportRecordModel
+/**
+ * Model ServiceRequest
+ * 
+ */
+export type ServiceRequest = Prisma.ServiceRequestModel
+/**
+ * Model ServiceRequestDocument
+ * 
+ */
+export type ServiceRequestDocument = Prisma.ServiceRequestDocumentModel
+/**
+ * Model ServiceRequestEvent
+ * 
+ */
+export type ServiceRequestEvent = Prisma.ServiceRequestEventModel
+/**
+ * Model ServiceAppointment
+ * 
+ */
+export type ServiceAppointment = Prisma.ServiceAppointmentModel
