@@ -13,7 +13,7 @@ export default async function EditOpportunityPage({params}:{params:Promise<{id:s
  const row=await prisma.jobOpportunity.findUnique({where:{id}});
  if(!row)notFound();
  if(row.status==="PENDING_REVIEW")notFound();
- const job={id:row.id,title:row.title,employer:row.employer,sector:row.sector,workType:row.workType,
+ const job={createdById: row.createdById,id:row.id,title:row.title,employer:row.employer,sector:row.sector,workType:row.workType,
   barangay:row.barangay,location:row.location,description:row.description,skills:decodeTags(row.skillsJson),
   interests:decodeTags(row.interestsJson),education:row.education,contactInfo:row.contactInfo,externalUrl:row.externalUrl,
   expiresAt:row.expiresAt?.toISOString().slice(0,10)??"",status:row.status,createdAt:row.createdAt.toISOString(),

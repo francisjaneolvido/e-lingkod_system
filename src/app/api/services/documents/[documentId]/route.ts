@@ -2,6 +2,7 @@ import { viewerFromHeaders } from "@/lib/access";
 import { hasModuleAccess } from "@/lib/staff-access";
 import { prisma } from "@/lib/prisma";
 import { departmentMatchesService, serviceByKey } from "@/features/services/catalog";
+import { resolveServiceDefinition } from "@/features/services/server/catalog";
 
 export async function GET(request:Request,{params}:{params:Promise<{documentId:string}>}){
   const viewer=await viewerFromHeaders(request.headers);

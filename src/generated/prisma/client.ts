@@ -181,3 +181,23 @@ export type ServiceRequestEvent = Prisma.ServiceRequestEventModel
  * 
  */
 export type ServiceAppointment = Prisma.ServiceAppointmentModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model WorkAssignment
+ * 
+ */
+export type WorkAssignment = Prisma.WorkAssignmentModel
+/**
+ * Model ServiceDefinition
+ * 
+ */
+export type ServiceDefinition = Prisma.ServiceDefinitionModel
+/**
+ * Model ServiceDefinitionAudit
+ * 
+ */
+export type ServiceDefinitionAudit = Prisma.ServiceDefinitionAuditModel
