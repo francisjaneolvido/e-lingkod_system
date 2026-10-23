@@ -87,7 +87,14 @@ export const ModelName = {
   EmergencyHotline: 'EmergencyHotline',
   EmergencyHotlineProposal: 'EmergencyHotlineProposal',
   EmergencyAlert: 'EmergencyAlert',
-  EmergencyActionLog: 'EmergencyActionLog'
+  EmergencyActionLog: 'EmergencyActionLog',
+  CommunitySurveyWorkspace: 'CommunitySurveyWorkspace',
+  CommunitySurveyRevision: 'CommunitySurveyRevision',
+  CitizenProfileConsent: 'CitizenProfileConsent',
+  Establishment: 'Establishment',
+  EstablishmentSurvey: 'EstablishmentSurvey',
+  EstablishmentRevision: 'EstablishmentRevision',
+  EstablishmentOperation: 'EstablishmentOperation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -438,6 +445,10 @@ export const CommunitySurveyScalarFieldEnum = {
   currentlyStudying: 'currentlyStudying',
   educationLevel: 'educationLevel',
   employmentStatus: 'employmentStatus',
+  employmentHistory: 'employmentHistory',
+  overseasExperience: 'overseasExperience',
+  qualificationsJson: 'qualificationsJson',
+  completedTrainingJson: 'completedTrainingJson',
   occupation: 'occupation',
   industry: 'industry',
   workArrangement: 'workArrangement',
@@ -640,6 +651,7 @@ export const ServicePickupSlotScalarFieldEnum = {
   proposedById: 'proposedById',
   citizenNote: 'citizenNote',
   claimantName: 'claimantName',
+  confirmedClaimantName: 'confirmedClaimantName',
   confirmedAt: 'confirmedAt',
   claimedAt: 'claimedAt',
   createdAt: 'createdAt',
@@ -802,6 +814,108 @@ export const EmergencyActionLogScalarFieldEnum = {
 } as const
 
 export type EmergencyActionLogScalarFieldEnum = (typeof EmergencyActionLogScalarFieldEnum)[keyof typeof EmergencyActionLogScalarFieldEnum]
+
+
+export const CommunitySurveyWorkspaceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  surveyYear: 'surveyYear',
+  version: 'version',
+  draftJson: 'draftJson',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CommunitySurveyWorkspaceScalarFieldEnum = (typeof CommunitySurveyWorkspaceScalarFieldEnum)[keyof typeof CommunitySurveyWorkspaceScalarFieldEnum]
+
+
+export const CommunitySurveyRevisionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  actorId: 'actorId',
+  surveyYear: 'surveyYear',
+  revision: 'revision',
+  action: 'action',
+  schemaVersion: 'schemaVersion',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  resultVersion: 'resultVersion',
+  answersJson: 'answersJson',
+  createdAt: 'createdAt'
+} as const
+
+export type CommunitySurveyRevisionScalarFieldEnum = (typeof CommunitySurveyRevisionScalarFieldEnum)[keyof typeof CommunitySurveyRevisionScalarFieldEnum]
+
+
+export const CitizenProfileConsentScalarFieldEnum = {
+  userId: 'userId',
+  matching: 'matching',
+  programs: 'programs',
+  version: 'version',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CitizenProfileConsentScalarFieldEnum = (typeof CitizenProfileConsentScalarFieldEnum)[keyof typeof CitizenProfileConsentScalarFieldEnum]
+
+
+export const EstablishmentScalarFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  identityKey: 'identityKey',
+  businessName: 'businessName',
+  officeType: 'officeType',
+  street: 'street',
+  barangay: 'barangay',
+  municipality: 'municipality',
+  province: 'province',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EstablishmentScalarFieldEnum = (typeof EstablishmentScalarFieldEnum)[keyof typeof EstablishmentScalarFieldEnum]
+
+
+export const EstablishmentSurveyScalarFieldEnum = {
+  id: 'id',
+  establishmentId: 'establishmentId',
+  surveyYear: 'surveyYear',
+  version: 'version',
+  draftJson: 'draftJson',
+  submittedJson: 'submittedJson',
+  status: 'status',
+  submittedAt: 'submittedAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EstablishmentSurveyScalarFieldEnum = (typeof EstablishmentSurveyScalarFieldEnum)[keyof typeof EstablishmentSurveyScalarFieldEnum]
+
+
+export const EstablishmentRevisionScalarFieldEnum = {
+  id: 'id',
+  surveyId: 'surveyId',
+  revision: 'revision',
+  action: 'action',
+  answersJson: 'answersJson',
+  actorId: 'actorId',
+  createdAt: 'createdAt'
+} as const
+
+export type EstablishmentRevisionScalarFieldEnum = (typeof EstablishmentRevisionScalarFieldEnum)[keyof typeof EstablishmentRevisionScalarFieldEnum]
+
+
+export const EstablishmentOperationScalarFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  establishmentId: 'establishmentId',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  recordVersion: 'recordVersion',
+  workspaceVersion: 'workspaceVersion',
+  revisionId: 'revisionId',
+  createdAt: 'createdAt'
+} as const
+
+export type EstablishmentOperationScalarFieldEnum = (typeof EstablishmentOperationScalarFieldEnum)[keyof typeof EstablishmentOperationScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1084,6 +1198,10 @@ export const CommunitySurveyOrderByRelevanceFieldEnum = {
   pwdStatus: 'pwdStatus',
   educationLevel: 'educationLevel',
   employmentStatus: 'employmentStatus',
+  employmentHistory: 'employmentHistory',
+  overseasExperience: 'overseasExperience',
+  qualificationsJson: 'qualificationsJson',
+  completedTrainingJson: 'completedTrainingJson',
   occupation: 'occupation',
   industry: 'industry',
   workArrangement: 'workArrangement',
@@ -1243,7 +1361,8 @@ export const ServicePickupSlotOrderByRelevanceFieldEnum = {
   status: 'status',
   proposedById: 'proposedById',
   citizenNote: 'citizenNote',
-  claimantName: 'claimantName'
+  claimantName: 'claimantName',
+  confirmedClaimantName: 'confirmedClaimantName'
 } as const
 
 export type ServicePickupSlotOrderByRelevanceFieldEnum = (typeof ServicePickupSlotOrderByRelevanceFieldEnum)[keyof typeof ServicePickupSlotOrderByRelevanceFieldEnum]
@@ -1374,4 +1493,82 @@ export const EmergencyActionLogOrderByRelevanceFieldEnum = {
 } as const
 
 export type EmergencyActionLogOrderByRelevanceFieldEnum = (typeof EmergencyActionLogOrderByRelevanceFieldEnum)[keyof typeof EmergencyActionLogOrderByRelevanceFieldEnum]
+
+
+export const CommunitySurveyWorkspaceOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  draftJson: 'draftJson'
+} as const
+
+export type CommunitySurveyWorkspaceOrderByRelevanceFieldEnum = (typeof CommunitySurveyWorkspaceOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyWorkspaceOrderByRelevanceFieldEnum]
+
+
+export const CommunitySurveyRevisionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  actorId: 'actorId',
+  action: 'action',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  answersJson: 'answersJson'
+} as const
+
+export type CommunitySurveyRevisionOrderByRelevanceFieldEnum = (typeof CommunitySurveyRevisionOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyRevisionOrderByRelevanceFieldEnum]
+
+
+export const CitizenProfileConsentOrderByRelevanceFieldEnum = {
+  userId: 'userId'
+} as const
+
+export type CitizenProfileConsentOrderByRelevanceFieldEnum = (typeof CitizenProfileConsentOrderByRelevanceFieldEnum)[keyof typeof CitizenProfileConsentOrderByRelevanceFieldEnum]
+
+
+export const EstablishmentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  identityKey: 'identityKey',
+  businessName: 'businessName',
+  officeType: 'officeType',
+  street: 'street',
+  barangay: 'barangay',
+  municipality: 'municipality',
+  province: 'province'
+} as const
+
+export type EstablishmentOrderByRelevanceFieldEnum = (typeof EstablishmentOrderByRelevanceFieldEnum)[keyof typeof EstablishmentOrderByRelevanceFieldEnum]
+
+
+export const EstablishmentSurveyOrderByRelevanceFieldEnum = {
+  id: 'id',
+  establishmentId: 'establishmentId',
+  draftJson: 'draftJson',
+  submittedJson: 'submittedJson',
+  status: 'status'
+} as const
+
+export type EstablishmentSurveyOrderByRelevanceFieldEnum = (typeof EstablishmentSurveyOrderByRelevanceFieldEnum)[keyof typeof EstablishmentSurveyOrderByRelevanceFieldEnum]
+
+
+export const EstablishmentRevisionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  surveyId: 'surveyId',
+  action: 'action',
+  answersJson: 'answersJson',
+  actorId: 'actorId'
+} as const
+
+export type EstablishmentRevisionOrderByRelevanceFieldEnum = (typeof EstablishmentRevisionOrderByRelevanceFieldEnum)[keyof typeof EstablishmentRevisionOrderByRelevanceFieldEnum]
+
+
+export const EstablishmentOperationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  establishmentId: 'establishmentId',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  revisionId: 'revisionId'
+} as const
+
+export type EstablishmentOperationOrderByRelevanceFieldEnum = (typeof EstablishmentOperationOrderByRelevanceFieldEnum)[keyof typeof EstablishmentOperationOrderByRelevanceFieldEnum]
 

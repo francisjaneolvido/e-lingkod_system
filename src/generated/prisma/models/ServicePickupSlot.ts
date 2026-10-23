@@ -34,6 +34,7 @@ export type ServicePickupSlotMinAggregateOutputType = {
   proposedById: string | null
   citizenNote: string | null
   claimantName: string | null
+  confirmedClaimantName: string | null
   confirmedAt: Date | null
   claimedAt: Date | null
   createdAt: Date | null
@@ -50,6 +51,7 @@ export type ServicePickupSlotMaxAggregateOutputType = {
   proposedById: string | null
   citizenNote: string | null
   claimantName: string | null
+  confirmedClaimantName: string | null
   confirmedAt: Date | null
   claimedAt: Date | null
   createdAt: Date | null
@@ -66,6 +68,7 @@ export type ServicePickupSlotCountAggregateOutputType = {
   proposedById: number
   citizenNote: number
   claimantName: number
+  confirmedClaimantName: number
   confirmedAt: number
   claimedAt: number
   createdAt: number
@@ -84,6 +87,7 @@ export type ServicePickupSlotMinAggregateInputType = {
   proposedById?: true
   citizenNote?: true
   claimantName?: true
+  confirmedClaimantName?: true
   confirmedAt?: true
   claimedAt?: true
   createdAt?: true
@@ -100,6 +104,7 @@ export type ServicePickupSlotMaxAggregateInputType = {
   proposedById?: true
   citizenNote?: true
   claimantName?: true
+  confirmedClaimantName?: true
   confirmedAt?: true
   claimedAt?: true
   createdAt?: true
@@ -116,6 +121,7 @@ export type ServicePickupSlotCountAggregateInputType = {
   proposedById?: true
   citizenNote?: true
   claimantName?: true
+  confirmedClaimantName?: true
   confirmedAt?: true
   claimedAt?: true
   createdAt?: true
@@ -205,6 +211,7 @@ export type ServicePickupSlotGroupByOutputType = {
   proposedById: string
   citizenNote: string | null
   claimantName: string | null
+  confirmedClaimantName: string | null
   confirmedAt: Date | null
   claimedAt: Date | null
   createdAt: Date
@@ -242,6 +249,7 @@ export type ServicePickupSlotWhereInput = {
   proposedById?: Prisma.StringFilter<"ServicePickupSlot"> | string
   citizenNote?: Prisma.StringNullableFilter<"ServicePickupSlot"> | string | null
   claimantName?: Prisma.StringNullableFilter<"ServicePickupSlot"> | string | null
+  confirmedClaimantName?: Prisma.StringNullableFilter<"ServicePickupSlot"> | string | null
   confirmedAt?: Prisma.DateTimeNullableFilter<"ServicePickupSlot"> | Date | string | null
   claimedAt?: Prisma.DateTimeNullableFilter<"ServicePickupSlot"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"ServicePickupSlot"> | Date | string
@@ -260,6 +268,7 @@ export type ServicePickupSlotOrderByWithRelationInput = {
   proposedById?: Prisma.SortOrder
   citizenNote?: Prisma.SortOrderInput | Prisma.SortOrder
   claimantName?: Prisma.SortOrderInput | Prisma.SortOrder
+  confirmedClaimantName?: Prisma.SortOrderInput | Prisma.SortOrder
   confirmedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   claimedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -282,6 +291,7 @@ export type ServicePickupSlotWhereUniqueInput = Prisma.AtLeast<{
   proposedById?: Prisma.StringFilter<"ServicePickupSlot"> | string
   citizenNote?: Prisma.StringNullableFilter<"ServicePickupSlot"> | string | null
   claimantName?: Prisma.StringNullableFilter<"ServicePickupSlot"> | string | null
+  confirmedClaimantName?: Prisma.StringNullableFilter<"ServicePickupSlot"> | string | null
   confirmedAt?: Prisma.DateTimeNullableFilter<"ServicePickupSlot"> | Date | string | null
   claimedAt?: Prisma.DateTimeNullableFilter<"ServicePickupSlot"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"ServicePickupSlot"> | Date | string
@@ -300,6 +310,7 @@ export type ServicePickupSlotOrderByWithAggregationInput = {
   proposedById?: Prisma.SortOrder
   citizenNote?: Prisma.SortOrderInput | Prisma.SortOrder
   claimantName?: Prisma.SortOrderInput | Prisma.SortOrder
+  confirmedClaimantName?: Prisma.SortOrderInput | Prisma.SortOrder
   confirmedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   claimedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -322,6 +333,7 @@ export type ServicePickupSlotScalarWhereWithAggregatesInput = {
   proposedById?: Prisma.StringWithAggregatesFilter<"ServicePickupSlot"> | string
   citizenNote?: Prisma.StringNullableWithAggregatesFilter<"ServicePickupSlot"> | string | null
   claimantName?: Prisma.StringNullableWithAggregatesFilter<"ServicePickupSlot"> | string | null
+  confirmedClaimantName?: Prisma.StringNullableWithAggregatesFilter<"ServicePickupSlot"> | string | null
   confirmedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ServicePickupSlot"> | Date | string | null
   claimedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ServicePickupSlot"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ServicePickupSlot"> | Date | string
@@ -336,6 +348,7 @@ export type ServicePickupSlotCreateInput = {
   status?: string
   citizenNote?: string | null
   claimantName?: string | null
+  confirmedClaimantName?: string | null
   confirmedAt?: Date | string | null
   claimedAt?: Date | string | null
   createdAt?: Date | string
@@ -354,6 +367,7 @@ export type ServicePickupSlotUncheckedCreateInput = {
   proposedById: string
   citizenNote?: string | null
   claimantName?: string | null
+  confirmedClaimantName?: string | null
   confirmedAt?: Date | string | null
   claimedAt?: Date | string | null
   createdAt?: Date | string
@@ -368,6 +382,7 @@ export type ServicePickupSlotUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   citizenNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmedClaimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -386,6 +401,7 @@ export type ServicePickupSlotUncheckedUpdateInput = {
   proposedById?: Prisma.StringFieldUpdateOperationsInput | string
   citizenNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmedClaimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -402,6 +418,7 @@ export type ServicePickupSlotCreateManyInput = {
   proposedById: string
   citizenNote?: string | null
   claimantName?: string | null
+  confirmedClaimantName?: string | null
   confirmedAt?: Date | string | null
   claimedAt?: Date | string | null
   createdAt?: Date | string
@@ -416,6 +433,7 @@ export type ServicePickupSlotUpdateManyMutationInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   citizenNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmedClaimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -432,6 +450,7 @@ export type ServicePickupSlotUncheckedUpdateManyInput = {
   proposedById?: Prisma.StringFieldUpdateOperationsInput | string
   citizenNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmedClaimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -464,6 +483,7 @@ export type ServicePickupSlotCountOrderByAggregateInput = {
   proposedById?: Prisma.SortOrder
   citizenNote?: Prisma.SortOrder
   claimantName?: Prisma.SortOrder
+  confirmedClaimantName?: Prisma.SortOrder
   confirmedAt?: Prisma.SortOrder
   claimedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -480,6 +500,7 @@ export type ServicePickupSlotMaxOrderByAggregateInput = {
   proposedById?: Prisma.SortOrder
   citizenNote?: Prisma.SortOrder
   claimantName?: Prisma.SortOrder
+  confirmedClaimantName?: Prisma.SortOrder
   confirmedAt?: Prisma.SortOrder
   claimedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -496,6 +517,7 @@ export type ServicePickupSlotMinOrderByAggregateInput = {
   proposedById?: Prisma.SortOrder
   citizenNote?: Prisma.SortOrder
   claimantName?: Prisma.SortOrder
+  confirmedClaimantName?: Prisma.SortOrder
   confirmedAt?: Prisma.SortOrder
   claimedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -594,6 +616,7 @@ export type ServicePickupSlotCreateWithoutProposedByInput = {
   status?: string
   citizenNote?: string | null
   claimantName?: string | null
+  confirmedClaimantName?: string | null
   confirmedAt?: Date | string | null
   claimedAt?: Date | string | null
   createdAt?: Date | string
@@ -610,6 +633,7 @@ export type ServicePickupSlotUncheckedCreateWithoutProposedByInput = {
   status?: string
   citizenNote?: string | null
   claimantName?: string | null
+  confirmedClaimantName?: string | null
   confirmedAt?: Date | string | null
   claimedAt?: Date | string | null
   createdAt?: Date | string
@@ -655,6 +679,7 @@ export type ServicePickupSlotScalarWhereInput = {
   proposedById?: Prisma.StringFilter<"ServicePickupSlot"> | string
   citizenNote?: Prisma.StringNullableFilter<"ServicePickupSlot"> | string | null
   claimantName?: Prisma.StringNullableFilter<"ServicePickupSlot"> | string | null
+  confirmedClaimantName?: Prisma.StringNullableFilter<"ServicePickupSlot"> | string | null
   confirmedAt?: Prisma.DateTimeNullableFilter<"ServicePickupSlot"> | Date | string | null
   claimedAt?: Prisma.DateTimeNullableFilter<"ServicePickupSlot"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"ServicePickupSlot"> | Date | string
@@ -669,6 +694,7 @@ export type ServicePickupSlotCreateWithoutRequestInput = {
   status?: string
   citizenNote?: string | null
   claimantName?: string | null
+  confirmedClaimantName?: string | null
   confirmedAt?: Date | string | null
   claimedAt?: Date | string | null
   createdAt?: Date | string
@@ -685,6 +711,7 @@ export type ServicePickupSlotUncheckedCreateWithoutRequestInput = {
   proposedById: string
   citizenNote?: string | null
   claimantName?: string | null
+  confirmedClaimantName?: string | null
   confirmedAt?: Date | string | null
   claimedAt?: Date | string | null
   createdAt?: Date | string
@@ -726,6 +753,7 @@ export type ServicePickupSlotCreateManyProposedByInput = {
   status?: string
   citizenNote?: string | null
   claimantName?: string | null
+  confirmedClaimantName?: string | null
   confirmedAt?: Date | string | null
   claimedAt?: Date | string | null
   createdAt?: Date | string
@@ -740,6 +768,7 @@ export type ServicePickupSlotUpdateWithoutProposedByInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   citizenNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmedClaimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -756,6 +785,7 @@ export type ServicePickupSlotUncheckedUpdateWithoutProposedByInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   citizenNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmedClaimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -771,6 +801,7 @@ export type ServicePickupSlotUncheckedUpdateManyWithoutProposedByInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   citizenNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmedClaimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -786,6 +817,7 @@ export type ServicePickupSlotCreateManyRequestInput = {
   proposedById: string
   citizenNote?: string | null
   claimantName?: string | null
+  confirmedClaimantName?: string | null
   confirmedAt?: Date | string | null
   claimedAt?: Date | string | null
   createdAt?: Date | string
@@ -800,6 +832,7 @@ export type ServicePickupSlotUpdateWithoutRequestInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   citizenNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmedClaimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -816,6 +849,7 @@ export type ServicePickupSlotUncheckedUpdateWithoutRequestInput = {
   proposedById?: Prisma.StringFieldUpdateOperationsInput | string
   citizenNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmedClaimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -831,6 +865,7 @@ export type ServicePickupSlotUncheckedUpdateManyWithoutRequestInput = {
   proposedById?: Prisma.StringFieldUpdateOperationsInput | string
   citizenNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmedClaimantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -849,6 +884,7 @@ export type ServicePickupSlotSelect<ExtArgs extends runtime.Types.Extensions.Int
   proposedById?: boolean
   citizenNote?: boolean
   claimantName?: boolean
+  confirmedClaimantName?: boolean
   confirmedAt?: boolean
   claimedAt?: boolean
   createdAt?: boolean
@@ -869,13 +905,14 @@ export type ServicePickupSlotSelectScalar = {
   proposedById?: boolean
   citizenNote?: boolean
   claimantName?: boolean
+  confirmedClaimantName?: boolean
   confirmedAt?: boolean
   claimedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ServicePickupSlotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "requestId" | "scheduledAt" | "location" | "instructions" | "status" | "proposedById" | "citizenNote" | "claimantName" | "confirmedAt" | "claimedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["servicePickupSlot"]>
+export type ServicePickupSlotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "requestId" | "scheduledAt" | "location" | "instructions" | "status" | "proposedById" | "citizenNote" | "claimantName" | "confirmedClaimantName" | "confirmedAt" | "claimedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["servicePickupSlot"]>
 export type ServicePickupSlotInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   request?: boolean | Prisma.ServiceRequestDefaultArgs<ExtArgs>
   proposedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -897,6 +934,7 @@ export type $ServicePickupSlotPayload<ExtArgs extends runtime.Types.Extensions.I
     proposedById: string
     citizenNote: string | null
     claimantName: string | null
+    confirmedClaimantName: string | null
     confirmedAt: Date | null
     claimedAt: Date | null
     createdAt: Date
@@ -1281,6 +1319,7 @@ export interface ServicePickupSlotFieldRefs {
   readonly proposedById: Prisma.FieldRef<"ServicePickupSlot", 'String'>
   readonly citizenNote: Prisma.FieldRef<"ServicePickupSlot", 'String'>
   readonly claimantName: Prisma.FieldRef<"ServicePickupSlot", 'String'>
+  readonly confirmedClaimantName: Prisma.FieldRef<"ServicePickupSlot", 'String'>
   readonly confirmedAt: Prisma.FieldRef<"ServicePickupSlot", 'DateTime'>
   readonly claimedAt: Prisma.FieldRef<"ServicePickupSlot", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"ServicePickupSlot", 'DateTime'>
