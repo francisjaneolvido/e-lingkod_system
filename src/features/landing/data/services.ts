@@ -55,10 +55,10 @@ export const services: Service[] = [
     group: "Community", icon: Siren, color: SERVICE_ICON_COLOR, surface: SERVICE_ICON_SURFACE,
     details: [
       { icon: PhoneCall, text: "One-tap call directory for verified emergency numbers" },
-      { icon: BellRing, text: "Push advisories for severe weather and emergencies" },
+      { icon: BellRing, text: "Admin-approved advisories for severe weather and emergencies" },
       { icon: Building2, text: "Contact groups: PNP, BFP, hospital, MDRRMO" },
     ],
-    note: "Real-time alerts and phone numbers will only be enabled after official data is connected and verified.",
+    note: "National hotlines are source-backed. Local contacts require Super Admin verification and advisories must be approved before public display. No emergency dispatch is initiated by this prototype.",
   },
   {
     id: "directory", number: "04", title: "Municipal Projects & Services", shortTitle: "Find an office",
@@ -71,7 +71,7 @@ export const services: Service[] = [
     ],
   },
   {
-    id: "jobs", number: "05", title: "Citizen Profiling", shortTitle: "Citizen surveys",
+    id: "jobs", number: "05", title: "Community Employment & Livelihood", shortTitle: "Survey & opportunities",
     description: "Community employment survey, skills and training profiling, plus PESO-reviewed opportunity discovery.",
     group: "Opportunities", icon: BriefcaseBusiness, color: SERVICE_ICON_COLOR, surface: SERVICE_ICON_SURFACE,
     details: [

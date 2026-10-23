@@ -20,7 +20,7 @@ export const metadata: Metadata = { title: "Operations Overview | E-Lingkod Baya
 const moduleLinks = [
   { title: "Civic reporting", description: "Review reports and document the response", href: "/admin/reports", icon: ClipboardList, available: true },
   { title: "LGU services", description: "Permits, clearances, assistance and tracked requests", href: "/admin/services", icon: Building2, available: true },
-  { title: "Emergency & alerts", description: "Emergency contacts and advisories", href: "/admin/emergency", icon: BellRing, available: false },
+  { title: "Emergency & alerts", description: "Emergency contacts and advisories", href: "/admin/emergency", icon: BellRing, available: true },
   { title: "Municipal projects", description: "Services, project plans, and milestones", href: "/admin/projects", icon: MapPinned, available: false },
   { title: "Job Matching & opportunities", description: "Employment profiling, insights and PESO-reviewed opportunities", href: "/admin/jobs", icon: BriefcaseBusiness, available: true },
   { title: "Community Census", description: "Separate census workflow planned for a future phase", href: "/admin/census", icon: UsersRound, available: false },

@@ -17,7 +17,7 @@ import { WorkOfferPanel } from "@/components/admin/work-offer-panel";
 const destinations: Record<StaffModule, { href: string; description: string; icon: typeof ClipboardList; live: boolean }> = {
   REPORTS: { href: "/admin/reports", description: "Review, claim and resolve routed cases", icon: ClipboardList, live: true },
   SERVICES: { href: "/admin/services", description: "Review assigned permits, clearances and assistance requests", icon: Building2, live: true },
-  EMERGENCY: { href: "/admin/emergency", description: "Emergency desk · planned", icon: BellRing, live: false },
+  EMERGENCY: { href: "/admin/emergency", description: "Local emergency contacts, review queues and advisory drafting", icon: BellRing, live: true },
   PROJECTS: { href: "/admin/projects", description: "Municipal projects · planned", icon: MapPinned, live: false },
   JOBS: { href: "/admin/jobs", description: "Manage Job Matching, employment insights and PESO opportunities", icon: BriefcaseBusiness, live: true },
   CENSUS: { href: "/admin/census", description: "Community Census · planned", icon: BarChart3, live: false },

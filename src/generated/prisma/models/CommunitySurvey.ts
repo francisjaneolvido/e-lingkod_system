@@ -55,10 +55,6 @@ export type CommunitySurveyMinAggregateOutputType = {
   currentlyStudying: boolean | null
   educationLevel: string | null
   employmentStatus: string | null
-  employmentHistory: string | null
-  overseasExperience: string | null
-  qualificationsJson: string | null
-  completedTrainingJson: string | null
   occupation: string | null
   industry: string | null
   workArrangement: string | null
@@ -121,10 +117,6 @@ export type CommunitySurveyMaxAggregateOutputType = {
   currentlyStudying: boolean | null
   educationLevel: string | null
   employmentStatus: string | null
-  employmentHistory: string | null
-  overseasExperience: string | null
-  qualificationsJson: string | null
-  completedTrainingJson: string | null
   occupation: string | null
   industry: string | null
   workArrangement: string | null
@@ -187,10 +179,6 @@ export type CommunitySurveyCountAggregateOutputType = {
   currentlyStudying: number
   educationLevel: number
   employmentStatus: number
-  employmentHistory: number
-  overseasExperience: number
-  qualificationsJson: number
-  completedTrainingJson: number
   occupation: number
   industry: number
   workArrangement: number
@@ -269,10 +257,6 @@ export type CommunitySurveyMinAggregateInputType = {
   currentlyStudying?: true
   educationLevel?: true
   employmentStatus?: true
-  employmentHistory?: true
-  overseasExperience?: true
-  qualificationsJson?: true
-  completedTrainingJson?: true
   occupation?: true
   industry?: true
   workArrangement?: true
@@ -335,10 +319,6 @@ export type CommunitySurveyMaxAggregateInputType = {
   currentlyStudying?: true
   educationLevel?: true
   employmentStatus?: true
-  employmentHistory?: true
-  overseasExperience?: true
-  qualificationsJson?: true
-  completedTrainingJson?: true
   occupation?: true
   industry?: true
   workArrangement?: true
@@ -401,10 +381,6 @@ export type CommunitySurveyCountAggregateInputType = {
   currentlyStudying?: true
   educationLevel?: true
   employmentStatus?: true
-  employmentHistory?: true
-  overseasExperience?: true
-  qualificationsJson?: true
-  completedTrainingJson?: true
   occupation?: true
   industry?: true
   workArrangement?: true
@@ -554,10 +530,6 @@ export type CommunitySurveyGroupByOutputType = {
   currentlyStudying: boolean | null
   educationLevel: string
   employmentStatus: string
-  employmentHistory: string | null
-  overseasExperience: string | null
-  qualificationsJson: string
-  completedTrainingJson: string
   occupation: string | null
   industry: string | null
   workArrangement: string | null
@@ -643,10 +615,6 @@ export type CommunitySurveyWhereInput = {
   currentlyStudying?: Prisma.BoolNullableFilter<"CommunitySurvey"> | boolean | null
   educationLevel?: Prisma.StringFilter<"CommunitySurvey"> | string
   employmentStatus?: Prisma.StringFilter<"CommunitySurvey"> | string
-  employmentHistory?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
-  overseasExperience?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
-  qualificationsJson?: Prisma.StringFilter<"CommunitySurvey"> | string
-  completedTrainingJson?: Prisma.StringFilter<"CommunitySurvey"> | string
   occupation?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
   industry?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
   workArrangement?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
@@ -710,10 +678,6 @@ export type CommunitySurveyOrderByWithRelationInput = {
   currentlyStudying?: Prisma.SortOrderInput | Prisma.SortOrder
   educationLevel?: Prisma.SortOrder
   employmentStatus?: Prisma.SortOrder
-  employmentHistory?: Prisma.SortOrderInput | Prisma.SortOrder
-  overseasExperience?: Prisma.SortOrderInput | Prisma.SortOrder
-  qualificationsJson?: Prisma.SortOrder
-  completedTrainingJson?: Prisma.SortOrder
   occupation?: Prisma.SortOrderInput | Prisma.SortOrder
   industry?: Prisma.SortOrderInput | Prisma.SortOrder
   workArrangement?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -782,10 +746,6 @@ export type CommunitySurveyWhereUniqueInput = Prisma.AtLeast<{
   currentlyStudying?: Prisma.BoolNullableFilter<"CommunitySurvey"> | boolean | null
   educationLevel?: Prisma.StringFilter<"CommunitySurvey"> | string
   employmentStatus?: Prisma.StringFilter<"CommunitySurvey"> | string
-  employmentHistory?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
-  overseasExperience?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
-  qualificationsJson?: Prisma.StringFilter<"CommunitySurvey"> | string
-  completedTrainingJson?: Prisma.StringFilter<"CommunitySurvey"> | string
   occupation?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
   industry?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
   workArrangement?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
@@ -849,10 +809,6 @@ export type CommunitySurveyOrderByWithAggregationInput = {
   currentlyStudying?: Prisma.SortOrderInput | Prisma.SortOrder
   educationLevel?: Prisma.SortOrder
   employmentStatus?: Prisma.SortOrder
-  employmentHistory?: Prisma.SortOrderInput | Prisma.SortOrder
-  overseasExperience?: Prisma.SortOrderInput | Prisma.SortOrder
-  qualificationsJson?: Prisma.SortOrder
-  completedTrainingJson?: Prisma.SortOrder
   occupation?: Prisma.SortOrderInput | Prisma.SortOrder
   industry?: Prisma.SortOrderInput | Prisma.SortOrder
   workArrangement?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -923,10 +879,6 @@ export type CommunitySurveyScalarWhereWithAggregatesInput = {
   currentlyStudying?: Prisma.BoolNullableWithAggregatesFilter<"CommunitySurvey"> | boolean | null
   educationLevel?: Prisma.StringWithAggregatesFilter<"CommunitySurvey"> | string
   employmentStatus?: Prisma.StringWithAggregatesFilter<"CommunitySurvey"> | string
-  employmentHistory?: Prisma.StringNullableWithAggregatesFilter<"CommunitySurvey"> | string | null
-  overseasExperience?: Prisma.StringNullableWithAggregatesFilter<"CommunitySurvey"> | string | null
-  qualificationsJson?: Prisma.StringWithAggregatesFilter<"CommunitySurvey"> | string
-  completedTrainingJson?: Prisma.StringWithAggregatesFilter<"CommunitySurvey"> | string
   occupation?: Prisma.StringNullableWithAggregatesFilter<"CommunitySurvey"> | string | null
   industry?: Prisma.StringNullableWithAggregatesFilter<"CommunitySurvey"> | string | null
   workArrangement?: Prisma.StringNullableWithAggregatesFilter<"CommunitySurvey"> | string | null
@@ -988,10 +940,6 @@ export type CommunitySurveyCreateInput = {
   currentlyStudying?: boolean | null
   educationLevel: string
   employmentStatus: string
-  employmentHistory?: string | null
-  overseasExperience?: string | null
-  qualificationsJson?: string
-  completedTrainingJson?: string
   occupation?: string | null
   industry?: string | null
   workArrangement?: string | null
@@ -1055,10 +1003,6 @@ export type CommunitySurveyUncheckedCreateInput = {
   currentlyStudying?: boolean | null
   educationLevel: string
   employmentStatus: string
-  employmentHistory?: string | null
-  overseasExperience?: string | null
-  qualificationsJson?: string
-  completedTrainingJson?: string
   occupation?: string | null
   industry?: string | null
   workArrangement?: string | null
@@ -1120,10 +1064,6 @@ export type CommunitySurveyUpdateInput = {
   currentlyStudying?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   educationLevel?: Prisma.StringFieldUpdateOperationsInput | string
   employmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
-  employmentHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  overseasExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  qualificationsJson?: Prisma.StringFieldUpdateOperationsInput | string
-  completedTrainingJson?: Prisma.StringFieldUpdateOperationsInput | string
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1187,10 +1127,6 @@ export type CommunitySurveyUncheckedUpdateInput = {
   currentlyStudying?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   educationLevel?: Prisma.StringFieldUpdateOperationsInput | string
   employmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
-  employmentHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  overseasExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  qualificationsJson?: Prisma.StringFieldUpdateOperationsInput | string
-  completedTrainingJson?: Prisma.StringFieldUpdateOperationsInput | string
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1253,10 +1189,6 @@ export type CommunitySurveyCreateManyInput = {
   currentlyStudying?: boolean | null
   educationLevel: string
   employmentStatus: string
-  employmentHistory?: string | null
-  overseasExperience?: string | null
-  qualificationsJson?: string
-  completedTrainingJson?: string
   occupation?: string | null
   industry?: string | null
   workArrangement?: string | null
@@ -1318,10 +1250,6 @@ export type CommunitySurveyUpdateManyMutationInput = {
   currentlyStudying?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   educationLevel?: Prisma.StringFieldUpdateOperationsInput | string
   employmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
-  employmentHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  overseasExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  qualificationsJson?: Prisma.StringFieldUpdateOperationsInput | string
-  completedTrainingJson?: Prisma.StringFieldUpdateOperationsInput | string
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1384,10 +1312,6 @@ export type CommunitySurveyUncheckedUpdateManyInput = {
   currentlyStudying?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   educationLevel?: Prisma.StringFieldUpdateOperationsInput | string
   employmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
-  employmentHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  overseasExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  qualificationsJson?: Prisma.StringFieldUpdateOperationsInput | string
-  completedTrainingJson?: Prisma.StringFieldUpdateOperationsInput | string
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1471,10 +1395,6 @@ export type CommunitySurveyCountOrderByAggregateInput = {
   currentlyStudying?: Prisma.SortOrder
   educationLevel?: Prisma.SortOrder
   employmentStatus?: Prisma.SortOrder
-  employmentHistory?: Prisma.SortOrder
-  overseasExperience?: Prisma.SortOrder
-  qualificationsJson?: Prisma.SortOrder
-  completedTrainingJson?: Prisma.SortOrder
   occupation?: Prisma.SortOrder
   industry?: Prisma.SortOrder
   workArrangement?: Prisma.SortOrder
@@ -1544,10 +1464,6 @@ export type CommunitySurveyMaxOrderByAggregateInput = {
   currentlyStudying?: Prisma.SortOrder
   educationLevel?: Prisma.SortOrder
   employmentStatus?: Prisma.SortOrder
-  employmentHistory?: Prisma.SortOrder
-  overseasExperience?: Prisma.SortOrder
-  qualificationsJson?: Prisma.SortOrder
-  completedTrainingJson?: Prisma.SortOrder
   occupation?: Prisma.SortOrder
   industry?: Prisma.SortOrder
   workArrangement?: Prisma.SortOrder
@@ -1610,10 +1526,6 @@ export type CommunitySurveyMinOrderByAggregateInput = {
   currentlyStudying?: Prisma.SortOrder
   educationLevel?: Prisma.SortOrder
   employmentStatus?: Prisma.SortOrder
-  employmentHistory?: Prisma.SortOrder
-  overseasExperience?: Prisma.SortOrder
-  qualificationsJson?: Prisma.SortOrder
-  completedTrainingJson?: Prisma.SortOrder
   occupation?: Prisma.SortOrder
   industry?: Prisma.SortOrder
   workArrangement?: Prisma.SortOrder
@@ -1736,10 +1648,6 @@ export type CommunitySurveyCreateWithoutUserInput = {
   currentlyStudying?: boolean | null
   educationLevel: string
   employmentStatus: string
-  employmentHistory?: string | null
-  overseasExperience?: string | null
-  qualificationsJson?: string
-  completedTrainingJson?: string
   occupation?: string | null
   industry?: string | null
   workArrangement?: string | null
@@ -1801,10 +1709,6 @@ export type CommunitySurveyUncheckedCreateWithoutUserInput = {
   currentlyStudying?: boolean | null
   educationLevel: string
   employmentStatus: string
-  employmentHistory?: string | null
-  overseasExperience?: string | null
-  qualificationsJson?: string
-  completedTrainingJson?: string
   occupation?: string | null
   industry?: string | null
   workArrangement?: string | null
@@ -1896,10 +1800,6 @@ export type CommunitySurveyScalarWhereInput = {
   currentlyStudying?: Prisma.BoolNullableFilter<"CommunitySurvey"> | boolean | null
   educationLevel?: Prisma.StringFilter<"CommunitySurvey"> | string
   employmentStatus?: Prisma.StringFilter<"CommunitySurvey"> | string
-  employmentHistory?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
-  overseasExperience?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
-  qualificationsJson?: Prisma.StringFilter<"CommunitySurvey"> | string
-  completedTrainingJson?: Prisma.StringFilter<"CommunitySurvey"> | string
   occupation?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
   industry?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
   workArrangement?: Prisma.StringNullableFilter<"CommunitySurvey"> | string | null
@@ -1961,10 +1861,6 @@ export type CommunitySurveyCreateManyUserInput = {
   currentlyStudying?: boolean | null
   educationLevel: string
   employmentStatus: string
-  employmentHistory?: string | null
-  overseasExperience?: string | null
-  qualificationsJson?: string
-  completedTrainingJson?: string
   occupation?: string | null
   industry?: string | null
   workArrangement?: string | null
@@ -2026,10 +1922,6 @@ export type CommunitySurveyUpdateWithoutUserInput = {
   currentlyStudying?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   educationLevel?: Prisma.StringFieldUpdateOperationsInput | string
   employmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
-  employmentHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  overseasExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  qualificationsJson?: Prisma.StringFieldUpdateOperationsInput | string
-  completedTrainingJson?: Prisma.StringFieldUpdateOperationsInput | string
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2091,10 +1983,6 @@ export type CommunitySurveyUncheckedUpdateWithoutUserInput = {
   currentlyStudying?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   educationLevel?: Prisma.StringFieldUpdateOperationsInput | string
   employmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
-  employmentHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  overseasExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  qualificationsJson?: Prisma.StringFieldUpdateOperationsInput | string
-  completedTrainingJson?: Prisma.StringFieldUpdateOperationsInput | string
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2156,10 +2044,6 @@ export type CommunitySurveyUncheckedUpdateManyWithoutUserInput = {
   currentlyStudying?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   educationLevel?: Prisma.StringFieldUpdateOperationsInput | string
   employmentStatus?: Prisma.StringFieldUpdateOperationsInput | string
-  employmentHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  overseasExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  qualificationsJson?: Prisma.StringFieldUpdateOperationsInput | string
-  completedTrainingJson?: Prisma.StringFieldUpdateOperationsInput | string
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2224,10 +2108,6 @@ export type CommunitySurveySelect<ExtArgs extends runtime.Types.Extensions.Inter
   currentlyStudying?: boolean
   educationLevel?: boolean
   employmentStatus?: boolean
-  employmentHistory?: boolean
-  overseasExperience?: boolean
-  qualificationsJson?: boolean
-  completedTrainingJson?: boolean
   occupation?: boolean
   industry?: boolean
   workArrangement?: boolean
@@ -2293,10 +2173,6 @@ export type CommunitySurveySelectScalar = {
   currentlyStudying?: boolean
   educationLevel?: boolean
   employmentStatus?: boolean
-  employmentHistory?: boolean
-  overseasExperience?: boolean
-  qualificationsJson?: boolean
-  completedTrainingJson?: boolean
   occupation?: boolean
   industry?: boolean
   workArrangement?: boolean
@@ -2344,7 +2220,7 @@ export type CommunitySurveySelectScalar = {
   updatedAt?: boolean
 }
 
-export type CommunitySurveyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "surveyYear" | "surveyVersion" | "status" | "barangay" | "ageGroup" | "sex" | "civilStatus" | "pwdStatus" | "householdSize" | "currentlyStudying" | "educationLevel" | "employmentStatus" | "employmentHistory" | "overseasExperience" | "qualificationsJson" | "completedTrainingJson" | "occupation" | "industry" | "workArrangement" | "workLocationScope" | "employmentLength" | "workRelatedToEducation" | "interestedNewWork" | "skillsJson" | "skillLevelsJson" | "trainingInterest" | "trainingCategoriesJson" | "trainingProgramsJson" | "trainingReason" | "trainingBarriersJson" | "employmentBarriersJson" | "preferredOccupationsJson" | "preferredIndustry" | "preferredWorkArrangement" | "preferredWorkLocation" | "willingOutsideMunicipality" | "interestedGovPrograms" | "interestedLivelihood" | "interestedEntrepreneurship" | "businessType" | "businessSector" | "businessLocationType" | "businessSize" | "businessRegistered" | "businessYears" | "businessChallengesJson" | "businessSupportJson" | "programAwareness" | "informationAccess" | "participatedConsultation" | "inclusivePlanning" | "priorityProgramsJson" | "publicServiceBarriersJson" | "serviceSatisfaction" | "feedback" | "consentAggregated" | "consentOpportunityRecommendations" | "consentProgramRecommendations" | "submittedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["communitySurvey"]>
+export type CommunitySurveyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "surveyYear" | "surveyVersion" | "status" | "barangay" | "ageGroup" | "sex" | "civilStatus" | "pwdStatus" | "householdSize" | "currentlyStudying" | "educationLevel" | "employmentStatus" | "occupation" | "industry" | "workArrangement" | "workLocationScope" | "employmentLength" | "workRelatedToEducation" | "interestedNewWork" | "skillsJson" | "skillLevelsJson" | "trainingInterest" | "trainingCategoriesJson" | "trainingProgramsJson" | "trainingReason" | "trainingBarriersJson" | "employmentBarriersJson" | "preferredOccupationsJson" | "preferredIndustry" | "preferredWorkArrangement" | "preferredWorkLocation" | "willingOutsideMunicipality" | "interestedGovPrograms" | "interestedLivelihood" | "interestedEntrepreneurship" | "businessType" | "businessSector" | "businessLocationType" | "businessSize" | "businessRegistered" | "businessYears" | "businessChallengesJson" | "businessSupportJson" | "programAwareness" | "informationAccess" | "participatedConsultation" | "inclusivePlanning" | "priorityProgramsJson" | "publicServiceBarriersJson" | "serviceSatisfaction" | "feedback" | "consentAggregated" | "consentOpportunityRecommendations" | "consentProgramRecommendations" | "submittedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["communitySurvey"]>
 export type CommunitySurveyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -2369,10 +2245,6 @@ export type $CommunitySurveyPayload<ExtArgs extends runtime.Types.Extensions.Int
     currentlyStudying: boolean | null
     educationLevel: string
     employmentStatus: string
-    employmentHistory: string | null
-    overseasExperience: string | null
-    qualificationsJson: string
-    completedTrainingJson: string
     occupation: string | null
     industry: string | null
     workArrangement: string | null
@@ -2802,10 +2674,6 @@ export interface CommunitySurveyFieldRefs {
   readonly currentlyStudying: Prisma.FieldRef<"CommunitySurvey", 'Boolean'>
   readonly educationLevel: Prisma.FieldRef<"CommunitySurvey", 'String'>
   readonly employmentStatus: Prisma.FieldRef<"CommunitySurvey", 'String'>
-  readonly employmentHistory: Prisma.FieldRef<"CommunitySurvey", 'String'>
-  readonly overseasExperience: Prisma.FieldRef<"CommunitySurvey", 'String'>
-  readonly qualificationsJson: Prisma.FieldRef<"CommunitySurvey", 'String'>
-  readonly completedTrainingJson: Prisma.FieldRef<"CommunitySurvey", 'String'>
   readonly occupation: Prisma.FieldRef<"CommunitySurvey", 'String'>
   readonly industry: Prisma.FieldRef<"CommunitySurvey", 'String'>
   readonly workArrangement: Prisma.FieldRef<"CommunitySurvey", 'String'>

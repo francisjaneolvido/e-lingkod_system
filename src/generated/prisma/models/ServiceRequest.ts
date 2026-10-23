@@ -342,6 +342,7 @@ export type ServiceRequestWhereInput = {
   documents?: Prisma.ServiceRequestDocumentListRelationFilter
   events?: Prisma.ServiceRequestEventListRelationFilter
   appointments?: Prisma.ServiceAppointmentListRelationFilter
+  pickupSlots?: Prisma.ServicePickupSlotListRelationFilter
 }
 
 export type ServiceRequestOrderByWithRelationInput = {
@@ -371,6 +372,7 @@ export type ServiceRequestOrderByWithRelationInput = {
   documents?: Prisma.ServiceRequestDocumentOrderByRelationAggregateInput
   events?: Prisma.ServiceRequestEventOrderByRelationAggregateInput
   appointments?: Prisma.ServiceAppointmentOrderByRelationAggregateInput
+  pickupSlots?: Prisma.ServicePickupSlotOrderByRelationAggregateInput
   _relevance?: Prisma.ServiceRequestOrderByRelevanceInput
 }
 
@@ -404,6 +406,7 @@ export type ServiceRequestWhereUniqueInput = Prisma.AtLeast<{
   documents?: Prisma.ServiceRequestDocumentListRelationFilter
   events?: Prisma.ServiceRequestEventListRelationFilter
   appointments?: Prisma.ServiceAppointmentListRelationFilter
+  pickupSlots?: Prisma.ServicePickupSlotListRelationFilter
 }, "id" | "trackingId">
 
 export type ServiceRequestOrderByWithAggregationInput = {
@@ -484,6 +487,7 @@ export type ServiceRequestCreateInput = {
   documents?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutRequestInput
   events?: Prisma.ServiceRequestEventCreateNestedManyWithoutRequestInput
   appointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestUncheckedCreateInput = {
@@ -510,6 +514,7 @@ export type ServiceRequestUncheckedCreateInput = {
   documents?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
   events?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutRequestInput
   appointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestUpdateInput = {
@@ -536,6 +541,7 @@ export type ServiceRequestUpdateInput = {
   documents?: Prisma.ServiceRequestDocumentUpdateManyWithoutRequestNestedInput
   events?: Prisma.ServiceRequestEventUpdateManyWithoutRequestNestedInput
   appointments?: Prisma.ServiceAppointmentUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestUncheckedUpdateInput = {
@@ -562,6 +568,7 @@ export type ServiceRequestUncheckedUpdateInput = {
   documents?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
   events?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutRequestNestedInput
   appointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestCreateManyInput = {
@@ -896,6 +903,20 @@ export type ServiceRequestUpdateOneRequiredWithoutAppointmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ServiceRequestUpdateToOneWithWhereWithoutAppointmentsInput, Prisma.ServiceRequestUpdateWithoutAppointmentsInput>, Prisma.ServiceRequestUncheckedUpdateWithoutAppointmentsInput>
 }
 
+export type ServiceRequestCreateNestedOneWithoutPickupSlotsInput = {
+  create?: Prisma.XOR<Prisma.ServiceRequestCreateWithoutPickupSlotsInput, Prisma.ServiceRequestUncheckedCreateWithoutPickupSlotsInput>
+  connectOrCreate?: Prisma.ServiceRequestCreateOrConnectWithoutPickupSlotsInput
+  connect?: Prisma.ServiceRequestWhereUniqueInput
+}
+
+export type ServiceRequestUpdateOneRequiredWithoutPickupSlotsNestedInput = {
+  create?: Prisma.XOR<Prisma.ServiceRequestCreateWithoutPickupSlotsInput, Prisma.ServiceRequestUncheckedCreateWithoutPickupSlotsInput>
+  connectOrCreate?: Prisma.ServiceRequestCreateOrConnectWithoutPickupSlotsInput
+  upsert?: Prisma.ServiceRequestUpsertWithoutPickupSlotsInput
+  connect?: Prisma.ServiceRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ServiceRequestUpdateToOneWithWhereWithoutPickupSlotsInput, Prisma.ServiceRequestUpdateWithoutPickupSlotsInput>, Prisma.ServiceRequestUncheckedUpdateWithoutPickupSlotsInput>
+}
+
 export type ServiceRequestCreateWithoutRequesterInput = {
   id?: string
   trackingId: string
@@ -919,6 +940,7 @@ export type ServiceRequestCreateWithoutRequesterInput = {
   documents?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutRequestInput
   events?: Prisma.ServiceRequestEventCreateNestedManyWithoutRequestInput
   appointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestUncheckedCreateWithoutRequesterInput = {
@@ -944,6 +966,7 @@ export type ServiceRequestUncheckedCreateWithoutRequesterInput = {
   documents?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
   events?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutRequestInput
   appointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestCreateOrConnectWithoutRequesterInput = {
@@ -979,6 +1002,7 @@ export type ServiceRequestCreateWithoutAssignedStaffInput = {
   documents?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutRequestInput
   events?: Prisma.ServiceRequestEventCreateNestedManyWithoutRequestInput
   appointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestUncheckedCreateWithoutAssignedStaffInput = {
@@ -1004,6 +1028,7 @@ export type ServiceRequestUncheckedCreateWithoutAssignedStaffInput = {
   documents?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
   events?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutRequestInput
   appointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestCreateOrConnectWithoutAssignedStaffInput = {
@@ -1039,6 +1064,7 @@ export type ServiceRequestCreateWithoutReleaseApprovedByInput = {
   documents?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutRequestInput
   events?: Prisma.ServiceRequestEventCreateNestedManyWithoutRequestInput
   appointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestUncheckedCreateWithoutReleaseApprovedByInput = {
@@ -1064,6 +1090,7 @@ export type ServiceRequestUncheckedCreateWithoutReleaseApprovedByInput = {
   documents?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
   events?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutRequestInput
   appointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestCreateOrConnectWithoutReleaseApprovedByInput = {
@@ -1173,6 +1200,7 @@ export type ServiceRequestCreateWithoutDocumentsInput = {
   releaseApprovedBy?: Prisma.UserCreateNestedOneWithoutApprovedServiceReleasesInput
   events?: Prisma.ServiceRequestEventCreateNestedManyWithoutRequestInput
   appointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestUncheckedCreateWithoutDocumentsInput = {
@@ -1198,6 +1226,7 @@ export type ServiceRequestUncheckedCreateWithoutDocumentsInput = {
   updatedAt?: Date | string
   events?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutRequestInput
   appointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestCreateOrConnectWithoutDocumentsInput = {
@@ -1239,6 +1268,7 @@ export type ServiceRequestUpdateWithoutDocumentsInput = {
   releaseApprovedBy?: Prisma.UserUpdateOneWithoutApprovedServiceReleasesNestedInput
   events?: Prisma.ServiceRequestEventUpdateManyWithoutRequestNestedInput
   appointments?: Prisma.ServiceAppointmentUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestUncheckedUpdateWithoutDocumentsInput = {
@@ -1264,6 +1294,7 @@ export type ServiceRequestUncheckedUpdateWithoutDocumentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutRequestNestedInput
   appointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestCreateWithoutEventsInput = {
@@ -1289,6 +1320,7 @@ export type ServiceRequestCreateWithoutEventsInput = {
   releaseApprovedBy?: Prisma.UserCreateNestedOneWithoutApprovedServiceReleasesInput
   documents?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutRequestInput
   appointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestUncheckedCreateWithoutEventsInput = {
@@ -1314,6 +1346,7 @@ export type ServiceRequestUncheckedCreateWithoutEventsInput = {
   updatedAt?: Date | string
   documents?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
   appointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestCreateOrConnectWithoutEventsInput = {
@@ -1355,6 +1388,7 @@ export type ServiceRequestUpdateWithoutEventsInput = {
   releaseApprovedBy?: Prisma.UserUpdateOneWithoutApprovedServiceReleasesNestedInput
   documents?: Prisma.ServiceRequestDocumentUpdateManyWithoutRequestNestedInput
   appointments?: Prisma.ServiceAppointmentUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestUncheckedUpdateWithoutEventsInput = {
@@ -1380,6 +1414,7 @@ export type ServiceRequestUncheckedUpdateWithoutEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
   appointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestCreateWithoutAppointmentsInput = {
@@ -1405,6 +1440,7 @@ export type ServiceRequestCreateWithoutAppointmentsInput = {
   releaseApprovedBy?: Prisma.UserCreateNestedOneWithoutApprovedServiceReleasesInput
   documents?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutRequestInput
   events?: Prisma.ServiceRequestEventCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestUncheckedCreateWithoutAppointmentsInput = {
@@ -1430,6 +1466,7 @@ export type ServiceRequestUncheckedCreateWithoutAppointmentsInput = {
   updatedAt?: Date | string
   documents?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
   events?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type ServiceRequestCreateOrConnectWithoutAppointmentsInput = {
@@ -1471,6 +1508,7 @@ export type ServiceRequestUpdateWithoutAppointmentsInput = {
   releaseApprovedBy?: Prisma.UserUpdateOneWithoutApprovedServiceReleasesNestedInput
   documents?: Prisma.ServiceRequestDocumentUpdateManyWithoutRequestNestedInput
   events?: Prisma.ServiceRequestEventUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestUncheckedUpdateWithoutAppointmentsInput = {
@@ -1496,6 +1534,127 @@ export type ServiceRequestUncheckedUpdateWithoutAppointmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
   events?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutRequestNestedInput
+}
+
+export type ServiceRequestCreateWithoutPickupSlotsInput = {
+  id?: string
+  trackingId: string
+  serviceKey: string
+  serviceTitle: string
+  purpose: string
+  formDataJson: string
+  status?: string
+  assignedDepartment?: string | null
+  staffRecommendation?: string | null
+  releaseNote?: string | null
+  finalNote?: string | null
+  releaseApprovedAt?: Date | string | null
+  version?: number
+  submittedAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  requester: Prisma.UserCreateNestedOneWithoutServiceRequestsInput
+  assignedStaff?: Prisma.UserCreateNestedOneWithoutAssignedServiceRequestsInput
+  releaseApprovedBy?: Prisma.UserCreateNestedOneWithoutApprovedServiceReleasesInput
+  documents?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutRequestInput
+  events?: Prisma.ServiceRequestEventCreateNestedManyWithoutRequestInput
+  appointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutRequestInput
+}
+
+export type ServiceRequestUncheckedCreateWithoutPickupSlotsInput = {
+  id?: string
+  trackingId: string
+  serviceKey: string
+  serviceTitle: string
+  requesterId: string
+  purpose: string
+  formDataJson: string
+  status?: string
+  assignedDepartment?: string | null
+  assignedStaffId?: string | null
+  staffRecommendation?: string | null
+  releaseNote?: string | null
+  finalNote?: string | null
+  releaseApprovedAt?: Date | string | null
+  releaseApprovedById?: string | null
+  version?: number
+  submittedAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
+  events?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  appointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutRequestInput
+}
+
+export type ServiceRequestCreateOrConnectWithoutPickupSlotsInput = {
+  where: Prisma.ServiceRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.ServiceRequestCreateWithoutPickupSlotsInput, Prisma.ServiceRequestUncheckedCreateWithoutPickupSlotsInput>
+}
+
+export type ServiceRequestUpsertWithoutPickupSlotsInput = {
+  update: Prisma.XOR<Prisma.ServiceRequestUpdateWithoutPickupSlotsInput, Prisma.ServiceRequestUncheckedUpdateWithoutPickupSlotsInput>
+  create: Prisma.XOR<Prisma.ServiceRequestCreateWithoutPickupSlotsInput, Prisma.ServiceRequestUncheckedCreateWithoutPickupSlotsInput>
+  where?: Prisma.ServiceRequestWhereInput
+}
+
+export type ServiceRequestUpdateToOneWithWhereWithoutPickupSlotsInput = {
+  where?: Prisma.ServiceRequestWhereInput
+  data: Prisma.XOR<Prisma.ServiceRequestUpdateWithoutPickupSlotsInput, Prisma.ServiceRequestUncheckedUpdateWithoutPickupSlotsInput>
+}
+
+export type ServiceRequestUpdateWithoutPickupSlotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingId?: Prisma.StringFieldUpdateOperationsInput | string
+  serviceKey?: Prisma.StringFieldUpdateOperationsInput | string
+  serviceTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  purpose?: Prisma.StringFieldUpdateOperationsInput | string
+  formDataJson?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedDepartment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffRecommendation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  releaseNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finalNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  releaseApprovedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requester?: Prisma.UserUpdateOneRequiredWithoutServiceRequestsNestedInput
+  assignedStaff?: Prisma.UserUpdateOneWithoutAssignedServiceRequestsNestedInput
+  releaseApprovedBy?: Prisma.UserUpdateOneWithoutApprovedServiceReleasesNestedInput
+  documents?: Prisma.ServiceRequestDocumentUpdateManyWithoutRequestNestedInput
+  events?: Prisma.ServiceRequestEventUpdateManyWithoutRequestNestedInput
+  appointments?: Prisma.ServiceAppointmentUpdateManyWithoutRequestNestedInput
+}
+
+export type ServiceRequestUncheckedUpdateWithoutPickupSlotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingId?: Prisma.StringFieldUpdateOperationsInput | string
+  serviceKey?: Prisma.StringFieldUpdateOperationsInput | string
+  serviceTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  requesterId?: Prisma.StringFieldUpdateOperationsInput | string
+  purpose?: Prisma.StringFieldUpdateOperationsInput | string
+  formDataJson?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedDepartment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffRecommendation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  releaseNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finalNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  releaseApprovedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  releaseApprovedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
+  events?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  appointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestCreateManyRequesterInput = {
@@ -1587,6 +1746,7 @@ export type ServiceRequestUpdateWithoutRequesterInput = {
   documents?: Prisma.ServiceRequestDocumentUpdateManyWithoutRequestNestedInput
   events?: Prisma.ServiceRequestEventUpdateManyWithoutRequestNestedInput
   appointments?: Prisma.ServiceAppointmentUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestUncheckedUpdateWithoutRequesterInput = {
@@ -1612,6 +1772,7 @@ export type ServiceRequestUncheckedUpdateWithoutRequesterInput = {
   documents?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
   events?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutRequestNestedInput
   appointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestUncheckedUpdateManyWithoutRequesterInput = {
@@ -1659,6 +1820,7 @@ export type ServiceRequestUpdateWithoutAssignedStaffInput = {
   documents?: Prisma.ServiceRequestDocumentUpdateManyWithoutRequestNestedInput
   events?: Prisma.ServiceRequestEventUpdateManyWithoutRequestNestedInput
   appointments?: Prisma.ServiceAppointmentUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestUncheckedUpdateWithoutAssignedStaffInput = {
@@ -1684,6 +1846,7 @@ export type ServiceRequestUncheckedUpdateWithoutAssignedStaffInput = {
   documents?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
   events?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutRequestNestedInput
   appointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestUncheckedUpdateManyWithoutAssignedStaffInput = {
@@ -1731,6 +1894,7 @@ export type ServiceRequestUpdateWithoutReleaseApprovedByInput = {
   documents?: Prisma.ServiceRequestDocumentUpdateManyWithoutRequestNestedInput
   events?: Prisma.ServiceRequestEventUpdateManyWithoutRequestNestedInput
   appointments?: Prisma.ServiceAppointmentUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestUncheckedUpdateWithoutReleaseApprovedByInput = {
@@ -1756,6 +1920,7 @@ export type ServiceRequestUncheckedUpdateWithoutReleaseApprovedByInput = {
   documents?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
   events?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutRequestNestedInput
   appointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutRequestNestedInput
+  pickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByInput = {
@@ -1789,12 +1954,14 @@ export type ServiceRequestCountOutputType = {
   documents: number
   events: number
   appointments: number
+  pickupSlots: number
 }
 
 export type ServiceRequestCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   documents?: boolean | ServiceRequestCountOutputTypeCountDocumentsArgs
   events?: boolean | ServiceRequestCountOutputTypeCountEventsArgs
   appointments?: boolean | ServiceRequestCountOutputTypeCountAppointmentsArgs
+  pickupSlots?: boolean | ServiceRequestCountOutputTypeCountPickupSlotsArgs
 }
 
 /**
@@ -1828,6 +1995,13 @@ export type ServiceRequestCountOutputTypeCountAppointmentsArgs<ExtArgs extends r
   where?: Prisma.ServiceAppointmentWhereInput
 }
 
+/**
+ * ServiceRequestCountOutputType without action
+ */
+export type ServiceRequestCountOutputTypeCountPickupSlotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ServicePickupSlotWhereInput
+}
+
 
 export type ServiceRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1856,6 +2030,7 @@ export type ServiceRequestSelect<ExtArgs extends runtime.Types.Extensions.Intern
   documents?: boolean | Prisma.ServiceRequest$documentsArgs<ExtArgs>
   events?: boolean | Prisma.ServiceRequest$eventsArgs<ExtArgs>
   appointments?: boolean | Prisma.ServiceRequest$appointmentsArgs<ExtArgs>
+  pickupSlots?: boolean | Prisma.ServiceRequest$pickupSlotsArgs<ExtArgs>
   _count?: boolean | Prisma.ServiceRequestCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["serviceRequest"]>
 
@@ -1892,6 +2067,7 @@ export type ServiceRequestInclude<ExtArgs extends runtime.Types.Extensions.Inter
   documents?: boolean | Prisma.ServiceRequest$documentsArgs<ExtArgs>
   events?: boolean | Prisma.ServiceRequest$eventsArgs<ExtArgs>
   appointments?: boolean | Prisma.ServiceRequest$appointmentsArgs<ExtArgs>
+  pickupSlots?: boolean | Prisma.ServiceRequest$pickupSlotsArgs<ExtArgs>
   _count?: boolean | Prisma.ServiceRequestCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1904,6 +2080,7 @@ export type $ServiceRequestPayload<ExtArgs extends runtime.Types.Extensions.Inte
     documents: Prisma.$ServiceRequestDocumentPayload<ExtArgs>[]
     events: Prisma.$ServiceRequestEventPayload<ExtArgs>[]
     appointments: Prisma.$ServiceAppointmentPayload<ExtArgs>[]
+    pickupSlots: Prisma.$ServicePickupSlotPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2272,6 +2449,7 @@ export interface Prisma__ServiceRequestClient<T, Null = never, ExtArgs extends r
   documents<T extends Prisma.ServiceRequest$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ServiceRequest$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceRequestDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   events<T extends Prisma.ServiceRequest$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ServiceRequest$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceRequestEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   appointments<T extends Prisma.ServiceRequest$appointmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ServiceRequest$appointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceAppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pickupSlots<T extends Prisma.ServiceRequest$pickupSlotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ServiceRequest$pickupSlotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServicePickupSlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2776,6 +2954,30 @@ export type ServiceRequest$appointmentsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.ServiceAppointmentScalarFieldEnum | Prisma.ServiceAppointmentScalarFieldEnum[]
+}
+
+/**
+ * ServiceRequest.pickupSlots
+ */
+export type ServiceRequest$pickupSlotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ServicePickupSlot
+   */
+  select?: Prisma.ServicePickupSlotSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ServicePickupSlot
+   */
+  omit?: Prisma.ServicePickupSlotOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ServicePickupSlotInclude<ExtArgs> | null
+  where?: Prisma.ServicePickupSlotWhereInput
+  orderBy?: Prisma.ServicePickupSlotOrderByWithRelationInput | Prisma.ServicePickupSlotOrderByWithRelationInput[]
+  cursor?: Prisma.ServicePickupSlotWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ServicePickupSlotScalarFieldEnum | Prisma.ServicePickupSlotScalarFieldEnum[]
 }
 
 /**

@@ -147,21 +147,6 @@ export type JobActivity = Prisma.JobActivityModel
  */
 export type CommunitySurvey = Prisma.CommunitySurveyModel
 /**
- * Model CommunitySurveyWorkspace
- *
- */
-export type CommunitySurveyWorkspace = Prisma.CommunitySurveyWorkspaceModel
-/**
- * Model CommunitySurveyRevision
- *
- */
-export type CommunitySurveyRevision = Prisma.CommunitySurveyRevisionModel
-/**
- * Model CitizenProfileConsent
- *
- */
-export type CitizenProfileConsent = Prisma.CitizenProfileConsentModel
-/**
  * Model GovernmentActivity
  * 
  */
@@ -197,6 +182,11 @@ export type ServiceRequestEvent = Prisma.ServiceRequestEventModel
  */
 export type ServiceAppointment = Prisma.ServiceAppointmentModel
 /**
+ * Model ServicePickupSlot
+ * 
+ */
+export type ServicePickupSlot = Prisma.ServicePickupSlotModel
+/**
  * Model Notification
  * 
  */
@@ -216,3 +206,23 @@ export type ServiceDefinition = Prisma.ServiceDefinitionModel
  * 
  */
 export type ServiceDefinitionAudit = Prisma.ServiceDefinitionAuditModel
+/**
+ * Model EmergencyHotline
+ * 
+ */
+export type EmergencyHotline = Prisma.EmergencyHotlineModel
+/**
+ * Model EmergencyHotlineProposal
+ * 
+ */
+export type EmergencyHotlineProposal = Prisma.EmergencyHotlineProposalModel
+/**
+ * Model EmergencyAlert
+ * 
+ */
+export type EmergencyAlert = Prisma.EmergencyAlertModel
+/**
+ * Model EmergencyActionLog
+ * 
+ */
+export type EmergencyActionLog = Prisma.EmergencyActionLogModel
