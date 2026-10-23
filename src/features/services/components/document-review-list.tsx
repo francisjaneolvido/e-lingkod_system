@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { DocumentInlinePreview } from "./document-inline-preview";
 import { CheckCircle2, FileText, Loader2, RotateCcw, XCircle } from "lucide-react";
 import type { ServiceRequirement } from "../catalog";
 
@@ -51,6 +52,7 @@ export function DocumentReviewList({ requestId, requirements, documents, reviewE
               <span className={`rounded-full border px-2 py-0.5 text-[9px] font-black ${statusTone[document.verificationStatus] || statusTone.PENDING}`}>{document.verificationStatus === "REJECTED" ? "Needs replacement" : document.verificationStatus}</span>
               {previousCount > 0 && <span className="text-[9px] text-[#8aa0ad]">+{previousCount} earlier upload{previousCount === 1 ? "" : "s"}</span>}
             </div> : <p className={`mt-2 text-[11px] ${requirement.required ? "font-bold text-[#aa5d63]" : "text-[#8a9da8]"}`}>{requirement.required ? "Required document not uploaded" : "Optional document not uploaded"}</p>}
+            {document && <DocumentInlinePreview documentId={document.id} fileName={document.fileName} mimeType={document.mimeType} compact />}
             {document?.verificationNote && <p className="mt-2 rounded-lg bg-white px-3 py-2 text-[10px] leading-4 text-[#667f8e]">Reviewer note: {document.verificationNote}</p>}
           </div>
         </div>

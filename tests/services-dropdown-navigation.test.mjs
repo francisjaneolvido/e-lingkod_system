@@ -21,8 +21,8 @@ test('all six service definitions remain available while Job Matching owns emplo
 });
 
 test('community menu separates Job Matching insights from the future Census module',()=>{
-  assert.match(header,/label: "Citizen Profiling", href: "\/community-employment"/);
-  assert.match(header,/label: "Personal survey", href: "\/community-survey"/);
+  assert.match(header,/label: "Job Matching overview", href: "\/community-employment"/);
+  assert.match(header,/label: "Employment survey", href: "\/community-survey"/);
   assert.match(header,/label: "Employment & skills insights", href: "\/community-employment\/insights"/);
   assert.match(header,/label: "Opportunities", href: "\/opportunities"/);
   assert.match(header,/label: "Community census · coming soon", href: "\/community-census"/);

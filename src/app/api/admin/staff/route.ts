@@ -33,6 +33,15 @@ export async function POST(request: Request) {
       if (target.id === actor.id || target.role === "ADMIN") throw new CivicError("Super Admin accounts cannot be edited here.", 403);
       if (target.role !== "STAFF" && target.role !== "CITIZEN") throw new CivicError("This account cannot be assigned.", 400);
       if (input.mode === "REVOKE" && target.role !== "STAFF") throw new CivicError("This account is not an active staff member.", 400);
+      const servicesAccessLost = target.role === "STAFF" && (input.mode === "REVOKE" || !input.modules.includes("SERVICES") || target.department !== input.department);
+      if (servicesAccessLost) {
+        const activeServiceRequests = await tx.serviceRequest.count({
+          where: { assignedStaffId: target.id, status: { notIn: ["COMPLETED", "DECLINED", "CANCELLED"] } },
+        });
+        if (activeServiceRequests > 0) {
+          throw new CivicError(`Reassign ${activeServiceRequests} active Online LGU Services request(s) before changing this staff member's office or permissions.`, 409);
+        }
+      }
       const updated = await tx.user.updateMany({
         where: { id: target.id, role: { in: input.mode === "SAVE" ? ["CITIZEN", "STAFF"] : ["STAFF"] } },
         data: input.mode === "SAVE" ? { role: "STAFF", department: input.department, designation: input.designation } : { role: "CITIZEN", department: null, designation: null },

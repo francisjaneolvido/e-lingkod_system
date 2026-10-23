@@ -32,9 +32,10 @@ test("Community Employment tile opens the live umbrella module and keeps opportu
   assert.match(modal, /href="\/community-employment"/);
 });
 
-test("service notices use Citizen Profiling while the dedicated Census module remains planned", () => {
+test("employment survey and future Census are clearly distinct in services notices", () => {
   assert.match(tile, /Survey & opportunity discovery · Available/);
-  assert.match(read("src/features/landing/data/services.ts"), /Citizen Profiling/);
+  assert.match(read("src/features/landing/data/services.ts"), /Community Employment & Livelihood/);
+  assert.match(read("src/app/community-employment/page.tsx"), /Citizen Profiling/);
   assert.match(read("src/features/landing/data/services.ts"), /title: "Community Census", shortTitle: "Census · coming soon"/);
   assert.match(read("src/features/landing/data/services.ts"), /belongs to Job Matching \/ Employment & Livelihood, not Census/);
   assert.match(read("src/components/layout/site-footer.tsx"), /Online LGU Services, and PESO opportunities now have working prototype flows/);

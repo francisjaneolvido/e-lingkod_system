@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { OFFICIAL_NUMBERS, normalizedPhone } from "@/features/emergency/domain";
 import { PublicEmergency, type PublicHotline, type PublicAlert } from "@/features/emergency/components/public-emergency";
 
-export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Emergency Hotlines & Alerts | Los Baños | eLingkod Bayan", description: "Emergency numbers and approved local advisories for Los Baños, Laguna." };
 
 export default async function EmergencyPage() {
+  // This public alert feed must be evaluated per request with cacheComponents enabled.
+  await connection();
   const now = new Date();
   // National hotlines remain visible if the database is down or migration is pending.
   // Never describe an unavailable advisory feed as proof that no warnings exist.

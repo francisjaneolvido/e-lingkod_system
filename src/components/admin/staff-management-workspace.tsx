@@ -22,7 +22,7 @@ export function StaffManagementWorkspace({ staff, invitations, activity, deliver
   const pending = invitations.filter(i => i.status === "PENDING").length;
   return <div className="space-y-6">
     <div className="flex flex-wrap items-start justify-between gap-4">
-      <div><span className="elb-admin-eyebrow">PEOPLE & PERMISSIONS</span><h1 className="mt-2 text-[27px] font-extrabold tracking-tight text-[#18435f]">LGU Staff Management</h1><p className="mt-1 max-w-2xl text-[13px] leading-6 text-[#67869a]">Manage personnel, onboarding, and access to LGU service modules.</p></div>
+      <div><span className="elb-admin-eyebrow">PEOPLE & PERMISSIONS</span><h1 className="mt-2 text-[27px] font-extrabold tracking-tight text-[#18435f]">LGU Staff Management</h1><p className="mt-1 max-w-2xl text-[13px] leading-6 text-[#67869a]">Recommended Admin → Staff workflow: select the office, grant the required modules, then assign incoming cases. Reassign open requests before revoking access.</p></div>
       <button type="button" onClick={() => setTab("invite")} className="elb-admin-primary min-h-11"><MailPlus size={17}/> Invite LGU staff <ArrowRight size={15}/></button>
     </div>
     <div className="grid gap-3 sm:grid-cols-3">

@@ -41,7 +41,7 @@ export function AdminRequestActions({ request, service, viewerRole, staff, verif
     if (request.status === "APPOINTMENT_CONFIRMED") return "Conduct the confirmed activity first. Record the outcome only after the scheduled time has occurred.";
     if (request.status === "APPOINTMENT_COMPLETED") return "The scheduled activity is complete. Add the staff recommendation and submit for final verification.";
     if (request.status === "FOR_FINAL_VERIFICATION") return releaseAlreadyApproved ? "Release was authorized and delivered. Super Admin must verify final completion." : "Staff actions are locked while Super Admin performs final verification.";
-    if (request.status === "READY_FOR_RELEASE") return `Record the actual release / delivery of ${service.outcomeLabel.toLowerCase()}.`;
+    if (request.status === "READY_FOR_RELEASE") return service.completionMode === "RELEASE" ? "Use Document pickup scheduling to offer slots and confirm the claimant before recording physical release." : `Record the actual release / delivery of ${service.outcomeLabel.toLowerCase()}.`;
     return "Actions are limited by the current workflow state to protect the audit trail.";
   }, [request.status, releaseAlreadyApproved, reviewStage, verificationReady, verifiedRequiredCount, requiredDocumentCount, requiredAppointment, service]);
 
@@ -67,7 +67,7 @@ export function AdminRequestActions({ request, service, viewerRole, staff, verif
     if (request.status === "APPOINTMENT_CONFIRMED") return { label:`Record ${service.appointmentMode === "INSPECTION" ? "inspection" : "appointment"} outcome`, action:"COMPLETE_APPOINTMENT", note:true };
     if (request.status === "APPOINTMENT_COMPLETED") return { label:"Submit staff recommendation", action:"RECOMMEND_FINAL", note:true };
     if (request.status === "VALIDATED" && (!requiredAppointment || service.appointmentMode === "OPTIONAL")) return { label:"Submit staff recommendation", action:"RECOMMEND_FINAL", note:true };
-    if (request.status === "READY_FOR_RELEASE") return { label:"Record release / delivery", action:"MARK_RELEASED", note:true };
+    if (request.status === "READY_FOR_RELEASE" && service.completionMode !== "RELEASE") return { label:"Record release / delivery", action:"MARK_RELEASED", note:true };
     return null;
   })();
 
@@ -83,6 +83,7 @@ export function AdminRequestActions({ request, service, viewerRole, staff, verif
     {viewerRole === "ADMIN" && <section className="rounded-2xl border border-[#dce8ee] bg-white p-4">
       <div className="flex items-center gap-2"><UserRoundCheck size={16} className="text-[#2c7899]"/><h3 className="text-xs font-black text-[#214e69]">Assignment override</h3></div>
       <p className="mt-1 text-[9px] leading-4 text-[#8296a2]">Normal requests are balanced automatically among eligible {service.processingOffice} staff. Use this only to override or rescue an unaccepted case.</p>
+      {staff.length === 0 && <p className="mt-2 rounded-lg bg-amber-50 p-3 text-[10px] text-amber-800">No eligible staff for this request yet. Set the right office and enable Online LGU Services in <a href="/admin/staff" className="font-bold underline">Staff Management</a>.</p>}
       <div className="mt-3 grid gap-2">
         <select className={input} value={staffId} onChange={event => setStaffId(event.target.value)}><option value="">Choose staff for manual override</option>{staff.map(person => <option key={person.id} value={person.id}>{person.name} · {person.department || "No department"}{typeof person.activeLoad === "number" ? ` · ${person.activeLoad} active` : ""}</option>)}</select>
         <button disabled={!staffId || !!busy} onClick={() => call(`/api/admin/services/requests/${request.id}/assign`, "PATCH", { staffId })} className="rounded-xl bg-[#175e80] px-3 py-2.5 text-[10px] font-extrabold text-white disabled:opacity-50">Assign / reassign</button>

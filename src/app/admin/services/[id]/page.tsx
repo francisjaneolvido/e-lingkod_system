@@ -9,6 +9,7 @@ import { resolveServiceDefinition } from "@/features/services/server/catalog";
 import { SERVICE_STATUS_META, isServiceStatus } from "@/features/services/domain";
 import { AdminRequestActions } from "@/features/services/components/admin-request-actions";
 import { DocumentReviewList } from "@/features/services/components/document-review-list";
+import { StaffPickupPanel } from "@/features/services/components/staff-pickup-panel";
 import { WorkOfferPanel } from "@/components/admin/work-offer-panel";
 
 export const instant = false;
@@ -65,6 +66,8 @@ export default async function AdminServiceDetail({ params }: { params: Promise<{
           <div className="mt-3 grid gap-2 sm:grid-cols-2">{service.reviewChecklist.map(item => <div key={item} className="flex gap-2 rounded-xl bg-[#f8fbfc] px-3 py-2.5 text-[10px] leading-4 text-[#607d8d]"><CheckCircle2 size={13} className="mt-0.5 shrink-0 text-[#53907d]"/>{item}</div>)}</div>
           <p className="mt-3 flex gap-2 rounded-xl bg-[#fff9ee] px-3 py-2.5 text-[10px] leading-4 text-[#84672f]"><ShieldCheck size={13} className="mt-0.5 shrink-0"/>This checklist supports review; it does not replace the office’s official Citizen’s Charter, technical assessment, fee assessment or legal eligibility decision.</p>
         </section>
+
+        {service.completionMode === "RELEASE" && request.releaseApprovedAt && ["READY_FOR_RELEASE", "FOR_FINAL_VERIFICATION", "COMPLETED"].includes(status) && viewer.role === "STAFF" && request.assignedStaffId === viewer.id && request.workAssignment?.status === "ACCEPTED" && <StaffPickupPanel request={request}/> }
 
         {request.appointments.length > 0 && <section className="rounded-[18px] border border-[#dedcf1] bg-[#fbfaff] p-4 sm:p-5">
           <div className="flex items-center gap-2"><CalendarClock size={16} className="text-[#68649c]"/><h2 className="text-xs font-black text-[#454073]">Appointment history</h2></div>

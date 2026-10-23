@@ -1,7 +1,7 @@
 import { viewerFromHeaders } from "@/lib/access";
 import { hasModuleAccess } from "@/lib/staff-access";
 import { prisma } from "@/lib/prisma";
-import { departmentMatchesService, serviceByKey } from "@/features/services/catalog";
+import { departmentMatchesService } from "@/features/services/catalog";
 import { resolveServiceDefinition } from "@/features/services/server/catalog";
 
 export async function GET(request:Request,{params}:{params:Promise<{documentId:string}>}){
@@ -16,5 +16,12 @@ export async function GET(request:Request,{params}:{params:Promise<{documentId:s
     allowed=doc.request.assignedStaffId===viewer.id||Boolean(service&&departmentMatchesService(service,viewer.department));
   }
   if(!allowed)return new Response("Forbidden",{status:403});
-  return new Response(new Uint8Array(doc.data),{headers:{"Content-Type":doc.mimeType,"Content-Disposition":`inline; filename="${doc.fileName.replace(/["\r\n]/g,"")}"`,"Cache-Control":"private, no-store","X-Content-Type-Options":"nosniff"}});
+  const canPreview = ["application/pdf", "image/jpeg", "image/png", "image/webp"].includes(doc.mimeType);
+  const safeName = doc.fileName.replace(/["\r\n]/g, "");
+  return new Response(new Uint8Array(doc.data), { headers: {
+    "Content-Type": canPreview ? doc.mimeType : "application/octet-stream",
+    "Content-Disposition": `${canPreview ? "inline" : "attachment"}; filename="${safeName}"`,
+    "Cache-Control": "private, no-store",
+    "X-Content-Type-Options": "nosniff",
+  }});
 }

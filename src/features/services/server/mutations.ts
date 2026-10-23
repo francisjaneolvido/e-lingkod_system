@@ -13,6 +13,7 @@ import { activeServiceRequirements, departmentMatchesService } from "../catalog"
 import { resolveServiceDefinition } from "./catalog";
 import { autoOfferServiceRequest, completeWork, manualAssignWork, requireAcceptedWork } from "@/lib/work-distribution/server";
 import { createNotification, notifyAdmins } from "@/lib/notifications/server";
+import { recordServicePickupRelease } from "./pickup";
 
 function canEditCitizen(status: string) { return ["DRAFT", "FORM_OPEN", "ACTION_REQUIRED"].includes(status); }
 
@@ -282,6 +283,8 @@ export async function staffServiceAction(id: string, input: any, viewer: CivicVi
     staffRecommendation = note(remarks, "Staff recommendation", 12);
     eventNote = "Staff review and recommendation were submitted for Super Admin final verification.";
   } else if (action === "MARK_RELEASED") {
+    // Physical documents must go through the confirmed pickup/claimant-ID flow.
+    if (service.completionMode === "RELEASE") return recordServicePickupRelease(id, input, viewer);
     if (row.status !== "READY_FOR_RELEASE") throw new CivicError("This request is not ready for release.", 409);
     next = "FOR_FINAL_VERIFICATION";
     releaseNote = note(remarks, "Release / delivery remarks", 8);

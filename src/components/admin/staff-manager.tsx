@@ -4,6 +4,7 @@ import { useMemo, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { AlertCircle, Building2, CheckCircle2, LoaderCircle, Search, ShieldCheck, Trash2, UserRoundPlus, UsersRound } from "lucide-react";
 import { STAFF_MODULES, STAFF_MODULE_LABELS, type StaffModule } from "@/lib/staff-modules";
+import { LGUOfficeSelect, LGUOfficeRecommendation } from "@/components/admin/lgu-office-select";
 
 export type Staff = { id: string; name: string; email: string; department: string | null; designation: string | null; modules: StaffModule[]; createdAt: string };
 type StaffPayload = { email: string; department: string; designation: string; modules: StaffModule[]; mode: "SAVE" | "REVOKE" };
@@ -62,7 +63,8 @@ function StaffCard({ staff }: { staff: Staff }) {
       <span className="rounded-full bg-[#e7f5ed] px-3 py-1 text-[11px] font-semibold text-[#267d67]">{staff.modules.length} assigned modules</span>
     </div>
     {editing && <form onSubmit={save} className="space-y-5 border-t border-[#e7eff3] px-5 py-5 sm:px-6">
-      <div className="grid gap-4 sm:grid-cols-2"><label className="block text-[12px] font-bold text-[#395f78]">Department / office<input className="elb-admin-field mt-2" required maxLength={120} value={department} onChange={e => setDepartment(e.target.value)} disabled={busy}/></label><label className="block text-[12px] font-bold text-[#395f78]">Job title / designation<input className="elb-admin-field mt-2" required maxLength={120} value={designation} onChange={e => setDesignation(e.target.value)} disabled={busy}/></label></div>
+      <div className="grid gap-4 sm:grid-cols-2"><label className="block text-[12px] font-bold text-[#395f78]">Department / office<LGUOfficeSelect value={department} onChange={setDepartment} disabled={busy}/></label><label className="block text-[12px] font-bold text-[#395f78]">Job title / designation<input className="elb-admin-field mt-2" required maxLength={120} value={designation} onChange={e => setDesignation(e.target.value)} disabled={busy}/></label></div>
+      <LGUOfficeRecommendation office={department} modules={modules} onApply={setModules} disabled={busy}/>
       <PermissionPicker value={modules} onChange={setModules} disabled={busy}/>
       {error && <p role="alert" className="elb-admin-feedback elb-admin-feedback--error"><AlertCircle size={16}/>{error}</p>}
       {notice && <p role="status" className="elb-admin-feedback"><CheckCircle2 size={16}/>{notice}</p>}
@@ -91,7 +93,8 @@ function AssignExistingAccount() {
   return <section className="rounded-2xl border border-[#dae8ef] bg-white p-5 sm:p-7">
     <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-xl bg-[#e7f5f3] text-[#24847c]"><UserRoundPlus size={21}/></span><div><h2 className="text-[18px] font-extrabold text-[#1c4d69]">Assign an existing account</h2><p className="mt-1 text-[13px] leading-5 text-[#6c869a]">For an account already registered as a citizen. The current password stays unchanged. Staff will use LGU tools instead of citizen-only reporting while assigned.</p></div></div>
     <form onSubmit={submit} className="mt-6 space-y-5">
-      <div className="grid gap-4 md:grid-cols-3"><label className="block text-[12px] font-bold text-[#395f78]">Registered email<input type="email" className="elb-admin-field mt-2" required maxLength={191} autoComplete="off" value={email} onChange={e => setEmail(e.target.value)} placeholder="officer@example.gov.ph" disabled={busy}/></label><label className="block text-[12px] font-bold text-[#395f78]">Department / office<input className="elb-admin-field mt-2" required maxLength={120} value={department} onChange={e => setDepartment(e.target.value)} placeholder="e.g. PESO" disabled={busy}/></label><label className="block text-[12px] font-bold text-[#395f78]">Designation<input className="elb-admin-field mt-2" required maxLength={120} value={designation} onChange={e => setDesignation(e.target.value)} placeholder="e.g. Employment Officer" disabled={busy}/></label></div>
+      <div className="grid gap-4 md:grid-cols-3"><label className="block text-[12px] font-bold text-[#395f78]">Registered email<input type="email" className="elb-admin-field mt-2" required maxLength={191} autoComplete="off" value={email} onChange={e => setEmail(e.target.value)} placeholder="officer@example.gov.ph" disabled={busy}/></label><label className="block text-[12px] font-bold text-[#395f78]">Department / office<LGUOfficeSelect value={department} onChange={setDepartment} disabled={busy}/></label><label className="block text-[12px] font-bold text-[#395f78]">Designation<input className="elb-admin-field mt-2" required maxLength={120} value={designation} onChange={e => setDesignation(e.target.value)} placeholder="e.g. Employment Officer" disabled={busy}/></label></div>
+      <LGUOfficeRecommendation office={department} modules={modules} onApply={setModules} disabled={busy}/>
       <PermissionPicker value={modules} onChange={setModules} disabled={busy}/>
       {error && <p role="alert" className="elb-admin-feedback elb-admin-feedback--error"><AlertCircle size={16}/>{error}</p>}
       {notice && <p role="status" className="elb-admin-feedback"><CheckCircle2 size={16}/>{notice}</p>}

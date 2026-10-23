@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 import { belongsToEmergencyOffice } from "@/features/emergency/domain";
 import { EmergencyConsole } from "@/features/emergency/components/emergency-console";
 
-export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Emergency & Alerts Desk | eLingkod Bayan" };
 export default async function EmergencyAdminPage() {
   const viewer = await requireModulePage("/admin/emergency", "EMERGENCY");
