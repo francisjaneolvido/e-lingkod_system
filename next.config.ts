@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Isolated verification may use its own output without disrupting an active dev server.
+  distDir: process.env.ELB_NEXT_DIST_DIR || ".next",
   async headers() {
     return [{
       source: "/staff/activate/:path*",

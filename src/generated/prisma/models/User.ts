@@ -281,6 +281,10 @@ export type UserWhereInput = {
   spesImports?: Prisma.SpesImportBatchListRelationFilter
   spesImportEvents?: Prisma.SpesImportEventListRelationFilter
   communitySurveys?: Prisma.CommunitySurveyListRelationFilter
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceListRelationFilter
+  surveyRevisions?: Prisma.CommunitySurveyRevisionListRelationFilter
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionListRelationFilter
+  citizenProfileConsent?: Prisma.XOR<Prisma.CitizenProfileConsentNullableScalarRelationFilter, Prisma.CitizenProfileConsentWhereInput> | null
   communityImports?: Prisma.CommunityImportBatchListRelationFilter
   serviceRequests?: Prisma.ServiceRequestListRelationFilter
   assignedServiceRequests?: Prisma.ServiceRequestListRelationFilter
@@ -329,6 +333,10 @@ export type UserOrderByWithRelationInput = {
   spesImports?: Prisma.SpesImportBatchOrderByRelationAggregateInput
   spesImportEvents?: Prisma.SpesImportEventOrderByRelationAggregateInput
   communitySurveys?: Prisma.CommunitySurveyOrderByRelationAggregateInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceOrderByRelationAggregateInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionOrderByRelationAggregateInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionOrderByRelationAggregateInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentOrderByWithRelationInput
   communityImports?: Prisma.CommunityImportBatchOrderByRelationAggregateInput
   serviceRequests?: Prisma.ServiceRequestOrderByRelationAggregateInput
   assignedServiceRequests?: Prisma.ServiceRequestOrderByRelationAggregateInput
@@ -381,6 +389,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   spesImports?: Prisma.SpesImportBatchListRelationFilter
   spesImportEvents?: Prisma.SpesImportEventListRelationFilter
   communitySurveys?: Prisma.CommunitySurveyListRelationFilter
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceListRelationFilter
+  surveyRevisions?: Prisma.CommunitySurveyRevisionListRelationFilter
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionListRelationFilter
+  citizenProfileConsent?: Prisma.XOR<Prisma.CitizenProfileConsentNullableScalarRelationFilter, Prisma.CitizenProfileConsentWhereInput> | null
   communityImports?: Prisma.CommunityImportBatchListRelationFilter
   serviceRequests?: Prisma.ServiceRequestListRelationFilter
   assignedServiceRequests?: Prisma.ServiceRequestListRelationFilter
@@ -471,6 +483,10 @@ export type UserCreateInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -519,6 +535,10 @@ export type UserUncheckedCreateInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -567,6 +587,10 @@ export type UserUpdateInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -615,6 +639,10 @@ export type UserUncheckedUpdateInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -1042,6 +1070,62 @@ export type UserUpdateOneRequiredWithoutCommunitySurveysNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCommunitySurveysInput, Prisma.UserUpdateWithoutCommunitySurveysInput>, Prisma.UserUncheckedUpdateWithoutCommunitySurveysInput>
 }
 
+export type UserCreateNestedOneWithoutSurveyWorkspacesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSurveyWorkspacesInput, Prisma.UserUncheckedCreateWithoutSurveyWorkspacesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSurveyWorkspacesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSurveyWorkspacesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSurveyWorkspacesInput, Prisma.UserUncheckedCreateWithoutSurveyWorkspacesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSurveyWorkspacesInput
+  upsert?: Prisma.UserUpsertWithoutSurveyWorkspacesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSurveyWorkspacesInput, Prisma.UserUpdateWithoutSurveyWorkspacesInput>, Prisma.UserUncheckedUpdateWithoutSurveyWorkspacesInput>
+}
+
+export type UserCreateNestedOneWithoutSurveyRevisionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSurveyRevisionsInput, Prisma.UserUncheckedCreateWithoutSurveyRevisionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSurveyRevisionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutAuthoredSurveyRevisionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthoredSurveyRevisionsInput, Prisma.UserUncheckedCreateWithoutAuthoredSurveyRevisionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthoredSurveyRevisionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSurveyRevisionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSurveyRevisionsInput, Prisma.UserUncheckedCreateWithoutSurveyRevisionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSurveyRevisionsInput
+  upsert?: Prisma.UserUpsertWithoutSurveyRevisionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSurveyRevisionsInput, Prisma.UserUpdateWithoutSurveyRevisionsInput>, Prisma.UserUncheckedUpdateWithoutSurveyRevisionsInput>
+}
+
+export type UserUpdateOneRequiredWithoutAuthoredSurveyRevisionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthoredSurveyRevisionsInput, Prisma.UserUncheckedCreateWithoutAuthoredSurveyRevisionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthoredSurveyRevisionsInput
+  upsert?: Prisma.UserUpsertWithoutAuthoredSurveyRevisionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuthoredSurveyRevisionsInput, Prisma.UserUpdateWithoutAuthoredSurveyRevisionsInput>, Prisma.UserUncheckedUpdateWithoutAuthoredSurveyRevisionsInput>
+}
+
+export type UserCreateNestedOneWithoutCitizenProfileConsentInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCitizenProfileConsentInput, Prisma.UserUncheckedCreateWithoutCitizenProfileConsentInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCitizenProfileConsentInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCitizenProfileConsentNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCitizenProfileConsentInput, Prisma.UserUncheckedCreateWithoutCitizenProfileConsentInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCitizenProfileConsentInput
+  upsert?: Prisma.UserUpsertWithoutCitizenProfileConsentInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCitizenProfileConsentInput, Prisma.UserUpdateWithoutCitizenProfileConsentInput>, Prisma.UserUncheckedUpdateWithoutCitizenProfileConsentInput>
+}
+
 export type UserCreateNestedOneWithoutCommunityImportsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCommunityImportsInput, Prisma.UserUncheckedCreateWithoutCommunityImportsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCommunityImportsInput
@@ -1240,6 +1324,10 @@ export type UserCreateWithoutSessionsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -1287,6 +1375,10 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -1350,6 +1442,10 @@ export type UserUpdateWithoutSessionsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -1397,6 +1493,10 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -1444,6 +1544,10 @@ export type UserCreateWithoutAccountsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -1491,6 +1595,10 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -1554,6 +1662,10 @@ export type UserUpdateWithoutAccountsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -1601,6 +1713,10 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -1648,6 +1764,10 @@ export type UserCreateWithoutReportsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -1695,6 +1815,10 @@ export type UserUncheckedCreateWithoutReportsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -1747,6 +1871,10 @@ export type UserCreateWithoutAssignedCivicReportsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -1794,6 +1922,10 @@ export type UserUncheckedCreateWithoutAssignedCivicReportsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -1857,6 +1989,10 @@ export type UserUpdateWithoutReportsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -1904,6 +2040,10 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -1962,6 +2102,10 @@ export type UserUpdateWithoutAssignedCivicReportsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -2009,6 +2153,10 @@ export type UserUncheckedUpdateWithoutAssignedCivicReportsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -2056,6 +2204,10 @@ export type UserCreateWithoutReportUpdatesInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -2103,6 +2255,10 @@ export type UserUncheckedCreateWithoutReportUpdatesInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -2166,6 +2322,10 @@ export type UserUpdateWithoutReportUpdatesInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -2213,6 +2373,10 @@ export type UserUncheckedUpdateWithoutReportUpdatesInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -2260,6 +2424,10 @@ export type UserCreateWithoutStaffPermissionsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -2307,6 +2475,10 @@ export type UserUncheckedCreateWithoutStaffPermissionsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -2370,6 +2542,10 @@ export type UserUpdateWithoutStaffPermissionsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -2417,6 +2593,10 @@ export type UserUncheckedUpdateWithoutStaffPermissionsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -2464,6 +2644,10 @@ export type UserCreateWithoutStaffChangesMadeInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -2511,6 +2695,10 @@ export type UserUncheckedCreateWithoutStaffChangesMadeInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -2563,6 +2751,10 @@ export type UserCreateWithoutStaffChangesReceivedInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -2610,6 +2802,10 @@ export type UserUncheckedCreateWithoutStaffChangesReceivedInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -2673,6 +2869,10 @@ export type UserUpdateWithoutStaffChangesMadeInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -2720,6 +2920,10 @@ export type UserUncheckedUpdateWithoutStaffChangesMadeInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -2778,6 +2982,10 @@ export type UserUpdateWithoutStaffChangesReceivedInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -2825,6 +3033,10 @@ export type UserUncheckedUpdateWithoutStaffChangesReceivedInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -2872,6 +3084,10 @@ export type UserCreateWithoutIssuedStaffInvitesInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -2919,6 +3135,10 @@ export type UserUncheckedCreateWithoutIssuedStaffInvitesInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -2982,6 +3202,10 @@ export type UserUpdateWithoutIssuedStaffInvitesInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -3029,6 +3253,10 @@ export type UserUncheckedUpdateWithoutIssuedStaffInvitesInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -3076,6 +3304,10 @@ export type UserCreateWithoutResolutionSubmissionsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -3123,6 +3355,10 @@ export type UserUncheckedCreateWithoutResolutionSubmissionsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -3175,6 +3411,10 @@ export type UserCreateWithoutResolutionReviewsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -3222,6 +3462,10 @@ export type UserUncheckedCreateWithoutResolutionReviewsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -3285,6 +3529,10 @@ export type UserUpdateWithoutResolutionSubmissionsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -3332,6 +3580,10 @@ export type UserUncheckedUpdateWithoutResolutionSubmissionsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -3390,6 +3642,10 @@ export type UserUpdateWithoutResolutionReviewsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -3437,6 +3693,10 @@ export type UserUncheckedUpdateWithoutResolutionReviewsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -3484,6 +3744,10 @@ export type UserCreateWithoutCitizenFeedbacksInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -3531,6 +3795,10 @@ export type UserUncheckedCreateWithoutCitizenFeedbacksInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -3594,6 +3862,10 @@ export type UserUpdateWithoutCitizenFeedbacksInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -3641,6 +3913,10 @@ export type UserUncheckedUpdateWithoutCitizenFeedbacksInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -3688,6 +3964,10 @@ export type UserCreateWithoutReviewedJobsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -3735,6 +4015,10 @@ export type UserUncheckedCreateWithoutReviewedJobsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -3787,6 +4071,10 @@ export type UserCreateWithoutPostedJobsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -3834,6 +4122,10 @@ export type UserUncheckedCreateWithoutPostedJobsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -3897,6 +4189,10 @@ export type UserUpdateWithoutReviewedJobsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -3944,6 +4240,10 @@ export type UserUncheckedUpdateWithoutReviewedJobsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -4002,6 +4302,10 @@ export type UserUpdateWithoutPostedJobsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -4049,6 +4353,10 @@ export type UserUncheckedUpdateWithoutPostedJobsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -4096,6 +4404,10 @@ export type UserCreateWithoutJobseekerProfileInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -4143,6 +4455,10 @@ export type UserUncheckedCreateWithoutJobseekerProfileInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -4206,6 +4522,10 @@ export type UserUpdateWithoutJobseekerProfileInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -4253,6 +4573,10 @@ export type UserUncheckedUpdateWithoutJobseekerProfileInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -4300,6 +4624,10 @@ export type UserCreateWithoutSpesImportsInput = {
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -4347,6 +4675,10 @@ export type UserUncheckedCreateWithoutSpesImportsInput = {
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -4410,6 +4742,10 @@ export type UserUpdateWithoutSpesImportsInput = {
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -4457,6 +4793,10 @@ export type UserUncheckedUpdateWithoutSpesImportsInput = {
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -4504,6 +4844,10 @@ export type UserCreateWithoutSpesImportEventsInput = {
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -4551,6 +4895,10 @@ export type UserUncheckedCreateWithoutSpesImportEventsInput = {
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -4614,6 +4962,10 @@ export type UserUpdateWithoutSpesImportEventsInput = {
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -4661,6 +5013,10 @@ export type UserUncheckedUpdateWithoutSpesImportEventsInput = {
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -4708,6 +5064,10 @@ export type UserCreateWithoutJobChangesInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -4755,6 +5115,10 @@ export type UserUncheckedCreateWithoutJobChangesInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -4818,6 +5182,10 @@ export type UserUpdateWithoutJobChangesInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -4865,6 +5233,10 @@ export type UserUncheckedUpdateWithoutJobChangesInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -4912,6 +5284,10 @@ export type UserCreateWithoutCommunitySurveysInput = {
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -4959,6 +5335,10 @@ export type UserUncheckedCreateWithoutCommunitySurveysInput = {
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -5022,6 +5402,10 @@ export type UserUpdateWithoutCommunitySurveysInput = {
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -5069,6 +5453,890 @@ export type UserUncheckedUpdateWithoutCommunitySurveysInput = {
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutSurveyWorkspacesInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutSurveyWorkspacesInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutSurveyWorkspacesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSurveyWorkspacesInput, Prisma.UserUncheckedCreateWithoutSurveyWorkspacesInput>
+}
+
+export type UserUpsertWithoutSurveyWorkspacesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSurveyWorkspacesInput, Prisma.UserUncheckedUpdateWithoutSurveyWorkspacesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSurveyWorkspacesInput, Prisma.UserUncheckedCreateWithoutSurveyWorkspacesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSurveyWorkspacesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSurveyWorkspacesInput, Prisma.UserUncheckedUpdateWithoutSurveyWorkspacesInput>
+}
+
+export type UserUpdateWithoutSurveyWorkspacesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSurveyWorkspacesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutSurveyRevisionsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutSurveyRevisionsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutSurveyRevisionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSurveyRevisionsInput, Prisma.UserUncheckedCreateWithoutSurveyRevisionsInput>
+}
+
+export type UserCreateWithoutAuthoredSurveyRevisionsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutAuthoredSurveyRevisionsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutAuthoredSurveyRevisionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthoredSurveyRevisionsInput, Prisma.UserUncheckedCreateWithoutAuthoredSurveyRevisionsInput>
+}
+
+export type UserUpsertWithoutSurveyRevisionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSurveyRevisionsInput, Prisma.UserUncheckedUpdateWithoutSurveyRevisionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSurveyRevisionsInput, Prisma.UserUncheckedCreateWithoutSurveyRevisionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSurveyRevisionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSurveyRevisionsInput, Prisma.UserUncheckedUpdateWithoutSurveyRevisionsInput>
+}
+
+export type UserUpdateWithoutSurveyRevisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSurveyRevisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserUpsertWithoutAuthoredSurveyRevisionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAuthoredSurveyRevisionsInput, Prisma.UserUncheckedUpdateWithoutAuthoredSurveyRevisionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthoredSurveyRevisionsInput, Prisma.UserUncheckedCreateWithoutAuthoredSurveyRevisionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAuthoredSurveyRevisionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAuthoredSurveyRevisionsInput, Prisma.UserUncheckedUpdateWithoutAuthoredSurveyRevisionsInput>
+}
+
+export type UserUpdateWithoutAuthoredSurveyRevisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAuthoredSurveyRevisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutCitizenProfileConsentInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutCitizenProfileConsentInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutCitizenProfileConsentInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCitizenProfileConsentInput, Prisma.UserUncheckedCreateWithoutCitizenProfileConsentInput>
+}
+
+export type UserUpsertWithoutCitizenProfileConsentInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCitizenProfileConsentInput, Prisma.UserUncheckedUpdateWithoutCitizenProfileConsentInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCitizenProfileConsentInput, Prisma.UserUncheckedCreateWithoutCitizenProfileConsentInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCitizenProfileConsentInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCitizenProfileConsentInput, Prisma.UserUncheckedUpdateWithoutCitizenProfileConsentInput>
+}
+
+export type UserUpdateWithoutCitizenProfileConsentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCitizenProfileConsentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -5117,6 +6385,10 @@ export type UserCreateWithoutCommunityImportsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
   serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
@@ -5164,6 +6436,10 @@ export type UserUncheckedCreateWithoutCommunityImportsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
   serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
@@ -5227,6 +6503,10 @@ export type UserUpdateWithoutCommunityImportsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
   serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
@@ -5274,6 +6554,10 @@ export type UserUncheckedUpdateWithoutCommunityImportsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
   serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
@@ -5321,6 +6605,10 @@ export type UserCreateWithoutServiceRequestsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
   serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
@@ -5368,6 +6656,10 @@ export type UserUncheckedCreateWithoutServiceRequestsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
   serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
@@ -5420,6 +6712,10 @@ export type UserCreateWithoutAssignedServiceRequestsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
@@ -5467,6 +6763,10 @@ export type UserUncheckedCreateWithoutAssignedServiceRequestsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
@@ -5519,6 +6819,10 @@ export type UserCreateWithoutApprovedServiceReleasesInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -5566,6 +6870,10 @@ export type UserUncheckedCreateWithoutApprovedServiceReleasesInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -5629,6 +6937,10 @@ export type UserUpdateWithoutServiceRequestsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
   serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
@@ -5676,6 +6988,10 @@ export type UserUncheckedUpdateWithoutServiceRequestsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
   serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
@@ -5734,6 +7050,10 @@ export type UserUpdateWithoutAssignedServiceRequestsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
@@ -5781,6 +7101,10 @@ export type UserUncheckedUpdateWithoutAssignedServiceRequestsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
@@ -5839,6 +7163,10 @@ export type UserUpdateWithoutApprovedServiceReleasesInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -5886,6 +7214,10 @@ export type UserUncheckedUpdateWithoutApprovedServiceReleasesInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -5933,6 +7265,10 @@ export type UserCreateWithoutVerifiedServiceDocumentsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -5980,6 +7316,10 @@ export type UserUncheckedCreateWithoutVerifiedServiceDocumentsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -6043,6 +7383,10 @@ export type UserUpdateWithoutVerifiedServiceDocumentsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -6090,6 +7434,10 @@ export type UserUncheckedUpdateWithoutVerifiedServiceDocumentsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -6137,6 +7485,10 @@ export type UserCreateWithoutServiceRequestEventsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -6184,6 +7536,10 @@ export type UserUncheckedCreateWithoutServiceRequestEventsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -6247,6 +7603,10 @@ export type UserUpdateWithoutServiceRequestEventsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -6294,6 +7654,10 @@ export type UserUncheckedUpdateWithoutServiceRequestEventsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -6341,6 +7705,10 @@ export type UserCreateWithoutProposedServiceAppointmentsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -6388,6 +7756,10 @@ export type UserUncheckedCreateWithoutProposedServiceAppointmentsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -6451,6 +7823,10 @@ export type UserUpdateWithoutProposedServiceAppointmentsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -6498,6 +7874,10 @@ export type UserUncheckedUpdateWithoutProposedServiceAppointmentsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -6545,6 +7925,10 @@ export type UserCreateWithoutNotificationsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -6592,6 +7976,10 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -6655,6 +8043,10 @@ export type UserUpdateWithoutNotificationsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -6702,6 +8094,10 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -6749,6 +8145,10 @@ export type UserCreateWithoutWorkAssignmentsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -6796,6 +8196,10 @@ export type UserUncheckedCreateWithoutWorkAssignmentsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -6859,6 +8263,10 @@ export type UserUpdateWithoutWorkAssignmentsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -6906,6 +8314,10 @@ export type UserUncheckedUpdateWithoutWorkAssignmentsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -6953,6 +8365,10 @@ export type UserCreateWithoutCreatedServiceDefinitionsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -7000,6 +8416,10 @@ export type UserUncheckedCreateWithoutCreatedServiceDefinitionsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -7063,6 +8483,10 @@ export type UserUpdateWithoutCreatedServiceDefinitionsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -7110,6 +8534,10 @@ export type UserUncheckedUpdateWithoutCreatedServiceDefinitionsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -7157,6 +8585,10 @@ export type UserCreateWithoutServiceDefinitionAuditsInput = {
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
@@ -7204,6 +8636,10 @@ export type UserUncheckedCreateWithoutServiceDefinitionAuditsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
   communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -7267,6 +8703,10 @@ export type UserUpdateWithoutServiceDefinitionAuditsInput = {
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
@@ -7314,6 +8754,10 @@ export type UserUncheckedUpdateWithoutServiceDefinitionAuditsInput = {
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
   communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
   communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
   assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -7350,6 +8794,9 @@ export type UserCountOutputType = {
   spesImports: number
   spesImportEvents: number
   communitySurveys: number
+  surveyWorkspaces: number
+  surveyRevisions: number
+  authoredSurveyRevisions: number
   communityImports: number
   serviceRequests: number
   assignedServiceRequests: number
@@ -7382,6 +8829,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   spesImports?: boolean | UserCountOutputTypeCountSpesImportsArgs
   spesImportEvents?: boolean | UserCountOutputTypeCountSpesImportEventsArgs
   communitySurveys?: boolean | UserCountOutputTypeCountCommunitySurveysArgs
+  surveyWorkspaces?: boolean | UserCountOutputTypeCountSurveyWorkspacesArgs
+  surveyRevisions?: boolean | UserCountOutputTypeCountSurveyRevisionsArgs
+  authoredSurveyRevisions?: boolean | UserCountOutputTypeCountAuthoredSurveyRevisionsArgs
   communityImports?: boolean | UserCountOutputTypeCountCommunityImportsArgs
   serviceRequests?: boolean | UserCountOutputTypeCountServiceRequestsArgs
   assignedServiceRequests?: boolean | UserCountOutputTypeCountAssignedServiceRequestsArgs
@@ -7534,6 +8984,27 @@ export type UserCountOutputTypeCountCommunitySurveysArgs<ExtArgs extends runtime
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountSurveyWorkspacesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CommunitySurveyWorkspaceWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSurveyRevisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CommunitySurveyRevisionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAuthoredSurveyRevisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CommunitySurveyRevisionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountCommunityImportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CommunityImportBatchWhereInput
 }
@@ -7644,6 +9115,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   spesImports?: boolean | Prisma.User$spesImportsArgs<ExtArgs>
   spesImportEvents?: boolean | Prisma.User$spesImportEventsArgs<ExtArgs>
   communitySurveys?: boolean | Prisma.User$communitySurveysArgs<ExtArgs>
+  surveyWorkspaces?: boolean | Prisma.User$surveyWorkspacesArgs<ExtArgs>
+  surveyRevisions?: boolean | Prisma.User$surveyRevisionsArgs<ExtArgs>
+  authoredSurveyRevisions?: boolean | Prisma.User$authoredSurveyRevisionsArgs<ExtArgs>
+  citizenProfileConsent?: boolean | Prisma.User$citizenProfileConsentArgs<ExtArgs>
   communityImports?: boolean | Prisma.User$communityImportsArgs<ExtArgs>
   serviceRequests?: boolean | Prisma.User$serviceRequestsArgs<ExtArgs>
   assignedServiceRequests?: boolean | Prisma.User$assignedServiceRequestsArgs<ExtArgs>
@@ -7699,6 +9174,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   spesImports?: boolean | Prisma.User$spesImportsArgs<ExtArgs>
   spesImportEvents?: boolean | Prisma.User$spesImportEventsArgs<ExtArgs>
   communitySurveys?: boolean | Prisma.User$communitySurveysArgs<ExtArgs>
+  surveyWorkspaces?: boolean | Prisma.User$surveyWorkspacesArgs<ExtArgs>
+  surveyRevisions?: boolean | Prisma.User$surveyRevisionsArgs<ExtArgs>
+  authoredSurveyRevisions?: boolean | Prisma.User$authoredSurveyRevisionsArgs<ExtArgs>
+  citizenProfileConsent?: boolean | Prisma.User$citizenProfileConsentArgs<ExtArgs>
   communityImports?: boolean | Prisma.User$communityImportsArgs<ExtArgs>
   serviceRequests?: boolean | Prisma.User$serviceRequestsArgs<ExtArgs>
   assignedServiceRequests?: boolean | Prisma.User$assignedServiceRequestsArgs<ExtArgs>
@@ -7735,6 +9214,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     spesImports: Prisma.$SpesImportBatchPayload<ExtArgs>[]
     spesImportEvents: Prisma.$SpesImportEventPayload<ExtArgs>[]
     communitySurveys: Prisma.$CommunitySurveyPayload<ExtArgs>[]
+    surveyWorkspaces: Prisma.$CommunitySurveyWorkspacePayload<ExtArgs>[]
+    surveyRevisions: Prisma.$CommunitySurveyRevisionPayload<ExtArgs>[]
+    authoredSurveyRevisions: Prisma.$CommunitySurveyRevisionPayload<ExtArgs>[]
+    citizenProfileConsent: Prisma.$CitizenProfileConsentPayload<ExtArgs> | null
     communityImports: Prisma.$CommunityImportBatchPayload<ExtArgs>[]
     serviceRequests: Prisma.$ServiceRequestPayload<ExtArgs>[]
     assignedServiceRequests: Prisma.$ServiceRequestPayload<ExtArgs>[]
@@ -8122,6 +9605,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   spesImports<T extends Prisma.User$spesImportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$spesImportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpesImportBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   spesImportEvents<T extends Prisma.User$spesImportEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$spesImportEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpesImportEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   communitySurveys<T extends Prisma.User$communitySurveysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$communitySurveysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunitySurveyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  surveyWorkspaces<T extends Prisma.User$surveyWorkspacesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$surveyWorkspacesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunitySurveyWorkspacePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  surveyRevisions<T extends Prisma.User$surveyRevisionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$surveyRevisionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunitySurveyRevisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  authoredSurveyRevisions<T extends Prisma.User$authoredSurveyRevisionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authoredSurveyRevisionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunitySurveyRevisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  citizenProfileConsent<T extends Prisma.User$citizenProfileConsentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$citizenProfileConsentArgs<ExtArgs>>): Prisma.Prisma__CitizenProfileConsentClient<runtime.Types.Result.GetResult<Prisma.$CitizenProfileConsentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   communityImports<T extends Prisma.User$communityImportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$communityImportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityImportBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   serviceRequests<T extends Prisma.User$serviceRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$serviceRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignedServiceRequests<T extends Prisma.User$assignedServiceRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedServiceRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -8973,6 +10460,97 @@ export type User$communitySurveysArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.CommunitySurveyScalarFieldEnum | Prisma.CommunitySurveyScalarFieldEnum[]
+}
+
+/**
+ * User.surveyWorkspaces
+ */
+export type User$surveyWorkspacesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CommunitySurveyWorkspace
+   */
+  select?: Prisma.CommunitySurveyWorkspaceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CommunitySurveyWorkspace
+   */
+  omit?: Prisma.CommunitySurveyWorkspaceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommunitySurveyWorkspaceInclude<ExtArgs> | null
+  where?: Prisma.CommunitySurveyWorkspaceWhereInput
+  orderBy?: Prisma.CommunitySurveyWorkspaceOrderByWithRelationInput | Prisma.CommunitySurveyWorkspaceOrderByWithRelationInput[]
+  cursor?: Prisma.CommunitySurveyWorkspaceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CommunitySurveyWorkspaceScalarFieldEnum | Prisma.CommunitySurveyWorkspaceScalarFieldEnum[]
+}
+
+/**
+ * User.surveyRevisions
+ */
+export type User$surveyRevisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CommunitySurveyRevision
+   */
+  select?: Prisma.CommunitySurveyRevisionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CommunitySurveyRevision
+   */
+  omit?: Prisma.CommunitySurveyRevisionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommunitySurveyRevisionInclude<ExtArgs> | null
+  where?: Prisma.CommunitySurveyRevisionWhereInput
+  orderBy?: Prisma.CommunitySurveyRevisionOrderByWithRelationInput | Prisma.CommunitySurveyRevisionOrderByWithRelationInput[]
+  cursor?: Prisma.CommunitySurveyRevisionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CommunitySurveyRevisionScalarFieldEnum | Prisma.CommunitySurveyRevisionScalarFieldEnum[]
+}
+
+/**
+ * User.authoredSurveyRevisions
+ */
+export type User$authoredSurveyRevisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CommunitySurveyRevision
+   */
+  select?: Prisma.CommunitySurveyRevisionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CommunitySurveyRevision
+   */
+  omit?: Prisma.CommunitySurveyRevisionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommunitySurveyRevisionInclude<ExtArgs> | null
+  where?: Prisma.CommunitySurveyRevisionWhereInput
+  orderBy?: Prisma.CommunitySurveyRevisionOrderByWithRelationInput | Prisma.CommunitySurveyRevisionOrderByWithRelationInput[]
+  cursor?: Prisma.CommunitySurveyRevisionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CommunitySurveyRevisionScalarFieldEnum | Prisma.CommunitySurveyRevisionScalarFieldEnum[]
+}
+
+/**
+ * User.citizenProfileConsent
+ */
+export type User$citizenProfileConsentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CitizenProfileConsent
+   */
+  select?: Prisma.CitizenProfileConsentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CitizenProfileConsent
+   */
+  omit?: Prisma.CitizenProfileConsentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CitizenProfileConsentInclude<ExtArgs> | null
+  where?: Prisma.CitizenProfileConsentWhereInput
 }
 
 /**
