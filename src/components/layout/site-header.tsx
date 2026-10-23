@@ -42,8 +42,8 @@ const serviceNavigation = services.map((service) => ({
 const publicServiceNavigation = serviceNavigation.filter((service) => service.id !== "jobs" && service.id !== "census");
 
 const communityNavigation = [
-  { label: "Job Matching overview", href: "/community-employment", description: "Employment, skills, training and livelihood profiling", icon: UsersRound },
-  { label: "Employment survey", href: "/community-survey", description: "Share skills, training interests and employment needs", icon: GraduationCap },
+  { label: "Citizen Profiling", href: "/community-employment", description: "Individual employment and livelihood profiling", icon: UsersRound },
+  { label: "Personal survey", href: "/community-survey", description: "Share skills, training interests and employment needs", icon: GraduationCap },
   { label: "Employment & skills insights", href: "/community-employment/insights", description: "View aggregated Job Matching survey insights", icon: BarChart3 },
   { label: "Opportunities", href: "/opportunities", description: "Browse verified local opportunities", icon: BriefcaseBusiness },
   { label: "Community census · coming soon", href: "/community-census", description: "Separate census module planned for a future phase", icon: BarChart3 },

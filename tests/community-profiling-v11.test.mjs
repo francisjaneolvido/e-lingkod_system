@@ -39,8 +39,9 @@ const files = [
   "src/app/api/admin/jobs/insights/export/route.ts",
 ];
 
-test("employment survey is profiling under Job Matching, not a job application, and optional sections can be skipped", () => {
-  assert.match(survey, /profiling survey under Job Matching, not a job application/);
+test("Citizen Profiling is a survey for community planning, not a job application, and optional sections can be skipped", () => {
+  assert.match(survey, /Citizen Profiling survey supports community planning/);
+  assert.match(survey, /not a job application or a promise of employment/);
   assert.match(survey, /Skip optional section/);
   assert.match(survey, /Save draft/);
   assert.match(survey, /Only the basic profile, skills and consent are required/);

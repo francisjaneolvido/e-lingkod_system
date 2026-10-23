@@ -147,6 +147,21 @@ export type JobActivity = Prisma.JobActivityModel
  */
 export type CommunitySurvey = Prisma.CommunitySurveyModel
 /**
+ * Model CommunitySurveyWorkspace
+ *
+ */
+export type CommunitySurveyWorkspace = Prisma.CommunitySurveyWorkspaceModel
+/**
+ * Model CommunitySurveyRevision
+ *
+ */
+export type CommunitySurveyRevision = Prisma.CommunitySurveyRevisionModel
+/**
+ * Model CitizenProfileConsent
+ *
+ */
+export type CitizenProfileConsent = Prisma.CitizenProfileConsentModel
+/**
  * Model GovernmentActivity
  * 
  */

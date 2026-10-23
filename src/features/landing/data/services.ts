@@ -71,7 +71,7 @@ export const services: Service[] = [
     ],
   },
   {
-    id: "jobs", number: "05", title: "Community Employment & Livelihood", shortTitle: "Survey & opportunities",
+    id: "jobs", number: "05", title: "Citizen Profiling", shortTitle: "Citizen surveys",
     description: "Community employment survey, skills and training profiling, plus PESO-reviewed opportunity discovery.",
     group: "Opportunities", icon: BriefcaseBusiness, color: SERVICE_ICON_COLOR, surface: SERVICE_ICON_SURFACE,
     details: [

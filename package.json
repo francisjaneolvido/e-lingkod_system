@@ -13,6 +13,8 @@
     "test:staff": "node --test tests/staff-invitations.test.mjs",
     "admin:seed": "node scripts/seed-admin.mjs",
     "test:all": "node --test",
+    "test:profiling": "node scripts/verify-citizen-profiling.mjs",
+    "test:profiling:legacy": "node scripts/verify-citizen-profiling.mjs --legacy",
     "db:clear-data": "node scripts/clear-demo-data.mjs",
     "postinstall": "prisma generate",
     "db:generate": "prisma generate",

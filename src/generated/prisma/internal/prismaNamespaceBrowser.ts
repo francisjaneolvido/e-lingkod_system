@@ -72,6 +72,9 @@ export const ModelName = {
   SpesImportEvent: 'SpesImportEvent',
   JobActivity: 'JobActivity',
   CommunitySurvey: 'CommunitySurvey',
+  CommunitySurveyWorkspace: 'CommunitySurveyWorkspace',
+  CommunitySurveyRevision: 'CommunitySurveyRevision',
+  CitizenProfileConsent: 'CitizenProfileConsent',
   GovernmentActivity: 'GovernmentActivity',
   CommunityImportBatch: 'CommunityImportBatch',
   CommunityImportRecord: 'CommunityImportRecord',
@@ -433,6 +436,10 @@ export const CommunitySurveyScalarFieldEnum = {
   currentlyStudying: 'currentlyStudying',
   educationLevel: 'educationLevel',
   employmentStatus: 'employmentStatus',
+  employmentHistory: 'employmentHistory',
+  overseasExperience: 'overseasExperience',
+  qualificationsJson: 'qualificationsJson',
+  completedTrainingJson: 'completedTrainingJson',
   occupation: 'occupation',
   industry: 'industry',
   workArrangement: 'workArrangement',
@@ -481,6 +488,47 @@ export const CommunitySurveyScalarFieldEnum = {
 } as const
 
 export type CommunitySurveyScalarFieldEnum = (typeof CommunitySurveyScalarFieldEnum)[keyof typeof CommunitySurveyScalarFieldEnum]
+
+
+export const CommunitySurveyWorkspaceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  surveyYear: 'surveyYear',
+  version: 'version',
+  draftJson: 'draftJson',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CommunitySurveyWorkspaceScalarFieldEnum = (typeof CommunitySurveyWorkspaceScalarFieldEnum)[keyof typeof CommunitySurveyWorkspaceScalarFieldEnum]
+
+
+export const CommunitySurveyRevisionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  actorId: 'actorId',
+  surveyYear: 'surveyYear',
+  revision: 'revision',
+  action: 'action',
+  schemaVersion: 'schemaVersion',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  resultVersion: 'resultVersion',
+  answersJson: 'answersJson',
+  createdAt: 'createdAt'
+} as const
+
+export type CommunitySurveyRevisionScalarFieldEnum = (typeof CommunitySurveyRevisionScalarFieldEnum)[keyof typeof CommunitySurveyRevisionScalarFieldEnum]
+
+
+export const CitizenProfileConsentScalarFieldEnum = {
+  userId: 'userId',
+  matching: 'matching',
+  programs: 'programs',
+  version: 'version',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CitizenProfileConsentScalarFieldEnum = (typeof CitizenProfileConsentScalarFieldEnum)[keyof typeof CitizenProfileConsentScalarFieldEnum]
 
 
 export const GovernmentActivityScalarFieldEnum = {
@@ -982,6 +1030,10 @@ export const CommunitySurveyOrderByRelevanceFieldEnum = {
   pwdStatus: 'pwdStatus',
   educationLevel: 'educationLevel',
   employmentStatus: 'employmentStatus',
+  employmentHistory: 'employmentHistory',
+  overseasExperience: 'overseasExperience',
+  qualificationsJson: 'qualificationsJson',
+  completedTrainingJson: 'completedTrainingJson',
   occupation: 'occupation',
   industry: 'industry',
   workArrangement: 'workArrangement',
@@ -1017,6 +1069,35 @@ export const CommunitySurveyOrderByRelevanceFieldEnum = {
 } as const
 
 export type CommunitySurveyOrderByRelevanceFieldEnum = (typeof CommunitySurveyOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyOrderByRelevanceFieldEnum]
+
+
+export const CommunitySurveyWorkspaceOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  draftJson: 'draftJson'
+} as const
+
+export type CommunitySurveyWorkspaceOrderByRelevanceFieldEnum = (typeof CommunitySurveyWorkspaceOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyWorkspaceOrderByRelevanceFieldEnum]
+
+
+export const CommunitySurveyRevisionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  actorId: 'actorId',
+  action: 'action',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  answersJson: 'answersJson'
+} as const
+
+export type CommunitySurveyRevisionOrderByRelevanceFieldEnum = (typeof CommunitySurveyRevisionOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyRevisionOrderByRelevanceFieldEnum]
+
+
+export const CitizenProfileConsentOrderByRelevanceFieldEnum = {
+  userId: 'userId'
+} as const
+
+export type CitizenProfileConsentOrderByRelevanceFieldEnum = (typeof CitizenProfileConsentOrderByRelevanceFieldEnum)[keyof typeof CitizenProfileConsentOrderByRelevanceFieldEnum]
 
 
 export const GovernmentActivityOrderByRelevanceFieldEnum = {

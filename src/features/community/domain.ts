@@ -72,9 +72,10 @@ function opt(value: unknown, max=250): string | null {
 function bool(value: unknown): boolean|null { return typeof value === "boolean" ? value : null; }
 function list(value: unknown, max=20, itemMax=80): string[] {
   if(value===null||value===undefined||value==="") return [];
-  const raw=Array.isArray(value)?value:(typeof value==="string"?value.split("|"):[]);
-  if(!Array.isArray(raw)||raw.length>max) throw new CivicError("Too many selected answers.",400);
-  return [...new Set(raw.map(v=>String(v).trim()).filter(Boolean).map(v=>v.slice(0,itemMax)))];
+  if(!Array.isArray(value)&&typeof value!=="string") throw new CivicError("Choose valid text answers.",400);
+  const raw=Array.isArray(value)?value:value.split("|");
+  if(raw.length>max||raw.some(v=>typeof v!=="string"||v.trim().length>itemMax)) throw new CivicError("Choose valid answers within the allowed length.",400);
+  return [...new Set((raw as string[]).map(v=>v.trim()).filter(Boolean))];
 }
 function oneOf(value: unknown, allowed: readonly string[], name:string, optional=false): string|null {
   if(optional && (value===null||value===undefined||value==="")) return null;
@@ -84,25 +85,34 @@ function oneOf(value: unknown, allowed: readonly string[], name:string, optional
 
 export function parseCommunitySurvey(value: unknown) {
   const d=obj(value);
-  const surveyYear=Number(d.surveyYear||new Date().getFullYear());
+  const surveyYear=Number(d.surveyYear??new Date().getFullYear());
   if(!Number.isInteger(surveyYear)||surveyYear<2020||surveyYear>new Date().getFullYear()+1) throw new CivicError("Choose a valid survey year.",400);
+  if(d.status!==undefined&&d.status!=="DRAFT"&&d.status!=="SUBMITTED") throw new CivicError("Choose a valid survey status.",400);
   const status=d.status==="SUBMITTED"?"SUBMITTED":"DRAFT";
+  const draft=status==="DRAFT";
+  if(!draft&&d.employmentStatus==="STUDENT"&&d.ageGroup==="15-17")throw new CivicError("Student respondents must be aged 18 or older.",400);
   const skills=list(d.skills,20,80);
-  if(!skills.length) throw new CivicError("Choose at least one skill. You may choose the closest skill and add details later.",400);
+  if(!draft&&!skills.length) throw new CivicError("Choose at least one skill before submitting.",400);
   const serviceSatisfaction=d.serviceSatisfaction===null||d.serviceSatisfaction===undefined||d.serviceSatisfaction===""?null:Number(d.serviceSatisfaction);
   if(serviceSatisfaction!==null && (!Number.isInteger(serviceSatisfaction)||serviceSatisfaction<1||serviceSatisfaction>5)) throw new CivicError("Service satisfaction must be from 1 to 5.",400);
-  const consentAggregated=Boolean(d.consentAggregated);
+  for(const key of ["consentAggregated","consentOpportunityRecommendations","consentProgramRecommendations"]){if(d[key]!==undefined&&typeof d[key]!=="boolean")throw new CivicError("Consent choices must be true or false.",400);}
+  const consentAggregated=d.consentAggregated===true;
   if(status==="SUBMITTED"&&!consentAggregated) throw new CivicError("Consent for aggregated community statistics is required to submit the survey.",400);
   const feedback=opt(d.feedback,1200);
+  const householdSize=d.householdSize===""||d.householdSize===null||d.householdSize===undefined?null:Number(d.householdSize);
+  if(householdSize!==null&&(!Number.isInteger(householdSize)||householdSize<1||householdSize>30))throw new CivicError("Household size must be a whole number from 1 to 30.",400);
   return {
     surveyYear,status,
-    barangay:req(d.barangay,"Barangay",100),
-    ageGroup:oneOf(d.ageGroup,AGE_GROUPS,"age group")!,
+    barangay:draft?opt(d.barangay,100)||"":req(d.barangay,"Barangay",100),
+    ageGroup:oneOf(d.ageGroup,AGE_GROUPS,"age group",draft)||"",
     sex:opt(d.sex,30), civilStatus:opt(d.civilStatus,30), pwdStatus:opt(d.pwdStatus,30),
-    householdSize:d.householdSize===""||d.householdSize===null||d.householdSize===undefined?null:Math.max(1,Math.min(30,Number(d.householdSize)||1)),
+    householdSize,
     currentlyStudying:bool(d.currentlyStudying),
-    educationLevel:oneOf(d.educationLevel,EDUCATION_LEVELS,"education level")!,
-    employmentStatus:oneOf(d.employmentStatus,EMPLOYMENT_STATUSES,"employment status")!,
+    educationLevel:oneOf(d.educationLevel,EDUCATION_LEVELS,"education level",draft)||"",
+    employmentStatus:oneOf(d.employmentStatus,EMPLOYMENT_STATUSES,"employment status",draft)||"",
+    employmentHistory:opt(d.employmentHistory,2000),
+    overseasExperience:oneOf(d.overseasExperience,["CURRENT","FORMER","NEVER"],"overseas employment experience",true),
+    qualifications:list(d.qualifications,30,120),completedTraining:list(d.completedTraining,30,120),
     occupation:opt(d.occupation,150), industry:opt(d.industry,120), workArrangement:opt(d.workArrangement,40), workLocationScope:opt(d.workLocationScope,50), employmentLength:opt(d.employmentLength,50),
     workRelatedToEducation:bool(d.workRelatedToEducation), interestedNewWork:bool(d.interestedNewWork),
     skills, skillLevels:objOrEmpty(d.skillLevels),

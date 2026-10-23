@@ -2,6 +2,7 @@ import "server-only";
 import { prisma } from "@/lib/prisma";
 import { decodeList, EMPLOYMENT_LABELS } from "../domain";
 import { INTERESTS, type MatchProfile } from "@/features/jobs/domain";
+import { currentProfileConsent, ownedSurveyState } from "./survey-lifecycle";
 
 export type InsightRow = {
   source: "CITIZEN_SURVEY"|"HISTORICAL";
@@ -117,14 +118,13 @@ export async function adminEmploymentInsights(filters:EmploymentInsightFilters={
 }
 
 export async function surveyForCitizen(userId:string,year=new Date().getFullYear()) {
-  const row=await prisma.communitySurvey.findUnique({where:{userId_surveyYear:{userId,surveyYear:year}}});
-  if(!row)return null;
-  return {...row,skills:decodeList(row.skillsJson),skillLevels:safeObject(row.skillLevelsJson),trainingCategories:decodeList(row.trainingCategoriesJson),trainingPrograms:decodeList(row.trainingProgramsJson),trainingBarriers:decodeList(row.trainingBarriersJson),employmentBarriers:decodeList(row.employmentBarriersJson),preferredOccupations:decodeList(row.preferredOccupationsJson),businessChallenges:decodeList(row.businessChallengesJson),businessSupport:decodeList(row.businessSupportJson),priorityPrograms:decodeList(row.priorityProgramsJson),publicServiceBarriers:decodeList(row.publicServiceBarriersJson),createdAt:row.createdAt.toISOString(),updatedAt:row.updatedAt.toISOString(),submittedAt:row.submittedAt?.toISOString()||null};
+  return ownedSurveyState(userId,year);
 }
-function safeObject(value:string):Record<string,string>{try{const v=JSON.parse(value);return v&&typeof v==="object"&&!Array.isArray(v)?v:{};}catch{return {};}}
 
 export async function communityMatchProfile(userId:string):Promise<MatchProfile|null> {
-  const row=await prisma.communitySurvey.findFirst({where:{userId,status:"SUBMITTED",consentOpportunityRecommendations:true},orderBy:{surveyYear:"desc"}});
+  const consent=await currentProfileConsent(userId);
+  if(!consent?.matching)return null;
+  const row=await prisma.communitySurvey.findFirst({where:{userId,status:"SUBMITTED"},orderBy:{surveyYear:"desc"}});
   if(!row)return null;
   const interests=row.preferredIndustry&&INTERESTS.includes(row.preferredIndustry as never)?[row.preferredIndustry]:[];
   const availability=row.preferredWorkArrangement||row.workArrangement||"ANY";

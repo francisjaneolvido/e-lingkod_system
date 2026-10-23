@@ -1,6 +1,7 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
 import { decodeTags, scoreMatch, type MatchProfile } from "../domain";
+import { currentProfileConsent } from "@/features/community/server/survey-lifecycle";
 
 export async function publishedJobs() {
   const rows=await prisma.jobOpportunity.findMany({where:{status:"PUBLISHED",OR:[{expiresAt:null},{expiresAt:{gte:new Date()}}]},orderBy:{publishedAt:"desc"},take:250});
@@ -69,6 +70,13 @@ export async function adminJobData() {
   };
 }
 export async function profileForCitizen(userId:string):Promise<MatchProfile|null> {
+  const consent=await currentProfileConsent(userId);
+  if(consent&&!consent.matching)return null;
+  // An unfinished legacy draft does not replace an authorized optional profile.
+  // Submitted or withdrawn participation must still govern profile selection.
+  if(await prisma.communitySurvey.findFirst({where:{userId,status:{in:["SUBMITTED","WITHDRAWN"]}},select:{id:true}}))return null;
+  // Workspace-only withdrawals have no annual compatibility row.
+  if(await prisma.communitySurveyRevision.findFirst({where:{userId,action:"WITHDRAWN"},select:{id:true}}))return null;
   const r=await prisma.jobseekerProfile.findUnique({where:{userId}});
   return r ? {skills:decodeTags(r.skillsJson),interests:decodeTags(r.interestsJson),education:r.education,preferredArea:r.preferredArea,availability:r.availability} : null;
 }
