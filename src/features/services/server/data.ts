@@ -21,7 +21,7 @@ export async function citizenServiceRequest(id: string, userId: string) {
     documents: { select: { id: true, requirementKey: true, requirementLabel: true, fileName: true, mimeType: true, byteSize: true, uploadedAt: true, verificationStatus: true, verificationNote: true, verifiedAt: true }, orderBy: { uploadedAt: "desc" } },
     events: { where: { visibleToCitizen: true }, select: { id: true, action: true, status: true, note: true, createdAt: true }, orderBy: { createdAt: "asc" } },
     appointments: { select: { id: true, scheduledAt: true, location: true, agenda: true, status: true, citizenNote: true, staffNote: true, confirmedAt: true, completedAt: true, createdAt: true }, orderBy: [{ scheduledAt: "asc" }, { createdAt: "desc" }] },
-    pickupSlots: { select: { id: true, scheduledAt: true, location: true, instructions: true, status: true, citizenNote: true, confirmedAt: true, claimantName: true, claimedAt: true }, orderBy: { scheduledAt: "asc" } },
+    pickupSlots: { select: { id: true, scheduledAt: true, location: true, instructions: true, status: true, citizenNote: true, confirmedAt: true, claimantName: true, confirmedClaimantName: true, claimedAt: true }, orderBy: { scheduledAt: "asc" } },
   }});
   if (!row) return null;
   return { ...row, status: isServiceStatus(row.status) ? row.status : "DRAFT", formData: jsonObject(row.formDataJson), formDataJson: undefined, createdAt: row.createdAt.toISOString(), updatedAt: row.updatedAt.toISOString(), submittedAt: row.submittedAt?.toISOString() ?? null, completedAt: row.completedAt?.toISOString() ?? null, releaseApprovedAt: row.releaseApprovedAt?.toISOString() ?? null,

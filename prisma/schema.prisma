@@ -44,7 +44,14 @@ model User {
   reviewedJobs JobOpportunity[] @relation("JobReviewedBy")
   spesImports SpesImportBatch[] @relation("SpesImportedBy")
   spesImportEvents SpesImportEvent[] @relation("SpesImportEventActor")
+  establishments Establishment[] @relation("EstablishmentOwner")
+  establishmentRevisions EstablishmentRevision[] @relation("EstablishmentRevisionActor")
+  establishmentOperations EstablishmentOperation[] @relation("EstablishmentOperationOwner")
   communitySurveys CommunitySurvey[]
+  surveyWorkspaces CommunitySurveyWorkspace[]
+  surveyRevisions CommunitySurveyRevision[] @relation("SurveyRevisionOwner")
+  authoredSurveyRevisions CommunitySurveyRevision[] @relation("SurveyRevisionActor")
+  citizenProfileConsent CitizenProfileConsent?
   communityImports CommunityImportBatch[] @relation("CommunityImportedBy")
   serviceRequests ServiceRequest[] @relation("ServiceRequestedBy")
   assignedServiceRequests ServiceRequest[] @relation("ServiceAssignedStaff")
@@ -476,6 +483,10 @@ model CommunitySurvey {
   currentlyStudying                Boolean?
   educationLevel                   String   @db.VarChar(40)
   employmentStatus                 String   @db.VarChar(50)
+  employmentHistory                String?  @db.Text
+  overseasExperience               String?  @db.VarChar(20)
+  qualificationsJson               String   @default("[]") @db.Text
+  completedTrainingJson            String   @default("[]") @db.Text
   occupation                       String?  @db.VarChar(150)
   industry                         String?  @db.VarChar(120)
   workArrangement                  String?  @db.VarChar(40)
@@ -717,6 +728,7 @@ model ServicePickupSlot {
   proposedBy     User           @relation("ServicePickupProposedBy", fields: [proposedById], references: [id], onDelete: Restrict)
   citizenNote    String?        @db.Text
   claimantName   String?        @db.VarChar(180)
+  confirmedClaimantName String? @db.VarChar(180)
   confirmedAt    DateTime?
   claimedAt      DateTime?
   createdAt      DateTime       @default(now())
@@ -895,4 +907,113 @@ model EmergencyActionLog {
 
   @@index([entityType, entityId, createdAt])
   @@map("emergency_action_log")
+}
+
+// B1: editable drafts are separate from current submitted CommunitySurvey rows.
+model CommunitySurveyWorkspace {
+  id String @id @default(cuid()) @db.VarChar(191)
+  userId String @db.VarChar(191)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  surveyYear Int
+  version Int @default(0)
+  draftJson String? @db.LongText
+  updatedAt DateTime @default(now()) @updatedAt
+  @@unique([userId, surveyYear])
+  @@map("community_survey_workspace")
+}
+
+model CommunitySurveyRevision {
+  id String @id @default(cuid()) @db.VarChar(191)
+  userId String @db.VarChar(191)
+  user User @relation("SurveyRevisionOwner", fields: [userId], references: [id], onDelete: Restrict)
+  actorId String @db.VarChar(191)
+  actor User @relation("SurveyRevisionActor", fields: [actorId], references: [id], onDelete: Restrict)
+  surveyYear Int
+  revision Int
+  action String @db.VarChar(20)
+  schemaVersion Int @default(2)
+  requestKey String @db.VarChar(80)
+  payloadHash String @db.VarChar(64)
+  resultVersion Int
+  answersJson String @db.LongText
+  createdAt DateTime @default(now())
+  @@unique([userId, requestKey])
+  @@unique([userId, surveyYear, revision])
+  @@index([userId, surveyYear, createdAt])
+  @@map("community_survey_revision")
+}
+
+model CitizenProfileConsent {
+  userId String @id @db.VarChar(191)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  matching Boolean @default(false)
+  programs Boolean @default(false)
+  version Int @default(0)
+  updatedAt DateTime @default(now()) @updatedAt
+  @@map("citizen_profile_consent")
+}
+
+
+model Establishment {
+  id String @id @default(cuid()) @db.VarChar(191)
+  ownerId String @db.VarChar(191)
+  owner User @relation("EstablishmentOwner", fields: [ownerId], references: [id], onDelete: Restrict)
+  identityKey String @db.Char(64)
+  businessName String @db.VarChar(180)
+  officeType String @db.VarChar(20)
+  street String @db.VarChar(220)
+  barangay String @db.VarChar(80)
+  municipality String @db.VarChar(80)
+  province String @db.VarChar(80)
+  version Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  surveys EstablishmentSurvey[]
+  operations EstablishmentOperation[]
+  @@unique([ownerId, identityKey])
+  @@map("establishment")
+}
+model EstablishmentSurvey {
+  id String @id @default(cuid()) @db.VarChar(191)
+  establishmentId String @db.VarChar(191)
+  establishment Establishment @relation(fields: [establishmentId], references: [id], onDelete: Restrict)
+  surveyYear Int
+  version Int @default(0)
+  draftJson String? @db.LongText
+  submittedJson String? @db.LongText
+  status String @default("DRAFT") @db.VarChar(20)
+  submittedAt DateTime?
+  updatedAt DateTime @updatedAt
+  revisions EstablishmentRevision[]
+  @@unique([establishmentId, surveyYear])
+  @@map("establishment_survey")
+}
+model EstablishmentRevision {
+  id String @id @default(cuid()) @db.VarChar(191)
+  surveyId String @db.VarChar(191)
+  survey EstablishmentSurvey @relation(fields: [surveyId], references: [id], onDelete: Restrict)
+  revision Int
+  action String @db.VarChar(20)
+  answersJson String @db.LongText
+  actorId String @db.VarChar(191)
+  actor User @relation("EstablishmentRevisionActor", fields: [actorId], references: [id], onDelete: Restrict)
+  createdAt DateTime @default(now())
+  @@unique([surveyId, revision])
+  @@map("establishment_revision")
+}
+model EstablishmentOperation {
+  id String @id @default(cuid()) @db.VarChar(191)
+  ownerId String @db.VarChar(191)
+  owner User @relation("EstablishmentOperationOwner", fields: [ownerId], references: [id], onDelete: Restrict)
+  establishmentId String @db.VarChar(191)
+  establishment Establishment @relation(fields: [establishmentId], references: [id], onDelete: Restrict)
+  requestKey String @db.VarChar(64)
+  payloadHash String @db.Char(64)
+  recordVersion Int
+  workspaceVersion Int
+  revisionId String? @db.VarChar(191)
+  createdAt DateTime @default(now())
+  @@unique([ownerId, requestKey])
+  @@index([establishmentId])
+  @@map("establishment_operation")
 }

@@ -202,3 +202,38 @@ export type EmergencyAlert = Prisma.EmergencyAlertModel
  * 
  */
 export type EmergencyActionLog = Prisma.EmergencyActionLogModel
+/**
+ * Model CommunitySurveyWorkspace
+ * 
+ */
+export type CommunitySurveyWorkspace = Prisma.CommunitySurveyWorkspaceModel
+/**
+ * Model CommunitySurveyRevision
+ * 
+ */
+export type CommunitySurveyRevision = Prisma.CommunitySurveyRevisionModel
+/**
+ * Model CitizenProfileConsent
+ * 
+ */
+export type CitizenProfileConsent = Prisma.CitizenProfileConsentModel
+/**
+ * Model Establishment
+ * 
+ */
+export type Establishment = Prisma.EstablishmentModel
+/**
+ * Model EstablishmentSurvey
+ * 
+ */
+export type EstablishmentSurvey = Prisma.EstablishmentSurveyModel
+/**
+ * Model EstablishmentRevision
+ * 
+ */
+export type EstablishmentRevision = Prisma.EstablishmentRevisionModel
+/**
+ * Model EstablishmentOperation
+ * 
+ */
+export type EstablishmentOperation = Prisma.EstablishmentOperationModel
