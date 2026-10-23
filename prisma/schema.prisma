@@ -45,6 +45,10 @@ model User {
   spesImports SpesImportBatch[] @relation("SpesImportedBy")
   spesImportEvents SpesImportEvent[] @relation("SpesImportEventActor")
   communitySurveys CommunitySurvey[]
+  communitySurveyWorkspaces CommunitySurveyWorkspace[]
+  communitySurveyRevisions CommunitySurveyRevision[] @relation("CommunitySurveyRevisionOwner")
+  authoredCommunitySurveyRevisions CommunitySurveyRevision[] @relation("CommunitySurveyRevisionActor")
+  citizenProfileConsent CitizenProfileConsent?
   communityImports CommunityImportBatch[] @relation("CommunityImportedBy")
   serviceRequests ServiceRequest[] @relation("ServiceRequestedBy")
   assignedServiceRequests ServiceRequest[] @relation("ServiceAssignedStaff")
@@ -473,6 +477,10 @@ model CommunitySurvey {
   civilStatus                      String?  @db.VarChar(30)
   pwdStatus                        String?  @db.VarChar(30)
   householdSize                    Int?
+  employmentHistory                String?  @db.Text
+  overseasExperience               String?  @db.VarChar(20)
+  qualificationsJson               String   @default("[]") @db.Text
+  completedTrainingJson            String   @default("[]") @db.Text
   currentlyStudying                Boolean?
   educationLevel                   String   @db.VarChar(40)
   employmentStatus                 String   @db.VarChar(50)
@@ -528,6 +536,54 @@ model CommunitySurvey {
   @@index([employmentStatus, surveyYear])
   @@index([educationLevel, surveyYear])
   @@map("community_survey")
+}
+
+// V11 citizen history/consent: schema definitions for the existing
+// 20261023030000_citizen_profile_history migration (no new tables added here).
+model CommunitySurveyWorkspace {
+  id         String   @id @default(cuid()) @db.VarChar(191)
+  userId     String   @db.VarChar(191)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  surveyYear Int
+  version    Int      @default(0)
+  draftJson  String?  @db.LongText
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@unique([userId, surveyYear])
+  @@map("community_survey_workspace")
+}
+
+model CommunitySurveyRevision {
+  id            String   @id @default(cuid()) @db.VarChar(191)
+  userId        String   @db.VarChar(191)
+  user          User     @relation("CommunitySurveyRevisionOwner", fields: [userId], references: [id], onDelete: Restrict)
+  actorId       String   @db.VarChar(191)
+  actor         User     @relation("CommunitySurveyRevisionActor", fields: [actorId], references: [id], onDelete: Restrict)
+  surveyYear    Int
+  revision      Int
+  action        String   @db.VarChar(20)
+  schemaVersion Int      @default(2)
+  requestKey    String   @db.VarChar(80)
+  payloadHash   String   @db.VarChar(64)
+  resultVersion Int
+  answersJson   String   @db.LongText
+  createdAt     DateTime @default(now())
+
+  @@unique([userId, requestKey])
+  @@unique([userId, surveyYear, revision])
+  @@index([userId, surveyYear, createdAt])
+  @@map("community_survey_revision")
+}
+
+model CitizenProfileConsent {
+  userId    String   @id @db.VarChar(191)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  matching  Boolean  @default(false)
+  programs  Boolean  @default(false)
+  version   Int      @default(0)
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("citizen_profile_consent")
 }
 
 model GovernmentActivity {

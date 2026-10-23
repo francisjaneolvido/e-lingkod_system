@@ -418,6 +418,9 @@ export const ModelName = {
   SpesImportEvent: 'SpesImportEvent',
   JobActivity: 'JobActivity',
   CommunitySurvey: 'CommunitySurvey',
+  CommunitySurveyWorkspace: 'CommunitySurveyWorkspace',
+  CommunitySurveyRevision: 'CommunitySurveyRevision',
+  CitizenProfileConsent: 'CitizenProfileConsent',
   GovernmentActivity: 'GovernmentActivity',
   CommunityImportBatch: 'CommunityImportBatch',
   CommunityImportRecord: 'CommunityImportRecord',
@@ -449,7 +452,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity" | "communitySurvey" | "governmentActivity" | "communityImportBatch" | "communityImportRecord" | "serviceRequest" | "serviceRequestDocument" | "serviceRequestEvent" | "serviceAppointment" | "servicePickupSlot" | "notification" | "workAssignment" | "serviceDefinition" | "serviceDefinitionAudit" | "emergencyHotline" | "emergencyHotlineProposal" | "emergencyAlert" | "emergencyActionLog"
+    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity" | "communitySurvey" | "communitySurveyWorkspace" | "communitySurveyRevision" | "citizenProfileConsent" | "governmentActivity" | "communityImportBatch" | "communityImportRecord" | "serviceRequest" | "serviceRequestDocument" | "serviceRequestEvent" | "serviceAppointment" | "servicePickupSlot" | "notification" | "workAssignment" | "serviceDefinition" | "serviceDefinitionAudit" | "emergencyHotline" | "emergencyHotlineProposal" | "emergencyAlert" | "emergencyActionLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1836,6 +1839,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CommunitySurveyCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyCountAggregateOutputType> | number
+        }
+      }
+    }
+    CommunitySurveyWorkspace: {
+      payload: Prisma.$CommunitySurveyWorkspacePayload<ExtArgs>
+      fields: Prisma.CommunitySurveyWorkspaceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CommunitySurveyWorkspaceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CommunitySurveyWorkspaceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
+        }
+        findFirst: {
+          args: Prisma.CommunitySurveyWorkspaceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CommunitySurveyWorkspaceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
+        }
+        findMany: {
+          args: Prisma.CommunitySurveyWorkspaceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>[]
+        }
+        create: {
+          args: Prisma.CommunitySurveyWorkspaceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
+        }
+        createMany: {
+          args: Prisma.CommunitySurveyWorkspaceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CommunitySurveyWorkspaceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
+        }
+        update: {
+          args: Prisma.CommunitySurveyWorkspaceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
+        }
+        deleteMany: {
+          args: Prisma.CommunitySurveyWorkspaceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CommunitySurveyWorkspaceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CommunitySurveyWorkspaceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
+        }
+        aggregate: {
+          args: Prisma.CommunitySurveyWorkspaceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCommunitySurveyWorkspace>
+        }
+        groupBy: {
+          args: Prisma.CommunitySurveyWorkspaceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyWorkspaceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CommunitySurveyWorkspaceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyWorkspaceCountAggregateOutputType> | number
+        }
+      }
+    }
+    CommunitySurveyRevision: {
+      payload: Prisma.$CommunitySurveyRevisionPayload<ExtArgs>
+      fields: Prisma.CommunitySurveyRevisionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CommunitySurveyRevisionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CommunitySurveyRevisionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
+        }
+        findFirst: {
+          args: Prisma.CommunitySurveyRevisionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CommunitySurveyRevisionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
+        }
+        findMany: {
+          args: Prisma.CommunitySurveyRevisionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>[]
+        }
+        create: {
+          args: Prisma.CommunitySurveyRevisionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
+        }
+        createMany: {
+          args: Prisma.CommunitySurveyRevisionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CommunitySurveyRevisionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
+        }
+        update: {
+          args: Prisma.CommunitySurveyRevisionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
+        }
+        deleteMany: {
+          args: Prisma.CommunitySurveyRevisionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CommunitySurveyRevisionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CommunitySurveyRevisionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
+        }
+        aggregate: {
+          args: Prisma.CommunitySurveyRevisionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCommunitySurveyRevision>
+        }
+        groupBy: {
+          args: Prisma.CommunitySurveyRevisionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyRevisionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CommunitySurveyRevisionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyRevisionCountAggregateOutputType> | number
+        }
+      }
+    }
+    CitizenProfileConsent: {
+      payload: Prisma.$CitizenProfileConsentPayload<ExtArgs>
+      fields: Prisma.CitizenProfileConsentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CitizenProfileConsentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CitizenProfileConsentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
+        }
+        findFirst: {
+          args: Prisma.CitizenProfileConsentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CitizenProfileConsentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
+        }
+        findMany: {
+          args: Prisma.CitizenProfileConsentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>[]
+        }
+        create: {
+          args: Prisma.CitizenProfileConsentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
+        }
+        createMany: {
+          args: Prisma.CitizenProfileConsentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CitizenProfileConsentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
+        }
+        update: {
+          args: Prisma.CitizenProfileConsentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
+        }
+        deleteMany: {
+          args: Prisma.CitizenProfileConsentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CitizenProfileConsentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CitizenProfileConsentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
+        }
+        aggregate: {
+          args: Prisma.CitizenProfileConsentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCitizenProfileConsent>
+        }
+        groupBy: {
+          args: Prisma.CitizenProfileConsentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CitizenProfileConsentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CitizenProfileConsentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CitizenProfileConsentCountAggregateOutputType> | number
         }
       }
     }
@@ -3263,6 +3464,10 @@ export const CommunitySurveyScalarFieldEnum = {
   civilStatus: 'civilStatus',
   pwdStatus: 'pwdStatus',
   householdSize: 'householdSize',
+  employmentHistory: 'employmentHistory',
+  overseasExperience: 'overseasExperience',
+  qualificationsJson: 'qualificationsJson',
+  completedTrainingJson: 'completedTrainingJson',
   currentlyStudying: 'currentlyStudying',
   educationLevel: 'educationLevel',
   employmentStatus: 'employmentStatus',
@@ -3314,6 +3519,47 @@ export const CommunitySurveyScalarFieldEnum = {
 } as const
 
 export type CommunitySurveyScalarFieldEnum = (typeof CommunitySurveyScalarFieldEnum)[keyof typeof CommunitySurveyScalarFieldEnum]
+
+
+export const CommunitySurveyWorkspaceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  surveyYear: 'surveyYear',
+  version: 'version',
+  draftJson: 'draftJson',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CommunitySurveyWorkspaceScalarFieldEnum = (typeof CommunitySurveyWorkspaceScalarFieldEnum)[keyof typeof CommunitySurveyWorkspaceScalarFieldEnum]
+
+
+export const CommunitySurveyRevisionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  actorId: 'actorId',
+  surveyYear: 'surveyYear',
+  revision: 'revision',
+  action: 'action',
+  schemaVersion: 'schemaVersion',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  resultVersion: 'resultVersion',
+  answersJson: 'answersJson',
+  createdAt: 'createdAt'
+} as const
+
+export type CommunitySurveyRevisionScalarFieldEnum = (typeof CommunitySurveyRevisionScalarFieldEnum)[keyof typeof CommunitySurveyRevisionScalarFieldEnum]
+
+
+export const CitizenProfileConsentScalarFieldEnum = {
+  userId: 'userId',
+  matching: 'matching',
+  programs: 'programs',
+  version: 'version',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CitizenProfileConsentScalarFieldEnum = (typeof CitizenProfileConsentScalarFieldEnum)[keyof typeof CitizenProfileConsentScalarFieldEnum]
 
 
 export const GovernmentActivityScalarFieldEnum = {
@@ -3910,6 +4156,10 @@ export const CommunitySurveyOrderByRelevanceFieldEnum = {
   sex: 'sex',
   civilStatus: 'civilStatus',
   pwdStatus: 'pwdStatus',
+  employmentHistory: 'employmentHistory',
+  overseasExperience: 'overseasExperience',
+  qualificationsJson: 'qualificationsJson',
+  completedTrainingJson: 'completedTrainingJson',
   educationLevel: 'educationLevel',
   employmentStatus: 'employmentStatus',
   occupation: 'occupation',
@@ -3947,6 +4197,35 @@ export const CommunitySurveyOrderByRelevanceFieldEnum = {
 } as const
 
 export type CommunitySurveyOrderByRelevanceFieldEnum = (typeof CommunitySurveyOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyOrderByRelevanceFieldEnum]
+
+
+export const CommunitySurveyWorkspaceOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  draftJson: 'draftJson'
+} as const
+
+export type CommunitySurveyWorkspaceOrderByRelevanceFieldEnum = (typeof CommunitySurveyWorkspaceOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyWorkspaceOrderByRelevanceFieldEnum]
+
+
+export const CommunitySurveyRevisionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  actorId: 'actorId',
+  action: 'action',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  answersJson: 'answersJson'
+} as const
+
+export type CommunitySurveyRevisionOrderByRelevanceFieldEnum = (typeof CommunitySurveyRevisionOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyRevisionOrderByRelevanceFieldEnum]
+
+
+export const CitizenProfileConsentOrderByRelevanceFieldEnum = {
+  userId: 'userId'
+} as const
+
+export type CitizenProfileConsentOrderByRelevanceFieldEnum = (typeof CitizenProfileConsentOrderByRelevanceFieldEnum)[keyof typeof CitizenProfileConsentOrderByRelevanceFieldEnum]
 
 
 export const GovernmentActivityOrderByRelevanceFieldEnum = {
@@ -4465,6 +4744,9 @@ export type GlobalOmitConfig = {
   spesImportEvent?: Prisma.SpesImportEventOmit
   jobActivity?: Prisma.JobActivityOmit
   communitySurvey?: Prisma.CommunitySurveyOmit
+  communitySurveyWorkspace?: Prisma.CommunitySurveyWorkspaceOmit
+  communitySurveyRevision?: Prisma.CommunitySurveyRevisionOmit
+  citizenProfileConsent?: Prisma.CitizenProfileConsentOmit
   governmentActivity?: Prisma.GovernmentActivityOmit
   communityImportBatch?: Prisma.CommunityImportBatchOmit
   communityImportRecord?: Prisma.CommunityImportRecordOmit
