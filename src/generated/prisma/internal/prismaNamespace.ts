@@ -436,7 +436,11 @@ export const ModelName = {
   EmergencyHotline: 'EmergencyHotline',
   EmergencyHotlineProposal: 'EmergencyHotlineProposal',
   EmergencyAlert: 'EmergencyAlert',
-  EmergencyActionLog: 'EmergencyActionLog'
+  EmergencyActionLog: 'EmergencyActionLog',
+  MunicipalProject: 'MunicipalProject',
+  MunicipalProjectUpdate: 'MunicipalProjectUpdate',
+  MunicipalOfficeDirectoryEntry: 'MunicipalOfficeDirectoryEntry',
+  MunicipalOfficeDirectoryProposal: 'MunicipalOfficeDirectoryProposal'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -452,7 +456,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity" | "communitySurvey" | "communitySurveyWorkspace" | "communitySurveyRevision" | "citizenProfileConsent" | "governmentActivity" | "communityImportBatch" | "communityImportRecord" | "serviceRequest" | "serviceRequestDocument" | "serviceRequestEvent" | "serviceAppointment" | "servicePickupSlot" | "notification" | "workAssignment" | "serviceDefinition" | "serviceDefinitionAudit" | "emergencyHotline" | "emergencyHotlineProposal" | "emergencyAlert" | "emergencyActionLog"
+    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity" | "communitySurvey" | "communitySurveyWorkspace" | "communitySurveyRevision" | "citizenProfileConsent" | "governmentActivity" | "communityImportBatch" | "communityImportRecord" | "serviceRequest" | "serviceRequestDocument" | "serviceRequestEvent" | "serviceAppointment" | "servicePickupSlot" | "notification" | "workAssignment" | "serviceDefinition" | "serviceDefinitionAudit" | "emergencyHotline" | "emergencyHotlineProposal" | "emergencyAlert" | "emergencyActionLog" | "municipalProject" | "municipalProjectUpdate" | "municipalOfficeDirectoryEntry" | "municipalOfficeDirectoryProposal"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3096,6 +3100,270 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MunicipalProject: {
+      payload: Prisma.$MunicipalProjectPayload<ExtArgs>
+      fields: Prisma.MunicipalProjectFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunicipalProjectFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunicipalProjectFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectPayload>
+        }
+        findFirst: {
+          args: Prisma.MunicipalProjectFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunicipalProjectFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectPayload>
+        }
+        findMany: {
+          args: Prisma.MunicipalProjectFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectPayload>[]
+        }
+        create: {
+          args: Prisma.MunicipalProjectCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectPayload>
+        }
+        createMany: {
+          args: Prisma.MunicipalProjectCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MunicipalProjectDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectPayload>
+        }
+        update: {
+          args: Prisma.MunicipalProjectUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectPayload>
+        }
+        deleteMany: {
+          args: Prisma.MunicipalProjectDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunicipalProjectUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MunicipalProjectUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectPayload>
+        }
+        aggregate: {
+          args: Prisma.MunicipalProjectAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunicipalProject>
+        }
+        groupBy: {
+          args: Prisma.MunicipalProjectGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunicipalProjectGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunicipalProjectCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunicipalProjectCountAggregateOutputType> | number
+        }
+      }
+    }
+    MunicipalProjectUpdate: {
+      payload: Prisma.$MunicipalProjectUpdatePayload<ExtArgs>
+      fields: Prisma.MunicipalProjectUpdateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunicipalProjectUpdateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectUpdatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunicipalProjectUpdateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectUpdatePayload>
+        }
+        findFirst: {
+          args: Prisma.MunicipalProjectUpdateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectUpdatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunicipalProjectUpdateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectUpdatePayload>
+        }
+        findMany: {
+          args: Prisma.MunicipalProjectUpdateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectUpdatePayload>[]
+        }
+        create: {
+          args: Prisma.MunicipalProjectUpdateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectUpdatePayload>
+        }
+        createMany: {
+          args: Prisma.MunicipalProjectUpdateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MunicipalProjectUpdateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectUpdatePayload>
+        }
+        update: {
+          args: Prisma.MunicipalProjectUpdateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectUpdatePayload>
+        }
+        deleteMany: {
+          args: Prisma.MunicipalProjectUpdateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunicipalProjectUpdateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MunicipalProjectUpdateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalProjectUpdatePayload>
+        }
+        aggregate: {
+          args: Prisma.MunicipalProjectUpdateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunicipalProjectUpdate>
+        }
+        groupBy: {
+          args: Prisma.MunicipalProjectUpdateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunicipalProjectUpdateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunicipalProjectUpdateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunicipalProjectUpdateCountAggregateOutputType> | number
+        }
+      }
+    }
+    MunicipalOfficeDirectoryEntry: {
+      payload: Prisma.$MunicipalOfficeDirectoryEntryPayload<ExtArgs>
+      fields: Prisma.MunicipalOfficeDirectoryEntryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunicipalOfficeDirectoryEntryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryEntryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunicipalOfficeDirectoryEntryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryEntryPayload>
+        }
+        findFirst: {
+          args: Prisma.MunicipalOfficeDirectoryEntryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryEntryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunicipalOfficeDirectoryEntryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryEntryPayload>
+        }
+        findMany: {
+          args: Prisma.MunicipalOfficeDirectoryEntryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryEntryPayload>[]
+        }
+        create: {
+          args: Prisma.MunicipalOfficeDirectoryEntryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryEntryPayload>
+        }
+        createMany: {
+          args: Prisma.MunicipalOfficeDirectoryEntryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MunicipalOfficeDirectoryEntryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryEntryPayload>
+        }
+        update: {
+          args: Prisma.MunicipalOfficeDirectoryEntryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryEntryPayload>
+        }
+        deleteMany: {
+          args: Prisma.MunicipalOfficeDirectoryEntryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunicipalOfficeDirectoryEntryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MunicipalOfficeDirectoryEntryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryEntryPayload>
+        }
+        aggregate: {
+          args: Prisma.MunicipalOfficeDirectoryEntryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunicipalOfficeDirectoryEntry>
+        }
+        groupBy: {
+          args: Prisma.MunicipalOfficeDirectoryEntryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunicipalOfficeDirectoryEntryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunicipalOfficeDirectoryEntryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunicipalOfficeDirectoryEntryCountAggregateOutputType> | number
+        }
+      }
+    }
+    MunicipalOfficeDirectoryProposal: {
+      payload: Prisma.$MunicipalOfficeDirectoryProposalPayload<ExtArgs>
+      fields: Prisma.MunicipalOfficeDirectoryProposalFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunicipalOfficeDirectoryProposalFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryProposalPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunicipalOfficeDirectoryProposalFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryProposalPayload>
+        }
+        findFirst: {
+          args: Prisma.MunicipalOfficeDirectoryProposalFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryProposalPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunicipalOfficeDirectoryProposalFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryProposalPayload>
+        }
+        findMany: {
+          args: Prisma.MunicipalOfficeDirectoryProposalFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryProposalPayload>[]
+        }
+        create: {
+          args: Prisma.MunicipalOfficeDirectoryProposalCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryProposalPayload>
+        }
+        createMany: {
+          args: Prisma.MunicipalOfficeDirectoryProposalCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MunicipalOfficeDirectoryProposalDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryProposalPayload>
+        }
+        update: {
+          args: Prisma.MunicipalOfficeDirectoryProposalUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryProposalPayload>
+        }
+        deleteMany: {
+          args: Prisma.MunicipalOfficeDirectoryProposalDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunicipalOfficeDirectoryProposalUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MunicipalOfficeDirectoryProposalUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunicipalOfficeDirectoryProposalPayload>
+        }
+        aggregate: {
+          args: Prisma.MunicipalOfficeDirectoryProposalAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunicipalOfficeDirectoryProposal>
+        }
+        groupBy: {
+          args: Prisma.MunicipalOfficeDirectoryProposalGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunicipalOfficeDirectoryProposalGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunicipalOfficeDirectoryProposalCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunicipalOfficeDirectoryProposalCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3878,6 +4146,94 @@ export const EmergencyActionLogScalarFieldEnum = {
 export type EmergencyActionLogScalarFieldEnum = (typeof EmergencyActionLogScalarFieldEnum)[keyof typeof EmergencyActionLogScalarFieldEnum]
 
 
+export const MunicipalProjectScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  summary: 'summary',
+  category: 'category',
+  phase: 'phase',
+  leadOffice: 'leadOffice',
+  barangaysJson: 'barangaysJson',
+  sourceUrl: 'sourceUrl',
+  isDemo: 'isDemo',
+  photoPath: 'photoPath',
+  budgetPhp: 'budgetPhp',
+  budgetSourceUrl: 'budgetSourceUrl',
+  fundingSource: 'fundingSource',
+  contractor: 'contractor',
+  procurementUrl: 'procurementUrl',
+  targetCompletion: 'targetCompletion',
+  status: 'status',
+  createdById: 'createdById',
+  reviewedById: 'reviewedById',
+  reviewNote: 'reviewNote',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunicipalProjectScalarFieldEnum = (typeof MunicipalProjectScalarFieldEnum)[keyof typeof MunicipalProjectScalarFieldEnum]
+
+
+export const MunicipalProjectUpdateScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  title: 'title',
+  details: 'details',
+  progressPercent: 'progressPercent',
+  phaseAfter: 'phaseAfter',
+  sourceUrl: 'sourceUrl',
+  status: 'status',
+  reviewNote: 'reviewNote',
+  createdById: 'createdById',
+  reviewedById: 'reviewedById',
+  reviewedAt: 'reviewedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type MunicipalProjectUpdateScalarFieldEnum = (typeof MunicipalProjectUpdateScalarFieldEnum)[keyof typeof MunicipalProjectUpdateScalarFieldEnum]
+
+
+export const MunicipalOfficeDirectoryEntryScalarFieldEnum = {
+  id: 'id',
+  officeName: 'officeName',
+  phone: 'phone',
+  extension: 'extension',
+  email: 'email',
+  officeHours: 'officeHours',
+  address: 'address',
+  notes: 'notes',
+  sourceUrl: 'sourceUrl',
+  isPublished: 'isPublished',
+  verifiedAt: 'verifiedAt',
+  verifiedById: 'verifiedById',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunicipalOfficeDirectoryEntryScalarFieldEnum = (typeof MunicipalOfficeDirectoryEntryScalarFieldEnum)[keyof typeof MunicipalOfficeDirectoryEntryScalarFieldEnum]
+
+
+export const MunicipalOfficeDirectoryProposalScalarFieldEnum = {
+  id: 'id',
+  officeName: 'officeName',
+  phone: 'phone',
+  extension: 'extension',
+  email: 'email',
+  officeHours: 'officeHours',
+  address: 'address',
+  notes: 'notes',
+  sourceUrl: 'sourceUrl',
+  status: 'status',
+  reviewNote: 'reviewNote',
+  submittedById: 'submittedById',
+  reviewedById: 'reviewedById',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt'
+} as const
+
+export type MunicipalOfficeDirectoryProposalScalarFieldEnum = (typeof MunicipalOfficeDirectoryProposalScalarFieldEnum)[keyof typeof MunicipalOfficeDirectoryProposalScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4483,6 +4839,80 @@ export const EmergencyActionLogOrderByRelevanceFieldEnum = {
 export type EmergencyActionLogOrderByRelevanceFieldEnum = (typeof EmergencyActionLogOrderByRelevanceFieldEnum)[keyof typeof EmergencyActionLogOrderByRelevanceFieldEnum]
 
 
+export const MunicipalProjectOrderByRelevanceFieldEnum = {
+  id: 'id',
+  title: 'title',
+  summary: 'summary',
+  category: 'category',
+  phase: 'phase',
+  leadOffice: 'leadOffice',
+  barangaysJson: 'barangaysJson',
+  sourceUrl: 'sourceUrl',
+  photoPath: 'photoPath',
+  budgetSourceUrl: 'budgetSourceUrl',
+  fundingSource: 'fundingSource',
+  contractor: 'contractor',
+  procurementUrl: 'procurementUrl',
+  status: 'status',
+  createdById: 'createdById',
+  reviewedById: 'reviewedById',
+  reviewNote: 'reviewNote'
+} as const
+
+export type MunicipalProjectOrderByRelevanceFieldEnum = (typeof MunicipalProjectOrderByRelevanceFieldEnum)[keyof typeof MunicipalProjectOrderByRelevanceFieldEnum]
+
+
+export const MunicipalProjectUpdateOrderByRelevanceFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  title: 'title',
+  details: 'details',
+  phaseAfter: 'phaseAfter',
+  sourceUrl: 'sourceUrl',
+  status: 'status',
+  reviewNote: 'reviewNote',
+  createdById: 'createdById',
+  reviewedById: 'reviewedById'
+} as const
+
+export type MunicipalProjectUpdateOrderByRelevanceFieldEnum = (typeof MunicipalProjectUpdateOrderByRelevanceFieldEnum)[keyof typeof MunicipalProjectUpdateOrderByRelevanceFieldEnum]
+
+
+export const MunicipalOfficeDirectoryEntryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  officeName: 'officeName',
+  phone: 'phone',
+  extension: 'extension',
+  email: 'email',
+  officeHours: 'officeHours',
+  address: 'address',
+  notes: 'notes',
+  sourceUrl: 'sourceUrl',
+  verifiedById: 'verifiedById'
+} as const
+
+export type MunicipalOfficeDirectoryEntryOrderByRelevanceFieldEnum = (typeof MunicipalOfficeDirectoryEntryOrderByRelevanceFieldEnum)[keyof typeof MunicipalOfficeDirectoryEntryOrderByRelevanceFieldEnum]
+
+
+export const MunicipalOfficeDirectoryProposalOrderByRelevanceFieldEnum = {
+  id: 'id',
+  officeName: 'officeName',
+  phone: 'phone',
+  extension: 'extension',
+  email: 'email',
+  officeHours: 'officeHours',
+  address: 'address',
+  notes: 'notes',
+  sourceUrl: 'sourceUrl',
+  status: 'status',
+  reviewNote: 'reviewNote',
+  submittedById: 'submittedById',
+  reviewedById: 'reviewedById'
+} as const
+
+export type MunicipalOfficeDirectoryProposalOrderByRelevanceFieldEnum = (typeof MunicipalOfficeDirectoryProposalOrderByRelevanceFieldEnum)[keyof typeof MunicipalOfficeDirectoryProposalOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -4570,6 +5000,13 @@ export type EnumCitizenFeedbackDecisionFieldRefInput<$PrismaModel> = FieldRefInp
  * Reference to a field of type 'JobListingStatus'
  */
 export type EnumJobListingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JobListingStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
     
 
 /**
@@ -4763,6 +5200,10 @@ export type GlobalOmitConfig = {
   emergencyHotlineProposal?: Prisma.EmergencyHotlineProposalOmit
   emergencyAlert?: Prisma.EmergencyAlertOmit
   emergencyActionLog?: Prisma.EmergencyActionLogOmit
+  municipalProject?: Prisma.MunicipalProjectOmit
+  municipalProjectUpdate?: Prisma.MunicipalProjectUpdateOmit
+  municipalOfficeDirectoryEntry?: Prisma.MunicipalOfficeDirectoryEntryOmit
+  municipalOfficeDirectoryProposal?: Prisma.MunicipalOfficeDirectoryProposalOmit
 }
 
 /* Types for Logging */

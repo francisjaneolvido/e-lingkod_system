@@ -297,6 +297,10 @@ export type UserWhereInput = {
   workAssignments?: Prisma.WorkAssignmentListRelationFilter
   createdServiceDefinitions?: Prisma.ServiceDefinitionListRelationFilter
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditListRelationFilter
+  municipalProjectsCreated?: Prisma.MunicipalProjectListRelationFilter
+  municipalProjectsReviewed?: Prisma.MunicipalProjectListRelationFilter
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateListRelationFilter
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -350,6 +354,10 @@ export type UserOrderByWithRelationInput = {
   workAssignments?: Prisma.WorkAssignmentOrderByRelationAggregateInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionOrderByRelationAggregateInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditOrderByRelationAggregateInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectOrderByRelationAggregateInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectOrderByRelationAggregateInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateOrderByRelationAggregateInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -407,6 +415,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   workAssignments?: Prisma.WorkAssignmentListRelationFilter
   createdServiceDefinitions?: Prisma.ServiceDefinitionListRelationFilter
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditListRelationFilter
+  municipalProjectsCreated?: Prisma.MunicipalProjectListRelationFilter
+  municipalProjectsReviewed?: Prisma.MunicipalProjectListRelationFilter
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateListRelationFilter
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -502,6 +514,10 @@ export type UserCreateInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -555,6 +571,10 @@ export type UserUncheckedCreateInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUpdateInput = {
@@ -608,6 +628,10 @@ export type UserUpdateInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -661,6 +685,10 @@ export type UserUncheckedUpdateInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1311,6 +1339,66 @@ export type UserUpdateOneRequiredWithoutServiceDefinitionAuditsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutServiceDefinitionAuditsInput, Prisma.UserUpdateWithoutServiceDefinitionAuditsInput>, Prisma.UserUncheckedUpdateWithoutServiceDefinitionAuditsInput>
 }
 
+export type UserCreateNestedOneWithoutMunicipalProjectsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutMunicipalProjectsReviewedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsReviewedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectsReviewedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMunicipalProjectsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectsCreatedInput
+  upsert?: Prisma.UserUpsertWithoutMunicipalProjectsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMunicipalProjectsCreatedInput, Prisma.UserUpdateWithoutMunicipalProjectsCreatedInput>, Prisma.UserUncheckedUpdateWithoutMunicipalProjectsCreatedInput>
+}
+
+export type UserUpdateOneWithoutMunicipalProjectsReviewedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsReviewedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectsReviewedInput
+  upsert?: Prisma.UserUpsertWithoutMunicipalProjectsReviewedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMunicipalProjectsReviewedInput, Prisma.UserUpdateWithoutMunicipalProjectsReviewedInput>, Prisma.UserUncheckedUpdateWithoutMunicipalProjectsReviewedInput>
+}
+
+export type UserCreateNestedOneWithoutMunicipalProjectUpdatesCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectUpdatesCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutMunicipalProjectUpdatesReviewedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesReviewedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectUpdatesReviewedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMunicipalProjectUpdatesCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectUpdatesCreatedInput
+  upsert?: Prisma.UserUpsertWithoutMunicipalProjectUpdatesCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUpdateWithoutMunicipalProjectUpdatesCreatedInput>, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesCreatedInput>
+}
+
+export type UserUpdateOneWithoutMunicipalProjectUpdatesReviewedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesReviewedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectUpdatesReviewedInput
+  upsert?: Prisma.UserUpsertWithoutMunicipalProjectUpdatesReviewedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUpdateWithoutMunicipalProjectUpdatesReviewedInput>, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesReviewedInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id: string
   name: string
@@ -1361,6 +1449,10 @@ export type UserCreateWithoutSessionsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1413,6 +1505,10 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1481,6 +1577,10 @@ export type UserUpdateWithoutSessionsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1533,6 +1633,10 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -1585,6 +1689,10 @@ export type UserCreateWithoutAccountsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -1637,6 +1745,10 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -1705,6 +1817,10 @@ export type UserUpdateWithoutAccountsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -1757,6 +1873,10 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
@@ -1809,6 +1929,10 @@ export type UserCreateWithoutReportsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
@@ -1861,6 +1985,10 @@ export type UserUncheckedCreateWithoutReportsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -1918,6 +2046,10 @@ export type UserCreateWithoutAssignedCivicReportsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutAssignedCivicReportsInput = {
@@ -1970,6 +2102,10 @@ export type UserUncheckedCreateWithoutAssignedCivicReportsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutAssignedCivicReportsInput = {
@@ -2038,6 +2174,10 @@ export type UserUpdateWithoutReportsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
@@ -2090,6 +2230,10 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutAssignedCivicReportsInput = {
@@ -2153,6 +2297,10 @@ export type UserUpdateWithoutAssignedCivicReportsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedCivicReportsInput = {
@@ -2205,6 +2353,10 @@ export type UserUncheckedUpdateWithoutAssignedCivicReportsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutReportUpdatesInput = {
@@ -2257,6 +2409,10 @@ export type UserCreateWithoutReportUpdatesInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutReportUpdatesInput = {
@@ -2309,6 +2465,10 @@ export type UserUncheckedCreateWithoutReportUpdatesInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutReportUpdatesInput = {
@@ -2377,6 +2537,10 @@ export type UserUpdateWithoutReportUpdatesInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportUpdatesInput = {
@@ -2429,6 +2593,10 @@ export type UserUncheckedUpdateWithoutReportUpdatesInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutStaffPermissionsInput = {
@@ -2481,6 +2649,10 @@ export type UserCreateWithoutStaffPermissionsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutStaffPermissionsInput = {
@@ -2533,6 +2705,10 @@ export type UserUncheckedCreateWithoutStaffPermissionsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutStaffPermissionsInput = {
@@ -2601,6 +2777,10 @@ export type UserUpdateWithoutStaffPermissionsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStaffPermissionsInput = {
@@ -2653,6 +2833,10 @@ export type UserUncheckedUpdateWithoutStaffPermissionsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutStaffChangesMadeInput = {
@@ -2705,6 +2889,10 @@ export type UserCreateWithoutStaffChangesMadeInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutStaffChangesMadeInput = {
@@ -2757,6 +2945,10 @@ export type UserUncheckedCreateWithoutStaffChangesMadeInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutStaffChangesMadeInput = {
@@ -2814,6 +3006,10 @@ export type UserCreateWithoutStaffChangesReceivedInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutStaffChangesReceivedInput = {
@@ -2866,6 +3062,10 @@ export type UserUncheckedCreateWithoutStaffChangesReceivedInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutStaffChangesReceivedInput = {
@@ -2934,6 +3134,10 @@ export type UserUpdateWithoutStaffChangesMadeInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStaffChangesMadeInput = {
@@ -2986,6 +3190,10 @@ export type UserUncheckedUpdateWithoutStaffChangesMadeInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutStaffChangesReceivedInput = {
@@ -3049,6 +3257,10 @@ export type UserUpdateWithoutStaffChangesReceivedInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStaffChangesReceivedInput = {
@@ -3101,6 +3313,10 @@ export type UserUncheckedUpdateWithoutStaffChangesReceivedInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutIssuedStaffInvitesInput = {
@@ -3153,6 +3369,10 @@ export type UserCreateWithoutIssuedStaffInvitesInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutIssuedStaffInvitesInput = {
@@ -3205,6 +3425,10 @@ export type UserUncheckedCreateWithoutIssuedStaffInvitesInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutIssuedStaffInvitesInput = {
@@ -3273,6 +3497,10 @@ export type UserUpdateWithoutIssuedStaffInvitesInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIssuedStaffInvitesInput = {
@@ -3325,6 +3553,10 @@ export type UserUncheckedUpdateWithoutIssuedStaffInvitesInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutResolutionSubmissionsInput = {
@@ -3377,6 +3609,10 @@ export type UserCreateWithoutResolutionSubmissionsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutResolutionSubmissionsInput = {
@@ -3429,6 +3665,10 @@ export type UserUncheckedCreateWithoutResolutionSubmissionsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutResolutionSubmissionsInput = {
@@ -3486,6 +3726,10 @@ export type UserCreateWithoutResolutionReviewsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutResolutionReviewsInput = {
@@ -3538,6 +3782,10 @@ export type UserUncheckedCreateWithoutResolutionReviewsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutResolutionReviewsInput = {
@@ -3606,6 +3854,10 @@ export type UserUpdateWithoutResolutionSubmissionsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResolutionSubmissionsInput = {
@@ -3658,6 +3910,10 @@ export type UserUncheckedUpdateWithoutResolutionSubmissionsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutResolutionReviewsInput = {
@@ -3721,6 +3977,10 @@ export type UserUpdateWithoutResolutionReviewsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResolutionReviewsInput = {
@@ -3773,6 +4033,10 @@ export type UserUncheckedUpdateWithoutResolutionReviewsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCitizenFeedbacksInput = {
@@ -3825,6 +4089,10 @@ export type UserCreateWithoutCitizenFeedbacksInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCitizenFeedbacksInput = {
@@ -3877,6 +4145,10 @@ export type UserUncheckedCreateWithoutCitizenFeedbacksInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCitizenFeedbacksInput = {
@@ -3945,6 +4217,10 @@ export type UserUpdateWithoutCitizenFeedbacksInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCitizenFeedbacksInput = {
@@ -3997,6 +4273,10 @@ export type UserUncheckedUpdateWithoutCitizenFeedbacksInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutReviewedJobsInput = {
@@ -4049,6 +4329,10 @@ export type UserCreateWithoutReviewedJobsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutReviewedJobsInput = {
@@ -4101,6 +4385,10 @@ export type UserUncheckedCreateWithoutReviewedJobsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutReviewedJobsInput = {
@@ -4158,6 +4446,10 @@ export type UserCreateWithoutPostedJobsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutPostedJobsInput = {
@@ -4210,6 +4502,10 @@ export type UserUncheckedCreateWithoutPostedJobsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutPostedJobsInput = {
@@ -4278,6 +4574,10 @@ export type UserUpdateWithoutReviewedJobsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewedJobsInput = {
@@ -4330,6 +4630,10 @@ export type UserUncheckedUpdateWithoutReviewedJobsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutPostedJobsInput = {
@@ -4393,6 +4697,10 @@ export type UserUpdateWithoutPostedJobsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostedJobsInput = {
@@ -4445,6 +4753,10 @@ export type UserUncheckedUpdateWithoutPostedJobsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutJobseekerProfileInput = {
@@ -4497,6 +4809,10 @@ export type UserCreateWithoutJobseekerProfileInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutJobseekerProfileInput = {
@@ -4549,6 +4865,10 @@ export type UserUncheckedCreateWithoutJobseekerProfileInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutJobseekerProfileInput = {
@@ -4617,6 +4937,10 @@ export type UserUpdateWithoutJobseekerProfileInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJobseekerProfileInput = {
@@ -4669,6 +4993,10 @@ export type UserUncheckedUpdateWithoutJobseekerProfileInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutSpesImportsInput = {
@@ -4721,6 +5049,10 @@ export type UserCreateWithoutSpesImportsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutSpesImportsInput = {
@@ -4773,6 +5105,10 @@ export type UserUncheckedCreateWithoutSpesImportsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutSpesImportsInput = {
@@ -4841,6 +5177,10 @@ export type UserUpdateWithoutSpesImportsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSpesImportsInput = {
@@ -4893,6 +5233,10 @@ export type UserUncheckedUpdateWithoutSpesImportsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutSpesImportEventsInput = {
@@ -4945,6 +5289,10 @@ export type UserCreateWithoutSpesImportEventsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutSpesImportEventsInput = {
@@ -4997,6 +5345,10 @@ export type UserUncheckedCreateWithoutSpesImportEventsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutSpesImportEventsInput = {
@@ -5065,6 +5417,10 @@ export type UserUpdateWithoutSpesImportEventsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSpesImportEventsInput = {
@@ -5117,6 +5473,10 @@ export type UserUncheckedUpdateWithoutSpesImportEventsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutJobChangesInput = {
@@ -5169,6 +5529,10 @@ export type UserCreateWithoutJobChangesInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutJobChangesInput = {
@@ -5221,6 +5585,10 @@ export type UserUncheckedCreateWithoutJobChangesInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutJobChangesInput = {
@@ -5289,6 +5657,10 @@ export type UserUpdateWithoutJobChangesInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJobChangesInput = {
@@ -5341,6 +5713,10 @@ export type UserUncheckedUpdateWithoutJobChangesInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCommunitySurveysInput = {
@@ -5393,6 +5769,10 @@ export type UserCreateWithoutCommunitySurveysInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCommunitySurveysInput = {
@@ -5445,6 +5825,10 @@ export type UserUncheckedCreateWithoutCommunitySurveysInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCommunitySurveysInput = {
@@ -5513,6 +5897,10 @@ export type UserUpdateWithoutCommunitySurveysInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommunitySurveysInput = {
@@ -5565,6 +5953,10 @@ export type UserUncheckedUpdateWithoutCommunitySurveysInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCommunitySurveyWorkspacesInput = {
@@ -5617,6 +6009,10 @@ export type UserCreateWithoutCommunitySurveyWorkspacesInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCommunitySurveyWorkspacesInput = {
@@ -5669,6 +6065,10 @@ export type UserUncheckedCreateWithoutCommunitySurveyWorkspacesInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCommunitySurveyWorkspacesInput = {
@@ -5737,6 +6137,10 @@ export type UserUpdateWithoutCommunitySurveyWorkspacesInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommunitySurveyWorkspacesInput = {
@@ -5789,6 +6193,10 @@ export type UserUncheckedUpdateWithoutCommunitySurveyWorkspacesInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCommunitySurveyRevisionsInput = {
@@ -5841,6 +6249,10 @@ export type UserCreateWithoutCommunitySurveyRevisionsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCommunitySurveyRevisionsInput = {
@@ -5893,6 +6305,10 @@ export type UserUncheckedCreateWithoutCommunitySurveyRevisionsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCommunitySurveyRevisionsInput = {
@@ -5950,6 +6366,10 @@ export type UserCreateWithoutAuthoredCommunitySurveyRevisionsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutAuthoredCommunitySurveyRevisionsInput = {
@@ -6002,6 +6422,10 @@ export type UserUncheckedCreateWithoutAuthoredCommunitySurveyRevisionsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutAuthoredCommunitySurveyRevisionsInput = {
@@ -6070,6 +6494,10 @@ export type UserUpdateWithoutCommunitySurveyRevisionsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommunitySurveyRevisionsInput = {
@@ -6122,6 +6550,10 @@ export type UserUncheckedUpdateWithoutCommunitySurveyRevisionsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutAuthoredCommunitySurveyRevisionsInput = {
@@ -6185,6 +6617,10 @@ export type UserUpdateWithoutAuthoredCommunitySurveyRevisionsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthoredCommunitySurveyRevisionsInput = {
@@ -6237,6 +6673,10 @@ export type UserUncheckedUpdateWithoutAuthoredCommunitySurveyRevisionsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCitizenProfileConsentInput = {
@@ -6289,6 +6729,10 @@ export type UserCreateWithoutCitizenProfileConsentInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCitizenProfileConsentInput = {
@@ -6341,6 +6785,10 @@ export type UserUncheckedCreateWithoutCitizenProfileConsentInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCitizenProfileConsentInput = {
@@ -6409,6 +6857,10 @@ export type UserUpdateWithoutCitizenProfileConsentInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCitizenProfileConsentInput = {
@@ -6461,6 +6913,10 @@ export type UserUncheckedUpdateWithoutCitizenProfileConsentInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCommunityImportsInput = {
@@ -6513,6 +6969,10 @@ export type UserCreateWithoutCommunityImportsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCommunityImportsInput = {
@@ -6565,6 +7025,10 @@ export type UserUncheckedCreateWithoutCommunityImportsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCommunityImportsInput = {
@@ -6633,6 +7097,10 @@ export type UserUpdateWithoutCommunityImportsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommunityImportsInput = {
@@ -6685,6 +7153,10 @@ export type UserUncheckedUpdateWithoutCommunityImportsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutServiceRequestsInput = {
@@ -6737,6 +7209,10 @@ export type UserCreateWithoutServiceRequestsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutServiceRequestsInput = {
@@ -6789,6 +7265,10 @@ export type UserUncheckedCreateWithoutServiceRequestsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutServiceRequestsInput = {
@@ -6846,6 +7326,10 @@ export type UserCreateWithoutAssignedServiceRequestsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutAssignedServiceRequestsInput = {
@@ -6898,6 +7382,10 @@ export type UserUncheckedCreateWithoutAssignedServiceRequestsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutAssignedServiceRequestsInput = {
@@ -6955,6 +7443,10 @@ export type UserCreateWithoutApprovedServiceReleasesInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutApprovedServiceReleasesInput = {
@@ -7007,6 +7499,10 @@ export type UserUncheckedCreateWithoutApprovedServiceReleasesInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutApprovedServiceReleasesInput = {
@@ -7075,6 +7571,10 @@ export type UserUpdateWithoutServiceRequestsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutServiceRequestsInput = {
@@ -7127,6 +7627,10 @@ export type UserUncheckedUpdateWithoutServiceRequestsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutAssignedServiceRequestsInput = {
@@ -7190,6 +7694,10 @@ export type UserUpdateWithoutAssignedServiceRequestsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedServiceRequestsInput = {
@@ -7242,6 +7750,10 @@ export type UserUncheckedUpdateWithoutAssignedServiceRequestsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutApprovedServiceReleasesInput = {
@@ -7305,6 +7817,10 @@ export type UserUpdateWithoutApprovedServiceReleasesInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApprovedServiceReleasesInput = {
@@ -7357,6 +7873,10 @@ export type UserUncheckedUpdateWithoutApprovedServiceReleasesInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutVerifiedServiceDocumentsInput = {
@@ -7409,6 +7929,10 @@ export type UserCreateWithoutVerifiedServiceDocumentsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutVerifiedServiceDocumentsInput = {
@@ -7461,6 +7985,10 @@ export type UserUncheckedCreateWithoutVerifiedServiceDocumentsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutVerifiedServiceDocumentsInput = {
@@ -7529,6 +8057,10 @@ export type UserUpdateWithoutVerifiedServiceDocumentsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerifiedServiceDocumentsInput = {
@@ -7581,6 +8113,10 @@ export type UserUncheckedUpdateWithoutVerifiedServiceDocumentsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutServiceRequestEventsInput = {
@@ -7633,6 +8169,10 @@ export type UserCreateWithoutServiceRequestEventsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutServiceRequestEventsInput = {
@@ -7685,6 +8225,10 @@ export type UserUncheckedCreateWithoutServiceRequestEventsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutServiceRequestEventsInput = {
@@ -7753,6 +8297,10 @@ export type UserUpdateWithoutServiceRequestEventsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutServiceRequestEventsInput = {
@@ -7805,6 +8353,10 @@ export type UserUncheckedUpdateWithoutServiceRequestEventsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutProposedServiceAppointmentsInput = {
@@ -7857,6 +8409,10 @@ export type UserCreateWithoutProposedServiceAppointmentsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutProposedServiceAppointmentsInput = {
@@ -7909,6 +8465,10 @@ export type UserUncheckedCreateWithoutProposedServiceAppointmentsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutProposedServiceAppointmentsInput = {
@@ -7977,6 +8537,10 @@ export type UserUpdateWithoutProposedServiceAppointmentsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProposedServiceAppointmentsInput = {
@@ -8029,6 +8593,10 @@ export type UserUncheckedUpdateWithoutProposedServiceAppointmentsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutProposedServicePickupSlotsInput = {
@@ -8081,6 +8649,10 @@ export type UserCreateWithoutProposedServicePickupSlotsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutProposedServicePickupSlotsInput = {
@@ -8133,6 +8705,10 @@ export type UserUncheckedCreateWithoutProposedServicePickupSlotsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutProposedServicePickupSlotsInput = {
@@ -8201,6 +8777,10 @@ export type UserUpdateWithoutProposedServicePickupSlotsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProposedServicePickupSlotsInput = {
@@ -8253,6 +8833,10 @@ export type UserUncheckedUpdateWithoutProposedServicePickupSlotsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -8305,6 +8889,10 @@ export type UserCreateWithoutNotificationsInput = {
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -8357,6 +8945,10 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -8425,6 +9017,10 @@ export type UserUpdateWithoutNotificationsInput = {
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -8477,6 +9073,10 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutWorkAssignmentsInput = {
@@ -8529,6 +9129,10 @@ export type UserCreateWithoutWorkAssignmentsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutWorkAssignmentsInput = {
@@ -8581,6 +9185,10 @@ export type UserUncheckedCreateWithoutWorkAssignmentsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutWorkAssignmentsInput = {
@@ -8649,6 +9257,10 @@ export type UserUpdateWithoutWorkAssignmentsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorkAssignmentsInput = {
@@ -8701,6 +9313,10 @@ export type UserUncheckedUpdateWithoutWorkAssignmentsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCreatedServiceDefinitionsInput = {
@@ -8753,6 +9369,10 @@ export type UserCreateWithoutCreatedServiceDefinitionsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCreatedServiceDefinitionsInput = {
@@ -8805,6 +9425,10 @@ export type UserUncheckedCreateWithoutCreatedServiceDefinitionsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedServiceDefinitionsInput = {
@@ -8873,6 +9497,10 @@ export type UserUpdateWithoutCreatedServiceDefinitionsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedServiceDefinitionsInput = {
@@ -8925,6 +9553,10 @@ export type UserUncheckedUpdateWithoutCreatedServiceDefinitionsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutServiceDefinitionAuditsInput = {
@@ -8977,6 +9609,10 @@ export type UserCreateWithoutServiceDefinitionAuditsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutServiceDefinitionAuditsInput = {
@@ -9029,6 +9665,10 @@ export type UserUncheckedCreateWithoutServiceDefinitionAuditsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutServiceDefinitionAuditsInput = {
@@ -9097,6 +9737,10 @@ export type UserUpdateWithoutServiceDefinitionAuditsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutServiceDefinitionAuditsInput = {
@@ -9149,6 +9793,970 @@ export type UserUncheckedUpdateWithoutServiceDefinitionAuditsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
   createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserCreateWithoutMunicipalProjectsCreatedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutMunicipalProjectsCreatedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutMunicipalProjectsCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsCreatedInput>
+}
+
+export type UserCreateWithoutMunicipalProjectsReviewedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutMunicipalProjectsReviewedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutMunicipalProjectsReviewedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsReviewedInput>
+}
+
+export type UserUpsertWithoutMunicipalProjectsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectsCreatedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectsCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMunicipalProjectsCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectsCreatedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectsCreatedInput>
+}
+
+export type UserUpdateWithoutMunicipalProjectsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMunicipalProjectsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUpsertWithoutMunicipalProjectsReviewedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectsReviewedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectsReviewedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsReviewedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMunicipalProjectsReviewedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectsReviewedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectsReviewedInput>
+}
+
+export type UserUpdateWithoutMunicipalProjectsReviewedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMunicipalProjectsReviewedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserCreateWithoutMunicipalProjectUpdatesCreatedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutMunicipalProjectUpdatesCreatedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutMunicipalProjectUpdatesCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesCreatedInput>
+}
+
+export type UserCreateWithoutMunicipalProjectUpdatesReviewedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutMunicipalProjectUpdatesReviewedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutMunicipalProjectUpdatesReviewedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesReviewedInput>
+}
+
+export type UserUpsertWithoutMunicipalProjectUpdatesCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMunicipalProjectUpdatesCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesCreatedInput>
+}
+
+export type UserUpdateWithoutMunicipalProjectUpdatesCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMunicipalProjectUpdatesCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUpsertWithoutMunicipalProjectUpdatesReviewedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesReviewedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesReviewedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMunicipalProjectUpdatesReviewedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesReviewedInput>
+}
+
+export type UserUpdateWithoutMunicipalProjectUpdatesReviewedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMunicipalProjectUpdatesReviewedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  communitySurveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  communitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredCommunitySurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 
@@ -9190,6 +10798,10 @@ export type UserCountOutputType = {
   workAssignments: number
   createdServiceDefinitions: number
   serviceDefinitionAudits: number
+  municipalProjectsCreated: number
+  municipalProjectsReviewed: number
+  municipalProjectUpdatesCreated: number
+  municipalProjectUpdatesReviewed: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -9226,6 +10838,10 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   workAssignments?: boolean | UserCountOutputTypeCountWorkAssignmentsArgs
   createdServiceDefinitions?: boolean | UserCountOutputTypeCountCreatedServiceDefinitionsArgs
   serviceDefinitionAudits?: boolean | UserCountOutputTypeCountServiceDefinitionAuditsArgs
+  municipalProjectsCreated?: boolean | UserCountOutputTypeCountMunicipalProjectsCreatedArgs
+  municipalProjectsReviewed?: boolean | UserCountOutputTypeCountMunicipalProjectsReviewedArgs
+  municipalProjectUpdatesCreated?: boolean | UserCountOutputTypeCountMunicipalProjectUpdatesCreatedArgs
+  municipalProjectUpdatesReviewed?: boolean | UserCountOutputTypeCountMunicipalProjectUpdatesReviewedArgs
 }
 
 /**
@@ -9469,6 +11085,34 @@ export type UserCountOutputTypeCountServiceDefinitionAuditsArgs<ExtArgs extends 
   where?: Prisma.ServiceDefinitionAuditWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMunicipalProjectsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunicipalProjectWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMunicipalProjectsReviewedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunicipalProjectWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMunicipalProjectUpdatesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunicipalProjectUpdateWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMunicipalProjectUpdatesReviewedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunicipalProjectUpdateWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -9521,6 +11165,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   workAssignments?: boolean | Prisma.User$workAssignmentsArgs<ExtArgs>
   createdServiceDefinitions?: boolean | Prisma.User$createdServiceDefinitionsArgs<ExtArgs>
   serviceDefinitionAudits?: boolean | Prisma.User$serviceDefinitionAuditsArgs<ExtArgs>
+  municipalProjectsCreated?: boolean | Prisma.User$municipalProjectsCreatedArgs<ExtArgs>
+  municipalProjectsReviewed?: boolean | Prisma.User$municipalProjectsReviewedArgs<ExtArgs>
+  municipalProjectUpdatesCreated?: boolean | Prisma.User$municipalProjectUpdatesCreatedArgs<ExtArgs>
+  municipalProjectUpdatesReviewed?: boolean | Prisma.User$municipalProjectUpdatesReviewedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -9581,6 +11229,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   workAssignments?: boolean | Prisma.User$workAssignmentsArgs<ExtArgs>
   createdServiceDefinitions?: boolean | Prisma.User$createdServiceDefinitionsArgs<ExtArgs>
   serviceDefinitionAudits?: boolean | Prisma.User$serviceDefinitionAuditsArgs<ExtArgs>
+  municipalProjectsCreated?: boolean | Prisma.User$municipalProjectsCreatedArgs<ExtArgs>
+  municipalProjectsReviewed?: boolean | Prisma.User$municipalProjectsReviewedArgs<ExtArgs>
+  municipalProjectUpdatesCreated?: boolean | Prisma.User$municipalProjectUpdatesCreatedArgs<ExtArgs>
+  municipalProjectUpdatesReviewed?: boolean | Prisma.User$municipalProjectUpdatesReviewedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -9622,6 +11274,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     workAssignments: Prisma.$WorkAssignmentPayload<ExtArgs>[]
     createdServiceDefinitions: Prisma.$ServiceDefinitionPayload<ExtArgs>[]
     serviceDefinitionAudits: Prisma.$ServiceDefinitionAuditPayload<ExtArgs>[]
+    municipalProjectsCreated: Prisma.$MunicipalProjectPayload<ExtArgs>[]
+    municipalProjectsReviewed: Prisma.$MunicipalProjectPayload<ExtArgs>[]
+    municipalProjectUpdatesCreated: Prisma.$MunicipalProjectUpdatePayload<ExtArgs>[]
+    municipalProjectUpdatesReviewed: Prisma.$MunicipalProjectUpdatePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -10014,6 +11670,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   workAssignments<T extends Prisma.User$workAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$workAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdServiceDefinitions<T extends Prisma.User$createdServiceDefinitionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdServiceDefinitionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceDefinitionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   serviceDefinitionAudits<T extends Prisma.User$serviceDefinitionAuditsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$serviceDefinitionAuditsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceDefinitionAuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  municipalProjectsCreated<T extends Prisma.User$municipalProjectsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$municipalProjectsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunicipalProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  municipalProjectsReviewed<T extends Prisma.User$municipalProjectsReviewedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$municipalProjectsReviewedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunicipalProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  municipalProjectUpdatesCreated<T extends Prisma.User$municipalProjectUpdatesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$municipalProjectUpdatesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunicipalProjectUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  municipalProjectUpdatesReviewed<T extends Prisma.User$municipalProjectUpdatesReviewedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$municipalProjectUpdatesReviewedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunicipalProjectUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11233,6 +12893,102 @@ export type User$serviceDefinitionAuditsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.ServiceDefinitionAuditScalarFieldEnum | Prisma.ServiceDefinitionAuditScalarFieldEnum[]
+}
+
+/**
+ * User.municipalProjectsCreated
+ */
+export type User$municipalProjectsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunicipalProject
+   */
+  select?: Prisma.MunicipalProjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunicipalProject
+   */
+  omit?: Prisma.MunicipalProjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunicipalProjectInclude<ExtArgs> | null
+  where?: Prisma.MunicipalProjectWhereInput
+  orderBy?: Prisma.MunicipalProjectOrderByWithRelationInput | Prisma.MunicipalProjectOrderByWithRelationInput[]
+  cursor?: Prisma.MunicipalProjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunicipalProjectScalarFieldEnum | Prisma.MunicipalProjectScalarFieldEnum[]
+}
+
+/**
+ * User.municipalProjectsReviewed
+ */
+export type User$municipalProjectsReviewedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunicipalProject
+   */
+  select?: Prisma.MunicipalProjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunicipalProject
+   */
+  omit?: Prisma.MunicipalProjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunicipalProjectInclude<ExtArgs> | null
+  where?: Prisma.MunicipalProjectWhereInput
+  orderBy?: Prisma.MunicipalProjectOrderByWithRelationInput | Prisma.MunicipalProjectOrderByWithRelationInput[]
+  cursor?: Prisma.MunicipalProjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunicipalProjectScalarFieldEnum | Prisma.MunicipalProjectScalarFieldEnum[]
+}
+
+/**
+ * User.municipalProjectUpdatesCreated
+ */
+export type User$municipalProjectUpdatesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunicipalProjectUpdate
+   */
+  select?: Prisma.MunicipalProjectUpdateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunicipalProjectUpdate
+   */
+  omit?: Prisma.MunicipalProjectUpdateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunicipalProjectUpdateInclude<ExtArgs> | null
+  where?: Prisma.MunicipalProjectUpdateWhereInput
+  orderBy?: Prisma.MunicipalProjectUpdateOrderByWithRelationInput | Prisma.MunicipalProjectUpdateOrderByWithRelationInput[]
+  cursor?: Prisma.MunicipalProjectUpdateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunicipalProjectUpdateScalarFieldEnum | Prisma.MunicipalProjectUpdateScalarFieldEnum[]
+}
+
+/**
+ * User.municipalProjectUpdatesReviewed
+ */
+export type User$municipalProjectUpdatesReviewedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunicipalProjectUpdate
+   */
+  select?: Prisma.MunicipalProjectUpdateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunicipalProjectUpdate
+   */
+  omit?: Prisma.MunicipalProjectUpdateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunicipalProjectUpdateInclude<ExtArgs> | null
+  where?: Prisma.MunicipalProjectUpdateWhereInput
+  orderBy?: Prisma.MunicipalProjectUpdateOrderByWithRelationInput | Prisma.MunicipalProjectUpdateOrderByWithRelationInput[]
+  cursor?: Prisma.MunicipalProjectUpdateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunicipalProjectUpdateScalarFieldEnum | Prisma.MunicipalProjectUpdateScalarFieldEnum[]
 }
 
 /**

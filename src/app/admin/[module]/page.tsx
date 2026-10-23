@@ -15,13 +15,12 @@ export const metadata: Metadata = { title: "LGU Modules | E-Lingkod Bayan" };
 const modules = {
   services: { index: "02", name: "Online LGU Services", icon: Building2, summary: "Bring permits, clearances, IDs, and other service requests closer to residents.", steps: ["Citizen application and document upload", "LGU review, assignment and approval", "Application status tracking and updates"] },
   emergency: { index: "03", name: "Emergency Hotlines & Alerts", icon: BellRing, summary: "One trusted place to find verified local emergency contacts and public advisories.", steps: ["Verified PNP, BFP, hospital, and MDRRMO contacts", "One-tap calling on supported devices", "Authorized LGU advisory publishing"] },
-  projects: { index: "04", name: "Municipal Projects & Services", icon: MapPinned, summary: "Improve visibility into municipal offices, public services, and projects.", steps: ["LGU office and service directory", "Upcoming and ongoing project listings", "Project progress and milestones from the LGU"] },
   jobs: { index: "05", name: "Job Matching & Employment", icon: BriefcaseBusiness, summary: "Combine employment profiling, skills and training insights, and verified opportunity discovery without turning the portal into a job application system.", steps: ["Adaptive employment and livelihood survey", "Skills, training, barriers and historical activity insights", "PESO-managed opportunity publishing and informational recommendations"] },
   census: { index: "06", name: "Community Census", icon: UsersRound, summary: "A separate census module reserved for a future implementation phase.", steps: ["Define census scope and methodology", "Design authorized census collection and validation", "Publish privacy-safe census statistics when officially implemented"] },
 } as const;
 
 export function generateStaticParams() { return Object.keys(modules).map(module => ({module})); }
-const moduleKeys: Record<keyof typeof modules, StaffModule> = { services: "SERVICES", emergency: "EMERGENCY", projects: "PROJECTS", jobs: "JOBS", census: "CENSUS" };
+const moduleKeys: Record<keyof typeof modules, StaffModule> = { services: "SERVICES", emergency: "EMERGENCY", jobs: "JOBS", census: "CENSUS" };
 
 export default async function AdminModulePage({ params }: { params: Promise<{ module: string }> }) {
   const { module } = await params;

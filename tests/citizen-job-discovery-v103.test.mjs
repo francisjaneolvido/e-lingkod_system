@@ -38,7 +38,7 @@ test("employment survey and future Census are clearly distinct in services notic
   assert.match(read("src/app/community-employment/page.tsx"), /Citizen Profiling/);
   assert.match(read("src/features/landing/data/services.ts"), /title: "Community Census", shortTitle: "Census · coming soon"/);
   assert.match(read("src/features/landing/data/services.ts"), /belongs to Job Matching \/ Employment & Livelihood, not Census/);
-  assert.match(read("src/components/layout/site-footer.tsx"), /Online LGU Services, and PESO opportunities now have working prototype flows/);
+  assert.match(read("src/components/layout/site-footer.tsx"), /Online LGU Services, Emergency Hotlines and Municipal Projects have prototype workflows/);
 });
 
 test("citizen cards link to dedicated details instead of expanding into long inline content", () => {

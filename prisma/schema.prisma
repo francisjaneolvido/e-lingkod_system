@@ -61,6 +61,10 @@ model User {
   workAssignments WorkAssignment[] @relation("WorkAssignmentStaff")
   createdServiceDefinitions ServiceDefinition[] @relation("ServiceDefinitionCreator")
   serviceDefinitionAudits ServiceDefinitionAudit[] @relation("ServiceDefinitionAuditActor")
+  municipalProjectsCreated MunicipalProject[] @relation("MunicipalProjectAuthor")
+  municipalProjectsReviewed MunicipalProject[] @relation("MunicipalProjectReviewer")
+  municipalProjectUpdatesCreated MunicipalProjectUpdate[] @relation("MunicipalProjectUpdateAuthor")
+  municipalProjectUpdatesReviewed MunicipalProjectUpdate[] @relation("MunicipalProjectUpdateReviewer")
 
   @@map("user")
 }
@@ -951,4 +955,100 @@ model EmergencyActionLog {
 
   @@index([entityType, entityId, createdAt])
   @@map("emergency_action_log")
+}
+
+
+// Project entries are not official until reviewed by an Admin. The public page
+// only shows PUBLISHED records, and progress entries are separately approved.
+model MunicipalProject {
+  id String @id @default(cuid()) @db.VarChar(191)
+  title String @db.VarChar(180)
+  summary String @db.Text
+  category String @db.VarChar(50)
+  phase String @default("PLANNED") @db.VarChar(25)
+  leadOffice String @db.VarChar(160)
+  barangaysJson String @db.Text
+  sourceUrl String? @db.VarChar(500)
+  isDemo Boolean @default(false)
+  photoPath String? @db.VarChar(240)
+  budgetPhp Decimal? @db.Decimal(16,2)
+  budgetSourceUrl String? @db.VarChar(500)
+  fundingSource String? @db.VarChar(180)
+  contractor String? @db.VarChar(180)
+  procurementUrl String? @db.VarChar(500)
+  targetCompletion DateTime?
+  status String @default("DRAFT") @db.VarChar(25)
+  createdById String @db.VarChar(191)
+  createdBy User @relation("MunicipalProjectAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  reviewedById String? @db.VarChar(191)
+  reviewedBy User? @relation("MunicipalProjectReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  reviewNote String? @db.Text
+  publishedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  updates MunicipalProjectUpdate[]
+
+  @@index([status, phase, publishedAt])
+  @@index([leadOffice, status])
+  @@map("municipal_project")
+}
+
+model MunicipalProjectUpdate {
+  id String @id @default(cuid()) @db.VarChar(191)
+  projectId String @db.VarChar(191)
+  project MunicipalProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title String @db.VarChar(160)
+  details String @db.Text
+  progressPercent Int?
+  phaseAfter String? @db.VarChar(25)
+  sourceUrl String @db.VarChar(500)
+  status String @default("PENDING_REVIEW") @db.VarChar(25)
+  reviewNote String? @db.Text
+  createdById String @db.VarChar(191)
+  createdBy User @relation("MunicipalProjectUpdateAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  reviewedById String? @db.VarChar(191)
+  reviewedBy User? @relation("MunicipalProjectUpdateReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  reviewedAt DateTime?
+  createdAt DateTime @default(now())
+  @@index([projectId, status, createdAt])
+  @@map("municipal_project_update")
+}
+
+// Municipal Projects V2 office contacts and proposed corrections; non-Projects models untouched.
+model MunicipalOfficeDirectoryEntry {
+  id String @id @default(cuid()) @db.VarChar(191)
+  officeName String @unique @db.VarChar(160)
+  phone String? @db.VarChar(35)
+  extension String? @db.VarChar(15)
+  email String? @db.VarChar(190)
+  officeHours String? @db.VarChar(160)
+  address String? @db.VarChar(220)
+  notes String? @db.VarChar(350)
+  sourceUrl String @db.VarChar(500)
+  isPublished Boolean @default(true)
+  verifiedAt DateTime
+  verifiedById String @db.VarChar(191)
+  updatedAt DateTime @updatedAt
+  @@index([isPublished, officeName])
+  @@map("municipal_office_directory")
+}
+
+model MunicipalOfficeDirectoryProposal {
+  id String @id @default(cuid()) @db.VarChar(191)
+  officeName String @db.VarChar(160)
+  phone String? @db.VarChar(35)
+  extension String? @db.VarChar(15)
+  email String? @db.VarChar(190)
+  officeHours String? @db.VarChar(160)
+  address String? @db.VarChar(220)
+  notes String? @db.VarChar(350)
+  sourceUrl String @db.VarChar(500)
+  status String @default("PENDING_REVIEW") @db.VarChar(25)
+  reviewNote String? @db.VarChar(700)
+  submittedById String @db.VarChar(191)
+  reviewedById String? @db.VarChar(191)
+  submittedAt DateTime @default(now())
+  reviewedAt DateTime?
+  @@index([status, submittedAt])
+  @@map("municipal_office_proposal")
 }

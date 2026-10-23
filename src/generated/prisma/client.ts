@@ -241,3 +241,23 @@ export type EmergencyAlert = Prisma.EmergencyAlertModel
  * 
  */
 export type EmergencyActionLog = Prisma.EmergencyActionLogModel
+/**
+ * Model MunicipalProject
+ * 
+ */
+export type MunicipalProject = Prisma.MunicipalProjectModel
+/**
+ * Model MunicipalProjectUpdate
+ * 
+ */
+export type MunicipalProjectUpdate = Prisma.MunicipalProjectUpdateModel
+/**
+ * Model MunicipalOfficeDirectoryEntry
+ * 
+ */
+export type MunicipalOfficeDirectoryEntry = Prisma.MunicipalOfficeDirectoryEntryModel
+/**
+ * Model MunicipalOfficeDirectoryProposal
+ * 
+ */
+export type MunicipalOfficeDirectoryProposal = Prisma.MunicipalOfficeDirectoryProposalModel

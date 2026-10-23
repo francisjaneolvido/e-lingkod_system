@@ -18,7 +18,7 @@ const destinations: Record<StaffModule, { href: string; description: string; ico
   REPORTS: { href: "/admin/reports", description: "Review, claim and resolve routed cases", icon: ClipboardList, live: true },
   SERVICES: { href: "/admin/services", description: "Review assigned permits, clearances and assistance requests", icon: Building2, live: true },
   EMERGENCY: { href: "/admin/emergency", description: "Local emergency contacts, review queues and advisory drafting", icon: BellRing, live: true },
-  PROJECTS: { href: "/admin/projects", description: "Municipal projects · planned", icon: MapPinned, live: false },
+  PROJECTS: { href: "/admin/projects", description: "Draft projects, submit updates and track approval", icon: MapPinned, live: true },
   JOBS: { href: "/admin/jobs", description: "Manage Job Matching, employment insights and PESO opportunities", icon: BriefcaseBusiness, live: true },
   CENSUS: { href: "/admin/census", description: "Community Census · planned", icon: BarChart3, live: false },
   COMMUNITY_DATA: { href: "/admin/jobs/data", description: "Import and encode authorized Job Matching activity data", icon: FileSpreadsheet, live: true },
