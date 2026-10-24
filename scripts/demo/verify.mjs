@@ -35,7 +35,7 @@ export async function verify(config, target, { login = true } = {}) {
   const db = await connect(target);
   const { prisma } = await import('../../src/lib/prisma.ts');
   try {
-    await assertReady(db);
+    const readyState=await assertReady(db);
     const expected = JSON.parse(fs.readFileSync('demo/expected-counts.json', 'utf8'));
     assert.equal(expected.datasetVersion, datasetVersion);
     assert.deepEqual(await counts(prisma), expected.counts);
@@ -111,6 +111,7 @@ export async function verify(config, target, { login = true } = {}) {
     assert.equal(await prisma.staffPermission.count({ where: { user: { email: 'staff.04@example.test' }, module: 'CENSUS' } }), 0);
     const historicalSource = await prisma.communityImportRecord.groupBy({ by: ['outcome'], _count: { _all: true } });
     assert.ok(historicalSource.some(r => r.outcome === 'REVIEW_NEEDED'));
+    if(expected.b5)await(await import('./verify-b5.mjs')).verifyB5(prisma,readyState);
     if (login) await verifyLogins(config, prisma);
   } finally { await db.end(); }
 }

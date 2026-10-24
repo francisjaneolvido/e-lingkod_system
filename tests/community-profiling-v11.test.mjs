@@ -14,7 +14,6 @@ const insights = read("src/features/analytics/domain.ts");
 const analyticalData = read("src/features/analytics/server/data.ts");
 const censusPage = read("src/app/community-census/page.tsx");
 const adminCensus = read("src/app/admin/census/page.tsx");
-const opportunities = read("src/app/opportunities/page.tsx");
 
 const files = [
   "src/features/community/domain.ts",
@@ -99,10 +98,8 @@ test("Public census remains private-data free while protected B3 records are sep
   assert.doesNotMatch(adminCensus, /adminEmploymentInsights/);
 });
 
-test("opportunity recommendations can use the consented employment profile without submitting applications", () => {
-  assert.match(opportunities, /communityMatchProfile/);
-  assert.match(opportunities, /not an application or eligibility decision/);
-  assert.match(opportunities, /Your profile is not sent to employers/);
+test("opportunity recommendations can use the consented employment profile without submitting applications",()=>{
+const page=read('src/app/opportunities/page.tsx');const service=read('src/features/jobs/server/recommendations.ts');assert.match(page,/personalOpportunities\(viewer\)/);assert.match(service,/consent\?\.matching/);assert.match(service,/status:\{in:\['SUBMITTED','WITHDRAWN'\]/);assert.match(service,/withdrawal/);assert.match(read('src/features/jobs/components/opportunity-workspace.tsx'),/does not send your profile or process applications/);
 });
 
 test("Job Matching community profiling TypeScript and TSX sources parse", () => {

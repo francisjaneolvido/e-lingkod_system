@@ -4,6 +4,7 @@ import { snapshot, digest, identifier } from './database.mjs';
 // Explicitly reviewed postconditions: additive DDL must not adopt manual data
 // in tables/columns which did not exist in the pre-migration snapshot.
 const contracts = {
+  '20261024130000_opportunity_details':{tables:['job_mutation','job_recommendation'],columns:{job_opportunity:{occupationCategory:null,employmentSector:null,workArrangement:null,experienceLevel:null,payMin:null,payMax:null,payCurrency:null,payBasis:null,negotiable:0,certificationsJson:null,isDemo:0}},demoMarker:true},
   '20261024080000_census_records_imports': {
     tables: ['census_review', 'census_staff_scope', 'census_assistance_roster', 'census_assistance_member', 'census_audit', 'census_source_record', 'census_import_lock'],
     columns: {
@@ -56,7 +57,7 @@ export async function assertPostconditions(db, journal) {
     if (JSON.stringify([...currentColumns].sort()) !== JSON.stringify([...oldColumns, ...Object.keys(extra)].sort())) failure('unexpected columns in ' + table);
     const projected = after[table].map(value => {
       const row = JSON.parse(value);
-      for (const [column, expected] of Object.entries(extra)) if (row[column] !== expected) failure('unexpected value in new column ' + table + '.' + column);
+      for (const [column, expected] of Object.entries(extra)) { const value=table==='job_opportunity'&&column==='isDemo'&&conditions.migrations.some(m=>m.contract.demoMarker)?Number(row.title.startsWith('[DEMO]')||row.employer.startsWith('[DEMO]')):expected; if(row[column]!==value) failure('unexpected value in new column '+table+'.'+column); }
       return JSON.stringify(Object.fromEntries(oldColumns.map(column => [column, row[column]])));
     }).sort();
     const expected = oldRows.map(value => {

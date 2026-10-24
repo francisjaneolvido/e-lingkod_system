@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, useRef, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Check, Info, Save, ShieldCheck } from "lucide-react";
 import { EDUCATION, EDUCATION_LABEL, INTERESTS, SECTORS, SKILLS, WORK_LABEL, WORK_TYPES } from "../domain";
 import { emptyOpportunity, toOpportunityForm, type ManagedJob, type OpportunityFormValue } from "./job-types";
+import {PAY_BASES,PAY_CURRENCIES,ARRANGEMENTS,EXPERIENCE_LEVELS,OCCUPATIONS,EMPLOYMENT_SECTORS} from "../opportunities-domain";
+import {sendPreparedVacancy,VacancyRequestError,type PreparedVacancyRequest} from './vacancy-request';
 import "./jobs-workspace.css";
 
 function Choices({legend,items,selected,onChange,limit}:{legend:string;items:readonly string[];selected:string[];onChange:(items:string[])=>void;limit:number}) {
@@ -23,6 +25,8 @@ export function OpportunityEditor({job}:{job?:ManagedJob}) {
  const router=useRouter();
  const starting=useMemo(()=>job?toOpportunityForm(job):{...emptyOpportunity,skills:[],interests:[]},[job]);
  const [form,setForm]=useState<OpportunityFormValue>(starting);
+const record=useRef(job?{id:job.id,version:job.version}:null);
+const pending=useRef<PreparedVacancyRequest|null>(null);
  const [busy,setBusy]=useState(false);
  const [error,setError]=useState("");
  const [saved,setSaved]=useState(false);
@@ -48,11 +52,18 @@ export function OpportunityEditor({job}:{job?:ManagedJob}) {
   event.preventDefault();if(busy)return;
   setError("");setBusy(true);
   try{
-   const response=await fetch(job?`/api/admin/jobs/${job.id}`:"/api/admin/jobs",{method:job?"PATCH":"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(job?{action:"EDIT",job:form}:form)});
-   const result=await response.json().catch(()=>({error:"Unexpected response from server."}));
-   if(!response.ok)throw new Error(result.error||"Unable to save opportunity.");
+   const snapshot=structuredClone(form),signature=JSON.stringify(snapshot);
+   const prepare=():PreparedVacancyRequest=>record.current?{signature,path:`/api/admin/jobs/${record.current.id}`,method:'PATCH',body:{action:'EDIT',job:snapshot,expectedVersion:record.current.version,requestKey:crypto.randomUUID()},resultVersion:record.current.version+1}:{signature,path:'/api/admin/jobs',method:'POST',body:{...snapshot,requestKey:crypto.randomUUID()},resultVersion:1};
+   // Reconcile the original preparation before amending its recovered vacancy.
+   // A receipt establishes identity; a matching title or content never does.
+   pending.current??=prepare();
+   const prepared=pending.current;
+   record.current=await sendPreparedVacancy(prepared);pending.current=null;
+   if(prepared.signature!==signature){
+    pending.current=prepare();record.current=await sendPreparedVacancy(pending.current);pending.current=null;
+   }
    setSaved(true);router.push("/admin/jobs?updated=1");router.refresh();
-  }catch(reason){setError(reason instanceof Error?reason.message:"Unable to save opportunity.");}finally{setBusy(false);}
+  }catch(reason){if(reason instanceof VacancyRequestError&&reason.definitiveRejection)pending.current=null;setError(reason instanceof Error?reason.message:"Unable to save opportunity.");}finally{setBusy(false);}
  }
  return <div className="jobs-editor-layout">
   <div className="jobs-editor-heading"><div><Link href="/admin/jobs" className="jobs-back"><ArrowLeft size={16}/> Back to opportunities</Link><p className="jobs-eyebrow">PESO / OPPORTUNITY MANAGEMENT</p><h1>{job?"Edit job opportunity":"Create job opportunity"}</h1><p>Fill out the vacancy information. Saving creates a draft. Submit it to the Super Admin for employer and vacancy review from the Opportunities list.</p></div><span className="jobs-editor-state">{job?.status||"NEW DRAFT"}</span></div>
@@ -75,10 +86,11 @@ export function OpportunityEditor({job}:{job?:ManagedJob}) {
      <Choices legend="Relevant interest areas (optional)" items={INTERESTS} selected={form.interests} onChange={v=>change("interests",v)} limit={4}/></div>
     </section>
     <section className="jobs-form-section" aria-labelledby="jobs-application"><div className="jobs-section-head"><span className="jobs-section-index">03</span><div><h2 id="jobs-application">Inquiry & publication details</h2><p>Tell citizens where to obtain official information or inquire.</p></div></div>
-     <div className="jobs-form-stack"><label className="jobs-label">Official inquiry / application instructions *<textarea required minLength={8} maxLength={250} rows={3} className="jobs-input jobs-textarea" value={form.contactInfo} onChange={e=>change("contactInfo",e.target.value)} placeholder="e.g. Inquire at the PESO desk during office hours"/></label>
+     <div className="jobs-form-stack"><label className="jobs-label">Approved inquiry / contact instructions *<textarea required minLength={8} maxLength={250} rows={3} className="jobs-input jobs-textarea" value={form.contactInfo} onChange={e=>change("contactInfo",e.target.value)} placeholder="e.g. Inquire at the PESO desk during office hours"/></label>
      <div className="jobs-input-grid"><label className="jobs-label">Official posting link (optional)<input className="jobs-input" type="url" maxLength={500} value={form.externalUrl} onChange={e=>change("externalUrl",e.target.value)} placeholder="https://..."/></label>
      <label className="jobs-label">Expiry date (optional)<input type="date" className="jobs-input" value={form.expiresAt} onChange={e=>change("expiresAt",e.target.value)}/></label></div></div>
     </section>
+    <section className="jobs-form-section" aria-labelledby="pay-details"><h2 id="pay-details">Compensation and work conditions</h2><p>Drafts may omit unknown values. Disclose pay range or fixed hourly/daily rate, currency and basis before publication; negotiability alone is insufficient. Existing missing pay is never fabricated.</p><div className="jobs-form-grid">{(['payMin','payMax'] as const).map(key=><label key={key} className="jobs-field-label">{key==='payMin'?'Minimum pay':'Maximum pay'}<input className="jobs-input" type="number" min="0" step="0.01" value={form[key]} onChange={e=>change(key,e.target.value)}/></label>)}{([['payCurrency','Currency',PAY_CURRENCIES],['payBasis','Pay basis',PAY_BASES],['occupationCategory','Occupational category',OCCUPATIONS],['employmentSector','Employment sector',EMPLOYMENT_SECTORS],['workArrangement','Work arrangement',ARRANGEMENTS],['experienceLevel','Experience requirement',EXPERIENCE_LEVELS]] as const).map(([key,title,options])=><label key={key} className="jobs-field-label">{title}<select className="jobs-input" value={form[key]} onChange={e=>change(key,e.target.value)}><option value="">Not provided</option>{options.map(v=><option value={v} key={v}>{v.replaceAll('_',' ')}</option>)}</select></label>)}</div><label className="jobs-field-label"><input type="checkbox" checked={form.negotiable} onChange={e=>change('negotiable',e.target.checked)}/> Pay is negotiable</label><label className="jobs-field-label">Required certifications (one per line; blank means none recorded)<textarea className="jobs-input jobs-textarea" value={form.certifications.join('\n')} onChange={e=>change('certifications',e.target.value.split('\n'))} onBlur={()=>change('certifications',form.certifications.map(s=>s.trim()).filter(Boolean))}/></label><label className="jobs-field-label"><input type="checkbox" checked={form.isDemo} disabled={job?.isDemo} onChange={e=>change('isDemo',e.target.checked)}/> Clearly labelled demonstration listing (no real recruitment)</label></section>
     <section className="jobs-form-section jobs-verification-source" aria-labelledby="jobs-source"><div className="jobs-section-head"><span className="jobs-section-index">04</span><div><h2 id="jobs-source">Employer & vacancy verification source</h2><p>Internal PESO reference; not shown to citizens. Required before requesting approval.</p></div></div>
      <label className="jobs-label">Where did the vacancy information come from?<textarea className="jobs-input jobs-textarea" rows={3} minLength={12} maxLength={300} value={form.reviewSource} onChange={e=>change("reviewSource",e.target.value)} placeholder="e.g. Employer called PESO desk on Oct 21; vacancy and official contact confirmed with HR"/><span className="jobs-field-help">Record the verification method and reference. Do not enter personal IDs or private contact information.</span></label>
     </section>

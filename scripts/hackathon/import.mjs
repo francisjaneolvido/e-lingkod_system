@@ -1,3 +1,4 @@
+import {vacancyDetails} from '../../demo/b5-fixtures.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
@@ -109,7 +110,7 @@ export async function importFixtures({db,directory,target,baseURL,fault}) {
     }
     for(const fixture of vacancyScenarios){
       const i=fixture.index;
-      const job={title:`[DEMO] ${['Office assistant','Farm worker','Food preparer','Technical assistant'][i%4]} ${String(i+1).padStart(2,'0')}`,employer:`[DEMO] Synthetic Employer ${i+1}`,sector:jobs.SECTORS[i%jobs.SECTORS.length],workType:jobs.WORK_TYPES[i%jobs.WORK_TYPES.length],barangay:barangays[i%barangays.length],location:`Los Baños, Laguna — demo site ${i+1}`,description:'[DEMO] Synthetic opportunity for team testing only. No real recruitment or external applications. Future salary/experience scenarios are fixture annotations only.',skills:[i===15?'Photography':domain.COMMUNITY_SKILLS[i%domain.COMMUNITY_SKILLS.length]],interests:[jobs.INTERESTS[i%jobs.INTERESTS.length]],education:jobs.EDUCATION[i%jobs.EDUCATION.length],contactInfo:'Demonstration only: do not contact or apply externally.',reviewSource:'[DEMO] Synthetic fixture, simulated review only. No actual employer or vacancy verification.',externalUrl:'',expiresAt:''};
+      const job={...vacancyDetails(i),title:`[DEMO] ${['Office assistant','Farm worker','Food preparer','Technical assistant'][i%4]} ${String(i+1).padStart(2,'0')}`,employer:`[DEMO] Synthetic Employer ${i+1}`,sector:jobs.SECTORS[i%jobs.SECTORS.length],workType:jobs.WORK_TYPES[i%jobs.WORK_TYPES.length],barangay:barangays[i%barangays.length],location:`Los Baños, Laguna — demo site ${i+1}`,description:'[DEMO] Synthetic opportunity for team testing only. No real recruitment or external applications. Future salary/experience scenarios are fixture annotations only.',skills:[i===15?'Photography':domain.COMMUNITY_SKILLS[i%domain.COMMUNITY_SKILLS.length]],interests:[jobs.INTERESTS[i%jobs.INTERESTS.length]],education:jobs.EDUCATION[i%jobs.EDUCATION.length],contactInfo:'Demonstration only: do not contact or apply externally.',reviewSource:'[DEMO] Synthetic fixture, simulated review only. No actual employer or vacancy verification.',externalUrl:'',expiresAt:''};
       const name=fixture.key+':create';
       if(!state.completed[name]&&!state.pending&&await prisma.jobOpportunity.count({where:{title:job.title}})){if(!state.conflicts.includes(name)){state.conflicts.push(name);await persist(state);}continue;}
       const created=await step(name,()=>job,payload=>route('jobs','POST',payload));

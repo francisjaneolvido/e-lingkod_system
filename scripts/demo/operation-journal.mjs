@@ -5,6 +5,7 @@ const conflict = () => { throw new Error('Demo operation conflict: original prec
 export async function executeOperation(operation) {
   const { prisma } = await import('../../src/lib/prisma.ts');
   const viewer = await prisma.user.findUniqueOrThrow({ where: { id: operation.actorId } });
+  if(operation.kind==='vacancy-mutation')return (await import('../../src/features/jobs/server/mutations.ts')).mutateOpportunity(operation.payload.id,operation.payload,viewer);
   if (['record-scope', 'assistance-roster'].includes(operation.kind)) {
     const data = await import('../../src/features/census/server/data.ts');
     return operation.kind === 'record-scope' ? data.setRecordScope(viewer, operation.payload) : data.saveAssistanceRoster(viewer, operation.payload);
@@ -31,6 +32,7 @@ export async function executeOperation(operation) {
 async function receipt(operation) {
   const { prisma } = await import('../../src/lib/prisma.ts');
   const { payload: p, actorId, kind } = operation;
+  if(kind==='vacancy-mutation')return prisma.jobMutation.findUnique({where:{actorId_requestKey:{actorId,requestKey:p.requestKey}}});
   if (kind === 'review') return prisma.censusReview.findUnique({ where: { actorId_requestKey: { actorId, requestKey: p.requestKey } } });
   if (kind === 'census-import') { const { validateImport } = await import('../../src/features/census/server/imports.ts'); return prisma.communityImportBatch.findUnique({ where: { fingerprint: validateImport(p).fingerprint } }); }
   if (kind === 'staff-grant') {
@@ -75,7 +77,13 @@ async function assertOwnResult(pending, result, after) {
       for (const key of Object.keys(original)) if (!['role', 'department', 'designation', 'updatedAt'].includes(key) && JSON.stringify(original[key]) !== JSON.stringify(actual[key])) conflict();
       allowed = (table, row) => table === 'user' ? row.id === target.id : table === 'staff_permission' ? row.userId === target.id : table === 'staff_access_audit' && row.id === proof.id;
     }
-  } else if (kind.startsWith('individual')) {
+  } else if(kind==='vacancy-mutation'){
+    const proof=await receipt(pending.operation);if(!proof)conflict();const value=JSON.parse(proof.resultJson);
+    const current=await prisma.jobOpportunity.findUniqueOrThrow({where:{id:value.id}});
+    assert.deepEqual(JSON.parse(JSON.stringify(current)),value.snapshot,'Later vacancy edits preserved; exact operation result required');
+    allowed=(table,row)=>table==='job_opportunity'?row.id===value.id:table==='job_mutation'?row.id===proof.id:table==='job_activity'?row.id===value.activityId:table==='notification'&&value.notificationIds.includes(row.id);
+  }
+  else if (kind.startsWith('individual')) {
     const state = await (await import('../../src/features/community/server/survey-lifecycle.ts')).ownedSurveyState(actorId, p.surveyYear);
     if (state.workspaceVersion !== p.expectedVersion + 1) conflict();
     if (p.status !== 'DRAFT' && state.consentVersion !== p.expectedConsentVersion + 1) conflict();

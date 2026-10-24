@@ -1,11 +1,12 @@
 "use client";
 
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useMemo, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Archive, ArrowRight, ArrowUpRight, BarChart3, BriefcaseBusiness, ClipboardList, Filter, MapPin, Plus, Search, ShieldCheck, X } from "lucide-react";
 import { SECTORS, WORK_LABEL, WORK_TYPES } from "../domain";
 import { displayJobStatus, type JobsDashboardData, type ManagedJob } from "./job-types";
+import {sendPreparedVacancy,VacancyRequestError,type PreparedVacancyRequest} from './vacancy-request';
 import "./jobs-workspace.css";
 
 type Status="ALL"|"PUBLISHED"|"DRAFT"|"PENDING_REVIEW"|"RETURNED"|"CLOSED"|"FILLED"|"ARCHIVED"|"EXPIRED";
@@ -31,10 +32,10 @@ function VacancyReview({job,busy,onSubmit}:{job:ManagedJob;busy:boolean;onSubmit
  const [vacancyVerified,setVacancyVerified]=useState(false);
  const [note,setNote]=useState("");
  return <div className="jobs-review-card">
-  <div className="jobs-review-heading"><ShieldCheck size={20}/><div><strong>Super Admin verification</strong><p>Verify employer identity and the open vacancy through an independent authorized channel before publishing.</p></div></div>
+  <div className="jobs-review-heading"><ShieldCheck size={20}/><div><strong>{job.isDemo?'Demonstration review':'Super Admin verification'}</strong><p>{job.isDemo?'Check this synthetic scenario only; no genuine employer or vacancy verification is claimed.':'Verify employer identity and the open vacancy through an independent authorized channel before publishing.'}</p></div></div>
   <p className="jobs-review-source"><strong>PESO-provided source:</strong> {job.reviewSource||"Not recorded"}</p>
-  <label className="jobs-review-check"><input type="checkbox" checked={employerVerified} onChange={e=>setEmployerVerified(e.target.checked)}/> I confirmed the employer details.</label>
-  <label className="jobs-review-check"><input type="checkbox" checked={vacancyVerified} onChange={e=>setVacancyVerified(e.target.checked)}/> I confirmed this vacancy is genuine and available.</label>
+  <label className="jobs-review-check"><input type="checkbox" checked={employerVerified} onChange={e=>setEmployerVerified(e.target.checked)}/> {job.isDemo?'I checked the synthetic employer scenario (demonstration only).':'I confirmed the employer details.'}</label>
+  <label className="jobs-review-check"><input type="checkbox" checked={vacancyVerified} onChange={e=>setVacancyVerified(e.target.checked)}/> {job.isDemo?'I checked the demonstration vacancy scenario; no real vacancy is claimed.':'I confirmed this vacancy is genuine and available.'}</label>
   <label className="jobs-label">Reviewer remarks / required corrections<textarea maxLength={1000} rows={3} className="jobs-input jobs-textarea" value={note} onChange={e=>setNote(e.target.value)} placeholder="Add a reason when returning for corrections..."/></label>
   <div className="jobs-review-actions"><button disabled={busy||!employerVerified||!vacancyVerified} className="jobs-primary-button" type="button" onClick={()=>onSubmit(job.id,"APPROVE",{employerVerified,vacancyVerified,note})}>Approve & publish</button><button disabled={busy||note.trim().length<20} className="jobs-secondary-button" type="button" onClick={()=>onSubmit(job.id,"RETURN",{note})}>Return for correction</button></div>
   <p className="jobs-field-help">Approval is recorded with your Super Admin identity. Public listings do not show internal verification notes.</p>
@@ -57,7 +58,9 @@ export function JobConsole({data,viewerId,viewerName,asOf,isSuperAdmin,canViewIn
  const [quickView,setQuickView]=useState<QuickView>(()=>initialQuickView(initialView,isSuperAdmin));
  const [search,setSearch]=useState("");const [status,setStatus]=useState<Status>("ALL");const [sector,setSector]=useState("ALL");const [type,setType]=useState("ALL");
  const [busy,setBusy]=useState(false);const [error,setError]=useState("");const [notice,setNotice]=useState(saved?"Opportunity saved successfully.":"");
- const [expanded,setExpanded]=useState<string|null>(null);const [reviewId,setReviewId]=useState<string|null>(null);
+ const [expanded,setExpanded]=useState<string|null>(null);const [reviewJob,setReviewJob]=useState<ManagedJob|null>(null);const reviewId=reviewJob?.id??null;
+ const setReviewId=(id:string|null)=>setReviewJob(id?data.jobs.find(j=>j.id===id)??null:null);
+ const pending=useRef(new Map<string,PreparedVacancyRequest>());
 
  const statusOf=(job:ManagedJob)=>displayJobStatus(job,now);
  const quickMatch=(job:ManagedJob)=>{
@@ -89,11 +92,18 @@ export function JobConsole({data,viewerId,viewerName,asOf,isSuperAdmin,canViewIn
   if(confirmations[act]&&!window.confirm(confirmations[act]))return;
   setBusy(true);setError("");setNotice("");
   try{
-   const response=await fetch(`/api/admin/jobs/${encodeURIComponent(id)}`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:act,...details})});
-   const result=await response.json().catch(()=>({}));if(!response.ok)throw Error(result.error||"Unable to update listing.");
+   const signature=JSON.stringify({act,details});
+   if(!pending.current.has(id)){
+    const version=reviewJob?.id===id?reviewJob.version:data.jobs.find(j=>j.id===id)?.version;
+    if(version===undefined)throw Error('Refresh the vacancy before updating it.');
+    pending.current.set(id,{signature,path:`/api/admin/jobs/${encodeURIComponent(id)}`,method:'PATCH',body:{action:act,expectedVersion:version,requestKey:crypto.randomUUID(),...structuredClone(details)},resultVersion:version+1});
+   }
+   const prepared=pending.current.get(id)!;
+   await sendPreparedVacancy(prepared);pending.current.delete(id);
+   if(prepared.signature!==signature){setNotice('Earlier '+String(prepared.body.action)+' completed. Changed review details or another action were not submitted; review the refreshed vacancy.');setReviewId(null);router.refresh();return;}
    const messages:Record<Action,string>={SUBMIT_REVIEW:"Submitted for Super Admin verification.",APPROVE:"Employer and vacancy approved; listing is now published.",RETURN:"Returned to PESO staff for corrections.",CLOSE:"Vacancy closed.",FILL:"Vacancy marked filled.",ARCHIVE:"Opportunity archived."};
    setNotice(messages[act]);setReviewId(null);router.refresh();
-  }catch(e){setError(e instanceof Error?e.message:"Unable to update listing.");}finally{setBusy(false);}
+  }catch(e){if(e instanceof VacancyRequestError&&e.definitiveRejection)pending.current.delete(id);setError(e instanceof Error?e.message:"Unable to update listing.");}finally{setBusy(false);}
  }
 
  const quickViews:Array<{id:QuickView;label:string;count:number;adminOnly?:boolean}>=[
@@ -106,7 +116,7 @@ export function JobConsole({data,viewerId,viewerName,asOf,isSuperAdmin,canViewIn
  ];
 
  return <div className="jobs-workspace">
-  <header className="jobs-header"><div><span className="jobs-eyebrow">EMPLOYMENT & LIVELIHOOD / PESO</span><h1>Opportunity Management</h1><p>{isSuperAdmin?"Review submitted vacancies, publish verified listings, and monitor their lifecycle.":"Prepare PESO opportunity listings and submit them for Super Admin verification before they become public."} Signed in as {viewerName}.</p><div className="mt-3 flex flex-wrap gap-2">{canViewInsights&&<Link href="/admin/census/analytics" className="jobs-small-button"><BarChart3 size={14}/> Workforce &amp; social analytics</Link>}<Link href="/opportunities" className="jobs-small-button">Citizen view <ArrowUpRight size={13}/></Link></div></div><Link href="/admin/jobs/new" className="jobs-primary-button"><Plus size={17}/> Add opportunity</Link></header>
+  <header className="jobs-header"><div><span className="jobs-eyebrow">EMPLOYMENT & LIVELIHOOD / PESO</span><h1>Opportunity Management</h1><p>{isSuperAdmin?"Review submitted vacancies, publish verified listings, and monitor their lifecycle.":"Prepare PESO opportunity listings and submit them for Super Admin verification before they become public."} Signed in as {viewerName}.</p><div className="mt-3 flex flex-wrap gap-2">{canViewInsights&&<Link href="/admin/census/analytics" className="jobs-small-button"><BarChart3 size={14}/> Workforce &amp; social analytics</Link>}{canViewInsights&&<Link href="/admin/jobs/demand" className="jobs-small-button">Protected employer demand</Link>}<Link href="/opportunities" className="jobs-small-button">Citizen view <ArrowUpRight size={13}/></Link></div></div><Link href="/admin/jobs/new" className="jobs-primary-button"><Plus size={17}/> Add opportunity</Link></header>
 
   <div className="jobs-metrics">
    {[{label:"Published",value:counts.active,icon:BriefcaseBusiness,view:"PUBLISHED" as QuickView},{label:"My work",value:counts.myWork,icon:ClipboardList,view:"MY_WORK" as QuickView},{label:isSuperAdmin?"Needs verification":"For verification",value:counts.pending,icon:ShieldCheck,view:"REVIEW" as QuickView},{label:"Returned to me",value:counts.returned,icon:ClipboardList,view:"RETURNED" as QuickView}].map(metric=><button type="button" onClick={()=>setQuickView(metric.view)} className="jobs-metric text-left" key={metric.label}><div><span>{metric.label}</span><strong>{metric.value}</strong></div><metric.icon aria-hidden size={20}/></button>)}
@@ -126,7 +136,7 @@ export function JobConsole({data,viewerId,viewerName,asOf,isSuperAdmin,canViewIn
     {(search||status!=="ALL"||sector!=="ALL"||type!=="ALL")&&<button type="button" className="jobs-clear-filter" onClick={()=>{setSearch("");setStatus("ALL");setSector("ALL");setType("ALL");}}>Clear filters</button>}
    </div>
 
-   {filtered.length?<><div className="jobs-desktop-table"><table><thead><tr><th>Opportunity</th><th>Type / sector</th><th>Status</th><th>Last updated</th><th className="jobs-actions-cell">Actions</th></tr></thead><tbody>{filtered.map(job=><Fragment key={job.id}><tr><td><div className="jobs-list-title">{job.title}</div><div className="jobs-list-meta"><MapPin size={12}/>{job.employer} · {job.barangay}</div><button className="jobs-text-action" type="button" onClick={()=>setExpanded(expanded===job.id?null:job.id)} aria-expanded={expanded===job.id}>{expanded===job.id?"Hide details":"Quick details"}</button>{expanded===job.id&&<div className="jobs-row-expand"><strong>Requirements:</strong> {job.skills.join(", ")||"Not specified"}<div><strong>Inquiries:</strong> {job.contactInfo}</div>{job.reviewNote&&<div><strong>Last reviewer note:</strong> {job.reviewNote}</div>}</div>}</td><td><div>{WORK_LABEL[job.workType]}</div><span className="jobs-muted">{job.sector}</span></td><td><Badge status={statusOf(job)}/></td><td className="jobs-muted"><DateCell date={job.updatedAt}/></td><td><JobActions job={job} busy={busy} now={now} isSuperAdmin={isSuperAdmin} onAction={action} onReview={id=>setReviewId(reviewId===id?null:id)}/></td></tr>{reviewId===job.id&&isSuperAdmin&&<tr className="jobs-review-row"><td colSpan={5}><VacancyReview job={job} busy={busy} onSubmit={action}/></td></tr>}</Fragment>)}</tbody></table></div>
+   {filtered.length?<><div className="jobs-desktop-table"><table><thead><tr><th>Opportunity</th><th>Type / sector</th><th>Status</th><th>Last updated</th><th className="jobs-actions-cell">Actions</th></tr></thead><tbody>{filtered.map(job=><Fragment key={job.id}><tr><td><div className="jobs-list-title">{job.title}</div><div className="jobs-list-meta"><MapPin size={12}/>{job.employer} · {job.barangay}</div><button className="jobs-text-action" type="button" onClick={()=>setExpanded(expanded===job.id?null:job.id)} aria-expanded={expanded===job.id}>{expanded===job.id?"Hide details":"Quick details"}</button>{expanded===job.id&&<div className="jobs-row-expand"><strong>Requirements:</strong> {job.skills.join(", ")||"Not specified"}<div><strong>Inquiries:</strong> {job.contactInfo}</div>{job.reviewNote&&<div><strong>Last reviewer note:</strong> {job.reviewNote}</div>}</div>}</td><td><div>{WORK_LABEL[job.workType]}</div><span className="jobs-muted">{job.sector}</span></td><td><Badge status={statusOf(job)}/></td><td className="jobs-muted"><DateCell date={job.updatedAt}/></td><td><JobActions job={job} busy={busy} now={now} isSuperAdmin={isSuperAdmin} onAction={action} onReview={id=>setReviewId(reviewId===id?null:id)}/></td></tr>{reviewId===job.id&&isSuperAdmin&&<tr className="jobs-review-row"><td colSpan={5}><VacancyReview job={reviewJob!} busy={busy} onSubmit={action}/></td></tr>}</Fragment>)}</tbody></table></div>
     <div className="jobs-mobile-list">{filtered.map(job=><article className="jobs-mobile-card" key={job.id}><div className="jobs-mobile-card-head"><h3>{job.title}</h3><Badge status={statusOf(job)}/></div><p>{job.employer} · {job.barangay}</p><p>{WORK_LABEL[job.workType]} · {job.sector}</p><div className="jobs-mobile-card-foot"><JobActions job={job} busy={busy} now={now} isSuperAdmin={isSuperAdmin} onAction={action} onReview={id=>setReviewId(reviewId===id?null:id)}/></div>{reviewId===job.id&&isSuperAdmin&&<VacancyReview job={job} busy={busy} onSubmit={action}/>}</article>)}</div></>:<div className="jobs-empty-state"><BriefcaseBusiness size={26}/><h3>No opportunities in this view</h3><p>{data.jobs.length?"Try another workflow view or adjust your filters.":"Create your first draft to start building local opportunities."}</p>{!data.jobs.length&&<Link href="/admin/jobs/new" className="jobs-primary-button"><Plus size={16}/> Add first opportunity</Link>}</div>}
   </section>
 

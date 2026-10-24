@@ -35,7 +35,9 @@
     "hackathon:import": "node scripts/hackathon/run.mjs apply",
     "hackathon:verify": "node scripts/hackathon/run.mjs verify",
     "test:hackathon-import": "node scripts/verify-hackathon-import.mjs",
-    "hackathon:report": "node scripts/hackathon/run.mjs report"
+    "hackathon:report": "node scripts/hackathon/run.mjs report",
+    "test:opportunities": "node scripts/verify-opportunities.mjs",
+    "test:opportunities:browser": "node scripts/verify-census-records.mjs --serve --opportunities"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

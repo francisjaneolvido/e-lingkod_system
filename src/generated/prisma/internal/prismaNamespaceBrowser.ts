@@ -101,7 +101,9 @@ export const ModelName = {
   CensusAssistanceMember: 'CensusAssistanceMember',
   CensusAudit: 'CensusAudit',
   CensusSourceRecord: 'CensusSourceRecord',
-  CensusImportLock: 'CensusImportLock'
+  CensusImportLock: 'CensusImportLock',
+  JobMutation: 'JobMutation',
+  JobRecommendation: 'JobRecommendation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -346,6 +348,17 @@ export const JobOpportunityScalarFieldEnum = {
   skillsJson: 'skillsJson',
   interestsJson: 'interestsJson',
   education: 'education',
+  occupationCategory: 'occupationCategory',
+  employmentSector: 'employmentSector',
+  workArrangement: 'workArrangement',
+  experienceLevel: 'experienceLevel',
+  payMin: 'payMin',
+  payMax: 'payMax',
+  payCurrency: 'payCurrency',
+  payBasis: 'payBasis',
+  negotiable: 'negotiable',
+  certificationsJson: 'certificationsJson',
+  isDemo: 'isDemo',
   contactInfo: 'contactInfo',
   externalUrl: 'externalUrl',
   status: 'status',
@@ -1009,6 +1022,31 @@ export const CensusImportLockScalarFieldEnum = {
 export type CensusImportLockScalarFieldEnum = (typeof CensusImportLockScalarFieldEnum)[keyof typeof CensusImportLockScalarFieldEnum]
 
 
+export const JobMutationScalarFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  jobId: 'jobId',
+  resultJson: 'resultJson',
+  createdAt: 'createdAt'
+} as const
+
+export type JobMutationScalarFieldEnum = (typeof JobMutationScalarFieldEnum)[keyof typeof JobMutationScalarFieldEnum]
+
+
+export const JobRecommendationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  jobId: 'jobId',
+  publicationVersion: 'publicationVersion',
+  notificationId: 'notificationId',
+  createdAt: 'createdAt'
+} as const
+
+export type JobRecommendationScalarFieldEnum = (typeof JobRecommendationScalarFieldEnum)[keyof typeof JobRecommendationScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1204,6 +1242,13 @@ export const JobOpportunityOrderByRelevanceFieldEnum = {
   skillsJson: 'skillsJson',
   interestsJson: 'interestsJson',
   education: 'education',
+  occupationCategory: 'occupationCategory',
+  employmentSector: 'employmentSector',
+  workArrangement: 'workArrangement',
+  experienceLevel: 'experienceLevel',
+  payCurrency: 'payCurrency',
+  payBasis: 'payBasis',
+  certificationsJson: 'certificationsJson',
   contactInfo: 'contactInfo',
   externalUrl: 'externalUrl',
   reviewSource: 'reviewSource',
@@ -1725,4 +1770,26 @@ export const CensusSourceRecordOrderByRelevanceFieldEnum = {
 } as const
 
 export type CensusSourceRecordOrderByRelevanceFieldEnum = (typeof CensusSourceRecordOrderByRelevanceFieldEnum)[keyof typeof CensusSourceRecordOrderByRelevanceFieldEnum]
+
+
+export const JobMutationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  jobId: 'jobId',
+  resultJson: 'resultJson'
+} as const
+
+export type JobMutationOrderByRelevanceFieldEnum = (typeof JobMutationOrderByRelevanceFieldEnum)[keyof typeof JobMutationOrderByRelevanceFieldEnum]
+
+
+export const JobRecommendationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  jobId: 'jobId',
+  notificationId: 'notificationId'
+} as const
+
+export type JobRecommendationOrderByRelevanceFieldEnum = (typeof JobRecommendationOrderByRelevanceFieldEnum)[keyof typeof JobRecommendationOrderByRelevanceFieldEnum]
 
