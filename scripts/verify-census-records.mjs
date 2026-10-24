@@ -20,6 +20,7 @@ try {
       const analyticsSeed = spawnSync(process.execPath, ['tests/helpers/prepare-analytics-browser.mjs'], { env: browserEnv, stdio: 'inherit', windowsHide: true });
       if (analyticsSeed.status !== 0) throw new Error('B4 browser fixture failed');
     }
+    if(process.argv.includes('--opportunities')){const seeded=spawnSync(process.execPath,['tests/helpers/prepare-opportunities-browser.mjs'],{env:browserEnv,stdio:'inherit',windowsHide:true});if(seeded.status!==0)throw Error('B5 browser fixture failed');}
     const child = spawn(process.execPath, ['node_modules/next/dist/bin/next', 'dev', '--hostname', 'localhost', '--port', '3103'], { env: browserEnv, stdio: 'inherit', windowsHide: true });
     const stop = () => { if (child.pid) spawnSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore', windowsHide: true }); };
     process.stdin.resume(); process.stdin.once('data', stop); process.once('SIGINT', stop); process.once('SIGTERM', stop);

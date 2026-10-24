@@ -15,13 +15,14 @@ const legacySpes=read("src/app/admin/jobs/legacy-spes/page.tsx");
 test("new and edit routes enforce server-side JOBS permission",()=>{
  assert.match(create,/requireModulePage\("\/admin\/jobs\/new","JOBS"\)/);
  assert.match(edit,/requireModulePage\("\/admin\/jobs","JOBS"\)/);
- assert.match(edit,/prisma\.jobOpportunity\.findUnique/);
+ assert.match(edit,/prisma\.jobOpportunity\.findFirst/);
  assert.match(edit,/if\(!row\)notFound\(\)/);
 });
 test("creation and editing use existing verified server APIs",()=>{
- assert.match(editor,/"\/api\/admin\/jobs"/);
- assert.match(editor,/`\/api\/admin\/jobs\/\$\{job\.id\}`/);
- assert.match(editor,/action:"EDIT"/);
+ assert.match(editor,/path:['"]\/api\/admin\/jobs['"]/);
+ assert.match(editor,/`\/api\/admin\/jobs\/\$\{record\.current\.id\}`/);
+ assert.match(editor,/sendPreparedVacancy\(prepared\)/);
+ assert.match(editor,/action:["\']EDIT["\']/);
  assert.match(editor,/router\.push\("\/admin\/jobs\?updated=1"\)/);
 });
 test("list no longer renders lengthy inline editor or duplicate save buttons",()=>{

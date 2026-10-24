@@ -45,20 +45,14 @@ test('closed or filled vacancies cannot be republished directly',()=>{
   assert.throws(()=>validateJobTransition('SUBMIT_REVIEW','FILLED',false));
   assert.throws(()=>validateJobTransition('APPROVE','CLOSED',true));
 });
-test('legacy direct PUBLISH mutation removed, identity and CAS checks remain server-side',()=>{
-  const src=read('src/app/api/admin/jobs/[id]/route.ts');
-  assert.match(src,/requireApiViewer\(request,"JOBS"\)/);
-  assert.match(src,/validateJobTransition\(jobAction,job.status as JobStatus,viewer.role==="ADMIN"\)/);
-  assert.match(src,/version:job.version,status:job.status/);
-  assert.doesNotMatch(src,/"PUBLISH"/);
+test("legacy direct PUBLISH mutation removed, identity and CAS checks remain server-side",()=>{
+const route=read('src/app/api/admin/jobs/[id]/route.ts'),src=read('src/features/jobs/server/mutations.ts');assert.match(route,/requireApiViewer\(request,'JOBS'\)/);assert.match(src,/validateJobTransition\(action,job.status as JobStatus,viewer.role==='ADMIN'\)/);assert.match(src,/version:expected as number/);assert.match(src,/createdById!==viewer.id/);assert.doesNotMatch(src,/action==='PUBLISH'/);assert.match(src,/expectedVersion/);
 });
-test('employer verification source private to PESO; citizen only sees published jobs',()=>{
-  const data=read('src/features/jobs/server/data.ts');
-  assert.match(data,/where:\{status:"PUBLISHED"/);
-  assert.doesNotMatch(data.slice(0,data.indexOf('export async function adminJobData')),/reviewSource/);
-  const api=read('src/app/api/admin/jobs/route.ts');
-  assert.match(api,/reviewSource:value.reviewSource/);
+
+test("employer verification source private to PESO; citizen only sees published jobs",()=>{
+const src=read('src/features/jobs/server/opportunities.ts');const selection=src.slice(src.indexOf('publicOpportunitySelect='),src.indexOf('satisfies Prisma.JobOpportunitySelect'));assert.doesNotMatch(selection,/reviewSource|reviewNote|reviewedById|createdById/);assert.match(src,/status:'PUBLISHED'/);assert.match(src,/expiresAt:\{gt:now\}/);assert.match(read('src/features/jobs/server/mutations.ts'),/authorized employer\/vacancy source/);
 });
+
 test('additive schema and migration preserve civic reports and legacy published listings',()=>{
   const schema=read('prisma/schema.prisma');
   const sql=read('prisma/migrations/20261021030000_job_vacancy_verification/migration.sql');

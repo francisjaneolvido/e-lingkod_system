@@ -185,5 +185,10 @@
       "staff.02@example.test": 5
     },
     "expectationProvenance": "Individual fixtures index0–67 retain submitted2026 answers; acquired qualifications every3rd index and training every4th. Historical fixtures indices0/10/20/30/40/50/60/70. Existing approved expected counts define workforce/source outcomes; no SPES table fixture is seeded. Optional matching/program choices and later drafts do not reduce aggregated-statistics participation. B3 fixtures explicitly grant Staff01 all canonical barangays and Staff02 Bambang; roster locations do not define their record scopes."
+  },
+  "b5": {
+    "fixtureVersion": "elb-b5-fixtures-v1",
+    "managedVacancies": 28,
+    "allClearlyDemonstrations": true
   }
 }

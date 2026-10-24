@@ -11,7 +11,7 @@ vm.runInNewContext(`(function(require,module,exports){${compiled}\n})`,{URL}) ((
   if(name==="@/features/civic/validation") return {CivicError:TestCivicError};
   throw new Error(`Unexpected import: ${name}`);
 },output,output.exports);
-const {SKILLS,INTERESTS,parseJob,parseProfile,parseSpesCsv,scoreMatch}=output.exports;
+const {parseJob,parseProfile,parseSpesCsv,scoreMatch}=output.exports;
 const job={title:"Office Assistant",employer:"Example Employer",sector:"Office & admin",workType:"FULL_TIME",barangay:"Poblacion",location:"Town Center",description:"Support data entry and office documentation tasks for the local team.",skills:["Data entry","Microsoft Excel"],interests:["Office & admin"],education:"SENIOR_HIGH",contactInfo:"Apply through the verified employer's public recruitment desk.",externalUrl:"https://example.org/jobs",expiresAt:""};
 test("job listing validation protects outgoing URLs and structured skills",()=>{
  const parsed=parseJob(job);
@@ -52,11 +52,11 @@ test("V10 APIs keep roles and privacy on the server",()=>{
  const imp=fs.readFileSync("src/app/api/admin/jobs/import/route.ts","utf8");
  const prof=fs.readFileSync("src/app/api/jobs/profile/route.ts","utf8");
  const source=fs.readFileSync("src/features/jobs/server/data.ts","utf8");
- assert.match(api,/requireApiViewer\(request,"JOBS"\)/);
+ assert.match(api,/requireApiViewer\(request,["\']JOBS["\']\)/);
  assert.match(imp,/parseSpesCsv/);
  assert.match(prof,/viewer\.role!=="CITIZEN"/);
  assert.match(prof,/userId:viewer\.id/);
- assert.match(source,/status:"PUBLISHED"/);
+ assert.match(source,/status:\s*["\']PUBLISHED["\']/);
  assert.match(source,/expiresAt/);
 });
 test("V10 schema and migration preserve other modules and create independent tables",()=>{

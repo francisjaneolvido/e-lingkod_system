@@ -38,11 +38,13 @@ export async function notifyModuleStaff(module: StaffModule, input: Omit<Notific
 }
 
 export async function notificationFeed(userId: string, take = 20) {
-  const [items, unread] = await Promise.all([
-    prisma.notification.findMany({ where: { userId }, orderBy: { createdAt: "desc" }, take, select: { id: true, module: true, type: true, title: true, message: true, href: true, readAt: true, createdAt: true } }),
-    prisma.notification.count({ where: { userId, readAt: null } }),
-  ]);
-  return { unread, items: items.map(item => ({ ...item, createdAt: item.createdAt.toISOString(), readAt: item.readAt?.toISOString() ?? null })) };
+ return prisma.$transaction(async tx=>{
+  const {visibleRecommendationIds}=await import('@/features/jobs/server/recommendations');
+  const allowed=await visibleRecommendationIds(tx,userId);
+  const where={userId,OR:[{type:{not:'JOB_MATCH'}},{id:{in:allowed}}]};
+  const [items,unread]=await Promise.all([tx.notification.findMany({where,orderBy:{createdAt:'desc'},take,select:{id:true,module:true,type:true,title:true,message:true,href:true,readAt:true,createdAt:true}}),tx.notification.count({where:{...where,readAt:null}})]);
+  return {unread,items:items.map(item=>({...item,createdAt:item.createdAt.toISOString(),readAt:item.readAt?.toISOString()??null}))};
+ },{isolationLevel:'RepeatableRead'});
 }
 
 export async function markNotificationRead(userId: string, id?: string) {

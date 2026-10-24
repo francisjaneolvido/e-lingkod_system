@@ -1,3 +1,5 @@
+import {fixtureIdentity} from './fixture-identity.mjs';
+import {vacancyDetails} from '../../demo/b5-fixtures.mjs';
 import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
@@ -15,7 +17,8 @@ export async function setup(config) {
   try {
     const [lock] = await db.query("SELECT GET_LOCK('elb_demo_setup_v1',0) AS acquired");
     if (Number(lock.acquired) !== 1) throw new Error('Another demo setup is active; no records changed.');
-    const fixtureDigest = digest(fs.readdirSync('demo/fixtures').sort().map(name => [name, fs.readFileSync(`demo/fixtures/${name}`, 'utf8')]));
+    const fixtureFiles=fs.readdirSync('demo/fixtures').sort().map(name=>[name,fs.readFileSync('demo/fixtures/'+name,'utf8')]);
+    const fixtureDigest=digest(fixtureFiles.map(([name,text])=>[name,text.replace(/\r\n/g,'\n')]));
     let state = await metadata(db);
     if (!state) {
       // An interrupted migration can be resumed only if no application data exists.
@@ -33,10 +36,10 @@ export async function setup(config) {
     state = await upgradeDemo(config, db, state);
     if (process.argv.includes('--migrate-only')) { console.log('Demo migrations complete; fixtures/manual records preserved.'); return; }
     if (state.version !== datasetVersion) throw new Error('Demo fixture version conflicts; no records were replaced.');
-    if (state.fixtureDigest && state.fixtureDigest !== fixtureDigest) throw new Error('Fixture definitions changed since setup. Existing records preserved; use an explicitly versioned dataset upgrade.');
+    if(state.fixtureDigest&&state.fixtureDigest!==fixtureDigest){const proof=fixtureIdentity(fixtureFiles.map(([n,t])=>[n,Buffer.from(t)]),state.fixtureDigest,'strings');if(!proof.proven||state.fingerprint!==await fingerprint(db))throw new Error('Fixture definitions changed since setup. Existing records preserved; explicit upgrade required.');state.fixtureDigest=fixtureDigest;state.fixtureTransportProof={previous:proof.previous,canonical:fixtureDigest,method:'Proven LF/CRLF-only transport; no definitions adopted'};await saveMetadata(db,state);}
     // Upgrade the initial DEMO-1 local checkpoint without touching application rows.
     if (!state.fixtureDigest) { if (state.fingerprint !== await fingerprint(db)) throw new Error('Checkpoint upgrade conflicts with manual edits.'); state.fixtureDigest = fixtureDigest; await saveMetadata(db, state); }
-    if (state.ready) { await assertReady(db); if (state.b3FixtureVersion === 'elb-b3-fixtures-v1') { console.log('Demo dataset already complete: no data/passwords changed.'); return; } state.ready = false; await saveMetadata(db, state); }
+    if (state.ready) { await assertReady(db); if (state.b3FixtureVersion === 'elb-b3-fixtures-v1' && state.b5FixtureVersion === 'elb-b5-fixtures-v1') { console.log('Demo dataset already complete: no data/passwords changed.'); return; } state.ready = false; await saveMetadata(db, state); }
     if (!state.pending && state.fingerprint !== await fingerprint(db)) throw new Error('Demo checkpoint conflicts with manual edits; refusing to overwrite.');
     async function step(name, action) {
       if (Object.hasOwn(state.completed, name)) return state.completed[name];
@@ -150,7 +153,7 @@ export async function setup(config) {
     const jobs = await import('../../src/features/jobs/domain.ts');
     for (const fixture of vacancyScenarios) {
       const i = fixture.index;
-      const job = { title: `[DEMO] ${['Office assistant', 'Farm worker', 'Food preparer', 'Technical assistant'][i % 4]} ${String(i + 1).padStart(2, '0')}`, employer: `[DEMO] Synthetic Employer ${i + 1}`, sector: jobs.SECTORS[i % jobs.SECTORS.length], workType: jobs.WORK_TYPES[i % jobs.WORK_TYPES.length], barangay: LOS_BANOS_BARANGAYS[i % LOS_BANOS_BARANGAYS.length], location: `Los Baños, Laguna — demo site ${i + 1}`, description: '[DEMO] Synthetic opportunity for team testing only. No real recruitment or external applications. Future salary/experience scenarios are fixture annotations only.', skills: [i === 15 ? 'Photography' : domain.COMMUNITY_SKILLS[i % domain.COMMUNITY_SKILLS.length]], interests: [jobs.INTERESTS[i % jobs.INTERESTS.length]], education: jobs.EDUCATION[i % jobs.EDUCATION.length], contactInfo: 'Demonstration only: do not contact or apply externally.', reviewSource: '[DEMO] Synthetic fixture, simulated review only. No actual employer or vacancy verification.', externalUrl: '', expiresAt: '' };
+      const job = { ...vacancyDetails(i), title: `[DEMO] ${['Office assistant', 'Farm worker', 'Food preparer', 'Technical assistant'][i % 4]} ${String(i + 1).padStart(2, '0')}`, employer: `[DEMO] Synthetic Employer ${i + 1}`, sector: jobs.SECTORS[i % jobs.SECTORS.length], workType: jobs.WORK_TYPES[i % jobs.WORK_TYPES.length], barangay: LOS_BANOS_BARANGAYS[i % LOS_BANOS_BARANGAYS.length], location: `Los Baños, Laguna — demo site ${i + 1}`, description: '[DEMO] Synthetic opportunity for team testing only. No real recruitment or external applications. Future salary/experience scenarios are fixture annotations only.', skills: [i === 15 ? 'Photography' : domain.COMMUNITY_SKILLS[i % domain.COMMUNITY_SKILLS.length]], interests: [jobs.INTERESTS[i % jobs.INTERESTS.length]], education: jobs.EDUCATION[i % jobs.EDUCATION.length], contactInfo: 'Demonstration only: do not contact or apply externally.', reviewSource: '[DEMO] Synthetic fixture, simulated review only. No actual employer or vacancy verification.', externalUrl: '', expiresAt: '' };
       const created = await step(`${fixture.key}:create`, async () => {
         const existing = await prisma.jobOpportunity.findMany({ where: { title: job.title } });
         if (existing.length > 1) throw new Error('Duplicate demo vacancy conflict');
@@ -184,10 +187,12 @@ export async function setup(config) {
       const result = await response.json(); if (!response.ok) throw new Error(`Demo import: ${response.status} ${JSON.stringify(result)}`); return result;
     });
     await populateB3(db, state);
+    await (await import('./b5-fixtures.mjs')).populateB5(db,state);
     const { counts, writeAccounts } = await import('./verify.mjs');
     await writeAccounts(prisma);
     const actual = await counts(prisma);
-    fs.writeFileSync('demo/expected-counts.json', JSON.stringify({ datasetVersion, referenceYear, counts: actual }, null, 2) + '\n');
+    const earlier=fs.existsSync('demo/expected-counts.json')?JSON.parse(fs.readFileSync('demo/expected-counts.json','utf8')):{};
+    fs.writeFileSync('demo/expected-counts.json', JSON.stringify({datasetVersion,referenceYear,counts:actual,...(earlier.analytics?{analytics:earlier.analytics}:{}),b5:{fixtureVersion:'elb-b5-fixtures-v1',managedVacancies:28,allClearlyDemonstrations:true}},null,2)+'\n');
     state.ready = true; state.fingerprint = await fingerprint(db); await saveMetadata(db, state);
     console.log('Demo dataset complete. Primary database retained.');
   } finally { await db.query("SELECT RELEASE_LOCK('elb_demo_setup_v1')"); await db.end(); }

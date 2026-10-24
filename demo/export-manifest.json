@@ -1,8 +1,8 @@
 {
   "datasetVersion": "elb-demo-2026-v1",
   "sourceDatabase": "e_lingkod_bayan_demo",
-  "dataFingerprint": "c755de29f058c86b6bbebfe299102a64a9b8738484961f3f57d1d341d279cd0c",
-  "sqlSha256": "a00e812b8fe7fa363e1163e52ab0997da87e0159b5c4ccd2e4622feafc1f4dac",
+  "dataFingerprint": "8a02252f80e62a155421dcb91cfbc6bd04df238682f2a50a75b640b46a71a671",
+  "sqlSha256": "574c2ace33c51f67f1089a088f3efb4ac99c09d84e1cc97adf130a523948ff10",
   "tables": [
     {
       "table": "_elb_demo_meta",
@@ -10,7 +10,7 @@
     },
     {
       "table": "_prisma_migrations",
-      "rows": 24
+      "rows": 25
     },
     {
       "table": "account",
@@ -118,11 +118,19 @@
     },
     {
       "table": "job_activity",
-      "rows": 80
+      "rows": 164
+    },
+    {
+      "table": "job_mutation",
+      "rows": 84
     },
     {
       "table": "job_opportunity",
       "rows": 28
+    },
+    {
+      "table": "job_recommendation",
+      "rows": 0
     },
     {
       "table": "jobseeker_profile",
@@ -130,7 +138,7 @@
     },
     {
       "table": "notification",
-      "rows": 126
+      "rows": 256
     },
     {
       "table": "report_photo",

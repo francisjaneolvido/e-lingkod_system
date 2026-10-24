@@ -296,3 +296,13 @@ export type CensusSourceRecord = Prisma.CensusSourceRecordModel
  * 
  */
 export type CensusImportLock = Prisma.CensusImportLockModel
+/**
+ * Model JobMutation
+ * 
+ */
+export type JobMutation = Prisma.JobMutationModel
+/**
+ * Model JobRecommendation
+ * 
+ */
+export type JobRecommendation = Prisma.JobRecommendationModel

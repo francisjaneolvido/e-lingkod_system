@@ -280,6 +280,8 @@ export type UserWhereInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackListRelationFilter
   jobseekerProfile?: Prisma.XOR<Prisma.JobseekerProfileNullableScalarRelationFilter, Prisma.JobseekerProfileWhereInput> | null
   postedJobs?: Prisma.JobOpportunityListRelationFilter
+  jobMutations?: Prisma.JobMutationListRelationFilter
+  jobRecommendations?: Prisma.JobRecommendationListRelationFilter
   jobChanges?: Prisma.JobActivityListRelationFilter
   reviewedJobs?: Prisma.JobOpportunityListRelationFilter
   spesImports?: Prisma.SpesImportBatchListRelationFilter
@@ -340,6 +342,8 @@ export type UserOrderByWithRelationInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackOrderByRelationAggregateInput
   jobseekerProfile?: Prisma.JobseekerProfileOrderByWithRelationInput
   postedJobs?: Prisma.JobOpportunityOrderByRelationAggregateInput
+  jobMutations?: Prisma.JobMutationOrderByRelationAggregateInput
+  jobRecommendations?: Prisma.JobRecommendationOrderByRelationAggregateInput
   jobChanges?: Prisma.JobActivityOrderByRelationAggregateInput
   reviewedJobs?: Prisma.JobOpportunityOrderByRelationAggregateInput
   spesImports?: Prisma.SpesImportBatchOrderByRelationAggregateInput
@@ -404,6 +408,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackListRelationFilter
   jobseekerProfile?: Prisma.XOR<Prisma.JobseekerProfileNullableScalarRelationFilter, Prisma.JobseekerProfileWhereInput> | null
   postedJobs?: Prisma.JobOpportunityListRelationFilter
+  jobMutations?: Prisma.JobMutationListRelationFilter
+  jobRecommendations?: Prisma.JobRecommendationListRelationFilter
   jobChanges?: Prisma.JobActivityListRelationFilter
   reviewedJobs?: Prisma.JobOpportunityListRelationFilter
   spesImports?: Prisma.SpesImportBatchListRelationFilter
@@ -506,6 +512,8 @@ export type UserCreateInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -566,6 +574,8 @@ export type UserUncheckedCreateInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -626,6 +636,8 @@ export type UserUpdateInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -686,6 +698,8 @@ export type UserUncheckedUpdateInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -1458,6 +1472,34 @@ export type UserUpdateOneRequiredWithoutCensusAuditsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCensusAuditsInput, Prisma.UserUpdateWithoutCensusAuditsInput>, Prisma.UserUncheckedUpdateWithoutCensusAuditsInput>
 }
 
+export type UserCreateNestedOneWithoutJobMutationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJobMutationsInput, Prisma.UserUncheckedCreateWithoutJobMutationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobMutationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutJobMutationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJobMutationsInput, Prisma.UserUncheckedCreateWithoutJobMutationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobMutationsInput
+  upsert?: Prisma.UserUpsertWithoutJobMutationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutJobMutationsInput, Prisma.UserUpdateWithoutJobMutationsInput>, Prisma.UserUncheckedUpdateWithoutJobMutationsInput>
+}
+
+export type UserCreateNestedOneWithoutJobRecommendationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJobRecommendationsInput, Prisma.UserUncheckedCreateWithoutJobRecommendationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobRecommendationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutJobRecommendationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJobRecommendationsInput, Prisma.UserUncheckedCreateWithoutJobRecommendationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobRecommendationsInput
+  upsert?: Prisma.UserUpsertWithoutJobRecommendationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutJobRecommendationsInput, Prisma.UserUpdateWithoutJobRecommendationsInput>, Prisma.UserUncheckedUpdateWithoutJobRecommendationsInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id: string
   name: string
@@ -1491,6 +1533,8 @@ export type UserCreateWithoutSessionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -1550,6 +1594,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -1625,6 +1671,8 @@ export type UserUpdateWithoutSessionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -1684,6 +1732,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -1743,6 +1793,8 @@ export type UserCreateWithoutAccountsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -1802,6 +1854,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -1877,6 +1931,8 @@ export type UserUpdateWithoutAccountsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -1936,6 +1992,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -1995,6 +2053,8 @@ export type UserCreateWithoutReportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -2054,6 +2114,8 @@ export type UserUncheckedCreateWithoutReportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -2118,6 +2180,8 @@ export type UserCreateWithoutAssignedCivicReportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -2177,6 +2241,8 @@ export type UserUncheckedCreateWithoutAssignedCivicReportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -2252,6 +2318,8 @@ export type UserUpdateWithoutReportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -2311,6 +2379,8 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -2381,6 +2451,8 @@ export type UserUpdateWithoutAssignedCivicReportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -2440,6 +2512,8 @@ export type UserUncheckedUpdateWithoutAssignedCivicReportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -2499,6 +2573,8 @@ export type UserCreateWithoutReportUpdatesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -2558,6 +2634,8 @@ export type UserUncheckedCreateWithoutReportUpdatesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -2633,6 +2711,8 @@ export type UserUpdateWithoutReportUpdatesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -2692,6 +2772,8 @@ export type UserUncheckedUpdateWithoutReportUpdatesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -2751,6 +2833,8 @@ export type UserCreateWithoutStaffPermissionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -2810,6 +2894,8 @@ export type UserUncheckedCreateWithoutStaffPermissionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -2885,6 +2971,8 @@ export type UserUpdateWithoutStaffPermissionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -2944,6 +3032,8 @@ export type UserUncheckedUpdateWithoutStaffPermissionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -3003,6 +3093,8 @@ export type UserCreateWithoutStaffChangesMadeInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -3062,6 +3154,8 @@ export type UserUncheckedCreateWithoutStaffChangesMadeInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -3126,6 +3220,8 @@ export type UserCreateWithoutStaffChangesReceivedInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -3185,6 +3281,8 @@ export type UserUncheckedCreateWithoutStaffChangesReceivedInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -3260,6 +3358,8 @@ export type UserUpdateWithoutStaffChangesMadeInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -3319,6 +3419,8 @@ export type UserUncheckedUpdateWithoutStaffChangesMadeInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -3389,6 +3491,8 @@ export type UserUpdateWithoutStaffChangesReceivedInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -3448,6 +3552,8 @@ export type UserUncheckedUpdateWithoutStaffChangesReceivedInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -3507,6 +3613,8 @@ export type UserCreateWithoutIssuedStaffInvitesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -3566,6 +3674,8 @@ export type UserUncheckedCreateWithoutIssuedStaffInvitesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -3641,6 +3751,8 @@ export type UserUpdateWithoutIssuedStaffInvitesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -3700,6 +3812,8 @@ export type UserUncheckedUpdateWithoutIssuedStaffInvitesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -3759,6 +3873,8 @@ export type UserCreateWithoutResolutionSubmissionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -3818,6 +3934,8 @@ export type UserUncheckedCreateWithoutResolutionSubmissionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -3882,6 +4000,8 @@ export type UserCreateWithoutResolutionReviewsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -3941,6 +4061,8 @@ export type UserUncheckedCreateWithoutResolutionReviewsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -4016,6 +4138,8 @@ export type UserUpdateWithoutResolutionSubmissionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -4075,6 +4199,8 @@ export type UserUncheckedUpdateWithoutResolutionSubmissionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -4145,6 +4271,8 @@ export type UserUpdateWithoutResolutionReviewsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -4204,6 +4332,8 @@ export type UserUncheckedUpdateWithoutResolutionReviewsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -4263,6 +4393,8 @@ export type UserCreateWithoutCitizenFeedbacksInput = {
   issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -4322,6 +4454,8 @@ export type UserUncheckedCreateWithoutCitizenFeedbacksInput = {
   issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -4397,6 +4531,8 @@ export type UserUpdateWithoutCitizenFeedbacksInput = {
   issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -4456,6 +4592,8 @@ export type UserUncheckedUpdateWithoutCitizenFeedbacksInput = {
   issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -4516,6 +4654,8 @@ export type UserCreateWithoutReviewedJobsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
@@ -4575,6 +4715,8 @@ export type UserUncheckedCreateWithoutReviewedJobsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
@@ -4638,6 +4780,8 @@ export type UserCreateWithoutPostedJobsInput = {
   issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -4697,6 +4841,8 @@ export type UserUncheckedCreateWithoutPostedJobsInput = {
   issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -4773,6 +4919,8 @@ export type UserUpdateWithoutReviewedJobsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
@@ -4832,6 +4980,8 @@ export type UserUncheckedUpdateWithoutReviewedJobsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
@@ -4901,6 +5051,8 @@ export type UserUpdateWithoutPostedJobsInput = {
   issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -4960,6 +5112,8 @@ export type UserUncheckedUpdateWithoutPostedJobsInput = {
   issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -5019,6 +5173,8 @@ export type UserCreateWithoutJobseekerProfileInput = {
   issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -5078,6 +5234,8 @@ export type UserUncheckedCreateWithoutJobseekerProfileInput = {
   issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -5153,6 +5311,8 @@ export type UserUpdateWithoutJobseekerProfileInput = {
   issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -5212,6 +5372,8 @@ export type UserUncheckedUpdateWithoutJobseekerProfileInput = {
   issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -5272,6 +5434,8 @@ export type UserCreateWithoutSpesImportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
@@ -5331,6 +5495,8 @@ export type UserUncheckedCreateWithoutSpesImportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
@@ -5406,6 +5572,8 @@ export type UserUpdateWithoutSpesImportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
@@ -5465,6 +5633,8 @@ export type UserUncheckedUpdateWithoutSpesImportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
@@ -5524,6 +5694,8 @@ export type UserCreateWithoutSpesImportEventsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -5583,6 +5755,8 @@ export type UserUncheckedCreateWithoutSpesImportEventsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -5658,6 +5832,8 @@ export type UserUpdateWithoutSpesImportEventsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -5717,6 +5893,8 @@ export type UserUncheckedUpdateWithoutSpesImportEventsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -5776,6 +5954,8 @@ export type UserCreateWithoutJobChangesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
@@ -5835,6 +6015,8 @@ export type UserUncheckedCreateWithoutJobChangesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
@@ -5910,6 +6092,8 @@ export type UserUpdateWithoutJobChangesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
@@ -5969,6 +6153,8 @@ export type UserUncheckedUpdateWithoutJobChangesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
   spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
@@ -6028,6 +6214,8 @@ export type UserCreateWithoutCommunitySurveysInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -6087,6 +6275,8 @@ export type UserUncheckedCreateWithoutCommunitySurveysInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -6162,6 +6352,8 @@ export type UserUpdateWithoutCommunitySurveysInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -6221,6 +6413,8 @@ export type UserUncheckedUpdateWithoutCommunitySurveysInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -6280,6 +6474,8 @@ export type UserCreateWithoutCommunityImportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -6339,6 +6535,8 @@ export type UserUncheckedCreateWithoutCommunityImportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -6414,6 +6612,8 @@ export type UserUpdateWithoutCommunityImportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -6473,6 +6673,8 @@ export type UserUncheckedUpdateWithoutCommunityImportsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -6532,6 +6734,8 @@ export type UserCreateWithoutServiceRequestsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -6591,6 +6795,8 @@ export type UserUncheckedCreateWithoutServiceRequestsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -6655,6 +6861,8 @@ export type UserCreateWithoutAssignedServiceRequestsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -6714,6 +6922,8 @@ export type UserUncheckedCreateWithoutAssignedServiceRequestsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -6778,6 +6988,8 @@ export type UserCreateWithoutApprovedServiceReleasesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -6837,6 +7049,8 @@ export type UserUncheckedCreateWithoutApprovedServiceReleasesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -6912,6 +7126,8 @@ export type UserUpdateWithoutServiceRequestsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -6971,6 +7187,8 @@ export type UserUncheckedUpdateWithoutServiceRequestsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -7041,6 +7259,8 @@ export type UserUpdateWithoutAssignedServiceRequestsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -7100,6 +7320,8 @@ export type UserUncheckedUpdateWithoutAssignedServiceRequestsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -7170,6 +7392,8 @@ export type UserUpdateWithoutApprovedServiceReleasesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -7229,6 +7453,8 @@ export type UserUncheckedUpdateWithoutApprovedServiceReleasesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -7288,6 +7514,8 @@ export type UserCreateWithoutVerifiedServiceDocumentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -7347,6 +7575,8 @@ export type UserUncheckedCreateWithoutVerifiedServiceDocumentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -7422,6 +7652,8 @@ export type UserUpdateWithoutVerifiedServiceDocumentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -7481,6 +7713,8 @@ export type UserUncheckedUpdateWithoutVerifiedServiceDocumentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -7540,6 +7774,8 @@ export type UserCreateWithoutServiceRequestEventsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -7599,6 +7835,8 @@ export type UserUncheckedCreateWithoutServiceRequestEventsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -7674,6 +7912,8 @@ export type UserUpdateWithoutServiceRequestEventsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -7733,6 +7973,8 @@ export type UserUncheckedUpdateWithoutServiceRequestEventsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -7792,6 +8034,8 @@ export type UserCreateWithoutProposedServiceAppointmentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -7851,6 +8095,8 @@ export type UserUncheckedCreateWithoutProposedServiceAppointmentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -7926,6 +8172,8 @@ export type UserUpdateWithoutProposedServiceAppointmentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -7985,6 +8233,8 @@ export type UserUncheckedUpdateWithoutProposedServiceAppointmentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -8044,6 +8294,8 @@ export type UserCreateWithoutProposedServicePickupSlotsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -8103,6 +8355,8 @@ export type UserUncheckedCreateWithoutProposedServicePickupSlotsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -8178,6 +8432,8 @@ export type UserUpdateWithoutProposedServicePickupSlotsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -8237,6 +8493,8 @@ export type UserUncheckedUpdateWithoutProposedServicePickupSlotsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -8296,6 +8554,8 @@ export type UserCreateWithoutNotificationsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -8355,6 +8615,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -8430,6 +8692,8 @@ export type UserUpdateWithoutNotificationsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -8489,6 +8753,8 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -8548,6 +8814,8 @@ export type UserCreateWithoutWorkAssignmentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -8607,6 +8875,8 @@ export type UserUncheckedCreateWithoutWorkAssignmentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -8682,6 +8952,8 @@ export type UserUpdateWithoutWorkAssignmentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -8741,6 +9013,8 @@ export type UserUncheckedUpdateWithoutWorkAssignmentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -8800,6 +9074,8 @@ export type UserCreateWithoutCreatedServiceDefinitionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -8859,6 +9135,8 @@ export type UserUncheckedCreateWithoutCreatedServiceDefinitionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -8934,6 +9212,8 @@ export type UserUpdateWithoutCreatedServiceDefinitionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -8993,6 +9273,8 @@ export type UserUncheckedUpdateWithoutCreatedServiceDefinitionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -9052,6 +9334,8 @@ export type UserCreateWithoutServiceDefinitionAuditsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -9111,6 +9395,8 @@ export type UserUncheckedCreateWithoutServiceDefinitionAuditsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -9186,6 +9472,8 @@ export type UserUpdateWithoutServiceDefinitionAuditsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -9245,6 +9533,8 @@ export type UserUncheckedUpdateWithoutServiceDefinitionAuditsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -9304,6 +9594,8 @@ export type UserCreateWithoutSurveyWorkspacesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -9363,6 +9655,8 @@ export type UserUncheckedCreateWithoutSurveyWorkspacesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -9438,6 +9732,8 @@ export type UserUpdateWithoutSurveyWorkspacesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -9497,6 +9793,8 @@ export type UserUncheckedUpdateWithoutSurveyWorkspacesInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -9556,6 +9854,8 @@ export type UserCreateWithoutSurveyRevisionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -9615,6 +9915,8 @@ export type UserUncheckedCreateWithoutSurveyRevisionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -9679,6 +9981,8 @@ export type UserCreateWithoutAuthoredSurveyRevisionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -9738,6 +10042,8 @@ export type UserUncheckedCreateWithoutAuthoredSurveyRevisionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -9813,6 +10119,8 @@ export type UserUpdateWithoutSurveyRevisionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -9872,6 +10180,8 @@ export type UserUncheckedUpdateWithoutSurveyRevisionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -9942,6 +10252,8 @@ export type UserUpdateWithoutAuthoredSurveyRevisionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -10001,6 +10313,8 @@ export type UserUncheckedUpdateWithoutAuthoredSurveyRevisionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -10060,6 +10374,8 @@ export type UserCreateWithoutCitizenProfileConsentInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -10119,6 +10435,8 @@ export type UserUncheckedCreateWithoutCitizenProfileConsentInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -10194,6 +10512,8 @@ export type UserUpdateWithoutCitizenProfileConsentInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -10253,6 +10573,8 @@ export type UserUncheckedUpdateWithoutCitizenProfileConsentInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -10312,6 +10634,8 @@ export type UserCreateWithoutEstablishmentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -10371,6 +10695,8 @@ export type UserUncheckedCreateWithoutEstablishmentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -10446,6 +10772,8 @@ export type UserUpdateWithoutEstablishmentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -10505,6 +10833,8 @@ export type UserUncheckedUpdateWithoutEstablishmentsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -10564,6 +10894,8 @@ export type UserCreateWithoutEstablishmentRevisionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -10623,6 +10955,8 @@ export type UserUncheckedCreateWithoutEstablishmentRevisionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -10698,6 +11032,8 @@ export type UserUpdateWithoutEstablishmentRevisionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -10757,6 +11093,8 @@ export type UserUncheckedUpdateWithoutEstablishmentRevisionsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -10816,6 +11154,8 @@ export type UserCreateWithoutEstablishmentOperationsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -10875,6 +11215,8 @@ export type UserUncheckedCreateWithoutEstablishmentOperationsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -10950,6 +11292,8 @@ export type UserUpdateWithoutEstablishmentOperationsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -11009,6 +11353,8 @@ export type UserUncheckedUpdateWithoutEstablishmentOperationsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -11067,6 +11413,8 @@ export type UserCreateWithoutCensusReviewsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -11126,6 +11474,8 @@ export type UserUncheckedCreateWithoutCensusReviewsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -11201,6 +11551,8 @@ export type UserUpdateWithoutCensusReviewsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -11260,6 +11612,8 @@ export type UserUncheckedUpdateWithoutCensusReviewsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -11319,6 +11673,8 @@ export type UserCreateWithoutCensusScopeInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -11378,6 +11734,8 @@ export type UserUncheckedCreateWithoutCensusScopeInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -11453,6 +11811,8 @@ export type UserUpdateWithoutCensusScopeInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -11512,6 +11872,8 @@ export type UserUncheckedUpdateWithoutCensusScopeInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -11571,6 +11933,8 @@ export type UserCreateWithoutCensusRosterMembershipsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -11630,6 +11994,8 @@ export type UserUncheckedCreateWithoutCensusRosterMembershipsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -11705,6 +12071,8 @@ export type UserUpdateWithoutCensusRosterMembershipsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -11764,6 +12132,8 @@ export type UserUncheckedUpdateWithoutCensusRosterMembershipsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -11823,6 +12193,8 @@ export type UserCreateWithoutCensusAuditsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
@@ -11882,6 +12254,8 @@ export type UserUncheckedCreateWithoutCensusAuditsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
   postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
   jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
   spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
@@ -11957,6 +12331,8 @@ export type UserUpdateWithoutCensusAuditsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
   jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
@@ -12016,6 +12392,528 @@ export type UserUncheckedUpdateWithoutCensusAuditsInput = {
   citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
   jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
   postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUncheckedUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutJobMutationsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutJobMutationsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentUncheckedCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutJobMutationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobMutationsInput, Prisma.UserUncheckedCreateWithoutJobMutationsInput>
+}
+
+export type UserUpsertWithoutJobMutationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutJobMutationsInput, Prisma.UserUncheckedUpdateWithoutJobMutationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobMutationsInput, Prisma.UserUncheckedCreateWithoutJobMutationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutJobMutationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutJobMutationsInput, Prisma.UserUncheckedUpdateWithoutJobMutationsInput>
+}
+
+export type UserUpdateWithoutJobMutationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutJobMutationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUncheckedUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutJobRecommendationsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutJobRecommendationsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentUncheckedCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutJobRecommendationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobRecommendationsInput, Prisma.UserUncheckedCreateWithoutJobRecommendationsInput>
+}
+
+export type UserUpsertWithoutJobRecommendationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutJobRecommendationsInput, Prisma.UserUncheckedUpdateWithoutJobRecommendationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobRecommendationsInput, Prisma.UserUncheckedCreateWithoutJobRecommendationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutJobRecommendationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutJobRecommendationsInput, Prisma.UserUncheckedUpdateWithoutJobRecommendationsInput>
+}
+
+export type UserUpdateWithoutJobRecommendationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutJobRecommendationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
   jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
   reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
   spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
@@ -12064,6 +12962,8 @@ export type UserCountOutputType = {
   issuedStaffInvites: number
   citizenFeedbacks: number
   postedJobs: number
+  jobMutations: number
+  jobRecommendations: number
   jobChanges: number
   reviewedJobs: number
   spesImports: number
@@ -12106,6 +13006,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   issuedStaffInvites?: boolean | UserCountOutputTypeCountIssuedStaffInvitesArgs
   citizenFeedbacks?: boolean | UserCountOutputTypeCountCitizenFeedbacksArgs
   postedJobs?: boolean | UserCountOutputTypeCountPostedJobsArgs
+  jobMutations?: boolean | UserCountOutputTypeCountJobMutationsArgs
+  jobRecommendations?: boolean | UserCountOutputTypeCountJobRecommendationsArgs
   jobChanges?: boolean | UserCountOutputTypeCountJobChangesArgs
   reviewedJobs?: boolean | UserCountOutputTypeCountReviewedJobsArgs
   spesImports?: boolean | UserCountOutputTypeCountSpesImportsArgs
@@ -12251,6 +13153,20 @@ export type UserCountOutputTypeCountCitizenFeedbacksArgs<ExtArgs extends runtime
  */
 export type UserCountOutputTypeCountPostedJobsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.JobOpportunityWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountJobMutationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JobMutationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountJobRecommendationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JobRecommendationWhereInput
 }
 
 /**
@@ -12449,6 +13365,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   citizenFeedbacks?: boolean | Prisma.User$citizenFeedbacksArgs<ExtArgs>
   jobseekerProfile?: boolean | Prisma.User$jobseekerProfileArgs<ExtArgs>
   postedJobs?: boolean | Prisma.User$postedJobsArgs<ExtArgs>
+  jobMutations?: boolean | Prisma.User$jobMutationsArgs<ExtArgs>
+  jobRecommendations?: boolean | Prisma.User$jobRecommendationsArgs<ExtArgs>
   jobChanges?: boolean | Prisma.User$jobChangesArgs<ExtArgs>
   reviewedJobs?: boolean | Prisma.User$reviewedJobsArgs<ExtArgs>
   spesImports?: boolean | Prisma.User$spesImportsArgs<ExtArgs>
@@ -12516,6 +13434,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   citizenFeedbacks?: boolean | Prisma.User$citizenFeedbacksArgs<ExtArgs>
   jobseekerProfile?: boolean | Prisma.User$jobseekerProfileArgs<ExtArgs>
   postedJobs?: boolean | Prisma.User$postedJobsArgs<ExtArgs>
+  jobMutations?: boolean | Prisma.User$jobMutationsArgs<ExtArgs>
+  jobRecommendations?: boolean | Prisma.User$jobRecommendationsArgs<ExtArgs>
   jobChanges?: boolean | Prisma.User$jobChangesArgs<ExtArgs>
   reviewedJobs?: boolean | Prisma.User$reviewedJobsArgs<ExtArgs>
   spesImports?: boolean | Prisma.User$spesImportsArgs<ExtArgs>
@@ -12564,6 +13484,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     citizenFeedbacks: Prisma.$CitizenResolutionFeedbackPayload<ExtArgs>[]
     jobseekerProfile: Prisma.$JobseekerProfilePayload<ExtArgs> | null
     postedJobs: Prisma.$JobOpportunityPayload<ExtArgs>[]
+    jobMutations: Prisma.$JobMutationPayload<ExtArgs>[]
+    jobRecommendations: Prisma.$JobRecommendationPayload<ExtArgs>[]
     jobChanges: Prisma.$JobActivityPayload<ExtArgs>[]
     reviewedJobs: Prisma.$JobOpportunityPayload<ExtArgs>[]
     spesImports: Prisma.$SpesImportBatchPayload<ExtArgs>[]
@@ -12963,6 +13885,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   citizenFeedbacks<T extends Prisma.User$citizenFeedbacksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$citizenFeedbacksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CitizenResolutionFeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   jobseekerProfile<T extends Prisma.User$jobseekerProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jobseekerProfileArgs<ExtArgs>>): Prisma.Prisma__JobseekerProfileClient<runtime.Types.Result.GetResult<Prisma.$JobseekerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   postedJobs<T extends Prisma.User$postedJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postedJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobOpportunityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  jobMutations<T extends Prisma.User$jobMutationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jobMutationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobMutationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  jobRecommendations<T extends Prisma.User$jobRecommendationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jobRecommendationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobRecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   jobChanges<T extends Prisma.User$jobChangesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jobChangesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviewedJobs<T extends Prisma.User$reviewedJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobOpportunityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   spesImports<T extends Prisma.User$spesImportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$spesImportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpesImportBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -13798,6 +14722,54 @@ export type User$postedJobsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.JobOpportunityScalarFieldEnum | Prisma.JobOpportunityScalarFieldEnum[]
+}
+
+/**
+ * User.jobMutations
+ */
+export type User$jobMutationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobMutation
+   */
+  select?: Prisma.JobMutationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobMutation
+   */
+  omit?: Prisma.JobMutationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobMutationInclude<ExtArgs> | null
+  where?: Prisma.JobMutationWhereInput
+  orderBy?: Prisma.JobMutationOrderByWithRelationInput | Prisma.JobMutationOrderByWithRelationInput[]
+  cursor?: Prisma.JobMutationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JobMutationScalarFieldEnum | Prisma.JobMutationScalarFieldEnum[]
+}
+
+/**
+ * User.jobRecommendations
+ */
+export type User$jobRecommendationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobRecommendation
+   */
+  select?: Prisma.JobRecommendationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobRecommendation
+   */
+  omit?: Prisma.JobRecommendationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobRecommendationInclude<ExtArgs> | null
+  where?: Prisma.JobRecommendationWhereInput
+  orderBy?: Prisma.JobRecommendationOrderByWithRelationInput | Prisma.JobRecommendationOrderByWithRelationInput[]
+  cursor?: Prisma.JobRecommendationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JobRecommendationScalarFieldEnum | Prisma.JobRecommendationScalarFieldEnum[]
 }
 
 /**

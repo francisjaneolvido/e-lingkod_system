@@ -44,6 +44,8 @@ model User {
   citizenFeedbacks CitizenResolutionFeedback[] @relation("CitizenFeedbackReporter")
   jobseekerProfile JobseekerProfile?
   postedJobs JobOpportunity[] @relation("JobPostedBy")
+  jobMutations JobMutation[]
+  jobRecommendations JobRecommendation[]
   jobChanges JobActivity[] @relation("JobActivityActor")
   reviewedJobs JobOpportunity[] @relation("JobReviewedBy")
   spesImports SpesImportBatch[] @relation("SpesImportedBy")
@@ -365,6 +367,17 @@ model JobOpportunity {
   skillsJson     String @db.Text
   interestsJson  String @db.Text
   education      String @db.VarChar(40)
+  occupationCategory String? @db.VarChar(80)
+  employmentSector String? @db.VarChar(30)
+  workArrangement String? @db.VarChar(20)
+  experienceLevel String? @db.VarChar(30)
+  payMin Decimal? @db.Decimal(12, 2)
+  payMax Decimal? @db.Decimal(12, 2)
+  payCurrency String? @db.VarChar(3)
+  payBasis String? @db.VarChar(10)
+  negotiable Boolean @default(false)
+  certificationsJson String? @db.Text
+  isDemo Boolean @default(false)
   contactInfo    String @db.VarChar(250)
   externalUrl    String? @db.VarChar(500)
   status         JobListingStatus @default(DRAFT)
@@ -384,6 +397,8 @@ model JobOpportunity {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   activities     JobActivity[]
+  mutations JobMutation[]
+  recommendations JobRecommendation[]
 
   @@index([status, publishedAt])
   @@index([sector, workType])
@@ -756,6 +771,7 @@ model ServicePickupSlot {
 
 // V16 — shared notifications, fair work distribution and configurable Online LGU Services.
 model Notification {
+  recommendation JobRecommendation?
   id        String   @id @default(cuid()) @db.VarChar(191)
   userId    String   @db.VarChar(191)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -1100,4 +1116,31 @@ model CensusImportLock {
   id Int @id
   version Int @default(0)
   @@map("census_import_lock")
+}
+
+model JobMutation {
+  id String @id @default(cuid()) @db.VarChar(191)
+  actorId String @db.VarChar(191)
+  actor User @relation(fields:[actorId],references:[id],onDelete:Restrict,map:"job_mutation_actor_fkey")
+  requestKey String @db.VarChar(128)
+  payloadHash String @db.Char(64)
+  jobId String @db.VarChar(191)
+  job JobOpportunity @relation(fields:[jobId],references:[id],onDelete:Restrict,map:"job_mutation_job_fkey")
+  resultJson String @db.LongText
+  createdAt DateTime @default(now())
+  @@unique([actorId,requestKey])
+  @@map("job_mutation")
+}
+model JobRecommendation {
+  id String @id @default(cuid()) @db.VarChar(191)
+  userId String @db.VarChar(191)
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade,map:"job_recommendation_user_fkey")
+  jobId String @db.VarChar(191)
+  job JobOpportunity @relation(fields:[jobId],references:[id],onDelete:Restrict,map:"job_recommendation_job_fkey")
+  publicationVersion Int
+  notificationId String @unique @db.VarChar(191)
+  notification Notification @relation(fields:[notificationId],references:[id],onDelete:Cascade,map:"job_recommendation_notification_fkey")
+  createdAt DateTime @default(now())
+  @@unique([userId,jobId,publicationVersion])
+  @@map("job_recommendation")
 }

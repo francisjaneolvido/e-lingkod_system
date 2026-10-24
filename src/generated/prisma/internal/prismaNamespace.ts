@@ -447,7 +447,9 @@ export const ModelName = {
   CensusAssistanceMember: 'CensusAssistanceMember',
   CensusAudit: 'CensusAudit',
   CensusSourceRecord: 'CensusSourceRecord',
-  CensusImportLock: 'CensusImportLock'
+  CensusImportLock: 'CensusImportLock',
+  JobMutation: 'JobMutation',
+  JobRecommendation: 'JobRecommendation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -463,7 +465,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity" | "communitySurvey" | "governmentActivity" | "communityImportBatch" | "communityImportRecord" | "serviceRequest" | "serviceRequestDocument" | "serviceRequestEvent" | "serviceAppointment" | "servicePickupSlot" | "notification" | "workAssignment" | "serviceDefinition" | "serviceDefinitionAudit" | "emergencyHotline" | "emergencyHotlineProposal" | "emergencyAlert" | "emergencyActionLog" | "communitySurveyWorkspace" | "communitySurveyRevision" | "citizenProfileConsent" | "establishment" | "establishmentSurvey" | "establishmentRevision" | "establishmentOperation" | "censusReview" | "censusStaffScope" | "censusAssistanceRoster" | "censusAssistanceMember" | "censusAudit" | "censusSourceRecord" | "censusImportLock"
+    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity" | "communitySurvey" | "governmentActivity" | "communityImportBatch" | "communityImportRecord" | "serviceRequest" | "serviceRequestDocument" | "serviceRequestEvent" | "serviceAppointment" | "servicePickupSlot" | "notification" | "workAssignment" | "serviceDefinition" | "serviceDefinitionAudit" | "emergencyHotline" | "emergencyHotlineProposal" | "emergencyAlert" | "emergencyActionLog" | "communitySurveyWorkspace" | "communitySurveyRevision" | "citizenProfileConsent" | "establishment" | "establishmentSurvey" | "establishmentRevision" | "establishmentOperation" | "censusReview" | "censusStaffScope" | "censusAssistanceRoster" | "censusAssistanceMember" | "censusAudit" | "censusSourceRecord" | "censusImportLock" | "jobMutation" | "jobRecommendation"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3833,6 +3835,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    JobMutation: {
+      payload: Prisma.$JobMutationPayload<ExtArgs>
+      fields: Prisma.JobMutationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JobMutationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JobMutationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>
+        }
+        findFirst: {
+          args: Prisma.JobMutationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JobMutationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>
+        }
+        findMany: {
+          args: Prisma.JobMutationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>[]
+        }
+        create: {
+          args: Prisma.JobMutationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>
+        }
+        createMany: {
+          args: Prisma.JobMutationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.JobMutationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>
+        }
+        update: {
+          args: Prisma.JobMutationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>
+        }
+        deleteMany: {
+          args: Prisma.JobMutationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JobMutationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.JobMutationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>
+        }
+        aggregate: {
+          args: Prisma.JobMutationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJobMutation>
+        }
+        groupBy: {
+          args: Prisma.JobMutationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JobMutationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JobMutationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JobMutationCountAggregateOutputType> | number
+        }
+      }
+    }
+    JobRecommendation: {
+      payload: Prisma.$JobRecommendationPayload<ExtArgs>
+      fields: Prisma.JobRecommendationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JobRecommendationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JobRecommendationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>
+        }
+        findFirst: {
+          args: Prisma.JobRecommendationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JobRecommendationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>
+        }
+        findMany: {
+          args: Prisma.JobRecommendationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>[]
+        }
+        create: {
+          args: Prisma.JobRecommendationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>
+        }
+        createMany: {
+          args: Prisma.JobRecommendationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.JobRecommendationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>
+        }
+        update: {
+          args: Prisma.JobRecommendationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>
+        }
+        deleteMany: {
+          args: Prisma.JobRecommendationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JobRecommendationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.JobRecommendationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>
+        }
+        aggregate: {
+          args: Prisma.JobRecommendationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJobRecommendation>
+        }
+        groupBy: {
+          args: Prisma.JobRecommendationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JobRecommendationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JobRecommendationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JobRecommendationCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4098,6 +4232,17 @@ export const JobOpportunityScalarFieldEnum = {
   skillsJson: 'skillsJson',
   interestsJson: 'interestsJson',
   education: 'education',
+  occupationCategory: 'occupationCategory',
+  employmentSector: 'employmentSector',
+  workArrangement: 'workArrangement',
+  experienceLevel: 'experienceLevel',
+  payMin: 'payMin',
+  payMax: 'payMax',
+  payCurrency: 'payCurrency',
+  payBasis: 'payBasis',
+  negotiable: 'negotiable',
+  certificationsJson: 'certificationsJson',
+  isDemo: 'isDemo',
   contactInfo: 'contactInfo',
   externalUrl: 'externalUrl',
   status: 'status',
@@ -4761,6 +4906,31 @@ export const CensusImportLockScalarFieldEnum = {
 export type CensusImportLockScalarFieldEnum = (typeof CensusImportLockScalarFieldEnum)[keyof typeof CensusImportLockScalarFieldEnum]
 
 
+export const JobMutationScalarFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  jobId: 'jobId',
+  resultJson: 'resultJson',
+  createdAt: 'createdAt'
+} as const
+
+export type JobMutationScalarFieldEnum = (typeof JobMutationScalarFieldEnum)[keyof typeof JobMutationScalarFieldEnum]
+
+
+export const JobRecommendationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  jobId: 'jobId',
+  publicationVersion: 'publicationVersion',
+  notificationId: 'notificationId',
+  createdAt: 'createdAt'
+} as const
+
+export type JobRecommendationScalarFieldEnum = (typeof JobRecommendationScalarFieldEnum)[keyof typeof JobRecommendationScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4956,6 +5126,13 @@ export const JobOpportunityOrderByRelevanceFieldEnum = {
   skillsJson: 'skillsJson',
   interestsJson: 'interestsJson',
   education: 'education',
+  occupationCategory: 'occupationCategory',
+  employmentSector: 'employmentSector',
+  workArrangement: 'workArrangement',
+  experienceLevel: 'experienceLevel',
+  payCurrency: 'payCurrency',
+  payBasis: 'payBasis',
+  certificationsJson: 'certificationsJson',
   contactInfo: 'contactInfo',
   externalUrl: 'externalUrl',
   reviewSource: 'reviewSource',
@@ -5479,6 +5656,28 @@ export const CensusSourceRecordOrderByRelevanceFieldEnum = {
 export type CensusSourceRecordOrderByRelevanceFieldEnum = (typeof CensusSourceRecordOrderByRelevanceFieldEnum)[keyof typeof CensusSourceRecordOrderByRelevanceFieldEnum]
 
 
+export const JobMutationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  jobId: 'jobId',
+  resultJson: 'resultJson'
+} as const
+
+export type JobMutationOrderByRelevanceFieldEnum = (typeof JobMutationOrderByRelevanceFieldEnum)[keyof typeof JobMutationOrderByRelevanceFieldEnum]
+
+
+export const JobRecommendationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  jobId: 'jobId',
+  notificationId: 'notificationId'
+} as const
+
+export type JobRecommendationOrderByRelevanceFieldEnum = (typeof JobRecommendationOrderByRelevanceFieldEnum)[keyof typeof JobRecommendationOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -5559,6 +5758,13 @@ export type EnumResolutionReviewStatusFieldRefInput<$PrismaModel> = FieldRefInpu
  * Reference to a field of type 'CitizenFeedbackDecision'
  */
 export type EnumCitizenFeedbackDecisionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CitizenFeedbackDecision'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
     
 
 
@@ -5770,6 +5976,8 @@ export type GlobalOmitConfig = {
   censusAudit?: Prisma.CensusAuditOmit
   censusSourceRecord?: Prisma.CensusSourceRecordOmit
   censusImportLock?: Prisma.CensusImportLockOmit
+  jobMutation?: Prisma.JobMutationOmit
+  jobRecommendation?: Prisma.JobRecommendationOmit
 }
 
 /* Types for Logging */

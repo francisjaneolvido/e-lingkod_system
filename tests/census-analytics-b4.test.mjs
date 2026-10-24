@@ -142,7 +142,7 @@ test('B4 real annual populations, source separation, authority and aggregate exp
     await t.test('public disclosure and JOBS-only data loaders cannot bypass the protected analytics surface',async()=>{
       const old=await import('../src/features/community/server/data.ts');
       await assert.rejects(old.publicEmploymentInsights(),/Public analytics release is unavailable/);
-      const jobsData=await (await import('../src/features/jobs/server/data.ts')).adminJobData();
+      const jobsData=await (await import('../src/features/jobs/server/data.ts')).adminJobData(admin);
       assert.equal(Object.hasOwn(jobsData,'totalSurveys'),false);
       assert.equal(Object.hasOwn(jobsData,'insights'),false);
       assert.equal(Object.hasOwn(jobsData,'batches'),false);
