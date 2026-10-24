@@ -77,7 +77,7 @@ async function citizenRows(year?:number):Promise<InsightRow[]> {
 }
 async function importedRows(publicOnly:boolean):Promise<InsightRow[]> {
   const records=await prisma.communityImportRecord.findMany({
-    where:{batch:{status:"ACTIVE",...(publicOnly?{activity:{intendedUse:"PUBLIC_AGGREGATED"}}:{})}},
+    where:{outcome:"ACCEPTED",batch:{status:"ACTIVE",...(publicOnly?{activity:{intendedUse:"PUBLIC_AGGREGATED"}}:{})}},
     select:{barangay:true,ageGroup:true,educationLevel:true,employmentStatus:true,occupation:true,industry:true,skillsJson:true,trainingInterest:true,trainingCategoriesJson:true,trainingProgramsJson:true,trainingBarriersJson:true,employmentBarriersJson:true,businessSector:true,assistanceNeededJson:true,batch:{select:{activity:{select:{activityDate:true}}}}},
     take:20000,
   });

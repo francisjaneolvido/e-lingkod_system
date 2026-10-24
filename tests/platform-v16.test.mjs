@@ -16,7 +16,6 @@ const civicForm=read('src/features/civic/components/admin-update-form.tsx');
 const serviceDesk=read('src/app/admin/services/page.tsx');
 const serviceReports=read('src/app/admin/services/reports/page.tsx');
 const pulse=read('src/app/admin/pulse/page.tsx');
-const census=read('src/app/admin/census/page.tsx');
 
 test('V16 migration is additive and introduces notifications, fair work assignments and service definitions',()=>{
   for(const model of ['model Notification','model WorkAssignment','model ServiceDefinition','model ServiceDefinitionAudit']) assert.match(schema,new RegExp(model));
@@ -62,13 +61,10 @@ test('V16 Online Services includes operations analytics and audit export',()=>{
   assert.match(serviceReports,/Export request audit CSV/);
 });
 
-test('V16 Community Pulse remains aggregate-only and Census remains intentionally empty',()=>{
+test('V16 Community Pulse remains aggregate-only',()=>{
   assert.match(pulse,/Community Pulse/);
   assert.match(pulse,/Census/);
   assert.match(pulse,/Not configured/);
-  assert.match(census,/intentionally empty for now/);
-  assert.match(census,/No census respondents/);
-  assert.match(census,/No public census statistics/);
 });
 
 test('V16 new and heavily modified TypeScript sources parse successfully',()=>{

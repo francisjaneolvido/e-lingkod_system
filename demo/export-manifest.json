@@ -1,0 +1,223 @@
+{
+  "datasetVersion": "elb-demo-2026-v1",
+  "sourceDatabase": "e_lingkod_bayan_demo",
+  "dataFingerprint": "c755de29f058c86b6bbebfe299102a64a9b8738484961f3f57d1d341d279cd0c",
+  "sqlSha256": "a00e812b8fe7fa363e1163e52ab0997da87e0159b5c4ccd2e4622feafc1f4dac",
+  "tables": [
+    {
+      "table": "_elb_demo_meta",
+      "rows": 1
+    },
+    {
+      "table": "_prisma_migrations",
+      "rows": 24
+    },
+    {
+      "table": "account",
+      "rows": 108
+    },
+    {
+      "table": "census_assistance_member",
+      "rows": 3
+    },
+    {
+      "table": "census_assistance_roster",
+      "rows": 3
+    },
+    {
+      "table": "census_audit",
+      "rows": 5
+    },
+    {
+      "table": "census_import_lock",
+      "rows": 1
+    },
+    {
+      "table": "census_review",
+      "rows": 3
+    },
+    {
+      "table": "census_source_record",
+      "rows": 3
+    },
+    {
+      "table": "census_staff_scope",
+      "rows": 2
+    },
+    {
+      "table": "citizen_feedback_photo",
+      "rows": 0
+    },
+    {
+      "table": "citizen_profile_consent",
+      "rows": 75
+    },
+    {
+      "table": "citizen_resolution_feedback",
+      "rows": 0
+    },
+    {
+      "table": "civic_report",
+      "rows": 0
+    },
+    {
+      "table": "community_import_batch",
+      "rows": 2
+    },
+    {
+      "table": "community_import_record",
+      "rows": 13
+    },
+    {
+      "table": "community_survey",
+      "rows": 82
+    },
+    {
+      "table": "community_survey_revision",
+      "rows": 97
+    },
+    {
+      "table": "community_survey_workspace",
+      "rows": 88
+    },
+    {
+      "table": "emergency_action_log",
+      "rows": 0
+    },
+    {
+      "table": "emergency_alert",
+      "rows": 0
+    },
+    {
+      "table": "emergency_hotline",
+      "rows": 0
+    },
+    {
+      "table": "emergency_hotline_proposal",
+      "rows": 0
+    },
+    {
+      "table": "establishment",
+      "rows": 20
+    },
+    {
+      "table": "establishment_operation",
+      "rows": 55
+    },
+    {
+      "table": "establishment_revision",
+      "rows": 32
+    },
+    {
+      "table": "establishment_survey",
+      "rows": 25
+    },
+    {
+      "table": "government_activity",
+      "rows": 2
+    },
+    {
+      "table": "job_activity",
+      "rows": 80
+    },
+    {
+      "table": "job_opportunity",
+      "rows": 28
+    },
+    {
+      "table": "jobseeker_profile",
+      "rows": 0
+    },
+    {
+      "table": "notification",
+      "rows": 126
+    },
+    {
+      "table": "report_photo",
+      "rows": 0
+    },
+    {
+      "table": "report_update",
+      "rows": 0
+    },
+    {
+      "table": "resolution_proof_photo",
+      "rows": 0
+    },
+    {
+      "table": "resolution_submission",
+      "rows": 0
+    },
+    {
+      "table": "service_appointment",
+      "rows": 0
+    },
+    {
+      "table": "service_definition",
+      "rows": 0
+    },
+    {
+      "table": "service_definition_audit",
+      "rows": 0
+    },
+    {
+      "table": "service_pickup_slot",
+      "rows": 0
+    },
+    {
+      "table": "service_request",
+      "rows": 0
+    },
+    {
+      "table": "service_request_document",
+      "rows": 0
+    },
+    {
+      "table": "service_request_event",
+      "rows": 0
+    },
+    {
+      "table": "session",
+      "rows": 0,
+      "excluded": true
+    },
+    {
+      "table": "spes_import_batch",
+      "rows": 0
+    },
+    {
+      "table": "spes_import_event",
+      "rows": 0
+    },
+    {
+      "table": "spes_survey_record",
+      "rows": 0
+    },
+    {
+      "table": "staff_access_audit",
+      "rows": 6
+    },
+    {
+      "table": "staff_invitation",
+      "rows": 0,
+      "excluded": true
+    },
+    {
+      "table": "staff_permission",
+      "rows": 7
+    },
+    {
+      "table": "user",
+      "rows": 108
+    },
+    {
+      "table": "verification",
+      "rows": 0,
+      "excluded": true
+    },
+    {
+      "table": "work_assignment",
+      "rows": 0
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+participantRef,barangay,ageGroup,educationLevel,employmentStatus,skills,trainingInterest
+DEMO-IMPORT-001,Bambang,25-34,college,employed,Data Entry,yes
+DEMO-IMPORT-002,Batong Malake,18-24,senior high,student,Microsoft Office,maybe
+DEMO-IMPORT-003,Baybayin,45-54,high school,self-employed,Food Preparation,no
+DEMO-IMPORT-004,Maahas,55-64,vocational,unemployed,Welding,yes
+DEMO-IMPORT-005,Mayondon,65+,elementary,retired,Carpentry,not now
+DEMO-IMPORT-006,Timugan,,college,,Programming,

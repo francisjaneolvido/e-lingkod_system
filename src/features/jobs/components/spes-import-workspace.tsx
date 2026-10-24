@@ -13,6 +13,7 @@ export function SpesImportWorkspace({batches,batchCount,isSuperAdmin}:{batches:J
   const router=useRouter();
   const [file,setFile]=useState<File|null>(null);
   const [source,setSource]=useState("Hackathon Demo — Fictional SPES Survey");
+  const [surveyYear,setSurveyYear]=useState(String(new Date().getFullYear()));
   const [datasetKind,setDatasetKind]=useState<Dataset>("DEMO");
   const [authorizedUse,setAuthorizedUse]=useState(false);
   const [phase,setPhase]=useState<Phase>("upload");
@@ -27,7 +28,7 @@ export function SpesImportWorkspace({batches,batchCount,isSuperAdmin}:{batches:J
   function payload(includeHash=false){
     const body=new FormData();
     if(file)body.set("file",file);
-    body.set("sourceLabel",source.trim());
+    body.set("sourceLabel",source.trim());body.set("surveyYear",surveyYear);
     body.set("datasetKind",datasetKind);
     if(authorizedUse)body.set("authorizedUse","yes");
     if(includeHash&&preview?.previewHash)body.set("previewHash",preview.previewHash);
@@ -49,7 +50,7 @@ export function SpesImportWorkspace({batches,batchCount,isSuperAdmin}:{batches:J
     finally{setBusy(false);}
   }
   async function confirm(){
-    if(!file||!preview?.previewHash||preview.invalidRows||preview.duplicate)return;
+    if(!file||!preview?.previewHash||preview.invalidRows)return;
     setBusy(true);setError("");
     try{
       const result=await request("/api/admin/jobs/import",payload(true));
@@ -79,11 +80,11 @@ export function SpesImportWorkspace({batches,batchCount,isSuperAdmin}:{batches:J
       <div className="spes-steps" aria-label="Import progress">
         {(["Upload","Preview & validate","Confirm import"] as const).map((step,i)=><div className={`spes-step ${["upload","preview","result"].indexOf(phase)>=i?"spes-step--active":""}`} key={step}><span>{i+1}</span>{step}</div>)}
       </div>
-      <div className="jobs-info-note"><Info size={19}/><p>Only anonymous data with authorized consent can be imported. Never upload names, emails, phone numbers, addresses, birthdays or ID numbers. The uploaded file is validated in memory, not stored.</p></div>
+      <div className="jobs-info-note"><Info size={19}/><p>Only anonymous data with authorized consent can be imported. Rows are source observations, not deduplicated people; uncertain overlaps remain separate. For stable source references or conflicting versions, use Census imports. Never upload names, emails, phone numbers, addresses, birthdays or ID numbers. The uploaded file is validated in memory, not stored.</p></div>
       {phase==="upload"&&<div className="spes-fields">
         <div className="jobs-csv-template"><strong>CSV format — exact column order</strong><code>consent,barangay,education,skills,interests,availability</code><small>Skills/interests separated by | · 500 rows maximum · 300 KB limit</small><a href="/demo-data/spes-demo-consented.csv" download className="jobs-text-action">Download sample CSV <ArrowRight size={13}/></a></div>
         <label className="jobs-label">Dataset type <select className="jobs-input" value={datasetKind} onChange={e=>{setDatasetKind(e.target.value as Dataset);setAuthorizedUse(false);invalidate();}}><option value="DEMO">Fictional / hackathon demonstration</option><option value="REAL">Authorized, anonymous real survey data</option></select></label>
-        <label className="jobs-label">Survey source label <input className="jobs-input" maxLength={120} value={source} onChange={e=>{setSource(e.target.value);invalidate();}} placeholder="e.g. Hackathon Demo — SPES 2026"/></label>
+        <label className="jobs-label">Actual source survey year<input type="number" min="2020" max={new Date().getFullYear()+1} className="jobs-input" value={surveyYear} onChange={e=>{setSurveyYear(e.target.value);invalidate();}}/></label><label className="jobs-label">Survey source label <input className="jobs-input" maxLength={120} value={source} onChange={e=>{setSource(e.target.value);invalidate();}} placeholder="e.g. Hackathon Demo — SPES 2026"/></label>
         {datasetKind==="REAL"&&<label className="spes-consent"><input type="checkbox" checked={authorizedUse} onChange={e=>{setAuthorizedUse(e.target.checked);invalidate();}}/> I confirm the collection/use is authorized, respondents consented to these insights, and direct identifiers are excluded.</label>}
         <label className="jobs-label">CSV file <input className="jobs-upload" type="file" accept=".csv,text/csv" onChange={e=>{setFile(e.target.files?.[0]||null);invalidate();}}/></label>
         {file&&<p className="spes-file-meta">Selected: {file.name} ({Math.ceil(file.size/1024)} KB)</p>}

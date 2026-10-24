@@ -1,0 +1,6 @@
+participantRef,barangay,ageGroup,educationLevel,employmentStatus,skills,trainingInterest
+DEMO-DUP-001,Bambang,25-34,college,employed,Data Entry,yes
+DEMO-DUP-001,Bambang,25-34,college,employed,Data Entry,yes
+DEMO-OVERLAP-UNKNOWN,Bambang,25-34,college,employed,Data Entry,yes
+,,,,,,
+DEMO-MISSING-001,Timugan,,,,Programming,
