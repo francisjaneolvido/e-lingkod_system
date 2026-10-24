@@ -284,6 +284,7 @@ export type CommunitySurveyRevisionWhereInput = {
   resultVersion?: Prisma.IntFilter<"CommunitySurveyRevision"> | number
   answersJson?: Prisma.StringFilter<"CommunitySurveyRevision"> | string
   createdAt?: Prisma.DateTimeFilter<"CommunitySurveyRevision"> | Date | string
+  censusReviews?: Prisma.CensusReviewListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   actor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
@@ -301,6 +302,7 @@ export type CommunitySurveyRevisionOrderByWithRelationInput = {
   resultVersion?: Prisma.SortOrder
   answersJson?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  censusReviews?: Prisma.CensusReviewOrderByRelationAggregateInput
   user?: Prisma.UserOrderByWithRelationInput
   actor?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.CommunitySurveyRevisionOrderByRelevanceInput
@@ -324,6 +326,7 @@ export type CommunitySurveyRevisionWhereUniqueInput = Prisma.AtLeast<{
   resultVersion?: Prisma.IntFilter<"CommunitySurveyRevision"> | number
   answersJson?: Prisma.StringFilter<"CommunitySurveyRevision"> | string
   createdAt?: Prisma.DateTimeFilter<"CommunitySurveyRevision"> | Date | string
+  censusReviews?: Prisma.CensusReviewListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   actor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId_requestKey" | "userId_surveyYear_revision">
@@ -377,6 +380,7 @@ export type CommunitySurveyRevisionCreateInput = {
   resultVersion: number
   answersJson: string
   createdAt?: Date | string
+  censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutIndividualRevisionInput
   user: Prisma.UserCreateNestedOneWithoutSurveyRevisionsInput
   actor: Prisma.UserCreateNestedOneWithoutAuthoredSurveyRevisionsInput
 }
@@ -394,6 +398,7 @@ export type CommunitySurveyRevisionUncheckedCreateInput = {
   resultVersion: number
   answersJson: string
   createdAt?: Date | string
+  censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutIndividualRevisionInput
 }
 
 export type CommunitySurveyRevisionUpdateInput = {
@@ -407,6 +412,7 @@ export type CommunitySurveyRevisionUpdateInput = {
   resultVersion?: Prisma.IntFieldUpdateOperationsInput | number
   answersJson?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  censusReviews?: Prisma.CensusReviewUpdateManyWithoutIndividualRevisionNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutSurveyRevisionsNestedInput
   actor?: Prisma.UserUpdateOneRequiredWithoutAuthoredSurveyRevisionsNestedInput
 }
@@ -424,6 +430,7 @@ export type CommunitySurveyRevisionUncheckedUpdateInput = {
   resultVersion?: Prisma.IntFieldUpdateOperationsInput | number
   answersJson?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutIndividualRevisionNestedInput
 }
 
 export type CommunitySurveyRevisionCreateManyInput = {
@@ -555,6 +562,11 @@ export type CommunitySurveyRevisionSumOrderByAggregateInput = {
   resultVersion?: Prisma.SortOrder
 }
 
+export type CommunitySurveyRevisionNullableScalarRelationFilter = {
+  is?: Prisma.CommunitySurveyRevisionWhereInput | null
+  isNot?: Prisma.CommunitySurveyRevisionWhereInput | null
+}
+
 export type CommunitySurveyRevisionCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.CommunitySurveyRevisionCreateWithoutUserInput, Prisma.CommunitySurveyRevisionUncheckedCreateWithoutUserInput> | Prisma.CommunitySurveyRevisionCreateWithoutUserInput[] | Prisma.CommunitySurveyRevisionUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.CommunitySurveyRevisionCreateOrConnectWithoutUserInput | Prisma.CommunitySurveyRevisionCreateOrConnectWithoutUserInput[]
@@ -639,6 +651,22 @@ export type CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput = 
   deleteMany?: Prisma.CommunitySurveyRevisionScalarWhereInput | Prisma.CommunitySurveyRevisionScalarWhereInput[]
 }
 
+export type CommunitySurveyRevisionCreateNestedOneWithoutCensusReviewsInput = {
+  create?: Prisma.XOR<Prisma.CommunitySurveyRevisionCreateWithoutCensusReviewsInput, Prisma.CommunitySurveyRevisionUncheckedCreateWithoutCensusReviewsInput>
+  connectOrCreate?: Prisma.CommunitySurveyRevisionCreateOrConnectWithoutCensusReviewsInput
+  connect?: Prisma.CommunitySurveyRevisionWhereUniqueInput
+}
+
+export type CommunitySurveyRevisionUpdateOneWithoutCensusReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.CommunitySurveyRevisionCreateWithoutCensusReviewsInput, Prisma.CommunitySurveyRevisionUncheckedCreateWithoutCensusReviewsInput>
+  connectOrCreate?: Prisma.CommunitySurveyRevisionCreateOrConnectWithoutCensusReviewsInput
+  upsert?: Prisma.CommunitySurveyRevisionUpsertWithoutCensusReviewsInput
+  disconnect?: Prisma.CommunitySurveyRevisionWhereInput | boolean
+  delete?: Prisma.CommunitySurveyRevisionWhereInput | boolean
+  connect?: Prisma.CommunitySurveyRevisionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CommunitySurveyRevisionUpdateToOneWithWhereWithoutCensusReviewsInput, Prisma.CommunitySurveyRevisionUpdateWithoutCensusReviewsInput>, Prisma.CommunitySurveyRevisionUncheckedUpdateWithoutCensusReviewsInput>
+}
+
 export type CommunitySurveyRevisionCreateWithoutUserInput = {
   id?: string
   surveyYear: number
@@ -650,6 +678,7 @@ export type CommunitySurveyRevisionCreateWithoutUserInput = {
   resultVersion: number
   answersJson: string
   createdAt?: Date | string
+  censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutIndividualRevisionInput
   actor: Prisma.UserCreateNestedOneWithoutAuthoredSurveyRevisionsInput
 }
 
@@ -665,6 +694,7 @@ export type CommunitySurveyRevisionUncheckedCreateWithoutUserInput = {
   resultVersion: number
   answersJson: string
   createdAt?: Date | string
+  censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutIndividualRevisionInput
 }
 
 export type CommunitySurveyRevisionCreateOrConnectWithoutUserInput = {
@@ -688,6 +718,7 @@ export type CommunitySurveyRevisionCreateWithoutActorInput = {
   resultVersion: number
   answersJson: string
   createdAt?: Date | string
+  censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutIndividualRevisionInput
   user: Prisma.UserCreateNestedOneWithoutSurveyRevisionsInput
 }
 
@@ -703,6 +734,7 @@ export type CommunitySurveyRevisionUncheckedCreateWithoutActorInput = {
   resultVersion: number
   answersJson: string
   createdAt?: Date | string
+  censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutIndividualRevisionInput
 }
 
 export type CommunitySurveyRevisionCreateOrConnectWithoutActorInput = {
@@ -765,6 +797,82 @@ export type CommunitySurveyRevisionUpdateManyWithWhereWithoutActorInput = {
   data: Prisma.XOR<Prisma.CommunitySurveyRevisionUpdateManyMutationInput, Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorInput>
 }
 
+export type CommunitySurveyRevisionCreateWithoutCensusReviewsInput = {
+  id?: string
+  surveyYear: number
+  revision: number
+  action: string
+  schemaVersion?: number
+  requestKey: string
+  payloadHash: string
+  resultVersion: number
+  answersJson: string
+  createdAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutSurveyRevisionsInput
+  actor: Prisma.UserCreateNestedOneWithoutAuthoredSurveyRevisionsInput
+}
+
+export type CommunitySurveyRevisionUncheckedCreateWithoutCensusReviewsInput = {
+  id?: string
+  userId: string
+  actorId: string
+  surveyYear: number
+  revision: number
+  action: string
+  schemaVersion?: number
+  requestKey: string
+  payloadHash: string
+  resultVersion: number
+  answersJson: string
+  createdAt?: Date | string
+}
+
+export type CommunitySurveyRevisionCreateOrConnectWithoutCensusReviewsInput = {
+  where: Prisma.CommunitySurveyRevisionWhereUniqueInput
+  create: Prisma.XOR<Prisma.CommunitySurveyRevisionCreateWithoutCensusReviewsInput, Prisma.CommunitySurveyRevisionUncheckedCreateWithoutCensusReviewsInput>
+}
+
+export type CommunitySurveyRevisionUpsertWithoutCensusReviewsInput = {
+  update: Prisma.XOR<Prisma.CommunitySurveyRevisionUpdateWithoutCensusReviewsInput, Prisma.CommunitySurveyRevisionUncheckedUpdateWithoutCensusReviewsInput>
+  create: Prisma.XOR<Prisma.CommunitySurveyRevisionCreateWithoutCensusReviewsInput, Prisma.CommunitySurveyRevisionUncheckedCreateWithoutCensusReviewsInput>
+  where?: Prisma.CommunitySurveyRevisionWhereInput
+}
+
+export type CommunitySurveyRevisionUpdateToOneWithWhereWithoutCensusReviewsInput = {
+  where?: Prisma.CommunitySurveyRevisionWhereInput
+  data: Prisma.XOR<Prisma.CommunitySurveyRevisionUpdateWithoutCensusReviewsInput, Prisma.CommunitySurveyRevisionUncheckedUpdateWithoutCensusReviewsInput>
+}
+
+export type CommunitySurveyRevisionUpdateWithoutCensusReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  surveyYear?: Prisma.IntFieldUpdateOperationsInput | number
+  revision?: Prisma.IntFieldUpdateOperationsInput | number
+  action?: Prisma.StringFieldUpdateOperationsInput | string
+  schemaVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  requestKey?: Prisma.StringFieldUpdateOperationsInput | string
+  payloadHash?: Prisma.StringFieldUpdateOperationsInput | string
+  resultVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  answersJson?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutSurveyRevisionsNestedInput
+  actor?: Prisma.UserUpdateOneRequiredWithoutAuthoredSurveyRevisionsNestedInput
+}
+
+export type CommunitySurveyRevisionUncheckedUpdateWithoutCensusReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  actorId?: Prisma.StringFieldUpdateOperationsInput | string
+  surveyYear?: Prisma.IntFieldUpdateOperationsInput | number
+  revision?: Prisma.IntFieldUpdateOperationsInput | number
+  action?: Prisma.StringFieldUpdateOperationsInput | string
+  schemaVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  requestKey?: Prisma.StringFieldUpdateOperationsInput | string
+  payloadHash?: Prisma.StringFieldUpdateOperationsInput | string
+  resultVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  answersJson?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type CommunitySurveyRevisionCreateManyUserInput = {
   id?: string
   actorId: string
@@ -804,6 +912,7 @@ export type CommunitySurveyRevisionUpdateWithoutUserInput = {
   resultVersion?: Prisma.IntFieldUpdateOperationsInput | number
   answersJson?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  censusReviews?: Prisma.CensusReviewUpdateManyWithoutIndividualRevisionNestedInput
   actor?: Prisma.UserUpdateOneRequiredWithoutAuthoredSurveyRevisionsNestedInput
 }
 
@@ -819,6 +928,7 @@ export type CommunitySurveyRevisionUncheckedUpdateWithoutUserInput = {
   resultVersion?: Prisma.IntFieldUpdateOperationsInput | number
   answersJson?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutIndividualRevisionNestedInput
 }
 
 export type CommunitySurveyRevisionUncheckedUpdateManyWithoutUserInput = {
@@ -846,6 +956,7 @@ export type CommunitySurveyRevisionUpdateWithoutActorInput = {
   resultVersion?: Prisma.IntFieldUpdateOperationsInput | number
   answersJson?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  censusReviews?: Prisma.CensusReviewUpdateManyWithoutIndividualRevisionNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutSurveyRevisionsNestedInput
 }
 
@@ -861,6 +972,7 @@ export type CommunitySurveyRevisionUncheckedUpdateWithoutActorInput = {
   resultVersion?: Prisma.IntFieldUpdateOperationsInput | number
   answersJson?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutIndividualRevisionNestedInput
 }
 
 export type CommunitySurveyRevisionUncheckedUpdateManyWithoutActorInput = {
@@ -878,6 +990,35 @@ export type CommunitySurveyRevisionUncheckedUpdateManyWithoutActorInput = {
 }
 
 
+/**
+ * Count Type CommunitySurveyRevisionCountOutputType
+ */
+
+export type CommunitySurveyRevisionCountOutputType = {
+  censusReviews: number
+}
+
+export type CommunitySurveyRevisionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  censusReviews?: boolean | CommunitySurveyRevisionCountOutputTypeCountCensusReviewsArgs
+}
+
+/**
+ * CommunitySurveyRevisionCountOutputType without action
+ */
+export type CommunitySurveyRevisionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CommunitySurveyRevisionCountOutputType
+   */
+  select?: Prisma.CommunitySurveyRevisionCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * CommunitySurveyRevisionCountOutputType without action
+ */
+export type CommunitySurveyRevisionCountOutputTypeCountCensusReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CensusReviewWhereInput
+}
+
 
 export type CommunitySurveyRevisionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -892,8 +1033,10 @@ export type CommunitySurveyRevisionSelect<ExtArgs extends runtime.Types.Extensio
   resultVersion?: boolean
   answersJson?: boolean
   createdAt?: boolean
+  censusReviews?: boolean | Prisma.CommunitySurveyRevision$censusReviewsArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   actor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.CommunitySurveyRevisionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["communitySurveyRevision"]>
 
 
@@ -915,13 +1058,16 @@ export type CommunitySurveyRevisionSelectScalar = {
 
 export type CommunitySurveyRevisionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "actorId" | "surveyYear" | "revision" | "action" | "schemaVersion" | "requestKey" | "payloadHash" | "resultVersion" | "answersJson" | "createdAt", ExtArgs["result"]["communitySurveyRevision"]>
 export type CommunitySurveyRevisionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  censusReviews?: boolean | Prisma.CommunitySurveyRevision$censusReviewsArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   actor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.CommunitySurveyRevisionCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $CommunitySurveyRevisionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CommunitySurveyRevision"
   objects: {
+    censusReviews: Prisma.$CensusReviewPayload<ExtArgs>[]
     user: Prisma.$UserPayload<ExtArgs>
     actor: Prisma.$UserPayload<ExtArgs>
   }
@@ -1278,6 +1424,7 @@ readonly fields: CommunitySurveyRevisionFieldRefs;
  */
 export interface Prisma__CommunitySurveyRevisionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  censusReviews<T extends Prisma.CommunitySurveyRevision$censusReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommunitySurveyRevision$censusReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CensusReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   actor<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
@@ -1666,6 +1813,30 @@ export type CommunitySurveyRevisionDeleteManyArgs<ExtArgs extends runtime.Types.
    * Limit how many CommunitySurveyRevisions to delete.
    */
   limit?: number
+}
+
+/**
+ * CommunitySurveyRevision.censusReviews
+ */
+export type CommunitySurveyRevision$censusReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CensusReview
+   */
+  select?: Prisma.CensusReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CensusReview
+   */
+  omit?: Prisma.CensusReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CensusReviewInclude<ExtArgs> | null
+  where?: Prisma.CensusReviewWhereInput
+  orderBy?: Prisma.CensusReviewOrderByWithRelationInput | Prisma.CensusReviewOrderByWithRelationInput[]
+  cursor?: Prisma.CensusReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CensusReviewScalarFieldEnum | Prisma.CensusReviewScalarFieldEnum[]
 }
 
 /**

@@ -237,3 +237,38 @@ export type EstablishmentRevision = Prisma.EstablishmentRevisionModel
  * 
  */
 export type EstablishmentOperation = Prisma.EstablishmentOperationModel
+/**
+ * Model CensusReview
+ * 
+ */
+export type CensusReview = Prisma.CensusReviewModel
+/**
+ * Model CensusStaffScope
+ * 
+ */
+export type CensusStaffScope = Prisma.CensusStaffScopeModel
+/**
+ * Model CensusAssistanceRoster
+ * 
+ */
+export type CensusAssistanceRoster = Prisma.CensusAssistanceRosterModel
+/**
+ * Model CensusAssistanceMember
+ * 
+ */
+export type CensusAssistanceMember = Prisma.CensusAssistanceMemberModel
+/**
+ * Model CensusAudit
+ * 
+ */
+export type CensusAudit = Prisma.CensusAuditModel
+/**
+ * Model CensusSourceRecord
+ * 
+ */
+export type CensusSourceRecord = Prisma.CensusSourceRecordModel
+/**
+ * Model CensusImportLock
+ * 
+ */
+export type CensusImportLock = Prisma.CensusImportLockModel

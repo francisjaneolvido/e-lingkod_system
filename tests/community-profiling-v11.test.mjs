@@ -89,11 +89,9 @@ test("public employment insights use aggregate privacy controls and are explicit
   assert.match(insights, /public Job Matching insight breakdowns suppress categories with fewer than/);
 });
 
-test("Census stays a separate planned module with no employment survey analytics", () => {
-  assert.match(censusPage, /The Census module has not been implemented yet/);
-  assert.match(censusPage, /No census records or census statistics are being displayed/);
-  assert.match(adminCensus, /intentionally empty for now/);
-  assert.doesNotMatch(censusPage, /publicEmploymentInsights/);
+test("Public census remains private-data free while protected B3 records are separate", () => {
+  assert.match(censusPage, /Public census statistics are not published here/);
+  assert.match(censusPage, /No census records or census statistics are being displayed/);  assert.doesNotMatch(censusPage, /publicEmploymentInsights/);
   assert.doesNotMatch(adminCensus, /adminEmploymentInsights/);
 });
 

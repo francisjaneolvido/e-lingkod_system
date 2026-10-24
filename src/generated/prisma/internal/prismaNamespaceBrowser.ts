@@ -94,7 +94,14 @@ export const ModelName = {
   Establishment: 'Establishment',
   EstablishmentSurvey: 'EstablishmentSurvey',
   EstablishmentRevision: 'EstablishmentRevision',
-  EstablishmentOperation: 'EstablishmentOperation'
+  EstablishmentOperation: 'EstablishmentOperation',
+  CensusReview: 'CensusReview',
+  CensusStaffScope: 'CensusStaffScope',
+  CensusAssistanceRoster: 'CensusAssistanceRoster',
+  CensusAssistanceMember: 'CensusAssistanceMember',
+  CensusAudit: 'CensusAudit',
+  CensusSourceRecord: 'CensusSourceRecord',
+  CensusImportLock: 'CensusImportLock'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -375,6 +382,7 @@ export type JobseekerProfileScalarFieldEnum = (typeof JobseekerProfileScalarFiel
 
 
 export const SpesImportBatchScalarFieldEnum = {
+  surveyYear: 'surveyYear',
   id: 'id',
   sourceLabel: 'sourceLabel',
   importedById: 'importedById',
@@ -392,6 +400,7 @@ export type SpesImportBatchScalarFieldEnum = (typeof SpesImportBatchScalarFieldE
 
 
 export const SpesSurveyRecordScalarFieldEnum = {
+  originalRowNumber: 'originalRowNumber',
   id: 'id',
   batchId: 'batchId',
   barangay: 'barangay',
@@ -518,6 +527,10 @@ export type GovernmentActivityScalarFieldEnum = (typeof GovernmentActivityScalar
 
 
 export const CommunityImportBatchScalarFieldEnum = {
+  sourceKey: 'sourceKey',
+  surveyYear: 'surveyYear',
+  skippedCount: 'skippedCount',
+  reviewNeededCount: 'reviewNeededCount',
   id: 'id',
   activityId: 'activityId',
   importedById: 'importedById',
@@ -537,6 +550,11 @@ export type CommunityImportBatchScalarFieldEnum = (typeof CommunityImportBatchSc
 
 
 export const CommunityImportRecordScalarFieldEnum = {
+  sourceKey: 'sourceKey',
+  surveyYear: 'surveyYear',
+  outcome: 'outcome',
+  outcomeReason: 'outcomeReason',
+  contentHash: 'contentHash',
   id: 'id',
   batchId: 'batchId',
   originalRowNumber: 'originalRowNumber',
@@ -918,6 +936,79 @@ export const EstablishmentOperationScalarFieldEnum = {
 export type EstablishmentOperationScalarFieldEnum = (typeof EstablishmentOperationScalarFieldEnum)[keyof typeof EstablishmentOperationScalarFieldEnum]
 
 
+export const CensusReviewScalarFieldEnum = {
+  id: 'id',
+  individualRevisionId: 'individualRevisionId',
+  establishmentRevisionId: 'establishmentRevisionId',
+  actorId: 'actorId',
+  action: 'action',
+  note: 'note',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  createdAt: 'createdAt'
+} as const
+
+export type CensusReviewScalarFieldEnum = (typeof CensusReviewScalarFieldEnum)[keyof typeof CensusReviewScalarFieldEnum]
+
+
+export const CensusStaffScopeScalarFieldEnum = {
+  userId: 'userId',
+  barangaysJson: 'barangaysJson',
+  version: 'version'
+} as const
+
+export type CensusStaffScopeScalarFieldEnum = (typeof CensusStaffScopeScalarFieldEnum)[keyof typeof CensusStaffScopeScalarFieldEnum]
+
+
+export const CensusAssistanceRosterScalarFieldEnum = {
+  barangay: 'barangay',
+  version: 'version',
+  confirmedAt: 'confirmedAt'
+} as const
+
+export type CensusAssistanceRosterScalarFieldEnum = (typeof CensusAssistanceRosterScalarFieldEnum)[keyof typeof CensusAssistanceRosterScalarFieldEnum]
+
+
+export const CensusAssistanceMemberScalarFieldEnum = {
+  barangay: 'barangay',
+  staffId: 'staffId'
+} as const
+
+export type CensusAssistanceMemberScalarFieldEnum = (typeof CensusAssistanceMemberScalarFieldEnum)[keyof typeof CensusAssistanceMemberScalarFieldEnum]
+
+
+export const CensusAuditScalarFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  action: 'action',
+  target: 'target',
+  detailsJson: 'detailsJson',
+  createdAt: 'createdAt'
+} as const
+
+export type CensusAuditScalarFieldEnum = (typeof CensusAuditScalarFieldEnum)[keyof typeof CensusAuditScalarFieldEnum]
+
+
+export const CensusSourceRecordScalarFieldEnum = {
+  identityKey: 'identityKey',
+  sourceKey: 'sourceKey',
+  surveyYear: 'surveyYear',
+  sourceRef: 'sourceRef',
+  contentHash: 'contentHash',
+  conflicted: 'conflicted'
+} as const
+
+export type CensusSourceRecordScalarFieldEnum = (typeof CensusSourceRecordScalarFieldEnum)[keyof typeof CensusSourceRecordScalarFieldEnum]
+
+
+export const CensusImportLockScalarFieldEnum = {
+  id: 'id',
+  version: 'version'
+} as const
+
+export type CensusImportLockScalarFieldEnum = (typeof CensusImportLockScalarFieldEnum)[keyof typeof CensusImportLockScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1255,6 +1346,7 @@ export type GovernmentActivityOrderByRelevanceFieldEnum = (typeof GovernmentActi
 
 
 export const CommunityImportBatchOrderByRelevanceFieldEnum = {
+  sourceKey: 'sourceKey',
   id: 'id',
   activityId: 'activityId',
   importedById: 'importedById',
@@ -1268,6 +1360,10 @@ export type CommunityImportBatchOrderByRelevanceFieldEnum = (typeof CommunityImp
 
 
 export const CommunityImportRecordOrderByRelevanceFieldEnum = {
+  sourceKey: 'sourceKey',
+  outcome: 'outcome',
+  outcomeReason: 'outcomeReason',
+  contentHash: 'contentHash',
   id: 'id',
   batchId: 'batchId',
   participantRef: 'participantRef',
@@ -1571,4 +1667,62 @@ export const EstablishmentOperationOrderByRelevanceFieldEnum = {
 } as const
 
 export type EstablishmentOperationOrderByRelevanceFieldEnum = (typeof EstablishmentOperationOrderByRelevanceFieldEnum)[keyof typeof EstablishmentOperationOrderByRelevanceFieldEnum]
+
+
+export const CensusReviewOrderByRelevanceFieldEnum = {
+  id: 'id',
+  individualRevisionId: 'individualRevisionId',
+  establishmentRevisionId: 'establishmentRevisionId',
+  actorId: 'actorId',
+  action: 'action',
+  note: 'note',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash'
+} as const
+
+export type CensusReviewOrderByRelevanceFieldEnum = (typeof CensusReviewOrderByRelevanceFieldEnum)[keyof typeof CensusReviewOrderByRelevanceFieldEnum]
+
+
+export const CensusStaffScopeOrderByRelevanceFieldEnum = {
+  userId: 'userId',
+  barangaysJson: 'barangaysJson'
+} as const
+
+export type CensusStaffScopeOrderByRelevanceFieldEnum = (typeof CensusStaffScopeOrderByRelevanceFieldEnum)[keyof typeof CensusStaffScopeOrderByRelevanceFieldEnum]
+
+
+export const CensusAssistanceRosterOrderByRelevanceFieldEnum = {
+  barangay: 'barangay'
+} as const
+
+export type CensusAssistanceRosterOrderByRelevanceFieldEnum = (typeof CensusAssistanceRosterOrderByRelevanceFieldEnum)[keyof typeof CensusAssistanceRosterOrderByRelevanceFieldEnum]
+
+
+export const CensusAssistanceMemberOrderByRelevanceFieldEnum = {
+  barangay: 'barangay',
+  staffId: 'staffId'
+} as const
+
+export type CensusAssistanceMemberOrderByRelevanceFieldEnum = (typeof CensusAssistanceMemberOrderByRelevanceFieldEnum)[keyof typeof CensusAssistanceMemberOrderByRelevanceFieldEnum]
+
+
+export const CensusAuditOrderByRelevanceFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  action: 'action',
+  target: 'target',
+  detailsJson: 'detailsJson'
+} as const
+
+export type CensusAuditOrderByRelevanceFieldEnum = (typeof CensusAuditOrderByRelevanceFieldEnum)[keyof typeof CensusAuditOrderByRelevanceFieldEnum]
+
+
+export const CensusSourceRecordOrderByRelevanceFieldEnum = {
+  identityKey: 'identityKey',
+  sourceKey: 'sourceKey',
+  sourceRef: 'sourceRef',
+  contentHash: 'contentHash'
+} as const
+
+export type CensusSourceRecordOrderByRelevanceFieldEnum = (typeof CensusSourceRecordOrderByRelevanceFieldEnum)[keyof typeof CensusSourceRecordOrderByRelevanceFieldEnum]
 

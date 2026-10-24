@@ -8,10 +8,11 @@ export async function POST(request:Request){
     assertSameOrigin(request);
     await requireApiViewer(request,"JOBS");
     const form=await readMultipart(request,350_000);
-    const {text}=await readSpesFile(form);
+    const {text,label,datasetKind,surveyYear}=await readSpesFile(form);
+    const context={sourceLabel:label,surveyYear,datasetKind};
     const checked=previewSpesCsv(text);
-    const fingerprint=checked.records.length&&checked.errors.length===0?spesFingerprint(checked.records):null;
-    const duplicate=fingerprint?await findDuplicateSpesBatch(fingerprint):null;
+    const fingerprint=checked.records.length&&checked.errors.length===0?spesFingerprint(checked.records,context):null;
+    const duplicate=fingerprint?await findDuplicateSpesBatch(fingerprint,context):null;
     // Only row numbers and validator messages leave the server, never the raw CSV content.
     return json({totalRows:checked.totalRows,validRows:checked.records.length,invalidRows:checked.errors.length,
       issues:checked.errors.slice(0,25),moreIssues:Math.max(0,checked.errors.length-25),

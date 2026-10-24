@@ -27,14 +27,21 @@ export type AggregateCommunityImportRecord = {
 }
 
 export type CommunityImportRecordAvgAggregateOutputType = {
+  surveyYear: number | null
   originalRowNumber: number | null
 }
 
 export type CommunityImportRecordSumAggregateOutputType = {
+  surveyYear: number | null
   originalRowNumber: number | null
 }
 
 export type CommunityImportRecordMinAggregateOutputType = {
+  sourceKey: string | null
+  surveyYear: number | null
+  outcome: string | null
+  outcomeReason: string | null
+  contentHash: string | null
   id: string | null
   batchId: string | null
   originalRowNumber: number | null
@@ -59,6 +66,11 @@ export type CommunityImportRecordMinAggregateOutputType = {
 }
 
 export type CommunityImportRecordMaxAggregateOutputType = {
+  sourceKey: string | null
+  surveyYear: number | null
+  outcome: string | null
+  outcomeReason: string | null
+  contentHash: string | null
   id: string | null
   batchId: string | null
   originalRowNumber: number | null
@@ -83,6 +95,11 @@ export type CommunityImportRecordMaxAggregateOutputType = {
 }
 
 export type CommunityImportRecordCountAggregateOutputType = {
+  sourceKey: number
+  surveyYear: number
+  outcome: number
+  outcomeReason: number
+  contentHash: number
   id: number
   batchId: number
   originalRowNumber: number
@@ -109,14 +126,21 @@ export type CommunityImportRecordCountAggregateOutputType = {
 
 
 export type CommunityImportRecordAvgAggregateInputType = {
+  surveyYear?: true
   originalRowNumber?: true
 }
 
 export type CommunityImportRecordSumAggregateInputType = {
+  surveyYear?: true
   originalRowNumber?: true
 }
 
 export type CommunityImportRecordMinAggregateInputType = {
+  sourceKey?: true
+  surveyYear?: true
+  outcome?: true
+  outcomeReason?: true
+  contentHash?: true
   id?: true
   batchId?: true
   originalRowNumber?: true
@@ -141,6 +165,11 @@ export type CommunityImportRecordMinAggregateInputType = {
 }
 
 export type CommunityImportRecordMaxAggregateInputType = {
+  sourceKey?: true
+  surveyYear?: true
+  outcome?: true
+  outcomeReason?: true
+  contentHash?: true
   id?: true
   batchId?: true
   originalRowNumber?: true
@@ -165,6 +194,11 @@ export type CommunityImportRecordMaxAggregateInputType = {
 }
 
 export type CommunityImportRecordCountAggregateInputType = {
+  sourceKey?: true
+  surveyYear?: true
+  outcome?: true
+  outcomeReason?: true
+  contentHash?: true
   id?: true
   batchId?: true
   originalRowNumber?: true
@@ -276,6 +310,11 @@ export type CommunityImportRecordGroupByArgs<ExtArgs extends runtime.Types.Exten
 }
 
 export type CommunityImportRecordGroupByOutputType = {
+  sourceKey: string | null
+  surveyYear: number | null
+  outcome: string
+  outcomeReason: string | null
+  contentHash: string | null
   id: string
   batchId: string
   originalRowNumber: number
@@ -323,6 +362,11 @@ export type CommunityImportRecordWhereInput = {
   AND?: Prisma.CommunityImportRecordWhereInput | Prisma.CommunityImportRecordWhereInput[]
   OR?: Prisma.CommunityImportRecordWhereInput[]
   NOT?: Prisma.CommunityImportRecordWhereInput | Prisma.CommunityImportRecordWhereInput[]
+  sourceKey?: Prisma.StringNullableFilter<"CommunityImportRecord"> | string | null
+  surveyYear?: Prisma.IntNullableFilter<"CommunityImportRecord"> | number | null
+  outcome?: Prisma.StringFilter<"CommunityImportRecord"> | string
+  outcomeReason?: Prisma.StringNullableFilter<"CommunityImportRecord"> | string | null
+  contentHash?: Prisma.StringNullableFilter<"CommunityImportRecord"> | string | null
   id?: Prisma.StringFilter<"CommunityImportRecord"> | string
   batchId?: Prisma.StringFilter<"CommunityImportRecord"> | string
   originalRowNumber?: Prisma.IntFilter<"CommunityImportRecord"> | number
@@ -348,6 +392,11 @@ export type CommunityImportRecordWhereInput = {
 }
 
 export type CommunityImportRecordOrderByWithRelationInput = {
+  sourceKey?: Prisma.SortOrderInput | Prisma.SortOrder
+  surveyYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  outcomeReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  contentHash?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   originalRowNumber?: Prisma.SortOrder
@@ -378,6 +427,11 @@ export type CommunityImportRecordWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.CommunityImportRecordWhereInput | Prisma.CommunityImportRecordWhereInput[]
   OR?: Prisma.CommunityImportRecordWhereInput[]
   NOT?: Prisma.CommunityImportRecordWhereInput | Prisma.CommunityImportRecordWhereInput[]
+  sourceKey?: Prisma.StringNullableFilter<"CommunityImportRecord"> | string | null
+  surveyYear?: Prisma.IntNullableFilter<"CommunityImportRecord"> | number | null
+  outcome?: Prisma.StringFilter<"CommunityImportRecord"> | string
+  outcomeReason?: Prisma.StringNullableFilter<"CommunityImportRecord"> | string | null
+  contentHash?: Prisma.StringNullableFilter<"CommunityImportRecord"> | string | null
   batchId?: Prisma.StringFilter<"CommunityImportRecord"> | string
   originalRowNumber?: Prisma.IntFilter<"CommunityImportRecord"> | number
   participantRef?: Prisma.StringNullableFilter<"CommunityImportRecord"> | string | null
@@ -402,6 +456,11 @@ export type CommunityImportRecordWhereUniqueInput = Prisma.AtLeast<{
 }, "id">
 
 export type CommunityImportRecordOrderByWithAggregationInput = {
+  sourceKey?: Prisma.SortOrderInput | Prisma.SortOrder
+  surveyYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  outcomeReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  contentHash?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   originalRowNumber?: Prisma.SortOrder
@@ -434,6 +493,11 @@ export type CommunityImportRecordScalarWhereWithAggregatesInput = {
   AND?: Prisma.CommunityImportRecordScalarWhereWithAggregatesInput | Prisma.CommunityImportRecordScalarWhereWithAggregatesInput[]
   OR?: Prisma.CommunityImportRecordScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CommunityImportRecordScalarWhereWithAggregatesInput | Prisma.CommunityImportRecordScalarWhereWithAggregatesInput[]
+  sourceKey?: Prisma.StringNullableWithAggregatesFilter<"CommunityImportRecord"> | string | null
+  surveyYear?: Prisma.IntNullableWithAggregatesFilter<"CommunityImportRecord"> | number | null
+  outcome?: Prisma.StringWithAggregatesFilter<"CommunityImportRecord"> | string
+  outcomeReason?: Prisma.StringNullableWithAggregatesFilter<"CommunityImportRecord"> | string | null
+  contentHash?: Prisma.StringNullableWithAggregatesFilter<"CommunityImportRecord"> | string | null
   id?: Prisma.StringWithAggregatesFilter<"CommunityImportRecord"> | string
   batchId?: Prisma.StringWithAggregatesFilter<"CommunityImportRecord"> | string
   originalRowNumber?: Prisma.IntWithAggregatesFilter<"CommunityImportRecord"> | number
@@ -458,6 +522,11 @@ export type CommunityImportRecordScalarWhereWithAggregatesInput = {
 }
 
 export type CommunityImportRecordCreateInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  outcome?: string
+  outcomeReason?: string | null
+  contentHash?: string | null
   id?: string
   originalRowNumber: number
   participantRef?: string | null
@@ -482,6 +551,11 @@ export type CommunityImportRecordCreateInput = {
 }
 
 export type CommunityImportRecordUncheckedCreateInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  outcome?: string
+  outcomeReason?: string | null
+  contentHash?: string | null
   id?: string
   batchId: string
   originalRowNumber: number
@@ -506,6 +580,11 @@ export type CommunityImportRecordUncheckedCreateInput = {
 }
 
 export type CommunityImportRecordUpdateInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outcome?: Prisma.StringFieldUpdateOperationsInput | string
+  outcomeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   originalRowNumber?: Prisma.IntFieldUpdateOperationsInput | number
   participantRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -530,6 +609,11 @@ export type CommunityImportRecordUpdateInput = {
 }
 
 export type CommunityImportRecordUncheckedUpdateInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outcome?: Prisma.StringFieldUpdateOperationsInput | string
+  outcomeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   batchId?: Prisma.StringFieldUpdateOperationsInput | string
   originalRowNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -554,6 +638,11 @@ export type CommunityImportRecordUncheckedUpdateInput = {
 }
 
 export type CommunityImportRecordCreateManyInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  outcome?: string
+  outcomeReason?: string | null
+  contentHash?: string | null
   id?: string
   batchId: string
   originalRowNumber: number
@@ -578,6 +667,11 @@ export type CommunityImportRecordCreateManyInput = {
 }
 
 export type CommunityImportRecordUpdateManyMutationInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outcome?: Prisma.StringFieldUpdateOperationsInput | string
+  outcomeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   originalRowNumber?: Prisma.IntFieldUpdateOperationsInput | number
   participantRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -601,6 +695,11 @@ export type CommunityImportRecordUpdateManyMutationInput = {
 }
 
 export type CommunityImportRecordUncheckedUpdateManyInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outcome?: Prisma.StringFieldUpdateOperationsInput | string
+  outcomeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   batchId?: Prisma.StringFieldUpdateOperationsInput | string
   originalRowNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -641,6 +740,11 @@ export type CommunityImportRecordOrderByRelevanceInput = {
 }
 
 export type CommunityImportRecordCountOrderByAggregateInput = {
+  sourceKey?: Prisma.SortOrder
+  surveyYear?: Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  outcomeReason?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
   id?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   originalRowNumber?: Prisma.SortOrder
@@ -665,10 +769,16 @@ export type CommunityImportRecordCountOrderByAggregateInput = {
 }
 
 export type CommunityImportRecordAvgOrderByAggregateInput = {
+  surveyYear?: Prisma.SortOrder
   originalRowNumber?: Prisma.SortOrder
 }
 
 export type CommunityImportRecordMaxOrderByAggregateInput = {
+  sourceKey?: Prisma.SortOrder
+  surveyYear?: Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  outcomeReason?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
   id?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   originalRowNumber?: Prisma.SortOrder
@@ -693,6 +803,11 @@ export type CommunityImportRecordMaxOrderByAggregateInput = {
 }
 
 export type CommunityImportRecordMinOrderByAggregateInput = {
+  sourceKey?: Prisma.SortOrder
+  surveyYear?: Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  outcomeReason?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
   id?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   originalRowNumber?: Prisma.SortOrder
@@ -717,6 +832,7 @@ export type CommunityImportRecordMinOrderByAggregateInput = {
 }
 
 export type CommunityImportRecordSumOrderByAggregateInput = {
+  surveyYear?: Prisma.SortOrder
   originalRowNumber?: Prisma.SortOrder
 }
 
@@ -763,6 +879,11 @@ export type CommunityImportRecordUncheckedUpdateManyWithoutBatchNestedInput = {
 }
 
 export type CommunityImportRecordCreateWithoutBatchInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  outcome?: string
+  outcomeReason?: string | null
+  contentHash?: string | null
   id?: string
   originalRowNumber: number
   participantRef?: string | null
@@ -786,6 +907,11 @@ export type CommunityImportRecordCreateWithoutBatchInput = {
 }
 
 export type CommunityImportRecordUncheckedCreateWithoutBatchInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  outcome?: string
+  outcomeReason?: string | null
+  contentHash?: string | null
   id?: string
   originalRowNumber: number
   participantRef?: string | null
@@ -838,6 +964,11 @@ export type CommunityImportRecordScalarWhereInput = {
   AND?: Prisma.CommunityImportRecordScalarWhereInput | Prisma.CommunityImportRecordScalarWhereInput[]
   OR?: Prisma.CommunityImportRecordScalarWhereInput[]
   NOT?: Prisma.CommunityImportRecordScalarWhereInput | Prisma.CommunityImportRecordScalarWhereInput[]
+  sourceKey?: Prisma.StringNullableFilter<"CommunityImportRecord"> | string | null
+  surveyYear?: Prisma.IntNullableFilter<"CommunityImportRecord"> | number | null
+  outcome?: Prisma.StringFilter<"CommunityImportRecord"> | string
+  outcomeReason?: Prisma.StringNullableFilter<"CommunityImportRecord"> | string | null
+  contentHash?: Prisma.StringNullableFilter<"CommunityImportRecord"> | string | null
   id?: Prisma.StringFilter<"CommunityImportRecord"> | string
   batchId?: Prisma.StringFilter<"CommunityImportRecord"> | string
   originalRowNumber?: Prisma.IntFilter<"CommunityImportRecord"> | number
@@ -862,6 +993,11 @@ export type CommunityImportRecordScalarWhereInput = {
 }
 
 export type CommunityImportRecordCreateManyBatchInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  outcome?: string
+  outcomeReason?: string | null
+  contentHash?: string | null
   id?: string
   originalRowNumber: number
   participantRef?: string | null
@@ -885,6 +1021,11 @@ export type CommunityImportRecordCreateManyBatchInput = {
 }
 
 export type CommunityImportRecordUpdateWithoutBatchInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outcome?: Prisma.StringFieldUpdateOperationsInput | string
+  outcomeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   originalRowNumber?: Prisma.IntFieldUpdateOperationsInput | number
   participantRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -908,6 +1049,11 @@ export type CommunityImportRecordUpdateWithoutBatchInput = {
 }
 
 export type CommunityImportRecordUncheckedUpdateWithoutBatchInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outcome?: Prisma.StringFieldUpdateOperationsInput | string
+  outcomeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   originalRowNumber?: Prisma.IntFieldUpdateOperationsInput | number
   participantRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -931,6 +1077,11 @@ export type CommunityImportRecordUncheckedUpdateWithoutBatchInput = {
 }
 
 export type CommunityImportRecordUncheckedUpdateManyWithoutBatchInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outcome?: Prisma.StringFieldUpdateOperationsInput | string
+  outcomeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   originalRowNumber?: Prisma.IntFieldUpdateOperationsInput | number
   participantRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -956,6 +1107,11 @@ export type CommunityImportRecordUncheckedUpdateManyWithoutBatchInput = {
 
 
 export type CommunityImportRecordSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  sourceKey?: boolean
+  surveyYear?: boolean
+  outcome?: boolean
+  outcomeReason?: boolean
+  contentHash?: boolean
   id?: boolean
   batchId?: boolean
   originalRowNumber?: boolean
@@ -983,6 +1139,11 @@ export type CommunityImportRecordSelect<ExtArgs extends runtime.Types.Extensions
 
 
 export type CommunityImportRecordSelectScalar = {
+  sourceKey?: boolean
+  surveyYear?: boolean
+  outcome?: boolean
+  outcomeReason?: boolean
+  contentHash?: boolean
   id?: boolean
   batchId?: boolean
   originalRowNumber?: boolean
@@ -1006,7 +1167,7 @@ export type CommunityImportRecordSelectScalar = {
   createdAt?: boolean
 }
 
-export type CommunityImportRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "batchId" | "originalRowNumber" | "participantRef" | "barangay" | "ageGroup" | "educationLevel" | "employmentStatus" | "occupation" | "industry" | "skillsJson" | "trainingInterest" | "trainingCategoriesJson" | "trainingProgramsJson" | "trainingBarriersJson" | "employmentBarriersJson" | "businessSector" | "assistanceNeededJson" | "rawJson" | "qualityFlagsJson" | "createdAt", ExtArgs["result"]["communityImportRecord"]>
+export type CommunityImportRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"sourceKey" | "surveyYear" | "outcome" | "outcomeReason" | "contentHash" | "id" | "batchId" | "originalRowNumber" | "participantRef" | "barangay" | "ageGroup" | "educationLevel" | "employmentStatus" | "occupation" | "industry" | "skillsJson" | "trainingInterest" | "trainingCategoriesJson" | "trainingProgramsJson" | "trainingBarriersJson" | "employmentBarriersJson" | "businessSector" | "assistanceNeededJson" | "rawJson" | "qualityFlagsJson" | "createdAt", ExtArgs["result"]["communityImportRecord"]>
 export type CommunityImportRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   batch?: boolean | Prisma.CommunityImportBatchDefaultArgs<ExtArgs>
 }
@@ -1017,6 +1178,11 @@ export type $CommunityImportRecordPayload<ExtArgs extends runtime.Types.Extensio
     batch: Prisma.$CommunityImportBatchPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    sourceKey: string | null
+    surveyYear: number | null
+    outcome: string
+    outcomeReason: string | null
+    contentHash: string | null
     id: string
     batchId: string
     originalRowNumber: number
@@ -1121,8 +1287,8 @@ export interface CommunityImportRecordDelegate<ExtArgs extends runtime.Types.Ext
    * // Get first 10 CommunityImportRecords
    * const communityImportRecords = await prisma.communityImportRecord.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const communityImportRecordWithIdOnly = await prisma.communityImportRecord.findMany({ select: { id: true } })
+   * // Only select the `sourceKey`
+   * const communityImportRecordWithSourceKeyOnly = await prisma.communityImportRecord.findMany({ select: { sourceKey: true } })
    * 
    */
   findMany<T extends CommunityImportRecordFindManyArgs>(args?: Prisma.SelectSubset<T, CommunityImportRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityImportRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1408,6 +1574,11 @@ export interface Prisma__CommunityImportRecordClient<T, Null = never, ExtArgs ex
  * Fields of the CommunityImportRecord model
  */
 export interface CommunityImportRecordFieldRefs {
+  readonly sourceKey: Prisma.FieldRef<"CommunityImportRecord", 'String'>
+  readonly surveyYear: Prisma.FieldRef<"CommunityImportRecord", 'Int'>
+  readonly outcome: Prisma.FieldRef<"CommunityImportRecord", 'String'>
+  readonly outcomeReason: Prisma.FieldRef<"CommunityImportRecord", 'String'>
+  readonly contentHash: Prisma.FieldRef<"CommunityImportRecord", 'String'>
   readonly id: Prisma.FieldRef<"CommunityImportRecord", 'String'>
   readonly batchId: Prisma.FieldRef<"CommunityImportRecord", 'String'>
   readonly originalRowNumber: Prisma.FieldRef<"CommunityImportRecord", 'Int'>

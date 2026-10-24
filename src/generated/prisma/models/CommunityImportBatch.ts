@@ -27,6 +27,9 @@ export type AggregateCommunityImportBatch = {
 }
 
 export type CommunityImportBatchAvgAggregateOutputType = {
+  surveyYear: number | null
+  skippedCount: number | null
+  reviewNeededCount: number | null
   recordCount: number | null
   validCount: number | null
   invalidCount: number | null
@@ -35,6 +38,9 @@ export type CommunityImportBatchAvgAggregateOutputType = {
 }
 
 export type CommunityImportBatchSumAggregateOutputType = {
+  surveyYear: number | null
+  skippedCount: number | null
+  reviewNeededCount: number | null
   recordCount: number | null
   validCount: number | null
   invalidCount: number | null
@@ -43,6 +49,10 @@ export type CommunityImportBatchSumAggregateOutputType = {
 }
 
 export type CommunityImportBatchMinAggregateOutputType = {
+  sourceKey: string | null
+  surveyYear: number | null
+  skippedCount: number | null
+  reviewNeededCount: number | null
   id: string | null
   activityId: string | null
   importedById: string | null
@@ -59,6 +69,10 @@ export type CommunityImportBatchMinAggregateOutputType = {
 }
 
 export type CommunityImportBatchMaxAggregateOutputType = {
+  sourceKey: string | null
+  surveyYear: number | null
+  skippedCount: number | null
+  reviewNeededCount: number | null
   id: string | null
   activityId: string | null
   importedById: string | null
@@ -75,6 +89,10 @@ export type CommunityImportBatchMaxAggregateOutputType = {
 }
 
 export type CommunityImportBatchCountAggregateOutputType = {
+  sourceKey: number
+  surveyYear: number
+  skippedCount: number
+  reviewNeededCount: number
   id: number
   activityId: number
   importedById: number
@@ -93,6 +111,9 @@ export type CommunityImportBatchCountAggregateOutputType = {
 
 
 export type CommunityImportBatchAvgAggregateInputType = {
+  surveyYear?: true
+  skippedCount?: true
+  reviewNeededCount?: true
   recordCount?: true
   validCount?: true
   invalidCount?: true
@@ -101,6 +122,9 @@ export type CommunityImportBatchAvgAggregateInputType = {
 }
 
 export type CommunityImportBatchSumAggregateInputType = {
+  surveyYear?: true
+  skippedCount?: true
+  reviewNeededCount?: true
   recordCount?: true
   validCount?: true
   invalidCount?: true
@@ -109,6 +133,10 @@ export type CommunityImportBatchSumAggregateInputType = {
 }
 
 export type CommunityImportBatchMinAggregateInputType = {
+  sourceKey?: true
+  surveyYear?: true
+  skippedCount?: true
+  reviewNeededCount?: true
   id?: true
   activityId?: true
   importedById?: true
@@ -125,6 +153,10 @@ export type CommunityImportBatchMinAggregateInputType = {
 }
 
 export type CommunityImportBatchMaxAggregateInputType = {
+  sourceKey?: true
+  surveyYear?: true
+  skippedCount?: true
+  reviewNeededCount?: true
   id?: true
   activityId?: true
   importedById?: true
@@ -141,6 +173,10 @@ export type CommunityImportBatchMaxAggregateInputType = {
 }
 
 export type CommunityImportBatchCountAggregateInputType = {
+  sourceKey?: true
+  surveyYear?: true
+  skippedCount?: true
+  reviewNeededCount?: true
   id?: true
   activityId?: true
   importedById?: true
@@ -244,6 +280,10 @@ export type CommunityImportBatchGroupByArgs<ExtArgs extends runtime.Types.Extens
 }
 
 export type CommunityImportBatchGroupByOutputType = {
+  sourceKey: string | null
+  surveyYear: number | null
+  skippedCount: number
+  reviewNeededCount: number
   id: string
   activityId: string
   importedById: string
@@ -283,6 +323,10 @@ export type CommunityImportBatchWhereInput = {
   AND?: Prisma.CommunityImportBatchWhereInput | Prisma.CommunityImportBatchWhereInput[]
   OR?: Prisma.CommunityImportBatchWhereInput[]
   NOT?: Prisma.CommunityImportBatchWhereInput | Prisma.CommunityImportBatchWhereInput[]
+  sourceKey?: Prisma.StringNullableFilter<"CommunityImportBatch"> | string | null
+  surveyYear?: Prisma.IntNullableFilter<"CommunityImportBatch"> | number | null
+  skippedCount?: Prisma.IntFilter<"CommunityImportBatch"> | number
+  reviewNeededCount?: Prisma.IntFilter<"CommunityImportBatch"> | number
   id?: Prisma.StringFilter<"CommunityImportBatch"> | string
   activityId?: Prisma.StringFilter<"CommunityImportBatch"> | string
   importedById?: Prisma.StringFilter<"CommunityImportBatch"> | string
@@ -302,6 +346,10 @@ export type CommunityImportBatchWhereInput = {
 }
 
 export type CommunityImportBatchOrderByWithRelationInput = {
+  sourceKey?: Prisma.SortOrderInput | Prisma.SortOrder
+  surveyYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  skippedCount?: Prisma.SortOrder
+  reviewNeededCount?: Prisma.SortOrder
   id?: Prisma.SortOrder
   activityId?: Prisma.SortOrder
   importedById?: Prisma.SortOrder
@@ -327,6 +375,10 @@ export type CommunityImportBatchWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.CommunityImportBatchWhereInput | Prisma.CommunityImportBatchWhereInput[]
   OR?: Prisma.CommunityImportBatchWhereInput[]
   NOT?: Prisma.CommunityImportBatchWhereInput | Prisma.CommunityImportBatchWhereInput[]
+  sourceKey?: Prisma.StringNullableFilter<"CommunityImportBatch"> | string | null
+  surveyYear?: Prisma.IntNullableFilter<"CommunityImportBatch"> | number | null
+  skippedCount?: Prisma.IntFilter<"CommunityImportBatch"> | number
+  reviewNeededCount?: Prisma.IntFilter<"CommunityImportBatch"> | number
   activityId?: Prisma.StringFilter<"CommunityImportBatch"> | string
   importedById?: Prisma.StringFilter<"CommunityImportBatch"> | string
   sourceFilename?: Prisma.StringFilter<"CommunityImportBatch"> | string
@@ -344,6 +396,10 @@ export type CommunityImportBatchWhereUniqueInput = Prisma.AtLeast<{
 }, "id" | "fingerprint">
 
 export type CommunityImportBatchOrderByWithAggregationInput = {
+  sourceKey?: Prisma.SortOrderInput | Prisma.SortOrder
+  surveyYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  skippedCount?: Prisma.SortOrder
+  reviewNeededCount?: Prisma.SortOrder
   id?: Prisma.SortOrder
   activityId?: Prisma.SortOrder
   importedById?: Prisma.SortOrder
@@ -368,6 +424,10 @@ export type CommunityImportBatchScalarWhereWithAggregatesInput = {
   AND?: Prisma.CommunityImportBatchScalarWhereWithAggregatesInput | Prisma.CommunityImportBatchScalarWhereWithAggregatesInput[]
   OR?: Prisma.CommunityImportBatchScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CommunityImportBatchScalarWhereWithAggregatesInput | Prisma.CommunityImportBatchScalarWhereWithAggregatesInput[]
+  sourceKey?: Prisma.StringNullableWithAggregatesFilter<"CommunityImportBatch"> | string | null
+  surveyYear?: Prisma.IntNullableWithAggregatesFilter<"CommunityImportBatch"> | number | null
+  skippedCount?: Prisma.IntWithAggregatesFilter<"CommunityImportBatch"> | number
+  reviewNeededCount?: Prisma.IntWithAggregatesFilter<"CommunityImportBatch"> | number
   id?: Prisma.StringWithAggregatesFilter<"CommunityImportBatch"> | string
   activityId?: Prisma.StringWithAggregatesFilter<"CommunityImportBatch"> | string
   importedById?: Prisma.StringWithAggregatesFilter<"CommunityImportBatch"> | string
@@ -384,6 +444,10 @@ export type CommunityImportBatchScalarWhereWithAggregatesInput = {
 }
 
 export type CommunityImportBatchCreateInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  skippedCount?: number
+  reviewNeededCount?: number
   id?: string
   sourceFilename: string
   fileType: string
@@ -401,6 +465,10 @@ export type CommunityImportBatchCreateInput = {
 }
 
 export type CommunityImportBatchUncheckedCreateInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  skippedCount?: number
+  reviewNeededCount?: number
   id?: string
   activityId: string
   importedById: string
@@ -418,6 +486,10 @@ export type CommunityImportBatchUncheckedCreateInput = {
 }
 
 export type CommunityImportBatchUpdateInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  skippedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewNeededCount?: Prisma.IntFieldUpdateOperationsInput | number
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceFilename?: Prisma.StringFieldUpdateOperationsInput | string
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
@@ -435,6 +507,10 @@ export type CommunityImportBatchUpdateInput = {
 }
 
 export type CommunityImportBatchUncheckedUpdateInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  skippedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewNeededCount?: Prisma.IntFieldUpdateOperationsInput | number
   id?: Prisma.StringFieldUpdateOperationsInput | string
   activityId?: Prisma.StringFieldUpdateOperationsInput | string
   importedById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -452,6 +528,10 @@ export type CommunityImportBatchUncheckedUpdateInput = {
 }
 
 export type CommunityImportBatchCreateManyInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  skippedCount?: number
+  reviewNeededCount?: number
   id?: string
   activityId: string
   importedById: string
@@ -468,6 +548,10 @@ export type CommunityImportBatchCreateManyInput = {
 }
 
 export type CommunityImportBatchUpdateManyMutationInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  skippedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewNeededCount?: Prisma.IntFieldUpdateOperationsInput | number
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceFilename?: Prisma.StringFieldUpdateOperationsInput | string
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
@@ -482,6 +566,10 @@ export type CommunityImportBatchUpdateManyMutationInput = {
 }
 
 export type CommunityImportBatchUncheckedUpdateManyInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  skippedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewNeededCount?: Prisma.IntFieldUpdateOperationsInput | number
   id?: Prisma.StringFieldUpdateOperationsInput | string
   activityId?: Prisma.StringFieldUpdateOperationsInput | string
   importedById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -514,6 +602,10 @@ export type CommunityImportBatchOrderByRelevanceInput = {
 }
 
 export type CommunityImportBatchCountOrderByAggregateInput = {
+  sourceKey?: Prisma.SortOrder
+  surveyYear?: Prisma.SortOrder
+  skippedCount?: Prisma.SortOrder
+  reviewNeededCount?: Prisma.SortOrder
   id?: Prisma.SortOrder
   activityId?: Prisma.SortOrder
   importedById?: Prisma.SortOrder
@@ -530,6 +622,9 @@ export type CommunityImportBatchCountOrderByAggregateInput = {
 }
 
 export type CommunityImportBatchAvgOrderByAggregateInput = {
+  surveyYear?: Prisma.SortOrder
+  skippedCount?: Prisma.SortOrder
+  reviewNeededCount?: Prisma.SortOrder
   recordCount?: Prisma.SortOrder
   validCount?: Prisma.SortOrder
   invalidCount?: Prisma.SortOrder
@@ -538,6 +633,10 @@ export type CommunityImportBatchAvgOrderByAggregateInput = {
 }
 
 export type CommunityImportBatchMaxOrderByAggregateInput = {
+  sourceKey?: Prisma.SortOrder
+  surveyYear?: Prisma.SortOrder
+  skippedCount?: Prisma.SortOrder
+  reviewNeededCount?: Prisma.SortOrder
   id?: Prisma.SortOrder
   activityId?: Prisma.SortOrder
   importedById?: Prisma.SortOrder
@@ -554,6 +653,10 @@ export type CommunityImportBatchMaxOrderByAggregateInput = {
 }
 
 export type CommunityImportBatchMinOrderByAggregateInput = {
+  sourceKey?: Prisma.SortOrder
+  surveyYear?: Prisma.SortOrder
+  skippedCount?: Prisma.SortOrder
+  reviewNeededCount?: Prisma.SortOrder
   id?: Prisma.SortOrder
   activityId?: Prisma.SortOrder
   importedById?: Prisma.SortOrder
@@ -570,6 +673,9 @@ export type CommunityImportBatchMinOrderByAggregateInput = {
 }
 
 export type CommunityImportBatchSumOrderByAggregateInput = {
+  surveyYear?: Prisma.SortOrder
+  skippedCount?: Prisma.SortOrder
+  reviewNeededCount?: Prisma.SortOrder
   recordCount?: Prisma.SortOrder
   validCount?: Prisma.SortOrder
   invalidCount?: Prisma.SortOrder
@@ -681,6 +787,10 @@ export type CommunityImportBatchUpdateOneRequiredWithoutRecordsNestedInput = {
 }
 
 export type CommunityImportBatchCreateWithoutImportedByInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  skippedCount?: number
+  reviewNeededCount?: number
   id?: string
   sourceFilename: string
   fileType: string
@@ -697,6 +807,10 @@ export type CommunityImportBatchCreateWithoutImportedByInput = {
 }
 
 export type CommunityImportBatchUncheckedCreateWithoutImportedByInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  skippedCount?: number
+  reviewNeededCount?: number
   id?: string
   activityId: string
   sourceFilename: string
@@ -742,6 +856,10 @@ export type CommunityImportBatchScalarWhereInput = {
   AND?: Prisma.CommunityImportBatchScalarWhereInput | Prisma.CommunityImportBatchScalarWhereInput[]
   OR?: Prisma.CommunityImportBatchScalarWhereInput[]
   NOT?: Prisma.CommunityImportBatchScalarWhereInput | Prisma.CommunityImportBatchScalarWhereInput[]
+  sourceKey?: Prisma.StringNullableFilter<"CommunityImportBatch"> | string | null
+  surveyYear?: Prisma.IntNullableFilter<"CommunityImportBatch"> | number | null
+  skippedCount?: Prisma.IntFilter<"CommunityImportBatch"> | number
+  reviewNeededCount?: Prisma.IntFilter<"CommunityImportBatch"> | number
   id?: Prisma.StringFilter<"CommunityImportBatch"> | string
   activityId?: Prisma.StringFilter<"CommunityImportBatch"> | string
   importedById?: Prisma.StringFilter<"CommunityImportBatch"> | string
@@ -758,6 +876,10 @@ export type CommunityImportBatchScalarWhereInput = {
 }
 
 export type CommunityImportBatchCreateWithoutActivityInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  skippedCount?: number
+  reviewNeededCount?: number
   id?: string
   sourceFilename: string
   fileType: string
@@ -774,6 +896,10 @@ export type CommunityImportBatchCreateWithoutActivityInput = {
 }
 
 export type CommunityImportBatchUncheckedCreateWithoutActivityInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  skippedCount?: number
+  reviewNeededCount?: number
   id?: string
   importedById: string
   sourceFilename: string
@@ -816,6 +942,10 @@ export type CommunityImportBatchUpdateManyWithWhereWithoutActivityInput = {
 }
 
 export type CommunityImportBatchCreateWithoutRecordsInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  skippedCount?: number
+  reviewNeededCount?: number
   id?: string
   sourceFilename: string
   fileType: string
@@ -832,6 +962,10 @@ export type CommunityImportBatchCreateWithoutRecordsInput = {
 }
 
 export type CommunityImportBatchUncheckedCreateWithoutRecordsInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  skippedCount?: number
+  reviewNeededCount?: number
   id?: string
   activityId: string
   importedById: string
@@ -864,6 +998,10 @@ export type CommunityImportBatchUpdateToOneWithWhereWithoutRecordsInput = {
 }
 
 export type CommunityImportBatchUpdateWithoutRecordsInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  skippedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewNeededCount?: Prisma.IntFieldUpdateOperationsInput | number
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceFilename?: Prisma.StringFieldUpdateOperationsInput | string
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
@@ -880,6 +1018,10 @@ export type CommunityImportBatchUpdateWithoutRecordsInput = {
 }
 
 export type CommunityImportBatchUncheckedUpdateWithoutRecordsInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  skippedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewNeededCount?: Prisma.IntFieldUpdateOperationsInput | number
   id?: Prisma.StringFieldUpdateOperationsInput | string
   activityId?: Prisma.StringFieldUpdateOperationsInput | string
   importedById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -896,6 +1038,10 @@ export type CommunityImportBatchUncheckedUpdateWithoutRecordsInput = {
 }
 
 export type CommunityImportBatchCreateManyImportedByInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  skippedCount?: number
+  reviewNeededCount?: number
   id?: string
   activityId: string
   sourceFilename: string
@@ -911,6 +1057,10 @@ export type CommunityImportBatchCreateManyImportedByInput = {
 }
 
 export type CommunityImportBatchUpdateWithoutImportedByInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  skippedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewNeededCount?: Prisma.IntFieldUpdateOperationsInput | number
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceFilename?: Prisma.StringFieldUpdateOperationsInput | string
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
@@ -927,6 +1077,10 @@ export type CommunityImportBatchUpdateWithoutImportedByInput = {
 }
 
 export type CommunityImportBatchUncheckedUpdateWithoutImportedByInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  skippedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewNeededCount?: Prisma.IntFieldUpdateOperationsInput | number
   id?: Prisma.StringFieldUpdateOperationsInput | string
   activityId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceFilename?: Prisma.StringFieldUpdateOperationsInput | string
@@ -943,6 +1097,10 @@ export type CommunityImportBatchUncheckedUpdateWithoutImportedByInput = {
 }
 
 export type CommunityImportBatchUncheckedUpdateManyWithoutImportedByInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  skippedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewNeededCount?: Prisma.IntFieldUpdateOperationsInput | number
   id?: Prisma.StringFieldUpdateOperationsInput | string
   activityId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceFilename?: Prisma.StringFieldUpdateOperationsInput | string
@@ -958,6 +1116,10 @@ export type CommunityImportBatchUncheckedUpdateManyWithoutImportedByInput = {
 }
 
 export type CommunityImportBatchCreateManyActivityInput = {
+  sourceKey?: string | null
+  surveyYear?: number | null
+  skippedCount?: number
+  reviewNeededCount?: number
   id?: string
   importedById: string
   sourceFilename: string
@@ -973,6 +1135,10 @@ export type CommunityImportBatchCreateManyActivityInput = {
 }
 
 export type CommunityImportBatchUpdateWithoutActivityInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  skippedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewNeededCount?: Prisma.IntFieldUpdateOperationsInput | number
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceFilename?: Prisma.StringFieldUpdateOperationsInput | string
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
@@ -989,6 +1155,10 @@ export type CommunityImportBatchUpdateWithoutActivityInput = {
 }
 
 export type CommunityImportBatchUncheckedUpdateWithoutActivityInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  skippedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewNeededCount?: Prisma.IntFieldUpdateOperationsInput | number
   id?: Prisma.StringFieldUpdateOperationsInput | string
   importedById?: Prisma.StringFieldUpdateOperationsInput | string
   sourceFilename?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1005,6 +1175,10 @@ export type CommunityImportBatchUncheckedUpdateWithoutActivityInput = {
 }
 
 export type CommunityImportBatchUncheckedUpdateManyWithoutActivityInput = {
+  sourceKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  skippedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewNeededCount?: Prisma.IntFieldUpdateOperationsInput | number
   id?: Prisma.StringFieldUpdateOperationsInput | string
   importedById?: Prisma.StringFieldUpdateOperationsInput | string
   sourceFilename?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1051,6 +1225,10 @@ export type CommunityImportBatchCountOutputTypeCountRecordsArgs<ExtArgs extends 
 
 
 export type CommunityImportBatchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  sourceKey?: boolean
+  surveyYear?: boolean
+  skippedCount?: boolean
+  reviewNeededCount?: boolean
   id?: boolean
   activityId?: boolean
   importedById?: boolean
@@ -1073,6 +1251,10 @@ export type CommunityImportBatchSelect<ExtArgs extends runtime.Types.Extensions.
 
 
 export type CommunityImportBatchSelectScalar = {
+  sourceKey?: boolean
+  surveyYear?: boolean
+  skippedCount?: boolean
+  reviewNeededCount?: boolean
   id?: boolean
   activityId?: boolean
   importedById?: boolean
@@ -1088,7 +1270,7 @@ export type CommunityImportBatchSelectScalar = {
   createdAt?: boolean
 }
 
-export type CommunityImportBatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "activityId" | "importedById" | "sourceFilename" | "fileType" | "fingerprint" | "recordCount" | "validCount" | "invalidCount" | "warningCount" | "duplicateCount" | "status" | "createdAt", ExtArgs["result"]["communityImportBatch"]>
+export type CommunityImportBatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"sourceKey" | "surveyYear" | "skippedCount" | "reviewNeededCount" | "id" | "activityId" | "importedById" | "sourceFilename" | "fileType" | "fingerprint" | "recordCount" | "validCount" | "invalidCount" | "warningCount" | "duplicateCount" | "status" | "createdAt", ExtArgs["result"]["communityImportBatch"]>
 export type CommunityImportBatchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   activity?: boolean | Prisma.GovernmentActivityDefaultArgs<ExtArgs>
   importedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1104,6 +1286,10 @@ export type $CommunityImportBatchPayload<ExtArgs extends runtime.Types.Extension
     records: Prisma.$CommunityImportRecordPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    sourceKey: string | null
+    surveyYear: number | null
+    skippedCount: number
+    reviewNeededCount: number
     id: string
     activityId: string
     importedById: string
@@ -1200,8 +1386,8 @@ export interface CommunityImportBatchDelegate<ExtArgs extends runtime.Types.Exte
    * // Get first 10 CommunityImportBatches
    * const communityImportBatches = await prisma.communityImportBatch.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const communityImportBatchWithIdOnly = await prisma.communityImportBatch.findMany({ select: { id: true } })
+   * // Only select the `sourceKey`
+   * const communityImportBatchWithSourceKeyOnly = await prisma.communityImportBatch.findMany({ select: { sourceKey: true } })
    * 
    */
   findMany<T extends CommunityImportBatchFindManyArgs>(args?: Prisma.SelectSubset<T, CommunityImportBatchFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityImportBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1489,6 +1675,10 @@ export interface Prisma__CommunityImportBatchClient<T, Null = never, ExtArgs ext
  * Fields of the CommunityImportBatch model
  */
 export interface CommunityImportBatchFieldRefs {
+  readonly sourceKey: Prisma.FieldRef<"CommunityImportBatch", 'String'>
+  readonly surveyYear: Prisma.FieldRef<"CommunityImportBatch", 'Int'>
+  readonly skippedCount: Prisma.FieldRef<"CommunityImportBatch", 'Int'>
+  readonly reviewNeededCount: Prisma.FieldRef<"CommunityImportBatch", 'Int'>
   readonly id: Prisma.FieldRef<"CommunityImportBatch", 'String'>
   readonly activityId: Prisma.FieldRef<"CommunityImportBatch", 'String'>
   readonly importedById: Prisma.FieldRef<"CommunityImportBatch", 'String'>

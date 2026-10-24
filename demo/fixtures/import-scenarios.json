@@ -1,0 +1,7 @@
+{
+  "version": "elb-demo-2026-v1",
+  "accepted": "import-accepted.csv",
+  "reviewOnly": "import-review-only.csv",
+  "policy": "Only the accepted file is persisted through the existing import API. Review-only duplicates, uncertain overlap and empty rejected rows are never silently accepted. Six imported activity records are not six additional unique citizen respondents. Overlap with personal surveys is unknown; do not add source totals as unique people.",
+  "reviewRows": {"2": "duplicate reference", "3": "duplicate reference", "4": "uncertain overlap, manual review", "5": "reject: no useful analytical data", "6": "missing values, retain unknowns"}
+}

@@ -10,6 +10,10 @@ datasource db {
 
 // IMPORTANT: role is SERVER-OWNED. New registrations are CITIZEN only.
 model User {
+  censusReviews CensusReview[]
+  censusAudits CensusAudit[]
+  censusScope CensusStaffScope?
+  censusRosterMemberships CensusAssistanceMember[]
   id            String    @id @db.VarChar(191)
   name          String    @db.VarChar(191)
   // Structured fields for new citizens. Nullable for legacy, invited staff and seed admin accounts.
@@ -404,6 +408,7 @@ model JobseekerProfile {
 // Do not store respondent names, emails, exact addresses or phone numbers.
 // Import is restricted to datasets with explicit use-for-insights consent.
 model SpesImportBatch {
+  surveyYear Int?
   id             String @id @default(cuid()) @db.VarChar(191)
   sourceLabel    String @db.VarChar(120)
   importedById   String @db.VarChar(191)
@@ -424,6 +429,7 @@ model SpesImportBatch {
 }
 
 model SpesSurveyRecord {
+  originalRowNumber Int?
   id             String @id @default(cuid()) @db.VarChar(191)
   batchId        String @db.VarChar(191)
   batch          SpesImportBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
@@ -561,6 +567,10 @@ model GovernmentActivity {
 }
 
 model CommunityImportBatch {
+  sourceKey String? @db.VarChar(180)
+  surveyYear Int?
+  skippedCount Int @default(0)
+  reviewNeededCount Int @default(0)
   id             String   @id @default(cuid()) @db.VarChar(191)
   activityId     String   @db.VarChar(191)
   activity       GovernmentActivity @relation(fields: [activityId], references: [id], onDelete: Restrict)
@@ -584,6 +594,11 @@ model CommunityImportBatch {
 }
 
 model CommunityImportRecord {
+  sourceKey String? @db.VarChar(180)
+  surveyYear Int?
+  outcome String @default("ACCEPTED") @db.VarChar(30)
+  outcomeReason String? @db.VarChar(500)
+  contentHash String? @db.Char(64)
   id                     String   @id @default(cuid()) @db.VarChar(191)
   batchId                String   @db.VarChar(191)
   batch                  CommunityImportBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
@@ -923,6 +938,7 @@ model CommunitySurveyWorkspace {
 }
 
 model CommunitySurveyRevision {
+  censusReviews CensusReview[]
   id String @id @default(cuid()) @db.VarChar(191)
   userId String @db.VarChar(191)
   user User @relation("SurveyRevisionOwner", fields: [userId], references: [id], onDelete: Restrict)
@@ -989,6 +1005,7 @@ model EstablishmentSurvey {
   @@map("establishment_survey")
 }
 model EstablishmentRevision {
+  censusReviews CensusReview[]
   id String @id @default(cuid()) @db.VarChar(191)
   surveyId String @db.VarChar(191)
   survey EstablishmentSurvey @relation(fields: [surveyId], references: [id], onDelete: Restrict)
@@ -1016,4 +1033,71 @@ model EstablishmentOperation {
   @@unique([ownerId, requestKey])
   @@index([establishmentId])
   @@map("establishment_operation")
+}
+
+
+model CensusReview {
+  id String @id @default(cuid()) @db.VarChar(191)
+  individualRevisionId String? @db.VarChar(191)
+  individualRevision CommunitySurveyRevision? @relation(fields: [individualRevisionId], references: [id], onDelete: Restrict)
+  establishmentRevisionId String? @db.VarChar(191)
+  establishmentRevision EstablishmentRevision? @relation(fields: [establishmentRevisionId], references: [id], onDelete: Restrict)
+  actorId String @db.VarChar(191)
+  actor User @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  action String @db.VarChar(20)
+  note String? @db.VarChar(1000)
+  requestKey String @db.VarChar(80)
+  payloadHash String @db.Char(64)
+  createdAt DateTime @default(now())
+  @@unique([actorId, requestKey])
+  @@index([individualRevisionId, createdAt])
+  @@index([establishmentRevisionId, createdAt])
+  @@map("census_review")
+}
+model CensusStaffScope {
+  userId String @id @db.VarChar(191)
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  barangaysJson String @db.Text
+  version Int @default(1)
+  @@map("census_staff_scope")
+}
+model CensusAssistanceRoster {
+  barangay String @id @db.VarChar(100)
+  version Int @default(1)
+  confirmedAt DateTime @default(now())
+  members CensusAssistanceMember[]
+  @@map("census_assistance_roster")
+}
+model CensusAssistanceMember {
+  barangay String @db.VarChar(100)
+  roster CensusAssistanceRoster @relation(fields: [barangay], references: [barangay], onDelete: Restrict)
+  staffId String @db.VarChar(191)
+  staff User @relation(fields: [staffId], references: [id], onDelete: Restrict)
+  @@id([barangay, staffId])
+  @@map("census_assistance_member")
+}
+model CensusAudit {
+  id String @id @default(cuid()) @db.VarChar(191)
+  actorId String @db.VarChar(191)
+  actor User @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  action String @db.VarChar(40)
+  target String @db.VarChar(191)
+  detailsJson String @db.LongText
+  createdAt DateTime @default(now())
+  @@index([action, target, createdAt])
+  @@map("census_audit")
+}
+model CensusSourceRecord {
+  identityKey String @id @db.Char(64)
+  sourceKey String @db.VarChar(180)
+  surveyYear Int
+  sourceRef String @db.VarChar(191)
+  contentHash String @db.Char(64)
+  conflicted Boolean @default(false)
+  @@map("census_source_record")
+}
+model CensusImportLock {
+  id Int @id
+  version Int @default(0)
+  @@map("census_import_lock")
 }

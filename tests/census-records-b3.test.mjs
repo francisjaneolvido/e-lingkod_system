@@ -1,0 +1,82 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { loadServerTypescript } from './helpers/load-typescript.mjs';
+const enabled = /^elb_b3_test_[a-f0-9]{32}$/.test(process.env.ELB_B3_TEST_DATABASE || '');
+test('B3 protected records, traceability, assistance and imports', { skip: !enabled }, async t => {
+  const hook = loadServerTypescript(); const { prisma } = await import('../src/lib/prisma.ts');
+  const census = await import('../src/features/census/server/data.ts');
+  const imports = await import('../src/features/census/server/imports.ts');
+  const personal = await import('../src/features/community/server/survey-lifecycle.ts');
+  const user = (id, role) => prisma.user.create({ data: { id, name: 'Synthetic ' + id, email: id + '@example.test', role } });
+  const [admin, staff, denied, citizen] = await Promise.all([user('b3-admin', 'ADMIN'), user('b3-staff', 'STAFF'), user('b3-denied', 'STAFF'), user('b3-citizen', 'CITIZEN')]);
+  const answers = { surveyYear: 2026, status: 'SUBMITTED', barangay: 'Bambang', ageGroup: '25-34', educationLevel: 'COLLEGE', employmentStatus: 'EMPLOYED_FULL_TIME', skills: ['Data Entry'], consentAggregated: true };
+  await personal.saveCitizenSurvey({ ...answers, expectedVersion: 0, expectedConsentVersion: 0, requestKey: 'b3_record_first_revision' }, citizen);
+  try {
+    await t.test('permission AND explicit barangay scope, filters and paginated full history', async () => {
+      await assert.rejects(census.listRecords(citizen, {})); await assert.rejects(census.listRecords(denied, {}));
+      await prisma.staffPermission.create({ data: { userId: staff.id, module: 'CENSUS' } });
+      assert.equal((await census.listRecords(staff, {})).total, 0);
+      await census.setRecordScope(admin, { staffId: staff.id, barangays: ['Bambang'], expectedVersion: 0 });
+      const list = await census.listRecords(staff, { kind: 'INDIVIDUAL', year: '2026', barangay: 'Bambang', employment: 'EMPLOYED_FULL_TIME', status: 'SUBMITTED', pageSize: '1' });
+      assert.equal(list.total, 1); assert.equal(list.items.length, 1);
+      const detail = await census.recordDetail(staff, 'INDIVIDUAL', list.items[0].id, { pageSize: '1' });
+      assert.equal(detail.history.total, 1); assert.ok(detail.record.skillsJson);
+      await assert.rejects(census.listRecords(staff, { barangay: 'Maahas' }));
+    });
+    await t.test('revision-specific events, actor/time, staff approval denial and no inherited approval', async () => {
+      const list = await census.listRecords(admin, { kind: 'INDIVIDUAL', search: citizen.email }); const row = list.items[0];
+      const revision = await prisma.communitySurveyRevision.findFirstOrThrow({ where: { userId: citizen.id } });
+      await census.addReview(staff, { kind: 'INDIVIDUAL', revisionId: revision.id, action: 'ASSESSED', note: 'Synthetic assessment', requestKey: 'b3_assessment_event' });
+      await assert.rejects(census.addReview(staff, { kind: 'INDIVIDUAL', revisionId: revision.id, action: 'APPROVED', requestKey: 'b3_staff_approval_denied' }));
+      await census.addReview(admin, { kind: 'INDIVIDUAL', revisionId: revision.id, action: 'APPROVED', requestKey: 'b3_admin_approval_event' });
+      const current = await personal.ownedSurveyState(citizen.id, 2026);
+      await personal.saveCitizenSurvey({ ...answers, occupation: 'Later revision', expectedVersion: current.workspaceVersion, expectedConsentVersion: current.consentVersion, requestKey: 'b3_record_later_revision' }, citizen);
+      const detail = await census.recordDetail(admin, 'INDIVIDUAL', row.id, {});
+      assert.equal(detail.history.total, 2); assert.equal(detail.history.items[0].reviews.length, 0);
+      assert.equal(detail.history.items[1].reviews.find(e => e.action === 'APPROVED').actorId, admin.id);
+      assert.ok(detail.history.items[1].reviews[0].createdAt);
+      const next = await census.recordDetail(admin, 'INDIVIDUAL', row.id, { page: '2', pageSize: '1' });
+      assert.equal(next.history.total, 2); assert.equal(next.history.items[0].id, revision.id);
+      const empty = await census.listRecords(admin, { kind: 'INDIVIDUAL', search: citizen.email, page: '2', pageSize: '1' });
+      assert.equal(empty.total, 1); assert.equal(empty.items.length, 0);
+      await assert.rejects(census.listRecords(admin, { year: '2026 OR 1=1' }));
+    });
+    await t.test('assistance: unconfigured versus confirmed zero; unique active staff, audit, no grant', async () => {
+      assert.equal((await census.assistanceRoster(admin)).find(r => r.barangay === 'Bambang').count, null);
+      await assert.rejects(census.saveAssistanceRoster(staff, { barangay: 'Bambang', staffIds: [], expectedVersion: 0 }));
+      await census.saveAssistanceRoster(admin, { barangay: 'Bambang', staffIds: [], expectedVersion: 0 });
+      assert.equal((await census.assistanceRoster(admin)).find(r => r.barangay === 'Bambang').count, 0);
+      await census.saveAssistanceRoster(admin, { barangay: 'Bambang', staffIds: [denied.id, denied.id], expectedVersion: 1 });
+      assert.equal((await census.assistanceRoster(admin)).find(r => r.barangay === 'Bambang').count, 1);
+      assert.equal(await prisma.staffPermission.count({ where: { userId: denied.id, module: 'CENSUS' } }), 0);
+      await prisma.user.update({ where: { id: denied.id }, data: { role: 'CITIZEN' } });
+      const staleRoster = (await census.assistanceRoster(admin)).find(r => r.barangay === 'Bambang');
+      assert.equal(staleRoster.count, null); assert.equal(staleRoster.needsConfirmation, true);
+      assert.equal(await prisma.censusAudit.count({ where: { action: 'ASSISTANCE_ROSTER', actorId: admin.id } }), 2);
+    });
+    const table = rows => ({ headers: ['Reference', 'Barangay', 'Age', 'Education', 'Employment'], rows, fileType: 'CSV', sourceFilename: 'synthetic.csv' });
+    const mapping = { 0: 'participantRef', 1: 'barangay', 2: 'ageGroup', 3: 'educationLevel', 4: 'employmentStatus' };
+    const meta = { source: 'TEST-SOURCE', surveyYear: 2026, activityName: 'Synthetic B3 import', activityType: 'TEST', implementingOffice: 'PESO', intendedUse: 'INTERNAL_STATISTICS' };
+    const first = ['ref-A', 'Bambang', '25-34', 'college', 'employed'];
+    await t.test('stable source identity, explicit outcomes, concurrent exact replay and provenance', async () => {
+      const input = { table: table([first, first, ['ref-B', ...first.slice(1)], ['', '', '', '', '']]), mapping, meta };
+      const [a, b] = await Promise.all([imports.commitImport(admin, input), imports.commitImport(admin, input)]);
+      assert.equal(a.batchId, b.batchId); assert.equal(a.imported, 2); assert.equal(a.skipped, 1); assert.equal(a.rejected, 1);
+      assert.equal(await prisma.communityImportBatch.count({ where: { id: a.batchId } }), 1);
+      const rows = await prisma.communityImportRecord.findMany({ where: { batchId: a.batchId } });
+      assert.equal(rows.length, 4); assert.equal(rows[0].surveyYear, 2026); assert.ok(rows.every(r => r.originalRowNumber >= 2));
+      const changed = await imports.commitImport(admin, { table: table([['ref-A', 'Bambang', '35-44', 'college', 'employed']]), mapping, meta });
+      assert.equal(changed.imported, 0); assert.equal(changed.reviewNeeded, 1);
+      assert.equal(await prisma.communityImportRecord.count({ where: { sourceKey: 'TEST-SOURCE', participantRef: 'ref-A', outcome: 'ACCEPTED' } }), 0);
+      const other = await imports.commitImport(admin, { table: table([['ref-C', ...first.slice(1)]]), mapping, meta: { ...meta, source: 'OTHER-SOURCE' } });
+      assert.equal(other.imported, 1);
+      assert.match((await prisma.communityImportRecord.findFirstOrThrow({ where: { batchId: other.batchId } })).qualityFlagsJson, /overlap/i);
+      await assert.rejects(imports.commitImport(citizen, input));
+      const historical = await imports.commitImport(admin, { table: table([first]), mapping, meta: { ...meta, surveyYear: 2025 } });
+      assert.equal(historical.imported, 1, 'Same reference in a different actual survey year is distinct');
+      const caseSensitive = await imports.commitImport(admin, { table: table([['ref-a', ...first.slice(1)]]), mapping, meta });
+      assert.equal(caseSensitive.imported, 1, 'Opaque references retain exact case semantics');
+      assert.equal((await prisma.communityImportRecord.findFirstOrThrow({ where: { batchId: caseSensitive.batchId } })).outcome, 'ACCEPTED');
+    });
+  } finally { await prisma.$disconnect(); hook.deregister(); }
+});
