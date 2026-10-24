@@ -28,7 +28,14 @@
     "test:census": "node scripts/verify-census-records.mjs",
     "test:census:browser": "node scripts/verify-census-records.mjs --serve",
     "test:demo:transfer": "node scripts/demo/check-transfer.mjs",
-    "test:demo:upgrade": "node scripts/demo/check-upgrade.mjs"
+    "test:demo:upgrade": "node scripts/demo/check-upgrade.mjs",
+    "test:analytics": "node scripts/verify-census-records.mjs tests/census-analytics-b4.test.mjs",
+    "test:analytics:browser": "node scripts/verify-census-records.mjs --serve --analytics",
+    "hackathon:prepare": "node scripts/hackathon/run.mjs prepare",
+    "hackathon:import": "node scripts/hackathon/run.mjs apply",
+    "hackathon:verify": "node scripts/hackathon/run.mjs verify",
+    "test:hackathon-import": "node scripts/verify-hackathon-import.mjs",
+    "hackathon:report": "node scripts/hackathon/run.mjs report"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

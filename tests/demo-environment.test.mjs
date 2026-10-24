@@ -1,9 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { verifiedSqlText } from '../scripts/demo/transfer.mjs';
 import { guardedTarget, readDemoConfig, commandTarget } from '../scripts/demo/config.mjs';
 import { loadServerTypescript } from './helpers/load-typescript.mjs';
 import { safeRow } from '../scripts/demo/database.mjs';
 import { accounts, vacancyScenarios } from '../demo/fixtures/dataset.mjs';
+
+test('SQL transport accepts only byte-equivalent approved LF/CRLF content and preserves escaped row newlines', () => {
+  const sql="-- synthetic export\nINSERT INTO example VALUES ('line1\\r\\nline2');\n";
+  const hash=createHash('sha256').update(sql).digest('hex');
+  assert.equal(verifiedSqlText(sql,hash),sql);
+  assert.equal(verifiedSqlText(sql.replace(/\n/g,'\r\n'),hash),sql);
+  for(const tampered of [sql+'DROP TABLE example;\n',sql.replace('line1','changed')])assert.throws(()=>verifiedSqlText(tampered.replace(/\n/g,'\r\n'),hash),/checksum mismatch/);
+  const mixed="-- synthetic\nINSERT INTO example VALUES ('literal\r\nvalue');\n";
+  assert.equal(verifiedSqlText(mixed,createHash('sha256').update(mixed).digest('hex')),mixed);
+});
 
 test('demo target rejects application, remote and lookalike database names', () => {
   for (const name of ['e_lingkod_bayan', 'e_lingkod_bayan_demo_extra', 'mysql', 'e_lingkod_bayan_demo_restore_bad-name']) {

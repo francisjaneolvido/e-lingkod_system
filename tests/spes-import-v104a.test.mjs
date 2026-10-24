@@ -7,12 +7,12 @@ const read=p=>fs.readFileSync(p,'utf8');
 class TestCivicError extends Error{constructor(message,status=400){super(message);this.status=status;}}
 const src=read('src/features/jobs/domain.ts');
 const js=ts.transpileModule(src,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText;
-const module={exports:{}};
+const domainModule={exports:{}};
 vm.runInNewContext(`(function(require,module,exports){${js}\n})`,{URL}) (name=>{
  if(name==='@/features/civic/validation')return {CivicError:TestCivicError};
  throw Error(name);
-},module,module.exports);
-const {previewSpesCsv,parseSpesCsv}=module.exports;
+},domainModule,domainModule.exports);
+const {previewSpesCsv,parseSpesCsv}=domainModule.exports;
 const head='consent,barangay,education,skills,interests,availability\n';
 const valid='YES,Demo A,COLLEGE,Data entry,Office & admin,FULL_TIME\n';
 test('preview validates rows without saving and pinpoints invalid consent',()=>{
@@ -30,7 +30,8 @@ test('strict final parser rejects every invalid CSV, unlike preview',()=>{
 test('preview and confirm are separate protected routes',()=>{
  const prev=read('src/app/api/admin/jobs/import/preview/route.ts');
  const confirm=read('src/app/api/admin/jobs/import/route.ts');
- for(const code of [prev,confirm]){assert.match(code,/requireApiViewer\(request,"JOBS"\)/);assert.match(code,/assertSameOrigin\(request\)/);}
+ for(const code of [prev,confirm]){assert.match(code,/requireApiViewer\(request,"CENSUS"\)/);assert.match(code,/assertSameOrigin\(request\)/);}
+ for(const code of [prev,confirm]){assert.match(code,/assertSpesImportScope\(viewer,/);assert.match(code,/assertSpesReplayScope\(viewer,/);}
  assert.match(prev,/previewSpesCsv/);assert.match(confirm,/parseSpesCsv/);
  assert.match(confirm,/form\.get\("previewHash"\)/);assert.match(confirm,/findDuplicateSpesBatch/);
  assert.match(confirm,/spesImportBatch\.create/);assert.match(confirm,/createMany/);
@@ -75,6 +76,7 @@ test('fingerprints are stable even when rows are reordered, and catch identical 
  vm.runInNewContext(`(function(require,module,exports){${transpiled}\n})`,{File,FormData})((name)=>{
    if(name==='node:crypto')return {createHash};
    if(name==='@/lib/prisma')return {prisma:mock};
+   if(name==='@/features/census/server/data')return {recordScope:()=>{throw Error('Fingerprint calculation must not read authority');},assertBarangay:()=>{throw Error('Fingerprint calculation must not require scope');}};
    if(name==='@/features/civic/validation')return {CivicError:TestCivicError};
    if(name==='server-only')return {};
    throw Error(name);

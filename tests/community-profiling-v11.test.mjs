@@ -10,7 +10,8 @@ const domain = read("src/features/community/domain.ts");
 const data = read("src/features/community/server/data.ts");
 const importer = read("src/features/community/components/community-import-workspace.tsx");
 const importServer = read("src/features/community/server/import-file.ts");
-const insights = read("src/features/community/components/employment-insights-view.tsx");
+const insights = read("src/features/analytics/domain.ts");
+const analyticalData = read("src/features/analytics/server/data.ts");
 const censusPage = read("src/app/community-census/page.tsx");
 const adminCensus = read("src/app/admin/census/page.tsx");
 const opportunities = read("src/app/opportunities/page.tsx");
@@ -48,18 +49,18 @@ test("Citizen Profiling is a survey for community planning, not a job applicatio
   assert.doesNotMatch(survey, /Submit application/i);
 });
 
-test("skills, training interests and barriers are collected and included in Job Matching analytics", () => {
+test("skills, training interests and barriers are collected and included in protected workforce analytics", () => {
   assert.match(domain, /COMMUNITY_SKILLS/);
   assert.match(domain, /TRAINING_PROGRAMS/);
   assert.match(domain, /TRAINING_BARRIERS/);
   assert.match(domain, /EMPLOYMENT_BARRIERS/);
   assert.match(survey, /TESDA-related/);
-  assert.match(data, /trainingPrograms/);
-  assert.match(data, /trainingBarriers/);
-  assert.match(data, /employmentBarriers/);
-  assert.match(insights, /Most requested training/);
-  assert.match(insights, /Training barriers/);
-  assert.match(insights, /Employment barriers/);
+  assert.match(insights, /trainingPrograms/);
+  assert.match(insights, /trainingBarriers/);
+  assert.match(insights, /employmentBarriers/);
+  assert.match(insights, /Training programs requested/);
+  assert.match(insights, /Reported training barriers/);
+  assert.match(insights, /Reported employment barriers/);
 });
 
 test("citizen survey and historical government activity imports stay separate at storage and analytics layers", () => {
@@ -67,8 +68,9 @@ test("citizen survey and historical government activity imports stay separate at
   assert.match(schema, /model GovernmentActivity/);
   assert.match(schema, /model CommunityImportBatch/);
   assert.match(schema, /model CommunityImportRecord/);
-  assert.match(data, /source: "CITIZEN_SURVEY"\|"HISTORICAL"/);
-  assert.match(data, /intendedUse:"PUBLIC_AGGREGATED"/);
+  assert.match(analyticalData, /source observations/);
+  assert.match(analyticalData, /groups=await imported/);
+  assert.match(analyticalData, /groups=await spes/);
 });
 
 test("historical importer supports CSV and XLSX, mapping, validation and duplicate signals", () => {
@@ -81,12 +83,14 @@ test("historical importer supports CSV and XLSX, mapping, validation and duplica
   assert.match(importServer, /normalizeImportedStatus/);
 });
 
-test("public employment insights use aggregate privacy controls and are explicitly not Census", () => {
-  assert.match(data, /function suppress/);
-  assert.match(data, /minimumPublicGroupSize:5/);
-  assert.match(insights, /part of the Job Matching module/);
-  assert.match(insights, /not the municipality&apos;s official census/);
-  assert.match(insights, /public Job Matching insight breakdowns suppress categories with fewer than/);
+test("D08 public analytics fails closed without counts or filter metadata", () => {
+  assert.match(data, /publicEmploymentInsights\(\) \{ throw new CivicError\("Public analytics release is unavailable/);
+  const publicPage=read("src/app/community-employment/insights/page.tsx");
+  const landing=read("src/app/community-employment/page.tsx");
+  assert.doesNotMatch(publicPage, /publicEmploymentInsights|workforceAnalytics|EmploymentInsightsView/);
+  assert.doesNotMatch(landing, /publicEmploymentInsights|data\.total|data\.employment/);
+  assert.match(publicPage, /Public and citizen statistics are not currently released/);
+  assert.match(read("src/app/api/admin/census/analytics/route.ts"), /requireApiViewer\(request,'CENSUS'\)/);
 });
 
 test("Public census remains private-data free while protected B3 records are separate", () => {

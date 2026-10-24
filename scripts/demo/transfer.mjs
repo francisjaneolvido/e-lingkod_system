@@ -6,6 +6,14 @@ import { VERSION } from './config.mjs';
 
 const separator = '\n-- ELB-DEMO-STATEMENT\n';
 const sqlHash = sql => createHash('sha256').update(sql).digest('hex');
+export function verifiedSqlText(sql, expectedHash) {
+  // Windows transport may convert LF separators to CRLF. Never bypass integrity:
+  // accept a transport variant only if it reproduces the exact approved export.
+  if (sqlHash(sql) === expectedHash) return sql;
+  const canonical = sql.replace(/\r\n/g, '\n');
+  assert.equal(sqlHash(canonical), expectedHash, 'Export checksum mismatch');
+  return canonical;
+}
 function sqlValue(db, value) {
   if (value === null || value === undefined) return 'NULL';
   if (Buffer.isBuffer(value)) return `X'${value.toString('hex')}'`;
@@ -48,8 +56,8 @@ export async function restore(config) {
   const db = await connect(config.restore, true);
   try {
     const manifest = JSON.parse(fs.readFileSync('demo/export-manifest.json', 'utf8'));
-    const sql = fs.readFileSync('demo/e_lingkod_bayan_demo.sql', 'utf8');
-    assert.equal(manifest.datasetVersion, VERSION); assert.equal(sqlHash(sql), manifest.sqlSha256, 'Export checksum mismatch');
+    const sql = verifiedSqlText(fs.readFileSync('demo/e_lingkod_bayan_demo.sql', 'utf8'), manifest.sqlSha256);
+    assert.equal(manifest.datasetVersion, VERSION);
     const existing = await tables(db);
     if (existing.length) {
       const state = await metadata(db);

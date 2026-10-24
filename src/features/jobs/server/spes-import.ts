@@ -2,6 +2,8 @@ import "server-only";
 import { createHash } from "node:crypto";
 import { prisma } from "@/lib/prisma";
 import type { parseSpesCsv } from "../domain";
+import type { CivicViewer } from "@/features/civic/types";
+import { recordScope, assertBarangay } from "@/features/census/server/data";
 import { CivicError } from "@/features/civic/validation";
 
 export type SpesRecord=ReturnType<typeof parseSpesCsv>[number];
@@ -54,4 +56,17 @@ export async function readSpesFile(form:FormData){
 
 export function isUniqueConstraintError(error:unknown){
   return Boolean(error&&typeof error==="object"&&"code" in error&&error.code==="P2002");
+}
+
+/** Preview and commit share the protected census record contract. */
+export async function assertSpesImportScope(viewer:CivicViewer,records:SpesRecord[]) {
+  const scope=await recordScope(viewer);
+  for(const record of records)assertBarangay(scope,record.barangay);
+}
+export async function assertSpesReplayScope(viewer:CivicViewer,batchId:string) {
+  const scope=await recordScope(viewer);
+  if(scope===null)return;
+  const batch=await prisma.spesImportBatch.findUniqueOrThrow({where:{id:batchId},select:{importedById:true,records:{select:{barangay:true}}}});
+  if(batch.importedById!==viewer.id || batch.records.some(r=>!scope.includes(r.barangay)))
+    throw new CivicError('This source import cannot be accessed within your current authority.',403);
 }
