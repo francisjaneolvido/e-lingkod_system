@@ -52,7 +52,7 @@ function initialQuickView(raw:string,isSuperAdmin:boolean):QuickView {
  return isSuperAdmin?"REVIEW":"MY_WORK";
 }
 
-export function JobConsole({data,viewerId,viewerName,asOf,isSuperAdmin,canViewInsights,initialView,saved=false}:{data:JobsDashboardData;viewerId:string;viewerName:string;asOf:string;isSuperAdmin:boolean;canViewInsights:boolean;initialView:string;saved?:boolean}){
+export function JobConsole({data,viewerId,viewerName,asOf,isSuperAdmin,canViewInsights,initialView,saved=false}:{data:Pick<JobsDashboardData,"jobs"|"stats">;viewerId:string;viewerName:string;asOf:string;isSuperAdmin:boolean;canViewInsights:boolean;initialView:string;saved?:boolean}){
  const router=useRouter();const now=useMemo(()=>new Date(asOf),[asOf]);
  const [quickView,setQuickView]=useState<QuickView>(()=>initialQuickView(initialView,isSuperAdmin));
  const [search,setSearch]=useState("");const [status,setStatus]=useState<Status>("ALL");const [sector,setSector]=useState("ALL");const [type,setType]=useState("ALL");
@@ -106,7 +106,7 @@ export function JobConsole({data,viewerId,viewerName,asOf,isSuperAdmin,canViewIn
  ];
 
  return <div className="jobs-workspace">
-  <header className="jobs-header"><div><span className="jobs-eyebrow">EMPLOYMENT & LIVELIHOOD / PESO</span><h1>Opportunity Management</h1><p>{isSuperAdmin?"Review submitted vacancies, publish verified listings, and monitor their lifecycle.":"Prepare PESO opportunity listings and submit them for Super Admin verification before they become public."} Signed in as {viewerName}.</p><div className="mt-3 flex flex-wrap gap-2">{canViewInsights&&<Link href="/admin/jobs/insights" className="jobs-small-button"><BarChart3 size={14}/> Employment insights</Link>}<Link href="/opportunities" className="jobs-small-button">Citizen view <ArrowUpRight size={13}/></Link></div></div><Link href="/admin/jobs/new" className="jobs-primary-button"><Plus size={17}/> Add opportunity</Link></header>
+  <header className="jobs-header"><div><span className="jobs-eyebrow">EMPLOYMENT & LIVELIHOOD / PESO</span><h1>Opportunity Management</h1><p>{isSuperAdmin?"Review submitted vacancies, publish verified listings, and monitor their lifecycle.":"Prepare PESO opportunity listings and submit them for Super Admin verification before they become public."} Signed in as {viewerName}.</p><div className="mt-3 flex flex-wrap gap-2">{canViewInsights&&<Link href="/admin/census/analytics" className="jobs-small-button"><BarChart3 size={14}/> Workforce &amp; social analytics</Link>}<Link href="/opportunities" className="jobs-small-button">Citizen view <ArrowUpRight size={13}/></Link></div></div><Link href="/admin/jobs/new" className="jobs-primary-button"><Plus size={17}/> Add opportunity</Link></header>
 
   <div className="jobs-metrics">
    {[{label:"Published",value:counts.active,icon:BriefcaseBusiness,view:"PUBLISHED" as QuickView},{label:"My work",value:counts.myWork,icon:ClipboardList,view:"MY_WORK" as QuickView},{label:isSuperAdmin?"Needs verification":"For verification",value:counts.pending,icon:ShieldCheck,view:"REVIEW" as QuickView},{label:"Returned to me",value:counts.returned,icon:ClipboardList,view:"RETURNED" as QuickView}].map(metric=><button type="button" onClick={()=>setQuickView(metric.view)} className="jobs-metric text-left" key={metric.label}><div><span>{metric.label}</span><strong>{metric.value}</strong></div><metric.icon aria-hidden size={20}/></button>)}

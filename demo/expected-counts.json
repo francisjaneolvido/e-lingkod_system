@@ -146,5 +146,44 @@
       "uniquePeople": null,
       "reason": "Activity source rows can overlap citizens and each other; never add to individual respondent totals."
     }
+  },
+  "analytics": {
+    "policy": "Protected CENSUS-scoped analytics/exports only; public release deferred (D08).",
+    "referenceYear": 2026,
+    "individual": {
+      "current": 68,
+      "historical2025": 8,
+      "qualificationsRecorded": 23,
+      "completedTrainingRecorded": 17,
+      "overseasExperience": {
+        "CURRENT": 5,
+        "FORMER": 5,
+        "NEVER": 58
+      }
+    },
+    "establishment": {
+      "current": 17,
+      "historical2025": 5,
+      "knownWorkerSum": 370,
+      "knownTotals": 13,
+      "unknownTotals": 4
+    },
+    "imports": {
+      "currentBySource": {
+        "DEMO-B3-SOURCE": 2
+      },
+      "unknownSurveyYearExcluded": 6,
+      "notAccepted": 5,
+      "uniquePeople": null
+    },
+    "spes": {
+      "currentRealObservations": 0,
+      "currentAllKinds": 0
+    },
+    "staffRespondents": {
+      "staff.01@example.test": 68,
+      "staff.02@example.test": 5
+    },
+    "expectationProvenance": "Individual fixtures index0–67 retain submitted2026 answers; acquired qualifications every3rd index and training every4th. Historical fixtures indices0/10/20/30/40/50/60/70. Existing approved expected counts define workforce/source outcomes; no SPES table fixture is seeded. Optional matching/program choices and later drafts do not reduce aggregated-statistics participation. B3 fixtures explicitly grant Staff01 all canonical barangays and Staff02 Bambang; roster locations do not define their record scopes."
   }
 }

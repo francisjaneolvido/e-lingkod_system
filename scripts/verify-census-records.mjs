@@ -16,6 +16,10 @@ try {
     const browserEnv = { ...env, BETTER_AUTH_URL: 'http://localhost:3103', NEXT_PUBLIC_APP_URL: 'http://localhost:3103', ELB_NEXT_DIST_DIR: '.next-b3-test' };
     const seed = spawnSync(process.execPath, ['tests/helpers/prepare-census-browser.mjs'], { env: browserEnv, stdio: 'inherit', windowsHide: true });
     if (seed.status !== 0) throw new Error('B3 browser fixture failed');
+    if (process.argv.includes('--analytics')) {
+      const analyticsSeed = spawnSync(process.execPath, ['tests/helpers/prepare-analytics-browser.mjs'], { env: browserEnv, stdio: 'inherit', windowsHide: true });
+      if (analyticsSeed.status !== 0) throw new Error('B4 browser fixture failed');
+    }
     const child = spawn(process.execPath, ['node_modules/next/dist/bin/next', 'dev', '--hostname', 'localhost', '--port', '3103'], { env: browserEnv, stdio: 'inherit', windowsHide: true });
     const stop = () => { if (child.pid) spawnSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore', windowsHide: true }); };
     process.stdin.resume(); process.stdin.once('data', stop); process.once('SIGINT', stop); process.once('SIGTERM', stop);

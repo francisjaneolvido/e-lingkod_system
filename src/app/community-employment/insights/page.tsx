@@ -1,16 +1,8 @@
-import type { Metadata } from "next";
-import { connection } from "next/server";
-import { currentViewer } from "@/lib/access";
-import { publicEmploymentInsights } from "@/features/community/server/data";
-import { EmploymentInsightsView } from "@/features/community/components/employment-insights-view";
-import { SiteHeader } from "@/components/layout/site-header";
-import { SiteFooter } from "@/components/layout/site-footer";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { currentViewer } from '@/lib/access';
+import { SiteHeader } from '@/components/layout/site-header';
+import { SiteFooter } from '@/components/layout/site-footer';
 export const instant=false;
-export const metadata:Metadata={title:"Employment & Skills Insights | eLingkod Bayan"};
-export default async function EmploymentInsightsPage({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){
- await connection();const [viewer,params]=await Promise.all([currentViewer(),searchParams]);
- const one=(v:string|string[]|undefined)=>typeof v==="string"?v:"";
- const yearText=one(params.year);const filters={barangay:one(params.barangay),employmentStatus:one(params.employmentStatus),educationLevel:one(params.educationLevel),ageGroup:one(params.ageGroup),source:one(params.source)||"ALL",...(yearText?{year:Number(yearText)}:{})};
- const data=await publicEmploymentInsights(filters);
- return <><SiteHeader viewer={viewer?{name:viewer.name,email:viewer.email,role:viewer.role}:null}/><main className="min-h-screen bg-[#f6f9fb] px-5 py-8 sm:px-8"><div className="mx-auto max-w-[1240px]"><EmploymentInsightsView data={data} filters={{...filters,year:yearText}} signedInCitizen={viewer?.role==="CITIZEN"}/></div></main><SiteFooter/></>;
-}
+export const metadata:Metadata={title:'Analytics Access | eLingkod Bayan'};
+export default async function AnalyticsAccessPage() { const viewer=await currentViewer(); return <><SiteHeader viewer={viewer?{name:viewer.name,email:viewer.email,role:viewer.role}:null}/><main className="min-h-[60vh] bg-[#F8FBFE] px-5 py-12"><section className="mx-auto max-w-[1344px] rounded-[24px] border border-[#DFE9F2] bg-white p-6 sm:p-8"><p className="text-sm font-semibold text-[#118B81]">Worker Census &amp; Social Profiling</p><h1 className="mt-3 text-3xl font-bold text-[#103C64]">Analytics access</h1><p className="mt-5 max-w-2xl leading-7 text-[#56718B]">Workforce and social analytics are available only to authorized LGU users. Public and citizen statistics are not currently released. Survey participation and your consent choices remain separate from public disclosure.</p><Link className="mt-6 inline-flex min-h-11 items-center rounded-xl bg-[#153F67] px-5 font-semibold text-white" href="/community-employment">Return to Citizen Profiling</Link></section></main><SiteFooter/></>; }

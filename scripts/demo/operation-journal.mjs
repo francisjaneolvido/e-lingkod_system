@@ -81,13 +81,30 @@ async function assertOwnResult(pending, result, after) {
     if (p.status !== 'DRAFT' && state.consentVersion !== p.expectedConsentVersion + 1) conflict();
     if (p.status === 'DRAFT' || p.status === 'SUBMITTED') {
       const parsed = (await import('../../src/features/community/domain.ts')).parseCommunitySurvey(p);
-      for (const key of Object.keys(parsed)) assert.deepEqual(state[key], parsed[key], 'Prepared draft result differs');
+      // Owned state intentionally overlays independently current preferences.
+      // A draft stores answers but must not overwrite that current consent.
+      for (const key of Object.keys(parsed)) if (p.status !== 'DRAFT' || !['consentOpportunityRecommendations','consentProgramRecommendations'].includes(key)) assert.deepEqual(state[key], parsed[key], 'Prepared survey result differs');
+      if (p.status === 'DRAFT') {
+        const workspace = await prisma.communitySurveyWorkspace.findUniqueOrThrow({ where: { userId_surveyYear: { userId: actorId, surveyYear: p.surveyYear } } });
+        assert.deepEqual(JSON.parse(workspace.draftJson), parsed, 'Prepared stored draft differs');
+      }
     }
     const proof = p.status !== 'DRAFT' ? await receipt(pending.operation) : null;
     if (p.status !== 'DRAFT' && !proof) conflict();
     const withdrawing = kind === 'individual-withdraw';
     if (p.status !== 'DRAFT' && (state.consentOpportunityRecommendations !== (!withdrawing && p.consentOpportunityRecommendations === true) || state.consentProgramRecommendations !== (!withdrawing && p.consentProgramRecommendations === true))) conflict();
-    allowed = (table, row) => table === 'community_survey_revision' ? row.id === proof?.id : ['community_survey', 'community_survey_workspace'].includes(table) ? row.userId === actorId && row.surveyYear === p.surveyYear : table === 'citizen_profile_consent' && row.userId === actorId && p.status !== 'DRAFT';
+    // B1 synchronizes current preference flags across the actor's annual
+    // compatibility rows. Permit only that exact side effect on other years;
+    // answers, participation, ownership and history remain protected.
+    const compatibilityConsentOnly = row => {
+      if (p.status === 'DRAFT' || row.userId !== actorId) return false;
+      const original = pending.before.community_survey?.map(JSON.parse).find(r => r.id === row.id);
+      const current = after.community_survey?.map(JSON.parse).find(r => r.id === row.id);
+      if (!original || !current) return false;
+      if (Boolean(current.consentOpportunityRecommendations) !== (!withdrawing && p.consentOpportunityRecommendations === true) || Boolean(current.consentProgramRecommendations) !== (!withdrawing && p.consentProgramRecommendations === true)) return false;
+      return Object.keys(original).every(key => ['consentOpportunityRecommendations','consentProgramRecommendations','updatedAt'].includes(key) || JSON.stringify(original[key]) === JSON.stringify(current[key]));
+    };
+    allowed = (table, row) => table === 'community_survey_revision' ? row.id === proof?.id : table === 'community_survey' ? row.userId === actorId && (row.surveyYear === p.surveyYear || compatibilityConsentOnly(row)) : table === 'community_survey_workspace' ? row.userId === actorId && row.surveyYear === p.surveyYear : table === 'citizen_profile_consent' && row.userId === actorId && p.status !== 'DRAFT';
   } else {
     const id = result.establishmentId;
     const record = await prisma.establishment.findUniqueOrThrow({ where: { id } });
