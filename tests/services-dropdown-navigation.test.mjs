@@ -20,12 +20,12 @@ test('all six service definitions remain available while Job Matching owns emplo
   assert.match(definitions,/title: "Community Census", shortTitle: "Census · coming soon"/);
 });
 
-test('community menu separates Job Matching insights from the future Census module',()=>{
-  assert.match(header,/label: "Job Matching overview", href: "\/community-employment"/);
-  assert.match(header,/label: "Employment survey", href: "\/community-survey"/);
-  assert.match(header,/label: "Employment & skills insights", href: "\/community-employment\/insights"/);
+test('community menu provides both private profiling surveys without promising deferred public statistics',()=>{
+  assert.match(header,/label: "Citizen Profiling overview", href: "\/community-employment"/);
+  assert.match(header,/label: "Citizen Profiling survey", href: "\/community-survey"/);
+  assert.match(header,/label: "Establishment Profiling", href: "\/establishment-survey"/);
   assert.match(header,/label: "Opportunities", href: "\/opportunities"/);
-  assert.match(header,/label: "Community census · coming soon", href: "\/community-census"/);
+  assert.doesNotMatch(header,/label: "Community census · coming soon"/);
   assert.match(header,/Community <ChevronDown/);
   assert.match(header,/>About<\/Link>/);
 });
@@ -55,14 +55,16 @@ test('mobile navigation uses grouped Services and Community accordions',()=>{
   assert.match(header,/max-h-\[calc\(100dvh-82px\)\]/);
 });
 
-test('Job Matching analytics and data management are staff-assignable while Census remains separate',()=>{
-  assert.match(staffModules,/JOBS: "Job Matching & Opportunities"/);
-  assert.match(staffModules,/CENSUS: "Community Census"/);
-  assert.match(staffModules,/COMMUNITY_DATA: "Job Matching Data Management"/);
+test('opportunity maintenance remains separate from census-scoped analytics and imports',()=>{
+  assert.match(staffModules,/JOBS: "Employment Opportunities"/);
+  assert.match(staffModules,/CENSUS: "Protected Census Records"/);
+  assert.match(staffModules,/COMMUNITY_DATA: "Legacy Data Management"/);
   assert.match(staffManager,/module !== "REPORTS" && module !== "JOBS" && module !== "COMMUNITY_DATA"/);
   assert.match(inviteManager,/\["REPORTS", "JOBS", "COMMUNITY_DATA"\]/);
-  assert.match(adminShell,/"\/admin\/jobs\/insights": "JOBS"/);
-  assert.match(adminShell,/"\/admin\/jobs\/data": "COMMUNITY_DATA"/);
+  assert.match(adminShell,/"\/admin\/jobs\/insights": "CENSUS"/);
+  assert.match(adminShell,/"\/admin\/jobs\/data": "CENSUS"/);
+  assert.match(adminShell,/"\/admin\/census\/analytics": "CENSUS"/);
+  assert.match(adminShell,/"\/admin\/census\/imports": "CENSUS"/);
   assert.match(adminShell,/"\/admin\/census": "CENSUS"/);
 });
 
