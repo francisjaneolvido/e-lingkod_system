@@ -20,7 +20,9 @@ async page => {
   await page.getByRole('button', { name: 'View details and history' }).first().waitFor();
   check(await page.getByRole('button', { name: /Maintain .* roster/ }).count() === 0, 'Staff can maintain roster');
   for (const width of [1440, 820, 390]) { await page.setViewportSize({ width, height: 1000 }); check(await page.locator('body').evaluate(e => e.scrollWidth <= window.innerWidth + 2), 'Horizontal overflow at ' + width); }
-  await page.getByRole('button', { name: 'View details and history' }).first().click();
+  // Other integrated feature fixtures may have newer submissions. Select the
+  // known history fixture rather than depending on list insertion order.
+  await page.locator('article').filter({has:page.getByRole('heading',{name:'Browser Citizen',exact:true})}).filter({hasText:'2026 · SUBMITTED'}).getByRole('button', { name: 'View details and history' }).click();
   const dialog = page.getByRole('dialog'); await dialog.waitFor();
   await dialog.getByText('Immutable history · 22 revisions', { exact: true }).waitFor();
   await dialog.getByLabel('Review action', { exact: true }).first().selectOption('VERIFIED');

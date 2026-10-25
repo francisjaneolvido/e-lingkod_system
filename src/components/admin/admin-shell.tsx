@@ -21,13 +21,13 @@ const navSections = [
     { label: "Online LGU services", href: "/admin/services", icon: Building2 },
     { label: "Registered citizens", href: "/admin/citizens", icon: UsersRound },
   ] },
-  { title: "JOB MATCHING & EMPLOYMENT", items: [
+  { title: "PROFILING & OPPORTUNITIES", items: [
     { label: "Overview & opportunities", href: "/admin/jobs", icon: BriefcaseBusiness },
-    { label: "Employment insights", href: "/admin/jobs/insights", icon: BarChart3 },
-    { label: "Employment data", href: "/admin/jobs/data", icon: FileSpreadsheet },
+    { label: "Workforce analytics", href: "/admin/census/analytics", icon: BarChart3 },
+    { label: "Census imports", href: "/admin/census/imports", icon: FileSpreadsheet },
   ] },
   { title: "OTHER SERVICE MODULES", items: [
-    { label: "Community census", href: "/admin/census", icon: BarChart3 },
+    { label: "Protected census records", href: "/admin/census", icon: BarChart3 },
     { label: "Emergency & alerts", href: "/admin/emergency", icon: BellRing },
     { label: "Municipal projects", href: "/admin/projects", icon: MapPinned },
   ] },
@@ -45,9 +45,11 @@ const modulesByPath: Record<string, StaffModule> = {
   "/admin/emergency": "EMERGENCY",
   "/admin/projects": "PROJECTS",
   "/admin/jobs": "JOBS",
-  "/admin/jobs/insights": "JOBS",
-  "/admin/jobs/data": "COMMUNITY_DATA",
+  "/admin/jobs/insights": "CENSUS",
+  "/admin/jobs/data": "CENSUS",
   "/admin/census": "CENSUS",
+  "/admin/census/analytics": "CENSUS",
+  "/admin/census/imports": "CENSUS",
 };
 const adminOnlyPaths = new Set(["/admin/pulse"]);
 
@@ -59,10 +61,10 @@ const pageMeta: Record<string, {title: string; subtitle: string}> = {
   "/admin/services": { title: "Online LGU services", subtitle: "Requests, assignments, schedules and verification" },
   "/admin/emergency": { title: "Emergency & alerts", subtitle: "Public safety workspace" },
   "/admin/projects": { title: "Municipal projects", subtitle: "Programs and public services" },
-  "/admin/jobs": { title: "Job Matching", subtitle: "Employment, livelihood and opportunity workspace" },
+  "/admin/jobs": { title: "Employment opportunities", subtitle: "PESO opportunity maintenance and review" },
   "/admin/jobs/insights": { title: "Employment insights", subtitle: "Skills, training, barriers and livelihood analytics" },
   "/admin/jobs/data": { title: "Employment data", subtitle: "Historical activity datasets, imports and manual encoding" },
-  "/admin/census": { title: "Community census", subtitle: "Planned census module" },
+  "/admin/census": { title: "Protected census records", subtitle: "Worker Census & Social Profiling" },
   "/admin/pulse": { title: "Community Pulse", subtitle: "Aggregated cross-system operations" },
   "/admin/profile": { title: "My profile", subtitle: "LGU account" },
 };
