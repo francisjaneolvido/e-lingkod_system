@@ -64,7 +64,11 @@ test('V16 Online Services includes operations analytics and audit export',()=>{
 test('V16 Community Pulse remains aggregate-only',()=>{
   assert.match(pulse,/Community Pulse/);
   assert.match(pulse,/Census/);
-  assert.match(pulse,/Not configured/);
+  assert.match(pulse,/Protected census records and analytics/);
+  assert.match(pulse,/Public census analytics is deferred/);
+  assert.match(pulse,/requireSuperAdminPage/);
+  assert.doesNotMatch(pulse,/select:\s*\{[^}]*\b(?:email|phone|birthDate)\s*:/);
+  assert.match(pulse,/Assignments are operational tasks, not staff headcounts or census respondents/);
 });
 
 test('V16 new and heavily modified TypeScript sources parse successfully',()=>{

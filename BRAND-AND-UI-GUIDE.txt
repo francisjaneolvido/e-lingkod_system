@@ -1,51 +1,88 @@
-E-LINGKOD BAYAN — BRAND / UI CONTINUITY GUIDE
-=============================================
-Identity: eLB | eLingkod Bayan | Report. Act. Resolve.
-Original generated eLB mark: public/images/elb-mark.svg (keep existing).
-Font: Poppins throughout the site; V7 bundles the font files in public/fonts.
+eLINGKOD BAYAN — SHARED BRAND AND UI GUIDE
+========================================
+Identity: eLB | eLingkod Bayan – Los Baños | Report. Act. Resolve.
+Academic/hackathon prototype; never imply official municipal endorsement.
+Keep public/images/elb-mark.svg. Photography/illustrations are not proof of
+municipal operations, government verification or measured community impact.
 
-COLORS
-Navy / primary          #103C64 / #143D62
-Action/navy             #153F67
-Service blue            #1A78B4
-Pale blue               #EAF5FD
-Warm gold accent        #FFBF43
-Success teal            #118B81
-Primary body text       #56718B
-Border                  #DFE9F2
-Page background         #F8FBFE
+TYPOGRAPHY AND LAYOUT
+Poppins, locally bundled in public/fonts; system sans fallback.
+Body: 16px / 1.6; working controls 14px or larger; supporting labels 12px
+minimum. Headings: 20–24px sections, 30–40px page titles; bold with clear
+hierarchy. Sentence case for actions and labels; plain, specific language.
+Line lengths generally 60–80 characters for explanation paragraphs.
+Spacing scale: 4, 8, 12, 16, 24, 32, 48px. Cards use 16–24px padding,
+16–24px corners; controls use 10–12px corners. Avoid arbitrary microtext.
+Content max width 1344px; outer header/hero max width 1440px.
+Desktop >=1024px; tablet 768–1023px; mobile <768px. Collapse navigation,
+stack forms/cards, wrap labels/actions. Tables scroll within their own region,
+never widen the page. Preserve long names, translated text and zoom usability.
 
-LAYOUT
-Max content width       1344px for sections; 1440px header/hero outer wrapper
-Desktop (>=1024px)     split hero, 3-column cards, top navigation
-Tablet (768–1023px)   2-column service grid
-Mobile (<768px)        1-column cards; collapsible menu; stacked feature panels
-Spacing                 generous breathing room, 24px/32px cards
-Corners                 16–28px, not mixed arbitrarily
-Typography              editorial clear headings, concise body, meaningful labels
+COLOR SYSTEM — src/app/globals.css + src/styles/design-system.css
+Use semantic utilities/variables, not new hardcoded page palettes.
+Light: white card, white/pale-blue canvas, navy foreground/action (#153B63),
+muted foreground #526B80, teal #08766C, gold #FFBF43.
+Dark: canvas #101B29, card #172638, foreground #E9F2FA, muted #B6C9DA,
+action #245F8D with white text, focus #85CEFF.
+OLED: explicit #000000 canvas AND cards, near-black secondary surfaces,
+foreground as Dark; visible #575757 borders and #737373 input boundaries.
+All themes retain the eLB navy/teal/gold identity; never invert photos/logos.
+Tokens: background/foreground; card/card-foreground; primary/primary-foreground;
+secondary; muted/muted-foreground; accent; border/input/ring.
+Status text uses success/destructive/warning-foreground. Filled actions use
+success-solid/danger-solid rather than a bright dark-theme text color.
+Status surfaces use success-soft/danger-soft/warning-soft. Always add labels
+or icons; color alone must not convey status, selection or data meaning.
+Fixed navy/image regions use on-brand-muted, on-brand-gold and on-brand-error; gold actions
+use on-gold. These foregrounds do not follow the page's light/dark ink. Never
+pair white text with a pale accent surface. Legacy white control backgrounds
+must use card, and scoped legacy text variables must follow foreground tokens.
+Sidebar initials and logout hover use the sidebar's dark card surface, with
+white foreground; topbar avatars retain their page-surface pairing. Selected
+filled tabs use primary-foreground for both labels and helper text. Gold focus
+outlines belong on the fixed dark sidebar; content controls use ring. Text on
+photos must pass against the rendered image plus overlay at every breakpoint;
+use a local solid label backing where the photograph is too variable.
 
-INTERACTION
-- Real actions should be labelled accurately, including when demo-only.
-- Service preview pop-ups: keyboard closable via Escape and close button.
-- Buttons/links must perform an action (no dead endpoints).
-- Avoid mock statistics masquerading as live government figures.
-- Never publish unverified emergency hotlines or fictional official advisories.
-- Do not expose individually identifiable census information on public pages.
+THEMES AND INTERACTION
+Light, Dark and explicit OLED are available in the site-wide Appearance
+control. Persist the allowlisted selection locally. Initialize it synchronously
+in the document head before body paint; React must not be required for initial
+colors. Unavailable storage falls back safely; do not make login depend on it.
+Keep essential controls visible without hover. Hover is enhancement only.
+Use >=44px primary input/button targets and visible keyboard focus (3px ring,
+3px offset). Check default, hover, focus, selected, disabled, error and loading
+states in every theme. Disabled controls keep readable labels and context.
+Every action has an accurate label. Empty/error/denied states explain the next
+available action. Do not grant protected access to fix an access-denied UI.
+Dialogs have a title, keyboard focus, Escape/close action and return focus.
+Respect reduced motion. Native selects are appropriate for simple choices.
+Do not add a theme/chart dependency without a concrete unmet requirement.
 
-PRODUCT MODULES (APPROVED)
-1 Civic Reporting: saved photo uploads, permission-based GPS/manual location, tracking ID/status, citizen history, and protected LGU action desk.
-2 Online LGU Services: permits, IDs, clearances.
-3 Emergency Hotlines & Alerts: PNP/BFP/Hospital/MDRRMO, push advisories.
-4 Municipal Projects & Services: offices, service directory, ongoing and future projects.
-5 Job matching: SPES survey imports and hypothetical skills-to-opportunity suggestions; no application processing in this scope.
-6 Worker and social-status census: occupation, employment status, socioeconomic survey data, and aggregated planning statistics.
+CHARTS AND INSIGHTS
+Use OverviewChart and the existing authorized aggregate results. Blue, teal,
+purple and ochre distinguish series; unknowns are labelled explicitly.
+Bars compare counts within a chart, never separate populations. Show exact
+values, source, survey year/filter context and denominator/multiple-response
+notes. Preserve supplied unknown percentages; never manufacture zero or 100%.
+Provide keyboard/touch selection, sorting, visible selected state, status text,
+and a complete table alternative. Empty and sparse data need honest messaging.
+Keep the protected endpoint/role/barangay scope, consent and withdrawal rules.
+Never expose identifiable census data or unscoped totals through chart props,
+tooltips, labels, exports or hidden DOM. Public census analytics is deferred.
 
-Images in public/images/landing are AI-created illustrations for this prototype.
-They are NOT photographs of actual LGU projects, events or service users.
-
-V7 CIVIC DESIGN
-- Scoped styles in src/features/civic/civic.module.css.
-- Warm off-white surfaces, navy headings, teal accents, numbered form sections.
-- Photo evidence, visible tracking receipts, and a chronological progress trail.
-- Staff workspace supports assignment, documented status changes, and version checks.
-- Keep the main public landing composition and existing eLB mark.
+SIX CORE MODULES
+1 Civic Reporting: citizen reports/tracking and authorized LGU case handling.
+2 Online LGU Services: requests, documents, appointments and verified release.
+3 Emergency Hotlines & Alerts: maintained directory/advisories; no fabricated
+  official alerts, dispatch capability or unverified emergency contacts.
+4 Municipal Projects & Services: current directory/preview; do not represent
+  sample content as persisted project implementation.
+5 Citizen Profiling: separate individual and establishment surveys, drafts,
+  protected submissions/history and optional matching/program consent.
+6 Worker Census & Social Profiling: protected records/imports and analytical
+  source populations; workforce/social insights, opportunities and readiness.
+  Suggestions do not guarantee eligibility/hiring or forward applications.
+Authentication, permissions, notifications and administration support these
+six modules. They are not additional core features. Demo records/listings and
+simulated review events must stay visibly identified as demonstrations.

@@ -23,7 +23,7 @@ export async function LandingPage({ viewer }: { viewer: PortalViewer | null }) {
       <main>
         {/* Preserve the landing design while connecting the civic workflow. */}
         <HeroSection />
-        {lgu && <div role="note" className="mx-auto mt-6 flex max-w-[1280px] flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#c8e4f0] bg-[#edf7fb] px-5 py-4 text-[13px] text-[#235775] sm:px-8"><span><strong>LGU workspace account:</strong> You can browse public services, but reporting concerns and citizen feedback require a separate Citizen account.</span><Link href="/admin" className="inline-flex min-h-10 items-center rounded-xl bg-[#145578] px-4 py-2 font-bold text-white">Return to LGU dashboard →</Link></div>}
+        {lgu && <div role="note" className="mx-auto mt-6 flex max-w-[1280px] flex-wrap items-center justify-between gap-3 rounded-2xl border border-border bg-muted px-5 py-4 text-[13px] text-foreground sm:px-8"><span><strong>LGU workspace account:</strong> You can browse public services, but reporting concerns and citizen feedback require a separate Citizen account.</span><Link href="/admin" className="inline-flex min-h-10 items-center rounded-xl bg-primary px-4 py-2 font-bold text-white">Return to LGU dashboard →</Link></div>}
         {citizen && <PersonalizedWelcomeSection name={viewer!.name} snapshot={citizenSnapshot!} />}
         <QuickLinksSection isLgu={lgu} />
         <ServicesSection isLgu={lgu} />

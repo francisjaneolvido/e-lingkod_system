@@ -1,3 +1,4 @@
+export const instant = false;
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { requireCitizenPageViewer } from "@/lib/access";
