@@ -20,9 +20,9 @@ export function PasswordField({ id, name, label, placeholder = "Enter your passw
   const [show, setShow] = useState(false);
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="block text-xs font-semibold text-[#245376]">{label}</label>
+      <label htmlFor={id} className="block text-xs font-semibold text-foreground">{label}</label>
       <div className="relative">
-        <LockKeyhole aria-hidden="true" size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#8da8b9]" />
+        <LockKeyhole aria-hidden="true" size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
         <input
           id={id}
           name={name || id}
@@ -35,14 +35,14 @@ export function PasswordField({ id, name, label, placeholder = "Enter your passw
           value={value}
           onChange={onChange}
           disabled={disabled}
-          className="h-[49px] w-full rounded-[12px] border border-[#d8e4ed] bg-white/90 pl-11 pr-12 text-[13px] text-[#143b5e] outline-none transition placeholder:text-[#a0b2bf] hover:border-[#9bc7df] focus:border-[#2287b4] focus:ring-[3px] focus:ring-[#d5edf9]"
+          className="h-[49px] w-full rounded-[12px] border border-border bg-card/90 pl-11 pr-12 text-[13px] text-foreground outline-none transition placeholder:text-muted-foreground hover:border-border focus:border-border focus:ring-[3px] focus:ring-border"
         />
         <button
           type="button"
           aria-label={show ? "Hide password" : "Show password"}
           aria-pressed={show}
           onClick={() => setShow(v => !v)}
-          className="absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-lg text-[#819caf] transition hover:bg-[#eef7fc] hover:text-[#165879] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#237cb3]"
+          className="absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border"
         >
           {show ? <EyeOff size={18} /> : <Eye size={18} />}
         </button>

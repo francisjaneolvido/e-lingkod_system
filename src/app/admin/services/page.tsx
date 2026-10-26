@@ -46,53 +46,53 @@ export default async function AdminServicesPage({ searchParams }: { searchParams
   ] as const;
 
   return <div className="space-y-4">
-    <section className="rounded-[20px] border border-[#d8e7ee] bg-[linear-gradient(120deg,#edf7fb,#fff_65%,#fff9ed)] px-5 py-5 sm:px-6">
+    <section className="rounded-[20px] border border-border bg-muted px-5 py-5 sm:px-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div><p className="elb-admin-eyebrow">ONLINE LGU SERVICES</p><h1 className="mt-1 text-2xl font-black tracking-tight text-[#143f61]">Service Request Desk</h1><p className="mt-1 max-w-2xl text-xs leading-5 text-[#668395]">Process citizen requests through intake, document verification, scheduling, staff recommendation and final verification.</p></div>
-        <div className="flex flex-wrap gap-2"><Link href="/services" className="rounded-xl border border-[#bad3df] bg-white px-3.5 py-2.5 text-[11px] font-extrabold text-[#286d8b]">Citizen catalog →</Link>{viewer.role === "ADMIN" && <><Link href="/admin/services/reports" className="inline-flex items-center gap-1.5 rounded-xl border border-[#bad3df] bg-white px-3.5 py-2.5 text-[11px] font-extrabold text-[#286d8b]"><BarChart3 size={13}/> Analytics</Link><Link href="/admin/services/catalog" className="inline-flex items-center gap-1.5 rounded-xl bg-[#175e80] px-3.5 py-2.5 text-[11px] font-extrabold text-white"><Settings2 size={13}/> Service Builder</Link></>}</div>
+        <div><p className="elb-admin-eyebrow">ONLINE LGU SERVICES</p><h1 className="mt-1 text-2xl font-black tracking-tight text-foreground">Service Request Desk</h1><p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">Process citizen requests through intake, document verification, scheduling, staff recommendation and final verification.</p></div>
+        <div className="flex flex-wrap gap-2"><Link href="/services" className="rounded-xl border border-border bg-card px-3.5 py-2.5 text-xs font-extrabold text-foreground">Citizen catalog →</Link>{viewer.role === "ADMIN" && <><Link href="/admin/services/reports" className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card px-3.5 py-2.5 text-xs font-extrabold text-foreground"><BarChart3 size={13}/> Analytics</Link><Link href="/admin/services/catalog" className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-3.5 py-2.5 text-xs font-extrabold text-white"><Settings2 size={13}/> Service Builder</Link></>}</div>
       </div>
     </section>
 
     <div className="grid gap-2 sm:grid-cols-3 xl:grid-cols-5">
-      {metrics.map(([label, value, Icon, target]) => <Link key={label} href={`/admin/services?view=${target}`} className="group flex items-center gap-3 rounded-2xl border border-[#dfe9ee] bg-white px-4 py-3 transition hover:border-[#a9cddc]">
-        <span className="grid size-9 place-items-center rounded-xl bg-[#eef6f9] text-[#347b98]"><Icon size={17}/></span>
-        <div><strong className="block text-xl leading-none text-[#174a67]">{value}</strong><span className="mt-1 block text-[10px] font-bold text-[#718b9b]">{label}</span></div>
+      {metrics.map(([label, value, Icon, target]) => <Link key={label} href={`/admin/services?view=${target}`} className="group flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 transition hover:border-border">
+        <span className="grid size-9 place-items-center rounded-xl bg-muted text-muted-foreground"><Icon size={17}/></span>
+        <div><strong className="block text-xl leading-none text-foreground">{value}</strong><span className="mt-1 block text-xs font-bold text-muted-foreground">{label}</span></div>
       </Link>)}
     </div>
 
-    <section className="rounded-[18px] border border-[#dfe9ee] bg-white">
-      <div className="flex gap-1 overflow-x-auto border-b border-[#e8eff2] px-3 pt-3">
-        {workflowTabs.map(([key,label]) => <Link key={key || "all"} href={`/admin/services${key ? `?view=${key}` : ""}`} className={`whitespace-nowrap rounded-t-xl px-3 py-2 text-[10px] font-extrabold ${view === key ? "bg-[#edf6f9] text-[#17607f]" : "text-[#718997] hover:bg-[#f7fafb]"}`}>{label}</Link>)}
+    <section className="rounded-[18px] border border-border bg-card">
+      <div className="flex gap-1 overflow-x-auto border-b border-border px-3 pt-3">
+        {workflowTabs.map(([key,label]) => <Link key={key || "all"} href={`/admin/services${key ? `?view=${key}` : ""}`} className={`whitespace-nowrap rounded-t-xl px-3 py-2 text-xs font-extrabold ${view === key ? "bg-muted text-foreground" : "text-muted-foreground hover:bg-card"}`}>{label}</Link>)}
       </div>
       <form className="grid gap-2 p-3 md:grid-cols-[minmax(220px,1fr)_220px_160px_auto]" action="/admin/services">
         {view && <input type="hidden" name="view" value={view}/>} 
-        <label className="relative"><Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8aa0ad]"/><input name="q" defaultValue={search} className="w-full rounded-xl border border-[#cfdee6] py-2.5 pl-9 pr-3 text-xs outline-none focus:border-[#5a9ab5]" placeholder="Tracking ID, citizen, email or service"/></label>
-        <select name="service" defaultValue={serviceKey} className="rounded-xl border border-[#cfdee6] px-3 py-2.5 text-xs"><option value="">All services</option>{services.map(service => <option key={service.key} value={service.key}>{service.shortTitle}</option>)}</select>
-        <label className="flex items-center gap-2 rounded-xl border border-[#dbe6ec] px-3 text-[10px] font-bold text-[#607e91]"><input type="checkbox" name="mine" value="1" defaultChecked={mine}/> Assigned to me</label>
-        <button className="rounded-xl bg-[#175e80] px-4 py-2.5 text-[10px] font-extrabold text-white">Filter queue</button>
+        <label className="relative"><Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"/><input name="q" defaultValue={search} className="w-full rounded-xl border border-border py-2.5 pl-9 pr-3 text-xs outline-none focus:border-border" placeholder="Tracking ID, citizen, email or service"/></label>
+        <select name="service" defaultValue={serviceKey} className="rounded-xl border border-border px-3 py-2.5 text-xs"><option value="">All services</option>{services.map(service => <option key={service.key} value={service.key}>{service.shortTitle}</option>)}</select>
+        <label className="flex items-center gap-2 rounded-xl border border-border px-3 text-xs font-bold text-muted-foreground"><input type="checkbox" name="mine" value="1" defaultChecked={mine}/> Assigned to me</label>
+        <button className="rounded-xl bg-primary px-4 py-2.5 text-xs font-extrabold text-white">Filter queue</button>
       </form>
     </section>
 
-    <section className="overflow-hidden rounded-[18px] border border-[#dfe8ed] bg-white">
-      <div className="flex items-center justify-between border-b border-[#eaf0f3] px-4 py-3"><div><h2 className="text-xs font-black text-[#214e69]">Accessible request queue</h2><p className="mt-0.5 text-[10px] text-[#8197a5]">{rows.length} request{rows.length === 1 ? "" : "s"}</p></div>{counts.completedCount > 0 && <Link href="/admin/services?view=closed" className="text-[10px] font-bold text-[#47788f]">{counts.completedCount} completed total</Link>}</div>
+    <section className="overflow-hidden rounded-[18px] border border-border bg-card">
+      <div className="flex items-center justify-between border-b border-border px-4 py-3"><div><h2 className="text-xs font-black text-foreground">Accessible request queue</h2><p className="mt-0.5 text-xs text-muted-foreground">{rows.length} request{rows.length === 1 ? "" : "s"}</p></div>{counts.completedCount > 0 && <Link href="/admin/services?view=closed" className="text-xs font-bold text-muted-foreground">{counts.completedCount} completed total</Link>}</div>
       {rows.length ? <div className="overflow-x-auto"><table className="w-full min-w-[940px] text-left text-xs">
-        <thead className="bg-[#f7fafb] text-[9px] uppercase tracking-wider text-[#7d94a2]"><tr><th className="px-4 py-2.5">Request</th><th className="px-4 py-2.5">Citizen</th><th className="px-4 py-2.5">Status / next step</th><th className="px-4 py-2.5">Assigned</th><th className="px-4 py-2.5">Updated</th><th className="px-4 py-2.5"/></tr></thead>
-        <tbody className="divide-y divide-[#edf2f4]">{rows.map((row) => {
+        <thead className="bg-card text-xs uppercase tracking-wider text-muted-foreground"><tr><th className="px-4 py-2.5">Request</th><th className="px-4 py-2.5">Citizen</th><th className="px-4 py-2.5">Status / next step</th><th className="px-4 py-2.5">Assigned</th><th className="px-4 py-2.5">Updated</th><th className="px-4 py-2.5"/></tr></thead>
+        <tbody className="divide-y divide-border">{rows.map((row) => {
   const key: ServiceRequestStatus = isServiceStatus(row.status)
     ? row.status
     : "DRAFT";
 
   const meta = SERVICE_STATUS_META[key];
-          return <tr key={row.id} className="hover:bg-[#fbfdfe]">
-            <td className="px-4 py-3"><strong className="block text-[11px] text-[#287797]">{row.trackingId}</strong><span className="mt-0.5 block font-bold text-[#365e74]">{row.serviceTitle}</span></td>
-            <td className="px-4 py-3"><strong className="block text-[#315a72]">{row.requester.name}</strong><span className="text-[10px] text-[#8497a4]">{row.requester.email}</span></td>
-            <td className="px-4 py-3"><span className={`rounded-full px-2 py-1 text-[9px] font-extrabold ${meta.tone}`}>{meta.label}</span><span className="mt-1.5 block text-[10px] text-[#718997]">{nextStep(key)}</span></td>
-            <td className="px-4 py-3 text-[10px] text-[#6f8796]">{row.assignedStaff?.name || row.assignedDepartment || "Unassigned"}{row.workAssignment?.status === "OFFERED" && <span className="mt-1 block text-[8px] font-black uppercase tracking-wide text-amber-700">Awaiting staff acceptance</span>}</td>
-            <td className="px-4 py-3 text-[10px] text-[#8497a4]">{new Date(row.updatedAt).toLocaleString("en-PH", { month:"short", day:"numeric", hour:"numeric", minute:"2-digit" })}</td>
-            <td className="px-4 py-3"><Link href={`/admin/services/${row.id}`} className="inline-flex items-center gap-1 rounded-lg bg-[#eef6f9] px-2.5 py-2 text-[10px] font-extrabold text-[#277594]">Open <ArrowRight size={12}/></Link></td>
+          return <tr key={row.id} className="hover:bg-card">
+            <td className="px-4 py-3"><strong className="block text-xs text-foreground">{row.trackingId}</strong><span className="mt-0.5 block font-bold text-foreground">{row.serviceTitle}</span></td>
+            <td className="px-4 py-3"><strong className="block text-foreground">{row.requester.name}</strong><span className="text-xs text-muted-foreground">{row.requester.email}</span></td>
+            <td className="px-4 py-3"><span className={`rounded-full px-2 py-1 text-xs font-extrabold ${meta.tone}`}>{meta.label}</span><span className="mt-1.5 block text-xs text-muted-foreground">{nextStep(key)}</span></td>
+            <td className="px-4 py-3 text-xs text-muted-foreground">{row.assignedStaff?.name || row.assignedDepartment || "Unassigned"}{row.workAssignment?.status === "OFFERED" && <span className="mt-1 block text-xs font-black uppercase tracking-wide text-amber-700">Awaiting staff acceptance</span>}</td>
+            <td className="px-4 py-3 text-xs text-muted-foreground">{new Date(row.updatedAt).toLocaleString("en-PH", { month:"short", day:"numeric", hour:"numeric", minute:"2-digit" })}</td>
+            <td className="px-4 py-3"><Link href={`/admin/services/${row.id}`} className="inline-flex items-center gap-1 rounded-lg bg-muted px-2.5 py-2 text-xs font-extrabold text-foreground">Open <ArrowRight size={12}/></Link></td>
           </tr>;
         })}</tbody>
-      </table></div> : <div className="px-6 py-12 text-center text-xs text-[#8096a4]">No service requests match the current filters.</div>}
+      </table></div> : <div className="px-6 py-12 text-center text-xs text-muted-foreground">No service requests match the current filters.</div>}
     </section>
   </div>;
 }

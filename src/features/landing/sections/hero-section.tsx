@@ -16,7 +16,7 @@ export function HeroSection() {
     <section
       id="home"
       aria-labelledby="elb-hero-heading"
-      className="relative isolate scroll-mt-24 overflow-hidden bg-[#103c63] text-white"
+      className="relative isolate scroll-mt-24 overflow-hidden bg-primary text-white"
     >
       {/* Image is illustrative; we are not claiming a specific municipality. */}
       <Image
@@ -43,8 +43,8 @@ export function HeroSection() {
 
       <div className="mx-auto flex min-h-[525px] max-w-[1440px] flex-col justify-center px-5 pb-16 pt-14 sm:min-h-[540px] sm:px-8 sm:pb-16 lg:min-h-[550px] lg:px-12 lg:py-20 xl:min-h-[570px] 2xl:min-h-[590px]">
         <div className="relative z-10 max-w-[795px]">
-          <p className="mb-6 inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.15em] text-[#fff1c0] sm:text-[12px]">
-            <span className="h-[3px] w-9 shrink-0 rounded-full bg-[#ffc344]" />
+          <p className="mb-6 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[.15em] text-on-brand-gold sm:text-[12px]">
+            <span className="h-[3px] w-9 shrink-0 rounded-full bg-brand-gold" />
             Welcome to E-Lingkod Bayan
           </p>
           <h1
@@ -53,7 +53,7 @@ export function HeroSection() {
           >
             Serbisyong bayan,
             <br className="hidden sm:block" />{" "}
-            <span className="text-[#ffcf5b]">mas malapit sa’yo.</span>
+            <span className="text-on-brand-gold">mas malapit sa’yo.</span>
           </h1>
           <p className="mt-5 max-w-[640px] text-[13px] leading-[1.85] text-[#e7f1fa] sm:mt-6 sm:text-[15px] lg:text-[16px]">
             Mag-ulat ng concern, mag-request ng serbisyo, at makahanap ng
@@ -62,22 +62,22 @@ export function HeroSection() {
           <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center">
             <Link
               href="/#services"
-              className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-[#ffc448] px-6 py-3 text-[12px] font-extrabold text-[#123e67] shadow-[0_13px_28px_rgba(0,0,0,.16)] transition hover:-translate-y-0.5 hover:bg-[#ffdc83] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto"
+              className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-brand-gold px-6 py-3 text-[12px] font-extrabold text-on-gold shadow-[0_13px_28px_rgba(0,0,0,.16)] transition hover:-translate-y-0.5 hover:bg-brand-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto"
             >
               Explore services
               <ArrowRight size={17} className="transition group-hover:translate-x-1" />
             </Link>
             <Link
               href="/track"
-              className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/60 bg-white/10 px-6 py-3 text-[12px] font-bold text-white backdrop-blur-sm transition hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto"
+              className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/60 bg-card/10 px-6 py-3 text-[12px] font-bold text-white backdrop-blur-sm transition hover:bg-card/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto"
             >
               Track a report
               <ArrowUpRight size={17} />
             </Link>
           </div>
-          <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-semibold text-[#dfecf8] sm:mt-10 sm:text-[11px]">
-            <span className="inline-flex items-center gap-2"><ShieldCheck size={15} className="text-[#ffd16a]" /> Citizen-centered</span>
-            <span className="inline-flex items-center gap-2"><MapPin size={15} className="text-[#ffd16a]" /> One connected portal</span>
+          <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-on-brand-muted sm:mt-10 sm:text-xs">
+            <span className="inline-flex items-center gap-2"><ShieldCheck size={15} className="text-on-brand-gold" /> Citizen-centered</span>
+            <span className="inline-flex items-center gap-2"><MapPin size={15} className="text-on-brand-gold" /> One connected portal</span>
           </div>
         </div>
       </div>

@@ -31,11 +31,11 @@ export function LogoutButton({ fullWidth = false }: { fullWidth?: boolean }) {
 
   return (
     <div>
-      <button type="button" onClick={logout} disabled={pending} className={`inline-flex items-center gap-2 rounded-xl border border-[#cbdce9] bg-white px-4 py-2.5 text-xs font-bold text-[#17486c] transition hover:bg-[#ecf6fc] disabled:opacity-50 ${fullWidth ? "w-full justify-start border-transparent" : ""}`}>
+      <button type="button" onClick={logout} disabled={pending} className={`inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-xs font-bold text-foreground transition hover:bg-muted disabled:opacity-50 ${fullWidth ? "w-full justify-start border-transparent" : ""}`}>
         {pending ? <LoaderCircle size={15} className="animate-spin" /> : <LogOut size={15} />}
         {pending ? "Signing out..." : "Log out"}
       </button>
-      {error && <p role="alert" className="px-2 pt-1 text-[11px] text-red-700">Could not sign out. Please try again.</p>}
+      {error && <p role="alert" className="px-2 pt-1 text-xs text-destructive">Could not sign out. Please try again.</p>}
     </div>
   );
 }

@@ -89,17 +89,17 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
 
   return (
     <>
-      <div className="border-b border-[#d5e5f1] bg-[#eef7ff]">
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-5 py-2 text-[10px] font-medium tracking-wide text-[#42617e] sm:px-8 lg:px-12">
-          <span className="flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5 text-[#166d9e]" aria-hidden /> A community-first digital service concept</span>
-          <span className="hidden text-[#617f96] sm:block">Hackathon prototype · Not an official LGU website</span>
+      <div className="border-b border-border bg-muted">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-5 py-2 text-xs font-medium tracking-wide text-foreground sm:px-8 lg:px-12">
+          <span className="flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5 text-foreground" aria-hidden /> A community-first digital service concept</span>
+          <span className="hidden text-muted-foreground sm:block">Hackathon prototype · Not an official LGU website</span>
         </div>
       </div>
-      <header className="sticky top-0 z-50 border-b border-[#e4eaf0] bg-white/95 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-xl">
         <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between gap-4 px-5 sm:px-8 lg:h-[82px] lg:px-12">
           <BrandLogo />
           <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex xl:gap-8">
-            <Link href="/#home" className="text-[12px] font-semibold text-[#506b83] transition hover:text-[#0869a9] xl:text-[13px]">Home</Link>
+            <Link href="/#home" className="text-[12px] font-semibold text-muted-foreground transition hover:text-foreground xl:text-[13px]">Home</Link>
             <div
               ref={servicesDetails}
               className="relative"
@@ -121,19 +121,19 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                 aria-controls="elb-services-menu"
                 aria-expanded={servicesOpen}
                 onClick={() => setServicesOpen(true)}
-                className={`flex min-h-11 items-center gap-1.5 rounded-xl px-2 text-[12px] font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b779f] xl:text-[13px] ${servicesOpen ? "bg-[#eef7fc] text-[#0d5d91]" : "text-[#506b83] hover:text-[#0869a9]"}`}
+                className={`flex min-h-11 items-center gap-1.5 rounded-xl px-2 text-[12px] font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border xl:text-[13px] ${servicesOpen ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground"}`}
               >
                 Services <ChevronDown aria-hidden size={15} className={`transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
               </button>
               {servicesOpen && (
                 <div className="absolute left-1/2 top-full z-[80] w-[min(640px,calc(100vw-2rem))] -translate-x-1/2 pt-2">
-                  <div id="elb-services-menu" className="rounded-[22px] border border-[#d5e5ef] bg-white p-4 shadow-[0_24px_65px_rgba(13,51,83,.17)] xl:p-5">
-                    <div className="flex items-start justify-between gap-3 border-b border-[#e8eff4] px-2 pb-3.5">
+                  <div id="elb-services-menu" className="rounded-[22px] border border-border bg-card p-4 shadow-[0_24px_65px_rgba(13,51,83,.17)] xl:p-5">
+                    <div className="flex items-start justify-between gap-3 border-b border-border px-2 pb-3.5">
                       <div>
-                        <p className="text-[10px] font-extrabold uppercase tracking-[.14em] text-[#4382a6]">eLingkod Bayan</p>
-                        <p className="mt-1 text-[16px] font-extrabold text-[#153b63]">Public services</p>
+                        <p className="text-xs font-extrabold uppercase tracking-[.14em] text-muted-foreground">eLingkod Bayan</p>
+                        <p className="mt-1 text-[16px] font-extrabold text-foreground">Public services</p>
                       </div>
-                      <span className="rounded-full bg-[#eaf6f2] px-2.5 py-1 text-[10px] font-semibold text-[#217663]">{publicServiceNavigation.filter((service) => service.live).length} available now</span>
+                      <span className="rounded-full bg-muted px-2.5 py-1 text-xs font-semibold text-success">{publicServiceNavigation.filter((service) => service.live).length} available now</span>
                     </div>
                     <div className="mt-3 grid grid-cols-2 gap-1.5">
                       {publicServiceNavigation.map((service) => {
@@ -143,19 +143,19 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                             key={service.id}
                             href={staffPortal && service.id === "civic" ? "/admin" : service.href}
                             onClick={() => setServicesOpen(false)}
-                            className="group flex min-w-0 items-start gap-3 rounded-xl px-3 py-3 transition hover:bg-[#eff7fc] focus-visible:bg-[#eff7fc] focus-visible:outline-2 focus-visible:outline-[#78b8d7]"
+                            className="group flex min-w-0 items-start gap-3 rounded-xl px-3 py-3 transition hover:bg-muted focus-visible:bg-muted focus-visible:outline-2 focus-visible:outline-border"
                           >
-                            <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#eaf3f9] text-[#165581] group-hover:bg-white"><Icon size={19} aria-hidden /></span>
+                            <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-muted text-foreground group-hover:bg-card"><Icon size={19} aria-hidden /></span>
                             <span className="min-w-0 flex-1">
-                              <span className="block text-[12px] font-extrabold leading-5 text-[#1a4668]">{service.title}</span>
-                              <span className="mt-0.5 block text-[11px] leading-[1.5] text-[#678299]">{staffPortal && service.id === "civic" ? "Manage concerns in your LGU workspace" : service.description}</span>
-                              <span className={`mt-1.5 inline-block text-[10px] font-bold ${service.live ? "text-[#18836a]" : "text-[#849bad]"}`}>{service.live ? "Available" : "Preview"}</span>
+                              <span className="block text-[12px] font-extrabold leading-5 text-foreground">{service.title}</span>
+                              <span className="mt-0.5 block text-xs leading-[1.5] text-muted-foreground">{staffPortal && service.id === "civic" ? "Manage concerns in your LGU workspace" : service.description}</span>
+                              <span className={`mt-1.5 inline-block text-xs font-bold ${service.live ? "text-success" : "text-muted-foreground"}`}>{service.live ? "Available" : "Preview"}</span>
                             </span>
                           </Link>
                         );
                       })}
                     </div>
-                    <Link href="/#services" onClick={() => setServicesOpen(false)} className="mt-3 flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#d7e7f0] bg-[#f6fafd] text-[12px] font-bold text-[#17567f] hover:bg-[#eaf5fb] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b779f]">
+                    <Link href="/#services" onClick={() => setServicesOpen(false)} className="mt-3 flex min-h-10 items-center justify-center gap-2 rounded-xl border border-border bg-card text-[12px] font-bold text-foreground hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border">
                       View all services <ArrowRight size={15} aria-hidden />
                     </Link>
                   </div>
@@ -183,16 +183,16 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                 aria-controls="elb-community-menu"
                 aria-expanded={communityOpen}
                 onClick={() => setCommunityOpen((value) => !value)}
-                className={`flex min-h-11 items-center gap-1.5 rounded-xl px-2 text-[12px] font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b779f] xl:text-[13px] ${communityOpen ? "bg-[#eef7fc] text-[#0d5d91]" : "text-[#506b83] hover:text-[#0869a9]"}`}
+                className={`flex min-h-11 items-center gap-1.5 rounded-xl px-2 text-[12px] font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border xl:text-[13px] ${communityOpen ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground"}`}
               >
                 Community <ChevronDown aria-hidden size={15} className={`transition-transform duration-200 ${communityOpen ? "rotate-180" : ""}`} />
               </button>
               {communityOpen && (
                 <div className="absolute left-1/2 top-full z-[80] w-[min(390px,calc(100vw-2rem))] -translate-x-1/2 pt-2">
-                  <div id="elb-community-menu" className="rounded-[22px] border border-[#d5e5ef] bg-white p-3 shadow-[0_24px_65px_rgba(13,51,83,.17)]">
+                  <div id="elb-community-menu" className="rounded-[22px] border border-border bg-card p-3 shadow-[0_24px_65px_rgba(13,51,83,.17)]">
                     <div className="px-3 pb-2 pt-1">
-                      <p className="text-[10px] font-extrabold uppercase tracking-[.14em] text-[#4382a6]">Community</p>
-                      <p className="mt-1 text-[15px] font-extrabold text-[#153b63]">Citizen Profiling & opportunities</p>
+                      <p className="text-xs font-extrabold uppercase tracking-[.14em] text-muted-foreground">Community</p>
+                      <p className="mt-1 text-[15px] font-extrabold text-foreground">Citizen Profiling & opportunities</p>
                     </div>
                     <div className="grid gap-1">
                       {(staffPortal
@@ -200,9 +200,9 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                         : communityNavigation
                       ).map((item) => {
                         const Icon = item.icon;
-                        return <Link key={item.href} href={item.href} onClick={() => setCommunityOpen(false)} className="group flex items-start gap-3 rounded-xl px-3 py-2.5 transition hover:bg-[#eff7fc] focus-visible:bg-[#eff7fc] focus-visible:outline-2 focus-visible:outline-[#78b8d7]">
-                          <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#eaf3f9] text-[#165581]"><Icon size={18} aria-hidden /></span>
-                          <span><span className="block text-[12px] font-extrabold text-[#1a4668]">{item.label}</span><span className="mt-0.5 block text-[10.5px] leading-[1.45] text-[#71899b]">{item.description}</span></span>
+                        return <Link key={item.href} href={item.href} onClick={() => setCommunityOpen(false)} className="group flex items-start gap-3 rounded-xl px-3 py-2.5 transition hover:bg-muted focus-visible:bg-muted focus-visible:outline-2 focus-visible:outline-border">
+                          <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-muted text-foreground"><Icon size={18} aria-hidden /></span>
+                          <span><span className="block text-[12px] font-extrabold text-foreground">{item.label}</span><span className="mt-0.5 block text-[10.5px] leading-[1.45] text-muted-foreground">{item.description}</span></span>
                         </Link>;
                       })}
                     </div>
@@ -210,60 +210,60 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                 </div>
               )}
             </div>
-            <Link href="/#about" className="text-[12px] font-semibold text-[#506b83] transition hover:text-[#0869a9] xl:text-[13px]">About</Link>
+            <Link href="/#about" className="text-[12px] font-semibold text-muted-foreground transition hover:text-foreground xl:text-[13px]">About</Link>
           </nav>
           {viewer ? (
             <div className="hidden items-center gap-3 lg:flex">
               <NotificationBell />
               <details ref={profileDetails} className="group relative">
-                <summary aria-label="Open account menu" className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-[#cbdfea] bg-white px-3.5 py-2 text-xs font-bold text-[#143e65] transition hover:bg-[#f1f8fd] [&::-webkit-details-marker]:hidden">
-                  <span className="flex size-7 items-center justify-center rounded-full bg-[#EDF5FB] text-[#153B63]"><UserRound size={16} /></span>
+                <summary aria-label="Open account menu" className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-border bg-card px-3.5 py-2 text-xs font-bold text-foreground transition hover:bg-muted [&::-webkit-details-marker]:hidden">
+                  <span className="flex size-7 items-center justify-center rounded-full bg-muted text-foreground"><UserRound size={16} /></span>
                   <span className="max-w-[115px] truncate">{viewer.name.split(" ")[0] || "Citizen"}</span>
                   <ChevronDown size={15} className="transition group-open:rotate-180" />
                 </summary>
-                <div className="absolute right-0 top-[calc(100%+10px)] z-50 w-[270px] overflow-hidden rounded-2xl border border-[#d9e6ef] bg-white p-2 shadow-[0_22px_55px_rgba(15,52,79,.17)]">
-                  <div className="border-b border-[#e8eef3] px-3 py-3">
-                    <p className="truncate text-[13px] font-extrabold text-[#153b63]">{viewer.name}</p>
-                    <p className="mt-1 truncate text-[11px] text-[#7290a3]">{viewer.email}</p>
+                <div className="absolute right-0 top-[calc(100%+10px)] z-50 w-[270px] overflow-hidden rounded-2xl border border-border bg-card p-2 shadow-[0_22px_55px_rgba(15,52,79,.17)]">
+                  <div className="border-b border-border px-3 py-3">
+                    <p className="truncate text-[13px] font-extrabold text-foreground">{viewer.name}</p>
+                    <p className="mt-1 truncate text-xs text-muted-foreground">{viewer.email}</p>
                   </div>
-                  <Link href={staffPortal ? "/admin" : "/account"} className="mt-2 flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><CircleUserRound size={17} className="text-[#153B63]" /> My Account</Link>
-                  <Link href={staffPortal ? "/admin/profile" : "/account/profile"} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><UserRound size={17} className="text-[#153B63]" /> My Profile</Link>
-                  <div className="my-1 border-t border-[#e8eef3]" />
-                  {citizenPortal && <Link href="/community-survey" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><GraduationCap size={17} /> Citizen Profiling</Link>}
-                  {citizenPortal && <Link href="/establishment-survey" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><BarChart3 size={17} /> Establishment Profiling</Link>}
-                  {citizenPortal && <Link href="/reports" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><ClipboardList size={17} /> My Reports</Link>}
-                  {citizenPortal && <Link href="/services/requests" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><Files size={17} /> My LGU Requests</Link>}
-                  {(viewer.role === "ADMIN" || viewer.role === "STAFF") && <Link href="/admin" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><ShieldCheck size={17} /> LGU workspace</Link>}
-                  <div className="my-1 border-t border-[#e8eef3]" />
+                  <Link href={staffPortal ? "/admin" : "/account"} className="mt-2 flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-foreground hover:bg-muted"><CircleUserRound size={17} className="text-foreground" /> My Account</Link>
+                  <Link href={staffPortal ? "/admin/profile" : "/account/profile"} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-foreground hover:bg-muted"><UserRound size={17} className="text-foreground" /> My Profile</Link>
+                  <div className="my-1 border-t border-border" />
+                  {citizenPortal && <Link href="/community-survey" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-foreground hover:bg-muted"><GraduationCap size={17} /> Citizen Profiling</Link>}
+                  {citizenPortal && <Link href="/establishment-survey" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-foreground hover:bg-muted"><BarChart3 size={17} /> Establishment Profiling</Link>}
+                  {citizenPortal && <Link href="/reports" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-foreground hover:bg-muted"><ClipboardList size={17} /> My Reports</Link>}
+                  {citizenPortal && <Link href="/services/requests" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-foreground hover:bg-muted"><Files size={17} /> My LGU Requests</Link>}
+                  {(viewer.role === "ADMIN" || viewer.role === "STAFF") && <Link href="/admin" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-foreground hover:bg-muted"><ShieldCheck size={17} /> LGU workspace</Link>}
+                  <div className="my-1 border-t border-border" />
                   <LogoutButton fullWidth />
                 </div>
               </details>
             </div>
           ) : (
             <div className="hidden items-center gap-3 lg:flex">
-              <Link href="/login" className="rounded-full border border-[#cddfea] px-5 py-2.5 text-xs font-bold text-[#14416b] transition hover:bg-[#edf7ff]">Log in</Link>
-              <Link href="/register" className="inline-flex items-center gap-2 rounded-full bg-[#113c66] px-5 py-3 text-xs font-bold text-white transition hover:bg-[#126caa]">Create an account <ArrowUpRight size={15}/></Link>
+              <Link href="/login" className="rounded-full border border-border px-5 py-2.5 text-xs font-bold text-foreground transition hover:bg-muted">Log in</Link>
+              <Link href="/register" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-xs font-bold text-white transition hover:bg-primary">Create an account <ArrowUpRight size={15}/></Link>
             </div>
           )}
-          <button type="button" aria-label={open ? "Close menu" : "Open menu"} aria-controls="elb-mobile-menu" aria-expanded={open} onClick={() => { setOpen((current) => !current); setMobileServicesOpen(false); setMobileCommunityOpen(false); }} className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#dbe7ee] text-[#153a61] lg:hidden">
+          <button type="button" aria-label={open ? "Close menu" : "Open menu"} aria-controls="elb-mobile-menu" aria-expanded={open} onClick={() => { setOpen((current) => !current); setMobileServicesOpen(false); setMobileCommunityOpen(false); }} className="flex h-11 w-11 items-center justify-center rounded-xl border border-border text-foreground lg:hidden">
             {open ? <X size={22}/> : <Menu size={22}/>}
           </button>
         </div>
         {open && (
-          <nav id="elb-mobile-menu" aria-label="Mobile" className="max-h-[calc(100dvh-82px)] overflow-y-auto overscroll-contain border-t border-[#e8edf2] bg-white px-5 py-4 shadow-xl sm:px-8 lg:hidden">
+          <nav id="elb-mobile-menu" aria-label="Mobile" className="max-h-[calc(100dvh-82px)] overflow-y-auto overscroll-contain border-t border-border bg-card px-5 py-4 shadow-xl sm:px-8 lg:hidden">
             <div className="mx-auto flex max-w-[580px] flex-col gap-1">
-              <Link href="/#home" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]">Home</Link>
+              <Link href="/#home" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted">Home</Link>
               <button
                 type="button"
                 aria-expanded={mobileServicesOpen}
                 aria-controls="elb-mobile-services-menu"
                 onClick={() => setMobileServicesOpen((current) => !current)}
-                className="flex min-h-11 w-full items-center justify-between rounded-xl bg-[#f1f7fb] px-4 py-3 text-left text-sm font-extrabold text-[#164567] focus-visible:outline-2 focus-visible:outline-[#1b779f]"
+                className="flex min-h-11 w-full items-center justify-between rounded-xl bg-muted px-4 py-3 text-left text-sm font-extrabold text-foreground focus-visible:outline-2 focus-visible:outline-border"
               >
                 Services <ChevronDown size={17} aria-hidden className={`transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`} />
               </button>
               {mobileServicesOpen && (
-                <div id="elb-mobile-services-menu" className="grid gap-1.5 border-l-2 border-[#c0dfed] pl-3">
+                <div id="elb-mobile-services-menu" className="grid gap-1.5 border-l-2 border-border pl-3">
                   {publicServiceNavigation.map((service) => {
                     const Icon = service.icon;
                     return (
@@ -271,11 +271,11 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                         key={service.id}
                         href={staffPortal && service.id === "civic" ? "/admin" : service.href}
                         onClick={() => { setMobileServicesOpen(false); setOpen(false); }}
-                        className="flex min-h-12 items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#234b72] hover:bg-[#f0f7fd] focus-visible:outline-2 focus-visible:outline-[#1b779f]"
+                        className="flex min-h-12 items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-foreground hover:bg-muted focus-visible:outline-2 focus-visible:outline-border"
                       >
-                        <Icon size={17} aria-hidden className="shrink-0 text-[#357395]" />
+                        <Icon size={17} aria-hidden className="shrink-0 text-foreground" />
                         <span className="flex-1">{service.title}</span>
-                        <span className={`text-[10px] font-semibold ${service.live ? "text-[#167a66]" : "text-[#8ca0af]"}`}>{service.live ? "Live" : "Preview"}</span>
+                        <span className={`text-xs font-semibold ${service.live ? "text-success" : "text-muted-foreground"}`}>{service.live ? "Live" : "Preview"}</span>
                       </Link>
                     );
                   })}
@@ -286,41 +286,41 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                 aria-expanded={mobileCommunityOpen}
                 aria-controls="elb-mobile-community-menu"
                 onClick={() => setMobileCommunityOpen((current) => !current)}
-                className="flex min-h-11 w-full items-center justify-between rounded-xl bg-[#f1f7fb] px-4 py-3 text-left text-sm font-extrabold text-[#164567] focus-visible:outline-2 focus-visible:outline-[#1b779f]"
+                className="flex min-h-11 w-full items-center justify-between rounded-xl bg-muted px-4 py-3 text-left text-sm font-extrabold text-foreground focus-visible:outline-2 focus-visible:outline-border"
               >
                 Community <ChevronDown size={17} aria-hidden className={`transition-transform ${mobileCommunityOpen ? "rotate-180" : ""}`} />
               </button>
               {mobileCommunityOpen && (
-                <div id="elb-mobile-community-menu" className="grid gap-1.5 border-l-2 border-[#c0dfed] pl-3">
+                <div id="elb-mobile-community-menu" className="grid gap-1.5 border-l-2 border-border pl-3">
                   {(staffPortal
                     ? [{ label: "Workforce analytics", href: "/admin/census/analytics", description: "Protected census-scoped planning measures", icon: BarChart3 }, { label: "Opportunity management", href: "/admin/jobs", description: "Manage PESO-reviewed opportunities", icon: BriefcaseBusiness }, { label: "Protected census records", href: "/admin/census", description: "Authorized individual and establishment records", icon: BarChart3 }]
                     : communityNavigation
                   ).map((item) => {
                     const Icon = item.icon;
-                    return <Link key={item.href} href={item.href} onClick={() => { setMobileCommunityOpen(false); setOpen(false); }} className="flex min-h-12 items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#234b72] hover:bg-[#f0f7fd]">
-                      <Icon size={17} aria-hidden className="shrink-0 text-[#357395]"/><span>{item.label}</span>
+                    return <Link key={item.href} href={item.href} onClick={() => { setMobileCommunityOpen(false); setOpen(false); }} className="flex min-h-12 items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-foreground hover:bg-muted">
+                      <Icon size={17} aria-hidden className="shrink-0 text-foreground"/><span>{item.label}</span>
                     </Link>;
                   })}
                 </div>
               )}
-              <Link href="/#about" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]">About</Link>
+              <Link href="/#about" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted">About</Link>
               {viewer ? (
-                <div className="mt-3 border-t border-[#e9f0f5] pt-3">
-                  <p className="truncate px-4 py-2 text-[12px] font-bold text-[#153b63]">Signed in as {viewer.name}</p>
-                  <Link href={staffPortal ? "/admin" : "/account"} onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><CircleUserRound size={17}/> {staffPortal ? "LGU Dashboard" : "My Account"}</Link>
-                  <Link href={staffPortal ? "/admin/profile" : "/account/profile"} onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><UserRound size={17}/> My Profile</Link>
-                  {citizenPortal && <Link href="/community-survey" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><GraduationCap size={17}/> Citizen Profiling</Link>}
-                  {citizenPortal && <Link href="/establishment-survey" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><BarChart3 size={17}/> Establishment Profiling</Link>}
-                  {citizenPortal && <Link href="/reports" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><ClipboardList size={17}/> My Reports</Link>}
-                  {citizenPortal && <Link href="/services/requests" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><Files size={17}/> My LGU Requests</Link>}
-                  {(viewer.role === "ADMIN" || viewer.role === "STAFF") && <Link href="/admin" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><ShieldCheck size={17}/> LGU workspace</Link>}
-                  <div className="flex items-center justify-between px-4 py-2 text-[11px] text-[#8198aa]"><span>Notifications</span><NotificationBell /></div>
+                <div className="mt-3 border-t border-border pt-3">
+                  <p className="truncate px-4 py-2 text-[12px] font-bold text-foreground">Signed in as {viewer.name}</p>
+                  <Link href={staffPortal ? "/admin" : "/account"} onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><CircleUserRound size={17}/> {staffPortal ? "LGU Dashboard" : "My Account"}</Link>
+                  <Link href={staffPortal ? "/admin/profile" : "/account/profile"} onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><UserRound size={17}/> My Profile</Link>
+                  {citizenPortal && <Link href="/community-survey" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><GraduationCap size={17}/> Citizen Profiling</Link>}
+                  {citizenPortal && <Link href="/establishment-survey" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><BarChart3 size={17}/> Establishment Profiling</Link>}
+                  {citizenPortal && <Link href="/reports" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><ClipboardList size={17}/> My Reports</Link>}
+                  {citizenPortal && <Link href="/services/requests" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><Files size={17}/> My LGU Requests</Link>}
+                  {(viewer.role === "ADMIN" || viewer.role === "STAFF") && <Link href="/admin" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><ShieldCheck size={17}/> LGU workspace</Link>}
+                  <div className="flex items-center justify-between px-4 py-2 text-xs text-muted-foreground"><span>Notifications</span><NotificationBell /></div>
                   <div className="px-2 pt-2"><LogoutButton fullWidth /></div>
                 </div>
               ) : (
                 <div className="mt-3 grid grid-cols-2 gap-3">
-                  <Link href="/login" onClick={() => setOpen(false)} className="rounded-xl border border-[#cddfea] py-3 text-center text-xs font-bold text-[#113c66]">Log in</Link>
-                  <Link href="/register" onClick={() => setOpen(false)} className="rounded-xl bg-[#113c66] py-3 text-center text-xs font-bold text-white">Create account</Link>
+                  <Link href="/login" onClick={() => setOpen(false)} className="rounded-xl border border-border py-3 text-center text-xs font-bold text-foreground">Log in</Link>
+                  <Link href="/register" onClick={() => setOpen(false)} className="rounded-xl bg-primary py-3 text-center text-xs font-bold text-white">Create account</Link>
                 </div>
               )}
             </div>

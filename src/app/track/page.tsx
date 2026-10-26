@@ -1,3 +1,4 @@
+export const instant = false;
 import type { Metadata } from "next";
 import { currentViewer } from "@/lib/access";
 import { CivicShell } from "@/features/civic/components/civic-shell";

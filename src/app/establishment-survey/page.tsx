@@ -14,5 +14,5 @@ export default async function EstablishmentSurveyPage() {
   const viewer=await requirePageViewer("/establishment-survey");
   if(viewer.role!=="CITIZEN")notFound();
   const records=await listOwnedEstablishments(viewer);
-  return <><SiteHeader viewer={{name:viewer.name,email:viewer.email,role:viewer.role}}/><main className="min-h-screen bg-[#F8FBFE] px-5 py-8 sm:px-8"><div className="mx-auto max-w-[1344px]"><EstablishmentSurveyForm initialRecords={records} currentYear={new Date().getFullYear()}/></div></main><SiteFooter/></>;
+  return <><SiteHeader viewer={{name:viewer.name,email:viewer.email,role:viewer.role}}/><main className="min-h-screen bg-card px-5 py-8 sm:px-8"><div className="mx-auto max-w-[1344px]"><EstablishmentSurveyForm initialRecords={records} currentYear={new Date().getFullYear()}/></div></main><SiteFooter/></>;
 }
