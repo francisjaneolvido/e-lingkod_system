@@ -778,13 +778,6 @@ export type MunicipalProjectScalarRelationFilter = {
   isNot?: Prisma.MunicipalProjectWhereInput
 }
 
-export type MunicipalProjectCreateNestedManyWithoutCreatedByInput = {
-  create?: Prisma.XOR<Prisma.MunicipalProjectCreateWithoutCreatedByInput, Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput> | Prisma.MunicipalProjectCreateWithoutCreatedByInput[] | Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.MunicipalProjectCreateOrConnectWithoutCreatedByInput | Prisma.MunicipalProjectCreateOrConnectWithoutCreatedByInput[]
-  createMany?: Prisma.MunicipalProjectCreateManyCreatedByInputEnvelope
-  connect?: Prisma.MunicipalProjectWhereUniqueInput | Prisma.MunicipalProjectWhereUniqueInput[]
-}
-
 export type MunicipalProjectCreateNestedManyWithoutReviewedByInput = {
   create?: Prisma.XOR<Prisma.MunicipalProjectCreateWithoutReviewedByInput, Prisma.MunicipalProjectUncheckedCreateWithoutReviewedByInput> | Prisma.MunicipalProjectCreateWithoutReviewedByInput[] | Prisma.MunicipalProjectUncheckedCreateWithoutReviewedByInput[]
   connectOrCreate?: Prisma.MunicipalProjectCreateOrConnectWithoutReviewedByInput | Prisma.MunicipalProjectCreateOrConnectWithoutReviewedByInput[]
@@ -792,7 +785,7 @@ export type MunicipalProjectCreateNestedManyWithoutReviewedByInput = {
   connect?: Prisma.MunicipalProjectWhereUniqueInput | Prisma.MunicipalProjectWhereUniqueInput[]
 }
 
-export type MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput = {
+export type MunicipalProjectCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.MunicipalProjectCreateWithoutCreatedByInput, Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput> | Prisma.MunicipalProjectCreateWithoutCreatedByInput[] | Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.MunicipalProjectCreateOrConnectWithoutCreatedByInput | Prisma.MunicipalProjectCreateOrConnectWithoutCreatedByInput[]
   createMany?: Prisma.MunicipalProjectCreateManyCreatedByInputEnvelope
@@ -806,18 +799,11 @@ export type MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput = {
   connect?: Prisma.MunicipalProjectWhereUniqueInput | Prisma.MunicipalProjectWhereUniqueInput[]
 }
 
-export type MunicipalProjectUpdateManyWithoutCreatedByNestedInput = {
+export type MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.MunicipalProjectCreateWithoutCreatedByInput, Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput> | Prisma.MunicipalProjectCreateWithoutCreatedByInput[] | Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.MunicipalProjectCreateOrConnectWithoutCreatedByInput | Prisma.MunicipalProjectCreateOrConnectWithoutCreatedByInput[]
-  upsert?: Prisma.MunicipalProjectUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.MunicipalProjectUpsertWithWhereUniqueWithoutCreatedByInput[]
   createMany?: Prisma.MunicipalProjectCreateManyCreatedByInputEnvelope
-  set?: Prisma.MunicipalProjectWhereUniqueInput | Prisma.MunicipalProjectWhereUniqueInput[]
-  disconnect?: Prisma.MunicipalProjectWhereUniqueInput | Prisma.MunicipalProjectWhereUniqueInput[]
-  delete?: Prisma.MunicipalProjectWhereUniqueInput | Prisma.MunicipalProjectWhereUniqueInput[]
   connect?: Prisma.MunicipalProjectWhereUniqueInput | Prisma.MunicipalProjectWhereUniqueInput[]
-  update?: Prisma.MunicipalProjectUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.MunicipalProjectUpdateWithWhereUniqueWithoutCreatedByInput[]
-  updateMany?: Prisma.MunicipalProjectUpdateManyWithWhereWithoutCreatedByInput | Prisma.MunicipalProjectUpdateManyWithWhereWithoutCreatedByInput[]
-  deleteMany?: Prisma.MunicipalProjectScalarWhereInput | Prisma.MunicipalProjectScalarWhereInput[]
 }
 
 export type MunicipalProjectUpdateManyWithoutReviewedByNestedInput = {
@@ -834,7 +820,7 @@ export type MunicipalProjectUpdateManyWithoutReviewedByNestedInput = {
   deleteMany?: Prisma.MunicipalProjectScalarWhereInput | Prisma.MunicipalProjectScalarWhereInput[]
 }
 
-export type MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput = {
+export type MunicipalProjectUpdateManyWithoutCreatedByNestedInput = {
   create?: Prisma.XOR<Prisma.MunicipalProjectCreateWithoutCreatedByInput, Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput> | Prisma.MunicipalProjectCreateWithoutCreatedByInput[] | Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.MunicipalProjectCreateOrConnectWithoutCreatedByInput | Prisma.MunicipalProjectCreateOrConnectWithoutCreatedByInput[]
   upsert?: Prisma.MunicipalProjectUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.MunicipalProjectUpsertWithWhereUniqueWithoutCreatedByInput[]
@@ -862,12 +848,18 @@ export type MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput = {
   deleteMany?: Prisma.MunicipalProjectScalarWhereInput | Prisma.MunicipalProjectScalarWhereInput[]
 }
 
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+export type MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.MunicipalProjectCreateWithoutCreatedByInput, Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput> | Prisma.MunicipalProjectCreateWithoutCreatedByInput[] | Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.MunicipalProjectCreateOrConnectWithoutCreatedByInput | Prisma.MunicipalProjectCreateOrConnectWithoutCreatedByInput[]
+  upsert?: Prisma.MunicipalProjectUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.MunicipalProjectUpsertWithWhereUniqueWithoutCreatedByInput[]
+  createMany?: Prisma.MunicipalProjectCreateManyCreatedByInputEnvelope
+  set?: Prisma.MunicipalProjectWhereUniqueInput | Prisma.MunicipalProjectWhereUniqueInput[]
+  disconnect?: Prisma.MunicipalProjectWhereUniqueInput | Prisma.MunicipalProjectWhereUniqueInput[]
+  delete?: Prisma.MunicipalProjectWhereUniqueInput | Prisma.MunicipalProjectWhereUniqueInput[]
+  connect?: Prisma.MunicipalProjectWhereUniqueInput | Prisma.MunicipalProjectWhereUniqueInput[]
+  update?: Prisma.MunicipalProjectUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.MunicipalProjectUpdateWithWhereUniqueWithoutCreatedByInput[]
+  updateMany?: Prisma.MunicipalProjectUpdateManyWithWhereWithoutCreatedByInput | Prisma.MunicipalProjectUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.MunicipalProjectScalarWhereInput | Prisma.MunicipalProjectScalarWhereInput[]
 }
 
 export type MunicipalProjectCreateNestedOneWithoutUpdatesInput = {
@@ -882,68 +874,6 @@ export type MunicipalProjectUpdateOneRequiredWithoutUpdatesNestedInput = {
   upsert?: Prisma.MunicipalProjectUpsertWithoutUpdatesInput
   connect?: Prisma.MunicipalProjectWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.MunicipalProjectUpdateToOneWithWhereWithoutUpdatesInput, Prisma.MunicipalProjectUpdateWithoutUpdatesInput>, Prisma.MunicipalProjectUncheckedUpdateWithoutUpdatesInput>
-}
-
-export type MunicipalProjectCreateWithoutCreatedByInput = {
-  id?: string
-  title: string
-  summary: string
-  category: string
-  phase?: string
-  leadOffice: string
-  barangaysJson: string
-  sourceUrl?: string | null
-  isDemo?: boolean
-  photoPath?: string | null
-  budgetPhp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  budgetSourceUrl?: string | null
-  fundingSource?: string | null
-  contractor?: string | null
-  procurementUrl?: string | null
-  targetCompletion?: Date | string | null
-  status?: string
-  reviewNote?: string | null
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  reviewedBy?: Prisma.UserCreateNestedOneWithoutMunicipalProjectsReviewedInput
-  updates?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutProjectInput
-}
-
-export type MunicipalProjectUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  title: string
-  summary: string
-  category: string
-  phase?: string
-  leadOffice: string
-  barangaysJson: string
-  sourceUrl?: string | null
-  isDemo?: boolean
-  photoPath?: string | null
-  budgetPhp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  budgetSourceUrl?: string | null
-  fundingSource?: string | null
-  contractor?: string | null
-  procurementUrl?: string | null
-  targetCompletion?: Date | string | null
-  status?: string
-  reviewedById?: string | null
-  reviewNote?: string | null
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  updates?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutProjectInput
-}
-
-export type MunicipalProjectCreateOrConnectWithoutCreatedByInput = {
-  where: Prisma.MunicipalProjectWhereUniqueInput
-  create: Prisma.XOR<Prisma.MunicipalProjectCreateWithoutCreatedByInput, Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput>
-}
-
-export type MunicipalProjectCreateManyCreatedByInputEnvelope = {
-  data: Prisma.MunicipalProjectCreateManyCreatedByInput | Prisma.MunicipalProjectCreateManyCreatedByInput[]
-  skipDuplicates?: boolean
 }
 
 export type MunicipalProjectCreateWithoutReviewedByInput = {
@@ -1008,20 +938,82 @@ export type MunicipalProjectCreateManyReviewedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type MunicipalProjectUpsertWithWhereUniqueWithoutCreatedByInput = {
+export type MunicipalProjectCreateWithoutCreatedByInput = {
+  id?: string
+  title: string
+  summary: string
+  category: string
+  phase?: string
+  leadOffice: string
+  barangaysJson: string
+  sourceUrl?: string | null
+  isDemo?: boolean
+  photoPath?: string | null
+  budgetPhp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  budgetSourceUrl?: string | null
+  fundingSource?: string | null
+  contractor?: string | null
+  procurementUrl?: string | null
+  targetCompletion?: Date | string | null
+  status?: string
+  reviewNote?: string | null
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reviewedBy?: Prisma.UserCreateNestedOneWithoutMunicipalProjectsReviewedInput
+  updates?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutProjectInput
+}
+
+export type MunicipalProjectUncheckedCreateWithoutCreatedByInput = {
+  id?: string
+  title: string
+  summary: string
+  category: string
+  phase?: string
+  leadOffice: string
+  barangaysJson: string
+  sourceUrl?: string | null
+  isDemo?: boolean
+  photoPath?: string | null
+  budgetPhp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  budgetSourceUrl?: string | null
+  fundingSource?: string | null
+  contractor?: string | null
+  procurementUrl?: string | null
+  targetCompletion?: Date | string | null
+  status?: string
+  reviewedById?: string | null
+  reviewNote?: string | null
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  updates?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type MunicipalProjectCreateOrConnectWithoutCreatedByInput = {
   where: Prisma.MunicipalProjectWhereUniqueInput
-  update: Prisma.XOR<Prisma.MunicipalProjectUpdateWithoutCreatedByInput, Prisma.MunicipalProjectUncheckedUpdateWithoutCreatedByInput>
   create: Prisma.XOR<Prisma.MunicipalProjectCreateWithoutCreatedByInput, Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput>
 }
 
-export type MunicipalProjectUpdateWithWhereUniqueWithoutCreatedByInput = {
-  where: Prisma.MunicipalProjectWhereUniqueInput
-  data: Prisma.XOR<Prisma.MunicipalProjectUpdateWithoutCreatedByInput, Prisma.MunicipalProjectUncheckedUpdateWithoutCreatedByInput>
+export type MunicipalProjectCreateManyCreatedByInputEnvelope = {
+  data: Prisma.MunicipalProjectCreateManyCreatedByInput | Prisma.MunicipalProjectCreateManyCreatedByInput[]
+  skipDuplicates?: boolean
 }
 
-export type MunicipalProjectUpdateManyWithWhereWithoutCreatedByInput = {
+export type MunicipalProjectUpsertWithWhereUniqueWithoutReviewedByInput = {
+  where: Prisma.MunicipalProjectWhereUniqueInput
+  update: Prisma.XOR<Prisma.MunicipalProjectUpdateWithoutReviewedByInput, Prisma.MunicipalProjectUncheckedUpdateWithoutReviewedByInput>
+  create: Prisma.XOR<Prisma.MunicipalProjectCreateWithoutReviewedByInput, Prisma.MunicipalProjectUncheckedCreateWithoutReviewedByInput>
+}
+
+export type MunicipalProjectUpdateWithWhereUniqueWithoutReviewedByInput = {
+  where: Prisma.MunicipalProjectWhereUniqueInput
+  data: Prisma.XOR<Prisma.MunicipalProjectUpdateWithoutReviewedByInput, Prisma.MunicipalProjectUncheckedUpdateWithoutReviewedByInput>
+}
+
+export type MunicipalProjectUpdateManyWithWhereWithoutReviewedByInput = {
   where: Prisma.MunicipalProjectScalarWhereInput
-  data: Prisma.XOR<Prisma.MunicipalProjectUpdateManyMutationInput, Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByInput>
+  data: Prisma.XOR<Prisma.MunicipalProjectUpdateManyMutationInput, Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByInput>
 }
 
 export type MunicipalProjectScalarWhereInput = {
@@ -1053,20 +1045,20 @@ export type MunicipalProjectScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"MunicipalProject"> | Date | string
 }
 
-export type MunicipalProjectUpsertWithWhereUniqueWithoutReviewedByInput = {
+export type MunicipalProjectUpsertWithWhereUniqueWithoutCreatedByInput = {
   where: Prisma.MunicipalProjectWhereUniqueInput
-  update: Prisma.XOR<Prisma.MunicipalProjectUpdateWithoutReviewedByInput, Prisma.MunicipalProjectUncheckedUpdateWithoutReviewedByInput>
-  create: Prisma.XOR<Prisma.MunicipalProjectCreateWithoutReviewedByInput, Prisma.MunicipalProjectUncheckedCreateWithoutReviewedByInput>
+  update: Prisma.XOR<Prisma.MunicipalProjectUpdateWithoutCreatedByInput, Prisma.MunicipalProjectUncheckedUpdateWithoutCreatedByInput>
+  create: Prisma.XOR<Prisma.MunicipalProjectCreateWithoutCreatedByInput, Prisma.MunicipalProjectUncheckedCreateWithoutCreatedByInput>
 }
 
-export type MunicipalProjectUpdateWithWhereUniqueWithoutReviewedByInput = {
+export type MunicipalProjectUpdateWithWhereUniqueWithoutCreatedByInput = {
   where: Prisma.MunicipalProjectWhereUniqueInput
-  data: Prisma.XOR<Prisma.MunicipalProjectUpdateWithoutReviewedByInput, Prisma.MunicipalProjectUncheckedUpdateWithoutReviewedByInput>
+  data: Prisma.XOR<Prisma.MunicipalProjectUpdateWithoutCreatedByInput, Prisma.MunicipalProjectUncheckedUpdateWithoutCreatedByInput>
 }
 
-export type MunicipalProjectUpdateManyWithWhereWithoutReviewedByInput = {
+export type MunicipalProjectUpdateManyWithWhereWithoutCreatedByInput = {
   where: Prisma.MunicipalProjectScalarWhereInput
-  data: Prisma.XOR<Prisma.MunicipalProjectUpdateManyMutationInput, Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByInput>
+  data: Prisma.XOR<Prisma.MunicipalProjectUpdateManyMutationInput, Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByInput>
 }
 
 export type MunicipalProjectCreateWithoutUpdatesInput = {
@@ -1189,31 +1181,6 @@ export type MunicipalProjectUncheckedUpdateWithoutUpdatesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type MunicipalProjectCreateManyCreatedByInput = {
-  id?: string
-  title: string
-  summary: string
-  category: string
-  phase?: string
-  leadOffice: string
-  barangaysJson: string
-  sourceUrl?: string | null
-  isDemo?: boolean
-  photoPath?: string | null
-  budgetPhp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  budgetSourceUrl?: string | null
-  fundingSource?: string | null
-  contractor?: string | null
-  procurementUrl?: string | null
-  targetCompletion?: Date | string | null
-  status?: string
-  reviewedById?: string | null
-  reviewNote?: string | null
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
 export type MunicipalProjectCreateManyReviewedByInput = {
   id?: string
   title: string
@@ -1239,81 +1206,29 @@ export type MunicipalProjectCreateManyReviewedByInput = {
   updatedAt?: Date | string
 }
 
-export type MunicipalProjectUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  phase?: Prisma.StringFieldUpdateOperationsInput | string
-  leadOffice?: Prisma.StringFieldUpdateOperationsInput | string
-  barangaysJson?: Prisma.StringFieldUpdateOperationsInput | string
-  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  budgetPhp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  budgetSourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fundingSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  procurementUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  targetCompletion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  reviewedBy?: Prisma.UserUpdateOneWithoutMunicipalProjectsReviewedNestedInput
-  updates?: Prisma.MunicipalProjectUpdateUpdateManyWithoutProjectNestedInput
-}
-
-export type MunicipalProjectUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  phase?: Prisma.StringFieldUpdateOperationsInput | string
-  leadOffice?: Prisma.StringFieldUpdateOperationsInput | string
-  barangaysJson?: Prisma.StringFieldUpdateOperationsInput | string
-  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  budgetPhp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  budgetSourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fundingSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  procurementUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  targetCompletion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updates?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutProjectNestedInput
-}
-
-export type MunicipalProjectUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  phase?: Prisma.StringFieldUpdateOperationsInput | string
-  leadOffice?: Prisma.StringFieldUpdateOperationsInput | string
-  barangaysJson?: Prisma.StringFieldUpdateOperationsInput | string
-  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  budgetPhp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  budgetSourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fundingSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  procurementUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  targetCompletion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type MunicipalProjectCreateManyCreatedByInput = {
+  id?: string
+  title: string
+  summary: string
+  category: string
+  phase?: string
+  leadOffice: string
+  barangaysJson: string
+  sourceUrl?: string | null
+  isDemo?: boolean
+  photoPath?: string | null
+  budgetPhp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  budgetSourceUrl?: string | null
+  fundingSource?: string | null
+  contractor?: string | null
+  procurementUrl?: string | null
+  targetCompletion?: Date | string | null
+  status?: string
+  reviewedById?: string | null
+  reviewNote?: string | null
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type MunicipalProjectUpdateWithoutReviewedByInput = {
@@ -1387,6 +1302,83 @@ export type MunicipalProjectUncheckedUpdateManyWithoutReviewedByInput = {
   targetCompletion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type MunicipalProjectUpdateWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  phase?: Prisma.StringFieldUpdateOperationsInput | string
+  leadOffice?: Prisma.StringFieldUpdateOperationsInput | string
+  barangaysJson?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetPhp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  budgetSourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fundingSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  procurementUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetCompletion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedBy?: Prisma.UserUpdateOneWithoutMunicipalProjectsReviewedNestedInput
+  updates?: Prisma.MunicipalProjectUpdateUpdateManyWithoutProjectNestedInput
+}
+
+export type MunicipalProjectUncheckedUpdateWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  phase?: Prisma.StringFieldUpdateOperationsInput | string
+  leadOffice?: Prisma.StringFieldUpdateOperationsInput | string
+  barangaysJson?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetPhp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  budgetSourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fundingSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  procurementUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetCompletion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updates?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type MunicipalProjectUncheckedUpdateManyWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  phase?: Prisma.StringFieldUpdateOperationsInput | string
+  leadOffice?: Prisma.StringFieldUpdateOperationsInput | string
+  barangaysJson?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  photoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetPhp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  budgetSourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fundingSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  procurementUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetCompletion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string

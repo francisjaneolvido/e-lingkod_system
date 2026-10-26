@@ -38,7 +38,7 @@ test("employment survey and future Census are clearly distinct in services notic
   assert.match(read("src/app/community-employment/page.tsx"), /Citizen Profiling/);
   assert.match(read("src/features/landing/data/services.ts"), /title: "Community Census", shortTitle: "Census · coming soon"/);
   assert.match(read("src/features/landing/data/services.ts"), /belongs to Job Matching \/ Employment & Livelihood, not Census/);
-  assert.match(read("src/components/layout/site-footer.tsx"), /Online LGU Services, Emergency Hotlines and Municipal Projects have prototype workflows/);
+  assert.match(read("src/components/layout/site-footer.tsx"), /Online LGU Services, and PESO opportunities now have working prototype flows/);
 });
 
 test("citizen cards link to dedicated details instead of expanding into long inline content", () => {
@@ -49,35 +49,16 @@ test("citizen cards link to dedicated details instead of expanding into long inl
   assert.match(browser, /Clear filters/);
 });
 
-test("job details are server-filtered: only published and non-expired", () => {
-  assert.match(repo, /export async function publishedJobById/);
-  assert.match(repo, /where: \{ id, status: "PUBLISHED", OR: \[\{ expiresAt: null \}, \{ expiresAt: \{ gte: new Date\(\) \} \}\] \}/);
-  assert.match(detail, /if \(!job\) notFound\(\)/);
-  assert.match(detail, /await connection\(\)/);
-  assert.match(detail, /export const instant = false/);
-  assert.match(read("src/app/opportunities/[id]/not-found.tsx"), /no longer available/);
-  assert.match(repo, /select: \{/);
-  const section = repo.slice(repo.indexOf("export async function publishedJobById"), repo.indexOf("export async function adminJobData"));
-  assert.doesNotMatch(section, /reviewSource|reviewNote|reviewerId/);
+test("job details are server-filtered: only published and non-expired",()=>{
+assert.match(repo,/export async function publishedJobById/);assert.match(repo,/status:'PUBLISHED'/);assert.match(repo,/employerVerified:true,vacancyVerified:true/);assert.match(repo,/expiresAt:\{gt:new Date\(\)\}/);assert.match(detail,/if\(!job\)notFound\(\)/);assert.match(detail,/await connection\(\)/);assert.match(detail,/instant=false/);assert.match(read('src/app/opportunities/[id]/not-found.tsx'),/no longer available/);const select=read('src/features/jobs/server/opportunities.ts').split('satisfies Prisma.JobOpportunitySelect')[0];assert.doesNotMatch(select,/reviewSource|reviewNote|reviewerId|createdById/);
 });
 
-test("job details include qualifications, contact steps and optional non-eligibility skill comparison", () => {
-  assert.match(detail, /scoreMatch\(profile, job\)/);
-  assert.match(detail, /EDUCATION_LABEL\[job\.education\]/);
-  assert.match(detail, /job\.contactInfo/);
-  assert.match(detail, /job\.skills\.map/);
-  assert.match(detail, /not a qualification assessment/);
-  assert.match(detail, /not an online job application or hiring decision/);
+test("job details include qualifications, contact steps and optional non-eligibility skill comparison",()=>{
+assert.match(detail,/personalOpportunities\(viewer\)/);assert.match(detail,/personal\?\.matches.find/);assert.match(detail,/EDUCATION_LABEL\[job\.education\]/);assert.match(detail,/job\.contactInfo/);assert.match(detail,/job\.skills\.join/);assert.match(detail,/no hiring or eligibility guarantee/i);assert.match(detail,/does not forward your profile or process an application/);
 });
 
-test("public job discovery does not require login; profile remains opt-in", () => {
-  const listing = read("src/app/opportunities/page.tsx");
-  assert.match(listing, /communityMatchProfile\(viewer\.id\)/);
-  assert.match(listing, /profileForCitizen\(viewer\.id\)/);
-  assert.match(listing, /publishedJobs\(\)/);
-  assert.match(detail, /communityMatchProfile\(viewer\.id\)/);
-  assert.match(detail, /profileForCitizen\(viewer\.id\)/);
-  assert.doesNotMatch(detail, /requirePageViewer/);
+test("public job discovery does not require login; profile remains opt-in",()=>{
+const listing=read('src/app/opportunities/page.tsx');assert.match(listing,/publicOpportunities\(filters\)/);assert.match(listing,/viewer\?\.role==='CITIZEN'/);assert.match(listing,/personalOpportunities\(viewer\)/);assert.doesNotMatch(listing,/requirePageViewer|requireModulePage/);assert.doesNotMatch(detail,/requirePageViewer/);
 });
 
 test("opt-in skills profile has one persistent save button and enforces selection limits", () => {

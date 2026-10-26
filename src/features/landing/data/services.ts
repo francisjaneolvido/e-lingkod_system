@@ -67,7 +67,7 @@ export const services: Service[] = [
     details: [
       { icon: Building2, text: "Directory of offices and departments" },
       { icon: ClipboardList, text: "Requirements and step-by-step service guides" },
-      { icon: Search, text: "Published LGU-reviewed municipal projects" },
+      { icon: Search, text: "Ongoing and future municipal projects" },
     ],
   },
   {

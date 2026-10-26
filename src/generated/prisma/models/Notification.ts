@@ -214,6 +214,7 @@ export type NotificationWhereInput = {
   href?: Prisma.StringNullableFilter<"Notification"> | string | null
   readAt?: Prisma.DateTimeNullableFilter<"Notification"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Notification"> | Date | string
+  recommendation?: Prisma.XOR<Prisma.JobRecommendationNullableScalarRelationFilter, Prisma.JobRecommendationWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -227,6 +228,7 @@ export type NotificationOrderByWithRelationInput = {
   href?: Prisma.SortOrderInput | Prisma.SortOrder
   readAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  recommendation?: Prisma.JobRecommendationOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.NotificationOrderByRelevanceInput
 }
@@ -244,6 +246,7 @@ export type NotificationWhereUniqueInput = Prisma.AtLeast<{
   href?: Prisma.StringNullableFilter<"Notification"> | string | null
   readAt?: Prisma.DateTimeNullableFilter<"Notification"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Notification"> | Date | string
+  recommendation?: Prisma.XOR<Prisma.JobRecommendationNullableScalarRelationFilter, Prisma.JobRecommendationWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
@@ -286,6 +289,7 @@ export type NotificationCreateInput = {
   href?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
+  recommendation?: Prisma.JobRecommendationCreateNestedOneWithoutNotificationInput
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
 }
 
@@ -299,6 +303,7 @@ export type NotificationUncheckedCreateInput = {
   href?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
+  recommendation?: Prisma.JobRecommendationUncheckedCreateNestedOneWithoutNotificationInput
 }
 
 export type NotificationUpdateInput = {
@@ -310,6 +315,7 @@ export type NotificationUpdateInput = {
   href?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recommendation?: Prisma.JobRecommendationUpdateOneWithoutNotificationNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
 }
 
@@ -323,6 +329,7 @@ export type NotificationUncheckedUpdateInput = {
   href?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recommendation?: Prisma.JobRecommendationUncheckedUpdateOneWithoutNotificationNestedInput
 }
 
 export type NotificationCreateManyInput = {
@@ -412,6 +419,11 @@ export type NotificationMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
+export type NotificationScalarRelationFilter = {
+  is?: Prisma.NotificationWhereInput
+  isNot?: Prisma.NotificationWhereInput
+}
+
 export type NotificationCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.NotificationCreateWithoutUserInput, Prisma.NotificationUncheckedCreateWithoutUserInput> | Prisma.NotificationCreateWithoutUserInput[] | Prisma.NotificationUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.NotificationCreateOrConnectWithoutUserInput | Prisma.NotificationCreateOrConnectWithoutUserInput[]
@@ -454,6 +466,20 @@ export type NotificationUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.NotificationScalarWhereInput | Prisma.NotificationScalarWhereInput[]
 }
 
+export type NotificationCreateNestedOneWithoutRecommendationInput = {
+  create?: Prisma.XOR<Prisma.NotificationCreateWithoutRecommendationInput, Prisma.NotificationUncheckedCreateWithoutRecommendationInput>
+  connectOrCreate?: Prisma.NotificationCreateOrConnectWithoutRecommendationInput
+  connect?: Prisma.NotificationWhereUniqueInput
+}
+
+export type NotificationUpdateOneRequiredWithoutRecommendationNestedInput = {
+  create?: Prisma.XOR<Prisma.NotificationCreateWithoutRecommendationInput, Prisma.NotificationUncheckedCreateWithoutRecommendationInput>
+  connectOrCreate?: Prisma.NotificationCreateOrConnectWithoutRecommendationInput
+  upsert?: Prisma.NotificationUpsertWithoutRecommendationInput
+  connect?: Prisma.NotificationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.NotificationUpdateToOneWithWhereWithoutRecommendationInput, Prisma.NotificationUpdateWithoutRecommendationInput>, Prisma.NotificationUncheckedUpdateWithoutRecommendationInput>
+}
+
 export type NotificationCreateWithoutUserInput = {
   id?: string
   module: string
@@ -463,6 +489,7 @@ export type NotificationCreateWithoutUserInput = {
   href?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
+  recommendation?: Prisma.JobRecommendationCreateNestedOneWithoutNotificationInput
 }
 
 export type NotificationUncheckedCreateWithoutUserInput = {
@@ -474,6 +501,7 @@ export type NotificationUncheckedCreateWithoutUserInput = {
   href?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
+  recommendation?: Prisma.JobRecommendationUncheckedCreateNestedOneWithoutNotificationInput
 }
 
 export type NotificationCreateOrConnectWithoutUserInput = {
@@ -517,6 +545,70 @@ export type NotificationScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Notification"> | Date | string
 }
 
+export type NotificationCreateWithoutRecommendationInput = {
+  id?: string
+  module: string
+  type: string
+  title: string
+  message: string
+  href?: string | null
+  readAt?: Date | string | null
+  createdAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutNotificationsInput
+}
+
+export type NotificationUncheckedCreateWithoutRecommendationInput = {
+  id?: string
+  userId: string
+  module: string
+  type: string
+  title: string
+  message: string
+  href?: string | null
+  readAt?: Date | string | null
+  createdAt?: Date | string
+}
+
+export type NotificationCreateOrConnectWithoutRecommendationInput = {
+  where: Prisma.NotificationWhereUniqueInput
+  create: Prisma.XOR<Prisma.NotificationCreateWithoutRecommendationInput, Prisma.NotificationUncheckedCreateWithoutRecommendationInput>
+}
+
+export type NotificationUpsertWithoutRecommendationInput = {
+  update: Prisma.XOR<Prisma.NotificationUpdateWithoutRecommendationInput, Prisma.NotificationUncheckedUpdateWithoutRecommendationInput>
+  create: Prisma.XOR<Prisma.NotificationCreateWithoutRecommendationInput, Prisma.NotificationUncheckedCreateWithoutRecommendationInput>
+  where?: Prisma.NotificationWhereInput
+}
+
+export type NotificationUpdateToOneWithWhereWithoutRecommendationInput = {
+  where?: Prisma.NotificationWhereInput
+  data: Prisma.XOR<Prisma.NotificationUpdateWithoutRecommendationInput, Prisma.NotificationUncheckedUpdateWithoutRecommendationInput>
+}
+
+export type NotificationUpdateWithoutRecommendationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  module?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  message?: Prisma.StringFieldUpdateOperationsInput | string
+  href?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
+}
+
+export type NotificationUncheckedUpdateWithoutRecommendationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  module?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  message?: Prisma.StringFieldUpdateOperationsInput | string
+  href?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type NotificationCreateManyUserInput = {
   id?: string
   module: string
@@ -537,6 +629,7 @@ export type NotificationUpdateWithoutUserInput = {
   href?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recommendation?: Prisma.JobRecommendationUpdateOneWithoutNotificationNestedInput
 }
 
 export type NotificationUncheckedUpdateWithoutUserInput = {
@@ -548,6 +641,7 @@ export type NotificationUncheckedUpdateWithoutUserInput = {
   href?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recommendation?: Prisma.JobRecommendationUncheckedUpdateOneWithoutNotificationNestedInput
 }
 
 export type NotificationUncheckedUpdateManyWithoutUserInput = {
@@ -573,6 +667,7 @@ export type NotificationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   href?: boolean
   readAt?: boolean
   createdAt?: boolean
+  recommendation?: boolean | Prisma.Notification$recommendationArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["notification"]>
 
@@ -592,12 +687,14 @@ export type NotificationSelectScalar = {
 
 export type NotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "module" | "type" | "title" | "message" | "href" | "readAt" | "createdAt", ExtArgs["result"]["notification"]>
 export type NotificationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  recommendation?: boolean | Prisma.Notification$recommendationArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $NotificationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Notification"
   objects: {
+    recommendation: Prisma.$JobRecommendationPayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -950,6 +1047,7 @@ readonly fields: NotificationFieldRefs;
  */
 export interface Prisma__NotificationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  recommendation<T extends Prisma.Notification$recommendationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Notification$recommendationArgs<ExtArgs>>): Prisma.Prisma__JobRecommendationClient<runtime.Types.Result.GetResult<Prisma.$JobRecommendationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1334,6 +1432,25 @@ export type NotificationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many Notifications to delete.
    */
   limit?: number
+}
+
+/**
+ * Notification.recommendation
+ */
+export type Notification$recommendationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobRecommendation
+   */
+  select?: Prisma.JobRecommendationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobRecommendation
+   */
+  omit?: Prisma.JobRecommendationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobRecommendationInclude<ExtArgs> | null
+  where?: Prisma.JobRecommendationWhereInput
 }
 
 /**

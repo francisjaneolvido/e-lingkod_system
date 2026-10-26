@@ -548,13 +548,6 @@ export type MunicipalProjectUpdateSumOrderByAggregateInput = {
   progressPercent?: Prisma.SortOrder
 }
 
-export type MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput = {
-  create?: Prisma.XOR<Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput, Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput> | Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput[] | Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.MunicipalProjectUpdateCreateOrConnectWithoutCreatedByInput | Prisma.MunicipalProjectUpdateCreateOrConnectWithoutCreatedByInput[]
-  createMany?: Prisma.MunicipalProjectUpdateCreateManyCreatedByInputEnvelope
-  connect?: Prisma.MunicipalProjectUpdateWhereUniqueInput | Prisma.MunicipalProjectUpdateWhereUniqueInput[]
-}
-
 export type MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput = {
   create?: Prisma.XOR<Prisma.MunicipalProjectUpdateCreateWithoutReviewedByInput, Prisma.MunicipalProjectUpdateUncheckedCreateWithoutReviewedByInput> | Prisma.MunicipalProjectUpdateCreateWithoutReviewedByInput[] | Prisma.MunicipalProjectUpdateUncheckedCreateWithoutReviewedByInput[]
   connectOrCreate?: Prisma.MunicipalProjectUpdateCreateOrConnectWithoutReviewedByInput | Prisma.MunicipalProjectUpdateCreateOrConnectWithoutReviewedByInput[]
@@ -562,7 +555,7 @@ export type MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput = {
   connect?: Prisma.MunicipalProjectUpdateWhereUniqueInput | Prisma.MunicipalProjectUpdateWhereUniqueInput[]
 }
 
-export type MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput = {
+export type MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput, Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput> | Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput[] | Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.MunicipalProjectUpdateCreateOrConnectWithoutCreatedByInput | Prisma.MunicipalProjectUpdateCreateOrConnectWithoutCreatedByInput[]
   createMany?: Prisma.MunicipalProjectUpdateCreateManyCreatedByInputEnvelope
@@ -576,18 +569,11 @@ export type MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInpu
   connect?: Prisma.MunicipalProjectUpdateWhereUniqueInput | Prisma.MunicipalProjectUpdateWhereUniqueInput[]
 }
 
-export type MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput = {
+export type MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput, Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput> | Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput[] | Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.MunicipalProjectUpdateCreateOrConnectWithoutCreatedByInput | Prisma.MunicipalProjectUpdateCreateOrConnectWithoutCreatedByInput[]
-  upsert?: Prisma.MunicipalProjectUpdateUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.MunicipalProjectUpdateUpsertWithWhereUniqueWithoutCreatedByInput[]
   createMany?: Prisma.MunicipalProjectUpdateCreateManyCreatedByInputEnvelope
-  set?: Prisma.MunicipalProjectUpdateWhereUniqueInput | Prisma.MunicipalProjectUpdateWhereUniqueInput[]
-  disconnect?: Prisma.MunicipalProjectUpdateWhereUniqueInput | Prisma.MunicipalProjectUpdateWhereUniqueInput[]
-  delete?: Prisma.MunicipalProjectUpdateWhereUniqueInput | Prisma.MunicipalProjectUpdateWhereUniqueInput[]
   connect?: Prisma.MunicipalProjectUpdateWhereUniqueInput | Prisma.MunicipalProjectUpdateWhereUniqueInput[]
-  update?: Prisma.MunicipalProjectUpdateUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.MunicipalProjectUpdateUpdateWithWhereUniqueWithoutCreatedByInput[]
-  updateMany?: Prisma.MunicipalProjectUpdateUpdateManyWithWhereWithoutCreatedByInput | Prisma.MunicipalProjectUpdateUpdateManyWithWhereWithoutCreatedByInput[]
-  deleteMany?: Prisma.MunicipalProjectUpdateScalarWhereInput | Prisma.MunicipalProjectUpdateScalarWhereInput[]
 }
 
 export type MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput = {
@@ -604,7 +590,7 @@ export type MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput = {
   deleteMany?: Prisma.MunicipalProjectUpdateScalarWhereInput | Prisma.MunicipalProjectUpdateScalarWhereInput[]
 }
 
-export type MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput = {
+export type MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput = {
   create?: Prisma.XOR<Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput, Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput> | Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput[] | Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.MunicipalProjectUpdateCreateOrConnectWithoutCreatedByInput | Prisma.MunicipalProjectUpdateCreateOrConnectWithoutCreatedByInput[]
   upsert?: Prisma.MunicipalProjectUpdateUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.MunicipalProjectUpdateUpsertWithWhereUniqueWithoutCreatedByInput[]
@@ -629,6 +615,20 @@ export type MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInpu
   connect?: Prisma.MunicipalProjectUpdateWhereUniqueInput | Prisma.MunicipalProjectUpdateWhereUniqueInput[]
   update?: Prisma.MunicipalProjectUpdateUpdateWithWhereUniqueWithoutReviewedByInput | Prisma.MunicipalProjectUpdateUpdateWithWhereUniqueWithoutReviewedByInput[]
   updateMany?: Prisma.MunicipalProjectUpdateUpdateManyWithWhereWithoutReviewedByInput | Prisma.MunicipalProjectUpdateUpdateManyWithWhereWithoutReviewedByInput[]
+  deleteMany?: Prisma.MunicipalProjectUpdateScalarWhereInput | Prisma.MunicipalProjectUpdateScalarWhereInput[]
+}
+
+export type MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput, Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput> | Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput[] | Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.MunicipalProjectUpdateCreateOrConnectWithoutCreatedByInput | Prisma.MunicipalProjectUpdateCreateOrConnectWithoutCreatedByInput[]
+  upsert?: Prisma.MunicipalProjectUpdateUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.MunicipalProjectUpdateUpsertWithWhereUniqueWithoutCreatedByInput[]
+  createMany?: Prisma.MunicipalProjectUpdateCreateManyCreatedByInputEnvelope
+  set?: Prisma.MunicipalProjectUpdateWhereUniqueInput | Prisma.MunicipalProjectUpdateWhereUniqueInput[]
+  disconnect?: Prisma.MunicipalProjectUpdateWhereUniqueInput | Prisma.MunicipalProjectUpdateWhereUniqueInput[]
+  delete?: Prisma.MunicipalProjectUpdateWhereUniqueInput | Prisma.MunicipalProjectUpdateWhereUniqueInput[]
+  connect?: Prisma.MunicipalProjectUpdateWhereUniqueInput | Prisma.MunicipalProjectUpdateWhereUniqueInput[]
+  update?: Prisma.MunicipalProjectUpdateUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.MunicipalProjectUpdateUpdateWithWhereUniqueWithoutCreatedByInput[]
+  updateMany?: Prisma.MunicipalProjectUpdateUpdateManyWithWhereWithoutCreatedByInput | Prisma.MunicipalProjectUpdateUpdateManyWithWhereWithoutCreatedByInput[]
   deleteMany?: Prisma.MunicipalProjectUpdateScalarWhereInput | Prisma.MunicipalProjectUpdateScalarWhereInput[]
 }
 
@@ -674,46 +674,6 @@ export type MunicipalProjectUpdateUncheckedUpdateManyWithoutProjectNestedInput =
   deleteMany?: Prisma.MunicipalProjectUpdateScalarWhereInput | Prisma.MunicipalProjectUpdateScalarWhereInput[]
 }
 
-export type MunicipalProjectUpdateCreateWithoutCreatedByInput = {
-  id?: string
-  title: string
-  details: string
-  progressPercent?: number | null
-  phaseAfter?: string | null
-  sourceUrl: string
-  status?: string
-  reviewNote?: string | null
-  reviewedAt?: Date | string | null
-  createdAt?: Date | string
-  project: Prisma.MunicipalProjectCreateNestedOneWithoutUpdatesInput
-  reviewedBy?: Prisma.UserCreateNestedOneWithoutMunicipalProjectUpdatesReviewedInput
-}
-
-export type MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  projectId: string
-  title: string
-  details: string
-  progressPercent?: number | null
-  phaseAfter?: string | null
-  sourceUrl: string
-  status?: string
-  reviewNote?: string | null
-  reviewedById?: string | null
-  reviewedAt?: Date | string | null
-  createdAt?: Date | string
-}
-
-export type MunicipalProjectUpdateCreateOrConnectWithoutCreatedByInput = {
-  where: Prisma.MunicipalProjectUpdateWhereUniqueInput
-  create: Prisma.XOR<Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput, Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput>
-}
-
-export type MunicipalProjectUpdateCreateManyCreatedByInputEnvelope = {
-  data: Prisma.MunicipalProjectUpdateCreateManyCreatedByInput | Prisma.MunicipalProjectUpdateCreateManyCreatedByInput[]
-  skipDuplicates?: boolean
-}
-
 export type MunicipalProjectUpdateCreateWithoutReviewedByInput = {
   id?: string
   title: string
@@ -754,20 +714,60 @@ export type MunicipalProjectUpdateCreateManyReviewedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type MunicipalProjectUpdateUpsertWithWhereUniqueWithoutCreatedByInput = {
+export type MunicipalProjectUpdateCreateWithoutCreatedByInput = {
+  id?: string
+  title: string
+  details: string
+  progressPercent?: number | null
+  phaseAfter?: string | null
+  sourceUrl: string
+  status?: string
+  reviewNote?: string | null
+  reviewedAt?: Date | string | null
+  createdAt?: Date | string
+  project: Prisma.MunicipalProjectCreateNestedOneWithoutUpdatesInput
+  reviewedBy?: Prisma.UserCreateNestedOneWithoutMunicipalProjectUpdatesReviewedInput
+}
+
+export type MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput = {
+  id?: string
+  projectId: string
+  title: string
+  details: string
+  progressPercent?: number | null
+  phaseAfter?: string | null
+  sourceUrl: string
+  status?: string
+  reviewNote?: string | null
+  reviewedById?: string | null
+  reviewedAt?: Date | string | null
+  createdAt?: Date | string
+}
+
+export type MunicipalProjectUpdateCreateOrConnectWithoutCreatedByInput = {
   where: Prisma.MunicipalProjectUpdateWhereUniqueInput
-  update: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateWithoutCreatedByInput, Prisma.MunicipalProjectUpdateUncheckedUpdateWithoutCreatedByInput>
   create: Prisma.XOR<Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput, Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput>
 }
 
-export type MunicipalProjectUpdateUpdateWithWhereUniqueWithoutCreatedByInput = {
-  where: Prisma.MunicipalProjectUpdateWhereUniqueInput
-  data: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateWithoutCreatedByInput, Prisma.MunicipalProjectUpdateUncheckedUpdateWithoutCreatedByInput>
+export type MunicipalProjectUpdateCreateManyCreatedByInputEnvelope = {
+  data: Prisma.MunicipalProjectUpdateCreateManyCreatedByInput | Prisma.MunicipalProjectUpdateCreateManyCreatedByInput[]
+  skipDuplicates?: boolean
 }
 
-export type MunicipalProjectUpdateUpdateManyWithWhereWithoutCreatedByInput = {
+export type MunicipalProjectUpdateUpsertWithWhereUniqueWithoutReviewedByInput = {
+  where: Prisma.MunicipalProjectUpdateWhereUniqueInput
+  update: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateWithoutReviewedByInput, Prisma.MunicipalProjectUpdateUncheckedUpdateWithoutReviewedByInput>
+  create: Prisma.XOR<Prisma.MunicipalProjectUpdateCreateWithoutReviewedByInput, Prisma.MunicipalProjectUpdateUncheckedCreateWithoutReviewedByInput>
+}
+
+export type MunicipalProjectUpdateUpdateWithWhereUniqueWithoutReviewedByInput = {
+  where: Prisma.MunicipalProjectUpdateWhereUniqueInput
+  data: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateWithoutReviewedByInput, Prisma.MunicipalProjectUpdateUncheckedUpdateWithoutReviewedByInput>
+}
+
+export type MunicipalProjectUpdateUpdateManyWithWhereWithoutReviewedByInput = {
   where: Prisma.MunicipalProjectUpdateScalarWhereInput
-  data: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateManyMutationInput, Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByInput>
+  data: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateManyMutationInput, Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByInput>
 }
 
 export type MunicipalProjectUpdateScalarWhereInput = {
@@ -789,20 +789,20 @@ export type MunicipalProjectUpdateScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"MunicipalProjectUpdate"> | Date | string
 }
 
-export type MunicipalProjectUpdateUpsertWithWhereUniqueWithoutReviewedByInput = {
+export type MunicipalProjectUpdateUpsertWithWhereUniqueWithoutCreatedByInput = {
   where: Prisma.MunicipalProjectUpdateWhereUniqueInput
-  update: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateWithoutReviewedByInput, Prisma.MunicipalProjectUpdateUncheckedUpdateWithoutReviewedByInput>
-  create: Prisma.XOR<Prisma.MunicipalProjectUpdateCreateWithoutReviewedByInput, Prisma.MunicipalProjectUpdateUncheckedCreateWithoutReviewedByInput>
+  update: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateWithoutCreatedByInput, Prisma.MunicipalProjectUpdateUncheckedUpdateWithoutCreatedByInput>
+  create: Prisma.XOR<Prisma.MunicipalProjectUpdateCreateWithoutCreatedByInput, Prisma.MunicipalProjectUpdateUncheckedCreateWithoutCreatedByInput>
 }
 
-export type MunicipalProjectUpdateUpdateWithWhereUniqueWithoutReviewedByInput = {
+export type MunicipalProjectUpdateUpdateWithWhereUniqueWithoutCreatedByInput = {
   where: Prisma.MunicipalProjectUpdateWhereUniqueInput
-  data: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateWithoutReviewedByInput, Prisma.MunicipalProjectUpdateUncheckedUpdateWithoutReviewedByInput>
+  data: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateWithoutCreatedByInput, Prisma.MunicipalProjectUpdateUncheckedUpdateWithoutCreatedByInput>
 }
 
-export type MunicipalProjectUpdateUpdateManyWithWhereWithoutReviewedByInput = {
+export type MunicipalProjectUpdateUpdateManyWithWhereWithoutCreatedByInput = {
   where: Prisma.MunicipalProjectUpdateScalarWhereInput
-  data: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateManyMutationInput, Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByInput>
+  data: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateManyMutationInput, Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByInput>
 }
 
 export type MunicipalProjectUpdateCreateWithoutProjectInput = {
@@ -861,21 +861,6 @@ export type MunicipalProjectUpdateUpdateManyWithWhereWithoutProjectInput = {
   data: Prisma.XOR<Prisma.MunicipalProjectUpdateUpdateManyMutationInput, Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutProjectInput>
 }
 
-export type MunicipalProjectUpdateCreateManyCreatedByInput = {
-  id?: string
-  projectId: string
-  title: string
-  details: string
-  progressPercent?: number | null
-  phaseAfter?: string | null
-  sourceUrl: string
-  status?: string
-  reviewNote?: string | null
-  reviewedById?: string | null
-  reviewedAt?: Date | string | null
-  createdAt?: Date | string
-}
-
 export type MunicipalProjectUpdateCreateManyReviewedByInput = {
   id?: string
   projectId: string
@@ -891,49 +876,19 @@ export type MunicipalProjectUpdateCreateManyReviewedByInput = {
   createdAt?: Date | string
 }
 
-export type MunicipalProjectUpdateUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  details?: Prisma.StringFieldUpdateOperationsInput | string
-  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  phaseAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  project?: Prisma.MunicipalProjectUpdateOneRequiredWithoutUpdatesNestedInput
-  reviewedBy?: Prisma.UserUpdateOneWithoutMunicipalProjectUpdatesReviewedNestedInput
-}
-
-export type MunicipalProjectUpdateUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  projectId?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  details?: Prisma.StringFieldUpdateOperationsInput | string
-  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  phaseAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  projectId?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  details?: Prisma.StringFieldUpdateOperationsInput | string
-  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  phaseAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type MunicipalProjectUpdateCreateManyCreatedByInput = {
+  id?: string
+  projectId: string
+  title: string
+  details: string
+  progressPercent?: number | null
+  phaseAfter?: string | null
+  sourceUrl: string
+  status?: string
+  reviewNote?: string | null
+  reviewedById?: string | null
+  reviewedAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type MunicipalProjectUpdateUpdateWithoutReviewedByInput = {
@@ -977,6 +932,51 @@ export type MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type MunicipalProjectUpdateUpdateWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.StringFieldUpdateOperationsInput | string
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  phaseAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.MunicipalProjectUpdateOneRequiredWithoutUpdatesNestedInput
+  reviewedBy?: Prisma.UserUpdateOneWithoutMunicipalProjectUpdatesReviewedNestedInput
+}
+
+export type MunicipalProjectUpdateUncheckedUpdateWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.StringFieldUpdateOperationsInput | string
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  phaseAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.StringFieldUpdateOperationsInput | string
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  phaseAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }

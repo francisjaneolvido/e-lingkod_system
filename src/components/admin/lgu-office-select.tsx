@@ -1,32 +1,14 @@
 "use client";
-
+import { useState } from "react";
 import { LGU_OFFICES, LGU_OFFICE_GROUPS, suggestedModulesForOffice } from "@/lib/lgu-offices";
 import { STAFF_MODULE_LABELS, type StaffModule } from "@/lib/staff-modules";
 
-/** Shared office picker for existing-staff, new-assignment, and invitations. */
-export function LGUOfficeSelect({ value, onChange, disabled, className = "elb-admin-field mt-2", required = true }: {
-  value: string; onChange: (value: string) => void; disabled?: boolean; className?: string; required?: boolean;
-}) {
-  const isLegacy = Boolean(value && !LGU_OFFICES.some(office => office.name === value));
-  return <select className={className} required={required} value={value} onChange={event => onChange(event.target.value)} disabled={disabled}>
-    <option value="">Select LGU office…</option>
-    {isLegacy && <option value={value}>{value} (existing / legacy office)</option>}
-    {LGU_OFFICE_GROUPS.map(group => <optgroup key={group} label={group}>
-      {LGU_OFFICES.filter(office => office.group === group).map(office => <option key={office.name} value={office.name}>{office.name}</option>)}
-    </optgroup>)}
-  </select>;
+export function LGUOfficeSelect({value,onChange,disabled,className="elb-admin-field mt-2"}:{value:string;onChange:(value:string)=>void;disabled?:boolean;className?:string}){
+  const [custom,setCustom]=useState(false),known=LGU_OFFICES.some(x=>x.name===value),other=custom||Boolean(value&&!known);
+  return <><select aria-label="Department / office" value={other?"__OTHER__":value} onChange={event=>{const next=event.target.value;setCustom(next==="__OTHER__");onChange(next==="__OTHER__"?"":next);}} disabled={disabled} required className={className}><option value="">Choose an office</option>{LGU_OFFICE_GROUPS.map(group=><optgroup key={group} label={group}>{LGU_OFFICES.filter(x=>x.group===group).map(office=><option key={office.name} value={office.name}>{office.name}</option>)}</optgroup>)}<option value="__OTHER__">Other / custom office</option></select>{other?<input aria-label="Custom department / office" value={value} onChange={event=>onChange(event.target.value)} disabled={disabled} required maxLength={120} className={className} placeholder="Enter the actual authorized office"/>:null}</>;
 }
-
-/** Deliberately opt-in: recommendation never silently changes someone's permissions. */
-export function LGUOfficeRecommendation({ office, modules, onApply, disabled }: {
-  office: string; modules: StaffModule[]; onApply: (modules: StaffModule[]) => void; disabled?: boolean;
-}) {
-  const suggestions = suggestedModulesForOffice(office);
-  if (!office) return <p className="mt-2 text-[11px] leading-5 text-[#738da0]">Choose a specific LGU office so case routing can find eligible staff. Avoid generic departments such as “Municipal Office.”</p>;
-  if (!suggestions.length) return <p className="mt-2 text-[11px] leading-5 text-[#947543]">This is a legacy office value. Select a listed office for reliable assignment and routing.</p>;
-  return <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] leading-5 text-[#55788b]">
-    <span>Suggested modules: <strong>{suggestions.map(module => STAFF_MODULE_LABELS[module]).join(", ")}</strong></span>
-    <button type="button" disabled={disabled || (suggestions.length === modules.length && suggestions.every(module => modules.includes(module)))} onClick={() => onApply(suggestions)} className="rounded-lg border border-[#c3dce7] bg-[#f1f8fb] px-2.5 py-1 font-bold text-[#176c92] disabled:opacity-50">Use suggested modules</button>
-    <span className="w-full text-[#7e96a5]">The Super Admin can add/remove permissions after checking the staff member's actual responsibilities.</span>
-  </div>;
+export function LGUOfficeRecommendation({office,modules,onApply,disabled}:{office:string;modules:StaffModule[];onApply:(modules:StaffModule[])=>void;disabled?:boolean}){
+  const suggested=suggestedModulesForOffice(office);if(!suggested.length)return null;
+  const matches=suggested.length===modules.length&&suggested.every(module=>modules.includes(module));
+  return <div className="rounded-2xl border border-[#DFE9F2] bg-[#EAF5FD] p-4 text-xs leading-6 text-[#103C64]"><p>Suggested modules: {suggested.map(module=>STAFF_MODULE_LABELS[module]).join(", ")}. Suggestions do not grant access; review the actual staff responsibilities.</p><button type="button" disabled={disabled||matches} onClick={()=>onApply([...suggested])} className="mt-3 rounded-2xl border border-[#DFE9F2] bg-white px-4 py-2 font-semibold disabled:opacity-50">{matches?"Suggested modules selected":"Use suggested modules"}</button></div>;
 }

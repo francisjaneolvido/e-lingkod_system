@@ -418,9 +418,6 @@ export const ModelName = {
   SpesImportEvent: 'SpesImportEvent',
   JobActivity: 'JobActivity',
   CommunitySurvey: 'CommunitySurvey',
-  CommunitySurveyWorkspace: 'CommunitySurveyWorkspace',
-  CommunitySurveyRevision: 'CommunitySurveyRevision',
-  CitizenProfileConsent: 'CitizenProfileConsent',
   GovernmentActivity: 'GovernmentActivity',
   CommunityImportBatch: 'CommunityImportBatch',
   CommunityImportRecord: 'CommunityImportRecord',
@@ -437,6 +434,22 @@ export const ModelName = {
   EmergencyHotlineProposal: 'EmergencyHotlineProposal',
   EmergencyAlert: 'EmergencyAlert',
   EmergencyActionLog: 'EmergencyActionLog',
+  CommunitySurveyWorkspace: 'CommunitySurveyWorkspace',
+  CommunitySurveyRevision: 'CommunitySurveyRevision',
+  CitizenProfileConsent: 'CitizenProfileConsent',
+  Establishment: 'Establishment',
+  EstablishmentSurvey: 'EstablishmentSurvey',
+  EstablishmentRevision: 'EstablishmentRevision',
+  EstablishmentOperation: 'EstablishmentOperation',
+  CensusReview: 'CensusReview',
+  CensusStaffScope: 'CensusStaffScope',
+  CensusAssistanceRoster: 'CensusAssistanceRoster',
+  CensusAssistanceMember: 'CensusAssistanceMember',
+  CensusAudit: 'CensusAudit',
+  CensusSourceRecord: 'CensusSourceRecord',
+  CensusImportLock: 'CensusImportLock',
+  JobMutation: 'JobMutation',
+  JobRecommendation: 'JobRecommendation',
   MunicipalProject: 'MunicipalProject',
   MunicipalProjectUpdate: 'MunicipalProjectUpdate',
   MunicipalOfficeDirectoryEntry: 'MunicipalOfficeDirectoryEntry',
@@ -456,7 +469,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity" | "communitySurvey" | "communitySurveyWorkspace" | "communitySurveyRevision" | "citizenProfileConsent" | "governmentActivity" | "communityImportBatch" | "communityImportRecord" | "serviceRequest" | "serviceRequestDocument" | "serviceRequestEvent" | "serviceAppointment" | "servicePickupSlot" | "notification" | "workAssignment" | "serviceDefinition" | "serviceDefinitionAudit" | "emergencyHotline" | "emergencyHotlineProposal" | "emergencyAlert" | "emergencyActionLog" | "municipalProject" | "municipalProjectUpdate" | "municipalOfficeDirectoryEntry" | "municipalOfficeDirectoryProposal"
+    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity" | "communitySurvey" | "governmentActivity" | "communityImportBatch" | "communityImportRecord" | "serviceRequest" | "serviceRequestDocument" | "serviceRequestEvent" | "serviceAppointment" | "servicePickupSlot" | "notification" | "workAssignment" | "serviceDefinition" | "serviceDefinitionAudit" | "emergencyHotline" | "emergencyHotlineProposal" | "emergencyAlert" | "emergencyActionLog" | "communitySurveyWorkspace" | "communitySurveyRevision" | "citizenProfileConsent" | "establishment" | "establishmentSurvey" | "establishmentRevision" | "establishmentOperation" | "censusReview" | "censusStaffScope" | "censusAssistanceRoster" | "censusAssistanceMember" | "censusAudit" | "censusSourceRecord" | "censusImportLock" | "jobMutation" | "jobRecommendation" | "municipalProject" | "municipalProjectUpdate" | "municipalOfficeDirectoryEntry" | "municipalOfficeDirectoryProposal"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1846,204 +1859,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    CommunitySurveyWorkspace: {
-      payload: Prisma.$CommunitySurveyWorkspacePayload<ExtArgs>
-      fields: Prisma.CommunitySurveyWorkspaceFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.CommunitySurveyWorkspaceFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.CommunitySurveyWorkspaceFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
-        }
-        findFirst: {
-          args: Prisma.CommunitySurveyWorkspaceFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.CommunitySurveyWorkspaceFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
-        }
-        findMany: {
-          args: Prisma.CommunitySurveyWorkspaceFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>[]
-        }
-        create: {
-          args: Prisma.CommunitySurveyWorkspaceCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
-        }
-        createMany: {
-          args: Prisma.CommunitySurveyWorkspaceCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.CommunitySurveyWorkspaceDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
-        }
-        update: {
-          args: Prisma.CommunitySurveyWorkspaceUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
-        }
-        deleteMany: {
-          args: Prisma.CommunitySurveyWorkspaceDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.CommunitySurveyWorkspaceUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.CommunitySurveyWorkspaceUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
-        }
-        aggregate: {
-          args: Prisma.CommunitySurveyWorkspaceAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateCommunitySurveyWorkspace>
-        }
-        groupBy: {
-          args: Prisma.CommunitySurveyWorkspaceGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyWorkspaceGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.CommunitySurveyWorkspaceCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyWorkspaceCountAggregateOutputType> | number
-        }
-      }
-    }
-    CommunitySurveyRevision: {
-      payload: Prisma.$CommunitySurveyRevisionPayload<ExtArgs>
-      fields: Prisma.CommunitySurveyRevisionFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.CommunitySurveyRevisionFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.CommunitySurveyRevisionFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
-        }
-        findFirst: {
-          args: Prisma.CommunitySurveyRevisionFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.CommunitySurveyRevisionFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
-        }
-        findMany: {
-          args: Prisma.CommunitySurveyRevisionFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>[]
-        }
-        create: {
-          args: Prisma.CommunitySurveyRevisionCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
-        }
-        createMany: {
-          args: Prisma.CommunitySurveyRevisionCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.CommunitySurveyRevisionDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
-        }
-        update: {
-          args: Prisma.CommunitySurveyRevisionUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
-        }
-        deleteMany: {
-          args: Prisma.CommunitySurveyRevisionDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.CommunitySurveyRevisionUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.CommunitySurveyRevisionUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
-        }
-        aggregate: {
-          args: Prisma.CommunitySurveyRevisionAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateCommunitySurveyRevision>
-        }
-        groupBy: {
-          args: Prisma.CommunitySurveyRevisionGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyRevisionGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.CommunitySurveyRevisionCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyRevisionCountAggregateOutputType> | number
-        }
-      }
-    }
-    CitizenProfileConsent: {
-      payload: Prisma.$CitizenProfileConsentPayload<ExtArgs>
-      fields: Prisma.CitizenProfileConsentFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.CitizenProfileConsentFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.CitizenProfileConsentFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
-        }
-        findFirst: {
-          args: Prisma.CitizenProfileConsentFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.CitizenProfileConsentFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
-        }
-        findMany: {
-          args: Prisma.CitizenProfileConsentFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>[]
-        }
-        create: {
-          args: Prisma.CitizenProfileConsentCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
-        }
-        createMany: {
-          args: Prisma.CitizenProfileConsentCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.CitizenProfileConsentDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
-        }
-        update: {
-          args: Prisma.CitizenProfileConsentUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
-        }
-        deleteMany: {
-          args: Prisma.CitizenProfileConsentDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.CitizenProfileConsentUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.CitizenProfileConsentUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
-        }
-        aggregate: {
-          args: Prisma.CitizenProfileConsentAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateCitizenProfileConsent>
-        }
-        groupBy: {
-          args: Prisma.CitizenProfileConsentGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CitizenProfileConsentGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.CitizenProfileConsentCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CitizenProfileConsentCountAggregateOutputType> | number
-        }
-      }
-    }
     GovernmentActivity: {
       payload: Prisma.$GovernmentActivityPayload<ExtArgs>
       fields: Prisma.GovernmentActivityFieldRefs
@@ -3100,6 +2915,1062 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CommunitySurveyWorkspace: {
+      payload: Prisma.$CommunitySurveyWorkspacePayload<ExtArgs>
+      fields: Prisma.CommunitySurveyWorkspaceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CommunitySurveyWorkspaceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CommunitySurveyWorkspaceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
+        }
+        findFirst: {
+          args: Prisma.CommunitySurveyWorkspaceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CommunitySurveyWorkspaceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
+        }
+        findMany: {
+          args: Prisma.CommunitySurveyWorkspaceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>[]
+        }
+        create: {
+          args: Prisma.CommunitySurveyWorkspaceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
+        }
+        createMany: {
+          args: Prisma.CommunitySurveyWorkspaceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CommunitySurveyWorkspaceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
+        }
+        update: {
+          args: Prisma.CommunitySurveyWorkspaceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
+        }
+        deleteMany: {
+          args: Prisma.CommunitySurveyWorkspaceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CommunitySurveyWorkspaceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CommunitySurveyWorkspaceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyWorkspacePayload>
+        }
+        aggregate: {
+          args: Prisma.CommunitySurveyWorkspaceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCommunitySurveyWorkspace>
+        }
+        groupBy: {
+          args: Prisma.CommunitySurveyWorkspaceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyWorkspaceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CommunitySurveyWorkspaceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyWorkspaceCountAggregateOutputType> | number
+        }
+      }
+    }
+    CommunitySurveyRevision: {
+      payload: Prisma.$CommunitySurveyRevisionPayload<ExtArgs>
+      fields: Prisma.CommunitySurveyRevisionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CommunitySurveyRevisionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CommunitySurveyRevisionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
+        }
+        findFirst: {
+          args: Prisma.CommunitySurveyRevisionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CommunitySurveyRevisionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
+        }
+        findMany: {
+          args: Prisma.CommunitySurveyRevisionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>[]
+        }
+        create: {
+          args: Prisma.CommunitySurveyRevisionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
+        }
+        createMany: {
+          args: Prisma.CommunitySurveyRevisionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CommunitySurveyRevisionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
+        }
+        update: {
+          args: Prisma.CommunitySurveyRevisionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
+        }
+        deleteMany: {
+          args: Prisma.CommunitySurveyRevisionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CommunitySurveyRevisionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CommunitySurveyRevisionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommunitySurveyRevisionPayload>
+        }
+        aggregate: {
+          args: Prisma.CommunitySurveyRevisionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCommunitySurveyRevision>
+        }
+        groupBy: {
+          args: Prisma.CommunitySurveyRevisionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyRevisionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CommunitySurveyRevisionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CommunitySurveyRevisionCountAggregateOutputType> | number
+        }
+      }
+    }
+    CitizenProfileConsent: {
+      payload: Prisma.$CitizenProfileConsentPayload<ExtArgs>
+      fields: Prisma.CitizenProfileConsentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CitizenProfileConsentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CitizenProfileConsentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
+        }
+        findFirst: {
+          args: Prisma.CitizenProfileConsentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CitizenProfileConsentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
+        }
+        findMany: {
+          args: Prisma.CitizenProfileConsentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>[]
+        }
+        create: {
+          args: Prisma.CitizenProfileConsentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
+        }
+        createMany: {
+          args: Prisma.CitizenProfileConsentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CitizenProfileConsentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
+        }
+        update: {
+          args: Prisma.CitizenProfileConsentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
+        }
+        deleteMany: {
+          args: Prisma.CitizenProfileConsentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CitizenProfileConsentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CitizenProfileConsentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenProfileConsentPayload>
+        }
+        aggregate: {
+          args: Prisma.CitizenProfileConsentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCitizenProfileConsent>
+        }
+        groupBy: {
+          args: Prisma.CitizenProfileConsentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CitizenProfileConsentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CitizenProfileConsentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CitizenProfileConsentCountAggregateOutputType> | number
+        }
+      }
+    }
+    Establishment: {
+      payload: Prisma.$EstablishmentPayload<ExtArgs>
+      fields: Prisma.EstablishmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EstablishmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EstablishmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentPayload>
+        }
+        findFirst: {
+          args: Prisma.EstablishmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EstablishmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentPayload>
+        }
+        findMany: {
+          args: Prisma.EstablishmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentPayload>[]
+        }
+        create: {
+          args: Prisma.EstablishmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentPayload>
+        }
+        createMany: {
+          args: Prisma.EstablishmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.EstablishmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentPayload>
+        }
+        update: {
+          args: Prisma.EstablishmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.EstablishmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EstablishmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.EstablishmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentPayload>
+        }
+        aggregate: {
+          args: Prisma.EstablishmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEstablishment>
+        }
+        groupBy: {
+          args: Prisma.EstablishmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EstablishmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EstablishmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EstablishmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    EstablishmentSurvey: {
+      payload: Prisma.$EstablishmentSurveyPayload<ExtArgs>
+      fields: Prisma.EstablishmentSurveyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EstablishmentSurveyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentSurveyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EstablishmentSurveyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentSurveyPayload>
+        }
+        findFirst: {
+          args: Prisma.EstablishmentSurveyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentSurveyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EstablishmentSurveyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentSurveyPayload>
+        }
+        findMany: {
+          args: Prisma.EstablishmentSurveyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentSurveyPayload>[]
+        }
+        create: {
+          args: Prisma.EstablishmentSurveyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentSurveyPayload>
+        }
+        createMany: {
+          args: Prisma.EstablishmentSurveyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.EstablishmentSurveyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentSurveyPayload>
+        }
+        update: {
+          args: Prisma.EstablishmentSurveyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentSurveyPayload>
+        }
+        deleteMany: {
+          args: Prisma.EstablishmentSurveyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EstablishmentSurveyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.EstablishmentSurveyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentSurveyPayload>
+        }
+        aggregate: {
+          args: Prisma.EstablishmentSurveyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEstablishmentSurvey>
+        }
+        groupBy: {
+          args: Prisma.EstablishmentSurveyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EstablishmentSurveyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EstablishmentSurveyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EstablishmentSurveyCountAggregateOutputType> | number
+        }
+      }
+    }
+    EstablishmentRevision: {
+      payload: Prisma.$EstablishmentRevisionPayload<ExtArgs>
+      fields: Prisma.EstablishmentRevisionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EstablishmentRevisionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentRevisionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EstablishmentRevisionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentRevisionPayload>
+        }
+        findFirst: {
+          args: Prisma.EstablishmentRevisionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentRevisionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EstablishmentRevisionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentRevisionPayload>
+        }
+        findMany: {
+          args: Prisma.EstablishmentRevisionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentRevisionPayload>[]
+        }
+        create: {
+          args: Prisma.EstablishmentRevisionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentRevisionPayload>
+        }
+        createMany: {
+          args: Prisma.EstablishmentRevisionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.EstablishmentRevisionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentRevisionPayload>
+        }
+        update: {
+          args: Prisma.EstablishmentRevisionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentRevisionPayload>
+        }
+        deleteMany: {
+          args: Prisma.EstablishmentRevisionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EstablishmentRevisionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.EstablishmentRevisionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentRevisionPayload>
+        }
+        aggregate: {
+          args: Prisma.EstablishmentRevisionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEstablishmentRevision>
+        }
+        groupBy: {
+          args: Prisma.EstablishmentRevisionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EstablishmentRevisionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EstablishmentRevisionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EstablishmentRevisionCountAggregateOutputType> | number
+        }
+      }
+    }
+    EstablishmentOperation: {
+      payload: Prisma.$EstablishmentOperationPayload<ExtArgs>
+      fields: Prisma.EstablishmentOperationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EstablishmentOperationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentOperationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EstablishmentOperationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentOperationPayload>
+        }
+        findFirst: {
+          args: Prisma.EstablishmentOperationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentOperationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EstablishmentOperationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentOperationPayload>
+        }
+        findMany: {
+          args: Prisma.EstablishmentOperationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentOperationPayload>[]
+        }
+        create: {
+          args: Prisma.EstablishmentOperationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentOperationPayload>
+        }
+        createMany: {
+          args: Prisma.EstablishmentOperationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.EstablishmentOperationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentOperationPayload>
+        }
+        update: {
+          args: Prisma.EstablishmentOperationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentOperationPayload>
+        }
+        deleteMany: {
+          args: Prisma.EstablishmentOperationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EstablishmentOperationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.EstablishmentOperationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstablishmentOperationPayload>
+        }
+        aggregate: {
+          args: Prisma.EstablishmentOperationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEstablishmentOperation>
+        }
+        groupBy: {
+          args: Prisma.EstablishmentOperationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EstablishmentOperationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EstablishmentOperationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EstablishmentOperationCountAggregateOutputType> | number
+        }
+      }
+    }
+    CensusReview: {
+      payload: Prisma.$CensusReviewPayload<ExtArgs>
+      fields: Prisma.CensusReviewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CensusReviewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusReviewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CensusReviewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusReviewPayload>
+        }
+        findFirst: {
+          args: Prisma.CensusReviewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusReviewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CensusReviewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusReviewPayload>
+        }
+        findMany: {
+          args: Prisma.CensusReviewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusReviewPayload>[]
+        }
+        create: {
+          args: Prisma.CensusReviewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusReviewPayload>
+        }
+        createMany: {
+          args: Prisma.CensusReviewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CensusReviewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusReviewPayload>
+        }
+        update: {
+          args: Prisma.CensusReviewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusReviewPayload>
+        }
+        deleteMany: {
+          args: Prisma.CensusReviewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CensusReviewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CensusReviewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusReviewPayload>
+        }
+        aggregate: {
+          args: Prisma.CensusReviewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCensusReview>
+        }
+        groupBy: {
+          args: Prisma.CensusReviewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusReviewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CensusReviewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusReviewCountAggregateOutputType> | number
+        }
+      }
+    }
+    CensusStaffScope: {
+      payload: Prisma.$CensusStaffScopePayload<ExtArgs>
+      fields: Prisma.CensusStaffScopeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CensusStaffScopeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusStaffScopePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CensusStaffScopeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusStaffScopePayload>
+        }
+        findFirst: {
+          args: Prisma.CensusStaffScopeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusStaffScopePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CensusStaffScopeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusStaffScopePayload>
+        }
+        findMany: {
+          args: Prisma.CensusStaffScopeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusStaffScopePayload>[]
+        }
+        create: {
+          args: Prisma.CensusStaffScopeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusStaffScopePayload>
+        }
+        createMany: {
+          args: Prisma.CensusStaffScopeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CensusStaffScopeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusStaffScopePayload>
+        }
+        update: {
+          args: Prisma.CensusStaffScopeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusStaffScopePayload>
+        }
+        deleteMany: {
+          args: Prisma.CensusStaffScopeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CensusStaffScopeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CensusStaffScopeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusStaffScopePayload>
+        }
+        aggregate: {
+          args: Prisma.CensusStaffScopeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCensusStaffScope>
+        }
+        groupBy: {
+          args: Prisma.CensusStaffScopeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusStaffScopeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CensusStaffScopeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusStaffScopeCountAggregateOutputType> | number
+        }
+      }
+    }
+    CensusAssistanceRoster: {
+      payload: Prisma.$CensusAssistanceRosterPayload<ExtArgs>
+      fields: Prisma.CensusAssistanceRosterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CensusAssistanceRosterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceRosterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CensusAssistanceRosterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceRosterPayload>
+        }
+        findFirst: {
+          args: Prisma.CensusAssistanceRosterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceRosterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CensusAssistanceRosterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceRosterPayload>
+        }
+        findMany: {
+          args: Prisma.CensusAssistanceRosterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceRosterPayload>[]
+        }
+        create: {
+          args: Prisma.CensusAssistanceRosterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceRosterPayload>
+        }
+        createMany: {
+          args: Prisma.CensusAssistanceRosterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CensusAssistanceRosterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceRosterPayload>
+        }
+        update: {
+          args: Prisma.CensusAssistanceRosterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceRosterPayload>
+        }
+        deleteMany: {
+          args: Prisma.CensusAssistanceRosterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CensusAssistanceRosterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CensusAssistanceRosterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceRosterPayload>
+        }
+        aggregate: {
+          args: Prisma.CensusAssistanceRosterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCensusAssistanceRoster>
+        }
+        groupBy: {
+          args: Prisma.CensusAssistanceRosterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusAssistanceRosterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CensusAssistanceRosterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusAssistanceRosterCountAggregateOutputType> | number
+        }
+      }
+    }
+    CensusAssistanceMember: {
+      payload: Prisma.$CensusAssistanceMemberPayload<ExtArgs>
+      fields: Prisma.CensusAssistanceMemberFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CensusAssistanceMemberFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceMemberPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CensusAssistanceMemberFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceMemberPayload>
+        }
+        findFirst: {
+          args: Prisma.CensusAssistanceMemberFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceMemberPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CensusAssistanceMemberFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceMemberPayload>
+        }
+        findMany: {
+          args: Prisma.CensusAssistanceMemberFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceMemberPayload>[]
+        }
+        create: {
+          args: Prisma.CensusAssistanceMemberCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceMemberPayload>
+        }
+        createMany: {
+          args: Prisma.CensusAssistanceMemberCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CensusAssistanceMemberDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceMemberPayload>
+        }
+        update: {
+          args: Prisma.CensusAssistanceMemberUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceMemberPayload>
+        }
+        deleteMany: {
+          args: Prisma.CensusAssistanceMemberDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CensusAssistanceMemberUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CensusAssistanceMemberUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAssistanceMemberPayload>
+        }
+        aggregate: {
+          args: Prisma.CensusAssistanceMemberAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCensusAssistanceMember>
+        }
+        groupBy: {
+          args: Prisma.CensusAssistanceMemberGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusAssistanceMemberGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CensusAssistanceMemberCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusAssistanceMemberCountAggregateOutputType> | number
+        }
+      }
+    }
+    CensusAudit: {
+      payload: Prisma.$CensusAuditPayload<ExtArgs>
+      fields: Prisma.CensusAuditFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CensusAuditFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAuditPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CensusAuditFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAuditPayload>
+        }
+        findFirst: {
+          args: Prisma.CensusAuditFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAuditPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CensusAuditFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAuditPayload>
+        }
+        findMany: {
+          args: Prisma.CensusAuditFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAuditPayload>[]
+        }
+        create: {
+          args: Prisma.CensusAuditCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAuditPayload>
+        }
+        createMany: {
+          args: Prisma.CensusAuditCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CensusAuditDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAuditPayload>
+        }
+        update: {
+          args: Prisma.CensusAuditUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAuditPayload>
+        }
+        deleteMany: {
+          args: Prisma.CensusAuditDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CensusAuditUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CensusAuditUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusAuditPayload>
+        }
+        aggregate: {
+          args: Prisma.CensusAuditAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCensusAudit>
+        }
+        groupBy: {
+          args: Prisma.CensusAuditGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusAuditGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CensusAuditCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusAuditCountAggregateOutputType> | number
+        }
+      }
+    }
+    CensusSourceRecord: {
+      payload: Prisma.$CensusSourceRecordPayload<ExtArgs>
+      fields: Prisma.CensusSourceRecordFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CensusSourceRecordFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusSourceRecordPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CensusSourceRecordFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusSourceRecordPayload>
+        }
+        findFirst: {
+          args: Prisma.CensusSourceRecordFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusSourceRecordPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CensusSourceRecordFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusSourceRecordPayload>
+        }
+        findMany: {
+          args: Prisma.CensusSourceRecordFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusSourceRecordPayload>[]
+        }
+        create: {
+          args: Prisma.CensusSourceRecordCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusSourceRecordPayload>
+        }
+        createMany: {
+          args: Prisma.CensusSourceRecordCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CensusSourceRecordDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusSourceRecordPayload>
+        }
+        update: {
+          args: Prisma.CensusSourceRecordUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusSourceRecordPayload>
+        }
+        deleteMany: {
+          args: Prisma.CensusSourceRecordDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CensusSourceRecordUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CensusSourceRecordUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusSourceRecordPayload>
+        }
+        aggregate: {
+          args: Prisma.CensusSourceRecordAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCensusSourceRecord>
+        }
+        groupBy: {
+          args: Prisma.CensusSourceRecordGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusSourceRecordGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CensusSourceRecordCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusSourceRecordCountAggregateOutputType> | number
+        }
+      }
+    }
+    CensusImportLock: {
+      payload: Prisma.$CensusImportLockPayload<ExtArgs>
+      fields: Prisma.CensusImportLockFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CensusImportLockFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusImportLockPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CensusImportLockFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusImportLockPayload>
+        }
+        findFirst: {
+          args: Prisma.CensusImportLockFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusImportLockPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CensusImportLockFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusImportLockPayload>
+        }
+        findMany: {
+          args: Prisma.CensusImportLockFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusImportLockPayload>[]
+        }
+        create: {
+          args: Prisma.CensusImportLockCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusImportLockPayload>
+        }
+        createMany: {
+          args: Prisma.CensusImportLockCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CensusImportLockDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusImportLockPayload>
+        }
+        update: {
+          args: Prisma.CensusImportLockUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusImportLockPayload>
+        }
+        deleteMany: {
+          args: Prisma.CensusImportLockDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CensusImportLockUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CensusImportLockUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CensusImportLockPayload>
+        }
+        aggregate: {
+          args: Prisma.CensusImportLockAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCensusImportLock>
+        }
+        groupBy: {
+          args: Prisma.CensusImportLockGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusImportLockGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CensusImportLockCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CensusImportLockCountAggregateOutputType> | number
+        }
+      }
+    }
+    JobMutation: {
+      payload: Prisma.$JobMutationPayload<ExtArgs>
+      fields: Prisma.JobMutationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JobMutationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JobMutationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>
+        }
+        findFirst: {
+          args: Prisma.JobMutationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JobMutationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>
+        }
+        findMany: {
+          args: Prisma.JobMutationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>[]
+        }
+        create: {
+          args: Prisma.JobMutationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>
+        }
+        createMany: {
+          args: Prisma.JobMutationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.JobMutationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>
+        }
+        update: {
+          args: Prisma.JobMutationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>
+        }
+        deleteMany: {
+          args: Prisma.JobMutationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JobMutationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.JobMutationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobMutationPayload>
+        }
+        aggregate: {
+          args: Prisma.JobMutationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJobMutation>
+        }
+        groupBy: {
+          args: Prisma.JobMutationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JobMutationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JobMutationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JobMutationCountAggregateOutputType> | number
+        }
+      }
+    }
+    JobRecommendation: {
+      payload: Prisma.$JobRecommendationPayload<ExtArgs>
+      fields: Prisma.JobRecommendationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JobRecommendationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JobRecommendationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>
+        }
+        findFirst: {
+          args: Prisma.JobRecommendationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JobRecommendationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>
+        }
+        findMany: {
+          args: Prisma.JobRecommendationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>[]
+        }
+        create: {
+          args: Prisma.JobRecommendationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>
+        }
+        createMany: {
+          args: Prisma.JobRecommendationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.JobRecommendationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>
+        }
+        update: {
+          args: Prisma.JobRecommendationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>
+        }
+        deleteMany: {
+          args: Prisma.JobRecommendationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JobRecommendationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.JobRecommendationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobRecommendationPayload>
+        }
+        aggregate: {
+          args: Prisma.JobRecommendationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJobRecommendation>
+        }
+        groupBy: {
+          args: Prisma.JobRecommendationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JobRecommendationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JobRecommendationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JobRecommendationCountAggregateOutputType> | number
+        }
+      }
+    }
     MunicipalProject: {
       payload: Prisma.$MunicipalProjectPayload<ExtArgs>
       fields: Prisma.MunicipalProjectFieldRefs
@@ -3629,6 +4500,17 @@ export const JobOpportunityScalarFieldEnum = {
   skillsJson: 'skillsJson',
   interestsJson: 'interestsJson',
   education: 'education',
+  occupationCategory: 'occupationCategory',
+  employmentSector: 'employmentSector',
+  workArrangement: 'workArrangement',
+  experienceLevel: 'experienceLevel',
+  payMin: 'payMin',
+  payMax: 'payMax',
+  payCurrency: 'payCurrency',
+  payBasis: 'payBasis',
+  negotiable: 'negotiable',
+  certificationsJson: 'certificationsJson',
+  isDemo: 'isDemo',
   contactInfo: 'contactInfo',
   externalUrl: 'externalUrl',
   status: 'status',
@@ -3665,6 +4547,7 @@ export type JobseekerProfileScalarFieldEnum = (typeof JobseekerProfileScalarFiel
 
 
 export const SpesImportBatchScalarFieldEnum = {
+  surveyYear: 'surveyYear',
   id: 'id',
   sourceLabel: 'sourceLabel',
   importedById: 'importedById',
@@ -3682,6 +4565,7 @@ export type SpesImportBatchScalarFieldEnum = (typeof SpesImportBatchScalarFieldE
 
 
 export const SpesSurveyRecordScalarFieldEnum = {
+  originalRowNumber: 'originalRowNumber',
   id: 'id',
   batchId: 'batchId',
   barangay: 'barangay',
@@ -3732,13 +4616,13 @@ export const CommunitySurveyScalarFieldEnum = {
   civilStatus: 'civilStatus',
   pwdStatus: 'pwdStatus',
   householdSize: 'householdSize',
+  currentlyStudying: 'currentlyStudying',
+  educationLevel: 'educationLevel',
+  employmentStatus: 'employmentStatus',
   employmentHistory: 'employmentHistory',
   overseasExperience: 'overseasExperience',
   qualificationsJson: 'qualificationsJson',
   completedTrainingJson: 'completedTrainingJson',
-  currentlyStudying: 'currentlyStudying',
-  educationLevel: 'educationLevel',
-  employmentStatus: 'employmentStatus',
   occupation: 'occupation',
   industry: 'industry',
   workArrangement: 'workArrangement',
@@ -3789,47 +4673,6 @@ export const CommunitySurveyScalarFieldEnum = {
 export type CommunitySurveyScalarFieldEnum = (typeof CommunitySurveyScalarFieldEnum)[keyof typeof CommunitySurveyScalarFieldEnum]
 
 
-export const CommunitySurveyWorkspaceScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  surveyYear: 'surveyYear',
-  version: 'version',
-  draftJson: 'draftJson',
-  updatedAt: 'updatedAt'
-} as const
-
-export type CommunitySurveyWorkspaceScalarFieldEnum = (typeof CommunitySurveyWorkspaceScalarFieldEnum)[keyof typeof CommunitySurveyWorkspaceScalarFieldEnum]
-
-
-export const CommunitySurveyRevisionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  actorId: 'actorId',
-  surveyYear: 'surveyYear',
-  revision: 'revision',
-  action: 'action',
-  schemaVersion: 'schemaVersion',
-  requestKey: 'requestKey',
-  payloadHash: 'payloadHash',
-  resultVersion: 'resultVersion',
-  answersJson: 'answersJson',
-  createdAt: 'createdAt'
-} as const
-
-export type CommunitySurveyRevisionScalarFieldEnum = (typeof CommunitySurveyRevisionScalarFieldEnum)[keyof typeof CommunitySurveyRevisionScalarFieldEnum]
-
-
-export const CitizenProfileConsentScalarFieldEnum = {
-  userId: 'userId',
-  matching: 'matching',
-  programs: 'programs',
-  version: 'version',
-  updatedAt: 'updatedAt'
-} as const
-
-export type CitizenProfileConsentScalarFieldEnum = (typeof CitizenProfileConsentScalarFieldEnum)[keyof typeof CitizenProfileConsentScalarFieldEnum]
-
-
 export const GovernmentActivityScalarFieldEnum = {
   id: 'id',
   activityName: 'activityName',
@@ -3849,6 +4692,10 @@ export type GovernmentActivityScalarFieldEnum = (typeof GovernmentActivityScalar
 
 
 export const CommunityImportBatchScalarFieldEnum = {
+  sourceKey: 'sourceKey',
+  surveyYear: 'surveyYear',
+  skippedCount: 'skippedCount',
+  reviewNeededCount: 'reviewNeededCount',
   id: 'id',
   activityId: 'activityId',
   importedById: 'importedById',
@@ -3868,6 +4715,11 @@ export type CommunityImportBatchScalarFieldEnum = (typeof CommunityImportBatchSc
 
 
 export const CommunityImportRecordScalarFieldEnum = {
+  sourceKey: 'sourceKey',
+  surveyYear: 'surveyYear',
+  outcome: 'outcome',
+  outcomeReason: 'outcomeReason',
+  contentHash: 'contentHash',
   id: 'id',
   batchId: 'batchId',
   originalRowNumber: 'originalRowNumber',
@@ -3982,6 +4834,7 @@ export const ServicePickupSlotScalarFieldEnum = {
   proposedById: 'proposedById',
   citizenNote: 'citizenNote',
   claimantName: 'claimantName',
+  confirmedClaimantName: 'confirmedClaimantName',
   confirmedAt: 'confirmedAt',
   claimedAt: 'claimedAt',
   createdAt: 'createdAt',
@@ -4144,6 +4997,206 @@ export const EmergencyActionLogScalarFieldEnum = {
 } as const
 
 export type EmergencyActionLogScalarFieldEnum = (typeof EmergencyActionLogScalarFieldEnum)[keyof typeof EmergencyActionLogScalarFieldEnum]
+
+
+export const CommunitySurveyWorkspaceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  surveyYear: 'surveyYear',
+  version: 'version',
+  draftJson: 'draftJson',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CommunitySurveyWorkspaceScalarFieldEnum = (typeof CommunitySurveyWorkspaceScalarFieldEnum)[keyof typeof CommunitySurveyWorkspaceScalarFieldEnum]
+
+
+export const CommunitySurveyRevisionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  actorId: 'actorId',
+  surveyYear: 'surveyYear',
+  revision: 'revision',
+  action: 'action',
+  schemaVersion: 'schemaVersion',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  resultVersion: 'resultVersion',
+  answersJson: 'answersJson',
+  createdAt: 'createdAt'
+} as const
+
+export type CommunitySurveyRevisionScalarFieldEnum = (typeof CommunitySurveyRevisionScalarFieldEnum)[keyof typeof CommunitySurveyRevisionScalarFieldEnum]
+
+
+export const CitizenProfileConsentScalarFieldEnum = {
+  userId: 'userId',
+  matching: 'matching',
+  programs: 'programs',
+  version: 'version',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CitizenProfileConsentScalarFieldEnum = (typeof CitizenProfileConsentScalarFieldEnum)[keyof typeof CitizenProfileConsentScalarFieldEnum]
+
+
+export const EstablishmentScalarFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  identityKey: 'identityKey',
+  businessName: 'businessName',
+  officeType: 'officeType',
+  street: 'street',
+  barangay: 'barangay',
+  municipality: 'municipality',
+  province: 'province',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EstablishmentScalarFieldEnum = (typeof EstablishmentScalarFieldEnum)[keyof typeof EstablishmentScalarFieldEnum]
+
+
+export const EstablishmentSurveyScalarFieldEnum = {
+  id: 'id',
+  establishmentId: 'establishmentId',
+  surveyYear: 'surveyYear',
+  version: 'version',
+  draftJson: 'draftJson',
+  submittedJson: 'submittedJson',
+  status: 'status',
+  submittedAt: 'submittedAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EstablishmentSurveyScalarFieldEnum = (typeof EstablishmentSurveyScalarFieldEnum)[keyof typeof EstablishmentSurveyScalarFieldEnum]
+
+
+export const EstablishmentRevisionScalarFieldEnum = {
+  id: 'id',
+  surveyId: 'surveyId',
+  revision: 'revision',
+  action: 'action',
+  answersJson: 'answersJson',
+  actorId: 'actorId',
+  createdAt: 'createdAt'
+} as const
+
+export type EstablishmentRevisionScalarFieldEnum = (typeof EstablishmentRevisionScalarFieldEnum)[keyof typeof EstablishmentRevisionScalarFieldEnum]
+
+
+export const EstablishmentOperationScalarFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  establishmentId: 'establishmentId',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  recordVersion: 'recordVersion',
+  workspaceVersion: 'workspaceVersion',
+  revisionId: 'revisionId',
+  createdAt: 'createdAt'
+} as const
+
+export type EstablishmentOperationScalarFieldEnum = (typeof EstablishmentOperationScalarFieldEnum)[keyof typeof EstablishmentOperationScalarFieldEnum]
+
+
+export const CensusReviewScalarFieldEnum = {
+  id: 'id',
+  individualRevisionId: 'individualRevisionId',
+  establishmentRevisionId: 'establishmentRevisionId',
+  actorId: 'actorId',
+  action: 'action',
+  note: 'note',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  createdAt: 'createdAt'
+} as const
+
+export type CensusReviewScalarFieldEnum = (typeof CensusReviewScalarFieldEnum)[keyof typeof CensusReviewScalarFieldEnum]
+
+
+export const CensusStaffScopeScalarFieldEnum = {
+  userId: 'userId',
+  barangaysJson: 'barangaysJson',
+  version: 'version'
+} as const
+
+export type CensusStaffScopeScalarFieldEnum = (typeof CensusStaffScopeScalarFieldEnum)[keyof typeof CensusStaffScopeScalarFieldEnum]
+
+
+export const CensusAssistanceRosterScalarFieldEnum = {
+  barangay: 'barangay',
+  version: 'version',
+  confirmedAt: 'confirmedAt'
+} as const
+
+export type CensusAssistanceRosterScalarFieldEnum = (typeof CensusAssistanceRosterScalarFieldEnum)[keyof typeof CensusAssistanceRosterScalarFieldEnum]
+
+
+export const CensusAssistanceMemberScalarFieldEnum = {
+  barangay: 'barangay',
+  staffId: 'staffId'
+} as const
+
+export type CensusAssistanceMemberScalarFieldEnum = (typeof CensusAssistanceMemberScalarFieldEnum)[keyof typeof CensusAssistanceMemberScalarFieldEnum]
+
+
+export const CensusAuditScalarFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  action: 'action',
+  target: 'target',
+  detailsJson: 'detailsJson',
+  createdAt: 'createdAt'
+} as const
+
+export type CensusAuditScalarFieldEnum = (typeof CensusAuditScalarFieldEnum)[keyof typeof CensusAuditScalarFieldEnum]
+
+
+export const CensusSourceRecordScalarFieldEnum = {
+  identityKey: 'identityKey',
+  sourceKey: 'sourceKey',
+  surveyYear: 'surveyYear',
+  sourceRef: 'sourceRef',
+  contentHash: 'contentHash',
+  conflicted: 'conflicted'
+} as const
+
+export type CensusSourceRecordScalarFieldEnum = (typeof CensusSourceRecordScalarFieldEnum)[keyof typeof CensusSourceRecordScalarFieldEnum]
+
+
+export const CensusImportLockScalarFieldEnum = {
+  id: 'id',
+  version: 'version'
+} as const
+
+export type CensusImportLockScalarFieldEnum = (typeof CensusImportLockScalarFieldEnum)[keyof typeof CensusImportLockScalarFieldEnum]
+
+
+export const JobMutationScalarFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  jobId: 'jobId',
+  resultJson: 'resultJson',
+  createdAt: 'createdAt'
+} as const
+
+export type JobMutationScalarFieldEnum = (typeof JobMutationScalarFieldEnum)[keyof typeof JobMutationScalarFieldEnum]
+
+
+export const JobRecommendationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  jobId: 'jobId',
+  publicationVersion: 'publicationVersion',
+  notificationId: 'notificationId',
+  createdAt: 'createdAt'
+} as const
+
+export type JobRecommendationScalarFieldEnum = (typeof JobRecommendationScalarFieldEnum)[keyof typeof JobRecommendationScalarFieldEnum]
 
 
 export const MunicipalProjectScalarFieldEnum = {
@@ -4429,6 +5482,13 @@ export const JobOpportunityOrderByRelevanceFieldEnum = {
   skillsJson: 'skillsJson',
   interestsJson: 'interestsJson',
   education: 'education',
+  occupationCategory: 'occupationCategory',
+  employmentSector: 'employmentSector',
+  workArrangement: 'workArrangement',
+  experienceLevel: 'experienceLevel',
+  payCurrency: 'payCurrency',
+  payBasis: 'payBasis',
+  certificationsJson: 'certificationsJson',
   contactInfo: 'contactInfo',
   externalUrl: 'externalUrl',
   reviewSource: 'reviewSource',
@@ -4512,12 +5572,12 @@ export const CommunitySurveyOrderByRelevanceFieldEnum = {
   sex: 'sex',
   civilStatus: 'civilStatus',
   pwdStatus: 'pwdStatus',
+  educationLevel: 'educationLevel',
+  employmentStatus: 'employmentStatus',
   employmentHistory: 'employmentHistory',
   overseasExperience: 'overseasExperience',
   qualificationsJson: 'qualificationsJson',
   completedTrainingJson: 'completedTrainingJson',
-  educationLevel: 'educationLevel',
-  employmentStatus: 'employmentStatus',
   occupation: 'occupation',
   industry: 'industry',
   workArrangement: 'workArrangement',
@@ -4555,35 +5615,6 @@ export const CommunitySurveyOrderByRelevanceFieldEnum = {
 export type CommunitySurveyOrderByRelevanceFieldEnum = (typeof CommunitySurveyOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyOrderByRelevanceFieldEnum]
 
 
-export const CommunitySurveyWorkspaceOrderByRelevanceFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  draftJson: 'draftJson'
-} as const
-
-export type CommunitySurveyWorkspaceOrderByRelevanceFieldEnum = (typeof CommunitySurveyWorkspaceOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyWorkspaceOrderByRelevanceFieldEnum]
-
-
-export const CommunitySurveyRevisionOrderByRelevanceFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  actorId: 'actorId',
-  action: 'action',
-  requestKey: 'requestKey',
-  payloadHash: 'payloadHash',
-  answersJson: 'answersJson'
-} as const
-
-export type CommunitySurveyRevisionOrderByRelevanceFieldEnum = (typeof CommunitySurveyRevisionOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyRevisionOrderByRelevanceFieldEnum]
-
-
-export const CitizenProfileConsentOrderByRelevanceFieldEnum = {
-  userId: 'userId'
-} as const
-
-export type CitizenProfileConsentOrderByRelevanceFieldEnum = (typeof CitizenProfileConsentOrderByRelevanceFieldEnum)[keyof typeof CitizenProfileConsentOrderByRelevanceFieldEnum]
-
-
 export const GovernmentActivityOrderByRelevanceFieldEnum = {
   id: 'id',
   activityName: 'activityName',
@@ -4600,6 +5631,7 @@ export type GovernmentActivityOrderByRelevanceFieldEnum = (typeof GovernmentActi
 
 
 export const CommunityImportBatchOrderByRelevanceFieldEnum = {
+  sourceKey: 'sourceKey',
   id: 'id',
   activityId: 'activityId',
   importedById: 'importedById',
@@ -4613,6 +5645,10 @@ export type CommunityImportBatchOrderByRelevanceFieldEnum = (typeof CommunityImp
 
 
 export const CommunityImportRecordOrderByRelevanceFieldEnum = {
+  sourceKey: 'sourceKey',
+  outcome: 'outcome',
+  outcomeReason: 'outcomeReason',
+  contentHash: 'contentHash',
   id: 'id',
   batchId: 'batchId',
   participantRef: 'participantRef',
@@ -4706,7 +5742,8 @@ export const ServicePickupSlotOrderByRelevanceFieldEnum = {
   status: 'status',
   proposedById: 'proposedById',
   citizenNote: 'citizenNote',
-  claimantName: 'claimantName'
+  claimantName: 'claimantName',
+  confirmedClaimantName: 'confirmedClaimantName'
 } as const
 
 export type ServicePickupSlotOrderByRelevanceFieldEnum = (typeof ServicePickupSlotOrderByRelevanceFieldEnum)[keyof typeof ServicePickupSlotOrderByRelevanceFieldEnum]
@@ -4837,6 +5874,164 @@ export const EmergencyActionLogOrderByRelevanceFieldEnum = {
 } as const
 
 export type EmergencyActionLogOrderByRelevanceFieldEnum = (typeof EmergencyActionLogOrderByRelevanceFieldEnum)[keyof typeof EmergencyActionLogOrderByRelevanceFieldEnum]
+
+
+export const CommunitySurveyWorkspaceOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  draftJson: 'draftJson'
+} as const
+
+export type CommunitySurveyWorkspaceOrderByRelevanceFieldEnum = (typeof CommunitySurveyWorkspaceOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyWorkspaceOrderByRelevanceFieldEnum]
+
+
+export const CommunitySurveyRevisionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  actorId: 'actorId',
+  action: 'action',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  answersJson: 'answersJson'
+} as const
+
+export type CommunitySurveyRevisionOrderByRelevanceFieldEnum = (typeof CommunitySurveyRevisionOrderByRelevanceFieldEnum)[keyof typeof CommunitySurveyRevisionOrderByRelevanceFieldEnum]
+
+
+export const CitizenProfileConsentOrderByRelevanceFieldEnum = {
+  userId: 'userId'
+} as const
+
+export type CitizenProfileConsentOrderByRelevanceFieldEnum = (typeof CitizenProfileConsentOrderByRelevanceFieldEnum)[keyof typeof CitizenProfileConsentOrderByRelevanceFieldEnum]
+
+
+export const EstablishmentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  identityKey: 'identityKey',
+  businessName: 'businessName',
+  officeType: 'officeType',
+  street: 'street',
+  barangay: 'barangay',
+  municipality: 'municipality',
+  province: 'province'
+} as const
+
+export type EstablishmentOrderByRelevanceFieldEnum = (typeof EstablishmentOrderByRelevanceFieldEnum)[keyof typeof EstablishmentOrderByRelevanceFieldEnum]
+
+
+export const EstablishmentSurveyOrderByRelevanceFieldEnum = {
+  id: 'id',
+  establishmentId: 'establishmentId',
+  draftJson: 'draftJson',
+  submittedJson: 'submittedJson',
+  status: 'status'
+} as const
+
+export type EstablishmentSurveyOrderByRelevanceFieldEnum = (typeof EstablishmentSurveyOrderByRelevanceFieldEnum)[keyof typeof EstablishmentSurveyOrderByRelevanceFieldEnum]
+
+
+export const EstablishmentRevisionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  surveyId: 'surveyId',
+  action: 'action',
+  answersJson: 'answersJson',
+  actorId: 'actorId'
+} as const
+
+export type EstablishmentRevisionOrderByRelevanceFieldEnum = (typeof EstablishmentRevisionOrderByRelevanceFieldEnum)[keyof typeof EstablishmentRevisionOrderByRelevanceFieldEnum]
+
+
+export const EstablishmentOperationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  establishmentId: 'establishmentId',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  revisionId: 'revisionId'
+} as const
+
+export type EstablishmentOperationOrderByRelevanceFieldEnum = (typeof EstablishmentOperationOrderByRelevanceFieldEnum)[keyof typeof EstablishmentOperationOrderByRelevanceFieldEnum]
+
+
+export const CensusReviewOrderByRelevanceFieldEnum = {
+  id: 'id',
+  individualRevisionId: 'individualRevisionId',
+  establishmentRevisionId: 'establishmentRevisionId',
+  actorId: 'actorId',
+  action: 'action',
+  note: 'note',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash'
+} as const
+
+export type CensusReviewOrderByRelevanceFieldEnum = (typeof CensusReviewOrderByRelevanceFieldEnum)[keyof typeof CensusReviewOrderByRelevanceFieldEnum]
+
+
+export const CensusStaffScopeOrderByRelevanceFieldEnum = {
+  userId: 'userId',
+  barangaysJson: 'barangaysJson'
+} as const
+
+export type CensusStaffScopeOrderByRelevanceFieldEnum = (typeof CensusStaffScopeOrderByRelevanceFieldEnum)[keyof typeof CensusStaffScopeOrderByRelevanceFieldEnum]
+
+
+export const CensusAssistanceRosterOrderByRelevanceFieldEnum = {
+  barangay: 'barangay'
+} as const
+
+export type CensusAssistanceRosterOrderByRelevanceFieldEnum = (typeof CensusAssistanceRosterOrderByRelevanceFieldEnum)[keyof typeof CensusAssistanceRosterOrderByRelevanceFieldEnum]
+
+
+export const CensusAssistanceMemberOrderByRelevanceFieldEnum = {
+  barangay: 'barangay',
+  staffId: 'staffId'
+} as const
+
+export type CensusAssistanceMemberOrderByRelevanceFieldEnum = (typeof CensusAssistanceMemberOrderByRelevanceFieldEnum)[keyof typeof CensusAssistanceMemberOrderByRelevanceFieldEnum]
+
+
+export const CensusAuditOrderByRelevanceFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  action: 'action',
+  target: 'target',
+  detailsJson: 'detailsJson'
+} as const
+
+export type CensusAuditOrderByRelevanceFieldEnum = (typeof CensusAuditOrderByRelevanceFieldEnum)[keyof typeof CensusAuditOrderByRelevanceFieldEnum]
+
+
+export const CensusSourceRecordOrderByRelevanceFieldEnum = {
+  identityKey: 'identityKey',
+  sourceKey: 'sourceKey',
+  sourceRef: 'sourceRef',
+  contentHash: 'contentHash'
+} as const
+
+export type CensusSourceRecordOrderByRelevanceFieldEnum = (typeof CensusSourceRecordOrderByRelevanceFieldEnum)[keyof typeof CensusSourceRecordOrderByRelevanceFieldEnum]
+
+
+export const JobMutationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  requestKey: 'requestKey',
+  payloadHash: 'payloadHash',
+  jobId: 'jobId',
+  resultJson: 'resultJson'
+} as const
+
+export type JobMutationOrderByRelevanceFieldEnum = (typeof JobMutationOrderByRelevanceFieldEnum)[keyof typeof JobMutationOrderByRelevanceFieldEnum]
+
+
+export const JobRecommendationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  jobId: 'jobId',
+  notificationId: 'notificationId'
+} as const
+
+export type JobRecommendationOrderByRelevanceFieldEnum = (typeof JobRecommendationOrderByRelevanceFieldEnum)[keyof typeof JobRecommendationOrderByRelevanceFieldEnum]
 
 
 export const MunicipalProjectOrderByRelevanceFieldEnum = {
@@ -4997,16 +6192,16 @@ export type EnumCitizenFeedbackDecisionFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
- * Reference to a field of type 'JobListingStatus'
+ * Reference to a field of type 'Decimal'
  */
-export type EnumJobListingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JobListingStatus'>
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
     
 
 
 /**
- * Reference to a field of type 'Decimal'
+ * Reference to a field of type 'JobListingStatus'
  */
-export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+export type EnumJobListingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JobListingStatus'>
     
 
 /**
@@ -5181,9 +6376,6 @@ export type GlobalOmitConfig = {
   spesImportEvent?: Prisma.SpesImportEventOmit
   jobActivity?: Prisma.JobActivityOmit
   communitySurvey?: Prisma.CommunitySurveyOmit
-  communitySurveyWorkspace?: Prisma.CommunitySurveyWorkspaceOmit
-  communitySurveyRevision?: Prisma.CommunitySurveyRevisionOmit
-  citizenProfileConsent?: Prisma.CitizenProfileConsentOmit
   governmentActivity?: Prisma.GovernmentActivityOmit
   communityImportBatch?: Prisma.CommunityImportBatchOmit
   communityImportRecord?: Prisma.CommunityImportRecordOmit
@@ -5200,6 +6392,22 @@ export type GlobalOmitConfig = {
   emergencyHotlineProposal?: Prisma.EmergencyHotlineProposalOmit
   emergencyAlert?: Prisma.EmergencyAlertOmit
   emergencyActionLog?: Prisma.EmergencyActionLogOmit
+  communitySurveyWorkspace?: Prisma.CommunitySurveyWorkspaceOmit
+  communitySurveyRevision?: Prisma.CommunitySurveyRevisionOmit
+  citizenProfileConsent?: Prisma.CitizenProfileConsentOmit
+  establishment?: Prisma.EstablishmentOmit
+  establishmentSurvey?: Prisma.EstablishmentSurveyOmit
+  establishmentRevision?: Prisma.EstablishmentRevisionOmit
+  establishmentOperation?: Prisma.EstablishmentOperationOmit
+  censusReview?: Prisma.CensusReviewOmit
+  censusStaffScope?: Prisma.CensusStaffScopeOmit
+  censusAssistanceRoster?: Prisma.CensusAssistanceRosterOmit
+  censusAssistanceMember?: Prisma.CensusAssistanceMemberOmit
+  censusAudit?: Prisma.CensusAuditOmit
+  censusSourceRecord?: Prisma.CensusSourceRecordOmit
+  censusImportLock?: Prisma.CensusImportLockOmit
+  jobMutation?: Prisma.JobMutationOmit
+  jobRecommendation?: Prisma.JobRecommendationOmit
   municipalProject?: Prisma.MunicipalProjectOmit
   municipalProjectUpdate?: Prisma.MunicipalProjectUpdateOmit
   municipalOfficeDirectoryEntry?: Prisma.MunicipalOfficeDirectoryEntryOmit

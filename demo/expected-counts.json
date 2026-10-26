@@ -1,0 +1,194 @@
+{
+  "datasetVersion": "elb-demo-2026-v1",
+  "referenceYear": 2026,
+  "counts": {
+    "accounts": {
+      "total": 108,
+      "roles": {
+        "ADMIN": 4,
+        "CITIZEN": 100,
+        "STAFF": 4
+      },
+      "groups": {
+        "admin": 4,
+        "establishment": 20,
+        "individual": 80,
+        "staff": 4
+      },
+      "emailVerified": 0
+    },
+    "individual": {
+      "annualByYearAndStatus": {
+        "2025:SUBMITTED": 8,
+        "2026:SUBMITTED": 68,
+        "2026:WITHDRAWN": 6
+      },
+      "currentSubmittedRespondents": 68,
+      "currentMatchingEligible": 51,
+      "matchingEligibleAcrossSubmittedYears": 52,
+      "currentProgramsEligible": 45,
+      "activeWorkingDrafts": 14,
+      "revisionsByAction": {
+        "SUBMITTED": 91,
+        "WITHDRAWN": 6
+      },
+      "currentEmployment": {
+        "BUSINESS_OWNER": 4,
+        "EMPLOYED_FULL_TIME": 5,
+        "EMPLOYED_PART_TIME": 5,
+        "FORMER_OFW": 5,
+        "FREELANCER": 5,
+        "HOMEMAKER": 4,
+        "INFORMAL_WORKER": 5,
+        "OFW": 5,
+        "OTHER": 4,
+        "RETIRED": 4,
+        "SEASONAL_WORKER": 5,
+        "SELF_EMPLOYED": 5,
+        "STUDENT": 4,
+        "UNEMPLOYED_LOOKING": 4,
+        "UNEMPLOYED_NOT_LOOKING": 4
+      },
+      "currentBarangay": {
+        "Anos": 5,
+        "Bagong Silang": 5,
+        "Bambang": 5,
+        "Batong Malake": 5,
+        "Baybayin": 5,
+        "Bayog": 5,
+        "Lalakay": 5,
+        "Maahas": 5,
+        "Malinta": 5,
+        "Mayondon": 5,
+        "San Antonio": 5,
+        "Tadlac": 5,
+        "Timugan (Poblacion)": 4,
+        "Tuntungin-Putho": 4
+      },
+      "currentEducation": {
+        "COLLEGE": 11,
+        "ELEMENTARY": 12,
+        "HIGH_SCHOOL": 12,
+        "POSTGRADUATE": 11,
+        "SENIOR_HIGH": 11,
+        "VOCATIONAL": 11
+      }
+    },
+    "establishment": {
+      "records": 20,
+      "annualByYearAndStatus": {
+        "2025:SUBMITTED": 5,
+        "2026:DRAFT": 1,
+        "2026:SUBMITTED": 17,
+        "2026:WITHDRAWN": 2
+      },
+      "activeWorkingDrafts": 4,
+      "revisionsByAction": {
+        "SUBMITTED": 30,
+        "WITHDRAWN": 2
+      },
+      "currentIndustries": {
+        "ADMIN_SUPPORT": 1,
+        "AGRICULTURE": 1,
+        "CONSTRUCTION": 1,
+        "EDUCATION": 1,
+        "ENERGY": 1,
+        "FINANCE": 1,
+        "FOOD_ACCOMMODATION": 1,
+        "HEALTH_SOCIAL": 1,
+        "INFORMATION": 1,
+        "MANUFACTURING": 1,
+        "MINING": 1,
+        "PROFESSIONAL": 1,
+        "PUBLIC_ADMIN": 1,
+        "REAL_ESTATE": 1,
+        "TRADE_REPAIR": 1,
+        "TRANSPORT": 1,
+        "WATER_WASTE": 1
+      },
+      "knownWorkerTotal": 370,
+      "unknownWorkerTotals": 4
+    },
+    "opportunities": {
+      "total": 28,
+      "byStatus": {
+        "CLOSED": 2,
+        "DRAFT": 2,
+        "FILLED": 2,
+        "PENDING_REVIEW": 4,
+        "PUBLISHED": 16,
+        "RETURNED": 2
+      },
+      "published": 16
+    },
+    "assistance": {
+      "configuredBarangays": 3,
+      "assignments": 3,
+      "scopedStaff": 2,
+      "reviewEvents": 3
+    },
+    "imports": {
+      "records": 13,
+      "bySourceYearOutcome": {
+        "DEMO-B3-SOURCE:2026:ACCEPTED": 2,
+        "DEMO-B3-SOURCE:2026:REJECTED": 1,
+        "DEMO-B3-SOURCE:2026:REVIEW_NEEDED": 3,
+        "DEMO-B3-SOURCE:2026:SKIPPED": 1,
+        "LEGACY_UNKNOWN:UNKNOWN:ACCEPTED": 6
+      },
+      "outcomes": {
+        "ACCEPTED": 8,
+        "REJECTED": 1,
+        "REVIEW_NEEDED": 3,
+        "SKIPPED": 1
+      },
+      "batches": 2,
+      "uniquePeople": null,
+      "reason": "Activity source rows can overlap citizens and each other; never add to individual respondent totals."
+    }
+  },
+  "analytics": {
+    "policy": "Protected CENSUS-scoped analytics/exports only; public release deferred (D08).",
+    "referenceYear": 2026,
+    "individual": {
+      "current": 68,
+      "historical2025": 8,
+      "qualificationsRecorded": 23,
+      "completedTrainingRecorded": 17,
+      "overseasExperience": {
+        "CURRENT": 5,
+        "FORMER": 5,
+        "NEVER": 58
+      }
+    },
+    "establishment": {
+      "current": 17,
+      "historical2025": 5,
+      "knownWorkerSum": 370,
+      "knownTotals": 13,
+      "unknownTotals": 4
+    },
+    "imports": {
+      "currentBySource": {
+        "DEMO-B3-SOURCE": 2
+      },
+      "unknownSurveyYearExcluded": 6,
+      "notAccepted": 5,
+      "uniquePeople": null
+    },
+    "spes": {
+      "currentRealObservations": 0,
+      "currentAllKinds": 0
+    },
+    "staffRespondents": {
+      "staff.01@example.test": 68,
+      "staff.02@example.test": 5
+    },
+    "expectationProvenance": "Individual fixtures index0–67 retain submitted2026 answers; acquired qualifications every3rd index and training every4th. Historical fixtures indices0/10/20/30/40/50/60/70. Existing approved expected counts define workforce/source outcomes; no SPES table fixture is seeded. Optional matching/program choices and later drafts do not reduce aggregated-statistics participation. B3 fixtures explicitly grant Staff01 all canonical barangays and Staff02 Bambang; roster locations do not define their record scopes."
+  },
+  "b5": {
+    "fixtureVersion": "elb-b5-fixtures-v1",
+    "managedVacancies": 28,
+    "allClearlyDemonstrations": true
+  }
+}

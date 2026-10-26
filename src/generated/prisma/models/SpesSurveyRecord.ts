@@ -20,11 +20,22 @@ export type SpesSurveyRecordModel = runtime.Types.Result.DefaultSelection<Prisma
 
 export type AggregateSpesSurveyRecord = {
   _count: SpesSurveyRecordCountAggregateOutputType | null
+  _avg: SpesSurveyRecordAvgAggregateOutputType | null
+  _sum: SpesSurveyRecordSumAggregateOutputType | null
   _min: SpesSurveyRecordMinAggregateOutputType | null
   _max: SpesSurveyRecordMaxAggregateOutputType | null
 }
 
+export type SpesSurveyRecordAvgAggregateOutputType = {
+  originalRowNumber: number | null
+}
+
+export type SpesSurveyRecordSumAggregateOutputType = {
+  originalRowNumber: number | null
+}
+
 export type SpesSurveyRecordMinAggregateOutputType = {
+  originalRowNumber: number | null
   id: string | null
   batchId: string | null
   barangay: string | null
@@ -35,6 +46,7 @@ export type SpesSurveyRecordMinAggregateOutputType = {
 }
 
 export type SpesSurveyRecordMaxAggregateOutputType = {
+  originalRowNumber: number | null
   id: string | null
   batchId: string | null
   barangay: string | null
@@ -45,6 +57,7 @@ export type SpesSurveyRecordMaxAggregateOutputType = {
 }
 
 export type SpesSurveyRecordCountAggregateOutputType = {
+  originalRowNumber: number
   id: number
   batchId: number
   barangay: number
@@ -56,7 +69,16 @@ export type SpesSurveyRecordCountAggregateOutputType = {
 }
 
 
+export type SpesSurveyRecordAvgAggregateInputType = {
+  originalRowNumber?: true
+}
+
+export type SpesSurveyRecordSumAggregateInputType = {
+  originalRowNumber?: true
+}
+
 export type SpesSurveyRecordMinAggregateInputType = {
+  originalRowNumber?: true
   id?: true
   batchId?: true
   barangay?: true
@@ -67,6 +89,7 @@ export type SpesSurveyRecordMinAggregateInputType = {
 }
 
 export type SpesSurveyRecordMaxAggregateInputType = {
+  originalRowNumber?: true
   id?: true
   batchId?: true
   barangay?: true
@@ -77,6 +100,7 @@ export type SpesSurveyRecordMaxAggregateInputType = {
 }
 
 export type SpesSurveyRecordCountAggregateInputType = {
+  originalRowNumber?: true
   id?: true
   batchId?: true
   barangay?: true
@@ -125,6 +149,18 @@ export type SpesSurveyRecordAggregateArgs<ExtArgs extends runtime.Types.Extensio
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: SpesSurveyRecordAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: SpesSurveyRecordSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: SpesSurveyRecordMinAggregateInputType
@@ -155,11 +191,14 @@ export type SpesSurveyRecordGroupByArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   _count?: SpesSurveyRecordCountAggregateInputType | true
+  _avg?: SpesSurveyRecordAvgAggregateInputType
+  _sum?: SpesSurveyRecordSumAggregateInputType
   _min?: SpesSurveyRecordMinAggregateInputType
   _max?: SpesSurveyRecordMaxAggregateInputType
 }
 
 export type SpesSurveyRecordGroupByOutputType = {
+  originalRowNumber: number | null
   id: string
   batchId: string
   barangay: string
@@ -168,6 +207,8 @@ export type SpesSurveyRecordGroupByOutputType = {
   interestsJson: string
   availability: string
   _count: SpesSurveyRecordCountAggregateOutputType | null
+  _avg: SpesSurveyRecordAvgAggregateOutputType | null
+  _sum: SpesSurveyRecordSumAggregateOutputType | null
   _min: SpesSurveyRecordMinAggregateOutputType | null
   _max: SpesSurveyRecordMaxAggregateOutputType | null
 }
@@ -191,6 +232,7 @@ export type SpesSurveyRecordWhereInput = {
   AND?: Prisma.SpesSurveyRecordWhereInput | Prisma.SpesSurveyRecordWhereInput[]
   OR?: Prisma.SpesSurveyRecordWhereInput[]
   NOT?: Prisma.SpesSurveyRecordWhereInput | Prisma.SpesSurveyRecordWhereInput[]
+  originalRowNumber?: Prisma.IntNullableFilter<"SpesSurveyRecord"> | number | null
   id?: Prisma.StringFilter<"SpesSurveyRecord"> | string
   batchId?: Prisma.StringFilter<"SpesSurveyRecord"> | string
   barangay?: Prisma.StringFilter<"SpesSurveyRecord"> | string
@@ -202,6 +244,7 @@ export type SpesSurveyRecordWhereInput = {
 }
 
 export type SpesSurveyRecordOrderByWithRelationInput = {
+  originalRowNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   barangay?: Prisma.SortOrder
@@ -218,6 +261,7 @@ export type SpesSurveyRecordWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SpesSurveyRecordWhereInput | Prisma.SpesSurveyRecordWhereInput[]
   OR?: Prisma.SpesSurveyRecordWhereInput[]
   NOT?: Prisma.SpesSurveyRecordWhereInput | Prisma.SpesSurveyRecordWhereInput[]
+  originalRowNumber?: Prisma.IntNullableFilter<"SpesSurveyRecord"> | number | null
   batchId?: Prisma.StringFilter<"SpesSurveyRecord"> | string
   barangay?: Prisma.StringFilter<"SpesSurveyRecord"> | string
   education?: Prisma.StringFilter<"SpesSurveyRecord"> | string
@@ -228,6 +272,7 @@ export type SpesSurveyRecordWhereUniqueInput = Prisma.AtLeast<{
 }, "id">
 
 export type SpesSurveyRecordOrderByWithAggregationInput = {
+  originalRowNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   barangay?: Prisma.SortOrder
@@ -236,14 +281,17 @@ export type SpesSurveyRecordOrderByWithAggregationInput = {
   interestsJson?: Prisma.SortOrder
   availability?: Prisma.SortOrder
   _count?: Prisma.SpesSurveyRecordCountOrderByAggregateInput
+  _avg?: Prisma.SpesSurveyRecordAvgOrderByAggregateInput
   _max?: Prisma.SpesSurveyRecordMaxOrderByAggregateInput
   _min?: Prisma.SpesSurveyRecordMinOrderByAggregateInput
+  _sum?: Prisma.SpesSurveyRecordSumOrderByAggregateInput
 }
 
 export type SpesSurveyRecordScalarWhereWithAggregatesInput = {
   AND?: Prisma.SpesSurveyRecordScalarWhereWithAggregatesInput | Prisma.SpesSurveyRecordScalarWhereWithAggregatesInput[]
   OR?: Prisma.SpesSurveyRecordScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SpesSurveyRecordScalarWhereWithAggregatesInput | Prisma.SpesSurveyRecordScalarWhereWithAggregatesInput[]
+  originalRowNumber?: Prisma.IntNullableWithAggregatesFilter<"SpesSurveyRecord"> | number | null
   id?: Prisma.StringWithAggregatesFilter<"SpesSurveyRecord"> | string
   batchId?: Prisma.StringWithAggregatesFilter<"SpesSurveyRecord"> | string
   barangay?: Prisma.StringWithAggregatesFilter<"SpesSurveyRecord"> | string
@@ -254,6 +302,7 @@ export type SpesSurveyRecordScalarWhereWithAggregatesInput = {
 }
 
 export type SpesSurveyRecordCreateInput = {
+  originalRowNumber?: number | null
   id?: string
   barangay: string
   education: string
@@ -264,6 +313,7 @@ export type SpesSurveyRecordCreateInput = {
 }
 
 export type SpesSurveyRecordUncheckedCreateInput = {
+  originalRowNumber?: number | null
   id?: string
   batchId: string
   barangay: string
@@ -274,6 +324,7 @@ export type SpesSurveyRecordUncheckedCreateInput = {
 }
 
 export type SpesSurveyRecordUpdateInput = {
+  originalRowNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   barangay?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
@@ -284,6 +335,7 @@ export type SpesSurveyRecordUpdateInput = {
 }
 
 export type SpesSurveyRecordUncheckedUpdateInput = {
+  originalRowNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   batchId?: Prisma.StringFieldUpdateOperationsInput | string
   barangay?: Prisma.StringFieldUpdateOperationsInput | string
@@ -294,6 +346,7 @@ export type SpesSurveyRecordUncheckedUpdateInput = {
 }
 
 export type SpesSurveyRecordCreateManyInput = {
+  originalRowNumber?: number | null
   id?: string
   batchId: string
   barangay: string
@@ -304,6 +357,7 @@ export type SpesSurveyRecordCreateManyInput = {
 }
 
 export type SpesSurveyRecordUpdateManyMutationInput = {
+  originalRowNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   barangay?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
@@ -313,6 +367,7 @@ export type SpesSurveyRecordUpdateManyMutationInput = {
 }
 
 export type SpesSurveyRecordUncheckedUpdateManyInput = {
+  originalRowNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   batchId?: Prisma.StringFieldUpdateOperationsInput | string
   barangay?: Prisma.StringFieldUpdateOperationsInput | string
@@ -339,6 +394,7 @@ export type SpesSurveyRecordOrderByRelevanceInput = {
 }
 
 export type SpesSurveyRecordCountOrderByAggregateInput = {
+  originalRowNumber?: Prisma.SortOrder
   id?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   barangay?: Prisma.SortOrder
@@ -348,7 +404,12 @@ export type SpesSurveyRecordCountOrderByAggregateInput = {
   availability?: Prisma.SortOrder
 }
 
+export type SpesSurveyRecordAvgOrderByAggregateInput = {
+  originalRowNumber?: Prisma.SortOrder
+}
+
 export type SpesSurveyRecordMaxOrderByAggregateInput = {
+  originalRowNumber?: Prisma.SortOrder
   id?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   barangay?: Prisma.SortOrder
@@ -359,6 +420,7 @@ export type SpesSurveyRecordMaxOrderByAggregateInput = {
 }
 
 export type SpesSurveyRecordMinOrderByAggregateInput = {
+  originalRowNumber?: Prisma.SortOrder
   id?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   barangay?: Prisma.SortOrder
@@ -366,6 +428,10 @@ export type SpesSurveyRecordMinOrderByAggregateInput = {
   skillsJson?: Prisma.SortOrder
   interestsJson?: Prisma.SortOrder
   availability?: Prisma.SortOrder
+}
+
+export type SpesSurveyRecordSumOrderByAggregateInput = {
+  originalRowNumber?: Prisma.SortOrder
 }
 
 export type SpesSurveyRecordCreateNestedManyWithoutBatchInput = {
@@ -411,6 +477,7 @@ export type SpesSurveyRecordUncheckedUpdateManyWithoutBatchNestedInput = {
 }
 
 export type SpesSurveyRecordCreateWithoutBatchInput = {
+  originalRowNumber?: number | null
   id?: string
   barangay: string
   education: string
@@ -420,6 +487,7 @@ export type SpesSurveyRecordCreateWithoutBatchInput = {
 }
 
 export type SpesSurveyRecordUncheckedCreateWithoutBatchInput = {
+  originalRowNumber?: number | null
   id?: string
   barangay: string
   education: string
@@ -458,6 +526,7 @@ export type SpesSurveyRecordScalarWhereInput = {
   AND?: Prisma.SpesSurveyRecordScalarWhereInput | Prisma.SpesSurveyRecordScalarWhereInput[]
   OR?: Prisma.SpesSurveyRecordScalarWhereInput[]
   NOT?: Prisma.SpesSurveyRecordScalarWhereInput | Prisma.SpesSurveyRecordScalarWhereInput[]
+  originalRowNumber?: Prisma.IntNullableFilter<"SpesSurveyRecord"> | number | null
   id?: Prisma.StringFilter<"SpesSurveyRecord"> | string
   batchId?: Prisma.StringFilter<"SpesSurveyRecord"> | string
   barangay?: Prisma.StringFilter<"SpesSurveyRecord"> | string
@@ -468,6 +537,7 @@ export type SpesSurveyRecordScalarWhereInput = {
 }
 
 export type SpesSurveyRecordCreateManyBatchInput = {
+  originalRowNumber?: number | null
   id?: string
   barangay: string
   education: string
@@ -477,6 +547,7 @@ export type SpesSurveyRecordCreateManyBatchInput = {
 }
 
 export type SpesSurveyRecordUpdateWithoutBatchInput = {
+  originalRowNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   barangay?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
@@ -486,6 +557,7 @@ export type SpesSurveyRecordUpdateWithoutBatchInput = {
 }
 
 export type SpesSurveyRecordUncheckedUpdateWithoutBatchInput = {
+  originalRowNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   barangay?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
@@ -495,6 +567,7 @@ export type SpesSurveyRecordUncheckedUpdateWithoutBatchInput = {
 }
 
 export type SpesSurveyRecordUncheckedUpdateManyWithoutBatchInput = {
+  originalRowNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   barangay?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
@@ -506,6 +579,7 @@ export type SpesSurveyRecordUncheckedUpdateManyWithoutBatchInput = {
 
 
 export type SpesSurveyRecordSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  originalRowNumber?: boolean
   id?: boolean
   batchId?: boolean
   barangay?: boolean
@@ -519,6 +593,7 @@ export type SpesSurveyRecordSelect<ExtArgs extends runtime.Types.Extensions.Inte
 
 
 export type SpesSurveyRecordSelectScalar = {
+  originalRowNumber?: boolean
   id?: boolean
   batchId?: boolean
   barangay?: boolean
@@ -528,7 +603,7 @@ export type SpesSurveyRecordSelectScalar = {
   availability?: boolean
 }
 
-export type SpesSurveyRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "batchId" | "barangay" | "education" | "skillsJson" | "interestsJson" | "availability", ExtArgs["result"]["spesSurveyRecord"]>
+export type SpesSurveyRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"originalRowNumber" | "id" | "batchId" | "barangay" | "education" | "skillsJson" | "interestsJson" | "availability", ExtArgs["result"]["spesSurveyRecord"]>
 export type SpesSurveyRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   batch?: boolean | Prisma.SpesImportBatchDefaultArgs<ExtArgs>
 }
@@ -539,6 +614,7 @@ export type $SpesSurveyRecordPayload<ExtArgs extends runtime.Types.Extensions.In
     batch: Prisma.$SpesImportBatchPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    originalRowNumber: number | null
     id: string
     batchId: string
     barangay: string
@@ -629,8 +705,8 @@ export interface SpesSurveyRecordDelegate<ExtArgs extends runtime.Types.Extensio
    * // Get first 10 SpesSurveyRecords
    * const spesSurveyRecords = await prisma.spesSurveyRecord.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const spesSurveyRecordWithIdOnly = await prisma.spesSurveyRecord.findMany({ select: { id: true } })
+   * // Only select the `originalRowNumber`
+   * const spesSurveyRecordWithOriginalRowNumberOnly = await prisma.spesSurveyRecord.findMany({ select: { originalRowNumber: true } })
    * 
    */
   findMany<T extends SpesSurveyRecordFindManyArgs>(args?: Prisma.SelectSubset<T, SpesSurveyRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpesSurveyRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -916,6 +992,7 @@ export interface Prisma__SpesSurveyRecordClient<T, Null = never, ExtArgs extends
  * Fields of the SpesSurveyRecord model
  */
 export interface SpesSurveyRecordFieldRefs {
+  readonly originalRowNumber: Prisma.FieldRef<"SpesSurveyRecord", 'Int'>
   readonly id: Prisma.FieldRef<"SpesSurveyRecord", 'String'>
   readonly batchId: Prisma.FieldRef<"SpesSurveyRecord", 'String'>
   readonly barangay: Prisma.FieldRef<"SpesSurveyRecord", 'String'>

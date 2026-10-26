@@ -7,7 +7,7 @@ import { assertSameOrigin,readJson,json,apiFailure } from "@/features/civic/serv
 export async function PATCH(request:Request,{params}:{params:Promise<{id:string}>}){
   try{
     assertSameOrigin(request);
-    const viewer=await requireApiViewer(request,"JOBS");
+    const viewer=await requireApiViewer(request,"CENSUS");
     if(viewer.role!=="ADMIN")throw new CivicError("Only Super Admin can archive or restore survey batches.",403);
     const {id}=await params;
     const body=await readJson(request) as Record<string,unknown>;

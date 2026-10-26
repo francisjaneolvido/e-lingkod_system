@@ -27,10 +27,14 @@ export type AggregateJobOpportunity = {
 }
 
 export type JobOpportunityAvgAggregateOutputType = {
+  payMin: runtime.Decimal | null
+  payMax: runtime.Decimal | null
   version: number | null
 }
 
 export type JobOpportunitySumAggregateOutputType = {
+  payMin: runtime.Decimal | null
+  payMax: runtime.Decimal | null
   version: number | null
 }
 
@@ -46,6 +50,17 @@ export type JobOpportunityMinAggregateOutputType = {
   skillsJson: string | null
   interestsJson: string | null
   education: string | null
+  occupationCategory: string | null
+  employmentSector: string | null
+  workArrangement: string | null
+  experienceLevel: string | null
+  payMin: runtime.Decimal | null
+  payMax: runtime.Decimal | null
+  payCurrency: string | null
+  payBasis: string | null
+  negotiable: boolean | null
+  certificationsJson: string | null
+  isDemo: boolean | null
   contactInfo: string | null
   externalUrl: string | null
   status: $Enums.JobListingStatus | null
@@ -76,6 +91,17 @@ export type JobOpportunityMaxAggregateOutputType = {
   skillsJson: string | null
   interestsJson: string | null
   education: string | null
+  occupationCategory: string | null
+  employmentSector: string | null
+  workArrangement: string | null
+  experienceLevel: string | null
+  payMin: runtime.Decimal | null
+  payMax: runtime.Decimal | null
+  payCurrency: string | null
+  payBasis: string | null
+  negotiable: boolean | null
+  certificationsJson: string | null
+  isDemo: boolean | null
   contactInfo: string | null
   externalUrl: string | null
   status: $Enums.JobListingStatus | null
@@ -106,6 +132,17 @@ export type JobOpportunityCountAggregateOutputType = {
   skillsJson: number
   interestsJson: number
   education: number
+  occupationCategory: number
+  employmentSector: number
+  workArrangement: number
+  experienceLevel: number
+  payMin: number
+  payMax: number
+  payCurrency: number
+  payBasis: number
+  negotiable: number
+  certificationsJson: number
+  isDemo: number
   contactInfo: number
   externalUrl: number
   status: number
@@ -127,10 +164,14 @@ export type JobOpportunityCountAggregateOutputType = {
 
 
 export type JobOpportunityAvgAggregateInputType = {
+  payMin?: true
+  payMax?: true
   version?: true
 }
 
 export type JobOpportunitySumAggregateInputType = {
+  payMin?: true
+  payMax?: true
   version?: true
 }
 
@@ -146,6 +187,17 @@ export type JobOpportunityMinAggregateInputType = {
   skillsJson?: true
   interestsJson?: true
   education?: true
+  occupationCategory?: true
+  employmentSector?: true
+  workArrangement?: true
+  experienceLevel?: true
+  payMin?: true
+  payMax?: true
+  payCurrency?: true
+  payBasis?: true
+  negotiable?: true
+  certificationsJson?: true
+  isDemo?: true
   contactInfo?: true
   externalUrl?: true
   status?: true
@@ -176,6 +228,17 @@ export type JobOpportunityMaxAggregateInputType = {
   skillsJson?: true
   interestsJson?: true
   education?: true
+  occupationCategory?: true
+  employmentSector?: true
+  workArrangement?: true
+  experienceLevel?: true
+  payMin?: true
+  payMax?: true
+  payCurrency?: true
+  payBasis?: true
+  negotiable?: true
+  certificationsJson?: true
+  isDemo?: true
   contactInfo?: true
   externalUrl?: true
   status?: true
@@ -206,6 +269,17 @@ export type JobOpportunityCountAggregateInputType = {
   skillsJson?: true
   interestsJson?: true
   education?: true
+  occupationCategory?: true
+  employmentSector?: true
+  workArrangement?: true
+  experienceLevel?: true
+  payMin?: true
+  payMax?: true
+  payCurrency?: true
+  payBasis?: true
+  negotiable?: true
+  certificationsJson?: true
+  isDemo?: true
   contactInfo?: true
   externalUrl?: true
   status?: true
@@ -323,6 +397,17 @@ export type JobOpportunityGroupByOutputType = {
   skillsJson: string
   interestsJson: string
   education: string
+  occupationCategory: string | null
+  employmentSector: string | null
+  workArrangement: string | null
+  experienceLevel: string | null
+  payMin: runtime.Decimal | null
+  payMax: runtime.Decimal | null
+  payCurrency: string | null
+  payBasis: string | null
+  negotiable: boolean
+  certificationsJson: string | null
+  isDemo: boolean
   contactInfo: string
   externalUrl: string | null
   status: $Enums.JobListingStatus
@@ -376,6 +461,17 @@ export type JobOpportunityWhereInput = {
   skillsJson?: Prisma.StringFilter<"JobOpportunity"> | string
   interestsJson?: Prisma.StringFilter<"JobOpportunity"> | string
   education?: Prisma.StringFilter<"JobOpportunity"> | string
+  occupationCategory?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  employmentSector?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  workArrangement?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  experienceLevel?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  payMin?: Prisma.DecimalNullableFilter<"JobOpportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.DecimalNullableFilter<"JobOpportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  payBasis?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  negotiable?: Prisma.BoolFilter<"JobOpportunity"> | boolean
+  certificationsJson?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  isDemo?: Prisma.BoolFilter<"JobOpportunity"> | boolean
   contactInfo?: Prisma.StringFilter<"JobOpportunity"> | string
   externalUrl?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
   status?: Prisma.EnumJobListingStatusFilter<"JobOpportunity"> | $Enums.JobListingStatus
@@ -395,6 +491,8 @@ export type JobOpportunityWhereInput = {
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   activities?: Prisma.JobActivityListRelationFilter
+  mutations?: Prisma.JobMutationListRelationFilter
+  recommendations?: Prisma.JobRecommendationListRelationFilter
 }
 
 export type JobOpportunityOrderByWithRelationInput = {
@@ -409,6 +507,17 @@ export type JobOpportunityOrderByWithRelationInput = {
   skillsJson?: Prisma.SortOrder
   interestsJson?: Prisma.SortOrder
   education?: Prisma.SortOrder
+  occupationCategory?: Prisma.SortOrderInput | Prisma.SortOrder
+  employmentSector?: Prisma.SortOrderInput | Prisma.SortOrder
+  workArrangement?: Prisma.SortOrderInput | Prisma.SortOrder
+  experienceLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  payMin?: Prisma.SortOrderInput | Prisma.SortOrder
+  payMax?: Prisma.SortOrderInput | Prisma.SortOrder
+  payCurrency?: Prisma.SortOrderInput | Prisma.SortOrder
+  payBasis?: Prisma.SortOrderInput | Prisma.SortOrder
+  negotiable?: Prisma.SortOrder
+  certificationsJson?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDemo?: Prisma.SortOrder
   contactInfo?: Prisma.SortOrder
   externalUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -428,6 +537,8 @@ export type JobOpportunityOrderByWithRelationInput = {
   reviewedBy?: Prisma.UserOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   activities?: Prisma.JobActivityOrderByRelationAggregateInput
+  mutations?: Prisma.JobMutationOrderByRelationAggregateInput
+  recommendations?: Prisma.JobRecommendationOrderByRelationAggregateInput
   _relevance?: Prisma.JobOpportunityOrderByRelevanceInput
 }
 
@@ -446,6 +557,17 @@ export type JobOpportunityWhereUniqueInput = Prisma.AtLeast<{
   skillsJson?: Prisma.StringFilter<"JobOpportunity"> | string
   interestsJson?: Prisma.StringFilter<"JobOpportunity"> | string
   education?: Prisma.StringFilter<"JobOpportunity"> | string
+  occupationCategory?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  employmentSector?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  workArrangement?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  experienceLevel?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  payMin?: Prisma.DecimalNullableFilter<"JobOpportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.DecimalNullableFilter<"JobOpportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  payBasis?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  negotiable?: Prisma.BoolFilter<"JobOpportunity"> | boolean
+  certificationsJson?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  isDemo?: Prisma.BoolFilter<"JobOpportunity"> | boolean
   contactInfo?: Prisma.StringFilter<"JobOpportunity"> | string
   externalUrl?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
   status?: Prisma.EnumJobListingStatusFilter<"JobOpportunity"> | $Enums.JobListingStatus
@@ -465,6 +587,8 @@ export type JobOpportunityWhereUniqueInput = Prisma.AtLeast<{
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   activities?: Prisma.JobActivityListRelationFilter
+  mutations?: Prisma.JobMutationListRelationFilter
+  recommendations?: Prisma.JobRecommendationListRelationFilter
 }, "id">
 
 export type JobOpportunityOrderByWithAggregationInput = {
@@ -479,6 +603,17 @@ export type JobOpportunityOrderByWithAggregationInput = {
   skillsJson?: Prisma.SortOrder
   interestsJson?: Prisma.SortOrder
   education?: Prisma.SortOrder
+  occupationCategory?: Prisma.SortOrderInput | Prisma.SortOrder
+  employmentSector?: Prisma.SortOrderInput | Prisma.SortOrder
+  workArrangement?: Prisma.SortOrderInput | Prisma.SortOrder
+  experienceLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  payMin?: Prisma.SortOrderInput | Prisma.SortOrder
+  payMax?: Prisma.SortOrderInput | Prisma.SortOrder
+  payCurrency?: Prisma.SortOrderInput | Prisma.SortOrder
+  payBasis?: Prisma.SortOrderInput | Prisma.SortOrder
+  negotiable?: Prisma.SortOrder
+  certificationsJson?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDemo?: Prisma.SortOrder
   contactInfo?: Prisma.SortOrder
   externalUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -517,6 +652,17 @@ export type JobOpportunityScalarWhereWithAggregatesInput = {
   skillsJson?: Prisma.StringWithAggregatesFilter<"JobOpportunity"> | string
   interestsJson?: Prisma.StringWithAggregatesFilter<"JobOpportunity"> | string
   education?: Prisma.StringWithAggregatesFilter<"JobOpportunity"> | string
+  occupationCategory?: Prisma.StringNullableWithAggregatesFilter<"JobOpportunity"> | string | null
+  employmentSector?: Prisma.StringNullableWithAggregatesFilter<"JobOpportunity"> | string | null
+  workArrangement?: Prisma.StringNullableWithAggregatesFilter<"JobOpportunity"> | string | null
+  experienceLevel?: Prisma.StringNullableWithAggregatesFilter<"JobOpportunity"> | string | null
+  payMin?: Prisma.DecimalNullableWithAggregatesFilter<"JobOpportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.DecimalNullableWithAggregatesFilter<"JobOpportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.StringNullableWithAggregatesFilter<"JobOpportunity"> | string | null
+  payBasis?: Prisma.StringNullableWithAggregatesFilter<"JobOpportunity"> | string | null
+  negotiable?: Prisma.BoolWithAggregatesFilter<"JobOpportunity"> | boolean
+  certificationsJson?: Prisma.StringNullableWithAggregatesFilter<"JobOpportunity"> | string | null
+  isDemo?: Prisma.BoolWithAggregatesFilter<"JobOpportunity"> | boolean
   contactInfo?: Prisma.StringWithAggregatesFilter<"JobOpportunity"> | string
   externalUrl?: Prisma.StringNullableWithAggregatesFilter<"JobOpportunity"> | string | null
   status?: Prisma.EnumJobListingStatusWithAggregatesFilter<"JobOpportunity"> | $Enums.JobListingStatus
@@ -547,6 +693,17 @@ export type JobOpportunityCreateInput = {
   skillsJson: string
   interestsJson: string
   education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
   contactInfo: string
   externalUrl?: string | null
   status?: $Enums.JobListingStatus
@@ -564,6 +721,8 @@ export type JobOpportunityCreateInput = {
   reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedJobsInput
   createdBy: Prisma.UserCreateNestedOneWithoutPostedJobsInput
   activities?: Prisma.JobActivityCreateNestedManyWithoutJobInput
+  mutations?: Prisma.JobMutationCreateNestedManyWithoutJobInput
+  recommendations?: Prisma.JobRecommendationCreateNestedManyWithoutJobInput
 }
 
 export type JobOpportunityUncheckedCreateInput = {
@@ -578,6 +737,17 @@ export type JobOpportunityUncheckedCreateInput = {
   skillsJson: string
   interestsJson: string
   education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
   contactInfo: string
   externalUrl?: string | null
   status?: $Enums.JobListingStatus
@@ -595,6 +765,8 @@ export type JobOpportunityUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   activities?: Prisma.JobActivityUncheckedCreateNestedManyWithoutJobInput
+  mutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutJobInput
+  recommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutJobInput
 }
 
 export type JobOpportunityUpdateInput = {
@@ -609,6 +781,17 @@ export type JobOpportunityUpdateInput = {
   skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
   interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
   externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
@@ -626,6 +809,8 @@ export type JobOpportunityUpdateInput = {
   reviewedBy?: Prisma.UserUpdateOneWithoutReviewedJobsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutPostedJobsNestedInput
   activities?: Prisma.JobActivityUpdateManyWithoutJobNestedInput
+  mutations?: Prisma.JobMutationUpdateManyWithoutJobNestedInput
+  recommendations?: Prisma.JobRecommendationUpdateManyWithoutJobNestedInput
 }
 
 export type JobOpportunityUncheckedUpdateInput = {
@@ -640,6 +825,17 @@ export type JobOpportunityUncheckedUpdateInput = {
   skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
   interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
   externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
@@ -657,6 +853,8 @@ export type JobOpportunityUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   activities?: Prisma.JobActivityUncheckedUpdateManyWithoutJobNestedInput
+  mutations?: Prisma.JobMutationUncheckedUpdateManyWithoutJobNestedInput
+  recommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutJobNestedInput
 }
 
 export type JobOpportunityCreateManyInput = {
@@ -671,6 +869,17 @@ export type JobOpportunityCreateManyInput = {
   skillsJson: string
   interestsJson: string
   education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
   contactInfo: string
   externalUrl?: string | null
   status?: $Enums.JobListingStatus
@@ -701,6 +910,17 @@ export type JobOpportunityUpdateManyMutationInput = {
   skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
   interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
   externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
@@ -729,6 +949,17 @@ export type JobOpportunityUncheckedUpdateManyInput = {
   skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
   interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
   externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
@@ -775,6 +1006,17 @@ export type JobOpportunityCountOrderByAggregateInput = {
   skillsJson?: Prisma.SortOrder
   interestsJson?: Prisma.SortOrder
   education?: Prisma.SortOrder
+  occupationCategory?: Prisma.SortOrder
+  employmentSector?: Prisma.SortOrder
+  workArrangement?: Prisma.SortOrder
+  experienceLevel?: Prisma.SortOrder
+  payMin?: Prisma.SortOrder
+  payMax?: Prisma.SortOrder
+  payCurrency?: Prisma.SortOrder
+  payBasis?: Prisma.SortOrder
+  negotiable?: Prisma.SortOrder
+  certificationsJson?: Prisma.SortOrder
+  isDemo?: Prisma.SortOrder
   contactInfo?: Prisma.SortOrder
   externalUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -794,6 +1036,8 @@ export type JobOpportunityCountOrderByAggregateInput = {
 }
 
 export type JobOpportunityAvgOrderByAggregateInput = {
+  payMin?: Prisma.SortOrder
+  payMax?: Prisma.SortOrder
   version?: Prisma.SortOrder
 }
 
@@ -809,6 +1053,17 @@ export type JobOpportunityMaxOrderByAggregateInput = {
   skillsJson?: Prisma.SortOrder
   interestsJson?: Prisma.SortOrder
   education?: Prisma.SortOrder
+  occupationCategory?: Prisma.SortOrder
+  employmentSector?: Prisma.SortOrder
+  workArrangement?: Prisma.SortOrder
+  experienceLevel?: Prisma.SortOrder
+  payMin?: Prisma.SortOrder
+  payMax?: Prisma.SortOrder
+  payCurrency?: Prisma.SortOrder
+  payBasis?: Prisma.SortOrder
+  negotiable?: Prisma.SortOrder
+  certificationsJson?: Prisma.SortOrder
+  isDemo?: Prisma.SortOrder
   contactInfo?: Prisma.SortOrder
   externalUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -839,6 +1094,17 @@ export type JobOpportunityMinOrderByAggregateInput = {
   skillsJson?: Prisma.SortOrder
   interestsJson?: Prisma.SortOrder
   education?: Prisma.SortOrder
+  occupationCategory?: Prisma.SortOrder
+  employmentSector?: Prisma.SortOrder
+  workArrangement?: Prisma.SortOrder
+  experienceLevel?: Prisma.SortOrder
+  payMin?: Prisma.SortOrder
+  payMax?: Prisma.SortOrder
+  payCurrency?: Prisma.SortOrder
+  payBasis?: Prisma.SortOrder
+  negotiable?: Prisma.SortOrder
+  certificationsJson?: Prisma.SortOrder
+  isDemo?: Prisma.SortOrder
   contactInfo?: Prisma.SortOrder
   externalUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -858,6 +1124,8 @@ export type JobOpportunityMinOrderByAggregateInput = {
 }
 
 export type JobOpportunitySumOrderByAggregateInput = {
+  payMin?: Prisma.SortOrder
+  payMax?: Prisma.SortOrder
   version?: Prisma.SortOrder
 }
 
@@ -950,6 +1218,14 @@ export type JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput = {
   deleteMany?: Prisma.JobOpportunityScalarWhereInput | Prisma.JobOpportunityScalarWhereInput[]
 }
 
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
 export type EnumJobListingStatusFieldUpdateOperationsInput = {
   set?: $Enums.JobListingStatus
 }
@@ -968,6 +1244,34 @@ export type JobOpportunityUpdateOneRequiredWithoutActivitiesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.JobOpportunityUpdateToOneWithWhereWithoutActivitiesInput, Prisma.JobOpportunityUpdateWithoutActivitiesInput>, Prisma.JobOpportunityUncheckedUpdateWithoutActivitiesInput>
 }
 
+export type JobOpportunityCreateNestedOneWithoutMutationsInput = {
+  create?: Prisma.XOR<Prisma.JobOpportunityCreateWithoutMutationsInput, Prisma.JobOpportunityUncheckedCreateWithoutMutationsInput>
+  connectOrCreate?: Prisma.JobOpportunityCreateOrConnectWithoutMutationsInput
+  connect?: Prisma.JobOpportunityWhereUniqueInput
+}
+
+export type JobOpportunityUpdateOneRequiredWithoutMutationsNestedInput = {
+  create?: Prisma.XOR<Prisma.JobOpportunityCreateWithoutMutationsInput, Prisma.JobOpportunityUncheckedCreateWithoutMutationsInput>
+  connectOrCreate?: Prisma.JobOpportunityCreateOrConnectWithoutMutationsInput
+  upsert?: Prisma.JobOpportunityUpsertWithoutMutationsInput
+  connect?: Prisma.JobOpportunityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.JobOpportunityUpdateToOneWithWhereWithoutMutationsInput, Prisma.JobOpportunityUpdateWithoutMutationsInput>, Prisma.JobOpportunityUncheckedUpdateWithoutMutationsInput>
+}
+
+export type JobOpportunityCreateNestedOneWithoutRecommendationsInput = {
+  create?: Prisma.XOR<Prisma.JobOpportunityCreateWithoutRecommendationsInput, Prisma.JobOpportunityUncheckedCreateWithoutRecommendationsInput>
+  connectOrCreate?: Prisma.JobOpportunityCreateOrConnectWithoutRecommendationsInput
+  connect?: Prisma.JobOpportunityWhereUniqueInput
+}
+
+export type JobOpportunityUpdateOneRequiredWithoutRecommendationsNestedInput = {
+  create?: Prisma.XOR<Prisma.JobOpportunityCreateWithoutRecommendationsInput, Prisma.JobOpportunityUncheckedCreateWithoutRecommendationsInput>
+  connectOrCreate?: Prisma.JobOpportunityCreateOrConnectWithoutRecommendationsInput
+  upsert?: Prisma.JobOpportunityUpsertWithoutRecommendationsInput
+  connect?: Prisma.JobOpportunityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.JobOpportunityUpdateToOneWithWhereWithoutRecommendationsInput, Prisma.JobOpportunityUpdateWithoutRecommendationsInput>, Prisma.JobOpportunityUncheckedUpdateWithoutRecommendationsInput>
+}
+
 export type JobOpportunityCreateWithoutCreatedByInput = {
   id?: string
   title: string
@@ -980,6 +1284,17 @@ export type JobOpportunityCreateWithoutCreatedByInput = {
   skillsJson: string
   interestsJson: string
   education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
   contactInfo: string
   externalUrl?: string | null
   status?: $Enums.JobListingStatus
@@ -996,6 +1311,8 @@ export type JobOpportunityCreateWithoutCreatedByInput = {
   updatedAt?: Date | string
   reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedJobsInput
   activities?: Prisma.JobActivityCreateNestedManyWithoutJobInput
+  mutations?: Prisma.JobMutationCreateNestedManyWithoutJobInput
+  recommendations?: Prisma.JobRecommendationCreateNestedManyWithoutJobInput
 }
 
 export type JobOpportunityUncheckedCreateWithoutCreatedByInput = {
@@ -1010,6 +1327,17 @@ export type JobOpportunityUncheckedCreateWithoutCreatedByInput = {
   skillsJson: string
   interestsJson: string
   education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
   contactInfo: string
   externalUrl?: string | null
   status?: $Enums.JobListingStatus
@@ -1026,6 +1354,8 @@ export type JobOpportunityUncheckedCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   activities?: Prisma.JobActivityUncheckedCreateNestedManyWithoutJobInput
+  mutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutJobInput
+  recommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutJobInput
 }
 
 export type JobOpportunityCreateOrConnectWithoutCreatedByInput = {
@@ -1050,6 +1380,17 @@ export type JobOpportunityCreateWithoutReviewedByInput = {
   skillsJson: string
   interestsJson: string
   education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
   contactInfo: string
   externalUrl?: string | null
   status?: $Enums.JobListingStatus
@@ -1066,6 +1407,8 @@ export type JobOpportunityCreateWithoutReviewedByInput = {
   updatedAt?: Date | string
   createdBy: Prisma.UserCreateNestedOneWithoutPostedJobsInput
   activities?: Prisma.JobActivityCreateNestedManyWithoutJobInput
+  mutations?: Prisma.JobMutationCreateNestedManyWithoutJobInput
+  recommendations?: Prisma.JobRecommendationCreateNestedManyWithoutJobInput
 }
 
 export type JobOpportunityUncheckedCreateWithoutReviewedByInput = {
@@ -1080,6 +1423,17 @@ export type JobOpportunityUncheckedCreateWithoutReviewedByInput = {
   skillsJson: string
   interestsJson: string
   education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
   contactInfo: string
   externalUrl?: string | null
   status?: $Enums.JobListingStatus
@@ -1096,6 +1450,8 @@ export type JobOpportunityUncheckedCreateWithoutReviewedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   activities?: Prisma.JobActivityUncheckedCreateNestedManyWithoutJobInput
+  mutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutJobInput
+  recommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutJobInput
 }
 
 export type JobOpportunityCreateOrConnectWithoutReviewedByInput = {
@@ -1139,6 +1495,17 @@ export type JobOpportunityScalarWhereInput = {
   skillsJson?: Prisma.StringFilter<"JobOpportunity"> | string
   interestsJson?: Prisma.StringFilter<"JobOpportunity"> | string
   education?: Prisma.StringFilter<"JobOpportunity"> | string
+  occupationCategory?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  employmentSector?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  workArrangement?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  experienceLevel?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  payMin?: Prisma.DecimalNullableFilter<"JobOpportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.DecimalNullableFilter<"JobOpportunity"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  payBasis?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  negotiable?: Prisma.BoolFilter<"JobOpportunity"> | boolean
+  certificationsJson?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
+  isDemo?: Prisma.BoolFilter<"JobOpportunity"> | boolean
   contactInfo?: Prisma.StringFilter<"JobOpportunity"> | string
   externalUrl?: Prisma.StringNullableFilter<"JobOpportunity"> | string | null
   status?: Prisma.EnumJobListingStatusFilter<"JobOpportunity"> | $Enums.JobListingStatus
@@ -1185,6 +1552,17 @@ export type JobOpportunityCreateWithoutActivitiesInput = {
   skillsJson: string
   interestsJson: string
   education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
   contactInfo: string
   externalUrl?: string | null
   status?: $Enums.JobListingStatus
@@ -1201,6 +1579,8 @@ export type JobOpportunityCreateWithoutActivitiesInput = {
   updatedAt?: Date | string
   reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedJobsInput
   createdBy: Prisma.UserCreateNestedOneWithoutPostedJobsInput
+  mutations?: Prisma.JobMutationCreateNestedManyWithoutJobInput
+  recommendations?: Prisma.JobRecommendationCreateNestedManyWithoutJobInput
 }
 
 export type JobOpportunityUncheckedCreateWithoutActivitiesInput = {
@@ -1215,6 +1595,17 @@ export type JobOpportunityUncheckedCreateWithoutActivitiesInput = {
   skillsJson: string
   interestsJson: string
   education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
   contactInfo: string
   externalUrl?: string | null
   status?: $Enums.JobListingStatus
@@ -1231,6 +1622,8 @@ export type JobOpportunityUncheckedCreateWithoutActivitiesInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  mutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutJobInput
+  recommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutJobInput
 }
 
 export type JobOpportunityCreateOrConnectWithoutActivitiesInput = {
@@ -1261,6 +1654,17 @@ export type JobOpportunityUpdateWithoutActivitiesInput = {
   skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
   interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
   externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
@@ -1277,6 +1681,8 @@ export type JobOpportunityUpdateWithoutActivitiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedBy?: Prisma.UserUpdateOneWithoutReviewedJobsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutPostedJobsNestedInput
+  mutations?: Prisma.JobMutationUpdateManyWithoutJobNestedInput
+  recommendations?: Prisma.JobRecommendationUpdateManyWithoutJobNestedInput
 }
 
 export type JobOpportunityUncheckedUpdateWithoutActivitiesInput = {
@@ -1291,6 +1697,17 @@ export type JobOpportunityUncheckedUpdateWithoutActivitiesInput = {
   skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
   interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
   externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
@@ -1307,6 +1724,384 @@ export type JobOpportunityUncheckedUpdateWithoutActivitiesInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mutations?: Prisma.JobMutationUncheckedUpdateManyWithoutJobNestedInput
+  recommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutJobNestedInput
+}
+
+export type JobOpportunityCreateWithoutMutationsInput = {
+  id?: string
+  title: string
+  employer: string
+  sector: string
+  workType: string
+  barangay: string
+  location: string
+  description: string
+  skillsJson: string
+  interestsJson: string
+  education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
+  contactInfo: string
+  externalUrl?: string | null
+  status?: $Enums.JobListingStatus
+  version?: number
+  reviewSource?: string | null
+  reviewRequestedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  reviewNote?: string | null
+  employerVerified?: boolean
+  vacancyVerified?: boolean
+  expiresAt?: Date | string | null
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedJobsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutPostedJobsInput
+  activities?: Prisma.JobActivityCreateNestedManyWithoutJobInput
+  recommendations?: Prisma.JobRecommendationCreateNestedManyWithoutJobInput
+}
+
+export type JobOpportunityUncheckedCreateWithoutMutationsInput = {
+  id?: string
+  title: string
+  employer: string
+  sector: string
+  workType: string
+  barangay: string
+  location: string
+  description: string
+  skillsJson: string
+  interestsJson: string
+  education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
+  contactInfo: string
+  externalUrl?: string | null
+  status?: $Enums.JobListingStatus
+  version?: number
+  reviewSource?: string | null
+  reviewRequestedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  reviewedById?: string | null
+  reviewNote?: string | null
+  employerVerified?: boolean
+  vacancyVerified?: boolean
+  expiresAt?: Date | string | null
+  publishedAt?: Date | string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  activities?: Prisma.JobActivityUncheckedCreateNestedManyWithoutJobInput
+  recommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutJobInput
+}
+
+export type JobOpportunityCreateOrConnectWithoutMutationsInput = {
+  where: Prisma.JobOpportunityWhereUniqueInput
+  create: Prisma.XOR<Prisma.JobOpportunityCreateWithoutMutationsInput, Prisma.JobOpportunityUncheckedCreateWithoutMutationsInput>
+}
+
+export type JobOpportunityUpsertWithoutMutationsInput = {
+  update: Prisma.XOR<Prisma.JobOpportunityUpdateWithoutMutationsInput, Prisma.JobOpportunityUncheckedUpdateWithoutMutationsInput>
+  create: Prisma.XOR<Prisma.JobOpportunityCreateWithoutMutationsInput, Prisma.JobOpportunityUncheckedCreateWithoutMutationsInput>
+  where?: Prisma.JobOpportunityWhereInput
+}
+
+export type JobOpportunityUpdateToOneWithWhereWithoutMutationsInput = {
+  where?: Prisma.JobOpportunityWhereInput
+  data: Prisma.XOR<Prisma.JobOpportunityUpdateWithoutMutationsInput, Prisma.JobOpportunityUncheckedUpdateWithoutMutationsInput>
+}
+
+export type JobOpportunityUpdateWithoutMutationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  employer?: Prisma.StringFieldUpdateOperationsInput | string
+  sector?: Prisma.StringFieldUpdateOperationsInput | string
+  workType?: Prisma.StringFieldUpdateOperationsInput | string
+  barangay?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
+  interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
+  education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
+  externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employerVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  vacancyVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedBy?: Prisma.UserUpdateOneWithoutReviewedJobsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutPostedJobsNestedInput
+  activities?: Prisma.JobActivityUpdateManyWithoutJobNestedInput
+  recommendations?: Prisma.JobRecommendationUpdateManyWithoutJobNestedInput
+}
+
+export type JobOpportunityUncheckedUpdateWithoutMutationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  employer?: Prisma.StringFieldUpdateOperationsInput | string
+  sector?: Prisma.StringFieldUpdateOperationsInput | string
+  workType?: Prisma.StringFieldUpdateOperationsInput | string
+  barangay?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
+  interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
+  education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
+  externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employerVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  vacancyVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  activities?: Prisma.JobActivityUncheckedUpdateManyWithoutJobNestedInput
+  recommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutJobNestedInput
+}
+
+export type JobOpportunityCreateWithoutRecommendationsInput = {
+  id?: string
+  title: string
+  employer: string
+  sector: string
+  workType: string
+  barangay: string
+  location: string
+  description: string
+  skillsJson: string
+  interestsJson: string
+  education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
+  contactInfo: string
+  externalUrl?: string | null
+  status?: $Enums.JobListingStatus
+  version?: number
+  reviewSource?: string | null
+  reviewRequestedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  reviewNote?: string | null
+  employerVerified?: boolean
+  vacancyVerified?: boolean
+  expiresAt?: Date | string | null
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedJobsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutPostedJobsInput
+  activities?: Prisma.JobActivityCreateNestedManyWithoutJobInput
+  mutations?: Prisma.JobMutationCreateNestedManyWithoutJobInput
+}
+
+export type JobOpportunityUncheckedCreateWithoutRecommendationsInput = {
+  id?: string
+  title: string
+  employer: string
+  sector: string
+  workType: string
+  barangay: string
+  location: string
+  description: string
+  skillsJson: string
+  interestsJson: string
+  education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
+  contactInfo: string
+  externalUrl?: string | null
+  status?: $Enums.JobListingStatus
+  version?: number
+  reviewSource?: string | null
+  reviewRequestedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  reviewedById?: string | null
+  reviewNote?: string | null
+  employerVerified?: boolean
+  vacancyVerified?: boolean
+  expiresAt?: Date | string | null
+  publishedAt?: Date | string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  activities?: Prisma.JobActivityUncheckedCreateNestedManyWithoutJobInput
+  mutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutJobInput
+}
+
+export type JobOpportunityCreateOrConnectWithoutRecommendationsInput = {
+  where: Prisma.JobOpportunityWhereUniqueInput
+  create: Prisma.XOR<Prisma.JobOpportunityCreateWithoutRecommendationsInput, Prisma.JobOpportunityUncheckedCreateWithoutRecommendationsInput>
+}
+
+export type JobOpportunityUpsertWithoutRecommendationsInput = {
+  update: Prisma.XOR<Prisma.JobOpportunityUpdateWithoutRecommendationsInput, Prisma.JobOpportunityUncheckedUpdateWithoutRecommendationsInput>
+  create: Prisma.XOR<Prisma.JobOpportunityCreateWithoutRecommendationsInput, Prisma.JobOpportunityUncheckedCreateWithoutRecommendationsInput>
+  where?: Prisma.JobOpportunityWhereInput
+}
+
+export type JobOpportunityUpdateToOneWithWhereWithoutRecommendationsInput = {
+  where?: Prisma.JobOpportunityWhereInput
+  data: Prisma.XOR<Prisma.JobOpportunityUpdateWithoutRecommendationsInput, Prisma.JobOpportunityUncheckedUpdateWithoutRecommendationsInput>
+}
+
+export type JobOpportunityUpdateWithoutRecommendationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  employer?: Prisma.StringFieldUpdateOperationsInput | string
+  sector?: Prisma.StringFieldUpdateOperationsInput | string
+  workType?: Prisma.StringFieldUpdateOperationsInput | string
+  barangay?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
+  interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
+  education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
+  externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employerVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  vacancyVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviewedBy?: Prisma.UserUpdateOneWithoutReviewedJobsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutPostedJobsNestedInput
+  activities?: Prisma.JobActivityUpdateManyWithoutJobNestedInput
+  mutations?: Prisma.JobMutationUpdateManyWithoutJobNestedInput
+}
+
+export type JobOpportunityUncheckedUpdateWithoutRecommendationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  employer?: Prisma.StringFieldUpdateOperationsInput | string
+  sector?: Prisma.StringFieldUpdateOperationsInput | string
+  workType?: Prisma.StringFieldUpdateOperationsInput | string
+  barangay?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
+  interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
+  education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
+  externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employerVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  vacancyVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  activities?: Prisma.JobActivityUncheckedUpdateManyWithoutJobNestedInput
+  mutations?: Prisma.JobMutationUncheckedUpdateManyWithoutJobNestedInput
 }
 
 export type JobOpportunityCreateManyCreatedByInput = {
@@ -1321,6 +2116,17 @@ export type JobOpportunityCreateManyCreatedByInput = {
   skillsJson: string
   interestsJson: string
   education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
   contactInfo: string
   externalUrl?: string | null
   status?: $Enums.JobListingStatus
@@ -1350,6 +2156,17 @@ export type JobOpportunityCreateManyReviewedByInput = {
   skillsJson: string
   interestsJson: string
   education: string
+  occupationCategory?: string | null
+  employmentSector?: string | null
+  workArrangement?: string | null
+  experienceLevel?: string | null
+  payMin?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: string | null
+  payBasis?: string | null
+  negotiable?: boolean
+  certificationsJson?: string | null
+  isDemo?: boolean
   contactInfo: string
   externalUrl?: string | null
   status?: $Enums.JobListingStatus
@@ -1379,6 +2196,17 @@ export type JobOpportunityUpdateWithoutCreatedByInput = {
   skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
   interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
   externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
@@ -1395,6 +2223,8 @@ export type JobOpportunityUpdateWithoutCreatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedBy?: Prisma.UserUpdateOneWithoutReviewedJobsNestedInput
   activities?: Prisma.JobActivityUpdateManyWithoutJobNestedInput
+  mutations?: Prisma.JobMutationUpdateManyWithoutJobNestedInput
+  recommendations?: Prisma.JobRecommendationUpdateManyWithoutJobNestedInput
 }
 
 export type JobOpportunityUncheckedUpdateWithoutCreatedByInput = {
@@ -1409,6 +2239,17 @@ export type JobOpportunityUncheckedUpdateWithoutCreatedByInput = {
   skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
   interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
   externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
@@ -1425,6 +2266,8 @@ export type JobOpportunityUncheckedUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   activities?: Prisma.JobActivityUncheckedUpdateManyWithoutJobNestedInput
+  mutations?: Prisma.JobMutationUncheckedUpdateManyWithoutJobNestedInput
+  recommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutJobNestedInput
 }
 
 export type JobOpportunityUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1439,6 +2282,17 @@ export type JobOpportunityUncheckedUpdateManyWithoutCreatedByInput = {
   skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
   interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
   externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
@@ -1468,6 +2322,17 @@ export type JobOpportunityUpdateWithoutReviewedByInput = {
   skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
   interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
   externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
@@ -1484,6 +2349,8 @@ export type JobOpportunityUpdateWithoutReviewedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserUpdateOneRequiredWithoutPostedJobsNestedInput
   activities?: Prisma.JobActivityUpdateManyWithoutJobNestedInput
+  mutations?: Prisma.JobMutationUpdateManyWithoutJobNestedInput
+  recommendations?: Prisma.JobRecommendationUpdateManyWithoutJobNestedInput
 }
 
 export type JobOpportunityUncheckedUpdateWithoutReviewedByInput = {
@@ -1498,6 +2365,17 @@ export type JobOpportunityUncheckedUpdateWithoutReviewedByInput = {
   skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
   interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
   externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
@@ -1514,6 +2392,8 @@ export type JobOpportunityUncheckedUpdateWithoutReviewedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   activities?: Prisma.JobActivityUncheckedUpdateManyWithoutJobNestedInput
+  mutations?: Prisma.JobMutationUncheckedUpdateManyWithoutJobNestedInput
+  recommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutJobNestedInput
 }
 
 export type JobOpportunityUncheckedUpdateManyWithoutReviewedByInput = {
@@ -1528,6 +2408,17 @@ export type JobOpportunityUncheckedUpdateManyWithoutReviewedByInput = {
   skillsJson?: Prisma.StringFieldUpdateOperationsInput | string
   interestsJson?: Prisma.StringFieldUpdateOperationsInput | string
   education?: Prisma.StringFieldUpdateOperationsInput | string
+  occupationCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employmentSector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workArrangement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payMin?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payMax?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  payCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  negotiable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  certificationsJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contactInfo?: Prisma.StringFieldUpdateOperationsInput | string
   externalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumJobListingStatusFieldUpdateOperationsInput | $Enums.JobListingStatus
@@ -1552,10 +2443,14 @@ export type JobOpportunityUncheckedUpdateManyWithoutReviewedByInput = {
 
 export type JobOpportunityCountOutputType = {
   activities: number
+  mutations: number
+  recommendations: number
 }
 
 export type JobOpportunityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   activities?: boolean | JobOpportunityCountOutputTypeCountActivitiesArgs
+  mutations?: boolean | JobOpportunityCountOutputTypeCountMutationsArgs
+  recommendations?: boolean | JobOpportunityCountOutputTypeCountRecommendationsArgs
 }
 
 /**
@@ -1575,6 +2470,20 @@ export type JobOpportunityCountOutputTypeCountActivitiesArgs<ExtArgs extends run
   where?: Prisma.JobActivityWhereInput
 }
 
+/**
+ * JobOpportunityCountOutputType without action
+ */
+export type JobOpportunityCountOutputTypeCountMutationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JobMutationWhereInput
+}
+
+/**
+ * JobOpportunityCountOutputType without action
+ */
+export type JobOpportunityCountOutputTypeCountRecommendationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JobRecommendationWhereInput
+}
+
 
 export type JobOpportunitySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1588,6 +2497,17 @@ export type JobOpportunitySelect<ExtArgs extends runtime.Types.Extensions.Intern
   skillsJson?: boolean
   interestsJson?: boolean
   education?: boolean
+  occupationCategory?: boolean
+  employmentSector?: boolean
+  workArrangement?: boolean
+  experienceLevel?: boolean
+  payMin?: boolean
+  payMax?: boolean
+  payCurrency?: boolean
+  payBasis?: boolean
+  negotiable?: boolean
+  certificationsJson?: boolean
+  isDemo?: boolean
   contactInfo?: boolean
   externalUrl?: boolean
   status?: boolean
@@ -1607,6 +2527,8 @@ export type JobOpportunitySelect<ExtArgs extends runtime.Types.Extensions.Intern
   reviewedBy?: boolean | Prisma.JobOpportunity$reviewedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   activities?: boolean | Prisma.JobOpportunity$activitiesArgs<ExtArgs>
+  mutations?: boolean | Prisma.JobOpportunity$mutationsArgs<ExtArgs>
+  recommendations?: boolean | Prisma.JobOpportunity$recommendationsArgs<ExtArgs>
   _count?: boolean | Prisma.JobOpportunityCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["jobOpportunity"]>
 
@@ -1624,6 +2546,17 @@ export type JobOpportunitySelectScalar = {
   skillsJson?: boolean
   interestsJson?: boolean
   education?: boolean
+  occupationCategory?: boolean
+  employmentSector?: boolean
+  workArrangement?: boolean
+  experienceLevel?: boolean
+  payMin?: boolean
+  payMax?: boolean
+  payCurrency?: boolean
+  payBasis?: boolean
+  negotiable?: boolean
+  certificationsJson?: boolean
+  isDemo?: boolean
   contactInfo?: boolean
   externalUrl?: boolean
   status?: boolean
@@ -1642,11 +2575,13 @@ export type JobOpportunitySelectScalar = {
   updatedAt?: boolean
 }
 
-export type JobOpportunityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "employer" | "sector" | "workType" | "barangay" | "location" | "description" | "skillsJson" | "interestsJson" | "education" | "contactInfo" | "externalUrl" | "status" | "version" | "reviewSource" | "reviewRequestedAt" | "reviewedAt" | "reviewedById" | "reviewNote" | "employerVerified" | "vacancyVerified" | "expiresAt" | "publishedAt" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["jobOpportunity"]>
+export type JobOpportunityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "employer" | "sector" | "workType" | "barangay" | "location" | "description" | "skillsJson" | "interestsJson" | "education" | "occupationCategory" | "employmentSector" | "workArrangement" | "experienceLevel" | "payMin" | "payMax" | "payCurrency" | "payBasis" | "negotiable" | "certificationsJson" | "isDemo" | "contactInfo" | "externalUrl" | "status" | "version" | "reviewSource" | "reviewRequestedAt" | "reviewedAt" | "reviewedById" | "reviewNote" | "employerVerified" | "vacancyVerified" | "expiresAt" | "publishedAt" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["jobOpportunity"]>
 export type JobOpportunityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reviewedBy?: boolean | Prisma.JobOpportunity$reviewedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   activities?: boolean | Prisma.JobOpportunity$activitiesArgs<ExtArgs>
+  mutations?: boolean | Prisma.JobOpportunity$mutationsArgs<ExtArgs>
+  recommendations?: boolean | Prisma.JobOpportunity$recommendationsArgs<ExtArgs>
   _count?: boolean | Prisma.JobOpportunityCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1656,6 +2591,8 @@ export type $JobOpportunityPayload<ExtArgs extends runtime.Types.Extensions.Inte
     reviewedBy: Prisma.$UserPayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs>
     activities: Prisma.$JobActivityPayload<ExtArgs>[]
+    mutations: Prisma.$JobMutationPayload<ExtArgs>[]
+    recommendations: Prisma.$JobRecommendationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1669,6 +2606,17 @@ export type $JobOpportunityPayload<ExtArgs extends runtime.Types.Extensions.Inte
     skillsJson: string
     interestsJson: string
     education: string
+    occupationCategory: string | null
+    employmentSector: string | null
+    workArrangement: string | null
+    experienceLevel: string | null
+    payMin: runtime.Decimal | null
+    payMax: runtime.Decimal | null
+    payCurrency: string | null
+    payBasis: string | null
+    negotiable: boolean
+    certificationsJson: string | null
+    isDemo: boolean
     contactInfo: string
     externalUrl: string | null
     status: $Enums.JobListingStatus
@@ -2028,6 +2976,8 @@ export interface Prisma__JobOpportunityClient<T, Null = never, ExtArgs extends r
   reviewedBy<T extends Prisma.JobOpportunity$reviewedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JobOpportunity$reviewedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   activities<T extends Prisma.JobOpportunity$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JobOpportunity$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  mutations<T extends Prisma.JobOpportunity$mutationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JobOpportunity$mutationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobMutationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  recommendations<T extends Prisma.JobOpportunity$recommendationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JobOpportunity$recommendationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobRecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2068,6 +3018,17 @@ export interface JobOpportunityFieldRefs {
   readonly skillsJson: Prisma.FieldRef<"JobOpportunity", 'String'>
   readonly interestsJson: Prisma.FieldRef<"JobOpportunity", 'String'>
   readonly education: Prisma.FieldRef<"JobOpportunity", 'String'>
+  readonly occupationCategory: Prisma.FieldRef<"JobOpportunity", 'String'>
+  readonly employmentSector: Prisma.FieldRef<"JobOpportunity", 'String'>
+  readonly workArrangement: Prisma.FieldRef<"JobOpportunity", 'String'>
+  readonly experienceLevel: Prisma.FieldRef<"JobOpportunity", 'String'>
+  readonly payMin: Prisma.FieldRef<"JobOpportunity", 'Decimal'>
+  readonly payMax: Prisma.FieldRef<"JobOpportunity", 'Decimal'>
+  readonly payCurrency: Prisma.FieldRef<"JobOpportunity", 'String'>
+  readonly payBasis: Prisma.FieldRef<"JobOpportunity", 'String'>
+  readonly negotiable: Prisma.FieldRef<"JobOpportunity", 'Boolean'>
+  readonly certificationsJson: Prisma.FieldRef<"JobOpportunity", 'String'>
+  readonly isDemo: Prisma.FieldRef<"JobOpportunity", 'Boolean'>
   readonly contactInfo: Prisma.FieldRef<"JobOpportunity", 'String'>
   readonly externalUrl: Prisma.FieldRef<"JobOpportunity", 'String'>
   readonly status: Prisma.FieldRef<"JobOpportunity", 'JobListingStatus'>
@@ -2472,6 +3433,54 @@ export type JobOpportunity$activitiesArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.JobActivityScalarFieldEnum | Prisma.JobActivityScalarFieldEnum[]
+}
+
+/**
+ * JobOpportunity.mutations
+ */
+export type JobOpportunity$mutationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobMutation
+   */
+  select?: Prisma.JobMutationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobMutation
+   */
+  omit?: Prisma.JobMutationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobMutationInclude<ExtArgs> | null
+  where?: Prisma.JobMutationWhereInput
+  orderBy?: Prisma.JobMutationOrderByWithRelationInput | Prisma.JobMutationOrderByWithRelationInput[]
+  cursor?: Prisma.JobMutationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JobMutationScalarFieldEnum | Prisma.JobMutationScalarFieldEnum[]
+}
+
+/**
+ * JobOpportunity.recommendations
+ */
+export type JobOpportunity$recommendationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobRecommendation
+   */
+  select?: Prisma.JobRecommendationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobRecommendation
+   */
+  omit?: Prisma.JobRecommendationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobRecommendationInclude<ExtArgs> | null
+  where?: Prisma.JobRecommendationWhereInput
+  orderBy?: Prisma.JobRecommendationOrderByWithRelationInput | Prisma.JobRecommendationOrderByWithRelationInput[]
+  cursor?: Prisma.JobRecommendationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JobRecommendationScalarFieldEnum | Prisma.JobRecommendationScalarFieldEnum[]
 }
 
 /**

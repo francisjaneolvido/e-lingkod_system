@@ -18,9 +18,9 @@ const destinations: Record<StaffModule, { href: string; description: string; ico
   REPORTS: { href: "/admin/reports", description: "Review, claim and resolve routed cases", icon: ClipboardList, live: true },
   SERVICES: { href: "/admin/services", description: "Review assigned permits, clearances and assistance requests", icon: Building2, live: true },
   EMERGENCY: { href: "/admin/emergency", description: "Local emergency contacts, review queues and advisory drafting", icon: BellRing, live: true },
-  PROJECTS: { href: "/admin/projects", description: "Draft projects, submit updates and track approval", icon: MapPinned, live: true },
-  JOBS: { href: "/admin/jobs", description: "Manage Job Matching, employment insights and PESO opportunities", icon: BriefcaseBusiness, live: true },
-  CENSUS: { href: "/admin/census", description: "Community Census · planned", icon: BarChart3, live: false },
+  PROJECTS: { href: "/admin/projects", description: "Draft, review and publish official projects", icon: MapPinned, live: true },
+  JOBS: { href: "/admin/jobs", description: "Maintain your PESO opportunity listings", icon: BriefcaseBusiness, live: true },
+  CENSUS: { href: "/admin/census", description: "Protected census records, imports and scoped workforce analytics", icon: BarChart3, live: true },
   COMMUNITY_DATA: { href: "/admin/jobs/data", description: "Import and encode authorized Job Matching activity data", icon: FileSpreadsheet, live: true },
 };
 
@@ -29,14 +29,15 @@ const priorityColors: Record<string, string> = {
   NORMAL: "bg-[#e7f3fa] text-[#286f93]", LOW: "bg-[#eef2f5] text-[#667f91]",
 };
 
-type FocusTask = { title: string; value: number; detail: string; href: string; icon: typeof ClipboardList; tone: string };
+type FocusTask = { title: string; value: number | string; detail: string; href: string; icon: typeof ClipboardList; tone: string };
 
 export async function StaffWorkspace({ viewer, modules }: { viewer: CivicViewer; modules: StaffModule[] }) {
   const canManageCases = modules.includes("REPORTS") && !!viewer.department?.trim();
   const canManageServices = modules.includes("SERVICES");
   const canManageJobs = modules.includes("JOBS");
-  const canViewInsights = modules.includes("JOBS");
-  const canManageCommunityData = modules.includes("COMMUNITY_DATA");
+  const canViewInsights = modules.includes("CENSUS");
+  const canManageCommunityData = modules.includes("CENSUS");
+  const visibleModules=modules.filter(module=>module!=="COMMUNITY_DATA");
   const office = viewer.department?.trim() || "Your department";
   const scope = reportAdminScope(viewer);
   const active = { status: { notIn: ["RESOLVED", "REJECTED"] as ("RESOLVED" | "REJECTED")[] } };
@@ -54,12 +55,9 @@ export async function StaffWorkspace({ viewer, modules }: { viewer: CivicViewer;
     ])
     : [0, 0, 0, 0, [], []] as const;
 
-  const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-  const [myDraftJobs, returnedJobs, recentSurveys, importIssues, workOffers] = await Promise.all([
+  const [myDraftJobs, returnedJobs, workOffers] = await Promise.all([
     canManageJobs ? prisma.jobOpportunity.count({ where: { createdById: viewer.id, status: "DRAFT" } }) : Promise.resolve(0),
     canManageJobs ? prisma.jobOpportunity.count({ where: { createdById: viewer.id, status: "RETURNED" } }) : Promise.resolve(0),
-    canViewInsights ? prisma.communitySurvey.count({ where: { status: "SUBMITTED", consentAggregated: true, updatedAt: { gte: since } } }) : Promise.resolve(0),
-    canManageCommunityData ? prisma.communityImportBatch.count({ where: { status: "ACTIVE", OR: [{ warningCount: { gt: 0 } }, { invalidCount: { gt: 0 } }, { duplicateCount: { gt: 0 } }] } }) : Promise.resolve(0),
     staffWorkOffers(viewer.id),
   ]);
 
@@ -84,8 +82,8 @@ export async function StaffWorkspace({ viewer, modules }: { viewer: CivicViewer;
       { title: "My opportunity drafts", value: myDraftJobs, detail: "Draft listings waiting for your next step", href: "/admin/jobs?view=my-work", icon: BriefcaseBusiness, tone: "bg-[#e8f3fa] text-[#246e94]" },
       { title: "Returned for correction", value: returnedJobs, detail: "Listings sent back by Super Admin", href: "/admin/jobs?view=returned", icon: ClipboardList, tone: "bg-[#fff2df] text-[#a16f1e]" },
     ] : []),
-    ...(canViewInsights ? [{ title: "New survey responses", value: recentSurveys, detail: "Submitted in the last 7 days", href: "/admin/jobs/insights", icon: BarChart3, tone: "bg-[#e8f7f1] text-[#267e66]" }] : []),
-    ...(canManageCommunityData ? [{ title: "Datasets needing review", value: importIssues, detail: "Imports with warnings, invalid rows or duplicate refs", href: "/admin/jobs/data", icon: FileSpreadsheet, tone: "bg-[#f3edfb] text-[#745bac]" }] : []),
+    ...(canViewInsights ? [{ title: "Protected workforce analytics", value: "View", detail: "Survey populations within your authorized census scope", href: "/admin/census/analytics", icon: BarChart3, tone: "bg-[#e8f7f1] text-[#267e66]" }] : []),
+    ...(canManageCommunityData ? [{ title: "Census imports and provenance", value: "Open", detail: "Validate and review source records within your census scope", href: "/admin/census/imports", icon: FileSpreadsheet, tone: "bg-[#f3edfb] text-[#745bac]" }] : []),
   ];
 
   return <div className="space-y-7 lg:space-y-8">
@@ -106,7 +104,7 @@ export async function StaffWorkspace({ viewer, modules }: { viewer: CivicViewer;
     </section>}
 
     {employmentTasks.length > 0 && <section aria-label="Employment and livelihood focus">
-      <div className="mb-4 flex flex-wrap items-end justify-between gap-3"><div><p className="elb-admin-eyebrow">JOB MATCHING & EMPLOYMENT FOCUS</p><h2 className="mt-1 text-xl font-extrabold text-[#194966]">What needs attention</h2><p className="mt-2 text-xs text-[#7893a3]">Task-oriented signals from the modules assigned to you.</p></div></div>
+      <div className="mb-4 flex flex-wrap items-end justify-between gap-3"><div><p className="elb-admin-eyebrow">PROFILING & OPPORTUNITIES</p><h2 className="mt-1 text-xl font-extrabold text-[#194966]">What needs attention</h2><p className="mt-2 text-xs text-[#7893a3]">Task-oriented signals from the modules assigned to you.</p></div></div>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">{employmentTasks.map(item => <Link key={item.title} href={item.href} className="group rounded-2xl border border-[#dce9f0] bg-white p-5 transition hover:border-[#a9cddb] hover:shadow-sm"><div className="flex items-start justify-between gap-2"><div><p className="text-[11px] font-semibold text-[#7390a2]">{item.title}</p><strong className="mt-2 block text-[30px] font-extrabold tracking-tight text-[#174969]">{item.value}</strong></div><span className={`grid size-10 place-items-center rounded-xl ${item.tone}`}><item.icon size={20}/></span></div><p className="mt-3 text-[11px] leading-5 text-[#8aa0ae]">{item.detail}</p></Link>)}</div>
     </section>}
 
@@ -121,8 +119,8 @@ export async function StaffWorkspace({ viewer, modules }: { viewer: CivicViewer;
       <div className="flex items-start gap-3 rounded-xl border border-[#d8e6ed] bg-[#f0f7fa] p-4 text-xs leading-6 text-[#5e7f91]"><Clock3 size={18} className="mt-0.5 shrink-0 text-[#2f799c]"/><p><strong className="text-[#245a74]">Workflow:</strong> New cases are offered fairly based on active workload. Accept your offer first, then add inspection or action notes and update the status. Internal notes remain visible only to authorized LGU personnel; citizen-facing updates appear in the citizen tracking timeline.</p></div>
     </> : <section className="rounded-2xl border border-[#d9e7ee] bg-white p-6"><h2 className="text-lg font-extrabold text-[#174969]">Civic reporting</h2><p className="mt-2 text-xs leading-6 text-[#6c899c]">Civic Reporting is not assigned to your account. Your other authorized service modules remain available below.</p></section>}
 
-    <section><div className="mb-4"><p className="elb-admin-eyebrow">AUTHORIZED MODULES</p><h2 className="mt-1 text-xl font-extrabold text-[#194966]">My service tools</h2><p className="mt-2 text-xs text-[#8199a9]">Only approved modules appear in your workspace. Community analytics and community data management are separate permissions.</p></div>
-      {modules.length ? <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{modules.map(module => { const item = destinations[module]; const Icon = item.icon; return <Link key={module} href={item.href} className="group flex items-start justify-between gap-3 rounded-2xl border border-[#e0e9ee] bg-white p-5 transition hover:border-[#accfdd] hover:shadow-sm"><div className="flex items-start gap-3"><span className="grid size-10 shrink-0 place-items-center rounded-xl bg-[#eaf4f8] text-[#2e7395]"><Icon size={19}/></span><div><h3 className="text-[13px] font-extrabold text-[#214e6a]">{STAFF_MODULE_LABELS[module]}</h3><p className="mt-1.5 text-[11px] leading-5 text-[#7792a4]">{item.description}</p><span className={`mt-2 inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold ${item.live ? "bg-[#e7f6ee] text-[#277c63]" : "bg-[#f0f3f6] text-[#73889a]"}`}>{item.live ? "Available" : "Planned"}</span></div></div><ArrowUpRight size={17} className="shrink-0 text-[#4386a2]"/></Link>;})}</div>
+    <section><div className="mb-4"><p className="elb-admin-eyebrow">AUTHORIZED MODULES</p><h2 className="mt-1 text-xl font-extrabold text-[#194966]">My service tools</h2><p className="mt-2 text-xs text-[#8199a9]">Only approved modules appear here. Census records, analytics and imports require CENSUS and an authorized record scope; opportunity maintenance uses JOBS.</p></div>
+      {visibleModules.length ? <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{visibleModules.map(module => { const item = destinations[module]; const Icon = item.icon; return <Link key={module} href={item.href} className="group flex items-start justify-between gap-3 rounded-2xl border border-[#e0e9ee] bg-white p-5 transition hover:border-[#accfdd] hover:shadow-sm"><div className="flex items-start gap-3"><span className="grid size-10 shrink-0 place-items-center rounded-xl bg-[#eaf4f8] text-[#2e7395]"><Icon size={19}/></span><div><h3 className="text-[13px] font-extrabold text-[#214e6a]">{STAFF_MODULE_LABELS[module]}</h3><p className="mt-1.5 text-[11px] leading-5 text-[#7792a4]">{item.description}</p><span className={`mt-2 inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold ${item.live ? "bg-[#e7f6ee] text-[#277c63]" : "bg-[#f0f3f6] text-[#73889a]"}`}>{item.live ? "Available" : "Planned"}</span></div></div><ArrowUpRight size={17} className="shrink-0 text-[#4386a2]"/></Link>;})}</div>
         : <div className="rounded-2xl border border-dashed border-[#cbdfe9] bg-white px-5 py-10 text-center text-sm text-[#7b92a3]">No modules have been assigned yet.</div>}
     </section>
   </div>;

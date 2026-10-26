@@ -288,7 +288,7 @@ export type CommunitySurveyWorkspaceCreateInput = {
   version?: number
   draftJson?: string | null
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutCommunitySurveyWorkspacesInput
+  user: Prisma.UserCreateNestedOneWithoutSurveyWorkspacesInput
 }
 
 export type CommunitySurveyWorkspaceUncheckedCreateInput = {
@@ -306,7 +306,7 @@ export type CommunitySurveyWorkspaceUpdateInput = {
   version?: Prisma.IntFieldUpdateOperationsInput | number
   draftJson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutCommunitySurveyWorkspacesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutSurveyWorkspacesNestedInput
 }
 
 export type CommunitySurveyWorkspaceUncheckedUpdateInput = {

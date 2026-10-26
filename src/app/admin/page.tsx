@@ -23,7 +23,7 @@ const moduleLinks = [
   { title: "Emergency & alerts", description: "Emergency contacts and advisories", href: "/admin/emergency", icon: BellRing, available: true },
   { title: "Municipal projects", description: "Services, project plans, and milestones", href: "/admin/projects", icon: MapPinned, available: true },
   { title: "Job Matching & opportunities", description: "Employment profiling, insights and PESO-reviewed opportunities", href: "/admin/jobs", icon: BriefcaseBusiness, available: true },
-  { title: "Community Census", description: "Separate census workflow planned for a future phase", href: "/admin/census", icon: UsersRound, available: false },
+  { title: "Community Census", description: "Manage protected census records and analytics", href: "/admin/census", icon: UsersRound, available: true },
 ];
 
 const reportStatusBars: { label: string; status: ReportStatus; className: string }[] = [

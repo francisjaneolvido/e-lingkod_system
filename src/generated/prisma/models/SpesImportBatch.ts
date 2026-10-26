@@ -27,14 +27,17 @@ export type AggregateSpesImportBatch = {
 }
 
 export type SpesImportBatchAvgAggregateOutputType = {
+  surveyYear: number | null
   recordCount: number | null
 }
 
 export type SpesImportBatchSumAggregateOutputType = {
+  surveyYear: number | null
   recordCount: number | null
 }
 
 export type SpesImportBatchMinAggregateOutputType = {
+  surveyYear: number | null
   id: string | null
   sourceLabel: string | null
   importedById: string | null
@@ -49,6 +52,7 @@ export type SpesImportBatchMinAggregateOutputType = {
 }
 
 export type SpesImportBatchMaxAggregateOutputType = {
+  surveyYear: number | null
   id: string | null
   sourceLabel: string | null
   importedById: string | null
@@ -63,6 +67,7 @@ export type SpesImportBatchMaxAggregateOutputType = {
 }
 
 export type SpesImportBatchCountAggregateOutputType = {
+  surveyYear: number
   id: number
   sourceLabel: number
   importedById: number
@@ -79,14 +84,17 @@ export type SpesImportBatchCountAggregateOutputType = {
 
 
 export type SpesImportBatchAvgAggregateInputType = {
+  surveyYear?: true
   recordCount?: true
 }
 
 export type SpesImportBatchSumAggregateInputType = {
+  surveyYear?: true
   recordCount?: true
 }
 
 export type SpesImportBatchMinAggregateInputType = {
+  surveyYear?: true
   id?: true
   sourceLabel?: true
   importedById?: true
@@ -101,6 +109,7 @@ export type SpesImportBatchMinAggregateInputType = {
 }
 
 export type SpesImportBatchMaxAggregateInputType = {
+  surveyYear?: true
   id?: true
   sourceLabel?: true
   importedById?: true
@@ -115,6 +124,7 @@ export type SpesImportBatchMaxAggregateInputType = {
 }
 
 export type SpesImportBatchCountAggregateInputType = {
+  surveyYear?: true
   id?: true
   sourceLabel?: true
   importedById?: true
@@ -216,6 +226,7 @@ export type SpesImportBatchGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 export type SpesImportBatchGroupByOutputType = {
+  surveyYear: number | null
   id: string
   sourceLabel: string
   importedById: string
@@ -253,6 +264,7 @@ export type SpesImportBatchWhereInput = {
   AND?: Prisma.SpesImportBatchWhereInput | Prisma.SpesImportBatchWhereInput[]
   OR?: Prisma.SpesImportBatchWhereInput[]
   NOT?: Prisma.SpesImportBatchWhereInput | Prisma.SpesImportBatchWhereInput[]
+  surveyYear?: Prisma.IntNullableFilter<"SpesImportBatch"> | number | null
   id?: Prisma.StringFilter<"SpesImportBatch"> | string
   sourceLabel?: Prisma.StringFilter<"SpesImportBatch"> | string
   importedById?: Prisma.StringFilter<"SpesImportBatch"> | string
@@ -270,6 +282,7 @@ export type SpesImportBatchWhereInput = {
 }
 
 export type SpesImportBatchOrderByWithRelationInput = {
+  surveyYear?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   sourceLabel?: Prisma.SortOrder
   importedById?: Prisma.SortOrder
@@ -293,6 +306,7 @@ export type SpesImportBatchWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SpesImportBatchWhereInput | Prisma.SpesImportBatchWhereInput[]
   OR?: Prisma.SpesImportBatchWhereInput[]
   NOT?: Prisma.SpesImportBatchWhereInput | Prisma.SpesImportBatchWhereInput[]
+  surveyYear?: Prisma.IntNullableFilter<"SpesImportBatch"> | number | null
   sourceLabel?: Prisma.StringFilter<"SpesImportBatch"> | string
   importedById?: Prisma.StringFilter<"SpesImportBatch"> | string
   recordCount?: Prisma.IntFilter<"SpesImportBatch"> | number
@@ -308,6 +322,7 @@ export type SpesImportBatchWhereUniqueInput = Prisma.AtLeast<{
 }, "id" | "fingerprint">
 
 export type SpesImportBatchOrderByWithAggregationInput = {
+  surveyYear?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   sourceLabel?: Prisma.SortOrder
   importedById?: Prisma.SortOrder
@@ -330,6 +345,7 @@ export type SpesImportBatchScalarWhereWithAggregatesInput = {
   AND?: Prisma.SpesImportBatchScalarWhereWithAggregatesInput | Prisma.SpesImportBatchScalarWhereWithAggregatesInput[]
   OR?: Prisma.SpesImportBatchScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SpesImportBatchScalarWhereWithAggregatesInput | Prisma.SpesImportBatchScalarWhereWithAggregatesInput[]
+  surveyYear?: Prisma.IntNullableWithAggregatesFilter<"SpesImportBatch"> | number | null
   id?: Prisma.StringWithAggregatesFilter<"SpesImportBatch"> | string
   sourceLabel?: Prisma.StringWithAggregatesFilter<"SpesImportBatch"> | string
   importedById?: Prisma.StringWithAggregatesFilter<"SpesImportBatch"> | string
@@ -344,6 +360,7 @@ export type SpesImportBatchScalarWhereWithAggregatesInput = {
 }
 
 export type SpesImportBatchCreateInput = {
+  surveyYear?: number | null
   id?: string
   sourceLabel: string
   recordCount: number
@@ -360,6 +377,7 @@ export type SpesImportBatchCreateInput = {
 }
 
 export type SpesImportBatchUncheckedCreateInput = {
+  surveyYear?: number | null
   id?: string
   sourceLabel: string
   importedById: string
@@ -376,6 +394,7 @@ export type SpesImportBatchUncheckedCreateInput = {
 }
 
 export type SpesImportBatchUpdateInput = {
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceLabel?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -392,6 +411,7 @@ export type SpesImportBatchUpdateInput = {
 }
 
 export type SpesImportBatchUncheckedUpdateInput = {
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceLabel?: Prisma.StringFieldUpdateOperationsInput | string
   importedById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -408,6 +428,7 @@ export type SpesImportBatchUncheckedUpdateInput = {
 }
 
 export type SpesImportBatchCreateManyInput = {
+  surveyYear?: number | null
   id?: string
   sourceLabel: string
   importedById: string
@@ -422,6 +443,7 @@ export type SpesImportBatchCreateManyInput = {
 }
 
 export type SpesImportBatchUpdateManyMutationInput = {
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceLabel?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -435,6 +457,7 @@ export type SpesImportBatchUpdateManyMutationInput = {
 }
 
 export type SpesImportBatchUncheckedUpdateManyInput = {
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceLabel?: Prisma.StringFieldUpdateOperationsInput | string
   importedById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -465,6 +488,7 @@ export type SpesImportBatchOrderByRelevanceInput = {
 }
 
 export type SpesImportBatchCountOrderByAggregateInput = {
+  surveyYear?: Prisma.SortOrder
   id?: Prisma.SortOrder
   sourceLabel?: Prisma.SortOrder
   importedById?: Prisma.SortOrder
@@ -479,10 +503,12 @@ export type SpesImportBatchCountOrderByAggregateInput = {
 }
 
 export type SpesImportBatchAvgOrderByAggregateInput = {
+  surveyYear?: Prisma.SortOrder
   recordCount?: Prisma.SortOrder
 }
 
 export type SpesImportBatchMaxOrderByAggregateInput = {
+  surveyYear?: Prisma.SortOrder
   id?: Prisma.SortOrder
   sourceLabel?: Prisma.SortOrder
   importedById?: Prisma.SortOrder
@@ -497,6 +523,7 @@ export type SpesImportBatchMaxOrderByAggregateInput = {
 }
 
 export type SpesImportBatchMinOrderByAggregateInput = {
+  surveyYear?: Prisma.SortOrder
   id?: Prisma.SortOrder
   sourceLabel?: Prisma.SortOrder
   importedById?: Prisma.SortOrder
@@ -511,6 +538,7 @@ export type SpesImportBatchMinOrderByAggregateInput = {
 }
 
 export type SpesImportBatchSumOrderByAggregateInput = {
+  surveyYear?: Prisma.SortOrder
   recordCount?: Prisma.SortOrder
 }
 
@@ -561,6 +589,14 @@ export type SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput = {
   deleteMany?: Prisma.SpesImportBatchScalarWhereInput | Prisma.SpesImportBatchScalarWhereInput[]
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type SpesImportBatchCreateNestedOneWithoutRecordsInput = {
   create?: Prisma.XOR<Prisma.SpesImportBatchCreateWithoutRecordsInput, Prisma.SpesImportBatchUncheckedCreateWithoutRecordsInput>
   connectOrCreate?: Prisma.SpesImportBatchCreateOrConnectWithoutRecordsInput
@@ -590,6 +626,7 @@ export type SpesImportBatchUpdateOneRequiredWithoutEventsNestedInput = {
 }
 
 export type SpesImportBatchCreateWithoutImportedByInput = {
+  surveyYear?: number | null
   id?: string
   sourceLabel: string
   recordCount: number
@@ -605,6 +642,7 @@ export type SpesImportBatchCreateWithoutImportedByInput = {
 }
 
 export type SpesImportBatchUncheckedCreateWithoutImportedByInput = {
+  surveyYear?: number | null
   id?: string
   sourceLabel: string
   recordCount: number
@@ -649,6 +687,7 @@ export type SpesImportBatchScalarWhereInput = {
   AND?: Prisma.SpesImportBatchScalarWhereInput | Prisma.SpesImportBatchScalarWhereInput[]
   OR?: Prisma.SpesImportBatchScalarWhereInput[]
   NOT?: Prisma.SpesImportBatchScalarWhereInput | Prisma.SpesImportBatchScalarWhereInput[]
+  surveyYear?: Prisma.IntNullableFilter<"SpesImportBatch"> | number | null
   id?: Prisma.StringFilter<"SpesImportBatch"> | string
   sourceLabel?: Prisma.StringFilter<"SpesImportBatch"> | string
   importedById?: Prisma.StringFilter<"SpesImportBatch"> | string
@@ -663,6 +702,7 @@ export type SpesImportBatchScalarWhereInput = {
 }
 
 export type SpesImportBatchCreateWithoutRecordsInput = {
+  surveyYear?: number | null
   id?: string
   sourceLabel: string
   recordCount: number
@@ -678,6 +718,7 @@ export type SpesImportBatchCreateWithoutRecordsInput = {
 }
 
 export type SpesImportBatchUncheckedCreateWithoutRecordsInput = {
+  surveyYear?: number | null
   id?: string
   sourceLabel: string
   importedById: string
@@ -709,6 +750,7 @@ export type SpesImportBatchUpdateToOneWithWhereWithoutRecordsInput = {
 }
 
 export type SpesImportBatchUpdateWithoutRecordsInput = {
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceLabel?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -724,6 +766,7 @@ export type SpesImportBatchUpdateWithoutRecordsInput = {
 }
 
 export type SpesImportBatchUncheckedUpdateWithoutRecordsInput = {
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceLabel?: Prisma.StringFieldUpdateOperationsInput | string
   importedById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -739,6 +782,7 @@ export type SpesImportBatchUncheckedUpdateWithoutRecordsInput = {
 }
 
 export type SpesImportBatchCreateWithoutEventsInput = {
+  surveyYear?: number | null
   id?: string
   sourceLabel: string
   recordCount: number
@@ -754,6 +798,7 @@ export type SpesImportBatchCreateWithoutEventsInput = {
 }
 
 export type SpesImportBatchUncheckedCreateWithoutEventsInput = {
+  surveyYear?: number | null
   id?: string
   sourceLabel: string
   importedById: string
@@ -785,6 +830,7 @@ export type SpesImportBatchUpdateToOneWithWhereWithoutEventsInput = {
 }
 
 export type SpesImportBatchUpdateWithoutEventsInput = {
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceLabel?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -800,6 +846,7 @@ export type SpesImportBatchUpdateWithoutEventsInput = {
 }
 
 export type SpesImportBatchUncheckedUpdateWithoutEventsInput = {
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceLabel?: Prisma.StringFieldUpdateOperationsInput | string
   importedById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -815,6 +862,7 @@ export type SpesImportBatchUncheckedUpdateWithoutEventsInput = {
 }
 
 export type SpesImportBatchCreateManyImportedByInput = {
+  surveyYear?: number | null
   id?: string
   sourceLabel: string
   recordCount: number
@@ -828,6 +876,7 @@ export type SpesImportBatchCreateManyImportedByInput = {
 }
 
 export type SpesImportBatchUpdateWithoutImportedByInput = {
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceLabel?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -843,6 +892,7 @@ export type SpesImportBatchUpdateWithoutImportedByInput = {
 }
 
 export type SpesImportBatchUncheckedUpdateWithoutImportedByInput = {
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceLabel?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -858,6 +908,7 @@ export type SpesImportBatchUncheckedUpdateWithoutImportedByInput = {
 }
 
 export type SpesImportBatchUncheckedUpdateManyWithoutImportedByInput = {
+  surveyYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceLabel?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -911,6 +962,7 @@ export type SpesImportBatchCountOutputTypeCountEventsArgs<ExtArgs extends runtim
 
 
 export type SpesImportBatchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  surveyYear?: boolean
   id?: boolean
   sourceLabel?: boolean
   importedById?: boolean
@@ -931,6 +983,7 @@ export type SpesImportBatchSelect<ExtArgs extends runtime.Types.Extensions.Inter
 
 
 export type SpesImportBatchSelectScalar = {
+  surveyYear?: boolean
   id?: boolean
   sourceLabel?: boolean
   importedById?: boolean
@@ -944,7 +997,7 @@ export type SpesImportBatchSelectScalar = {
   createdAt?: boolean
 }
 
-export type SpesImportBatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sourceLabel" | "importedById" | "recordCount" | "datasetKind" | "fingerprint" | "status" | "voidedAt" | "voidedById" | "voidReason" | "createdAt", ExtArgs["result"]["spesImportBatch"]>
+export type SpesImportBatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"surveyYear" | "id" | "sourceLabel" | "importedById" | "recordCount" | "datasetKind" | "fingerprint" | "status" | "voidedAt" | "voidedById" | "voidReason" | "createdAt", ExtArgs["result"]["spesImportBatch"]>
 export type SpesImportBatchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   importedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   records?: boolean | Prisma.SpesImportBatch$recordsArgs<ExtArgs>
@@ -960,6 +1013,7 @@ export type $SpesImportBatchPayload<ExtArgs extends runtime.Types.Extensions.Int
     events: Prisma.$SpesImportEventPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    surveyYear: number | null
     id: string
     sourceLabel: string
     importedById: string
@@ -1054,8 +1108,8 @@ export interface SpesImportBatchDelegate<ExtArgs extends runtime.Types.Extension
    * // Get first 10 SpesImportBatches
    * const spesImportBatches = await prisma.spesImportBatch.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const spesImportBatchWithIdOnly = await prisma.spesImportBatch.findMany({ select: { id: true } })
+   * // Only select the `surveyYear`
+   * const spesImportBatchWithSurveyYearOnly = await prisma.spesImportBatch.findMany({ select: { surveyYear: true } })
    * 
    */
   findMany<T extends SpesImportBatchFindManyArgs>(args?: Prisma.SelectSubset<T, SpesImportBatchFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpesImportBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1343,6 +1397,7 @@ export interface Prisma__SpesImportBatchClient<T, Null = never, ExtArgs extends 
  * Fields of the SpesImportBatch model
  */
 export interface SpesImportBatchFieldRefs {
+  readonly surveyYear: Prisma.FieldRef<"SpesImportBatch", 'Int'>
   readonly id: Prisma.FieldRef<"SpesImportBatch", 'String'>
   readonly sourceLabel: Prisma.FieldRef<"SpesImportBatch", 'String'>
   readonly importedById: Prisma.FieldRef<"SpesImportBatch", 'String'>

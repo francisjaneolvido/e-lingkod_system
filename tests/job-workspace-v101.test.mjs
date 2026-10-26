@@ -6,7 +6,6 @@ import ts from "typescript";
 const read=(f)=>fs.readFileSync(f,"utf8");
 const editor=read("src/features/jobs/components/opportunity-editor.tsx");
 const list=read("src/features/jobs/components/job-console.tsx");
-const page=read("src/app/admin/jobs/page.tsx");
 const create=read("src/app/admin/jobs/new/page.tsx");
 const edit=read("src/app/admin/jobs/[id]/edit/page.tsx");
 const css=read("src/features/jobs/components/jobs-workspace.css");
@@ -16,13 +15,14 @@ const legacySpes=read("src/app/admin/jobs/legacy-spes/page.tsx");
 test("new and edit routes enforce server-side JOBS permission",()=>{
  assert.match(create,/requireModulePage\("\/admin\/jobs\/new","JOBS"\)/);
  assert.match(edit,/requireModulePage\("\/admin\/jobs","JOBS"\)/);
- assert.match(edit,/prisma\.jobOpportunity\.findUnique/);
+ assert.match(edit,/prisma\.jobOpportunity\.findFirst/);
  assert.match(edit,/if\(!row\)notFound\(\)/);
 });
 test("creation and editing use existing verified server APIs",()=>{
- assert.match(editor,/"\/api\/admin\/jobs"/);
- assert.match(editor,/`\/api\/admin\/jobs\/\$\{job\.id\}`/);
- assert.match(editor,/action:"EDIT"/);
+ assert.match(editor,/path:['"]\/api\/admin\/jobs['"]/);
+ assert.match(editor,/`\/api\/admin\/jobs\/\$\{record\.current\.id\}`/);
+ assert.match(editor,/sendPreparedVacancy\(prepared\)/);
+ assert.match(editor,/action:["\']EDIT["\']/);
  assert.match(editor,/router\.push\("\/admin\/jobs\?updated=1"\)/);
 });
 test("list no longer renders lengthy inline editor or duplicate save buttons",()=>{
@@ -54,7 +54,12 @@ test("SPES and insight modules retain private aggregate workflow",()=>{
  assert.match(importer,/\/api\/admin\/jobs\/import/);
  assert.doesNotMatch(list,/SPES survey import/);
  assert.match(legacySpes,/SpesImportWorkspace/);
- assert.match(legacySpes,/SpesInsights/);
+ assert.match(legacySpes,/legacySpesImportData/);
+ assert.match(legacySpes,/CENSUS/);
+ assert.doesNotMatch(legacySpes,/SpesInsights/);
+ const jobsData=fs.readFileSync("src/features/jobs/server/data.ts","utf8");
+ const consoleData=jobsData.slice(jobsData.indexOf("export async function adminJobData"),jobsData.indexOf("export async function profileForCitizen"));
+ assert.doesNotMatch(consoleData,/spesSurveyRecord|totalSurveys|insights/);
  assert.match(insights,/opportunitySignals/);
  assert.match(insights,/topSkills/);
  assert.match(importer,/Never upload names, emails, phone numbers/);

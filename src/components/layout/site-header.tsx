@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  ArrowRight, ArrowUpRight, BarChart3, BriefcaseBusiness, ChevronDown, CircleUserRound, ClipboardList,
+  ArrowRight, ArrowUpRight, BarChart3, Building2, BriefcaseBusiness, ChevronDown, CircleUserRound, ClipboardList,
   Files, GraduationCap, Menu, ShieldCheck, UserRound, UsersRound, X,
 } from "lucide-react";
 import { BrandLogo } from "@/components/shared/brand-logo";
@@ -42,11 +42,10 @@ const serviceNavigation = services.map((service) => ({
 const publicServiceNavigation = serviceNavigation.filter((service) => service.id !== "jobs" && service.id !== "census");
 
 const communityNavigation = [
-  { label: "Job Matching overview", href: "/community-employment", description: "Employment, skills, training and livelihood profiling", icon: UsersRound },
-  { label: "Employment survey", href: "/community-survey", description: "Share skills, training interests and employment needs", icon: GraduationCap },
-  { label: "Employment & skills insights", href: "/community-employment/insights", description: "View aggregated Job Matching survey insights", icon: BarChart3 },
+  { label: "Citizen Profiling overview", href: "/community-employment", description: "Employment, skills, training and livelihood profiling", icon: UsersRound },
+  { label: "Citizen Profiling survey", href: "/community-survey", description: "Share skills, training interests and employment needs", icon: GraduationCap },
+  { label: "Establishment Profiling", href: "/establishment-survey", description: "Manage your separate private organizational survey", icon: Building2 },
   { label: "Opportunities", href: "/opportunities", description: "Browse verified local opportunities", icon: BriefcaseBusiness },
-  { label: "Community census · coming soon", href: "/community-census", description: "Separate census module planned for a future phase", icon: BarChart3 },
 ] as const;
 
 export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
@@ -193,11 +192,11 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                   <div id="elb-community-menu" className="rounded-[22px] border border-[#d5e5ef] bg-white p-3 shadow-[0_24px_65px_rgba(13,51,83,.17)]">
                     <div className="px-3 pb-2 pt-1">
                       <p className="text-[10px] font-extrabold uppercase tracking-[.14em] text-[#4382a6]">Community</p>
-                      <p className="mt-1 text-[15px] font-extrabold text-[#153b63]">Job Matching · Employment & livelihood</p>
+                      <p className="mt-1 text-[15px] font-extrabold text-[#153b63]">Citizen Profiling & opportunities</p>
                     </div>
                     <div className="grid gap-1">
                       {(staffPortal
-                        ? [{ label: "Job Matching insights", href: "/admin/jobs/insights", description: "Manage employment survey analytics", icon: BarChart3 }, { label: "Opportunity management", href: "/admin/jobs", description: "Manage PESO-reviewed opportunities", icon: BriefcaseBusiness }, { label: "Community census · coming soon", href: "/admin/census", description: "Separate planned census module", icon: BarChart3 }]
+                        ? [{ label: "Workforce analytics", href: "/admin/census/analytics", description: "Protected census-scoped planning measures", icon: BarChart3 }, { label: "Opportunity management", href: "/admin/jobs", description: "Manage PESO-reviewed opportunities", icon: BriefcaseBusiness }, { label: "Protected census records", href: "/admin/census", description: "Authorized individual and establishment records", icon: BarChart3 }]
                         : communityNavigation
                       ).map((item) => {
                         const Icon = item.icon;
@@ -230,8 +229,8 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                   <Link href={staffPortal ? "/admin" : "/account"} className="mt-2 flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><CircleUserRound size={17} className="text-[#153B63]" /> My Account</Link>
                   <Link href={staffPortal ? "/admin/profile" : "/account/profile"} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><UserRound size={17} className="text-[#153B63]" /> My Profile</Link>
                   <div className="my-1 border-t border-[#e8eef3]" />
-                  {citizenPortal && <Link href="/community-survey" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><GraduationCap size={17} /> Community Survey</Link>}
-                  {citizenPortal && <Link href="/community-employment/insights" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><BarChart3 size={17} /> Employment Insights</Link>}
+                  {citizenPortal && <Link href="/community-survey" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><GraduationCap size={17} /> Citizen Profiling</Link>}
+                  {citizenPortal && <Link href="/establishment-survey" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><BarChart3 size={17} /> Establishment Profiling</Link>}
                   {citizenPortal && <Link href="/reports" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><ClipboardList size={17} /> My Reports</Link>}
                   {citizenPortal && <Link href="/services/requests" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><Files size={17} /> My LGU Requests</Link>}
                   {(viewer.role === "ADMIN" || viewer.role === "STAFF") && <Link href="/admin" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-semibold text-[#255172] hover:bg-[#eef6fb]"><ShieldCheck size={17} /> LGU workspace</Link>}
@@ -294,7 +293,7 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
               {mobileCommunityOpen && (
                 <div id="elb-mobile-community-menu" className="grid gap-1.5 border-l-2 border-[#c0dfed] pl-3">
                   {(staffPortal
-                    ? [{ label: "Job Matching insights", href: "/admin/jobs/insights", description: "Manage employment survey analytics", icon: BarChart3 }, { label: "Opportunity management", href: "/admin/jobs", description: "Manage PESO-reviewed opportunities", icon: BriefcaseBusiness }, { label: "Community census · coming soon", href: "/admin/census", description: "Separate planned census module", icon: BarChart3 }]
+                    ? [{ label: "Workforce analytics", href: "/admin/census/analytics", description: "Protected census-scoped planning measures", icon: BarChart3 }, { label: "Opportunity management", href: "/admin/jobs", description: "Manage PESO-reviewed opportunities", icon: BriefcaseBusiness }, { label: "Protected census records", href: "/admin/census", description: "Authorized individual and establishment records", icon: BarChart3 }]
                     : communityNavigation
                   ).map((item) => {
                     const Icon = item.icon;
@@ -310,8 +309,8 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                   <p className="truncate px-4 py-2 text-[12px] font-bold text-[#153b63]">Signed in as {viewer.name}</p>
                   <Link href={staffPortal ? "/admin" : "/account"} onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><CircleUserRound size={17}/> {staffPortal ? "LGU Dashboard" : "My Account"}</Link>
                   <Link href={staffPortal ? "/admin/profile" : "/account/profile"} onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><UserRound size={17}/> My Profile</Link>
-                  {citizenPortal && <Link href="/community-survey" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><GraduationCap size={17}/> Community Survey</Link>}
-                  {citizenPortal && <Link href="/community-employment/insights" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><BarChart3 size={17}/> Employment Insights</Link>}
+                  {citizenPortal && <Link href="/community-survey" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><GraduationCap size={17}/> Citizen Profiling</Link>}
+                  {citizenPortal && <Link href="/establishment-survey" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><BarChart3 size={17}/> Establishment Profiling</Link>}
                   {citizenPortal && <Link href="/reports" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><ClipboardList size={17}/> My Reports</Link>}
                   {citizenPortal && <Link href="/services/requests" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><Files size={17}/> My LGU Requests</Link>}
                   {(viewer.role === "ADMIN" || viewer.role === "STAFF") && <Link href="/admin" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-[#234b72] hover:bg-[#f0f7fd]"><ShieldCheck size={17}/> LGU workspace</Link>}

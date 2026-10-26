@@ -34,7 +34,6 @@ const searchKeywords: Record<string, string> = {
 function GetDetailsButton({ service, onExplore, children, light = false, isLgu = false }: {
   service: Service; onExplore: (service: Service) => void; children: React.ReactNode; light?: boolean; isLgu?: boolean;
 }) {
-  if (service.id === "directory") return <Link href="/projects" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#153d62] px-5 py-2.5 text-[12px] font-extrabold text-white hover:bg-[#216e9d]">Explore LGU projects & offices <ArrowUpRight size={17}/></Link>;
   if (service.id === "jobs") return <Link href="/community-employment" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#153d62] px-5 py-2.5 text-[12px] font-extrabold text-white hover:bg-[#216e9d]">Open employment & livelihood <ArrowUpRight size={17} /></Link>;
   if (service.id === "census") return <Link href="/community-census" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#153d62] px-5 py-2.5 text-[12px] font-extrabold text-white hover:bg-[#216e9d]">Preview community census <ArrowUpRight size={17} /></Link>;
   if (service.id === "civic") return <Link href={isLgu ? "/admin" : "/reports/new"} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-[12px] font-extrabold text-[#15466f] transition hover:bg-[#e9f5ff]">{isLgu ? "Open LGU workspace" : "Mag-report ng concern"} <ArrowUpRight size={17} /></Link>;
@@ -169,7 +168,7 @@ export function ServicesSection({ isLgu = false }: { isLgu?: boolean }) {
         )}
         <div className="mt-7 flex items-start gap-3 rounded-xl border border-[#d7e7f0] bg-white/90 px-4 py-3.5 text-[11px] leading-[1.7] text-[#607d92]">
           <Info className="mt-0.5 size-4 shrink-0 text-[#2175a9]" />
-          <p><strong className="text-[#245574]">Civic Reporting, Online LGU Services and Job Matching / Opportunity Recommendations are available.</strong> Employment survey insights are part of Job Matching. Community Census remains planned; Municipal Projects & Services provides LGU-reviewed project updates and an office directory. Emergency Hotlines & Alerts is available with verified numbers and approved advisories.</p>
+          <p><strong className="text-[#245574]">Civic Reporting, Online LGU Services and Job Matching / Opportunity Recommendations are available.</strong> Employment survey insights are part of Job Matching. Community Census and municipal projects remain planned modules. Emergency Hotlines & Alerts is available with verified numbers and approved advisories.</p>
         </div>
         <p className="mt-4 flex items-center gap-2 text-[11px] font-semibold text-[#64869c]"><CheckCircle2 size={15} className="text-[#159480]" /> Anim na approved modules · Isang portal para sa komunidad</p>
       </div>

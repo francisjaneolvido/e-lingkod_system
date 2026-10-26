@@ -147,21 +147,6 @@ export type JobActivity = Prisma.JobActivityModel
  */
 export type CommunitySurvey = Prisma.CommunitySurveyModel
 /**
- * Model CommunitySurveyWorkspace
- * 
- */
-export type CommunitySurveyWorkspace = Prisma.CommunitySurveyWorkspaceModel
-/**
- * Model CommunitySurveyRevision
- * 
- */
-export type CommunitySurveyRevision = Prisma.CommunitySurveyRevisionModel
-/**
- * Model CitizenProfileConsent
- * 
- */
-export type CitizenProfileConsent = Prisma.CitizenProfileConsentModel
-/**
  * Model GovernmentActivity
  * 
  */
@@ -241,6 +226,86 @@ export type EmergencyAlert = Prisma.EmergencyAlertModel
  * 
  */
 export type EmergencyActionLog = Prisma.EmergencyActionLogModel
+/**
+ * Model CommunitySurveyWorkspace
+ * 
+ */
+export type CommunitySurveyWorkspace = Prisma.CommunitySurveyWorkspaceModel
+/**
+ * Model CommunitySurveyRevision
+ * 
+ */
+export type CommunitySurveyRevision = Prisma.CommunitySurveyRevisionModel
+/**
+ * Model CitizenProfileConsent
+ * 
+ */
+export type CitizenProfileConsent = Prisma.CitizenProfileConsentModel
+/**
+ * Model Establishment
+ * 
+ */
+export type Establishment = Prisma.EstablishmentModel
+/**
+ * Model EstablishmentSurvey
+ * 
+ */
+export type EstablishmentSurvey = Prisma.EstablishmentSurveyModel
+/**
+ * Model EstablishmentRevision
+ * 
+ */
+export type EstablishmentRevision = Prisma.EstablishmentRevisionModel
+/**
+ * Model EstablishmentOperation
+ * 
+ */
+export type EstablishmentOperation = Prisma.EstablishmentOperationModel
+/**
+ * Model CensusReview
+ * 
+ */
+export type CensusReview = Prisma.CensusReviewModel
+/**
+ * Model CensusStaffScope
+ * 
+ */
+export type CensusStaffScope = Prisma.CensusStaffScopeModel
+/**
+ * Model CensusAssistanceRoster
+ * 
+ */
+export type CensusAssistanceRoster = Prisma.CensusAssistanceRosterModel
+/**
+ * Model CensusAssistanceMember
+ * 
+ */
+export type CensusAssistanceMember = Prisma.CensusAssistanceMemberModel
+/**
+ * Model CensusAudit
+ * 
+ */
+export type CensusAudit = Prisma.CensusAuditModel
+/**
+ * Model CensusSourceRecord
+ * 
+ */
+export type CensusSourceRecord = Prisma.CensusSourceRecordModel
+/**
+ * Model CensusImportLock
+ * 
+ */
+export type CensusImportLock = Prisma.CensusImportLockModel
+/**
+ * Model JobMutation
+ * 
+ */
+export type JobMutation = Prisma.JobMutationModel
+/**
+ * Model JobRecommendation
+ * 
+ */
+export type JobRecommendation = Prisma.JobRecommendationModel
 /**
  * Model MunicipalProject
  * 
