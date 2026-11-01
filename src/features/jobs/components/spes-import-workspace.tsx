@@ -1,5 +1,7 @@
 "use client";
 
+import './jobs-workspace.css';
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, CheckCircle2, ClipboardCheck, FileSpreadsheet, History, Info, RotateCcw, ShieldAlert, Upload, XCircle } from "lucide-react";
@@ -74,7 +76,7 @@ export function SpesImportWorkspace({batches,batchCount,isSuperAdmin}:{batches:J
     }catch(e){setHistoryMessage(e instanceof Error?e.message:"Unable to update history.");}
     finally{setHistoryBusy("");}
   }
-  return <div className="spes-v104-layout">
+  return <div className="jobs-workspace spes-v104-layout">
     <section className="jobs-panel jobs-pad spes-import-main" aria-label="SPES CSV import wizard">
       <div className="jobs-feature-title"><FileSpreadsheet size={23}/><div><h2>SPES Survey Import</h2><p>Preview and verify anonymous records before adding anything to Workforce Insights.</p></div></div>
       <div className="spes-steps" aria-label="Import progress">

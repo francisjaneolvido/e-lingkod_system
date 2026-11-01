@@ -14,9 +14,9 @@ export const metadata: Metadata = { title: "LGU Service | eLingkod Bayan" };
 
 export default async function ServicePage({ params }: { params: Promise<{serviceKey:string}> }) {
   const { serviceKey } = await params;
+  const viewer = await currentViewer();
   const service = await resolveServiceDefinition(serviceKey);
   if (!service) notFound();
-  const viewer = await currentViewer();
   const citizen = viewer?.role === "CITIZEN";
   const Icon = service.icon;
 

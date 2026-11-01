@@ -5,7 +5,7 @@ type Breakdown = AnalyticsGroup['breakdowns'][number];
 export function AnalyticsBreakdown({data}:{data:Breakdown}) {
   const [page,setPage]=useState(1),size=10;
   const visible=data.items.slice((page-1)*size,page*size);
-  return <details className="rounded-[20px] border border-border bg-card p-5" open={data.key==='employmentStatus'||data.key==='industry'}>
+  return <details className="min-w-0 rounded-[20px] border border-border bg-card p-5" open={data.key==='employmentStatus'||data.key==='industry'}>
     <summary className="cursor-pointer text-base font-bold text-foreground">{data.title}</summary>
     <p className="mt-3 text-xs leading-6 text-muted-foreground">Denominator: {data.denominator}. Recorded: {data.known}; {data.multi?'no selections recorded':'unknown / not recorded'}: {data.missing}. {data.multi?'Multiple selections; category percentages can total more than 100%.':'Percentages include unknown responses in the denominator.'}</p>
     {data.items.length===0?<p className="mt-4 rounded-xl bg-muted p-4 text-sm text-muted-foreground">No eligible observations. A percentage is unavailable.</p>:<>

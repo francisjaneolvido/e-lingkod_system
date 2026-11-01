@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { LogoutButton } from "@/features/auth/components/logout-button";
 import type { StaffModule } from "@/lib/staff-modules";
+import { ThemeControl } from "@/components/shared/theme-control";
 import { NotificationBell } from "@/components/notifications/notification-bell";
 
 const navSections = [
@@ -155,7 +156,6 @@ export function AdminShell({ children, name, email, role, modules, department }:
     <div className="elb-admin-main-column">
       <header className="elb-admin-topbar">
         <div className="elb-admin-topbar-start">
-          <button type="button" aria-label="Open navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)} className="elb-admin-menu-toggle"><Menu size={21}/></button>
           <div className="elb-admin-heading-group">
             <div className="elb-admin-breadcrumb"><span>LGU WORKSPACE</span><ChevronRight size={12}/><span className="elb-admin-breadcrumb-current">{meta.title}</span></div>
             <strong className="elb-admin-page-title">{meta.title}</strong>
@@ -165,6 +165,8 @@ export function AdminShell({ children, name, email, role, modules, department }:
           <NotificationBell variant="admin" />
           <span className="elb-admin-environment"><ShieldCheck size={15}/> Protected workspace</span>
           <Link href="/admin/profile" className="elb-admin-topbar-profile" aria-label={`View profile for ${name}`} title="Administrator profile"><span className="elb-admin-topbar-avatar">{initials}</span><span className="elb-admin-topbar-name">{name}</span><ChevronRight size={15}/></Link>
+          <button type="button" aria-label="Open navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)} className="elb-admin-menu-toggle"><Menu size={21}/></button>
+          <ThemeControl />
         </div>
       </header>
       <main id="admin-content" className="elb-admin-content" tabIndex={-1}>

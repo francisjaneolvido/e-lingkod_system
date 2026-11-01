@@ -119,7 +119,7 @@ export function ServicesSection({ isLgu = false }: { isLgu?: boolean }) {
                     ))}
                   </div>
                 </div>
-                <div className="mt-8"><GetDetailsButton service={civic} onExplore={setSelected} isLgu={isLgu} light>Mag-report ng concern</GetDetailsButton><p className="mt-3 text-xs text-white/70">Citizen reports · photos, location & progress history</p></div>
+                <div className="mt-8"><GetDetailsButton service={civic} onExplore={setSelected} isLgu={isLgu} light>Mag-report ng concern</GetDetailsButton><p className="mt-3 text-xs text-on-brand-muted">Citizen reports · photos, location & progress history</p></div>
               </div>
               <span className="pointer-events-none absolute bottom-6 right-6 hidden rounded-full border border-white/35 bg-primary/70 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm sm:inline">Community illustration</span>
             </article>

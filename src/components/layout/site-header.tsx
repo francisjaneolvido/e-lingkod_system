@@ -10,6 +10,7 @@ import { BrandLogo } from "@/components/shared/brand-logo";
 import { LogoutButton } from "@/features/auth/components/logout-button";
 import type { PortalViewer } from "@/features/landing/landing-page";
 import { services } from "@/features/landing/data/services";
+import { ThemeControl } from "@/components/shared/theme-control";
 import { NotificationBell } from "@/components/notifications/notification-bell";
 
 // Services are drawn from the same six modules as the home page.
@@ -212,6 +213,7 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
             </div>
             <Link href="/#about" className="text-[12px] font-semibold text-muted-foreground transition hover:text-foreground xl:text-[13px]">About</Link>
           </nav>
+          <div className="elb-header-utilities">
           {viewer ? (
             <div className="hidden items-center gap-3 lg:flex">
               <NotificationBell />
@@ -248,6 +250,8 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
           <button type="button" aria-label={open ? "Close menu" : "Open menu"} aria-controls="elb-mobile-menu" aria-expanded={open} onClick={() => { setOpen((current) => !current); setMobileServicesOpen(false); setMobileCommunityOpen(false); }} className="flex h-11 w-11 items-center justify-center rounded-xl border border-border text-foreground lg:hidden">
             {open ? <X size={22}/> : <Menu size={22}/>}
           </button>
+          <ThemeControl />
+          </div>
         </div>
         {open && (
           <nav id="elb-mobile-menu" aria-label="Mobile" className="max-h-[calc(100dvh-82px)] overflow-y-auto overscroll-contain border-t border-border bg-card px-5 py-4 shadow-xl sm:px-8 lg:hidden">

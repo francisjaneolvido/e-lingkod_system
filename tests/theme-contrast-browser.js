@@ -4,7 +4,7 @@ async page => {
  const base='http://localhost:3103',rows=[];
  const check=(ok,message)=>{if(!ok)throw Error(message);};
  const contrast=async e=>e.evaluate(el=>{const rgb=s=>s.match(/[\d.]+/g).map(Number),lum=a=>a.slice(0,3).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);let p=el,bg;while(p){const c=rgb(getComputedStyle(p).backgroundColor);if((c[3]??1)===1){bg=c;break;}p=p.parentElement;}const a=lum(rgb(getComputedStyle(el).color)),b=lum(bg||[255,255,255]);return(Math.max(a,b)+.05)/(Math.min(a,b)+.05);});
- async function theme(t){await page.waitForFunction(()=>document.querySelector('#elb-appearance')?.value===document.documentElement.dataset.theme);await page.getByLabel('Appearance',{exact:true}).selectOption(t);}
+  async function theme(t){for(let i=0;i<3&&await page.locator('html').getAttribute('data-theme')!==t;i++)await page.getByRole('button',{name:/^Current theme:/}).click();await page.waitForFunction(v=>document.documentElement.dataset.theme===v,t);await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));}
  async function login(role,next){await new Promise(r=>setTimeout(r,11000));await page.context().clearCookies();await page.goto(base+'/login?next='+encodeURIComponent(next));await page.locator('#loginEmail').fill('b3.'+role+'@example.test');await page.locator('#loginPassword').fill('B3-browser-password-2026!');await page.getByRole('button',{name:/^log in$/i}).click();await page.waitForURL(u=>u.pathname!=='/login');}
  await login('citizen','/reports/new');
  for(const t of ['dark','oled','light']){
