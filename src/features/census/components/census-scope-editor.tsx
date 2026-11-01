@@ -4,8 +4,8 @@ import { LOS_BANOS_BARANGAYS } from '@/features/emergency/domain';
 
 type Staff = { id: string; name: string; censusScope: { version: number; barangaysJson: string } | null; staffPermissions: { module: string }[] };
 type Edit = { staffId: string; barangays: string[]; version: number };
-const control = 'min-h-11 w-full rounded-xl border border-[#DFE9F2] bg-white px-3 py-2 text-sm text-[#103C64]';
-const button = 'min-h-11 rounded-xl bg-[#153F67] px-4 py-2 text-sm font-semibold text-white disabled:opacity-40';
+const control = 'min-h-11 w-full rounded-xl border border-border bg-card px-3 py-2 text-sm text-foreground';
+const button = 'min-h-11 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white disabled:opacity-40';
 
 export function CensusScopeEditor({ staff, busy, save }: { staff: Staff[]; busy: boolean; save: (input: Record<string, unknown>) => Promise<boolean> }) {
   // The edit values and the version they were observed with form one snapshot.
@@ -16,10 +16,10 @@ export function CensusScopeEditor({ staff, busy, save }: { staff: Staff[]; busy:
   function load(current: Staff | undefined) {
     setEdit(current ? { staffId: current.id, barangays: current.censusScope ? JSON.parse(current.censusScope.barangaysJson) : [], version: current.censusScope?.version ?? 0 } : null);
   }
-  return <section className="rounded-[22px] border border-[#DFE9F2] bg-white p-5 sm:p-7">
-    <h2 className="text-lg font-bold text-[#103C64]">Staff record scope</h2>
+  return <section className="rounded-[22px] border border-border bg-card p-5 sm:p-7">
+    <h2 className="text-lg font-bold text-foreground">Staff record scope</h2>
     <p className="mt-2 text-sm">Assign authorized record barangays independently of the assistance roster. The existing CENSUS module grant is also required.</p>
-    {stale && <div role="alert" className="mt-4 rounded-2xl bg-[#EAF5FD] p-4 text-sm"><p>Record scope changed in another session. Reload before saving.</p><button type="button" className={button + ' mt-3'} onClick={() => load(target)}>Reload record scope</button></div>}
+    {stale && <div role="alert" className="mt-4 rounded-2xl bg-muted p-4 text-sm"><p>Record scope changed in another session. Reload before saving.</p><button type="button" className={button + ' mt-3'} onClick={() => load(target)}>Reload record scope</button></div>}
     <form className="mt-4 space-y-4" onSubmit={async event => {
       event.preventDefault();
       if (!edit || stale) return;
