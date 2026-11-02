@@ -63,7 +63,7 @@ test('V16 Online Services includes operations analytics and audit export',()=>{
 
 test('V16 Community Pulse remains aggregate-only',()=>{
   assert.match(pulse,/Community Pulse/);
-  assert.match(pulse,/Census/);
+  assert.match(pulse,/\bcensus\b/i);
   assert.match(pulse,/Protected census records and analytics/);
   assert.match(pulse,/Public census analytics is deferred/);
   assert.match(pulse,/requireSuperAdminPage/);

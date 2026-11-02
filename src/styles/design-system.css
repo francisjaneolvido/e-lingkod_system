@@ -19,12 +19,12 @@ html[data-theme="dark"], html[data-theme="oled"] {
   --destructive: #ffb0b8; --danger-solid: #932338; --danger-soft: #4a202c;
   --success: #79d9bc; --success-solid: #14634f; --success-soft: #123d37;
   --warning-foreground: #ffd27d; --warning-soft: #44331a;
-  --border: #456078; --input: #526e87; --ring: #85ceff;
-  --chart-1: #83c8ff; --chart-2: #79d9bc; --chart-3: #c5adff; --chart-4: #ffd27d; --chart-unknown: #ffd27d;
+--border: #456078; --input: #6e8aa3; --ring: #85ceff;
+--chart-1: #83c8ff; --chart-2: #79d9bc; --chart-3: #c5adff; --chart-4: #ffd27d; --chart-unknown: #c5ced8;
 }
 html[data-theme="oled"] {
-  --surface-muted: #000000;
-  --background: #000000; --card: #000000; --popover: #101010;
+--surface-muted: #141414;
+--background: #000000; --card: #0d0d0d; --popover: #1b1b1b;
   --muted: #141414; --secondary: #1b1b1b; --accent: #242424;
   --border: #575757; --input: #737373;
 }
@@ -38,9 +38,15 @@ html[data-theme="oled"] {
   :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
   :is(input,select,textarea)::placeholder { color: var(--muted-foreground); opacity: 1; }
 }
-.elb-appearance-bar { display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: .65rem; padding: .4rem clamp(1rem,3vw,3rem); border-bottom: 1px solid var(--border); background: var(--card); color: var(--foreground); font-size: .875rem; }
-.elb-appearance-bar label { font-weight: 600; }
-.elb-appearance-bar select { max-width: 100%; min-height: 44px; border: 1px solid var(--input); border-radius: .75rem; background: var(--card); color: var(--foreground); padding: .4rem .75rem; }
+/* Inactive controls stay legible; the muted fill, dashed boundary, disabled
+   semantics and cursor convey state instead of fading the entire text layer. */
+:is(button,input:not([type="checkbox"]):not([type="radio"]),select,textarea):disabled {
+  opacity:1; color:var(--disabled-ink,var(--muted-foreground)); background:var(--disabled-surface,var(--muted));
+  border:1px dashed var(--input); cursor:not-allowed;
+}
+button:disabled :is(span,svg) { color:inherit; }
+[aria-disabled="true"] { opacity:1; color:var(--muted-foreground); background:var(--muted); border-style:dashed; cursor:not-allowed; }
+.elb-admin-sidebar { --disabled-surface:var(--card); --disabled-ink:var(--muted-foreground); }
 .elb-chart { color: var(--foreground); min-width: 0; border: 1px solid var(--border); border-radius: 1rem; padding: clamp(1rem,2vw,1.5rem); background: var(--card); }
 .elb-chart-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: 1rem; }
 .elb-chart-heading h3 { font-size: 1.125rem; font-weight: 700; line-height: 1.4; }
@@ -69,3 +75,79 @@ html[data-theme="dark"] .elb-admin-sidebar { background: #102d46; }
 html[data-theme="oled"] .elb-admin-sidebar { background: #000000; --card: #1b1b1b; border-right: 1px solid var(--border); }
 html[data-theme-changing] *, html[data-theme-changing] *::before, html[data-theme-changing] *::after { transition: none !important; }
 @media (max-width: 480px) { .elb-chart-row { grid-template-columns: 1fr; } .elb-chart-row strong { font-size: .875rem; } }
+/* Compact navigation appearance: zero extra document-height footprint. */
+.elb-theme { position:relative; flex-shrink:0; color:var(--card-foreground); }
+.elb-theme-trigger { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-width:44px; min-height:44px; padding:.5rem .7rem; border:1px solid var(--border); border-radius:50%; background:var(--card); color:var(--card-foreground); }
+.elb-theme-trigger:hover { background:var(--muted); }
+.elb-theme-label { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.elb-theme-fallback { position:fixed; right:1rem; top:1rem; z-index:85; }
+/* Streamed/error routes can retain a hidden navigation subtree. It must not
+   suppress the headerless recovery control. Native dialogs still own focus. */
+body:has([data-appearance-host]:not([hidden], [hidden] *)) > .elb-theme-fallback { display:none; }
+.elb-dashboard-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; align-items:start; }
+.elb-dashboard-tile { min-width:0; }
+.elb-header-utilities { display:flex; flex-shrink:0; align-items:center; gap:.5rem; margin-left:auto; }
+.elb-theme-trigger { width:44px; height:44px; padding:0; touch-action:manipulation; border-color:var(--input); }
+.elb-admin-topbar .elb-admin-topbar-end { gap:.5rem; }
+.elb-admin-topbar .elb-admin-menu-toggle { border-color:var(--input); }
+.elb-admin-topbar .elb-admin-notification { width:44px; height:44px; }
+.elb-admin-topbar .elb-admin-topbar-profile { min-height:44px; }
+.elb-notifications-panel { position:fixed; right:var(--notification-right,1rem); top:var(--notification-top,5.5rem); max-height:calc(100dvh - var(--notification-top,5.5rem) - 1rem); overflow-y:auto; }
+html[data-theme="oled"] .elb-admin { background:var(--background); }
+.elb-admin-menu-toggle { width:44px; height:44px; }
+.elb-donut-layout { display:grid; grid-template-columns:160px minmax(0,1fr); align-items:center; gap:.5rem; }
+.elb-donut-visual { width:160px; margin-inline:auto; }
+.elb-donut-visual svg { display:block; width:100%; overflow:visible; }
+.elb-donut-total { font-family:inherit; font-size:26px; font-weight:700; fill:var(--foreground); }
+.elb-donut-unit { font-family:inherit; font-size:15px; fill:var(--muted-foreground); }
+.elb-donut-number { font-family:inherit; font-size:16px; font-weight:600; fill:var(--foreground); }
+.elb-donut-legend { list-style:none; padding:0; min-width:0; }
+.elb-donut-key { display:grid; grid-template-columns:1.25rem minmax(0,1fr) auto; gap:.4rem; align-items:center; width:100%; min-height:44px; text-align:left; padding:.35rem; font-size:.75rem; border:1px solid transparent; border-radius:.5rem; color:var(--foreground); }
+.elb-donut-key:hover,.elb-donut-key[aria-pressed="true"] { background:var(--muted); border-color:var(--ring); }
+.elb-donut-key > span:nth-child(2) { overflow-wrap:anywhere; }
+.elb-donut-key strong { font-variant-numeric:tabular-nums; }
+.elb-donut-key small { display:block; font-weight:500; }
+.elb-donut-marker { width:1.25rem; height:1.25rem; border:2px solid var(--series); border-radius:50%; font-size:.75rem; display:grid; place-items:center; }
+.elb-donut-segment { pointer-events:none; }
+.elb-chart-table table { width:100%; text-align:left; font-size:.875rem; border-collapse:collapse; }
+.elb-chart-table :is(th,td) { padding:.65rem; border-bottom:1px solid var(--border); overflow-wrap:anywhere; }
+.elb-chart-table caption { color:var(--muted-foreground); text-align:left; padding:.75rem; }
+@media(max-width:650px) { .elb-donut-layout { grid-template-columns:1fr; } }
+.elb-chart-compact { padding:1rem; border-radius:1rem; }
+.elb-chart-compact .elb-chart-heading { gap:.6rem; }
+.elb-chart-compact h3 { font-size:1rem; }
+.elb-chart-compact .elb-chart-heading label { font-size:.75rem; }
+.elb-chart-compact .elb-chart-heading select { font-size:.875rem; min-height:44px; padding:.25rem; }
+.elb-chart-compact .elb-chart-description { font-size:.75rem; margin:.6rem 0; }
+.elb-chart-compact .elb-chart-row { padding:.4rem; gap:.3rem .5rem; }
+.elb-chart-compact .elb-chart-category { font-size:.8rem; }
+.elb-chart-compact .elb-chart-selection { font-size:.75rem; min-height:1.3rem; margin:.4rem 0 0; }
+.elb-data-story { font-size:.8rem; color:var(--foreground); line-height:1.65; border-left:3px solid var(--chart-2); padding:.6rem .75rem; margin:.6rem 0 0; }
+.elb-source-overview { min-width:0; }
+.elb-source-title { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:.5rem; margin-bottom:1rem; }
+.elb-source-title h2 { font-size:1.15rem; font-weight:700; overflow-wrap:anywhere; }
+.elb-source-title p { font-size:.75rem; color:var(--muted-foreground); }
+.elb-summary-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr)); gap:1rem; margin:0 0 1rem; }
+.elb-summary-metrics > div { border-bottom:2px solid var(--border); padding:.75rem 0; }
+.elb-summary-metrics dt { font-weight:600; font-size:.8rem; color:var(--muted-foreground); }
+.elb-summary-metrics dd { font-size:2rem; font-weight:700; font-variant-numeric:tabular-nums; color:var(--foreground); }
+.elb-summary-metrics p { font-size:.75rem; color:var(--muted-foreground); max-width:50ch; }
+.elb-applied-view { background:var(--muted); border:1px solid var(--border); border-radius:1rem; padding:1rem; }
+.elb-filter-chips { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.75rem; }
+.elb-filter-chips span { border:1px solid var(--border); border-radius:2rem; padding:.35rem .7rem; background:var(--card); color:var(--foreground); font-size:.75rem; overflow-wrap:anywhere; }
+@media(min-width:1400px) { .elb-dashboard-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:650px) { .elb-dashboard-grid { grid-template-columns:1fr; } .elb-admin-topbar-end { gap:.4rem; } }
+@media(prefers-reduced-motion:reduce) { .elb-theme *, .elb-chart * { transition:none!important; animation:none!important; } }
+
+@media(min-width:651px) { .elb-dashboard-grid:has(> :last-child:nth-child(2)) { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+.elb-chart-compact .elb-chart-heading { display:grid; grid-template-columns:minmax(0,1fr) auto; }
+.elb-chart-compact .elb-chart-heading select { width:105px; }
+.elb-dashboard-header { padding:.25rem 0; }
+/* Reserve navigation actions before truncating the noninteractive page heading. */
+.elb-admin-topbar-start { flex:1; }
+.elb-admin-heading-group { min-width:0; overflow:hidden; }
+.elb-admin-page-title { display:block; max-width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+.elb-admin-breadcrumb { overflow:hidden; }
+.elb-admin-breadcrumb-current { min-width:0; overflow:hidden; text-overflow:ellipsis; }
+.elb-admin-menu-toggle { flex-shrink:0; }
+@media(max-width:650px) { .elb-admin-topbar .elb-admin-breadcrumb { display:none; } }

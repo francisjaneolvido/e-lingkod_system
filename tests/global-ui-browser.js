@@ -17,7 +17,7 @@ async page => {
     const lum=v=>v.slice(0,3).map(x=>x/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4).reduce((n,x,i)=>n+x*[.2126,.7152,.0722][i],0);
     const a=lum(fg),b=lum(bg);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05);
   });
-  async function theme(value){await page.getByLabel('Appearance',{exact:true}).selectOption(value);check(await page.locator('html').getAttribute('data-theme')===value,'Theme did not apply');}
+  async function theme(t){await page.locator('h1:visible').first().waitFor();for(let i=0;i<3&&await page.locator('html').getAttribute('data-theme')!==t;i++){const nav=page.locator('header .elb-theme-trigger:visible');await(await nav.count()?nav:page.locator('.elb-theme-fallback .elb-theme-trigger')).click();}await page.waitForFunction(v=>document.documentElement.dataset.theme===v,t);await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-theme-changing'));}
   async function layout(label){check(await page.locator('body').evaluate(e=>e.scrollWidth<=innerWidth+2),'Horizontal overflow: '+label);}
   async function login(role,next){
     // Respect the installed auth limiter across successive synthetic role runs.
@@ -42,7 +42,10 @@ async page => {
   await page.reload();check(await page.locator('html').getAttribute('data-theme')==='oled','Theme not persistent after reload');
   for(const route of ['/','/community-survey','/establishment-survey','/reports/new','/services','/emergency','/opportunities','/community-employment/insights']){
     const response=await page.goto(base+route);check(response.status()<500,'Citizen route failed: '+route);await layout(route);
-    check(await page.getByLabel('Appearance',{exact:true}).count()===1,'Appearance absent: '+route);
+    // Streamed server routes can finish loading before their navigation arrives.
+    // Keep the exact one-visible-control assertion after bounded readiness.
+    await page.waitForFunction(()=>Array.from(document.querySelectorAll('button.elb-theme-trigger')).filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.height>0;}).length===1);
+    check(await page.getByRole('button',{name:/^Current theme:/}).count()===1,'Appearance absent: '+route);
     for(const width of [1440,820,390]){await page.setViewportSize({width,height:1000});for(const t of ['light','dark','oled']){await theme(t);await layout(route+'/'+t);matrix.push({journey:route,width,theme:t});}}
   }
   check(!await page.locator('.elb-chart').count(),'Public deferred analytics unexpectedly released');
@@ -50,15 +53,16 @@ async page => {
   await page.getByRole('heading',{name:'Workforce & social analytics',exact:true}).waitFor();
   await page.locator('.elb-chart-row').first().waitFor();
   const scoped=await (await page.request.get(base+'/api/admin/census/analytics?population=INDIVIDUAL&period=CURRENT&year=2026')).json();
-  check(scoped.groups.reduce((n,g)=>n+g.count,0)===2,'Staff scope count changed');
+  // --opportunities adds one eligible Bambang respondent to the two B4 fixtures.
+  check(scoped.groups.reduce((n,g)=>n+g.count,0)===3,'Staff scope count changed');
+  check(scoped.groups.every(g=>g.breakdowns.find(d=>d.key==='barangay').items.every(i=>i.key==='bambang')),'Staff received an unauthorized barangay');
+  check(!JSON.stringify(scoped).includes('Maahas-only mechanic')&&!JSON.stringify(scoped).includes('Unsubmitted browser secret'),'Staff received excluded answers');
   for(const width of [1440,820,390]){await page.setViewportSize({width,height:1000});for(const t of ['light','dark','oled']){
     await theme(t);await layout('Staff chart '+width+'/'+t);
-    const chart=page.locator('.elb-chart').first();await chart.getByLabel('Sort chart',{exact:true}).selectOption('count');
+    const chart=page.locator('[data-chart-type=bar]').first();
     const row=chart.locator('.elb-chart-row').first();await row.focus();await page.keyboard.press('Enter');check(await row.getAttribute('aria-pressed')==='true','Keyboard chart selection failed');
     check(await contrast(row)>=4.5,'Chart category contrast');
-    await chart.getByText(/^View .* as a table$/).click();check(await chart.locator('table').isVisible(),'Chart table alternative absent');
-    check(await chart.locator('table tbody tr').count()>0,'Chart table has no values');
-    await chart.getByText(/^View .* as a table$/).click();await row.click();
+    const table=page.locator('[data-overview-tables] details').first();await table.locator('summary').click();check(await table.locator('table').isVisible(),'Chart table alternative absent');check(await table.locator('table tbody tr').count()>0,'Chart table has no values');await table.locator('summary').click();await row.click();
     matrix.push({journey:'Staff chart',width,theme:t});
   }}
   await page.getByRole('combobox',{name:/^Population/}).selectOption('ESTABLISHMENT');await page.getByRole('button',{name:'Apply analytics filters',exact:true}).click();
@@ -69,9 +73,8 @@ async page => {
   const touchChart=await touchContext.newPage();await touchChart.goto(base+'/admin/census/analytics');const touchRow=touchChart.locator('.elb-chart-row').first();await touchRow.waitFor();await touchRow.tap();check(await touchRow.getAttribute('aria-pressed')==='true','Touch chart selection failed');await touchContext.close();
   await login('admin','/admin/census');
   await page.getByRole('heading',{name:'Protected census records',exact:true}).waitFor();
-  await page.getByRole('button',{name:'View details and history'}).first().click();const dialog=page.getByRole('dialog');await dialog.waitFor();
-  for(const t of ['light','dark','oled']){await theme(t);check(await dialog.isVisible(),'Dialog vanished');await layout('Admin history/'+t);}
-  await page.keyboard.press('Escape');check(!await dialog.isVisible(),'History dialog Escape failed');
+  const historyOpener=page.getByRole('button',{name:'View details and history'}).first();
+  for(const t of ['light','dark','oled']){await theme(t);await historyOpener.click();const dialog=page.getByRole('dialog');await dialog.waitFor();check(await dialog.isVisible(),'Dialog vanished');await layout('Admin history/'+t);await page.keyboard.press('Escape');check(!await dialog.isVisible(),'History dialog Escape failed');}
   for(const route of ['/admin/services/reports','/admin/jobs/demand','/admin/pulse','/admin/emergency','/admin/staff','/admin/census/imports']){
     const response=await page.goto(base+route);check(response.status()<500,'Admin route failed: '+route);
     for(const width of [1440,820,390]){await page.setViewportSize({width,height:1000});for(const t of ['light','dark','oled']){await theme(t);await layout(route+'/'+width+'/'+t);matrix.push({journey:route,width,theme:t});}}
@@ -81,12 +84,12 @@ async page => {
   check((await page.request.get(base+'/api/admin/census/records')).status()===403,'Ungranted Staff obtained census data');
   check(await contrast(page.getByRole('link',{name:'Return home',exact:true}))>=4.5,'Unavailable-page recovery unreadable');
   const sibling=await page.context().newPage();await sibling.goto(base+'/opportunities');
-  await sibling.waitForFunction(()=>document.querySelector('#elb-appearance')?.value===document.documentElement.dataset.theme);
-  await sibling.getByLabel('Appearance',{exact:true}).selectOption('light');
+  await sibling.getByRole('button',{name:/^Current theme:/}).waitFor();
+  for(let i=0;i<3&&await sibling.locator('html').getAttribute('data-theme')!=='light';i++)await sibling.getByRole('button',{name:/^Current theme:/}).click();
   await page.waitForFunction(()=>document.documentElement.dataset.theme==='light');await sibling.close();
   const browser=page.context().browser();
   const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true});
-  const touch=await context.newPage();await touch.goto(base+'/login');await touch.getByLabel('Appearance',{exact:true}).tap();await touch.keyboard.press('Escape');await touch.getByLabel('Appearance',{exact:true}).selectOption('oled');
+  const touch=await context.newPage();await touch.goto(base+'/login');await touch.getByRole('button',{name:/^Current theme:/}).tap();await touch.getByRole('button',{name:/^Current theme:/}).tap();
   check(await touch.locator('html').getAttribute('data-theme')==='oled','Touch theme failed');
   await context.close();
   const cold=await browser.newContext();await cold.addInitScript(()=>localStorage.setItem('elb-appearance','oled'));

@@ -24,7 +24,8 @@ Light: white card, white/pale-blue canvas, navy foreground/action (#153B63),
 muted foreground #526B80, teal #08766C, gold #FFBF43.
 Dark: canvas #101B29, card #172638, foreground #E9F2FA, muted #B6C9DA,
 action #245F8D with white text, focus #85CEFF.
-OLED: explicit #000000 canvas AND cards, near-black secondary surfaces,
+OLED: explicit #000000 canvas (including the protected shell), #0D0D0D cards,
+#141414 nested/muted panels, #1B1B1B popovers/secondary surfaces,
 foreground as Dark; visible #575757 borders and #737373 input boundaries.
 All themes retain the eLB navy/teal/gold identity; never invert photos/logos.
 Tokens: background/foreground; card/card-foreground; primary/primary-foreground;
@@ -65,7 +66,7 @@ purple and ochre distinguish series; unknowns are labelled explicitly.
 Bars compare counts within a chart, never separate populations. Show exact
 values, source, survey year/filter context and denominator/multiple-response
 notes. Preserve supplied unknown percentages; never manufacture zero or 100%.
-Provide keyboard/touch selection, sorting, visible selected state, status text,
+Provide keyboard/touch highlighting, visible selected state, status text,
 and a complete table alternative. Empty and sparse data need honest messaging.
 Keep the protected endpoint/role/barangay scope, consent and withdrawal rules.
 Never expose identifiable census data or unscoped totals through chart props,
@@ -86,3 +87,63 @@ SIX CORE MODULES
 Authentication, permissions, notifications and administration support these
 six modules. They are not additional core features. Demo records/listings and
 simulated review events must stay visibly identified as demonstrations.
+
+NAVIGATION APPEARANCE AND INSIGHT COMPOSITION
+Appearance uses a 44px sun/moon/eclipse button in the public header and
+protected topbar, always the rightmost utility. Group actions with 8px gaps;
+the mobile navigation toggle sits immediately to its left. One activation
+cycles Light -> Dark -> OLED -> Light; there is no menu, popover or switch.
+The accessible name gives current theme and next action. Enter/Space/click/tap
+cycle without moving focus; a polite live status announces the result.
+Auth/unavailable shells retain a fixed top-right fallback without adding height.
+Ignore hidden retained navigation when deciding whether that fallback is needed.
+Notification utilities share the 44px target. Their labelled panel is viewport
+clamped (16px gutter), dismisses on outside interaction/Escape and returns
+keyboard focus on Escape. Portalling prevents filtered headers from trapping
+fixed positioning; panel interactions must not count as outside clicks.
+
+Protected dashboards lead with applied population/year/source and useful
+recorded-value metrics, then complementary compact donut AND bar charts in a 2-column
+grid (3 at >=1400px; 1 at <=650px). Filters follow overview; detailed tables,
+methodology and exports follow filters. Each source gets its own totals and
+units. No merged people/workforce/observations/assignments. Do not draw trends
+without comparable time-series data or use pie charts for overlapping answers.
+Cards:16px padding/radius; gap16px; Poppins16px chart headings,14px working
+controls,12px supporting text; controls/targets remain >=44px even in compact
+charts. Stable category-key colors use existing blue/teal/purple/ochre tokens;
+unknowns use labelled ochre in Light and neutral pale gray in Dark/OLED.
+Donuts require exhaustive mutually exclusive categories with one denominator;
+include unknowns and never use multi-response skills/barriers as slices.
+Use explicit segment boundaries and numbered callouts matching visible legends,
+so repeated stable colors cannot merge categories. Show every category/count/
+percentage; do not silently hide categories or fabricate an Other grouping.
+Bars and exact values are visible by default. Compact tiles have no sort menus
+or report disclosures; full accessible tables and methodology sit below filters.
+Top5 categories are explicitly labelled; full values remain in accessible tables.
+Employment status/type uses compact ranked top-five bars: its 15 supported
+categories make a complete donut legend too tall for an overview. Keep smaller
+exclusive distributions such as education as donuts alongside those bars.
+Selection/hover/focus reports exact count, supplied percentage and denominator;
+highlighting never pretends to apply a filter. Short findings use actual counts,
+label ties and unknowns, and make no causal/population/hiring claims.
+
+Select filters apply immediately; free text waits300ms. Keep applied context
+with results, abort superseded requests and reject stale responses. Retain an
+honestly labelled previous view while updating; exports use the applied response
+and disappear during loading/errors. Reset clears incompatible filters. No fake
+filter controls on server snapshots without an authorized filtering contract.
+Reduce motion for users requesting it. Preserve photo/filled-surface contrast
+rules and public census deferral.
+
+OLED grouping uses visible borders/dividers and near-black surfaces, not shadows
+alone. Preserve intentional 16px grid gaps and 20-28px section gutters; remove
+accidental wrappers locally rather than compressing the whole site. Keep public
+brand/photo surfaces recognizable. Fixed-primary content uses on-brand foregrounds
+in every theme; page muted ink is unsuitable on a filled hero. Input outlines
+use input (#71879B Light, #6E8AA3 Dark, #737373 OLED) for >=3:1 on their actual
+surfaces; focus uses ring. Normal text requires >=4.5:1. Measure composited alpha,
+gradients and actual photo pixels; inspect grouping in screenshots as well.
+Inactive controls use full-opacity muted ink/surface with a dashed input boundary,
+disabled semantics and not-allowed cursor. Do not fade their entire text layer.
+Fixed-dark sidebar controls use the local card/ink pair. Include ancestor opacity
+when measuring rendered foregrounds, even when the CSS color itself is opaque.

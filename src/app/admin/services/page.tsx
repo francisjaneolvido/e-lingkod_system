@@ -87,7 +87,7 @@ export default async function AdminServicesPage({ searchParams }: { searchParams
             <td className="px-4 py-3"><strong className="block text-xs text-foreground">{row.trackingId}</strong><span className="mt-0.5 block font-bold text-foreground">{row.serviceTitle}</span></td>
             <td className="px-4 py-3"><strong className="block text-foreground">{row.requester.name}</strong><span className="text-xs text-muted-foreground">{row.requester.email}</span></td>
             <td className="px-4 py-3"><span className={`rounded-full px-2 py-1 text-xs font-extrabold ${meta.tone}`}>{meta.label}</span><span className="mt-1.5 block text-xs text-muted-foreground">{nextStep(key)}</span></td>
-            <td className="px-4 py-3 text-xs text-muted-foreground">{row.assignedStaff?.name || row.assignedDepartment || "Unassigned"}{row.workAssignment?.status === "OFFERED" && <span className="mt-1 block text-xs font-black uppercase tracking-wide text-amber-700">Awaiting staff acceptance</span>}</td>
+            <td className="px-4 py-3 text-xs text-muted-foreground">{row.assignedStaff?.name || row.assignedDepartment || "Unassigned"}{row.workAssignment?.status === "OFFERED" && <span className="mt-1 block text-xs font-black uppercase tracking-wide text-warning-foreground">Awaiting staff acceptance</span>}</td>
             <td className="px-4 py-3 text-xs text-muted-foreground">{new Date(row.updatedAt).toLocaleString("en-PH", { month:"short", day:"numeric", hour:"numeric", minute:"2-digit" })}</td>
             <td className="px-4 py-3"><Link href={`/admin/services/${row.id}`} className="inline-flex items-center gap-1 rounded-lg bg-muted px-2.5 py-2 text-xs font-extrabold text-foreground">Open <ArrowRight size={12}/></Link></td>
           </tr>;

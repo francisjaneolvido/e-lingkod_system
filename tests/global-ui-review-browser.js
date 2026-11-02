@@ -19,19 +19,13 @@ async page => {
     // Avoid a moving screenshot crop during the site's optional smooth scroll.
     await page.addStyleTag({content:'html { scroll-behavior: auto !important; }'});
   }
-  async function theme(t) {
-    await page.waitForFunction(() => document.querySelector('#elb-appearance')?.value === document.documentElement.dataset.theme);
-    // A same-value SSR select can look ready before its React handler exists.
-    if(await page.locator('html').getAttribute('data-theme')===t){const other=t==='light'?'dark':'light';await page.getByLabel('Appearance',{exact:true}).selectOption(other);await page.waitForFunction(value=>document.documentElement.dataset.theme===value,other);}
-    await page.getByLabel('Appearance', {exact:true}).selectOption(t);
-    await page.waitForFunction(value=>document.documentElement.dataset.theme===value,t);
-    await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-  }
+  async function theme(t){for(let i=0;i<3&&await page.locator('html').getAttribute('data-theme')!==t;i++)await page.getByRole('button',{name:/^Current theme:/}).click();await page.waitForFunction(v=>document.documentElement.dataset.theme===v,t);await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-theme-changing'),null,{timeout:10000});}
   async function measure(locator, label, image = false) {
+    await page.evaluate(label=>{window.__uiReviewStage=label;},label);
     await locator.scrollIntoViewIfNeeded();
     await locator.evaluate(el=>el.scrollIntoView({behavior:'instant',block:'center'}));
-    await page.evaluate(()=>document.fonts.ready);
-    await page.evaluate(() => Promise.all(document.getAnimations().filter(a => a.effect?.getTiming().iterations !== Infinity).map(a => a.finished.catch(() => {}))));
+    await page.waitForFunction(()=>document.fonts.status==='loaded',null,{timeout:10000});
+    await page.waitForFunction(()=>document.getAnimations().every(a=>a.effect?.getTiming().iterations===Infinity||a.playState!=='running'),null,{timeout:10000});
     const style = await locator.evaluate(el => {
       const range=document.createRange();range.selectNodeContents(el);const box=el.getBoundingClientRect();
       return {color:getComputedStyle(el).color,style:el.getAttribute('style'),textRects:Array.from(range.getClientRects()).map(r=>({left:(r.left-box.left)/box.width,right:(r.right-box.left)/box.width,top:(r.top-box.top)/box.height,bottom:(r.bottom-box.top)/box.height}))};
@@ -75,7 +69,7 @@ async page => {
   }
   async function focus(locator,label) {
     await locator.focus();await page.keyboard.press('Tab');await page.keyboard.press('Shift+Tab');
-    await page.evaluate(() => Promise.all(document.getAnimations().filter(a => a.effect?.getTiming().iterations !== Infinity).map(a => a.finished.catch(() => {}))));
+    await page.waitForFunction(()=>document.getAnimations().every(a=>a.effect?.getTiming().iterations===Infinity||a.playState!=='running'),null,{timeout:10000});
     check(await locator.evaluate(el=>el.matches(':focus-visible')&&getComputedStyle(el).outlineStyle!=='none'&&parseFloat(getComputedStyle(el).outlineWidth)>=2),label+' lacks keyboard focus');
     const saved=await locator.getAttribute('style');
     // Outline is outside the button, so compare its actual color with the
@@ -99,7 +93,9 @@ async page => {
       if(width>=1024) {
         await page.getByRole('button',{name:'Collapse sidebar',exact:true}).click();
         await measure(page.locator('.elb-admin-avatar'),'Sidebar compact '+key);
-        await page.getByRole('button',{name:'Expand sidebar',exact:true}).click();
+        // Next's dev-only bottom-left indicator overlaps this compact control.
+        // Exercise its native keyboard activation; console failures still fail the suite.
+        await page.getByRole('button',{name:'Expand sidebar',exact:true}).focus();await page.keyboard.press('Enter');
       } else await page.getByRole('button',{name:'Close navigation',exact:true}).click();
       if(width>=640) await measure(page.locator('.elb-admin-topbar-avatar'),'Topbar '+key);
       const tabs=page.getByRole('tab');
@@ -120,7 +116,7 @@ async page => {
   // Touch the actual staff tabs in a touch-enabled browser context.
   const touch=await page.context().browser().newContext({viewport:{width:390,height:1000},isMobile:true,hasTouch:true,storageState:await page.context().storageState()});
   const touchPage=await touch.newPage();await touchPage.goto(base+'/admin/staff');
-  for(const t of ['light','dark','oled']){await touchPage.getByLabel('Appearance',{exact:true}).selectOption(t);for(let i=0;i<4;i++){await touchPage.getByRole('tab').nth(i).tap();check(await touchPage.getByRole('tab').nth(i).getAttribute('aria-selected')==='true','Touch tab '+i+'/'+t);}}
+  for(const t of ['light','dark','oled']){for(let i=0;i<3&&await touchPage.locator('html').getAttribute('data-theme')!==t;i++)await touchPage.getByRole('button',{name:/^Current theme:/}).click();for(let i=0;i<4;i++){await touchPage.getByRole('tab').nth(i).tap();check(await touchPage.getByRole('tab').nth(i).getAttribute('aria-selected')==='true','Touch tab '+i+'/'+t);}}
   await touch.close();
   await login('citizen','/reports/new');
   // Confirm the report island is hydrated through a real local state change
