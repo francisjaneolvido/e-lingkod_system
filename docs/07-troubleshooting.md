@@ -2,6 +2,11 @@
 
 [README](../README.md) · [Setup guide](02-installation-and-environment-setup.md) · [Architecture](03-project-architecture.md) · [Testing](05-testing-phase.md)
 
+For the current MySQL/Prisma application's RSA authentication failure (45044,
+or a wrapped connection-pool timeout), use the maintained
+[local MySQL authentication guide](mysql-authentication.md). It documents the
+optional `MYSQL_RSA_PUBLIC_KEY_PATH` setting and disposable cold-cache test.
+
 Start with the first failing boundary: terminal command, dependency installation, compilation, HTTP request, Auth, database policy, or Storage. Save the exact error, route, account role, expected behavior, recent change and environment. Remove tokens, passwords, private URLs and personal data before posting logs. A browser message alone often omits the useful server error.
 
 All commands below are **later developer diagnostics**, run in PowerShell at the repository root unless stated otherwise. SQL runs in the Supabase SQL Editor. None was executed as an application repair for this handoff.
