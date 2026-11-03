@@ -16,7 +16,7 @@ export default async function AccountPage() {
   if (viewer.role === "ADMIN" || viewer.role === "STAFF") redirect("/admin");
 
   return (
-    <div className="min-h-screen bg-card text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       <SiteHeader viewer={viewer} />
       <main className="mx-auto max-w-[1200px] px-5 py-10 sm:px-8 sm:py-14">
         <p className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[.15em] text-muted-foreground"><ShieldCheck size={16} /> {viewer.role === "ADMIN" || viewer.role === "STAFF" ? "LGU staff account" : "Signed-in citizen"}</p>

@@ -3,7 +3,7 @@ import { ArrowLeft, BriefcaseBusiness } from "lucide-react";
 
 export default function OpportunityNotFound() {
   return (
-    <main className="flex min-h-[65vh] items-center justify-center bg-card px-5 py-12">
+    <main className="flex min-h-[65vh] items-center justify-center bg-background px-5 py-12">
       <div className="w-full max-w-lg rounded-[24px] border border-border bg-card p-8 text-center shadow-[0_10px_32px_rgba(17,63,97,.04)] sm:p-10">
         <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-muted text-foreground"><BriefcaseBusiness size={26}/></span>
         <h1 className="mt-5 text-2xl font-extrabold text-foreground">This opportunity is no longer available</h1>
