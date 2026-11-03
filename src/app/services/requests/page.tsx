@@ -21,7 +21,7 @@ export default async function MyServiceRequests() {
   const scheduledCount = rows.filter(row => ["SCHEDULED", "APPOINTMENT_CONFIRMED"].includes(row.status)).length;
   const completedCount = rows.filter(row => row.status === "COMPLETED").length;
 
-  return <><SiteHeader viewer={{ name:viewer.name, email:viewer.email, role:viewer.role }}/><main className="min-h-screen bg-card px-5 py-7 sm:px-8"><div className="mx-auto max-w-[1040px]">
+  return <><SiteHeader viewer={{ name:viewer.name, email:viewer.email, role:viewer.role }}/><main className="min-h-screen bg-background px-5 py-7 sm:px-8"><div className="mx-auto max-w-[1040px]">
     <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="text-xs font-extrabold uppercase tracking-[.14em] text-foreground">ONLINE LGU SERVICES</p><h1 className="mt-1 text-2xl font-black text-foreground">My LGU Requests</h1><p className="mt-1 text-xs text-muted-foreground">Continue drafts, fix LGU findings, confirm schedules and track release or completion.</p></div><Link href="/services" className="rounded-xl bg-primary px-4 py-2.5 text-xs font-extrabold text-white">Request a service</Link></div>
 
     {rows.length > 0 && <div className="mt-5 grid gap-2 sm:grid-cols-4"><Stat icon={FileText} value={activeCount} label="Active"/><Stat icon={RotateCcw} value={actionCount} label="Need your action" highlight={actionCount > 0}/><Stat icon={CalendarClock} value={scheduledCount} label="Scheduled"/><Stat icon={CheckCircle2} value={completedCount} label="Completed"/></div>}

@@ -27,3 +27,9 @@ test('every nonzero donut segment has a numbered callout and separated labels on
  assert.equal(labels.length,11);assert.equal(new Set(labels.map(x=>x.number)).size,11);
  for(const side of ['left','right']){const rows=labels.filter(x=>x.side===side).sort((a,b)=>a.y-b.y);for(let i=1;i<rows.length;i++)assert.ok(rows[i].y-rows[i-1].y>=18);}
 });
+test('donut label coordinates serialize identically despite subpixel trigonometric engine differences',()=>{
+ const rows=Array.from({length:7},(_,i)=>({key:String(i),fraction:1/7})),expected=JSON.stringify(model.donutLabels(rows));
+ const sin=Math.sin,cos=Math.cos;
+ try{Math.sin=x=>sin(x)+1e-15;Math.cos=x=>cos(x)+1e-15;assert.equal(JSON.stringify(model.donutLabels(rows)),expected);}
+ finally{Math.sin=sin;Math.cos=cos;}
+});

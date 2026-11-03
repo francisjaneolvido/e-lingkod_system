@@ -142,7 +142,7 @@
 .elb-admin-primary:disabled, .elb-admin-danger:disabled, .elb-admin-outline:disabled { opacity: .55; cursor: not-allowed; }
 .elb-admin-module-check { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); font-size:12px; font-weight: 600; color: var(--muted-foreground); cursor: pointer; }
 .elb-admin-module-check--selected { border-color: var(--border); background: var(--surface-muted); color: var(--foreground); }
-.elb-admin-module-check:has(input:focus-visible) { outline: 2px solid var(--border); outline-offset: 1px; }
+.elb-admin-module-check:has(input:focus-visible) { outline: 3px solid var(--ring); outline-offset: 3px; }
 .elb-admin-feedback { display: flex; align-items: center; gap: 8px; padding: 10px 13px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-muted); color: var(--success); font-size: 12px; font-weight: 600; }
 .elb-admin-feedback--error { border-color: var(--border); background: var(--card); color: var(--destructive); }
 

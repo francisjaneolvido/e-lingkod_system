@@ -4,8 +4,11 @@ export function donutLabels(rows:readonly {key:string;fraction:number}[]) {
   let offset=0;
   const labels=rows.flatMap((row,index)=>{const angle=(offset+row.fraction/2)*Math.PI*2-Math.PI/2;offset+=row.fraction;return row.fraction>0?[{key:row.key,number:index+1,side:Math.cos(angle)<0?'left':'right',anchorX:100+Math.cos(angle)*60,anchorY:100+Math.sin(angle)*60,y:100+Math.sin(angle)*80}]:[];});
   for(const side of ['left','right']){const ordered=labels.filter(l=>l.side===side).sort((a,b)=>a.y-b.y);for(let i=0;i<ordered.length;i++)ordered[i].y=Math.max(20,ordered[i].y,i?ordered[i-1].y+18:20);for(let i=ordered.length-1;i>=0;i--)ordered[i].y=Math.min(180,ordered[i].y,i<ordered.length-1?ordered[i+1].y-18:180);}
-  return labels;
+  // Node and browser math engines can differ below a rendered pixel. Keep SVG
+  // attributes deterministic across hydration without rounding counts or shares.
+  return labels.map(label=>({...label,anchorX:svgCoordinate(label.anchorX),anchorY:svgCoordinate(label.anchorY),y:svgCoordinate(label.y)}));
 }
+export const svgCoordinate=(value:number)=>Number(value.toFixed(3));
 // A part-to-whole is allowed only for an exhaustive, mutually exclusive aggregate.
 export function distributionRows(items:readonly ChartItem[],denominator:number,multi=false) {
   if(multi||!Number.isSafeInteger(denominator)||denominator<=0||items.some(i=>!Number.isSafeInteger(i.count)||i.count<0)||new Set(items.map(i=>i.key)).size!==items.length||items.reduce((s,i)=>s+i.count,0)!==denominator)return null;
