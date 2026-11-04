@@ -108,7 +108,7 @@ export async function POST(request: Request) {
     }
     return invalid("Unknown action.");
   } catch (error) {
-    if (error instanceof Error && !(error instanceof CivicError) && (/^(Project |Progress |Select |Choose |Official |Public |Lead |Milestone |Review |Provide an official|Demo |DEMO |Generated )/.test(error.message))) {
+    if (error instanceof Error && !(error instanceof CivicError) && (/^(Project |Progress |Select |Choose |Official |Public |Lead |Milestone |Review |Provide an official|Budget |An official budget |Demo |DEMO |Generated )/.test(error.message))) {
       return json({ error: error.message }, 400);
     }
     return apiFailure(error);

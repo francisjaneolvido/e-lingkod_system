@@ -22,25 +22,25 @@ function answer(value:unknown):string{
   return EMPLOYMENT_LABELS[String(value)]||String(value).replaceAll("_"," ");
 }
 export function CitizenProfileHistory({entries}:{entries:ProfileHistoryEntry[]}){
-  if(!entries.length)return <p className="text-sm text-[#56718B]">No submitted history for this survey year yet. Saved drafts are private and do not contribute to submitted-response statistics.</p>;
-  return <section aria-labelledby="profile-history-title" className="rounded-[24px] border border-[#DFE9F2] bg-white p-6 sm:p-8">
-    <h2 id="profile-history-title" className="text-xl font-bold text-[#103C64]">My submitted history</h2>
-    <p className="mt-2 text-sm leading-6 text-[#56718B]">Earlier answers stay protected when you update or withdraw a response. Historic consent shown here does not override your current preferences.</p>
-    <div className="mt-5 divide-y divide-[#DFE9F2]">{entries.map(entry=><details key={entry.id} className="py-4">
-      <summary className="cursor-pointer rounded-2xl text-sm font-bold text-[#153F67] focus-visible:outline-2 focus-visible:outline-offset-4">{entry.action==="WITHDRAWN"?"Response withdrawn":"Submitted revision "+entry.revision} · {new Date(entry.createdAt).toLocaleString("en-PH")}</summary>
-      <p className="mt-3 text-xs text-[#56718B]">Recorded by you. This entry preserves the answers at that time.</p>
-      <dl className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-2">{Object.entries(labels).filter(([key])=>key in entry.answers).map(([key,label])=><div key={key} className="min-w-0"><dt className="text-xs font-bold text-[#103C64]">{label}</dt><dd className="mt-1 whitespace-pre-wrap break-words text-sm leading-6 text-[#56718B]">{answer(entry.answers[key])}</dd></div>)}</dl>
+  if(!entries.length)return <p className="text-sm text-muted-foreground">No submitted history for this survey year yet. Saved drafts are private and do not contribute to submitted-response statistics.</p>;
+  return <section aria-labelledby="profile-history-title" className="rounded-[24px] border border-border bg-card p-6 sm:p-8">
+    <h2 id="profile-history-title" className="text-xl font-bold text-foreground">My submitted history</h2>
+    <p className="mt-2 text-sm leading-6 text-muted-foreground">Earlier answers stay protected when you update or withdraw a response. Historic consent shown here does not override your current preferences.</p>
+    <div className="mt-5 divide-y divide-border">{entries.map(entry=><details key={entry.id} className="py-4">
+      <summary className="cursor-pointer rounded-2xl text-sm font-bold text-foreground focus-visible:outline-2 focus-visible:outline-offset-4">{entry.action==="WITHDRAWN"?"Response withdrawn":"Submitted revision "+entry.revision} · {new Date(entry.createdAt).toLocaleString("en-PH")}</summary>
+      <p className="mt-3 text-xs text-muted-foreground">Recorded by you. This entry preserves the answers at that time.</p>
+      <dl className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-2">{Object.entries(labels).filter(([key])=>key in entry.answers).map(([key,label])=><div key={key} className="min-w-0"><dt className="text-xs font-bold text-foreground">{label}</dt><dd className="mt-1 whitespace-pre-wrap break-words text-sm leading-6 text-muted-foreground">{answer(entry.answers[key])}</dd></div>)}</dl>
     </details>)}</div>
   </section>;
 }
 export function WithdrawSurvey({disabled,onWithdraw}:{disabled:boolean;onWithdraw:()=>Promise<void>}){
   const dialog=useRef<HTMLDialogElement>(null);
   return <>
-    <button type="button" disabled={disabled} onClick={()=>dialog.current?.showModal()} className="min-h-11 rounded-2xl border border-[#DFE9F2] px-4 text-sm font-bold text-[#103C64] disabled:opacity-40">Withdraw this year&apos;s response</button>
-    <dialog ref={dialog} aria-labelledby="withdraw-survey-title" className="m-auto max-w-lg rounded-[24px] border border-[#DFE9F2] bg-white p-6 text-[#103C64] shadow-xl backdrop:bg-[#103C64]/40">
+    <button type="button" disabled={disabled} onClick={()=>dialog.current?.showModal()} className="min-h-11 rounded-2xl border border-border px-4 text-sm font-bold text-foreground disabled:opacity-40">Withdraw this year&apos;s response</button>
+    <dialog ref={dialog} aria-labelledby="withdraw-survey-title" className="m-auto max-w-lg rounded-[24px] border border-border bg-card p-6 text-foreground shadow-xl backdrop:bg-primary/40">
       <h2 id="withdraw-survey-title" className="text-xl font-bold">Withdraw this response?</h2>
-      <p className="mt-3 text-sm leading-7 text-[#56718B]">This year&apos;s response will leave active statistics. Optional recommendations will be disabled, the current draft will be cleared, and submitted history will remain protected. A new submission is needed to participate again.</p>
-      <div className="mt-6 flex flex-wrap justify-end gap-3"><button type="button" autoFocus onClick={()=>dialog.current?.close()} className="min-h-11 rounded-2xl border border-[#DFE9F2] px-4 font-bold">Keep response</button><button type="button" onClick={()=>{dialog.current?.close();void onWithdraw();}} className="min-h-11 rounded-2xl bg-[#153F67] px-4 font-bold text-white">Withdraw response</button></div>
+      <p className="mt-3 text-sm leading-7 text-muted-foreground">This year&apos;s response will leave active statistics. Optional recommendations will be disabled, the current draft will be cleared, and submitted history will remain protected. A new submission is needed to participate again.</p>
+      <div className="mt-6 flex flex-wrap justify-end gap-3"><button type="button" autoFocus onClick={()=>dialog.current?.close()} className="min-h-11 rounded-2xl border border-border px-4 font-bold">Keep response</button><button type="button" onClick={()=>{dialog.current?.close();void onWithdraw();}} className="min-h-11 rounded-2xl bg-primary px-4 font-bold text-white">Withdraw response</button></div>
     </dialog>
   </>;
 }

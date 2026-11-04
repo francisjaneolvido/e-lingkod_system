@@ -11,5 +11,5 @@ export const metadata: Metadata = { title: "Civic Reports | LGU Admin" };
 export default async function AdminReportsPage() {
   const viewer = await requireModulePage("/admin/reports", "REPORTS");
   const reports = await listReports(viewer, true);
-  return <div className="space-y-6"><div className="flex items-center gap-3"><div className="rounded-xl bg-[#e5f2fa] p-3 text-[#1d709c]"><ClipboardList size={24}/></div><div><h1 className="text-2xl font-extrabold tracking-tight">Civic Reporting Management</h1><p className="mt-1 text-[12px] text-[#8096a9]">Triage incoming concerns, set priority, route to a department, and assign accountable LGU personnel.</p></div></div><AdminReportsTable initialReports={reports} viewerRole={viewer.role} viewerId={viewer.id} department={viewer.department || ""}/></div>;
+  return <div className="space-y-6"><div className="flex items-center gap-3"><div className="rounded-xl bg-muted p-3 text-foreground"><ClipboardList size={24}/></div><div><h1 className="text-2xl font-extrabold tracking-tight">Civic Reporting Management</h1><p className="mt-1 text-[12px] text-muted-foreground">Triage incoming concerns, set priority, route to a department, and assign accountable LGU personnel.</p></div></div><AdminReportsTable initialReports={reports} viewerRole={viewer.role} viewerId={viewer.id} department={viewer.department || ""}/></div>;
 }

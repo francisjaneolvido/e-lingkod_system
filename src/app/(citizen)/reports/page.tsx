@@ -1,3 +1,4 @@
+export const instant = false;
 import type { Metadata } from "next";
 import { requireCitizenPageViewer } from "@/lib/access";
 import { CivicShell } from "@/features/civic/components/civic-shell";
