@@ -68,7 +68,12 @@ async page => {
     check(result.visible&&!result.clipped,label+' invisible/clipped');
   }
   async function focus(locator,label) {
-    await locator.focus();await page.keyboard.press('Tab');await page.keyboard.press('Shift+Tab');
+    // Enter tabs from their preceding control: the last tab may otherwise
+    // move into browser chrome. Native-dialog controls retain their forward
+    // round trip within the dialog's focus trap.
+    await locator.focus();
+    if(await locator.getAttribute('role')==='tab'){await page.keyboard.press('Shift+Tab');await page.keyboard.press('Tab');}
+    else{await page.keyboard.press('Tab');await page.keyboard.press('Shift+Tab');}
     await page.waitForFunction(()=>document.getAnimations().every(a=>a.effect?.getTiming().iterations===Infinity||a.playState!=='running'),null,{timeout:10000});
     check(await locator.evaluate(el=>el.matches(':focus-visible')&&getComputedStyle(el).outlineStyle!=='none'&&parseFloat(getComputedStyle(el).outlineWidth)>=2),label+' lacks keyboard focus');
     const saved=await locator.getAttribute('style');

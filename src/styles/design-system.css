@@ -7,6 +7,7 @@
   --warning-foreground: #795000; --warning-soft: #fff1ce; --brand-gold: #ffbf43;
   --chart-1: #176aa6; --chart-2: #08766c; --chart-3: #7252af; --chart-4: #a56900; --chart-unknown: #876315;
 }
+:root:not([data-theme]), html[data-theme="light"] { --destructive:var(--danger-solid); }
 html[data-theme="dark"], html[data-theme="oled"] {
   --link: #8dceff;
   --background: #101b29; --foreground: #e9f2fa;
@@ -151,3 +152,12 @@ html[data-theme="oled"] .elb-admin { background:var(--background); }
 .elb-admin-breadcrumb-current { min-width:0; overflow:hidden; text-overflow:ellipsis; }
 .elb-admin-menu-toggle { flex-shrink:0; }
 @media(max-width:650px) { .elb-admin-topbar .elb-admin-breadcrumb { display:none; } }
+
+/* Shared focus must outrank page utility resets; local dark surfaces own ring ink. */
+:root :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible { outline:3px solid var(--ring); outline-offset:3px; }
+.elb-admin-sidebar { --ring:var(--brand-gold); }
+@media print {
+  .elb-theme { display:none!important; }
+  body:has(.elb-print-document) { background:#fff; color:#173b60; }
+  .elb-print-document { --card:#fff; --foreground:#173b60; --muted-foreground:#526b80; --border:#71879b; background:#fff; color:var(--foreground); }
+}
