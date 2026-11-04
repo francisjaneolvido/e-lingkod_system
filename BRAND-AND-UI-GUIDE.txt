@@ -148,3 +148,27 @@ Inactive controls use full-opacity muted ink/surface with a dashed input boundar
 disabled semantics and not-allowed cursor. Do not fade their entire text layer.
 Fixed-dark sidebar controls use the local card/ink pair. Include ancestor opacity
 when measuring rendered foregrounds, even when the CSS color itself is opaque.
+
+MATERIAL STATES AND KEYBOARD CONTINUITY
+Shared keyboard focus is an unlayered 3px semantic ring with 3px offset so page
+utility resets cannot erase it. The fixed navy sidebar owns a gold ring. Hidden
+checkbox/radio choices put the ring on their visible label; never use the quiet
+section-border token as a focus indicator. Disabled choice labels retain full
+opacity, muted ink/fill and a dashed input boundary, including selection limits.
+Every file chooser has a visible, keyboard-operable button named with its
+document requirement; a hidden input alone is not a usable upload action.
+Native dialogs are named by their visible heading. Survey Next/Previous/Skip
+focuses and reveals the new step heading without changing answers; appearance
+changes must not move focus or scroll. Emergency extension guidance uses the
+semantic warning foreground on its actual card, with black OLED page canvas.
+Printable request acknowledgements use white paper and dark readable ink in all
+themes. Hide the appearance control in print; retain request facts and history.
+Full-page public/account/service/opportunity containers use background; their
+content cards use card. Do not paint the entire canvas with the card token:
+Dark needs its stepped surfaces and OLED needs black around near-black cards.
+Light destructive ink uses the deeper danger-solid value so it also passes on
+the pale danger-soft surface; Dark/OLED retain their bright error foreground.
+Uploaded-document actions wrap within narrow cards. Images may preview inline;
+PDFs use an explicit protected Open/download action and the browser's viewer.
+Do not leave a blank embedded PDF frame or relax sandbox/security boundaries to
+make one work. Preserve original document bytes and server ownership checks.

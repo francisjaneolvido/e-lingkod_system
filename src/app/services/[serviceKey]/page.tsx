@@ -20,7 +20,7 @@ export default async function ServicePage({ params }: { params: Promise<{service
   const citizen = viewer?.role === "CITIZEN";
   const Icon = service.icon;
 
-  return <><SiteHeader viewer={viewer ? { name:viewer.name, email:viewer.email, role:viewer.role } : null}/><main className="min-h-screen bg-card px-5 py-7 sm:px-8 lg:px-12"><div className="mx-auto max-w-[1160px]">
+  return <><SiteHeader viewer={viewer ? { name:viewer.name, email:viewer.email, role:viewer.role } : null}/><main className="min-h-screen bg-background px-5 py-7 sm:px-8 lg:px-12"><div className="mx-auto max-w-[1160px]">
     <Link href="/services" className="inline-flex items-center gap-2 text-xs font-bold text-foreground"><ArrowLeft size={15}/> All online services</Link>
 
     <section className="mt-4 rounded-[22px] border border-border bg-card p-5 sm:p-6">

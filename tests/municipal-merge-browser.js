@@ -46,8 +46,11 @@ async page => {
   }
   async function login(role) {
     await page.context().clearCookies();
-    const response=await page.context().request.post(base+'/api/auth/sign-in/email',{headers:{origin:base},data:{email:`merge.${role}@example.test`,password:'Municipal-browser-2026!'}});
-    check(response.ok(),`Login ${role}: ${response.status()}`);
+    await page.goto(base+'/login',{waitUntil:'networkidle'});
+    await page.locator('#loginEmail').fill(`merge.${role}@example.test`);
+    await page.locator('#loginPassword').fill('Municipal-browser-2026!');
+    await page.getByRole('button',{name:/^log in$/i}).click();
+    await page.waitForURL(url=>url.pathname!=='/login',{waitUntil:'networkidle'});
   }
   for(const role of ['citizen','denied']) {
     await login(role);await page.goto(base+'/admin/projects',{waitUntil:'networkidle'});

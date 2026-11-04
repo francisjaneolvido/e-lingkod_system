@@ -23,6 +23,7 @@ try {
     if(process.argv.includes('--opportunities')){const seeded=spawnSync(process.execPath,['tests/helpers/prepare-opportunities-browser.mjs'],{env:browserEnv,stdio:'inherit',windowsHide:true});if(seeded.status!==0)throw Error('B5 browser fixture failed');}
     if(process.argv.includes('--ui')){const seeded=spawnSync(process.execPath,['tests/helpers/prepare-ui-browser.mjs'],{env:browserEnv,stdio:'inherit',windowsHide:true});if(seeded.status!==0)throw Error('UI browser fixture failed');}
     if(process.argv.includes('--compact-dashboard')){const seeded=spawnSync(process.execPath,['tests/helpers/prepare-compact-dashboard.mjs'],{env:browserEnv,stdio:'inherit',windowsHide:true});if(seeded.status!==0)throw Error('High-category dashboard fixture failed');}
+    if(process.argv.includes('--theme-consistency'))for(const file of ['prepare-theme-browser','prepare-theme-authority']){const seeded=spawnSync(process.execPath,['tests/helpers/'+file+'.mjs'],{env:browserEnv,stdio:'inherit',windowsHide:true});if(seeded.status!==0)throw Error('Theme material-state fixture failed');}
     const child = spawn(process.execPath, ['node_modules/next/dist/bin/next', 'dev', '--hostname', 'localhost', '--port', '3103'], { env: browserEnv, stdio: 'inherit', windowsHide: true });
     const stop = () => { if (child.pid) spawnSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore', windowsHide: true }); };
     process.stdin.resume(); process.stdin.once('data', stop); process.once('SIGINT', stop); process.once('SIGTERM', stop);
