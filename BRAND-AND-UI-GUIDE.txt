@@ -77,8 +77,9 @@ SIX CORE MODULES
 2 Online LGU Services: requests, documents, appointments and verified release.
 3 Emergency Hotlines & Alerts: maintained directory/advisories; no fabricated
   official alerts, dispatch capability or unverified emergency contacts.
-4 Municipal Projects & Services: current directory/preview; do not represent
-  sample content as persisted project implementation.
+4 Municipal Projects & Services: Admin-published projects, separately reviewed
+  progress and source-backed office contacts. Keep fictional demo content clearly
+  labelled; never present it as official municipal records or evidence.
 5 Citizen Profiling: separate individual and establishment surveys, drafts,
   protected submissions/history and optional matching/program consent.
 6 Worker Census & Social Profiling: protected records/imports and analytical

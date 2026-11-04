@@ -262,6 +262,10 @@ export type UserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   department?: Prisma.StringNullableFilter<"User"> | string | null
   designation?: Prisma.StringNullableFilter<"User"> | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateListRelationFilter
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateListRelationFilter
+  municipalProjectsReviewed?: Prisma.MunicipalProjectListRelationFilter
+  municipalProjectsCreated?: Prisma.MunicipalProjectListRelationFilter
   censusReviews?: Prisma.CensusReviewListRelationFilter
   censusAudits?: Prisma.CensusAuditListRelationFilter
   censusScope?: Prisma.XOR<Prisma.CensusStaffScopeNullableScalarRelationFilter, Prisma.CensusStaffScopeWhereInput> | null
@@ -324,6 +328,10 @@ export type UserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   department?: Prisma.SortOrderInput | Prisma.SortOrder
   designation?: Prisma.SortOrderInput | Prisma.SortOrder
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateOrderByRelationAggregateInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateOrderByRelationAggregateInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectOrderByRelationAggregateInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectOrderByRelationAggregateInput
   censusReviews?: Prisma.CensusReviewOrderByRelationAggregateInput
   censusAudits?: Prisma.CensusAuditOrderByRelationAggregateInput
   censusScope?: Prisma.CensusStaffScopeOrderByWithRelationInput
@@ -390,6 +398,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   department?: Prisma.StringNullableFilter<"User"> | string | null
   designation?: Prisma.StringNullableFilter<"User"> | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateListRelationFilter
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateListRelationFilter
+  municipalProjectsReviewed?: Prisma.MunicipalProjectListRelationFilter
+  municipalProjectsCreated?: Prisma.MunicipalProjectListRelationFilter
   censusReviews?: Prisma.CensusReviewListRelationFilter
   censusAudits?: Prisma.CensusAuditListRelationFilter
   censusScope?: Prisma.XOR<Prisma.CensusStaffScopeNullableScalarRelationFilter, Prisma.CensusStaffScopeWhereInput> | null
@@ -494,6 +506,10 @@ export type UserCreateInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -556,6 +572,10 @@ export type UserUncheckedCreateInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -618,6 +638,10 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -680,6 +704,10 @@ export type UserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -1500,6 +1528,66 @@ export type UserUpdateOneRequiredWithoutJobRecommendationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutJobRecommendationsInput, Prisma.UserUpdateWithoutJobRecommendationsInput>, Prisma.UserUncheckedUpdateWithoutJobRecommendationsInput>
 }
 
+export type UserCreateNestedOneWithoutMunicipalProjectsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutMunicipalProjectsReviewedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsReviewedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectsReviewedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMunicipalProjectsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectsCreatedInput
+  upsert?: Prisma.UserUpsertWithoutMunicipalProjectsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMunicipalProjectsCreatedInput, Prisma.UserUpdateWithoutMunicipalProjectsCreatedInput>, Prisma.UserUncheckedUpdateWithoutMunicipalProjectsCreatedInput>
+}
+
+export type UserUpdateOneWithoutMunicipalProjectsReviewedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsReviewedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectsReviewedInput
+  upsert?: Prisma.UserUpsertWithoutMunicipalProjectsReviewedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMunicipalProjectsReviewedInput, Prisma.UserUpdateWithoutMunicipalProjectsReviewedInput>, Prisma.UserUncheckedUpdateWithoutMunicipalProjectsReviewedInput>
+}
+
+export type UserCreateNestedOneWithoutMunicipalProjectUpdatesCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectUpdatesCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutMunicipalProjectUpdatesReviewedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesReviewedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectUpdatesReviewedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMunicipalProjectUpdatesCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectUpdatesCreatedInput
+  upsert?: Prisma.UserUpsertWithoutMunicipalProjectUpdatesCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUpdateWithoutMunicipalProjectUpdatesCreatedInput>, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesCreatedInput>
+}
+
+export type UserUpdateOneWithoutMunicipalProjectUpdatesReviewedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesReviewedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMunicipalProjectUpdatesReviewedInput
+  upsert?: Prisma.UserUpsertWithoutMunicipalProjectUpdatesReviewedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUpdateWithoutMunicipalProjectUpdatesReviewedInput>, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesReviewedInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id: string
   name: string
@@ -1516,6 +1604,10 @@ export type UserCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -1577,6 +1669,10 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -1654,6 +1750,10 @@ export type UserUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -1715,6 +1815,10 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -1776,6 +1880,10 @@ export type UserCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -1837,6 +1945,10 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -1914,6 +2026,10 @@ export type UserUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -1975,6 +2091,10 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -2036,6 +2156,10 @@ export type UserCreateWithoutReportsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -2097,6 +2221,10 @@ export type UserUncheckedCreateWithoutReportsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -2163,6 +2291,10 @@ export type UserCreateWithoutAssignedCivicReportsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -2224,6 +2356,10 @@ export type UserUncheckedCreateWithoutAssignedCivicReportsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -2301,6 +2437,10 @@ export type UserUpdateWithoutReportsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -2362,6 +2502,10 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -2434,6 +2578,10 @@ export type UserUpdateWithoutAssignedCivicReportsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -2495,6 +2643,10 @@ export type UserUncheckedUpdateWithoutAssignedCivicReportsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -2556,6 +2708,10 @@ export type UserCreateWithoutReportUpdatesInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -2617,6 +2773,10 @@ export type UserUncheckedCreateWithoutReportUpdatesInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -2694,6 +2854,10 @@ export type UserUpdateWithoutReportUpdatesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -2755,6 +2919,10 @@ export type UserUncheckedUpdateWithoutReportUpdatesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -2816,6 +2984,10 @@ export type UserCreateWithoutStaffPermissionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -2877,6 +3049,10 @@ export type UserUncheckedCreateWithoutStaffPermissionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -2954,6 +3130,10 @@ export type UserUpdateWithoutStaffPermissionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -3015,6 +3195,10 @@ export type UserUncheckedUpdateWithoutStaffPermissionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -3076,6 +3260,10 @@ export type UserCreateWithoutStaffChangesMadeInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -3137,6 +3325,10 @@ export type UserUncheckedCreateWithoutStaffChangesMadeInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -3203,6 +3395,10 @@ export type UserCreateWithoutStaffChangesReceivedInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -3264,6 +3460,10 @@ export type UserUncheckedCreateWithoutStaffChangesReceivedInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -3341,6 +3541,10 @@ export type UserUpdateWithoutStaffChangesMadeInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -3402,6 +3606,10 @@ export type UserUncheckedUpdateWithoutStaffChangesMadeInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -3474,6 +3682,10 @@ export type UserUpdateWithoutStaffChangesReceivedInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -3535,6 +3747,10 @@ export type UserUncheckedUpdateWithoutStaffChangesReceivedInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -3596,6 +3812,10 @@ export type UserCreateWithoutIssuedStaffInvitesInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -3657,6 +3877,10 @@ export type UserUncheckedCreateWithoutIssuedStaffInvitesInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -3734,6 +3958,10 @@ export type UserUpdateWithoutIssuedStaffInvitesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -3795,6 +4023,10 @@ export type UserUncheckedUpdateWithoutIssuedStaffInvitesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -3856,6 +4088,10 @@ export type UserCreateWithoutResolutionSubmissionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -3917,6 +4153,10 @@ export type UserUncheckedCreateWithoutResolutionSubmissionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -3983,6 +4223,10 @@ export type UserCreateWithoutResolutionReviewsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -4044,6 +4288,10 @@ export type UserUncheckedCreateWithoutResolutionReviewsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -4121,6 +4369,10 @@ export type UserUpdateWithoutResolutionSubmissionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -4182,6 +4434,10 @@ export type UserUncheckedUpdateWithoutResolutionSubmissionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -4254,6 +4510,10 @@ export type UserUpdateWithoutResolutionReviewsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -4315,6 +4575,10 @@ export type UserUncheckedUpdateWithoutResolutionReviewsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -4376,6 +4640,10 @@ export type UserCreateWithoutCitizenFeedbacksInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -4437,6 +4705,10 @@ export type UserUncheckedCreateWithoutCitizenFeedbacksInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -4514,6 +4786,10 @@ export type UserUpdateWithoutCitizenFeedbacksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -4575,6 +4851,10 @@ export type UserUncheckedUpdateWithoutCitizenFeedbacksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -4636,6 +4916,10 @@ export type UserCreateWithoutReviewedJobsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -4697,6 +4981,10 @@ export type UserUncheckedCreateWithoutReviewedJobsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -4763,6 +5051,10 @@ export type UserCreateWithoutPostedJobsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -4824,6 +5116,10 @@ export type UserUncheckedCreateWithoutPostedJobsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -4901,6 +5197,10 @@ export type UserUpdateWithoutReviewedJobsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -4962,6 +5262,10 @@ export type UserUncheckedUpdateWithoutReviewedJobsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -5034,6 +5338,10 @@ export type UserUpdateWithoutPostedJobsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -5095,6 +5403,10 @@ export type UserUncheckedUpdateWithoutPostedJobsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -5156,6 +5468,10 @@ export type UserCreateWithoutJobseekerProfileInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -5217,6 +5533,10 @@ export type UserUncheckedCreateWithoutJobseekerProfileInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -5294,6 +5614,10 @@ export type UserUpdateWithoutJobseekerProfileInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -5355,6 +5679,10 @@ export type UserUncheckedUpdateWithoutJobseekerProfileInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -5416,6 +5744,10 @@ export type UserCreateWithoutSpesImportsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -5477,6 +5809,10 @@ export type UserUncheckedCreateWithoutSpesImportsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -5554,6 +5890,10 @@ export type UserUpdateWithoutSpesImportsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -5615,6 +5955,10 @@ export type UserUncheckedUpdateWithoutSpesImportsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -5676,6 +6020,10 @@ export type UserCreateWithoutSpesImportEventsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -5737,6 +6085,10 @@ export type UserUncheckedCreateWithoutSpesImportEventsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -5814,6 +6166,10 @@ export type UserUpdateWithoutSpesImportEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -5875,6 +6231,10 @@ export type UserUncheckedUpdateWithoutSpesImportEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -5936,6 +6296,10 @@ export type UserCreateWithoutJobChangesInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -5997,6 +6361,10 @@ export type UserUncheckedCreateWithoutJobChangesInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -6074,6 +6442,10 @@ export type UserUpdateWithoutJobChangesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -6135,6 +6507,10 @@ export type UserUncheckedUpdateWithoutJobChangesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -6196,6 +6572,10 @@ export type UserCreateWithoutCommunitySurveysInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -6257,6 +6637,10 @@ export type UserUncheckedCreateWithoutCommunitySurveysInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -6334,6 +6718,10 @@ export type UserUpdateWithoutCommunitySurveysInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -6395,6 +6783,10 @@ export type UserUncheckedUpdateWithoutCommunitySurveysInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -6456,6 +6848,10 @@ export type UserCreateWithoutCommunityImportsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -6517,6 +6913,10 @@ export type UserUncheckedCreateWithoutCommunityImportsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -6594,6 +6994,10 @@ export type UserUpdateWithoutCommunityImportsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -6655,6 +7059,10 @@ export type UserUncheckedUpdateWithoutCommunityImportsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -6716,6 +7124,10 @@ export type UserCreateWithoutServiceRequestsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -6777,6 +7189,10 @@ export type UserUncheckedCreateWithoutServiceRequestsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -6843,6 +7259,10 @@ export type UserCreateWithoutAssignedServiceRequestsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -6904,6 +7324,10 @@ export type UserUncheckedCreateWithoutAssignedServiceRequestsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -6970,6 +7394,10 @@ export type UserCreateWithoutApprovedServiceReleasesInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -7031,6 +7459,10 @@ export type UserUncheckedCreateWithoutApprovedServiceReleasesInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -7108,6 +7540,10 @@ export type UserUpdateWithoutServiceRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -7169,6 +7605,10 @@ export type UserUncheckedUpdateWithoutServiceRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -7241,6 +7681,10 @@ export type UserUpdateWithoutAssignedServiceRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -7302,6 +7746,10 @@ export type UserUncheckedUpdateWithoutAssignedServiceRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -7374,6 +7822,10 @@ export type UserUpdateWithoutApprovedServiceReleasesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -7435,6 +7887,10 @@ export type UserUncheckedUpdateWithoutApprovedServiceReleasesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -7496,6 +7952,10 @@ export type UserCreateWithoutVerifiedServiceDocumentsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -7557,6 +8017,10 @@ export type UserUncheckedCreateWithoutVerifiedServiceDocumentsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -7634,6 +8098,10 @@ export type UserUpdateWithoutVerifiedServiceDocumentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -7695,6 +8163,10 @@ export type UserUncheckedUpdateWithoutVerifiedServiceDocumentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -7756,6 +8228,10 @@ export type UserCreateWithoutServiceRequestEventsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -7817,6 +8293,10 @@ export type UserUncheckedCreateWithoutServiceRequestEventsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -7894,6 +8374,10 @@ export type UserUpdateWithoutServiceRequestEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -7955,6 +8439,10 @@ export type UserUncheckedUpdateWithoutServiceRequestEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -8016,6 +8504,10 @@ export type UserCreateWithoutProposedServiceAppointmentsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -8077,6 +8569,10 @@ export type UserUncheckedCreateWithoutProposedServiceAppointmentsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -8154,6 +8650,10 @@ export type UserUpdateWithoutProposedServiceAppointmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -8215,6 +8715,10 @@ export type UserUncheckedUpdateWithoutProposedServiceAppointmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -8276,6 +8780,10 @@ export type UserCreateWithoutProposedServicePickupSlotsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -8337,6 +8845,10 @@ export type UserUncheckedCreateWithoutProposedServicePickupSlotsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -8414,6 +8926,10 @@ export type UserUpdateWithoutProposedServicePickupSlotsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -8475,6 +8991,10 @@ export type UserUncheckedUpdateWithoutProposedServicePickupSlotsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -8536,6 +9056,10 @@ export type UserCreateWithoutNotificationsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -8597,6 +9121,10 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -8674,6 +9202,10 @@ export type UserUpdateWithoutNotificationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -8735,6 +9267,10 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -8796,6 +9332,10 @@ export type UserCreateWithoutWorkAssignmentsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -8857,6 +9397,10 @@ export type UserUncheckedCreateWithoutWorkAssignmentsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -8934,6 +9478,10 @@ export type UserUpdateWithoutWorkAssignmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -8995,6 +9543,10 @@ export type UserUncheckedUpdateWithoutWorkAssignmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -9056,6 +9608,10 @@ export type UserCreateWithoutCreatedServiceDefinitionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -9117,6 +9673,10 @@ export type UserUncheckedCreateWithoutCreatedServiceDefinitionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -9194,6 +9754,10 @@ export type UserUpdateWithoutCreatedServiceDefinitionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -9255,6 +9819,10 @@ export type UserUncheckedUpdateWithoutCreatedServiceDefinitionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -9316,6 +9884,10 @@ export type UserCreateWithoutServiceDefinitionAuditsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -9377,6 +9949,10 @@ export type UserUncheckedCreateWithoutServiceDefinitionAuditsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -9454,6 +10030,10 @@ export type UserUpdateWithoutServiceDefinitionAuditsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -9515,6 +10095,10 @@ export type UserUncheckedUpdateWithoutServiceDefinitionAuditsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -9576,6 +10160,10 @@ export type UserCreateWithoutSurveyWorkspacesInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -9637,6 +10225,10 @@ export type UserUncheckedCreateWithoutSurveyWorkspacesInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -9714,6 +10306,10 @@ export type UserUpdateWithoutSurveyWorkspacesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -9775,6 +10371,10 @@ export type UserUncheckedUpdateWithoutSurveyWorkspacesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -9836,6 +10436,10 @@ export type UserCreateWithoutSurveyRevisionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -9897,6 +10501,10 @@ export type UserUncheckedCreateWithoutSurveyRevisionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -9963,6 +10571,10 @@ export type UserCreateWithoutAuthoredSurveyRevisionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -10024,6 +10636,10 @@ export type UserUncheckedCreateWithoutAuthoredSurveyRevisionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -10101,6 +10717,10 @@ export type UserUpdateWithoutSurveyRevisionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -10162,6 +10782,10 @@ export type UserUncheckedUpdateWithoutSurveyRevisionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -10234,6 +10858,10 @@ export type UserUpdateWithoutAuthoredSurveyRevisionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -10295,6 +10923,10 @@ export type UserUncheckedUpdateWithoutAuthoredSurveyRevisionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -10356,6 +10988,10 @@ export type UserCreateWithoutCitizenProfileConsentInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -10417,6 +11053,10 @@ export type UserUncheckedCreateWithoutCitizenProfileConsentInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -10494,6 +11134,10 @@ export type UserUpdateWithoutCitizenProfileConsentInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -10555,6 +11199,10 @@ export type UserUncheckedUpdateWithoutCitizenProfileConsentInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -10616,6 +11264,10 @@ export type UserCreateWithoutEstablishmentsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -10677,6 +11329,10 @@ export type UserUncheckedCreateWithoutEstablishmentsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -10754,6 +11410,10 @@ export type UserUpdateWithoutEstablishmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -10815,6 +11475,10 @@ export type UserUncheckedUpdateWithoutEstablishmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -10876,6 +11540,10 @@ export type UserCreateWithoutEstablishmentRevisionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -10937,6 +11605,10 @@ export type UserUncheckedCreateWithoutEstablishmentRevisionsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -11014,6 +11686,10 @@ export type UserUpdateWithoutEstablishmentRevisionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -11075,6 +11751,10 @@ export type UserUncheckedUpdateWithoutEstablishmentRevisionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -11136,6 +11816,10 @@ export type UserCreateWithoutEstablishmentOperationsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -11197,6 +11881,10 @@ export type UserUncheckedCreateWithoutEstablishmentOperationsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -11274,6 +11962,10 @@ export type UserUpdateWithoutEstablishmentOperationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -11335,6 +12027,10 @@ export type UserUncheckedUpdateWithoutEstablishmentOperationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -11396,6 +12092,10 @@ export type UserCreateWithoutCensusReviewsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
@@ -11457,6 +12157,10 @@ export type UserUncheckedCreateWithoutCensusReviewsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
@@ -11534,6 +12238,10 @@ export type UserUpdateWithoutCensusReviewsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
@@ -11595,6 +12303,10 @@ export type UserUncheckedUpdateWithoutCensusReviewsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
@@ -11656,6 +12368,10 @@ export type UserCreateWithoutCensusScopeInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
@@ -11717,6 +12433,10 @@ export type UserUncheckedCreateWithoutCensusScopeInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
@@ -11794,6 +12514,10 @@ export type UserUpdateWithoutCensusScopeInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
@@ -11855,6 +12579,10 @@ export type UserUncheckedUpdateWithoutCensusScopeInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
@@ -11916,6 +12644,10 @@ export type UserCreateWithoutCensusRosterMembershipsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -11977,6 +12709,10 @@ export type UserUncheckedCreateWithoutCensusRosterMembershipsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -12054,6 +12790,10 @@ export type UserUpdateWithoutCensusRosterMembershipsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -12115,6 +12855,10 @@ export type UserUncheckedUpdateWithoutCensusRosterMembershipsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -12176,6 +12920,10 @@ export type UserCreateWithoutCensusAuditsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
@@ -12237,6 +12985,10 @@ export type UserUncheckedCreateWithoutCensusAuditsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
@@ -12314,6 +13066,10 @@ export type UserUpdateWithoutCensusAuditsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
@@ -12375,6 +13131,10 @@ export type UserUncheckedUpdateWithoutCensusAuditsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
@@ -12436,6 +13196,10 @@ export type UserCreateWithoutJobMutationsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -12497,6 +13261,10 @@ export type UserUncheckedCreateWithoutJobMutationsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -12574,6 +13342,10 @@ export type UserUpdateWithoutJobMutationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -12635,6 +13407,10 @@ export type UserUncheckedUpdateWithoutJobMutationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -12696,6 +13472,10 @@ export type UserCreateWithoutJobRecommendationsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
@@ -12757,6 +13537,10 @@ export type UserUncheckedCreateWithoutJobRecommendationsInput = {
   updatedAt?: Date | string
   department?: string | null
   designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
@@ -12834,6 +13618,10 @@ export type UserUpdateWithoutJobRecommendationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
@@ -12895,6 +13683,10 @@ export type UserUncheckedUpdateWithoutJobRecommendationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
@@ -12940,12 +13732,1120 @@ export type UserUncheckedUpdateWithoutJobRecommendationsInput = {
   serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
 }
 
+export type UserCreateWithoutMunicipalProjectsCreatedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutMunicipalProjectsCreatedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentUncheckedCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutMunicipalProjectsCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsCreatedInput>
+}
+
+export type UserCreateWithoutMunicipalProjectsReviewedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutMunicipalProjectsReviewedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentUncheckedCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutMunicipalProjectsReviewedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsReviewedInput>
+}
+
+export type UserUpsertWithoutMunicipalProjectsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectsCreatedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectsCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMunicipalProjectsCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectsCreatedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectsCreatedInput>
+}
+
+export type UserUpdateWithoutMunicipalProjectsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMunicipalProjectsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUncheckedUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserUpsertWithoutMunicipalProjectsReviewedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectsReviewedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectsReviewedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectsReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectsReviewedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMunicipalProjectsReviewedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectsReviewedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectsReviewedInput>
+}
+
+export type UserUpdateWithoutMunicipalProjectsReviewedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMunicipalProjectsReviewedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUncheckedUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutMunicipalProjectUpdatesCreatedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutMunicipalProjectUpdatesCreatedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentUncheckedCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutMunicipalProjectUpdatesCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesCreatedInput>
+}
+
+export type UserCreateWithoutMunicipalProjectUpdatesReviewedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutMunicipalProjectUpdatesReviewedInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentUncheckedCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutMunicipalProjectUpdatesReviewedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesReviewedInput>
+}
+
+export type UserUpsertWithoutMunicipalProjectUpdatesCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMunicipalProjectUpdatesCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectUpdatesCreatedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesCreatedInput>
+}
+
+export type UserUpdateWithoutMunicipalProjectUpdatesCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMunicipalProjectUpdatesCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUncheckedUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserUpsertWithoutMunicipalProjectUpdatesReviewedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesReviewedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUncheckedCreateWithoutMunicipalProjectUpdatesReviewedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMunicipalProjectUpdatesReviewedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesReviewedInput>
+}
+
+export type UserUpdateWithoutMunicipalProjectUpdatesReviewedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMunicipalProjectUpdatesReviewedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUncheckedUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+}
+
 
 /**
  * Count Type UserCountOutputType
  */
 
 export type UserCountOutputType = {
+  municipalProjectUpdatesReviewed: number
+  municipalProjectUpdatesCreated: number
+  municipalProjectsReviewed: number
+  municipalProjectsCreated: number
   censusReviews: number
   censusAudits: number
   censusRosterMemberships: number
@@ -12990,6 +14890,10 @@ export type UserCountOutputType = {
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  municipalProjectUpdatesReviewed?: boolean | UserCountOutputTypeCountMunicipalProjectUpdatesReviewedArgs
+  municipalProjectUpdatesCreated?: boolean | UserCountOutputTypeCountMunicipalProjectUpdatesCreatedArgs
+  municipalProjectsReviewed?: boolean | UserCountOutputTypeCountMunicipalProjectsReviewedArgs
+  municipalProjectsCreated?: boolean | UserCountOutputTypeCountMunicipalProjectsCreatedArgs
   censusReviews?: boolean | UserCountOutputTypeCountCensusReviewsArgs
   censusAudits?: boolean | UserCountOutputTypeCountCensusAuditsArgs
   censusRosterMemberships?: boolean | UserCountOutputTypeCountCensusRosterMembershipsArgs
@@ -13041,6 +14945,34 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMunicipalProjectUpdatesReviewedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunicipalProjectUpdateWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMunicipalProjectUpdatesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunicipalProjectUpdateWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMunicipalProjectsReviewedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunicipalProjectWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMunicipalProjectsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunicipalProjectWhereInput
 }
 
 /**
@@ -13347,6 +15279,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   department?: boolean
   designation?: boolean
+  municipalProjectUpdatesReviewed?: boolean | Prisma.User$municipalProjectUpdatesReviewedArgs<ExtArgs>
+  municipalProjectUpdatesCreated?: boolean | Prisma.User$municipalProjectUpdatesCreatedArgs<ExtArgs>
+  municipalProjectsReviewed?: boolean | Prisma.User$municipalProjectsReviewedArgs<ExtArgs>
+  municipalProjectsCreated?: boolean | Prisma.User$municipalProjectsCreatedArgs<ExtArgs>
   censusReviews?: boolean | Prisma.User$censusReviewsArgs<ExtArgs>
   censusAudits?: boolean | Prisma.User$censusAuditsArgs<ExtArgs>
   censusScope?: boolean | Prisma.User$censusScopeArgs<ExtArgs>
@@ -13416,6 +15352,10 @@ export type UserSelectScalar = {
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "firstName" | "lastName" | "middleInitial" | "hasNoMiddleName" | "phoneNumber" | "email" | "emailVerified" | "image" | "role" | "createdAt" | "updatedAt" | "department" | "designation", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  municipalProjectUpdatesReviewed?: boolean | Prisma.User$municipalProjectUpdatesReviewedArgs<ExtArgs>
+  municipalProjectUpdatesCreated?: boolean | Prisma.User$municipalProjectUpdatesCreatedArgs<ExtArgs>
+  municipalProjectsReviewed?: boolean | Prisma.User$municipalProjectsReviewedArgs<ExtArgs>
+  municipalProjectsCreated?: boolean | Prisma.User$municipalProjectsCreatedArgs<ExtArgs>
   censusReviews?: boolean | Prisma.User$censusReviewsArgs<ExtArgs>
   censusAudits?: boolean | Prisma.User$censusAuditsArgs<ExtArgs>
   censusScope?: boolean | Prisma.User$censusScopeArgs<ExtArgs>
@@ -13466,6 +15406,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    municipalProjectUpdatesReviewed: Prisma.$MunicipalProjectUpdatePayload<ExtArgs>[]
+    municipalProjectUpdatesCreated: Prisma.$MunicipalProjectUpdatePayload<ExtArgs>[]
+    municipalProjectsReviewed: Prisma.$MunicipalProjectPayload<ExtArgs>[]
+    municipalProjectsCreated: Prisma.$MunicipalProjectPayload<ExtArgs>[]
     censusReviews: Prisma.$CensusReviewPayload<ExtArgs>[]
     censusAudits: Prisma.$CensusAuditPayload<ExtArgs>[]
     censusScope: Prisma.$CensusStaffScopePayload<ExtArgs> | null
@@ -13867,6 +15811,10 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  municipalProjectUpdatesReviewed<T extends Prisma.User$municipalProjectUpdatesReviewedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$municipalProjectUpdatesReviewedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunicipalProjectUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  municipalProjectUpdatesCreated<T extends Prisma.User$municipalProjectUpdatesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$municipalProjectUpdatesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunicipalProjectUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  municipalProjectsReviewed<T extends Prisma.User$municipalProjectsReviewedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$municipalProjectsReviewedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunicipalProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  municipalProjectsCreated<T extends Prisma.User$municipalProjectsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$municipalProjectsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunicipalProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   censusReviews<T extends Prisma.User$censusReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$censusReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CensusReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   censusAudits<T extends Prisma.User$censusAuditsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$censusAuditsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CensusAuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   censusScope<T extends Prisma.User$censusScopeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$censusScopeArgs<ExtArgs>>): Prisma.Prisma__CensusStaffScopeClient<runtime.Types.Result.GetResult<Prisma.$CensusStaffScopePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -14300,6 +16248,102 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.municipalProjectUpdatesReviewed
+ */
+export type User$municipalProjectUpdatesReviewedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunicipalProjectUpdate
+   */
+  select?: Prisma.MunicipalProjectUpdateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunicipalProjectUpdate
+   */
+  omit?: Prisma.MunicipalProjectUpdateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunicipalProjectUpdateInclude<ExtArgs> | null
+  where?: Prisma.MunicipalProjectUpdateWhereInput
+  orderBy?: Prisma.MunicipalProjectUpdateOrderByWithRelationInput | Prisma.MunicipalProjectUpdateOrderByWithRelationInput[]
+  cursor?: Prisma.MunicipalProjectUpdateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunicipalProjectUpdateScalarFieldEnum | Prisma.MunicipalProjectUpdateScalarFieldEnum[]
+}
+
+/**
+ * User.municipalProjectUpdatesCreated
+ */
+export type User$municipalProjectUpdatesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunicipalProjectUpdate
+   */
+  select?: Prisma.MunicipalProjectUpdateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunicipalProjectUpdate
+   */
+  omit?: Prisma.MunicipalProjectUpdateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunicipalProjectUpdateInclude<ExtArgs> | null
+  where?: Prisma.MunicipalProjectUpdateWhereInput
+  orderBy?: Prisma.MunicipalProjectUpdateOrderByWithRelationInput | Prisma.MunicipalProjectUpdateOrderByWithRelationInput[]
+  cursor?: Prisma.MunicipalProjectUpdateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunicipalProjectUpdateScalarFieldEnum | Prisma.MunicipalProjectUpdateScalarFieldEnum[]
+}
+
+/**
+ * User.municipalProjectsReviewed
+ */
+export type User$municipalProjectsReviewedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunicipalProject
+   */
+  select?: Prisma.MunicipalProjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunicipalProject
+   */
+  omit?: Prisma.MunicipalProjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunicipalProjectInclude<ExtArgs> | null
+  where?: Prisma.MunicipalProjectWhereInput
+  orderBy?: Prisma.MunicipalProjectOrderByWithRelationInput | Prisma.MunicipalProjectOrderByWithRelationInput[]
+  cursor?: Prisma.MunicipalProjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunicipalProjectScalarFieldEnum | Prisma.MunicipalProjectScalarFieldEnum[]
+}
+
+/**
+ * User.municipalProjectsCreated
+ */
+export type User$municipalProjectsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunicipalProject
+   */
+  select?: Prisma.MunicipalProjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunicipalProject
+   */
+  omit?: Prisma.MunicipalProjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunicipalProjectInclude<ExtArgs> | null
+  where?: Prisma.MunicipalProjectWhereInput
+  orderBy?: Prisma.MunicipalProjectOrderByWithRelationInput | Prisma.MunicipalProjectOrderByWithRelationInput[]
+  cursor?: Prisma.MunicipalProjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunicipalProjectScalarFieldEnum | Prisma.MunicipalProjectScalarFieldEnum[]
 }
 
 /**

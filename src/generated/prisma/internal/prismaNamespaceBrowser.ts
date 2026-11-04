@@ -103,7 +103,11 @@ export const ModelName = {
   CensusSourceRecord: 'CensusSourceRecord',
   CensusImportLock: 'CensusImportLock',
   JobMutation: 'JobMutation',
-  JobRecommendation: 'JobRecommendation'
+  JobRecommendation: 'JobRecommendation',
+  MunicipalProject: 'MunicipalProject',
+  MunicipalProjectUpdate: 'MunicipalProjectUpdate',
+  MunicipalOfficeDirectoryEntry: 'MunicipalOfficeDirectoryEntry',
+  MunicipalOfficeDirectoryProposal: 'MunicipalOfficeDirectoryProposal'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1047,6 +1051,94 @@ export const JobRecommendationScalarFieldEnum = {
 export type JobRecommendationScalarFieldEnum = (typeof JobRecommendationScalarFieldEnum)[keyof typeof JobRecommendationScalarFieldEnum]
 
 
+export const MunicipalProjectScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  summary: 'summary',
+  category: 'category',
+  phase: 'phase',
+  leadOffice: 'leadOffice',
+  barangaysJson: 'barangaysJson',
+  sourceUrl: 'sourceUrl',
+  isDemo: 'isDemo',
+  photoPath: 'photoPath',
+  budgetPhp: 'budgetPhp',
+  budgetSourceUrl: 'budgetSourceUrl',
+  fundingSource: 'fundingSource',
+  contractor: 'contractor',
+  procurementUrl: 'procurementUrl',
+  targetCompletion: 'targetCompletion',
+  status: 'status',
+  createdById: 'createdById',
+  reviewedById: 'reviewedById',
+  reviewNote: 'reviewNote',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunicipalProjectScalarFieldEnum = (typeof MunicipalProjectScalarFieldEnum)[keyof typeof MunicipalProjectScalarFieldEnum]
+
+
+export const MunicipalProjectUpdateScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  title: 'title',
+  details: 'details',
+  progressPercent: 'progressPercent',
+  phaseAfter: 'phaseAfter',
+  sourceUrl: 'sourceUrl',
+  status: 'status',
+  reviewNote: 'reviewNote',
+  createdById: 'createdById',
+  reviewedById: 'reviewedById',
+  reviewedAt: 'reviewedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type MunicipalProjectUpdateScalarFieldEnum = (typeof MunicipalProjectUpdateScalarFieldEnum)[keyof typeof MunicipalProjectUpdateScalarFieldEnum]
+
+
+export const MunicipalOfficeDirectoryEntryScalarFieldEnum = {
+  id: 'id',
+  officeName: 'officeName',
+  phone: 'phone',
+  extension: 'extension',
+  email: 'email',
+  officeHours: 'officeHours',
+  address: 'address',
+  notes: 'notes',
+  sourceUrl: 'sourceUrl',
+  isPublished: 'isPublished',
+  verifiedAt: 'verifiedAt',
+  verifiedById: 'verifiedById',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunicipalOfficeDirectoryEntryScalarFieldEnum = (typeof MunicipalOfficeDirectoryEntryScalarFieldEnum)[keyof typeof MunicipalOfficeDirectoryEntryScalarFieldEnum]
+
+
+export const MunicipalOfficeDirectoryProposalScalarFieldEnum = {
+  id: 'id',
+  officeName: 'officeName',
+  phone: 'phone',
+  extension: 'extension',
+  email: 'email',
+  officeHours: 'officeHours',
+  address: 'address',
+  notes: 'notes',
+  sourceUrl: 'sourceUrl',
+  status: 'status',
+  reviewNote: 'reviewNote',
+  submittedById: 'submittedById',
+  reviewedById: 'reviewedById',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt'
+} as const
+
+export type MunicipalOfficeDirectoryProposalScalarFieldEnum = (typeof MunicipalOfficeDirectoryProposalScalarFieldEnum)[keyof typeof MunicipalOfficeDirectoryProposalScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1792,4 +1884,78 @@ export const JobRecommendationOrderByRelevanceFieldEnum = {
 } as const
 
 export type JobRecommendationOrderByRelevanceFieldEnum = (typeof JobRecommendationOrderByRelevanceFieldEnum)[keyof typeof JobRecommendationOrderByRelevanceFieldEnum]
+
+
+export const MunicipalProjectOrderByRelevanceFieldEnum = {
+  id: 'id',
+  title: 'title',
+  summary: 'summary',
+  category: 'category',
+  phase: 'phase',
+  leadOffice: 'leadOffice',
+  barangaysJson: 'barangaysJson',
+  sourceUrl: 'sourceUrl',
+  photoPath: 'photoPath',
+  budgetSourceUrl: 'budgetSourceUrl',
+  fundingSource: 'fundingSource',
+  contractor: 'contractor',
+  procurementUrl: 'procurementUrl',
+  status: 'status',
+  createdById: 'createdById',
+  reviewedById: 'reviewedById',
+  reviewNote: 'reviewNote'
+} as const
+
+export type MunicipalProjectOrderByRelevanceFieldEnum = (typeof MunicipalProjectOrderByRelevanceFieldEnum)[keyof typeof MunicipalProjectOrderByRelevanceFieldEnum]
+
+
+export const MunicipalProjectUpdateOrderByRelevanceFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  title: 'title',
+  details: 'details',
+  phaseAfter: 'phaseAfter',
+  sourceUrl: 'sourceUrl',
+  status: 'status',
+  reviewNote: 'reviewNote',
+  createdById: 'createdById',
+  reviewedById: 'reviewedById'
+} as const
+
+export type MunicipalProjectUpdateOrderByRelevanceFieldEnum = (typeof MunicipalProjectUpdateOrderByRelevanceFieldEnum)[keyof typeof MunicipalProjectUpdateOrderByRelevanceFieldEnum]
+
+
+export const MunicipalOfficeDirectoryEntryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  officeName: 'officeName',
+  phone: 'phone',
+  extension: 'extension',
+  email: 'email',
+  officeHours: 'officeHours',
+  address: 'address',
+  notes: 'notes',
+  sourceUrl: 'sourceUrl',
+  verifiedById: 'verifiedById'
+} as const
+
+export type MunicipalOfficeDirectoryEntryOrderByRelevanceFieldEnum = (typeof MunicipalOfficeDirectoryEntryOrderByRelevanceFieldEnum)[keyof typeof MunicipalOfficeDirectoryEntryOrderByRelevanceFieldEnum]
+
+
+export const MunicipalOfficeDirectoryProposalOrderByRelevanceFieldEnum = {
+  id: 'id',
+  officeName: 'officeName',
+  phone: 'phone',
+  extension: 'extension',
+  email: 'email',
+  officeHours: 'officeHours',
+  address: 'address',
+  notes: 'notes',
+  sourceUrl: 'sourceUrl',
+  status: 'status',
+  reviewNote: 'reviewNote',
+  submittedById: 'submittedById',
+  reviewedById: 'reviewedById'
+} as const
+
+export type MunicipalOfficeDirectoryProposalOrderByRelevanceFieldEnum = (typeof MunicipalOfficeDirectoryProposalOrderByRelevanceFieldEnum)[keyof typeof MunicipalOfficeDirectoryProposalOrderByRelevanceFieldEnum]
 

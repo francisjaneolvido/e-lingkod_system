@@ -37,7 +37,9 @@
     "test:hackathon-import": "node scripts/verify-hackathon-import.mjs",
     "hackathon:report": "node scripts/hackathon/run.mjs report",
     "test:opportunities": "node scripts/verify-opportunities.mjs",
-    "test:opportunities:browser": "node scripts/verify-census-records.mjs --serve --opportunities"
+    "test:opportunities:browser": "node scripts/verify-census-records.mjs --serve --opportunities",
+    "predev": "prisma generate",
+    "prebuild": "prisma generate"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

@@ -4,7 +4,7 @@ import { ArrowUpRight, Camera, Files, BookOpenText, BriefcaseBusiness } from "lu
 const actions = [
   { label: "Mag-report", detail: "Photo, location & tracking", icon: Camera, href: "/reports/new" },
   { label: "Mag-apply", detail: "Permits & clearances", icon: Files, href: "/#service-services" },
-  { label: "Maghanap ng office", detail: "Directory & guides", icon: BookOpenText, href: "/#service-directory" },
+  { label: "Maghanap ng office", detail: "Directory & guides", icon: BookOpenText, href: "/projects" },
   { label: "Maghanap ng trabaho", detail: "Local opportunities", icon: BriefcaseBusiness, href: "/opportunities" },
 ];
 

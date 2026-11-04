@@ -282,3 +282,23 @@ export type JobMutation = Prisma.JobMutationModel
  * 
  */
 export type JobRecommendation = Prisma.JobRecommendationModel
+/**
+ * Model MunicipalProject
+ * 
+ */
+export type MunicipalProject = Prisma.MunicipalProjectModel
+/**
+ * Model MunicipalProjectUpdate
+ * 
+ */
+export type MunicipalProjectUpdate = Prisma.MunicipalProjectUpdateModel
+/**
+ * Model MunicipalOfficeDirectoryEntry
+ * 
+ */
+export type MunicipalOfficeDirectoryEntry = Prisma.MunicipalOfficeDirectoryEntryModel
+/**
+ * Model MunicipalOfficeDirectoryProposal
+ * 
+ */
+export type MunicipalOfficeDirectoryProposal = Prisma.MunicipalOfficeDirectoryProposalModel
