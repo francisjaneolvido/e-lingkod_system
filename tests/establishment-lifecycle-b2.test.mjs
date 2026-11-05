@@ -1,3 +1,4 @@
+import { createLegacyCitizenFixture, registerLegacyCitizenFixture } from './helpers/legacy-citizen-fixture.mjs';
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
@@ -12,7 +13,7 @@ test("B2 persistent ownership, organizational lifecycle, concurrency and separat
   const { prisma } = await import("../src/lib/prisma.ts");
   const api = await import("../src/features/establishments/server/data.ts");
   const year = new Date().getFullYear();
-  const user = async role => { const id=randomUUID(); await prisma.user.create({ data:{id,name:"Establishment Tester",email:id+"@example.test",role} }); return {id,role,name:"Establishment Tester",email:id+"@example.test"}; };
+  const user = async role => { const id=randomUUID(); await createLegacyCitizenFixture(prisma, {id,name:"Establishment Tester",email:id+"@example.test",role}); return {id,role,name:"Establishment Tester",email:id+"@example.test"}; };
   const owner=await user("CITIZEN"), other=await user("CITIZEN"), admin=await user("ADMIN"), staff=await user("LGU_STAFF");
   const beforeIndividuals=await prisma.communitySurvey.count();
   const create=(value=answers,viewer=owner,key=randomUUID())=>api.createEstablishment({...value,requestKey:key},viewer);
@@ -97,7 +98,7 @@ test("B2 persistent ownership, organizational lifecycle, concurrency and separat
     await t.test("real authenticated routes enforce session, current role and same origin",async()=>{
       const {auth}=await import("../src/lib/auth.ts"),route=await import("../src/app/api/establishment-surveys/route.ts");
       const origin=process.env.BETTER_AUTH_URL||"http://localhost:3000";
-      const signup=await auth.api.signUpEmail({body:{name:"Establishment Route Tester",firstName:"Establishment",lastName:"Tester",hasNoMiddleName:true,phoneNumber:"+639171234567",email:randomUUID()+"@example.test",password:"B2-test-only-password-2468"},headers:new Headers({origin}),asResponse:true});assert.equal(signup.status,200);
+      const signup=await registerLegacyCitizenFixture(auth, prisma, {body:{name:"Establishment Route Tester",firstName:"Establishment",lastName:"Tester",hasNoMiddleName:true,phoneNumber:"+639171234567",email:randomUUID()+"@example.test",password:"B2-test-only-password-2468"},headers:new Headers({origin}),asResponse:true});assert.equal(signup.status,200);
       const cookie=signup.headers.getSetCookie().map(x=>x.split(";")[0]).join("; ");const account=await signup.json();
       const req=(method,input,url="",source=origin)=>new Request(origin+"/api/establishment-surveys"+url,{method,headers:{cookie,origin:source,"content-type":"application/json"},...(input?{body:JSON.stringify(input)}:{})});
       assert.equal((await route.GET(new Request(origin+"/api/establishment-surveys"))).status,401);
@@ -118,7 +119,7 @@ test("B2-R1 reopened annual answers do not implicitly replace current establishm
   const year=new Date().getFullYear(),oldYear=year-1;
   const send=(s,status,changes={})=>({...s.answers,establishmentId:s.establishment.id,surveyYear:s.surveyYear,status,expectedRecordVersion:s.recordVersion,expectedVersion:s.workspaceVersion,requestKey:randomUUID(),...changes});
   async function fixture(){
-    const id=randomUUID();await prisma.user.create({data:{id,name:"Historical Owner",email:id+"@example.test",role:"CITIZEN"}});const viewer={id,role:"CITIZEN"};
+    const id=randomUUID();await createLegacyCitizenFixture(prisma, {id,name:"Historical Owner",email:id+"@example.test",role:"CITIZEN"});const viewer={id,role:"CITIZEN"};
     const created=await api.createEstablishment({...answers,surveyYear:oldYear,requestKey:randomUUID()},viewer),read=yr=>api.ownedEstablishmentState(viewer,created.establishmentId,yr);
     await api.saveEstablishmentSurvey(send(await read(oldYear),"SUBMITTED"),viewer);
     await api.saveEstablishmentSurvey(send(await read(year),"SUBMITTED",{...answers,businessName:"Current identity",correctIdentity:true}),viewer);
@@ -157,7 +158,7 @@ test("B2 owned state stays coherent during controlled read/write overlap", { ski
   const hooks=loadServerTypescript();const {prisma}=await import("../src/lib/prisma.ts"),api=await import("../src/features/establishments/server/data.ts");
   const readStarted=Promise.withResolvers(),continueRead=Promise.withResolvers();const transactionMethod=prisma.$transaction,transaction=transactionMethod.bind(prisma);let reading,intercept=false;
   try{
-    const id=randomUUID();await prisma.user.create({data:{id,name:"Snapshot Reader",email:id+"@example.test",role:"CITIZEN"}});const viewer={id,role:"CITIZEN"};
+    const id=randomUUID();await createLegacyCitizenFixture(prisma, {id,name:"Snapshot Reader",email:id+"@example.test",role:"CITIZEN"});const viewer={id,role:"CITIZEN"};
     const created=await api.createEstablishment({...answers,requestKey:randomUUID()},viewer);const initial=await api.ownedEstablishmentState(viewer,created.establishmentId);
     const request={...answers,establishmentId:created.establishmentId,status:"SUBMITTED",expectedRecordVersion:initial.recordVersion,expectedVersion:initial.workspaceVersion,requestKey:randomUUID()};
     await api.saveEstablishmentSurvey(request,viewer);const first=await api.ownedEstablishmentState(viewer,created.establishmentId);
@@ -179,7 +180,7 @@ test("B2-R2 persistent partial staffing rejects contradictions and retains unkno
   assert.match(new URL(process.env.DATABASE_URL).pathname.slice(1),/^elb_b1_test_[a-f0-9]{32}$/);
   const hooks=loadServerTypescript(),{prisma}=await import("../src/lib/prisma.ts"),api=await import("../src/features/establishments/server/data.ts");
   try{
-    const id=randomUUID();await prisma.user.create({data:{id,name:"Partial Workforce",email:id+"@example.test",role:"CITIZEN"}});const viewer={id,role:"CITIZEN"};
+    const id=randomUUID();await createLegacyCitizenFixture(prisma, {id,name:"Partial Workforce",email:id+"@example.test",role:"CITIZEN"});const viewer={id,role:"CITIZEN"};
     const record=await api.createEstablishment({...answers,requestKey:randomUUID()},viewer),read=()=>api.ownedEstablishmentState(viewer,record.establishmentId);
     const send=(state,counts)=>({...answers,...counts,totalWorkers:null,establishmentId:record.establishmentId,surveyYear:state.surveyYear,status:"SUBMITTED",expectedRecordVersion:state.recordVersion,expectedVersion:state.workspaceVersion,requestKey:randomUUID()});
     await t.test("contradictory known subtotal fails before writing versions, receipts or history",async()=>{

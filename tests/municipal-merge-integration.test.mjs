@@ -1,3 +1,4 @@
+import { registerLegacyCitizenFixture } from './helpers/legacy-citizen-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadServerTypescript } from './helpers/load-typescript.mjs';
@@ -15,7 +16,7 @@ test('municipal merged API: authorization, publication, progress, directory and 
   const origin = process.env.BETTER_AUTH_URL;
   async function account(role, department, modules = []) {
     const email = `merge.${role}@example.test`;
-    const result = await auth.api.signUpEmail({ body: { email, password: 'Municipal-browser-2026!', firstName: 'Synthetic', lastName: role, hasNoMiddleName: true, phoneNumber: '+639001234567' }, returnHeaders: true });
+    const result = await registerLegacyCitizenFixture(auth, prisma, { body: { email, password: 'Municipal-browser-2026!', firstName: 'Synthetic', lastName: role, hasNoMiddleName: true, phoneNumber: '+639001234567' }, returnHeaders: true });
     const user = await prisma.user.update({ where: { email }, data: { role: role === 'admin' ? 'ADMIN' : role === 'citizen' ? 'CITIZEN' : 'STAFF', department } });
     for (const staffModule of modules) await prisma.staffPermission.create({ data: { userId: user.id, module: staffModule } });
     return { user, cookie: result.headers.getSetCookie().map(x => x.split(';')[0]).join('; ') };

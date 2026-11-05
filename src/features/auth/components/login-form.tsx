@@ -64,7 +64,7 @@ export function LoginForm() {
             <input type="checkbox" checked={remember} onChange={event => setRemember(event.target.checked)} className="size-4 rounded border-border accent-[#14638f]" />
             Remember me
           </label>
-          <span className="text-xs font-semibold text-muted-foreground" title="Requires an email delivery service">Forgot password? <span className="font-normal text-muted-foreground">(coming soon)</span></span>
+          <Link href="/forgot-password" className="inline-flex min-h-11 items-center text-sm font-semibold text-primary underline underline-offset-4">Forgot password?</Link>
         </div>
         {error && <p role="alert" className="flex items-start gap-2 rounded-xl border border-red-200 bg-danger-soft px-3 py-2.5 text-xs text-destructive"><AlertCircle size={16} className="mt-0.5 shrink-0" />{error}</p>}
         <button type="submit" disabled={pending} className="group flex h-[49px] w-full items-center justify-center gap-2 rounded-xl bg-primary text-[13px] font-bold text-white shadow-[0_12px_22px_rgba(18,85,126,0.14)] transition hover:-translate-y-0.5 hover:bg-primary disabled:cursor-wait disabled:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border">

@@ -6,10 +6,12 @@ import path from "node:path";
 import dotenv from "dotenv";
 import mariadb from "mariadb";
 
-dotenv.config({ quiet: true });
+const configArgument = process.argv.indexOf('--env');
+if (configArgument >= 0 && !process.argv[configArgument + 1]) throw Error('--env requires a private configuration path.');
+dotenv.config({ quiet: true, path: configArgument >= 0 ? process.argv[configArgument + 1] : '.env' });
 const require = createRequire(import.meta.url);
 const configured = new URL(process.env.DATABASE_URL || "missing:");
-if (configured.protocol !== "mysql:") throw new Error("A configured MySQL connection is required; credentials are not printed.");
+if (configured.protocol !== "mysql:" || !['localhost','127.0.0.1','[::1]','::1'].includes(configured.hostname) || configured.search || configured.hash) throw new Error("A configured loopback MySQL connection is required; credentials are not printed.");
 const database = `elb_b1_test_${randomUUID().replaceAll("-", "")}`;
 const testUrl = new URL(configured);
 testUrl.pathname = `/${database}`;

@@ -1,0 +1,2 @@
+'use client';
+export default function VerificationError({reset}:{reset:()=>void}){return <main className="mx-auto max-w-2xl space-y-4 p-8"><h1 className="text-2xl font-bold">Verification status is unavailable</h1><p>Your submission has not been changed. Retry to check the current status before uploading again.</p><button className="min-h-11 rounded-xl bg-primary px-5 text-primary-foreground" onClick={reset}>Retry status</button></main>;}

@@ -119,7 +119,7 @@ export function AdminShell({ children, name, email, role, modules, department }:
       <div className="elb-admin-context" aria-label="Environment">
         <span className="elb-admin-context-dot" />
         <span className="elb-admin-context-copy">{superAdmin ? "Super Admin · All modules" : (department || "LGU staff workspace")}</span>
-        <span className="elb-admin-context-short" title="Hackathon prototype">●</span>
+        <span className="elb-admin-context-short" title="LGU workspace">●</span>
       </div>
 
       <div className="elb-admin-nav-scroll">
@@ -172,7 +172,7 @@ export function AdminShell({ children, name, email, role, modules, department }:
       <main id="admin-content" className="elb-admin-content" tabIndex={-1}>
         <div className="elb-admin-content-inner">{children}</div>
       </main>
-      <footer className="elb-admin-footer"><span>eLingkod Bayan · Community service workspace</span><span>Hackathon prototype — not an official LGU website</span></footer>
+      <footer className="elb-admin-footer"><span>eLingkod Bayan · Community service workspace</span><span>Authorized staff access</span></footer>
     </div>
   </div>;
 }

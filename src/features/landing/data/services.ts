@@ -47,7 +47,7 @@ export const services: Service[] = [
       { icon: Receipt, text: "Permits, clearances and assistance workflows" },
       { icon: BadgeCheck, text: "Application review and status updates" },
     ],
-    note: "Prototype workflow. Exact requirements, fees, processing times and issuing offices must be verified and configured by the implementing LGU before production use.",
+    note: "Check the service guide for current requirements, fees, processing times and issuing offices before submitting a request.",
   },
   {
     id: "emergency", number: "03", title: "Emergency Hotlines & Alerts", shortTitle: "Emergency help",
@@ -58,7 +58,7 @@ export const services: Service[] = [
       { icon: BellRing, text: "Admin-approved advisories for severe weather and emergencies" },
       { icon: Building2, text: "Contact groups: PNP, BFP, hospital, MDRRMO" },
     ],
-    note: "National hotlines are source-backed. Local contacts require Super Admin verification and advisories must be approved before public display. No emergency dispatch is initiated by this prototype.",
+    note: "National hotlines are source-backed. Local contacts require Super Admin verification and advisories must be approved before public display. This website does not initiate emergency dispatch.",
   },
   {
     id: "directory", number: "04", title: "Municipal Projects & Services", shortTitle: "Find an office",

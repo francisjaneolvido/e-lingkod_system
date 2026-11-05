@@ -12,6 +12,7 @@ import type { PortalViewer } from "@/features/landing/landing-page";
 import { services } from "@/features/landing/data/services";
 import { ThemeControl } from "@/components/shared/theme-control";
 import { NotificationBell } from "@/components/notifications/notification-bell";
+import {hasCitizenFeatureAccess} from '@/features/identity/policy';
 
 // Services are drawn from the same six modules as the home page.
 // Unreleased modules point to their existing service previews, never to broken app routes.
@@ -61,7 +62,8 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
   const communityDetails = useRef<HTMLDivElement>(null);
   const communityTrigger = useRef<HTMLButtonElement>(null);
   const staffPortal = viewer?.role === "ADMIN" || viewer?.role === "STAFF";
-  const citizenPortal = viewer?.role === "CITIZEN";
+  const notificationsAllowed = Boolean(viewer && hasCitizenFeatureAccess({role:viewer.role||'',identityStatus:viewer.identityStatus}));
+  const citizenPortal = viewer?.role === "CITIZEN" && notificationsAllowed;
 
   useEffect(() => {
     function closeOnOutsideClick(event: PointerEvent) {
@@ -92,8 +94,8 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
     <>
       <div className="border-b border-border bg-muted">
         <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-5 py-2 text-xs font-medium tracking-wide text-foreground sm:px-8 lg:px-12">
-          <span className="flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5 text-foreground" aria-hidden /> A community-first digital service concept</span>
-          <span className="hidden text-muted-foreground sm:block">Hackathon prototype · Not an official LGU website</span>
+          <span className="flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5 text-foreground" aria-hidden /> Reports, services and community information</span>
+          <span className="hidden text-muted-foreground sm:block">Your community services portal</span>
         </div>
       </div>
       <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-xl">
@@ -216,7 +218,7 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
           <div className="elb-header-utilities">
           {viewer ? (
             <div className="hidden items-center gap-3 lg:flex">
-              <NotificationBell />
+              {notificationsAllowed && <NotificationBell />}
               <details ref={profileDetails} className="group relative">
                 <summary aria-label="Open account menu" className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-border bg-card px-3.5 py-2 text-xs font-bold text-foreground transition hover:bg-muted [&::-webkit-details-marker]:hidden">
                   <span className="flex size-7 items-center justify-center rounded-full bg-muted text-foreground"><UserRound size={16} /></span>
@@ -318,7 +320,7 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                   {citizenPortal && <Link href="/reports" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><ClipboardList size={17}/> My Reports</Link>}
                   {citizenPortal && <Link href="/services/requests" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><Files size={17}/> My LGU Requests</Link>}
                   {(viewer.role === "ADMIN" || viewer.role === "STAFF") && <Link href="/admin" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><ShieldCheck size={17}/> LGU workspace</Link>}
-                  <div className="flex items-center justify-between px-4 py-2 text-xs text-muted-foreground"><span>Notifications</span><NotificationBell /></div>
+              {notificationsAllowed && <div className="flex items-center justify-between px-4 py-2 text-xs text-muted-foreground"><span>Notifications</span><NotificationBell /></div>}
                   <div className="px-2 pt-2"><LogoutButton fullWidth /></div>
                 </div>
               ) : (

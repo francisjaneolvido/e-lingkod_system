@@ -397,6 +397,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
+  CitizenIdentitySubmission: 'CitizenIdentitySubmission',
+  CitizenIdentityReview: 'CitizenIdentityReview',
+  RateLimit: 'RateLimit',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
@@ -469,10 +472,208 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity" | "communitySurvey" | "governmentActivity" | "communityImportBatch" | "communityImportRecord" | "serviceRequest" | "serviceRequestDocument" | "serviceRequestEvent" | "serviceAppointment" | "servicePickupSlot" | "notification" | "workAssignment" | "serviceDefinition" | "serviceDefinitionAudit" | "emergencyHotline" | "emergencyHotlineProposal" | "emergencyAlert" | "emergencyActionLog" | "communitySurveyWorkspace" | "communitySurveyRevision" | "citizenProfileConsent" | "establishment" | "establishmentSurvey" | "establishmentRevision" | "establishmentOperation" | "censusReview" | "censusStaffScope" | "censusAssistanceRoster" | "censusAssistanceMember" | "censusAudit" | "censusSourceRecord" | "censusImportLock" | "jobMutation" | "jobRecommendation" | "municipalProject" | "municipalProjectUpdate" | "municipalOfficeDirectoryEntry" | "municipalOfficeDirectoryProposal"
+    modelProps: "citizenIdentitySubmission" | "citizenIdentityReview" | "rateLimit" | "user" | "session" | "account" | "verification" | "civicReport" | "reportPhoto" | "reportUpdate" | "staffPermission" | "staffAccessAudit" | "staffInvitation" | "resolutionSubmission" | "resolutionProofPhoto" | "citizenResolutionFeedback" | "citizenFeedbackPhoto" | "jobOpportunity" | "jobseekerProfile" | "spesImportBatch" | "spesSurveyRecord" | "spesImportEvent" | "jobActivity" | "communitySurvey" | "governmentActivity" | "communityImportBatch" | "communityImportRecord" | "serviceRequest" | "serviceRequestDocument" | "serviceRequestEvent" | "serviceAppointment" | "servicePickupSlot" | "notification" | "workAssignment" | "serviceDefinition" | "serviceDefinitionAudit" | "emergencyHotline" | "emergencyHotlineProposal" | "emergencyAlert" | "emergencyActionLog" | "communitySurveyWorkspace" | "communitySurveyRevision" | "citizenProfileConsent" | "establishment" | "establishmentSurvey" | "establishmentRevision" | "establishmentOperation" | "censusReview" | "censusStaffScope" | "censusAssistanceRoster" | "censusAssistanceMember" | "censusAudit" | "censusSourceRecord" | "censusImportLock" | "jobMutation" | "jobRecommendation" | "municipalProject" | "municipalProjectUpdate" | "municipalOfficeDirectoryEntry" | "municipalOfficeDirectoryProposal"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
+    CitizenIdentitySubmission: {
+      payload: Prisma.$CitizenIdentitySubmissionPayload<ExtArgs>
+      fields: Prisma.CitizenIdentitySubmissionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CitizenIdentitySubmissionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentitySubmissionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CitizenIdentitySubmissionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentitySubmissionPayload>
+        }
+        findFirst: {
+          args: Prisma.CitizenIdentitySubmissionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentitySubmissionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CitizenIdentitySubmissionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentitySubmissionPayload>
+        }
+        findMany: {
+          args: Prisma.CitizenIdentitySubmissionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentitySubmissionPayload>[]
+        }
+        create: {
+          args: Prisma.CitizenIdentitySubmissionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentitySubmissionPayload>
+        }
+        createMany: {
+          args: Prisma.CitizenIdentitySubmissionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CitizenIdentitySubmissionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentitySubmissionPayload>
+        }
+        update: {
+          args: Prisma.CitizenIdentitySubmissionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentitySubmissionPayload>
+        }
+        deleteMany: {
+          args: Prisma.CitizenIdentitySubmissionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CitizenIdentitySubmissionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CitizenIdentitySubmissionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentitySubmissionPayload>
+        }
+        aggregate: {
+          args: Prisma.CitizenIdentitySubmissionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCitizenIdentitySubmission>
+        }
+        groupBy: {
+          args: Prisma.CitizenIdentitySubmissionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CitizenIdentitySubmissionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CitizenIdentitySubmissionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CitizenIdentitySubmissionCountAggregateOutputType> | number
+        }
+      }
+    }
+    CitizenIdentityReview: {
+      payload: Prisma.$CitizenIdentityReviewPayload<ExtArgs>
+      fields: Prisma.CitizenIdentityReviewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CitizenIdentityReviewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentityReviewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CitizenIdentityReviewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentityReviewPayload>
+        }
+        findFirst: {
+          args: Prisma.CitizenIdentityReviewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentityReviewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CitizenIdentityReviewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentityReviewPayload>
+        }
+        findMany: {
+          args: Prisma.CitizenIdentityReviewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentityReviewPayload>[]
+        }
+        create: {
+          args: Prisma.CitizenIdentityReviewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentityReviewPayload>
+        }
+        createMany: {
+          args: Prisma.CitizenIdentityReviewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CitizenIdentityReviewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentityReviewPayload>
+        }
+        update: {
+          args: Prisma.CitizenIdentityReviewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentityReviewPayload>
+        }
+        deleteMany: {
+          args: Prisma.CitizenIdentityReviewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CitizenIdentityReviewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CitizenIdentityReviewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CitizenIdentityReviewPayload>
+        }
+        aggregate: {
+          args: Prisma.CitizenIdentityReviewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCitizenIdentityReview>
+        }
+        groupBy: {
+          args: Prisma.CitizenIdentityReviewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CitizenIdentityReviewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CitizenIdentityReviewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CitizenIdentityReviewCountAggregateOutputType> | number
+        }
+      }
+    }
+    RateLimit: {
+      payload: Prisma.$RateLimitPayload<ExtArgs>
+      fields: Prisma.RateLimitFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RateLimitFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimitPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RateLimitFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimitPayload>
+        }
+        findFirst: {
+          args: Prisma.RateLimitFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimitPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RateLimitFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimitPayload>
+        }
+        findMany: {
+          args: Prisma.RateLimitFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimitPayload>[]
+        }
+        create: {
+          args: Prisma.RateLimitCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimitPayload>
+        }
+        createMany: {
+          args: Prisma.RateLimitCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.RateLimitDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimitPayload>
+        }
+        update: {
+          args: Prisma.RateLimitUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimitPayload>
+        }
+        deleteMany: {
+          args: Prisma.RateLimitDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RateLimitUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.RateLimitUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimitPayload>
+        }
+        aggregate: {
+          args: Prisma.RateLimitAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRateLimit>
+        }
+        groupBy: {
+          args: Prisma.RateLimitGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RateLimitGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RateLimitCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RateLimitCountAggregateOutputType> | number
+        }
+      }
+    }
     User: {
       payload: Prisma.$UserPayload<ExtArgs>
       fields: Prisma.UserFieldRefs
@@ -4274,6 +4475,45 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const CitizenIdentitySubmissionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  revision: 'revision',
+  documentLabel: 'documentLabel',
+  submissionKey: 'submissionKey',
+  detailsJson: 'detailsJson',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  sha256: 'sha256',
+  data: 'data',
+  submittedAt: 'submittedAt'
+} as const
+
+export type CitizenIdentitySubmissionScalarFieldEnum = (typeof CitizenIdentitySubmissionScalarFieldEnum)[keyof typeof CitizenIdentitySubmissionScalarFieldEnum]
+
+
+export const CitizenIdentityReviewScalarFieldEnum = {
+  id: 'id',
+  submissionId: 'submissionId',
+  reviewerId: 'reviewerId',
+  decision: 'decision',
+  reason: 'reason',
+  reviewedAt: 'reviewedAt'
+} as const
+
+export type CitizenIdentityReviewScalarFieldEnum = (typeof CitizenIdentityReviewScalarFieldEnum)[keyof typeof CitizenIdentityReviewScalarFieldEnum]
+
+
+export const RateLimitScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  count: 'count',
+  lastRequest: 'lastRequest'
+} as const
+
+export type RateLimitScalarFieldEnum = (typeof RateLimitScalarFieldEnum)[keyof typeof RateLimitScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -4286,6 +4526,8 @@ export const UserScalarFieldEnum = {
   emailVerified: 'emailVerified',
   image: 'image',
   role: 'role',
+  identityStatus: 'identityStatus',
+  identityVersion: 'identityVersion',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   department: 'department',
@@ -5295,6 +5537,38 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const CitizenIdentitySubmissionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  documentLabel: 'documentLabel',
+  submissionKey: 'submissionKey',
+  detailsJson: 'detailsJson',
+  mimeType: 'mimeType',
+  sha256: 'sha256'
+} as const
+
+export type CitizenIdentitySubmissionOrderByRelevanceFieldEnum = (typeof CitizenIdentitySubmissionOrderByRelevanceFieldEnum)[keyof typeof CitizenIdentitySubmissionOrderByRelevanceFieldEnum]
+
+
+export const CitizenIdentityReviewOrderByRelevanceFieldEnum = {
+  id: 'id',
+  submissionId: 'submissionId',
+  reviewerId: 'reviewerId',
+  decision: 'decision',
+  reason: 'reason'
+} as const
+
+export type CitizenIdentityReviewOrderByRelevanceFieldEnum = (typeof CitizenIdentityReviewOrderByRelevanceFieldEnum)[keyof typeof CitizenIdentityReviewOrderByRelevanceFieldEnum]
+
+
+export const RateLimitOrderByRelevanceFieldEnum = {
+  id: 'id',
+  key: 'key'
+} as const
+
+export type RateLimitOrderByRelevanceFieldEnum = (typeof RateLimitOrderByRelevanceFieldEnum)[keyof typeof RateLimitOrderByRelevanceFieldEnum]
+
+
 export const NullsOrder = {
   first: 'first',
   last: 'last'
@@ -5313,6 +5587,7 @@ export const UserOrderByRelevanceFieldEnum = {
   email: 'email',
   image: 'image',
   role: 'role',
+  identityStatus: 'identityStatus',
   department: 'department',
   designation: 'designation'
 } as const
@@ -6122,9 +6397,16 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
 
 
 /**
- * Reference to a field of type 'Boolean'
+ * Reference to a field of type 'Int'
  */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Bytes'
+ */
+export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
     
 
 
@@ -6132,6 +6414,20 @@ export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -6153,20 +6449,6 @@ export type EnumCivicReportStatusFieldRefInput<$PrismaModel> = FieldRefInputType
  * Reference to a field of type 'ReportPriority'
  */
 export type EnumReportPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReportPriority'>
-    
-
-
-/**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
- * Reference to a field of type 'Bytes'
- */
-export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
     
 
 
@@ -6355,6 +6637,9 @@ export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions 
  */
 export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
+  citizenIdentitySubmission?: Prisma.CitizenIdentitySubmissionOmit
+  citizenIdentityReview?: Prisma.CitizenIdentityReviewOmit
+  rateLimit?: Prisma.RateLimitOmit
   user?: Prisma.UserOmit
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit

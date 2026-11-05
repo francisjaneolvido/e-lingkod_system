@@ -6,6 +6,6 @@ for(const files of [
  ['tests/opportunity-notice-locks-b5.test.mjs','tests/vacancy-request-b5.test.mjs'],
  ['tests/demo-opportunity-upgrade-b5.test.mjs'],
 ]){
- const result=spawnSync(process.execPath,['scripts/verify-census-records.mjs',...files],{env:process.env,stdio:'inherit',windowsHide:true});
+ const result=spawnSync(process.execPath,['scripts/verify-census-records.mjs',...process.argv.slice(2),...files],{env:process.env,stdio:'inherit',windowsHide:true});
  if(result.status!==0){process.exitCode=result.status??1;break;}
 }

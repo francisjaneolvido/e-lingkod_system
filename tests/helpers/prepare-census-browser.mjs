@@ -1,3 +1,4 @@
+import { registerLegacyCitizenFixture } from './legacy-citizen-fixture.mjs';
 import { loadServerTypescript } from './load-typescript.mjs';
 if (!/^elb_b3_test_[a-f0-9]{32}$/.test(process.env.ELB_B3_TEST_DATABASE || '')) throw new Error('Disposable B3 browser target required');
 const hook = loadServerTypescript();
@@ -5,7 +6,7 @@ const { prisma } = await import('../../src/lib/prisma.ts');
 const { auth } = await import('../../src/lib/auth.ts');
 const { spawnSync } = await import('node:child_process');
 try {
-  for (const name of ['Citizen', 'Staff', 'Denied', 'Admin', 'Administrator']) await auth.api.signUpEmail({ body: { firstName: 'Browser', lastName: name, hasNoMiddleName: true, phoneNumber: '+639001234567', email: `b3.${name.toLowerCase()}@example.test`, password: 'B3-browser-password-2026!', name: 'Browser ' + name } });
+  for (const name of ['Citizen', 'Staff', 'Denied', 'Admin', 'Administrator']) await registerLegacyCitizenFixture(auth, prisma, { body: { firstName: 'Browser', lastName: name, hasNoMiddleName: true, phoneNumber: '+639001234567', email: `b3.${name.toLowerCase()}@example.test`, password: 'B3-browser-password-2026!', name: 'Browser ' + name } });
   const promote = spawnSync(process.execPath, ['scripts/set-admin.mjs', 'b3.admin@example.test'], { env: process.env, stdio: 'inherit', windowsHide: true });
   if (promote.status !== 0) throw new Error('Test Admin provision failed');
   const promoteSecond = spawnSync(process.execPath, ['scripts/set-admin.mjs', 'b3.administrator@example.test'], { env: process.env, stdio: 'inherit', windowsHide: true });

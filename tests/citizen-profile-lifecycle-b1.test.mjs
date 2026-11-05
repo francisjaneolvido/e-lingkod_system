@@ -1,3 +1,4 @@
+import { createLegacyCitizenFixture, registerLegacyCitizenFixture } from './helpers/legacy-citizen-fixture.mjs';
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
@@ -13,7 +14,7 @@ test("B1 real database lifecycle, history, consent and ownership", { skip: !proc
   const route = await import("../src/app/api/community-survey/route.ts");
   try {
     const origin = process.env.BETTER_AUTH_URL || "http://localhost:3000";
-    const signedUp = await auth.api.signUpEmail({ body: { name: "Civic Tester", firstName: "Civic", lastName: "Tester", hasNoMiddleName: true, phoneNumber: "+639171234567", email: `b1-${randomUUID()}@example.test`, password: "B1-test-only-password-2468" }, headers: new Headers({ origin }), asResponse: true });
+    const signedUp = await registerLegacyCitizenFixture(auth, prisma, { body: { name: "Civic Tester", firstName: "Civic", lastName: "Tester", hasNoMiddleName: true, phoneNumber: "+639171234567", email: `b1-${randomUUID()}@example.test`, password: "B1-test-only-password-2468" }, headers: new Headers({ origin }), asResponse: true });
     assert.equal(signedUp.status, 200, await signedUp.clone().text());
     const cookie = signedUp.headers.getSetCookie().map(value => value.split(";")[0]).join("; ");
     assert(cookie, "real Better Auth signup must issue an authenticated session cookie");
@@ -96,7 +97,7 @@ test("B1 real database lifecycle, history, consent and ownership", { skip: !proc
     });
     await t.test("public and staff requests are denied and another citizen cannot select the owner's records", async () => {
       assert.equal((await route.GET(request("GET", null, ""))).status, 401);
-      const second = await auth.api.signUpEmail({ body: { name: "Other Tester", firstName: "Other", lastName: "Tester", hasNoMiddleName: true, phoneNumber: "+639171234568", email: `other-${randomUUID()}@example.test`, password: "B1-test-only-password-2468" }, headers: new Headers({ origin }), asResponse: true });
+      const second = await registerLegacyCitizenFixture(auth, prisma, { body: { name: "Other Tester", firstName: "Other", lastName: "Tester", hasNoMiddleName: true, phoneNumber: "+639171234568", email: `other-${randomUUID()}@example.test`, password: "B1-test-only-password-2468" }, headers: new Headers({ origin }), asResponse: true });
       assert.equal(second.status, 200, await second.clone().text());
       const otherCookie = second.headers.getSetCookie().map(v => v.split(";")[0]).join("; ");
       const other = await second.json();
@@ -163,7 +164,7 @@ test("R2 coherent owned state rejects overwriting a submission committed between
   const restore = () => { for (const undo of restores.splice(0).reverse()) undo(); };
   try {
     const id = randomUUID(), year = new Date().getFullYear();
-    await prisma.user.create({ data: { id, name: "Snapshot Tester", email: id + "@example.test", role: "CITIZEN" } });
+    await createLegacyCitizenFixture(prisma, { id, name: "Snapshot Tester", email: id + "@example.test", role: "CITIZEN" });
     const viewer = { id, role: "CITIZEN" };
     const answers = { status: "SUBMITTED", surveyYear: year, barangay: "Batong Malake", ageGroup: "25-34", educationLevel: "COLLEGE", employmentStatus: "EMPLOYED_FULL_TIME", skills: ["Data Entry"], consentAggregated: true, consentOpportunityRecommendations: false };
     const first = await saveCitizenSurvey({ ...answers, expectedVersion: 0, expectedConsentVersion: 0, requestKey: randomUUID() }, viewer);

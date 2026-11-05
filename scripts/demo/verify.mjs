@@ -1,10 +1,20 @@
 import fs from 'node:fs';
+import path from 'node:path';
 import assert from 'node:assert/strict';
 import { setTimeout as delay } from 'node:timers/promises';
 import { accounts, staffGrants, datasetVersion, referenceYear } from '../../demo/fixtures/dataset.mjs';
 import { connect, assertReady } from './database.mjs';
 
 const groups = (rows, key) => Object.fromEntries(Object.entries(Object.groupBy(rows, key)).map(([k, v]) => [k, v.length]).sort(([a], [b]) => a.localeCompare(b)));
+export function demoImportExpectations(rows, year) {
+  assert.deepEqual(rows.map(row=>row.participantRef).sort(),Array.from({length:6},(_,index)=>'DEMO-IMPORT-'+String(index+1).padStart(3,'0')),'Legacy import must contain exactly its six known synthetic references.');
+  const modern=rows.every(row=>row.sourceKey==='DEMO-LEGACY-REGISTRATION'&&row.surveyYear===year&&row.batch.sourceKey==='DEMO-LEGACY-REGISTRATION'&&row.batch.surveyYear===year);
+  const historical=rows.every(row=>row.sourceKey===null&&row.surveyYear===null&&row.batch.sourceKey===null&&row.batch.surveyYear===null);
+  assert(modern||historical,'Unexpected or mixed legacy fixture source/year context.');
+  assert.deepEqual(groups(rows,row=>row.outcome),modern?{ACCEPTED:5,REJECTED:1}:{ACCEPTED:6},'Known legacy fixture outcomes changed.');
+  if(modern)assert.equal(rows.find(row=>row.participantRef==='DEMO-IMPORT-006').outcome,'REJECTED','Unmapped Timugan is retained as rejected, never silently normalized.');
+  return {currentBySource:{'DEMO-B3-SOURCE':2,...(modern?{'DEMO-LEGACY-REGISTRATION':5}:{})},unknownSurveyYearExcluded:modern?0:6,notAccepted:modern?6:5};
+}
 export async function counts(prisma) {
   const [users, surveys, workspaces, consent, revisions, establishments, annual, establishmentRevisions, jobs, imports] = await Promise.all([
     prisma.user.findMany(), prisma.communitySurvey.findMany(), prisma.communitySurveyWorkspace.findMany(), prisma.citizenProfileConsent.findMany(), prisma.communitySurveyRevision.findMany(),
@@ -22,21 +32,22 @@ export async function counts(prisma) {
   };
 }
 function csv(value) { return '"' + String(value ?? '').replaceAll('"', '""') + '"'; }
-export async function writeAccounts(prisma) {
+export async function writeAccounts(prisma, {artifactDirectory='demo'}={}) {
   const lines = [['displayName', 'email', 'password', 'role', 'scenario', 'userId', 'establishmentId'].join(',')];
   for (const a of accounts) {
     const user = await prisma.user.findUniqueOrThrow({ where: { email: a.email } });
     const establishment = a.group === 'establishment' ? await prisma.establishment.findFirst({ where: { ownerId: user.id } }) : null;
     lines.push([user.name, a.email, a.password, user.role, `${a.group}:${a.scenario}`, user.id, establishment?.id].map(csv).join(','));
   }
-  fs.writeFileSync('demo/accounts.csv', lines.join('\n') + '\n');
+  fs.mkdirSync(artifactDirectory,{recursive:true});
+  fs.writeFileSync(path.join(artifactDirectory,'accounts.csv'), lines.join('\n') + '\n');
 }
-export async function verify(config, target, { login = true } = {}) {
+export async function verify(config, target, { login = true, artifactDirectory='demo' } = {}) {
   const db = await connect(target);
   const { prisma } = await import('../../src/lib/prisma.ts');
   try {
     const readyState=await assertReady(db);
-    const expected = JSON.parse(fs.readFileSync('demo/expected-counts.json', 'utf8'));
+    const expected = JSON.parse(fs.readFileSync(path.join(artifactDirectory,'expected-counts.json'), 'utf8'));
     assert.equal(expected.datasetVersion, datasetVersion);
     assert.deepEqual(await counts(prisma), expected.counts);
     assert.equal(expected.counts.accounts.total, 108); assert.equal(expected.counts.accounts.emailVerified, 0);
@@ -66,9 +77,13 @@ export async function verify(config, target, { login = true } = {}) {
     const workforce = organizations.groups[0].measures.find(m => m.key === 'totalWorkers');
     assert.equal(workforce.sum, expected.analytics.establishment.knownWorkerSum); assert.equal(workforce.known, expected.analytics.establishment.knownTotals); assert.equal(workforce.unknown, expected.analytics.establishment.unknownTotals);
     const observations = await analytics(analyticsAdmin, 'IMPORTS');
-    assert.deepEqual(Object.fromEntries(observations.groups.map(g => [g.source, g.count])), expected.analytics.imports.currentBySource);
-    assert.equal(observations.excluded.unknownSurveyYear, expected.analytics.imports.unknownSurveyYearExcluded);
-    assert.equal(observations.excluded.notAccepted, expected.analytics.imports.notAccepted);
+    const legacyBatch=readyState.completed['import:accepted']?.batchId;
+    assert(legacyBatch,'Known legacy import checkpoint is required.');
+    const legacyRows=await prisma.communityImportRecord.findMany({where:{batchId:legacyBatch},select:{participantRef:true,sourceKey:true,surveyYear:true,outcome:true,batch:{select:{sourceKey:true,surveyYear:true}}}});
+    const importExpected=demoImportExpectations(legacyRows,referenceYear);
+    assert.deepEqual(Object.fromEntries(observations.groups.map(g => [g.source, g.count])), importExpected.currentBySource);
+    assert.equal(observations.excluded.unknownSurveyYear??0, importExpected.unknownSurveyYearExcluded);
+    assert.equal(observations.excluded.notAccepted, importExpected.notAccepted);
     assert.equal((await analytics(analyticsAdmin, 'SPES')).groups.reduce((n, g) => n + g.count, 0), expected.analytics.spes.currentRealObservations);
     assert.equal((await analytics(analyticsAdmin, 'SPES', referenceYear, { dataset: 'ALL' })).groups.length, expected.analytics.spes.currentAllKinds);
     for (const [email, count] of Object.entries(expected.analytics.staffRespondents)) assert.equal((await analytics(await prisma.user.findUniqueOrThrow({ where: { email } }), 'INDIVIDUAL')).groups[0].count, count);

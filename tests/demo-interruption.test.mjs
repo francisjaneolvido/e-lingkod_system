@@ -1,3 +1,4 @@
+import { createLegacyCitizenFixture } from './helpers/legacy-citizen-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadServerTypescript } from './helpers/load-typescript.mjs';
@@ -12,7 +13,7 @@ test('DEMO-R1/R2 persistent prepared operation crash/recovery', { skip: !enabled
   const mariadb = (await import('mariadb')).default;
   const u = new URL(process.env.DATABASE_URL);
   const db = await mariadb.createConnection({ host: u.hostname, user: decodeURIComponent(u.username), password: decodeURIComponent(u.password), port: Number(u.port || 3306), database: u.pathname.slice(1), dateStrings: true, bigIntAsNumber: true });
-  const user = await prisma.user.create({ data: { id: 'b3-demo-owner', name: 'Demo Recovery', email: 'recovery@example.test', role: 'CITIZEN' } });
+  const user = await createLegacyCitizenFixture(prisma, { id: 'b3-demo-owner', name: 'Demo Recovery', email: 'recovery@example.test', role: 'CITIZEN' });
   let state;
   const reset = async () => { state = { completed: {}, pending: null, fingerprint: digest(await snapshot(db)) }; };
   const persist = async value => { await db.query('CREATE TABLE IF NOT EXISTS _elb_demo_meta(name VARCHAR(60) PRIMARY KEY,value LONGTEXT)'); await db.query("REPLACE INTO _elb_demo_meta VALUES('journal-test',?)", [JSON.stringify(value)]); };

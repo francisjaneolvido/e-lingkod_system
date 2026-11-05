@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarClock, CheckCircle2, FileUp, Info, ShieldCheck } from "lucide-react";
 import { currentViewer } from "@/lib/access";
+import {hasCitizenFeatureAccess} from '@/features/identity/policy';
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { serviceForClient } from "@/features/services/catalog";
@@ -17,10 +18,10 @@ export default async function ServicePage({ params }: { params: Promise<{service
   const viewer = await currentViewer();
   const service = await resolveServiceDefinition(serviceKey);
   if (!service) notFound();
-  const citizen = viewer?.role === "CITIZEN";
+  const citizen = viewer?.role === "CITIZEN" && hasCitizenFeatureAccess(viewer);
   const Icon = service.icon;
 
-  return <><SiteHeader viewer={viewer ? { name:viewer.name, email:viewer.email, role:viewer.role } : null}/><main className="min-h-screen bg-background px-5 py-7 sm:px-8 lg:px-12"><div className="mx-auto max-w-[1160px]">
+  return <><SiteHeader viewer={viewer ? { name:viewer.name, email:viewer.email, role:viewer.role,identityStatus:viewer.identityStatus } : null}/><main className="min-h-screen bg-background px-5 py-7 sm:px-8 lg:px-12"><div className="mx-auto max-w-[1160px]">
     <Link href="/services" className="inline-flex items-center gap-2 text-xs font-bold text-foreground"><ArrowLeft size={15}/> All online services</Link>
 
     <section className="mt-4 rounded-[22px] border border-border bg-card p-5 sm:p-6">
@@ -32,7 +33,7 @@ export default async function ServicePage({ params }: { params: Promise<{service
     </section>
 
     <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
-      <section>{citizen ? <ServiceStartForm service={serviceForClient(service)}/> : viewer ? <AccessCard title="Citizen account required" body="LGU staff accounts process requests from the protected workspace. Use a Citizen account to submit a personal service request." href="/admin/services" action="Open LGU workspace"/> : <AccessCard title="Sign in to start this request" body="Use your Citizen account so the request can be saved, requirements can be uploaded securely, and every status update can be tracked." href={`/login?next=${encodeURIComponent(`/services/${service.key}`)}`} action="Sign in as citizen"/>}</section>
+      <section>{citizen ? <ServiceStartForm service={serviceForClient(service)}/> : viewer?.role==="CITIZEN" ? <AccessCard title="ID review required" body="Submit your ID and wait for an authenticated Admin decision before starting a service request. You can continue browsing public service information." href="/verification" action="View verification status"/> : viewer ? <AccessCard title="Citizen account required" body="LGU staff accounts process requests from the protected workspace. Use a Citizen account to submit a personal service request." href="/admin/services" action="Open LGU workspace"/> : <AccessCard title="Sign in to start this request" body="Use your Citizen account so the request can be saved, requirements can be uploaded securely, and every status update can be tracked." href={`/login?next=${encodeURIComponent(`/services/${service.key}`)}`} action="Sign in as citizen"/>}</section>
 
       <aside className="space-y-3 lg:sticky lg:top-4 lg:self-start">
         <section className="rounded-[18px] border border-border bg-card p-4"><div className="flex items-center gap-2"><CheckCircle2 size={16} className="text-success"/><h2 className="text-xs font-black text-foreground">Prepare before submitting</h2></div><div className="mt-3 space-y-2.5">{service.requirements.map(requirement => <div key={requirement.key} className="rounded-xl bg-card px-3 py-2.5"><div className="flex items-start gap-2"><span className={`mt-1 size-1.5 shrink-0 rounded-full ${requirement.required ? "bg-success-solid" : "bg-accent"}`}/><div><strong className="text-xs leading-4 text-foreground">{requirement.label}</strong>{requirement.condition ? <span className="ml-1 text-xs font-bold text-warning-foreground">CONDITIONAL</span> : !requirement.required && <span className="ml-1 text-xs font-bold text-muted-foreground">OPTIONAL</span>}{requirement.examples && <p className="mt-1 text-xs leading-4 text-muted-foreground">Examples: {requirement.examples}</p>}{requirement.help && <p className="mt-1 text-xs leading-4 text-muted-foreground">{requirement.help}</p>}</div></div></div>)}</div></section>

@@ -14,6 +14,14 @@ export function verifiedSqlText(sql, expectedHash) {
   assert.equal(sqlHash(canonical), expectedHash, 'Export checksum mismatch');
   return canonical;
 }
+export async function assertIdentityFreeDemoExport(db) {
+  const existing=await tables(db);
+  for(const table of ['citizen_identity_submission','citizen_identity_review']){
+    if(!existing.includes(table))continue;
+    const [row]=await db.query('SELECT COUNT(*) AS n FROM '+identifier(table));
+    if(Number(row.n))throw Error('Demo export refuses identity submissions or reviews; no ID content was read or exported.');
+  }
+}
 function sqlValue(db, value) {
   if (value === null || value === undefined) return 'NULL';
   if (Buffer.isBuffer(value)) return `X'${value.toString('hex')}'`;
@@ -24,6 +32,8 @@ export async function exportDatabase(config) {
   try {
     await db.query('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
     await db.query('START TRANSACTION WITH CONSISTENT SNAPSHOT, READ ONLY');
+    // Count only, before assertReady/fingerprint can inspect any row content.
+    await assertIdentityFreeDemoExport(db);
     const state = await assertReady(db);
     const users = await db.query('SELECT email,emailVerified FROM user');
     assert.equal(users.length, 108);
@@ -71,7 +81,7 @@ export async function restore(config) {
     for (const command of commands) await db.query(command);
     assert.equal(await fingerprint(db), manifest.dataFingerprint, 'Restored data differs from source export');
     await assertReady(db);
-    for (const table of excludedData) {
+    for (const table of (await tables(db)).filter(table=>excludedData.has(table))) {
       const [row] = await db.query(`SELECT COUNT(*) AS n FROM ${identifier(table)}`); assert.equal(Number(row.n), 0);
     }
     console.log(`Fresh restore verified: ${config.restore.database}. Now run demo:verify -- --restored for all real sign-ins/counts.`);

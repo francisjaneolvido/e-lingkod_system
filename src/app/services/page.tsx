@@ -3,6 +3,7 @@ import Link from "next/link";
 import { connection } from "next/server";
 import { ArrowRight, Building2, CalendarClock, FileCheck2, Search, ShieldCheck, Sparkles } from "lucide-react";
 import { currentViewer } from "@/lib/access";
+import {hasCitizenFeatureAccess} from '@/features/identity/policy';
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SERVICE_CATEGORIES } from "@/features/services/catalog";
@@ -15,8 +16,8 @@ export default async function ServicesPage() {
   await connection();
   const viewer = await currentViewer();
   const catalog = await publishedServiceCatalog();
-  const citizen = viewer?.role === "CITIZEN";
-  return <><SiteHeader viewer={viewer ? { name:viewer.name, email:viewer.email, role:viewer.role } : null}/><main className="min-h-screen bg-background">
+  const citizen = viewer?.role === "CITIZEN" && hasCitizenFeatureAccess(viewer);
+  return <><SiteHeader viewer={viewer ? { name:viewer.name, email:viewer.email, role:viewer.role,identityStatus:viewer.identityStatus } : null}/><main className="min-h-screen bg-background">
     <section className="border-b border-border bg-muted px-5 py-9 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-[1200px]"><div className="flex flex-wrap items-end justify-between gap-5"><div className="max-w-[760px]"><span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-extrabold text-foreground"><Building2 size={14}/> Online LGU Services</span><h1 className="mt-4 text-[clamp(2rem,4vw,3.7rem)] font-black leading-[1.04] tracking-[-.045em] text-foreground">Request local services without guessing the next step.</h1><p className="mt-3 max-w-[720px] text-sm leading-6 text-muted-foreground">Choose the service, complete only the relevant form, upload requirements securely, respond to LGU corrections or schedules, and follow one tracking timeline until release or completion.</p></div><div className="flex flex-wrap gap-2">{citizen && <Link href="/services/requests" className="rounded-xl bg-primary px-4 py-2.5 text-xs font-extrabold text-white">My LGU requests</Link>}<Link href="#catalog" className="rounded-xl border border-border bg-card px-4 py-2.5 text-xs font-extrabold text-foreground">Browse services</Link></div></div>
         <div className="mt-6 grid gap-2 sm:grid-cols-4"><Mini icon={FileCheck2} title="Service-specific forms" text="Realistic intake fields, not one generic application."/><Mini icon={ShieldCheck} title="Requirement verification" text="Files are checked individually before validation."/><Mini icon={CalendarClock} title="Scheduling only if needed" text="Interviews, inspections and release slots stay service-specific."/><Mini icon={Sparkles} title="Track every handoff" text="Citizen, staff and final verification updates stay visible."/></div>

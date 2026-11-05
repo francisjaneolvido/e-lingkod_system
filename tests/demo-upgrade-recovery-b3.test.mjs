@@ -4,12 +4,13 @@ import assert from 'node:assert/strict';
 import { randomUUID, createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import mariadb from 'mariadb';
-import { loadConfig, guardedTarget, applicationEnvironment } from '../scripts/demo/config.mjs';
+import dotenv from 'dotenv';
+import { loadConfig, readDemoConfig, guardedTarget, applicationEnvironment } from '../scripts/demo/config.mjs';
 import { connect, snapshot, digest, saveMetadata, metadata, identifier } from '../scripts/demo/database.mjs';
 import { upgradeDemo } from '../scripts/demo/upgrade.mjs';
 const enabled = /^elb_b3_test_[a-f0-9]{32}$/.test(process.env.ELB_B3_TEST_DATABASE || '');
 test('R4-A migration interruption postconditions preserve manual rows and new-column values', { skip: !enabled }, async t => {
-  const config = loadConfig();
+  const config = process.env.ELB_REGRESSION_DEMO_CONFIG ? readDemoConfig(dotenv.parse(fs.readFileSync(process.env.ELB_REGRESSION_DEMO_CONFIG))) : loadConfig();
   async function fixture(run) {
     const url = new URL(config.primary.url); url.pathname = '/e_lingkod_bayan_demo_restore_u' + randomUUID().replaceAll('-', '');
     const target = guardedTarget(url.href, 'restore'), db = await connect(target, true);
@@ -20,7 +21,7 @@ test('R4-A migration interruption postconditions preserve manual rows and new-co
         const sql = fs.readFileSync('prisma/migrations/' + name + '/migration.sql', 'utf8'); await multi.query(sql);
         await db.query('INSERT INTO _prisma_migrations(id,checksum,migration_name,finished_at,applied_steps_count) VALUES(?,?,?,CURRENT_TIMESTAMP(3),1)', [randomUUID(), createHash('sha256').update(sql).digest('hex'), name]);
       }
-      for (const [id, role] of [['upgrade-admin', 'ADMIN'], ['upgrade-staff', 'STAFF']]) await db.query('INSERT INTO user(id,name,email,role,updatedAt) VALUES(?,?,?,?,CURRENT_TIMESTAMP(3))', [id, 'Synthetic Upgrade Fixture', id + '@example.test', role]);
+      for (const [id, role] of [['upgrade-admin', 'ADMIN'], ['upgrade-staff', 'STAFF'], ['upgrade-citizen', 'CITIZEN']]) await db.query('INSERT INTO user(id,name,email,role,updatedAt) VALUES(?,?,?,?,CURRENT_TIMESTAMP(3))', [id, 'Synthetic Upgrade Fixture', id + '@example.test', role]);
       await db.query("INSERT INTO government_activity(id,activityName,activityType,implementingOffice,updatedAt) VALUES('before-activity','Synthetic old source','TEST','PESO',CURRENT_TIMESTAMP(3))");
       await db.query("INSERT INTO community_import_batch(id,activityId,importedById,sourceFilename,fileType) VALUES('before-batch','before-activity','upgrade-admin','before.csv','CSV')");
       const state = { ready: true, completed: {}, pending: null, fingerprint: digest(await snapshot(db)) };
@@ -42,12 +43,20 @@ test('R4-A migration interruption postconditions preserve manual rows and new-co
     assert.equal(Number((await db.query("SELECT COUNT(*) n FROM census_assistance_member WHERE barangay='Maahas'"))[0].n), 1);
     assert.equal(Number((await db.query("SELECT COUNT(*) n FROM census_audit WHERE action='ASSISTANCE_ROSTER'"))[0].n), 1);
   }));
-  for (const kind of ['new-table', 'new-column', 'unchanged']) await t.test('prepared migration checkpoint: ' + kind, () => fixture(async ({ db, state, target, config }) => {
+  for (const kind of ['new-table', 'new-column', 'identity-status', 'identity-version', 'identity-default', 'identity-submission', 'identity-review', 'rate-limit', 'unchanged']) await t.test('prepared migration checkpoint: ' + kind, () => fixture(async ({ db, state, target, config }) => {
     await assert.rejects(upgradeDemo(config, db, state, { afterMigration: async () => { throw Error('Controlled interruption after DDL'); } }), /interruption/);
     if (kind === 'new-table') {
       const changed = spawnSync(process.execPath, ['tests/helpers/write-upgrade-roster.mjs'], { env: { ...applicationEnvironment(config, target), ELB_B3_UPGRADE_TEST_DATABASE: target.database }, stdio: 'ignore', windowsHide: true }); assert.equal(changed.status, 0);
     }
     if (kind === 'new-column') await db.query("UPDATE community_import_batch SET sourceKey='MANUAL-SOURCE' WHERE id='before-batch'");
+    if (kind === 'identity-status') await db.query("UPDATE user SET identityStatus='APPROVED' WHERE id='upgrade-citizen'");
+    if (kind === 'identity-version') await db.query("UPDATE user SET identityVersion=1 WHERE id='upgrade-citizen'");
+    if (kind === 'identity-default') await db.query("ALTER TABLE user ALTER COLUMN identityStatus SET DEFAULT 'LEGACY'");
+    if (kind === 'identity-submission' || kind === 'identity-review') {
+      await db.query("INSERT INTO citizen_identity_submission(id,userId,revision,documentLabel,submissionKey,detailsJson,mimeType,byteSize,sha256,data) VALUES('synthetic-upgrade-id','upgrade-citizen',1,'Synthetic preservation test','synthetic-upgrade-key','{}','image/png',1,?,?)", ['a'.repeat(64), Buffer.from([0])]);
+      if (kind === 'identity-review') await db.query("INSERT INTO citizen_identity_review(id,submissionId,reviewerId,decision,reason) VALUES('synthetic-upgrade-review','synthetic-upgrade-id','upgrade-admin','APPROVED','Synthetic preservation conflict fixture')");
+    }
+    if (kind === 'rate-limit') await db.query("INSERT INTO rateLimit(id,`key`,count,lastRequest) VALUES('synthetic-rate','synthetic-rate',1,1)");
     const before = digest(await snapshot(db)), pending = await metadata(db);
     if (kind === 'unchanged') {
       const resumed = await upgradeDemo(config, db, pending);
@@ -57,6 +66,19 @@ test('R4-A migration interruption postconditions preserve manual rows and new-co
       assert.equal(digest(await snapshot(db)), before);
       assert.notEqual((await metadata(db)).fingerprint, before);
       if (kind === 'new-column') assert.equal((await db.query("SELECT sourceKey FROM community_import_batch WHERE id='before-batch'"))[0].sourceKey, 'MANUAL-SOURCE');
+      if (kind === 'rate-limit') assert.equal(Number((await db.query('SELECT COUNT(*) AS n FROM rateLimit'))[0].n),1);
     }
+  }));
+  await t.test('reviewed identity migration preserves legacy accounts and requires future submissions', () => fixture(async ({ db, state, config }) => {
+    const original = await db.query('SELECT id,name,email,role FROM user ORDER BY id');
+    await upgradeDemo(config, db, state);
+    assert.deepEqual(await db.query('SELECT id,name,email,role FROM user ORDER BY id'), original);
+    const existing = await db.query('SELECT identityStatus,identityVersion FROM user');
+    assert(existing.every(row => row.identityStatus === 'LEGACY' && row.identityVersion === 0));
+    for (const table of ['citizen_identity_submission','citizen_identity_review','rateLimit']) assert.equal(Number((await db.query('SELECT COUNT(*) AS n FROM '+identifier(table)))[0].n), 0);
+    await db.query("INSERT INTO user(id,name,email,role,updatedAt) VALUES('after-upgrade','Synthetic new account','after.upgrade@example.test','CITIZEN',CURRENT_TIMESTAMP(3))");
+    const [future] = await db.query("SELECT identityStatus,identityVersion FROM user WHERE id='after-upgrade'");
+    assert.equal(future.identityStatus, 'SUBMISSION_REQUIRED');
+    assert.equal(future.identityVersion, 0);
   }));
 });

@@ -1,3 +1,4 @@
+import { registerLegacyCitizenFixture } from './legacy-citizen-fixture.mjs';
 // Opt-in persisted fixture; leaves ordinary/current regression populations unchanged.
 import {randomUUID} from 'node:crypto';
 import {loadServerTypescript} from './load-typescript.mjs';
@@ -15,7 +16,7 @@ try{
  let total=0;
  for(const [index,employmentStatus]of EMPLOYMENT_STATUSES.entries())for(let n=0;n<counts[index];n++){
    const suffix=String.fromCharCode(65+Math.floor(total/26),65+total%26),lastName='Compact '+suffix,name='Synthetic '+lastName,email=`compact.${index}.${n}@example.test`;total++;
-   await auth.api.signUpEmail({body:{firstName:'Synthetic',lastName,hasNoMiddleName:true,phoneNumber:'+639001234567',email,password:'Compact-browser-password-2026!',name}});
+   await registerLegacyCitizenFixture(auth, prisma, {body:{firstName:'Synthetic',lastName,hasNoMiddleName:true,phoneNumber:'+639001234567',email,password:'Compact-browser-password-2026!',name}});
    const owner=await prisma.user.findUniqueOrThrow({where:{email}});
    await saveCitizenSurvey({surveyYear:2026,status:'SUBMITTED',barangay:'Maahas',ageGroup:index===11?'18-24':'35-44',educationLevel:index%3===0?'SENIOR_HIGH':index%3===1?'COLLEGE':'VOCATIONAL',employmentStatus,skills:['Data Entry'],consentAggregated:true,requestKey:randomUUID(),expectedVersion:0,expectedConsentVersion:0},owner);
  }

@@ -1,12 +1,19 @@
 import { spawnSync, spawn } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import mariadb from 'mariadb';
-import { loadConfig, applicationEnvironment } from './demo/config.mjs';
-const config = loadConfig();
+import fs from 'node:fs';
+import path from 'node:path';
+import dotenv from 'dotenv';
+import { loadConfig, readDemoConfig, applicationEnvironment } from './demo/config.mjs';
+const arguments_ = process.argv.slice(2);
+const configIndex = arguments_.indexOf('--env');
+const configFile = configIndex >= 0 ? arguments_.splice(configIndex, 2)[1] : null;
+if (configIndex >= 0 && !configFile) throw Error('--env requires a private demo configuration path.');
+const config = configFile ? readDemoConfig(dotenv.parse(fs.readFileSync(configFile))) : loadConfig();
 const name = `elb_b3_test_${randomUUID().replaceAll('-', '')}`;
 const url = new URL(config.primary.url); url.pathname = '/' + name;
 const db = await mariadb.createConnection({ host: url.hostname, port: Number(url.port || 3306), user: decodeURIComponent(url.username), password: decodeURIComponent(url.password) });
-const env = { ...applicationEnvironment(config), DATABASE_URL: url.href, ELB_B3_TEST_DATABASE: name, ELB_DEMO_MODE: '' };
+const env = { ...applicationEnvironment(config), DATABASE_URL: url.href, ELB_B3_TEST_DATABASE: name, ELB_MUNICIPAL_TEST_DATABASE: name, ELB_REGRESSION_DEMO_CONFIG:configFile ? path.resolve(configFile) : '', ELB_DEMO_MODE: '', RESEND_API_KEY:'', STAFF_INVITE_FROM:'' };
 try {
   await db.query(`CREATE DATABASE \`${name}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`);
   console.log(`Disposable B3 database: ${name}`);
@@ -29,7 +36,7 @@ try {
     process.stdin.resume(); process.stdin.once('data', stop); process.once('SIGINT', stop); process.once('SIGTERM', stop);
     await new Promise(resolve => child.once('exit', resolve)); process.stdin.pause();
   } else {
-  const files = process.argv.slice(2).filter(x => !x.startsWith('--'));
+  const files = arguments_.filter(x => !x.startsWith('--'));
   const result = spawnSync(process.execPath, ['--test', '--test-concurrency=1', ...(files.length ? files : ['tests/demo-interruption.test.mjs', 'tests/census-records-b3.test.mjs', 'tests/census-api-b3.test.mjs', 'tests/census-review-fixes-b3.test.mjs', 'tests/demo-upgrade-recovery-b3.test.mjs'])], { env, stdio: 'inherit', windowsHide: true });
   process.exitCode = result.status ?? 1;
   }

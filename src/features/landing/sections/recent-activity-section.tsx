@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ClipboardList } from "lucide-react";
 import { currentViewer } from "@/lib/access";
+import {hasCitizenFeatureAccess} from '@/features/identity/policy';
 import { listReports } from "@/features/civic/server/repository";
 import { ReportCard } from "@/features/civic/components/report-card";
 import type { ReportSummary } from "@/features/civic/types";
@@ -8,7 +9,7 @@ import s from "@/features/civic/civic.module.css";
 
 export async function RecentActivitySection() {
   const viewer = await currentViewer();
-  if (!viewer) return null;
+  if (!viewer || !hasCitizenFeatureAccess(viewer)) return null;
   let reports: ReportSummary[] = [];
   let unavailable = false;
   try { reports = await listReports(viewer, false, 3); }

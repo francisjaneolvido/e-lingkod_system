@@ -1,0 +1,93 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {existsSync} from 'node:fs';
+import sharp from 'sharp';
+import {loadServerTypescript} from './helpers/load-typescript.mjs';
+const url=new URL(process.env.DATABASE_URL||'mysql://localhost/unused');
+const enabled=process.env.ELB_SITE_RELEASE_TEST_DATABASE==='true'&&/^\/elb_site_release_test_[a-f0-9]{32}$/.test(url.pathname)&&['localhost','127.0.0.1'].includes(url.hostname);
+
+test('identity full lifecycle, signup bypasses, access, owner previews and concurrent review', {skip:!enabled}, async()=>{
+  assert.equal(existsSync('src/features/identity/server.ts'),true,'identity transactional service must exist');
+  loadServerTypescript();
+  const {prisma}=await import('../src/lib/prisma.ts');
+  const {auth}=await import('../src/lib/auth.ts');
+  const {hasCitizenFeatureAccess}=await import('../src/features/identity/policy.ts');
+  const {requireApiViewer}=await import('../src/lib/access.ts');
+  const service=await import('../src/features/identity/server.ts');
+  const upload=await import('../src/app/api/identity/route.ts');
+  const preview=await import('../src/app/api/identity/documents/[id]/route.ts');
+  const review=await import('../src/app/api/admin/identity/[id]/route.ts');
+  const origin=process.env.BETTER_AUTH_URL;
+  const image=await sharp({create:{width:600,height:400,channels:3,background:'#aaa'}}).png().toBuffer();
+  const account=async(label,role='CITIZEN')=>{
+    const result=await auth.api.signUpEmail({body:{email:`site.${label}@example.test`,password:'Site-release-2026!',firstName:'Synthetic',lastName:'Citizen',hasNoMiddleName:true,phoneNumber:'+639001234567',role:'ADMIN',identityStatus:'APPROVED',identityVersion:99},returnHeaders:true});
+    const user=await prisma.user.findUniqueOrThrow({where:{email:`site.${label}@example.test`}});
+    assert.equal(user.role,'CITIZEN');assert.equal(user.identityStatus,'SUBMISSION_REQUIRED');assert.equal(user.identityVersion,0);
+    if(role!=='CITIZEN')await prisma.user.update({where:{id:user.id},data:{role}});
+    return {id:user.id,role,identityStatus:user.identityStatus,cookie:result.headers.getSetCookie().map(x=>x.split(';')[0]).join('; ')};
+  };
+  const request=(path,actor,body,method='POST')=>new Request(origin+path,{method,headers:{origin,cookie:actor?.cookie||'',...(body instanceof FormData?{}:{'content-type':'application/json'})},...(method==='GET'?{}:{body:body instanceof FormData?body:JSON.stringify(body)})});
+  const submit=async(actor,version,key)=>{
+    const form=new FormData();form.set('file',new File([image],'synthetic.png',{type:'image/png'}));form.set('documentLabel','Synthetic test ID');form.set('expectedVersion',String(version));form.set('submissionKey',key);
+    return upload.POST(request('/api/identity',actor,form));
+  };
+  try {
+    const a=await account('owner'),b=await account('other'),admin=await account('reviewer','ADMIN'),admin2=await account('reviewertwo','ADMIN'),staff=await account('staff','STAFF');
+    const {citizenHomeSnapshot}=await import('../src/features/landing/server/citizen-home.ts');
+    assert.equal(await citizenHomeSnapshot(a.id),null,'pending Citizen cannot load private homepage aggregates');
+    const mutateIdentity=()=>auth.handler(request('/api/auth/update-user',a,{name:'Different Person',firstName:'Different'}));
+    assert.equal((await mutateIdentity()).status,403,'native profile update cannot invalidate reviewed identity');
+    await assert.rejects(()=>requireApiViewer(request('/api/notifications',a,undefined,'GET')),error=>error.status===403);
+    assert.equal((await requireApiViewer(request('/api/notifications',staff,undefined,'GET'))).role,'STAFF');
+    assert.equal((await requireApiViewer(request('/api/admin/staff',admin,undefined,'GET'),true)).role,'ADMIN');
+    const legacy=await prisma.user.findUniqueOrThrow({where:{id:'site_preserved_legacy'}});assert.equal(hasCitizenFeatureAccess(legacy),true);assert.equal(legacy.emailVerified,false);
+    const invalidForm=new FormData();invalidForm.set('file',new File(['not a decoded image'],'synthetic.png',{type:'image/png'}));invalidForm.set('documentLabel','Synthetic invalid ID');invalidForm.set('expectedVersion','0');invalidForm.set('submissionKey','invalid-image');
+    assert.equal((await upload.POST(request('/api/identity',a,invalidForm))).status,400);
+    assert.equal(await prisma.citizenIdentitySubmission.count({where:{userId:a.id}}),0,'failed image decode creates no orphan revision');
+    assert.equal((await prisma.user.findUniqueOrThrow({where:{id:a.id}})).identityVersion,0);
+    assert.equal((await submit(a,0,'retry-one')).status,201);
+    const pending=await prisma.user.findUniqueOrThrow({where:{id:a.id}});assert.equal(pending.identityStatus,'PENDING');assert.equal(pending.identityVersion,1);
+    assert.equal((await mutateIdentity()).status,403);
+    assert.equal((await submit(a,0,'retry-one')).status,200,'same upload retry is idempotent');
+    assert.equal((await submit(a,0,'different-key')).status,409);
+    const rows=await prisma.citizenIdentitySubmission.findMany({where:{userId:a.id}});assert.equal(rows.length,1);const doc=rows[0];
+    const get=(actor,id=doc.id)=>preview.GET(request('/api/identity/documents/'+id,actor,undefined,'GET'),{params:Promise.resolve({id})});
+    assert.equal((await get(null)).status,401);assert.equal((await get(b)).status,404);assert.equal((await get(staff)).status,404);
+    for(const actor of [a,admin]){const response=await get(actor);assert.equal(response.status,200);assert.equal(response.headers.get('content-type'),'image/jpeg');assert.match(response.headers.get('cache-control'),/no-store/);assert.equal(response.headers.get('x-content-type-options'),'nosniff');}
+    const decide=(actor,body,id=doc.id)=>review.POST(request('/api/admin/identity/'+id,actor,body),{params:Promise.resolve({id})});
+    assert.equal((await decide(staff,{decision:'APPROVED',expectedVersion:1,reason:'Synthetic reason'})).status,403);
+    assert.equal((await decide(admin,{decision:'APPROVED',expectedVersion:1,reason:''})).status,400);
+    assert.equal((await decide(admin,{decision:'CORRECTIONS_REQUIRED',expectedVersion:1,reason:'Please submit a clearer synthetic ID image.'})).status,200);
+    assert.equal((await decide(admin,{decision:'APPROVED',expectedVersion:1,reason:'Stale action'})).status,409);
+    assert.equal((await submit(a,2,'retry-two')).status,201);
+    const latest=await prisma.citizenIdentitySubmission.findFirstOrThrow({where:{userId:a.id},orderBy:{revision:'desc'}});assert.equal(latest.revision,3);
+    assert.equal((await decide(admin,{decision:'APPROVED',expectedVersion:3,reason:'Wrong old revision'})).status,409);
+    const decisions=await Promise.all([admin,admin2].map(actor=>decide(actor,{decision:'APPROVED',expectedVersion:3,reason:'Synthetic ID reviewed against submitted details.'},latest.id)));
+    assert.deepEqual(decisions.map(x=>x.status).sort(),[200,409]);
+    assert.equal(await prisma.citizenIdentityReview.count({where:{submissionId:latest.id}}),1);
+    const approved=await prisma.user.findUniqueOrThrow({where:{id:a.id}});assert.equal(approved.identityStatus,'APPROVED');assert.equal(approved.role,'CITIZEN');assert.equal(approved.emailVerified,false);
+    assert.equal((await mutateIdentity()).status,403);assert.equal(approved.name,'Synthetic Citizen');
+    assert.equal((await requireApiViewer(request('/api/notifications',a,undefined,'GET'))).id,a.id);
+    assert.equal((await submit(a,4,'different-approved-doc')).status,409);
+    const detail=await service.identityDetail(a.id,admin);assert.equal(detail.submissions.length,2);assert.equal(detail.submissions.reduce((n,s)=>n+s.reviews.length,0),2);
+    const queue=await service.identityQueue({status:'APPROVED',page:1,q:'site.owner'},admin);assert.equal(queue.total,1);assert.equal(queue.rows[0].id,a.id);
+    assert.equal((await submit(b,0,'reject-one')).status,201);
+    const rejectedDocument=await prisma.citizenIdentitySubmission.findFirstOrThrow({where:{userId:b.id}});
+    assert.equal((await decide(admin,{decision:'REJECTED',expectedVersion:1,reason:'Synthetic rejection reason with correction guidance.'},rejectedDocument.id)).status,200);
+    assert.equal((await prisma.user.findUniqueOrThrow({where:{id:b.id}})).identityStatus,'REJECTED');
+    await assert.rejects(()=>requireApiViewer(request('/api/notifications',b,undefined,'GET')),error=>error.status===403);
+    assert.equal((await submit(b,2,'reject-two')).status,201,'rejected account safely resubmits on same identity');
+    assert.equal(await prisma.citizenIdentitySubmission.count({where:{userId:b.id}}),2);
+    // Legitimate invitation activation is a separate server-owned Staff path.
+    const {randomBytes,randomUUID}=await import('node:crypto');
+    const {hashInvitationToken}=await import('../src/lib/staff-invitations.ts');
+    const activation=await import('../src/app/api/staff/activate/route.ts');
+    const token=randomBytes(32).toString('base64url');
+    await prisma.staffInvitation.create({data:{id:randomUUID(),name:'Invited synthetic Staff',email:'site.invited@example.test',department:'MDRRMO',designation:'Synthetic reviewer',modulesJson:JSON.stringify(['REPORTS']),tokenHash:hashInvitationToken(token),expiresAt:new Date(Date.now()+3600000),issuedById:admin.id}});
+    const activated=await activation.POST(request('/api/staff/activate',null,{token,password:'Invited-staff-2026!',confirmPassword:'Invited-staff-2026!'}));
+    assert.equal(activated.status,200);
+    const invited=await prisma.user.findUniqueOrThrow({where:{email:'site.invited@example.test'}});assert.equal(invited.role,'STAFF');assert.equal(hasCitizenFeatureAccess(invited),true);assert.equal(invited.identityStatus,'SUBMISSION_REQUIRED');
+    assert.equal(await prisma.staffPermission.count({where:{userId:invited.id,module:'REPORTS'}}),1);
+    assert.equal((await activation.POST(request('/api/staff/activate',null,{token,password:'Invited-staff-2026!',confirmPassword:'Invited-staff-2026!'}))).status,410);
+  } finally {await prisma.$disconnect();}
+});

@@ -51,6 +51,9 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  CitizenIdentitySubmission: 'CitizenIdentitySubmission',
+  CitizenIdentityReview: 'CitizenIdentityReview',
+  RateLimit: 'RateLimit',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
@@ -126,6 +129,45 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const CitizenIdentitySubmissionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  revision: 'revision',
+  documentLabel: 'documentLabel',
+  submissionKey: 'submissionKey',
+  detailsJson: 'detailsJson',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  sha256: 'sha256',
+  data: 'data',
+  submittedAt: 'submittedAt'
+} as const
+
+export type CitizenIdentitySubmissionScalarFieldEnum = (typeof CitizenIdentitySubmissionScalarFieldEnum)[keyof typeof CitizenIdentitySubmissionScalarFieldEnum]
+
+
+export const CitizenIdentityReviewScalarFieldEnum = {
+  id: 'id',
+  submissionId: 'submissionId',
+  reviewerId: 'reviewerId',
+  decision: 'decision',
+  reason: 'reason',
+  reviewedAt: 'reviewedAt'
+} as const
+
+export type CitizenIdentityReviewScalarFieldEnum = (typeof CitizenIdentityReviewScalarFieldEnum)[keyof typeof CitizenIdentityReviewScalarFieldEnum]
+
+
+export const RateLimitScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  count: 'count',
+  lastRequest: 'lastRequest'
+} as const
+
+export type RateLimitScalarFieldEnum = (typeof RateLimitScalarFieldEnum)[keyof typeof RateLimitScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -138,6 +180,8 @@ export const UserScalarFieldEnum = {
   emailVerified: 'emailVerified',
   image: 'image',
   role: 'role',
+  identityStatus: 'identityStatus',
+  identityVersion: 'identityVersion',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   department: 'department',
@@ -1147,6 +1191,38 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const CitizenIdentitySubmissionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  documentLabel: 'documentLabel',
+  submissionKey: 'submissionKey',
+  detailsJson: 'detailsJson',
+  mimeType: 'mimeType',
+  sha256: 'sha256'
+} as const
+
+export type CitizenIdentitySubmissionOrderByRelevanceFieldEnum = (typeof CitizenIdentitySubmissionOrderByRelevanceFieldEnum)[keyof typeof CitizenIdentitySubmissionOrderByRelevanceFieldEnum]
+
+
+export const CitizenIdentityReviewOrderByRelevanceFieldEnum = {
+  id: 'id',
+  submissionId: 'submissionId',
+  reviewerId: 'reviewerId',
+  decision: 'decision',
+  reason: 'reason'
+} as const
+
+export type CitizenIdentityReviewOrderByRelevanceFieldEnum = (typeof CitizenIdentityReviewOrderByRelevanceFieldEnum)[keyof typeof CitizenIdentityReviewOrderByRelevanceFieldEnum]
+
+
+export const RateLimitOrderByRelevanceFieldEnum = {
+  id: 'id',
+  key: 'key'
+} as const
+
+export type RateLimitOrderByRelevanceFieldEnum = (typeof RateLimitOrderByRelevanceFieldEnum)[keyof typeof RateLimitOrderByRelevanceFieldEnum]
+
+
 export const NullsOrder = {
   first: 'first',
   last: 'last'
@@ -1165,6 +1241,7 @@ export const UserOrderByRelevanceFieldEnum = {
   email: 'email',
   image: 'image',
   role: 'role',
+  identityStatus: 'identityStatus',
   department: 'department',
   designation: 'designation'
 } as const

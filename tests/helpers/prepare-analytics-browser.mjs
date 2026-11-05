@@ -1,3 +1,4 @@
+import { createLegacyCitizenFixture } from './legacy-citizen-fixture.mjs';
 import { randomUUID } from 'node:crypto';
 import { loadServerTypescript } from './load-typescript.mjs';
 if(!/^elb_b3_test_[a-f0-9]{32}$/.test(process.env.ELB_B3_TEST_DATABASE||''))throw Error('Disposable analytics fixture target required');
@@ -22,7 +23,7 @@ try {
   await save(owner,2026,{status:'DRAFT',barangay:'Maahas',occupation:'Unsubmitted browser secret'});
   await save(owner,2025,{occupation:'Historical driver'});
   for(const [name,patch] of [['student',{barangay:'Bambang',ageGroup:'18-24',employmentStatus:'STUDENT',educationLevel:'SENIOR_HIGH',skills:['Baking'],householdSize:4,overseasExperience:'NEVER'}],['maahas',{barangay:'Maahas',employmentStatus:'UNEMPLOYED_LOOKING',occupation:'Maahas-only mechanic',skills:['Repair'],overseasExperience:'CURRENT'}]]){
-    const citizen=await prisma.user.create({data:{id:'b4-browser-'+name,name:'Synthetic '+name,email:'b4.'+name+'@example.test',role:'CITIZEN'}});
+    const citizen=await createLegacyCitizenFixture(prisma, {id:'b4-browser-'+name,name:'Synthetic '+name,email:'b4.'+name+'@example.test',role:'CITIZEN'});
     await save(citizen,2026,patch);
   }
   const business={surveyYear:2026,businessName:'[DEMO] Unknown Workforce',officeType:'MAIN',street:'Synthetic Second Street',barangay:'Bambang',employerType:'PRIVATE',organizationType:'CORPORATION',industry:'INFORMATION',productsServices:'Synthetic services',operatingStatus:'OPERATING',regularWorkers:3,nonRegularWorkers:2,partTimeWorkers:2,contactName:'Synthetic Representative',contactPosition:'Manager',contactEmail:'b3.citizen@example.test'};
