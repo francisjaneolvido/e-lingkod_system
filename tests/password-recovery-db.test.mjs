@@ -6,6 +6,7 @@ import path from "node:path";
 import mariadb from "mariadb";
 import { format } from "node:util";
 import { loadServerTypescript } from "./helpers/load-typescript.mjs";
+import { installNativeAuthBackground } from "./helpers/native-auth-background.mjs";
 
 const enabled = process.env.ELB_SITE_RELEASE_TEST_DATABASE === "true";
 if (enabled) {
@@ -16,6 +17,7 @@ if (enabled) {
 test("password recovery real mail capture, auth tokens, transactions and sessions", { skip: !enabled }, async t => {
   loadServerTypescript();
   const { auth } = await import("../src/lib/auth.ts");
+  const background = installNativeAuthBackground(auth);
   const { prisma } = await import("../src/lib/prisma.ts");
   const { hashPassword, verifyPassword } = await import("better-auth/crypto");
   const origin = process.env.BETTER_AUTH_URL;
@@ -27,7 +29,9 @@ test("password recovery real mail capture, auth tokens, transactions and session
   const nextPassword = "UpdatedPass!456";
   let address = 30;
   async function request(endpoint, body, ip = `127.0.0.${address++}`) {
-    return auth.handler(new Request(`${origin}/api/auth${endpoint}`, { method: "POST", headers: { "content-type": "application/json", origin, "x-forwarded-for": ip }, body: JSON.stringify(body) }));
+    const response = await auth.handler(new Request(`${origin}/api/auth${endpoint}`, { method: "POST", headers: { "content-type": "application/json", origin, "x-forwarded-for": ip }, body: JSON.stringify(body) }));
+    await background.drain();
+    return response;
   }
   async function fixture() {
     const id = `recovery-${randomUUID()}`;
@@ -149,5 +153,5 @@ test("password recovery real mail capture, auth tokens, transactions and session
       assert.equal(limited.status, 429);
       assert.ok(limited.headers.get("x-retry-after"));
     });
-  } finally { await prisma.$disconnect(); }
+  } finally { await background.restore(); await prisma.$disconnect(); }
 });

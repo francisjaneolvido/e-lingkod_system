@@ -11,7 +11,7 @@ try {
     const email='browser.'+label+'@example.test';
     await auth.api.signUpEmail({body:{email,password:'Site-browser-2026!',firstName:'Synthetic',lastName:'Browser',hasNoMiddleName:true,phoneNumber:'+639001234567'}});
     const user=await prisma.user.update({where:{email},data:{role,identityStatus:status,department:role==='STAFF'?'MDRRMO':null}});
-    if(role==='STAFF')for(const module of ['REPORTS','SERVICES','PROJECTS'])await prisma.staffPermission.create({data:{userId:user.id,module}});
+    if(role==='STAFF')for(const permissionModule of ['REPORTS','SERVICES','PROJECTS'])await prisma.staffPermission.create({data:{userId:user.id,module:permissionModule}});
   }
   // Image is generated inside the test, never a real ID or source asset.
   const {default:sharp}=await import('sharp');

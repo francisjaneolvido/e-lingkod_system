@@ -1,6 +1,7 @@
 import "server-only";
 import { betterAuth } from "better-auth";
 import { createAuthMiddleware, APIError } from "better-auth/api";
+import { after } from "next/server";
 import { authDatabaseAdapter } from "@/lib/auth-database-adapter";
 import { prisma } from "@/lib/prisma";
 import { checkRegistration } from "@/features/auth/registration-validation";
@@ -16,6 +17,10 @@ export const auth = betterAuth({
   } },
   onAPIError: { onError: () => { console.error("Authentication request could not be completed."); } },
   database: authDatabaseAdapter,
+  // Better Auth otherwise awaits mail transport on the public recovery route.
+  // Register the promise with Next so the response can finish while the host
+  // keeps delivery and its failure cleanup alive.
+  advanced: { backgroundTasks: { handler: promise => after(promise) } },
   trustedOrigins: process.env.BETTER_AUTH_URL ? [new URL(resetDestination(process.env.BETTER_AUTH_URL)).origin] : [],
   emailAndPassword: {
     enabled: true,

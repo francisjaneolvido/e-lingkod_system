@@ -8,13 +8,25 @@ const {chromium}=require(process.env.ELB_PLAYWRIGHT_MODULE||'playwright');
 const scratch=path.resolve('.scratch/site-release');
 const fixture=JSON.parse(await fs.readFile(path.join(scratch,'browser-context.json'),'utf8'));
 if(fixture.origin!=='http://localhost:3115'||!/^elb_site_release_test_[a-f0-9]{32}$/.test(fixture.database))throw Error('Refusing unguarded browser target.');
+// The disposable runner writes fixtures before Next finishes starting. Wait for
+// the actual auth route, rather than turning that startup race into a UI failure.
+const readyDeadline=Date.now()+120000;
+while(true){
+  try{if((await fetch(fixture.origin+'/api/auth/ok',{signal:AbortSignal.timeout(10000)})).ok)break;}
+  catch{/* Startup is not ready yet; the bounded condition below owns retries. */}
+  assert.ok(Date.now()<readyDeadline,'guarded browser server became ready');
+  await new Promise(resolve=>setTimeout(resolve,50));
+}
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const results=[],errors=[],network=[],contexts=[];
 const pendingLabel='pending'+'n'.repeat(20)+Date.now();
 const pendingEmail='browser.'+pendingLabel+'@example.test';
 const check=(name,value)=>{assert.ok(value,name);results.push(name);};
 async function context(viewport={width:1440,height:1000}){
-  const context=await browser.newContext({viewport,reducedMotion:'reduce',hasTouch:viewport.width<1024});contexts.push(context);
+  // Each role context represents a separate client. Keep production rate limits
+  // enabled without making unrelated synthetic actors share one loopback IP.
+  const context=await browser.newContext({viewport,reducedMotion:'reduce',hasTouch:viewport.width<1024,
+    extraHTTPHeaders:{'x-forwarded-for':'192.0.2.'+(contexts.length+10)}});contexts.push(context);
   context.on('page',page=>{
     page.on('pageerror',error=>errors.push({path:new URL(page.url()).pathname,message:error.message}));
     page.on('console',message=>{if(message.type()==='error')errors.push({path:new URL(page.url()).pathname,message:message.text()});});
@@ -100,8 +112,21 @@ try{
   const legacy=await context(),legacyPage=await legacy.newPage();await login(legacyPage,'legacy');await legacyPage.goto(fixture.origin+'/verification');await legacyPage.getByRole('heading',{name:'Existing account — legacy access',exact:true}).waitFor();check('legacy classification does not claim ID verification',true);
   const oldSession=await citizen.cookies();
   await guestPage.goto(fixture.origin+'/forgot-password');await guestPage.locator('#recoveryEmail').fill(pendingEmail);await guestPage.getByRole('button',{name:'Send reset email'}).click();await guestPage.getByRole('status').filter({hasText:/If that address has an account/}).waitFor();
-  const messages=await Promise.all((await fs.readdir(fixture.capture)).filter(x=>x.endsWith('.json')).map(async name=>JSON.parse(await fs.readFile(path.join(fixture.capture,name),'utf8'))));
-  const mail=messages.filter(item=>(item.to||item.email)===pendingEmail).at(-1);assert.ok(mail,'captured browser reset mail');
+  // The public response deliberately precedes email delivery. Wait for the
+  // private capture rather than assuming it exists when the status appears.
+  let mail;
+  const captureDeadline=Date.now()+15000;
+  while(!mail&&Date.now()<captureDeadline){
+    try{
+      const messages=await Promise.all((await fs.readdir(fixture.capture)).filter(x=>x.endsWith('.json')).map(async name=>{
+        try{return JSON.parse(await fs.readFile(path.join(fixture.capture,name),'utf8'));}
+        catch(error){if(error instanceof SyntaxError)return null;throw error;}
+      }));
+      mail=messages.filter(item=>item&&(item.to||item.email)===pendingEmail).at(-1);
+    }catch(error){if(error.code!=='ENOENT')throw error;}
+    if(!mail)await new Promise(resolve=>setTimeout(resolve,25));
+  }
+  assert.ok(mail,'captured browser reset mail arrived after the public response');
   const link=mail.url||mail.text?.match(/https?:\/\/[^\s]+/)?.[0];assert.ok(link,'capture contains private reset link');
   await guestPage.goto(link);await guestPage.locator('#resetPassword').waitFor();await guestPage.locator('#resetPassword').fill('Changed-browser-2026!');await guestPage.locator('#resetConfirmPassword').fill('Changed-browser-2026!');await guestPage.getByRole('button',{name:'Reset password',exact:true}).click();await guestPage.getByRole('status').filter({hasText:/Your password has been reset/}).waitFor();
   check('reset secret removed from browser URL',!guestPage.url().includes('token'));
