@@ -119,6 +119,8 @@ This block prompts for your **local MySQL** credentials, URL-encodes the usernam
 
 Create `.env` **before** `npm ci`: postinstall generates Prisma Client and reads the database configuration.
 
+Prisma Client is reproducible ignored output under `src/generated/prisma/`; it is not supplied by Git. Installation and supported development/build/typecheck/test entrypoints prepare it using the locked generator. Keep schema/migrations and `tsconfig.json` tracked. See [generated output and Git status](docs/LOCAL-DEVELOPMENT.md#generated-prisma-client-and-git-status) for CI, direct tooling and isolated Next configuration.
+
 ```powershell
 & {
     $ErrorActionPreference = 'Stop'

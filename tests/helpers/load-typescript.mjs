@@ -3,10 +3,12 @@ import path from "node:path";
 import { registerHooks } from "node:module";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import ts from "typescript";
+import {ensurePrismaClient} from '../../scripts/lib/prisma-client.mjs';
 
 // Load actual server modules in Node without a Next.js build. Only the
 // server-only environment marker is substituted; database/auth code is real.
 export function loadServerTypescript() {
+  ensurePrismaClient();
   return registerHooks({
     resolve(specifier, context, nextResolve) {
       if (specifier === "server-only") return { url: "data:text/javascript,export%20%7B%7D", shortCircuit: true };

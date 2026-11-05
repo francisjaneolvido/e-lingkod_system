@@ -16,8 +16,8 @@
     "test:profiling": "node scripts/verify-citizen-profiling.mjs",
     "test:profiling:legacy": "node scripts/verify-citizen-profiling.mjs --legacy",
     "db:clear-data": "node scripts/clear-demo-data.mjs",
-    "postinstall": "prisma generate",
-    "db:generate": "prisma generate",
+    "postinstall": "node scripts/generate-prisma-client.mjs",
+    "db:generate": "node scripts/generate-prisma-client.mjs",
     "db:migrate": "prisma migrate deploy",
     "test:establishments": "node scripts/verify-establishment-profiling.mjs",
     "demo:setup": "node scripts/demo/run.mjs setup",
@@ -38,8 +38,10 @@
     "hackathon:report": "node scripts/hackathon/run.mjs report",
     "test:opportunities": "node scripts/verify-opportunities.mjs",
     "test:opportunities:browser": "node scripts/verify-census-records.mjs --serve --opportunities",
-    "predev": "prisma generate",
-    "prebuild": "prisma generate"
+    "predev": "node scripts/generate-prisma-client.mjs",
+    "prebuild": "node scripts/generate-prisma-client.mjs",
+    "pretypecheck": "node scripts/generate-prisma-client.mjs --if-needed",
+    "pretest:all": "node scripts/generate-prisma-client.mjs --if-needed"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

@@ -1,8 +1,13 @@
 import type { NextConfig } from "next";
+import { PHASE_PRODUCTION_SERVER } from "next/constants";
+import { ensurePrismaClient } from "./scripts/lib/prisma-client.mjs";
+import { isolatedTypeScriptConfig } from "./scripts/lib/next-typescript-config.mjs";
+
+const distDir = process.env.ELB_NEXT_DIST_DIR || ".next";
 
 const nextConfig: NextConfig = {
   // Isolated verification may use its own output without disrupting an active dev server.
-  distDir: process.env.ELB_NEXT_DIST_DIR || ".next",
+  distDir,
   async headers() {
     return [{
       source: "/staff/activate/:path*",
@@ -28,4 +33,10 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default function configure(phase: string): NextConfig {
+  // A completed production build already carries its client. Startup must not
+  // require the generation-only schema, lockfile or Prisma CLI.
+  if (phase === PHASE_PRODUCTION_SERVER) return nextConfig;
+  ensurePrismaClient();
+  return { ...nextConfig, typescript: { tsconfigPath: isolatedTypeScriptConfig(process.cwd(), distDir) } };
+}
