@@ -432,10 +432,6 @@ export type ReportPhotoUncheckedUpdateManyWithoutReportNestedInput = {
   deleteMany?: Prisma.ReportPhotoScalarWhereInput | Prisma.ReportPhotoScalarWhereInput[]
 }
 
-export type BytesFieldUpdateOperationsInput = {
-  set?: runtime.Bytes
-}
-
 export type ReportPhotoCreateWithoutReportInput = {
   id?: string
   mimeType?: string

@@ -1,3 +1,4 @@
+import { registerLegacyCitizenFixture } from './legacy-citizen-fixture.mjs';
 import {randomUUID} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {loadServerTypescript} from './load-typescript.mjs';
@@ -5,7 +6,7 @@ if(!/^elb_b3_test_[a-f0-9]{32}$/.test(process.env.ELB_B3_TEST_DATABASE||''))thro
 const hook=loadServerTypescript();const {prisma}=await import('../../src/lib/prisma.ts');
 try{
  const {auth}=await import('../../src/lib/auth.ts'),base=process.env.BETTER_AUTH_URL;
- async function register(name){const email='b5.'+name+'@example.test';const r=await auth.api.signUpEmail({body:{email,password:'B5-browser-password-2026!',firstName:'Synthetic',lastName:name,hasNoMiddleName:true,phoneNumber:'+639001234567'},returnHeaders:true});return {user:await prisma.user.findUniqueOrThrow({where:{email}}),cookie:r.headers.getSetCookie()[0].split(';')[0]};}
+ async function register(name){const email='b5.'+name+'@example.test';const r=await registerLegacyCitizenFixture(auth, prisma, {body:{email,password:'B5-browser-password-2026!',firstName:'Synthetic',lastName:name,hasNoMiddleName:true,phoneNumber:'+639001234567'},returnHeaders:true});return {user:await prisma.user.findUniqueOrThrow({where:{email}}),cookie:r.headers.getSetCookie()[0].split(';')[0]};}
  const adminLogin=await register('admin'),staffLogin=await register('staff'),other=await register('other'),citizen=await register('citizen');
  if(spawnSync(process.execPath,['scripts/set-admin.mjs',adminLogin.user.email],{env:process.env,encoding:'utf8'}).status!==0)throw Error('Admin fixture failed');
  const admin=await prisma.user.findUniqueOrThrow({where:{id:adminLogin.user.id}}),staffRoute=await import('../../src/app/api/admin/staff/route.ts');

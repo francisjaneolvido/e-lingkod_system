@@ -11,7 +11,7 @@ export function AboutSection() {
           <div>
             <p className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.16em] text-on-brand-gold"><span className="h-[3px] w-7 rounded-full bg-brand-gold"/> Better together</p>
             <h2 className="mt-5 max-w-2xl text-[clamp(2rem,3.2vw,3.35rem)] font-extrabold leading-[1.19] tracking-[-0.045em]">A stronger community starts with a better connection.</h2>
-            <p className="mt-5 max-w-xl text-[13px] leading-8 text-on-brand-muted sm:text-sm">E-Lingkod Bayan is a hackathon concept for a more connected, responsive, and inclusive public-service experience. We believe accessible information can help communities take meaningful action.</p>
+            <p className="mt-5 max-w-xl text-[13px] leading-8 text-on-brand-muted sm:text-sm">E-Lingkod Bayan connects residents with community information, service requests, and opportunities. Accessible information helps communities take meaningful action.</p>
             <Link href="#services" className="mt-7 inline-flex min-h-12 items-center gap-2.5 rounded-xl bg-brand-gold px-6 text-[12px] font-extrabold text-on-gold transition hover:bg-brand-gold">Discover the services <ArrowRight size={17}/></Link>
           </div>
           <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">

@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -5,28 +8,64 @@ import {
   ArrowUpRight,
   MapPin,
   ShieldCheck,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+import { heroSlides, nextHeroSlide, type HeroNavigation, type HeroSlide } from "../data/hero-slides";
 
 /**
  * Public home hero. Full-width photo banner, styled for desktop first.
  * All actions navigate to existing V3 sections; no fake back-end behavior.
  */
 export function HeroSection() {
+  const [active, setActive] = useState(0);
+  const [failedPhotos, setFailedPhotos] = useState<Record<string, boolean>>({});
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const slide: HeroSlide = heroSlides[active];
+  const navigate = (action: HeroNavigation) => setActive(current => nextHeroSlide(current, action, heroSlides.length));
+
+  function handlePhotoKeys(event: KeyboardEvent<HTMLDivElement>) {
+    const action = ({ ArrowLeft: "previous", ArrowRight: "next", Home: "first", End: "last" } as const)[event.key as "ArrowLeft" | "ArrowRight" | "Home" | "End"];
+    if (action) {
+      event.preventDefault();
+      navigate(action);
+    }
+  }
+
   return (
     <section
       id="home"
-      aria-labelledby="elb-hero-heading"
+      aria-label="Community photos"
+      aria-roledescription="carousel"
       className="relative isolate scroll-mt-24 overflow-hidden bg-primary text-white"
+      onTouchStart={event => {
+        touchStart.current = null;
+        if (event.touches.length !== 1 || (event.target as HTMLElement).closest("a, button")) return;
+        touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+      }}
+      onTouchCancel={() => { touchStart.current = null; }}
+      onTouchEnd={event => {
+        const start = touchStart.current;
+        touchStart.current = null;
+        if (!start || !event.changedTouches.length) return;
+        const dx = event.changedTouches[0].clientX - start.x;
+        const dy = event.changedTouches[0].clientY - start.y;
+        if (Math.abs(dx) >= 60 && Math.abs(dx) > Math.abs(dy) * 1.5) navigate(dx < 0 ? "next" : "previous");
+      }}
     >
       {/* Image is illustrative; we are not claiming a specific municipality. */}
-      <Image
-        src="/images/landing/elb-civic-hero.webp"
-        alt="Illustrative scene of residents and volunteers coming together at a community plaza"
+      {!failedPhotos[slide.path] && <Image
+        key={slide.path}
+        src={slide.path}
+        alt={slide.alt}
         fill
-        priority
+        loading={active === 0 ? "eager" : "lazy"}
+        fetchPriority={active === 0 ? "high" : "auto"}
         sizes="100vw"
-        className="-z-20 object-cover object-[60%_47%] sm:object-[center_46%]"
-      />
+        className="-z-20 object-cover"
+        style={{ objectPosition: slide.focalPoint }}
+        onError={() => setFailedPhotos(current => ({ ...current, [slide.path]: true }))}
+      />}
       {/* Layered gradient maintains readable text, including on small screens. */}
       <div
         aria-hidden="true"
@@ -41,7 +80,7 @@ export function HeroSection() {
         className="pointer-events-none absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#093b68]/50 to-transparent"
       />
 
-      <div className="mx-auto flex min-h-[525px] max-w-[1440px] flex-col justify-center px-5 pb-16 pt-14 sm:min-h-[540px] sm:px-8 sm:pb-16 lg:min-h-[550px] lg:px-12 lg:py-20 xl:min-h-[570px] 2xl:min-h-[590px]">
+      <div className="mx-auto flex min-h-[525px] max-w-[1440px] flex-col justify-center px-5 pb-8 pt-14 sm:min-h-[540px] sm:px-8 lg:min-h-[550px] lg:px-12 lg:pt-20 xl:min-h-[570px] 2xl:min-h-[590px]">
         <div className="relative z-10 max-w-[795px]">
           <p className="mb-6 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[.15em] text-on-brand-gold sm:text-[12px]">
             <span className="h-[3px] w-9 shrink-0 rounded-full bg-brand-gold" />
@@ -80,6 +119,16 @@ export function HeroSection() {
             <span className="inline-flex items-center gap-2"><MapPin size={15} className="text-on-brand-gold" /> One connected portal</span>
           </div>
         </div>
+      </div>
+
+      <div className="relative z-20 mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-3 px-5 pb-7 sm:px-8 lg:px-12">
+        <p className="max-w-full rounded-lg bg-[#072c50] px-3 py-2 text-xs leading-5 text-on-brand-muted">{failedPhotos[slide.path] ? "Community image unavailable. Services remain available." : [slide.caption,slide.credit].filter(Boolean).join(' · ')}</p>
+        <div role="group" aria-label="Photo controls" onKeyDown={handlePhotoKeys} className="flex flex-wrap items-center gap-1 rounded-xl border border-white/40 bg-[#072c50] p-1 text-white">
+          <button type="button" onClick={() => navigate("previous")} aria-label="Previous community photo" className="inline-flex size-11 items-center justify-center rounded-lg hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"><ChevronLeft size={20} aria-hidden="true" /></button>
+          {heroSlides.map((photo, index) => <button key={photo.path} type="button" onClick={() => setActive(index)} aria-label={`Show community photo ${index + 1} of ${heroSlides.length}`} aria-pressed={active === index} className="inline-flex size-11 items-center justify-center rounded-lg hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"><span aria-hidden="true" className={`size-2.5 rounded-full ${active === index ? "bg-brand-gold ring-2 ring-white ring-offset-2 ring-offset-[#072c50]" : "bg-white/65"}`} /></button>)}
+          <button type="button" onClick={() => navigate("next")} aria-label="Next community photo" className="inline-flex size-11 items-center justify-center rounded-lg hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"><ChevronRight size={20} aria-hidden="true" /></button>
+        </div>
+        <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">Community photo {active + 1} of {heroSlides.length}. {failedPhotos[slide.path] ? "Image unavailable." : slide.alt}</p>
       </div>
 
       {/* Editorial shape makes this the site's own visual identity, not a QC copy. */}

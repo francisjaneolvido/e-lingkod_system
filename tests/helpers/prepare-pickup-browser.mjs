@@ -1,3 +1,4 @@
+import { registerLegacyCitizenFixture } from './legacy-citizen-fixture.mjs';
 import assert from "node:assert/strict";
 import { loadServerTypescript } from "./load-typescript.mjs";
 
@@ -9,7 +10,7 @@ export async function preparePickupBrowser(){
   try{
     const users={};
     for(const [key,role] of [["citizen","CITIZEN"],["staff","STAFF"],["admin","ADMIN"]]){
-      const result=await auth.api.signUpEmail({body:{name:"Pickup Browser",firstName:"Pickup",lastName:"Browser",hasNoMiddleName:true,phoneNumber:"+639171234569",email:`pickup-${key}@example.test`,password:"Pickup-browser-test-2468"},headers:new Headers({origin:process.env.BETTER_AUTH_URL||"http://localhost:3000"})});
+      const result=await registerLegacyCitizenFixture(auth, prisma, {body:{name:"Pickup Browser",firstName:"Pickup",lastName:"Browser",hasNoMiddleName:true,phoneNumber:"+639171234569",email:`pickup-${key}@example.test`,password:"Pickup-browser-test-2468"},headers:new Headers({origin:process.env.BETTER_AUTH_URL||"http://localhost:3000"})});
       users[key]=await prisma.user.update({where:{id:result.user.id},data:{role,department:"BPLO"}});
     }
     await prisma.staffPermission.create({data:{userId:users.staff.id,module:"SERVICES"}});

@@ -13,7 +13,7 @@ export default async function CommunityCensusPage() {
   await connection();
   const viewer = await currentViewer();
   return <>
-    <SiteHeader viewer={viewer ? { name: viewer.name, email: viewer.email, role: viewer.role } : null} />
+    <SiteHeader viewer={viewer ? { name: viewer.name, email: viewer.email, role:viewer.role,identityStatus:viewer.identityStatus } : null} />
     <main className="min-h-[68vh] bg-card px-5 py-12 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-[980px]">
         <section className="overflow-hidden rounded-[28px] border border-border bg-muted p-7 sm:p-10">

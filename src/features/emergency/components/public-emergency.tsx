@@ -37,7 +37,7 @@ export function PublicEmergency({ hotlines, alerts, dataAvailable }: { hotlines:
         <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-on-brand-muted"><ShieldAlert size={18}/> Public safety</span>
         <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Emergency Hotlines & Alerts</h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-on-brand-muted">Tawag agad sa emergency services at tingnan ang verified advisory references para sa Los Baños. Hindi kailangan ng account para makatawag.</p>
-        <p className="mt-3 text-xs leading-6 text-on-brand-gold">Hackathon prototype · Not an official LGU dispatch service. Calls open your phone dialer; this website does not place a call or dispatch responders automatically.</p>
+        <p className="mt-3 text-xs leading-6 text-on-brand-gold">Calls open your phone dialer; this website does not place a call or dispatch responders automatically.</p>
       </header>
 
       {!dataAvailable && <div role="alert" className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm font-bold text-amber-900">The live Los Baños directory and advisory feed are currently unavailable. National 911 and Red Cross 143 remain accessible below. Please verify updates directly with official authorities.</div>}

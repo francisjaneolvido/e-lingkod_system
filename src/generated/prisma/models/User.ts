@@ -20,8 +20,18 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  identityVersion: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  identityVersion: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -36,6 +46,8 @@ export type UserMinAggregateOutputType = {
   emailVerified: boolean | null
   image: string | null
   role: string | null
+  identityStatus: string | null
+  identityVersion: number | null
   createdAt: Date | null
   updatedAt: Date | null
   department: string | null
@@ -54,6 +66,8 @@ export type UserMaxAggregateOutputType = {
   emailVerified: boolean | null
   image: string | null
   role: string | null
+  identityStatus: string | null
+  identityVersion: number | null
   createdAt: Date | null
   updatedAt: Date | null
   department: string | null
@@ -72,6 +86,8 @@ export type UserCountAggregateOutputType = {
   emailVerified: number
   image: number
   role: number
+  identityStatus: number
+  identityVersion: number
   createdAt: number
   updatedAt: number
   department: number
@@ -79,6 +95,14 @@ export type UserCountAggregateOutputType = {
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  identityVersion?: true
+}
+
+export type UserSumAggregateInputType = {
+  identityVersion?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -92,6 +116,8 @@ export type UserMinAggregateInputType = {
   emailVerified?: true
   image?: true
   role?: true
+  identityStatus?: true
+  identityVersion?: true
   createdAt?: true
   updatedAt?: true
   department?: true
@@ -110,6 +136,8 @@ export type UserMaxAggregateInputType = {
   emailVerified?: true
   image?: true
   role?: true
+  identityStatus?: true
+  identityVersion?: true
   createdAt?: true
   updatedAt?: true
   department?: true
@@ -128,6 +156,8 @@ export type UserCountAggregateInputType = {
   emailVerified?: true
   image?: true
   role?: true
+  identityStatus?: true
+  identityVersion?: true
   createdAt?: true
   updatedAt?: true
   department?: true
@@ -173,6 +203,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -203,6 +245,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -219,11 +263,15 @@ export type UserGroupByOutputType = {
   emailVerified: boolean
   image: string | null
   role: string
+  identityStatus: string
+  identityVersion: number
   createdAt: Date
   updatedAt: Date
   department: string | null
   designation: string | null
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -258,6 +306,8 @@ export type UserWhereInput = {
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
   image?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.StringFilter<"User"> | string
+  identityStatus?: Prisma.StringFilter<"User"> | string
+  identityVersion?: Prisma.IntFilter<"User"> | number
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   department?: Prisma.StringNullableFilter<"User"> | string | null
@@ -270,6 +320,8 @@ export type UserWhereInput = {
   censusAudits?: Prisma.CensusAuditListRelationFilter
   censusScope?: Prisma.XOR<Prisma.CensusStaffScopeNullableScalarRelationFilter, Prisma.CensusStaffScopeWhereInput> | null
   censusRosterMemberships?: Prisma.CensusAssistanceMemberListRelationFilter
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionListRelationFilter
+  identityReviews?: Prisma.CitizenIdentityReviewListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
   reports?: Prisma.CivicReportListRelationFilter
@@ -324,6 +376,8 @@ export type UserOrderByWithRelationInput = {
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
+  identityStatus?: Prisma.SortOrder
+  identityVersion?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   department?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -336,6 +390,8 @@ export type UserOrderByWithRelationInput = {
   censusAudits?: Prisma.CensusAuditOrderByRelationAggregateInput
   censusScope?: Prisma.CensusStaffScopeOrderByWithRelationInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberOrderByRelationAggregateInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionOrderByRelationAggregateInput
+  identityReviews?: Prisma.CitizenIdentityReviewOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   reports?: Prisma.CivicReportOrderByRelationAggregateInput
@@ -394,6 +450,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
   image?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.StringFilter<"User"> | string
+  identityStatus?: Prisma.StringFilter<"User"> | string
+  identityVersion?: Prisma.IntFilter<"User"> | number
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   department?: Prisma.StringNullableFilter<"User"> | string | null
@@ -406,6 +464,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   censusAudits?: Prisma.CensusAuditListRelationFilter
   censusScope?: Prisma.XOR<Prisma.CensusStaffScopeNullableScalarRelationFilter, Prisma.CensusStaffScopeWhereInput> | null
   censusRosterMemberships?: Prisma.CensusAssistanceMemberListRelationFilter
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionListRelationFilter
+  identityReviews?: Prisma.CitizenIdentityReviewListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
   reports?: Prisma.CivicReportListRelationFilter
@@ -460,13 +520,17 @@ export type UserOrderByWithAggregationInput = {
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
+  identityStatus?: Prisma.SortOrder
+  identityVersion?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   department?: Prisma.SortOrderInput | Prisma.SortOrder
   designation?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -484,6 +548,8 @@ export type UserScalarWhereWithAggregatesInput = {
   emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.StringWithAggregatesFilter<"User"> | string
+  identityStatus?: Prisma.StringWithAggregatesFilter<"User"> | string
+  identityVersion?: Prisma.IntWithAggregatesFilter<"User"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   department?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -502,6 +568,8 @@ export type UserCreateInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -514,6 +582,8 @@ export type UserCreateInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -568,6 +638,8 @@ export type UserUncheckedCreateInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -580,6 +652,8 @@ export type UserUncheckedCreateInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -634,6 +708,8 @@ export type UserUpdateInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -646,6 +722,8 @@ export type UserUpdateInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -700,6 +778,8 @@ export type UserUncheckedUpdateInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -712,6 +792,8 @@ export type UserUncheckedUpdateInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -766,6 +848,8 @@ export type UserCreateManyInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -784,6 +868,8 @@ export type UserUpdateManyMutationInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -802,10 +888,17 @@ export type UserUncheckedUpdateManyInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
 export type UserOrderByRelevanceInput = {
@@ -826,10 +919,16 @@ export type UserCountOrderByAggregateInput = {
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  identityStatus?: Prisma.SortOrder
+  identityVersion?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   department?: Prisma.SortOrder
   designation?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  identityVersion?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -844,6 +943,8 @@ export type UserMaxOrderByAggregateInput = {
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  identityStatus?: Prisma.SortOrder
+  identityVersion?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   department?: Prisma.SortOrder
@@ -862,15 +963,16 @@ export type UserMinOrderByAggregateInput = {
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  identityStatus?: Prisma.SortOrder
+  identityVersion?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   department?: Prisma.SortOrder
   designation?: Prisma.SortOrder
 }
 
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
+export type UserSumOrderByAggregateInput = {
+  identityVersion?: Prisma.SortOrder
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -878,8 +980,32 @@ export type UserNullableScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput | null
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type UserCreateNestedOneWithoutIdentitySubmissionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIdentitySubmissionsInput, Prisma.UserUncheckedCreateWithoutIdentitySubmissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdentitySubmissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutIdentitySubmissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIdentitySubmissionsInput, Prisma.UserUncheckedCreateWithoutIdentitySubmissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdentitySubmissionsInput
+  upsert?: Prisma.UserUpsertWithoutIdentitySubmissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIdentitySubmissionsInput, Prisma.UserUpdateWithoutIdentitySubmissionsInput>, Prisma.UserUncheckedUpdateWithoutIdentitySubmissionsInput>
+}
+
+export type UserCreateNestedOneWithoutIdentityReviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIdentityReviewsInput, Prisma.UserUncheckedCreateWithoutIdentityReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdentityReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutIdentityReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIdentityReviewsInput, Prisma.UserUncheckedCreateWithoutIdentityReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdentityReviewsInput
+  upsert?: Prisma.UserUpsertWithoutIdentityReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIdentityReviewsInput, Prisma.UserUpdateWithoutIdentityReviewsInput>, Prisma.UserUncheckedUpdateWithoutIdentityReviewsInput>
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
@@ -888,10 +1014,6 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
 }
 
 export type UserCreateNestedOneWithoutSessionsInput = {
@@ -1588,7 +1710,7 @@ export type UserUpdateOneWithoutMunicipalProjectUpdatesReviewedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMunicipalProjectUpdatesReviewedInput, Prisma.UserUpdateWithoutMunicipalProjectUpdatesReviewedInput>, Prisma.UserUncheckedUpdateWithoutMunicipalProjectUpdatesReviewedInput>
 }
 
-export type UserCreateWithoutSessionsInput = {
+export type UserCreateWithoutIdentitySubmissionsInput = {
   id: string
   name: string
   firstName?: string | null
@@ -1600,6 +1722,8 @@ export type UserCreateWithoutSessionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -1612,6 +1736,592 @@ export type UserCreateWithoutSessionsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutIdentitySubmissionsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  identityStatus?: string
+  identityVersion?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentUncheckedCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutIdentitySubmissionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutIdentitySubmissionsInput, Prisma.UserUncheckedCreateWithoutIdentitySubmissionsInput>
+}
+
+export type UserUpsertWithoutIdentitySubmissionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutIdentitySubmissionsInput, Prisma.UserUncheckedUpdateWithoutIdentitySubmissionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutIdentitySubmissionsInput, Prisma.UserUncheckedCreateWithoutIdentitySubmissionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutIdentitySubmissionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutIdentitySubmissionsInput, Prisma.UserUncheckedUpdateWithoutIdentitySubmissionsInput>
+}
+
+export type UserUpdateWithoutIdentitySubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutIdentitySubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUncheckedUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutIdentityReviewsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  identityStatus?: string
+  identityVersion?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutIdentityReviewsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  identityStatus?: string
+  identityVersion?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedCreateNestedManyWithoutCreatedByInput
+  censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedCreateNestedManyWithoutActorInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedCreateNestedManyWithoutReviewedByInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedCreateNestedManyWithoutUserInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutActorInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedCreateNestedManyWithoutTargetInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedCreateNestedManyWithoutIssuedByInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedCreateNestedManyWithoutReporterInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedCreateNestedOneWithoutUserInput
+  postedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutCreatedByInput
+  jobMutations?: Prisma.JobMutationUncheckedCreateNestedManyWithoutActorInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedCreateNestedManyWithoutUserInput
+  jobChanges?: Prisma.JobActivityUncheckedCreateNestedManyWithoutActorInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedCreateNestedManyWithoutReviewedByInput
+  spesImports?: Prisma.SpesImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedCreateNestedManyWithoutActorInput
+  establishments?: Prisma.EstablishmentUncheckedCreateNestedManyWithoutOwnerInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedCreateNestedManyWithoutActorInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedCreateNestedManyWithoutOwnerInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedCreateNestedManyWithoutUserInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedCreateNestedManyWithoutUserInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutUserInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedCreateNestedManyWithoutActorInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedCreateNestedOneWithoutUserInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedCreateNestedManyWithoutImportedByInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutAssignedStaffInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedCreateNestedManyWithoutActorInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedCreateNestedManyWithoutProposedByInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedCreateNestedManyWithoutProposedByInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedCreateNestedManyWithoutVerifiedByInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedCreateNestedManyWithoutReleaseApprovedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutIdentityReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutIdentityReviewsInput, Prisma.UserUncheckedCreateWithoutIdentityReviewsInput>
+}
+
+export type UserUpsertWithoutIdentityReviewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutIdentityReviewsInput, Prisma.UserUncheckedUpdateWithoutIdentityReviewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutIdentityReviewsInput, Prisma.UserUncheckedCreateWithoutIdentityReviewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutIdentityReviewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutIdentityReviewsInput, Prisma.UserUncheckedUpdateWithoutIdentityReviewsInput>
+}
+
+export type UserUpdateWithoutIdentityReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUpdateManyWithoutCreatedByNestedInput
+  censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutIdentityReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleInitial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasNoMiddleName?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutReviewedByNestedInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectUncheckedUpdateManyWithoutCreatedByNestedInput
+  censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
+  censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
+  censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  reportUpdates?: Prisma.ReportUpdateUncheckedUpdateManyWithoutActorNestedInput
+  resolutionSubmissions?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  resolutionReviews?: Prisma.ResolutionSubmissionUncheckedUpdateManyWithoutReviewedByNestedInput
+  staffPermissions?: Prisma.StaffPermissionUncheckedUpdateManyWithoutUserNestedInput
+  staffChangesMade?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutActorNestedInput
+  staffChangesReceived?: Prisma.StaffAccessAuditUncheckedUpdateManyWithoutTargetNestedInput
+  issuedStaffInvites?: Prisma.StaffInvitationUncheckedUpdateManyWithoutIssuedByNestedInput
+  citizenFeedbacks?: Prisma.CitizenResolutionFeedbackUncheckedUpdateManyWithoutReporterNestedInput
+  jobseekerProfile?: Prisma.JobseekerProfileUncheckedUpdateOneWithoutUserNestedInput
+  postedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutCreatedByNestedInput
+  jobMutations?: Prisma.JobMutationUncheckedUpdateManyWithoutActorNestedInput
+  jobRecommendations?: Prisma.JobRecommendationUncheckedUpdateManyWithoutUserNestedInput
+  jobChanges?: Prisma.JobActivityUncheckedUpdateManyWithoutActorNestedInput
+  reviewedJobs?: Prisma.JobOpportunityUncheckedUpdateManyWithoutReviewedByNestedInput
+  spesImports?: Prisma.SpesImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  spesImportEvents?: Prisma.SpesImportEventUncheckedUpdateManyWithoutActorNestedInput
+  establishments?: Prisma.EstablishmentUncheckedUpdateManyWithoutOwnerNestedInput
+  establishmentRevisions?: Prisma.EstablishmentRevisionUncheckedUpdateManyWithoutActorNestedInput
+  establishmentOperations?: Prisma.EstablishmentOperationUncheckedUpdateManyWithoutOwnerNestedInput
+  communitySurveys?: Prisma.CommunitySurveyUncheckedUpdateManyWithoutUserNestedInput
+  surveyWorkspaces?: Prisma.CommunitySurveyWorkspaceUncheckedUpdateManyWithoutUserNestedInput
+  surveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutUserNestedInput
+  authoredSurveyRevisions?: Prisma.CommunitySurveyRevisionUncheckedUpdateManyWithoutActorNestedInput
+  citizenProfileConsent?: Prisma.CitizenProfileConsentUncheckedUpdateOneWithoutUserNestedInput
+  communityImports?: Prisma.CommunityImportBatchUncheckedUpdateManyWithoutImportedByNestedInput
+  serviceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  assignedServiceRequests?: Prisma.ServiceRequestUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  serviceRequestEvents?: Prisma.ServiceRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  proposedServiceAppointments?: Prisma.ServiceAppointmentUncheckedUpdateManyWithoutProposedByNestedInput
+  proposedServicePickupSlots?: Prisma.ServicePickupSlotUncheckedUpdateManyWithoutProposedByNestedInput
+  verifiedServiceDocuments?: Prisma.ServiceRequestDocumentUncheckedUpdateManyWithoutVerifiedByNestedInput
+  approvedServiceReleases?: Prisma.ServiceRequestUncheckedUpdateManyWithoutReleaseApprovedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  workAssignments?: Prisma.WorkAssignmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  createdServiceDefinitions?: Prisma.ServiceDefinitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceDefinitionAudits?: Prisma.ServiceDefinitionAuditUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutSessionsInput = {
+  id: string
+  name: string
+  firstName?: string | null
+  lastName?: string | null
+  middleInitial?: string | null
+  hasNoMiddleName?: boolean
+  phoneNumber?: string | null
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  identityStatus?: string
+  identityVersion?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: string | null
+  designation?: string | null
+  municipalProjectUpdatesReviewed?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutReviewedByInput
+  municipalProjectUpdatesCreated?: Prisma.MunicipalProjectUpdateCreateNestedManyWithoutCreatedByInput
+  municipalProjectsReviewed?: Prisma.MunicipalProjectCreateNestedManyWithoutReviewedByInput
+  municipalProjectsCreated?: Prisma.MunicipalProjectCreateNestedManyWithoutCreatedByInput
+  censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
+  censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
+  censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
+  censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
   assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
@@ -1665,6 +2375,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -1677,6 +2389,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
   assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -1746,6 +2460,8 @@ export type UserUpdateWithoutSessionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1758,6 +2474,8 @@ export type UserUpdateWithoutSessionsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
   assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
@@ -1811,6 +2529,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1823,6 +2543,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
   assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -1876,6 +2598,8 @@ export type UserCreateWithoutAccountsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -1888,6 +2612,8 @@ export type UserCreateWithoutAccountsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
   assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
@@ -1941,6 +2667,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -1953,6 +2681,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
   assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -2022,6 +2752,8 @@ export type UserUpdateWithoutAccountsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2034,6 +2766,8 @@ export type UserUpdateWithoutAccountsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
   assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
@@ -2087,6 +2821,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2099,6 +2835,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
   assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -2152,6 +2890,8 @@ export type UserCreateWithoutReportsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -2164,6 +2904,8 @@ export type UserCreateWithoutReportsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   assignedCivicReports?: Prisma.CivicReportCreateNestedManyWithoutAssignedStaffInput
@@ -2217,6 +2959,8 @@ export type UserUncheckedCreateWithoutReportsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -2229,6 +2973,8 @@ export type UserUncheckedCreateWithoutReportsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   assignedCivicReports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutAssignedStaffInput
@@ -2287,6 +3033,8 @@ export type UserCreateWithoutAssignedCivicReportsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -2299,6 +3047,8 @@ export type UserCreateWithoutAssignedCivicReportsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -2352,6 +3102,8 @@ export type UserUncheckedCreateWithoutAssignedCivicReportsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -2364,6 +3116,8 @@ export type UserUncheckedCreateWithoutAssignedCivicReportsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -2433,6 +3187,8 @@ export type UserUpdateWithoutReportsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2445,6 +3201,8 @@ export type UserUpdateWithoutReportsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   assignedCivicReports?: Prisma.CivicReportUpdateManyWithoutAssignedStaffNestedInput
@@ -2498,6 +3256,8 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2510,6 +3270,8 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   assignedCivicReports?: Prisma.CivicReportUncheckedUpdateManyWithoutAssignedStaffNestedInput
@@ -2574,6 +3336,8 @@ export type UserUpdateWithoutAssignedCivicReportsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2586,6 +3350,8 @@ export type UserUpdateWithoutAssignedCivicReportsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -2639,6 +3405,8 @@ export type UserUncheckedUpdateWithoutAssignedCivicReportsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2651,6 +3419,8 @@ export type UserUncheckedUpdateWithoutAssignedCivicReportsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -2704,6 +3474,8 @@ export type UserCreateWithoutReportUpdatesInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -2716,6 +3488,8 @@ export type UserCreateWithoutReportUpdatesInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -2769,6 +3543,8 @@ export type UserUncheckedCreateWithoutReportUpdatesInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -2781,6 +3557,8 @@ export type UserUncheckedCreateWithoutReportUpdatesInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -2850,6 +3628,8 @@ export type UserUpdateWithoutReportUpdatesInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2862,6 +3642,8 @@ export type UserUpdateWithoutReportUpdatesInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -2915,6 +3697,8 @@ export type UserUncheckedUpdateWithoutReportUpdatesInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2927,6 +3711,8 @@ export type UserUncheckedUpdateWithoutReportUpdatesInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -2980,6 +3766,8 @@ export type UserCreateWithoutStaffPermissionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -2992,6 +3780,8 @@ export type UserCreateWithoutStaffPermissionsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -3045,6 +3835,8 @@ export type UserUncheckedCreateWithoutStaffPermissionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -3057,6 +3849,8 @@ export type UserUncheckedCreateWithoutStaffPermissionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -3126,6 +3920,8 @@ export type UserUpdateWithoutStaffPermissionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3138,6 +3934,8 @@ export type UserUpdateWithoutStaffPermissionsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -3191,6 +3989,8 @@ export type UserUncheckedUpdateWithoutStaffPermissionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3203,6 +4003,8 @@ export type UserUncheckedUpdateWithoutStaffPermissionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -3256,6 +4058,8 @@ export type UserCreateWithoutStaffChangesMadeInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -3268,6 +4072,8 @@ export type UserCreateWithoutStaffChangesMadeInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -3321,6 +4127,8 @@ export type UserUncheckedCreateWithoutStaffChangesMadeInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -3333,6 +4141,8 @@ export type UserUncheckedCreateWithoutStaffChangesMadeInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -3391,6 +4201,8 @@ export type UserCreateWithoutStaffChangesReceivedInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -3403,6 +4215,8 @@ export type UserCreateWithoutStaffChangesReceivedInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -3456,6 +4270,8 @@ export type UserUncheckedCreateWithoutStaffChangesReceivedInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -3468,6 +4284,8 @@ export type UserUncheckedCreateWithoutStaffChangesReceivedInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -3537,6 +4355,8 @@ export type UserUpdateWithoutStaffChangesMadeInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3549,6 +4369,8 @@ export type UserUpdateWithoutStaffChangesMadeInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -3602,6 +4424,8 @@ export type UserUncheckedUpdateWithoutStaffChangesMadeInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3614,6 +4438,8 @@ export type UserUncheckedUpdateWithoutStaffChangesMadeInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -3678,6 +4504,8 @@ export type UserUpdateWithoutStaffChangesReceivedInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3690,6 +4518,8 @@ export type UserUpdateWithoutStaffChangesReceivedInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -3743,6 +4573,8 @@ export type UserUncheckedUpdateWithoutStaffChangesReceivedInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3755,6 +4587,8 @@ export type UserUncheckedUpdateWithoutStaffChangesReceivedInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -3808,6 +4642,8 @@ export type UserCreateWithoutIssuedStaffInvitesInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -3820,6 +4656,8 @@ export type UserCreateWithoutIssuedStaffInvitesInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -3873,6 +4711,8 @@ export type UserUncheckedCreateWithoutIssuedStaffInvitesInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -3885,6 +4725,8 @@ export type UserUncheckedCreateWithoutIssuedStaffInvitesInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -3954,6 +4796,8 @@ export type UserUpdateWithoutIssuedStaffInvitesInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3966,6 +4810,8 @@ export type UserUpdateWithoutIssuedStaffInvitesInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -4019,6 +4865,8 @@ export type UserUncheckedUpdateWithoutIssuedStaffInvitesInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4031,6 +4879,8 @@ export type UserUncheckedUpdateWithoutIssuedStaffInvitesInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -4084,6 +4934,8 @@ export type UserCreateWithoutResolutionSubmissionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -4096,6 +4948,8 @@ export type UserCreateWithoutResolutionSubmissionsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -4149,6 +5003,8 @@ export type UserUncheckedCreateWithoutResolutionSubmissionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -4161,6 +5017,8 @@ export type UserUncheckedCreateWithoutResolutionSubmissionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -4219,6 +5077,8 @@ export type UserCreateWithoutResolutionReviewsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -4231,6 +5091,8 @@ export type UserCreateWithoutResolutionReviewsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -4284,6 +5146,8 @@ export type UserUncheckedCreateWithoutResolutionReviewsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -4296,6 +5160,8 @@ export type UserUncheckedCreateWithoutResolutionReviewsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -4365,6 +5231,8 @@ export type UserUpdateWithoutResolutionSubmissionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4377,6 +5245,8 @@ export type UserUpdateWithoutResolutionSubmissionsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -4430,6 +5300,8 @@ export type UserUncheckedUpdateWithoutResolutionSubmissionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4442,6 +5314,8 @@ export type UserUncheckedUpdateWithoutResolutionSubmissionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -4506,6 +5380,8 @@ export type UserUpdateWithoutResolutionReviewsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4518,6 +5394,8 @@ export type UserUpdateWithoutResolutionReviewsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -4571,6 +5449,8 @@ export type UserUncheckedUpdateWithoutResolutionReviewsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4583,6 +5463,8 @@ export type UserUncheckedUpdateWithoutResolutionReviewsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -4636,6 +5518,8 @@ export type UserCreateWithoutCitizenFeedbacksInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -4648,6 +5532,8 @@ export type UserCreateWithoutCitizenFeedbacksInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -4701,6 +5587,8 @@ export type UserUncheckedCreateWithoutCitizenFeedbacksInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -4713,6 +5601,8 @@ export type UserUncheckedCreateWithoutCitizenFeedbacksInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -4782,6 +5672,8 @@ export type UserUpdateWithoutCitizenFeedbacksInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4794,6 +5686,8 @@ export type UserUpdateWithoutCitizenFeedbacksInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -4847,6 +5741,8 @@ export type UserUncheckedUpdateWithoutCitizenFeedbacksInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4859,6 +5755,8 @@ export type UserUncheckedUpdateWithoutCitizenFeedbacksInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -4912,6 +5810,8 @@ export type UserCreateWithoutReviewedJobsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -4924,6 +5824,8 @@ export type UserCreateWithoutReviewedJobsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -4977,6 +5879,8 @@ export type UserUncheckedCreateWithoutReviewedJobsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -4989,6 +5893,8 @@ export type UserUncheckedCreateWithoutReviewedJobsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -5047,6 +5953,8 @@ export type UserCreateWithoutPostedJobsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -5059,6 +5967,8 @@ export type UserCreateWithoutPostedJobsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -5112,6 +6022,8 @@ export type UserUncheckedCreateWithoutPostedJobsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -5124,6 +6036,8 @@ export type UserUncheckedCreateWithoutPostedJobsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -5193,6 +6107,8 @@ export type UserUpdateWithoutReviewedJobsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5205,6 +6121,8 @@ export type UserUpdateWithoutReviewedJobsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -5258,6 +6176,8 @@ export type UserUncheckedUpdateWithoutReviewedJobsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5270,6 +6190,8 @@ export type UserUncheckedUpdateWithoutReviewedJobsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -5334,6 +6256,8 @@ export type UserUpdateWithoutPostedJobsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5346,6 +6270,8 @@ export type UserUpdateWithoutPostedJobsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -5399,6 +6325,8 @@ export type UserUncheckedUpdateWithoutPostedJobsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5411,6 +6339,8 @@ export type UserUncheckedUpdateWithoutPostedJobsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -5464,6 +6394,8 @@ export type UserCreateWithoutJobseekerProfileInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -5476,6 +6408,8 @@ export type UserCreateWithoutJobseekerProfileInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -5529,6 +6463,8 @@ export type UserUncheckedCreateWithoutJobseekerProfileInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -5541,6 +6477,8 @@ export type UserUncheckedCreateWithoutJobseekerProfileInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -5610,6 +6548,8 @@ export type UserUpdateWithoutJobseekerProfileInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5622,6 +6562,8 @@ export type UserUpdateWithoutJobseekerProfileInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -5675,6 +6617,8 @@ export type UserUncheckedUpdateWithoutJobseekerProfileInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5687,6 +6631,8 @@ export type UserUncheckedUpdateWithoutJobseekerProfileInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -5740,6 +6686,8 @@ export type UserCreateWithoutSpesImportsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -5752,6 +6700,8 @@ export type UserCreateWithoutSpesImportsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -5805,6 +6755,8 @@ export type UserUncheckedCreateWithoutSpesImportsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -5817,6 +6769,8 @@ export type UserUncheckedCreateWithoutSpesImportsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -5886,6 +6840,8 @@ export type UserUpdateWithoutSpesImportsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5898,6 +6854,8 @@ export type UserUpdateWithoutSpesImportsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -5951,6 +6909,8 @@ export type UserUncheckedUpdateWithoutSpesImportsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5963,6 +6923,8 @@ export type UserUncheckedUpdateWithoutSpesImportsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -6016,6 +6978,8 @@ export type UserCreateWithoutSpesImportEventsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -6028,6 +6992,8 @@ export type UserCreateWithoutSpesImportEventsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -6081,6 +7047,8 @@ export type UserUncheckedCreateWithoutSpesImportEventsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -6093,6 +7061,8 @@ export type UserUncheckedCreateWithoutSpesImportEventsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -6162,6 +7132,8 @@ export type UserUpdateWithoutSpesImportEventsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6174,6 +7146,8 @@ export type UserUpdateWithoutSpesImportEventsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -6227,6 +7201,8 @@ export type UserUncheckedUpdateWithoutSpesImportEventsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6239,6 +7215,8 @@ export type UserUncheckedUpdateWithoutSpesImportEventsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -6292,6 +7270,8 @@ export type UserCreateWithoutJobChangesInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -6304,6 +7284,8 @@ export type UserCreateWithoutJobChangesInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -6357,6 +7339,8 @@ export type UserUncheckedCreateWithoutJobChangesInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -6369,6 +7353,8 @@ export type UserUncheckedCreateWithoutJobChangesInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -6438,6 +7424,8 @@ export type UserUpdateWithoutJobChangesInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6450,6 +7438,8 @@ export type UserUpdateWithoutJobChangesInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -6503,6 +7493,8 @@ export type UserUncheckedUpdateWithoutJobChangesInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6515,6 +7507,8 @@ export type UserUncheckedUpdateWithoutJobChangesInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -6568,6 +7562,8 @@ export type UserCreateWithoutCommunitySurveysInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -6580,6 +7576,8 @@ export type UserCreateWithoutCommunitySurveysInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -6633,6 +7631,8 @@ export type UserUncheckedCreateWithoutCommunitySurveysInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -6645,6 +7645,8 @@ export type UserUncheckedCreateWithoutCommunitySurveysInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -6714,6 +7716,8 @@ export type UserUpdateWithoutCommunitySurveysInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6726,6 +7730,8 @@ export type UserUpdateWithoutCommunitySurveysInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -6779,6 +7785,8 @@ export type UserUncheckedUpdateWithoutCommunitySurveysInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6791,6 +7799,8 @@ export type UserUncheckedUpdateWithoutCommunitySurveysInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -6844,6 +7854,8 @@ export type UserCreateWithoutCommunityImportsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -6856,6 +7868,8 @@ export type UserCreateWithoutCommunityImportsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -6909,6 +7923,8 @@ export type UserUncheckedCreateWithoutCommunityImportsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -6921,6 +7937,8 @@ export type UserUncheckedCreateWithoutCommunityImportsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -6990,6 +8008,8 @@ export type UserUpdateWithoutCommunityImportsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7002,6 +8022,8 @@ export type UserUpdateWithoutCommunityImportsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -7055,6 +8077,8 @@ export type UserUncheckedUpdateWithoutCommunityImportsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7067,6 +8091,8 @@ export type UserUncheckedUpdateWithoutCommunityImportsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -7120,6 +8146,8 @@ export type UserCreateWithoutServiceRequestsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -7132,6 +8160,8 @@ export type UserCreateWithoutServiceRequestsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -7185,6 +8215,8 @@ export type UserUncheckedCreateWithoutServiceRequestsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -7197,6 +8229,8 @@ export type UserUncheckedCreateWithoutServiceRequestsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -7255,6 +8289,8 @@ export type UserCreateWithoutAssignedServiceRequestsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -7267,6 +8303,8 @@ export type UserCreateWithoutAssignedServiceRequestsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -7320,6 +8358,8 @@ export type UserUncheckedCreateWithoutAssignedServiceRequestsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -7332,6 +8372,8 @@ export type UserUncheckedCreateWithoutAssignedServiceRequestsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -7390,6 +8432,8 @@ export type UserCreateWithoutApprovedServiceReleasesInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -7402,6 +8446,8 @@ export type UserCreateWithoutApprovedServiceReleasesInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -7455,6 +8501,8 @@ export type UserUncheckedCreateWithoutApprovedServiceReleasesInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -7467,6 +8515,8 @@ export type UserUncheckedCreateWithoutApprovedServiceReleasesInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -7536,6 +8586,8 @@ export type UserUpdateWithoutServiceRequestsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7548,6 +8600,8 @@ export type UserUpdateWithoutServiceRequestsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -7601,6 +8655,8 @@ export type UserUncheckedUpdateWithoutServiceRequestsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7613,6 +8669,8 @@ export type UserUncheckedUpdateWithoutServiceRequestsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -7677,6 +8735,8 @@ export type UserUpdateWithoutAssignedServiceRequestsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7689,6 +8749,8 @@ export type UserUpdateWithoutAssignedServiceRequestsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -7742,6 +8804,8 @@ export type UserUncheckedUpdateWithoutAssignedServiceRequestsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7754,6 +8818,8 @@ export type UserUncheckedUpdateWithoutAssignedServiceRequestsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -7818,6 +8884,8 @@ export type UserUpdateWithoutApprovedServiceReleasesInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7830,6 +8898,8 @@ export type UserUpdateWithoutApprovedServiceReleasesInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -7883,6 +8953,8 @@ export type UserUncheckedUpdateWithoutApprovedServiceReleasesInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7895,6 +8967,8 @@ export type UserUncheckedUpdateWithoutApprovedServiceReleasesInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -7948,6 +9022,8 @@ export type UserCreateWithoutVerifiedServiceDocumentsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -7960,6 +9036,8 @@ export type UserCreateWithoutVerifiedServiceDocumentsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -8013,6 +9091,8 @@ export type UserUncheckedCreateWithoutVerifiedServiceDocumentsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -8025,6 +9105,8 @@ export type UserUncheckedCreateWithoutVerifiedServiceDocumentsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -8094,6 +9176,8 @@ export type UserUpdateWithoutVerifiedServiceDocumentsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8106,6 +9190,8 @@ export type UserUpdateWithoutVerifiedServiceDocumentsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -8159,6 +9245,8 @@ export type UserUncheckedUpdateWithoutVerifiedServiceDocumentsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8171,6 +9259,8 @@ export type UserUncheckedUpdateWithoutVerifiedServiceDocumentsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -8224,6 +9314,8 @@ export type UserCreateWithoutServiceRequestEventsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -8236,6 +9328,8 @@ export type UserCreateWithoutServiceRequestEventsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -8289,6 +9383,8 @@ export type UserUncheckedCreateWithoutServiceRequestEventsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -8301,6 +9397,8 @@ export type UserUncheckedCreateWithoutServiceRequestEventsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -8370,6 +9468,8 @@ export type UserUpdateWithoutServiceRequestEventsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8382,6 +9482,8 @@ export type UserUpdateWithoutServiceRequestEventsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -8435,6 +9537,8 @@ export type UserUncheckedUpdateWithoutServiceRequestEventsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8447,6 +9551,8 @@ export type UserUncheckedUpdateWithoutServiceRequestEventsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -8500,6 +9606,8 @@ export type UserCreateWithoutProposedServiceAppointmentsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -8512,6 +9620,8 @@ export type UserCreateWithoutProposedServiceAppointmentsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -8565,6 +9675,8 @@ export type UserUncheckedCreateWithoutProposedServiceAppointmentsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -8577,6 +9689,8 @@ export type UserUncheckedCreateWithoutProposedServiceAppointmentsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -8646,6 +9760,8 @@ export type UserUpdateWithoutProposedServiceAppointmentsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8658,6 +9774,8 @@ export type UserUpdateWithoutProposedServiceAppointmentsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -8711,6 +9829,8 @@ export type UserUncheckedUpdateWithoutProposedServiceAppointmentsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8723,6 +9843,8 @@ export type UserUncheckedUpdateWithoutProposedServiceAppointmentsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -8776,6 +9898,8 @@ export type UserCreateWithoutProposedServicePickupSlotsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -8788,6 +9912,8 @@ export type UserCreateWithoutProposedServicePickupSlotsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -8841,6 +9967,8 @@ export type UserUncheckedCreateWithoutProposedServicePickupSlotsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -8853,6 +9981,8 @@ export type UserUncheckedCreateWithoutProposedServicePickupSlotsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -8922,6 +10052,8 @@ export type UserUpdateWithoutProposedServicePickupSlotsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8934,6 +10066,8 @@ export type UserUpdateWithoutProposedServicePickupSlotsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -8987,6 +10121,8 @@ export type UserUncheckedUpdateWithoutProposedServicePickupSlotsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8999,6 +10135,8 @@ export type UserUncheckedUpdateWithoutProposedServicePickupSlotsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -9052,6 +10190,8 @@ export type UserCreateWithoutNotificationsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -9064,6 +10204,8 @@ export type UserCreateWithoutNotificationsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -9117,6 +10259,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -9129,6 +10273,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -9198,6 +10344,8 @@ export type UserUpdateWithoutNotificationsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9210,6 +10358,8 @@ export type UserUpdateWithoutNotificationsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -9263,6 +10413,8 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9275,6 +10427,8 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -9328,6 +10482,8 @@ export type UserCreateWithoutWorkAssignmentsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -9340,6 +10496,8 @@ export type UserCreateWithoutWorkAssignmentsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -9393,6 +10551,8 @@ export type UserUncheckedCreateWithoutWorkAssignmentsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -9405,6 +10565,8 @@ export type UserUncheckedCreateWithoutWorkAssignmentsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -9474,6 +10636,8 @@ export type UserUpdateWithoutWorkAssignmentsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9486,6 +10650,8 @@ export type UserUpdateWithoutWorkAssignmentsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -9539,6 +10705,8 @@ export type UserUncheckedUpdateWithoutWorkAssignmentsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9551,6 +10719,8 @@ export type UserUncheckedUpdateWithoutWorkAssignmentsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -9604,6 +10774,8 @@ export type UserCreateWithoutCreatedServiceDefinitionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -9616,6 +10788,8 @@ export type UserCreateWithoutCreatedServiceDefinitionsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -9669,6 +10843,8 @@ export type UserUncheckedCreateWithoutCreatedServiceDefinitionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -9681,6 +10857,8 @@ export type UserUncheckedCreateWithoutCreatedServiceDefinitionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -9750,6 +10928,8 @@ export type UserUpdateWithoutCreatedServiceDefinitionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9762,6 +10942,8 @@ export type UserUpdateWithoutCreatedServiceDefinitionsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -9815,6 +10997,8 @@ export type UserUncheckedUpdateWithoutCreatedServiceDefinitionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9827,6 +11011,8 @@ export type UserUncheckedUpdateWithoutCreatedServiceDefinitionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -9880,6 +11066,8 @@ export type UserCreateWithoutServiceDefinitionAuditsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -9892,6 +11080,8 @@ export type UserCreateWithoutServiceDefinitionAuditsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -9945,6 +11135,8 @@ export type UserUncheckedCreateWithoutServiceDefinitionAuditsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -9957,6 +11149,8 @@ export type UserUncheckedCreateWithoutServiceDefinitionAuditsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -10026,6 +11220,8 @@ export type UserUpdateWithoutServiceDefinitionAuditsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10038,6 +11234,8 @@ export type UserUpdateWithoutServiceDefinitionAuditsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -10091,6 +11289,8 @@ export type UserUncheckedUpdateWithoutServiceDefinitionAuditsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10103,6 +11303,8 @@ export type UserUncheckedUpdateWithoutServiceDefinitionAuditsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -10156,6 +11358,8 @@ export type UserCreateWithoutSurveyWorkspacesInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -10168,6 +11372,8 @@ export type UserCreateWithoutSurveyWorkspacesInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -10221,6 +11427,8 @@ export type UserUncheckedCreateWithoutSurveyWorkspacesInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -10233,6 +11441,8 @@ export type UserUncheckedCreateWithoutSurveyWorkspacesInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -10302,6 +11512,8 @@ export type UserUpdateWithoutSurveyWorkspacesInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10314,6 +11526,8 @@ export type UserUpdateWithoutSurveyWorkspacesInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -10367,6 +11581,8 @@ export type UserUncheckedUpdateWithoutSurveyWorkspacesInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10379,6 +11595,8 @@ export type UserUncheckedUpdateWithoutSurveyWorkspacesInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -10432,6 +11650,8 @@ export type UserCreateWithoutSurveyRevisionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -10444,6 +11664,8 @@ export type UserCreateWithoutSurveyRevisionsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -10497,6 +11719,8 @@ export type UserUncheckedCreateWithoutSurveyRevisionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -10509,6 +11733,8 @@ export type UserUncheckedCreateWithoutSurveyRevisionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -10567,6 +11793,8 @@ export type UserCreateWithoutAuthoredSurveyRevisionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -10579,6 +11807,8 @@ export type UserCreateWithoutAuthoredSurveyRevisionsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -10632,6 +11862,8 @@ export type UserUncheckedCreateWithoutAuthoredSurveyRevisionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -10644,6 +11876,8 @@ export type UserUncheckedCreateWithoutAuthoredSurveyRevisionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -10713,6 +11947,8 @@ export type UserUpdateWithoutSurveyRevisionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10725,6 +11961,8 @@ export type UserUpdateWithoutSurveyRevisionsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -10778,6 +12016,8 @@ export type UserUncheckedUpdateWithoutSurveyRevisionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10790,6 +12030,8 @@ export type UserUncheckedUpdateWithoutSurveyRevisionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -10854,6 +12096,8 @@ export type UserUpdateWithoutAuthoredSurveyRevisionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10866,6 +12110,8 @@ export type UserUpdateWithoutAuthoredSurveyRevisionsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -10919,6 +12165,8 @@ export type UserUncheckedUpdateWithoutAuthoredSurveyRevisionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10931,6 +12179,8 @@ export type UserUncheckedUpdateWithoutAuthoredSurveyRevisionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -10984,6 +12234,8 @@ export type UserCreateWithoutCitizenProfileConsentInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -10996,6 +12248,8 @@ export type UserCreateWithoutCitizenProfileConsentInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -11049,6 +12303,8 @@ export type UserUncheckedCreateWithoutCitizenProfileConsentInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -11061,6 +12317,8 @@ export type UserUncheckedCreateWithoutCitizenProfileConsentInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -11130,6 +12388,8 @@ export type UserUpdateWithoutCitizenProfileConsentInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11142,6 +12402,8 @@ export type UserUpdateWithoutCitizenProfileConsentInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -11195,6 +12457,8 @@ export type UserUncheckedUpdateWithoutCitizenProfileConsentInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11207,6 +12471,8 @@ export type UserUncheckedUpdateWithoutCitizenProfileConsentInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -11260,6 +12526,8 @@ export type UserCreateWithoutEstablishmentsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -11272,6 +12540,8 @@ export type UserCreateWithoutEstablishmentsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -11325,6 +12595,8 @@ export type UserUncheckedCreateWithoutEstablishmentsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -11337,6 +12609,8 @@ export type UserUncheckedCreateWithoutEstablishmentsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -11406,6 +12680,8 @@ export type UserUpdateWithoutEstablishmentsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11418,6 +12694,8 @@ export type UserUpdateWithoutEstablishmentsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -11471,6 +12749,8 @@ export type UserUncheckedUpdateWithoutEstablishmentsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11483,6 +12763,8 @@ export type UserUncheckedUpdateWithoutEstablishmentsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -11536,6 +12818,8 @@ export type UserCreateWithoutEstablishmentRevisionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -11548,6 +12832,8 @@ export type UserCreateWithoutEstablishmentRevisionsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -11601,6 +12887,8 @@ export type UserUncheckedCreateWithoutEstablishmentRevisionsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -11613,6 +12901,8 @@ export type UserUncheckedCreateWithoutEstablishmentRevisionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -11682,6 +12972,8 @@ export type UserUpdateWithoutEstablishmentRevisionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11694,6 +12986,8 @@ export type UserUpdateWithoutEstablishmentRevisionsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -11747,6 +13041,8 @@ export type UserUncheckedUpdateWithoutEstablishmentRevisionsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11759,6 +13055,8 @@ export type UserUncheckedUpdateWithoutEstablishmentRevisionsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -11812,6 +13110,8 @@ export type UserCreateWithoutEstablishmentOperationsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -11824,6 +13124,8 @@ export type UserCreateWithoutEstablishmentOperationsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -11877,6 +13179,8 @@ export type UserUncheckedCreateWithoutEstablishmentOperationsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -11889,6 +13193,8 @@ export type UserUncheckedCreateWithoutEstablishmentOperationsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -11958,6 +13264,8 @@ export type UserUpdateWithoutEstablishmentOperationsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11970,6 +13278,8 @@ export type UserUpdateWithoutEstablishmentOperationsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -12023,6 +13333,8 @@ export type UserUncheckedUpdateWithoutEstablishmentOperationsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12035,6 +13347,8 @@ export type UserUncheckedUpdateWithoutEstablishmentOperationsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -12088,6 +13402,8 @@ export type UserCreateWithoutCensusReviewsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -12099,6 +13415,8 @@ export type UserCreateWithoutCensusReviewsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -12153,6 +13471,8 @@ export type UserUncheckedCreateWithoutCensusReviewsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -12164,6 +13484,8 @@ export type UserUncheckedCreateWithoutCensusReviewsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -12234,6 +13556,8 @@ export type UserUpdateWithoutCensusReviewsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12245,6 +13569,8 @@ export type UserUpdateWithoutCensusReviewsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -12299,6 +13625,8 @@ export type UserUncheckedUpdateWithoutCensusReviewsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12310,6 +13638,8 @@ export type UserUncheckedUpdateWithoutCensusReviewsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -12364,6 +13694,8 @@ export type UserCreateWithoutCensusScopeInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -12375,6 +13707,8 @@ export type UserCreateWithoutCensusScopeInput = {
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -12429,6 +13763,8 @@ export type UserUncheckedCreateWithoutCensusScopeInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -12440,6 +13776,8 @@ export type UserUncheckedCreateWithoutCensusScopeInput = {
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -12510,6 +13848,8 @@ export type UserUpdateWithoutCensusScopeInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12521,6 +13861,8 @@ export type UserUpdateWithoutCensusScopeInput = {
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -12575,6 +13917,8 @@ export type UserUncheckedUpdateWithoutCensusScopeInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12586,6 +13930,8 @@ export type UserUncheckedUpdateWithoutCensusScopeInput = {
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -12640,6 +13986,8 @@ export type UserCreateWithoutCensusRosterMembershipsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -12651,6 +13999,8 @@ export type UserCreateWithoutCensusRosterMembershipsInput = {
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -12705,6 +14055,8 @@ export type UserUncheckedCreateWithoutCensusRosterMembershipsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -12716,6 +14068,8 @@ export type UserUncheckedCreateWithoutCensusRosterMembershipsInput = {
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -12786,6 +14140,8 @@ export type UserUpdateWithoutCensusRosterMembershipsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12797,6 +14153,8 @@ export type UserUpdateWithoutCensusRosterMembershipsInput = {
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -12851,6 +14209,8 @@ export type UserUncheckedUpdateWithoutCensusRosterMembershipsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12862,6 +14222,8 @@ export type UserUncheckedUpdateWithoutCensusRosterMembershipsInput = {
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -12916,6 +14278,8 @@ export type UserCreateWithoutCensusAuditsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -12927,6 +14291,8 @@ export type UserCreateWithoutCensusAuditsInput = {
   censusReviews?: Prisma.CensusReviewCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -12981,6 +14347,8 @@ export type UserUncheckedCreateWithoutCensusAuditsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -12992,6 +14360,8 @@ export type UserUncheckedCreateWithoutCensusAuditsInput = {
   censusReviews?: Prisma.CensusReviewUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -13062,6 +14432,8 @@ export type UserUpdateWithoutCensusAuditsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13073,6 +14445,8 @@ export type UserUpdateWithoutCensusAuditsInput = {
   censusReviews?: Prisma.CensusReviewUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -13127,6 +14501,8 @@ export type UserUncheckedUpdateWithoutCensusAuditsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13138,6 +14514,8 @@ export type UserUncheckedUpdateWithoutCensusAuditsInput = {
   censusReviews?: Prisma.CensusReviewUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -13192,6 +14570,8 @@ export type UserCreateWithoutJobMutationsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -13204,6 +14584,8 @@ export type UserCreateWithoutJobMutationsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -13257,6 +14639,8 @@ export type UserUncheckedCreateWithoutJobMutationsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -13269,6 +14653,8 @@ export type UserUncheckedCreateWithoutJobMutationsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -13338,6 +14724,8 @@ export type UserUpdateWithoutJobMutationsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13350,6 +14738,8 @@ export type UserUpdateWithoutJobMutationsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -13403,6 +14793,8 @@ export type UserUncheckedUpdateWithoutJobMutationsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13415,6 +14807,8 @@ export type UserUncheckedUpdateWithoutJobMutationsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -13468,6 +14862,8 @@ export type UserCreateWithoutJobRecommendationsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -13480,6 +14876,8 @@ export type UserCreateWithoutJobRecommendationsInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -13533,6 +14931,8 @@ export type UserUncheckedCreateWithoutJobRecommendationsInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -13545,6 +14945,8 @@ export type UserUncheckedCreateWithoutJobRecommendationsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -13614,6 +15016,8 @@ export type UserUpdateWithoutJobRecommendationsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13626,6 +15030,8 @@ export type UserUpdateWithoutJobRecommendationsInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -13679,6 +15085,8 @@ export type UserUncheckedUpdateWithoutJobRecommendationsInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13691,6 +15099,8 @@ export type UserUncheckedUpdateWithoutJobRecommendationsInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -13744,6 +15154,8 @@ export type UserCreateWithoutMunicipalProjectsCreatedInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -13755,6 +15167,8 @@ export type UserCreateWithoutMunicipalProjectsCreatedInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -13809,6 +15223,8 @@ export type UserUncheckedCreateWithoutMunicipalProjectsCreatedInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -13820,6 +15236,8 @@ export type UserUncheckedCreateWithoutMunicipalProjectsCreatedInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -13879,6 +15297,8 @@ export type UserCreateWithoutMunicipalProjectsReviewedInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -13890,6 +15310,8 @@ export type UserCreateWithoutMunicipalProjectsReviewedInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -13944,6 +15366,8 @@ export type UserUncheckedCreateWithoutMunicipalProjectsReviewedInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -13955,6 +15379,8 @@ export type UserUncheckedCreateWithoutMunicipalProjectsReviewedInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -14025,6 +15451,8 @@ export type UserUpdateWithoutMunicipalProjectsCreatedInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14036,6 +15464,8 @@ export type UserUpdateWithoutMunicipalProjectsCreatedInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -14090,6 +15520,8 @@ export type UserUncheckedUpdateWithoutMunicipalProjectsCreatedInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14101,6 +15533,8 @@ export type UserUncheckedUpdateWithoutMunicipalProjectsCreatedInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -14166,6 +15600,8 @@ export type UserUpdateWithoutMunicipalProjectsReviewedInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14177,6 +15613,8 @@ export type UserUpdateWithoutMunicipalProjectsReviewedInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -14231,6 +15669,8 @@ export type UserUncheckedUpdateWithoutMunicipalProjectsReviewedInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14242,6 +15682,8 @@ export type UserUncheckedUpdateWithoutMunicipalProjectsReviewedInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -14296,6 +15738,8 @@ export type UserCreateWithoutMunicipalProjectUpdatesCreatedInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -14307,6 +15751,8 @@ export type UserCreateWithoutMunicipalProjectUpdatesCreatedInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -14361,6 +15807,8 @@ export type UserUncheckedCreateWithoutMunicipalProjectUpdatesCreatedInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -14372,6 +15820,8 @@ export type UserUncheckedCreateWithoutMunicipalProjectUpdatesCreatedInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -14431,6 +15881,8 @@ export type UserCreateWithoutMunicipalProjectUpdatesReviewedInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -14442,6 +15894,8 @@ export type UserCreateWithoutMunicipalProjectUpdatesReviewedInput = {
   censusAudits?: Prisma.CensusAuditCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportCreateNestedManyWithoutReporterInput
@@ -14496,6 +15950,8 @@ export type UserUncheckedCreateWithoutMunicipalProjectUpdatesReviewedInput = {
   emailVerified?: boolean
   image?: string | null
   role?: string
+  identityStatus?: string
+  identityVersion?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   department?: string | null
@@ -14507,6 +15963,8 @@ export type UserUncheckedCreateWithoutMunicipalProjectUpdatesReviewedInput = {
   censusAudits?: Prisma.CensusAuditUncheckedCreateNestedManyWithoutActorInput
   censusScope?: Prisma.CensusStaffScopeUncheckedCreateNestedOneWithoutUserInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedCreateNestedManyWithoutStaffInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedCreateNestedManyWithoutUserInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedCreateNestedManyWithoutReviewerInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.CivicReportUncheckedCreateNestedManyWithoutReporterInput
@@ -14577,6 +16035,8 @@ export type UserUpdateWithoutMunicipalProjectUpdatesCreatedInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14588,6 +16048,8 @@ export type UserUpdateWithoutMunicipalProjectUpdatesCreatedInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -14642,6 +16104,8 @@ export type UserUncheckedUpdateWithoutMunicipalProjectUpdatesCreatedInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14653,6 +16117,8 @@ export type UserUncheckedUpdateWithoutMunicipalProjectUpdatesCreatedInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -14718,6 +16184,8 @@ export type UserUpdateWithoutMunicipalProjectUpdatesReviewedInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14729,6 +16197,8 @@ export type UserUpdateWithoutMunicipalProjectUpdatesReviewedInput = {
   censusAudits?: Prisma.CensusAuditUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUpdateManyWithoutReporterNestedInput
@@ -14783,6 +16253,8 @@ export type UserUncheckedUpdateWithoutMunicipalProjectUpdatesReviewedInput = {
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  identityStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  identityVersion?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14794,6 +16266,8 @@ export type UserUncheckedUpdateWithoutMunicipalProjectUpdatesReviewedInput = {
   censusAudits?: Prisma.CensusAuditUncheckedUpdateManyWithoutActorNestedInput
   censusScope?: Prisma.CensusStaffScopeUncheckedUpdateOneWithoutUserNestedInput
   censusRosterMemberships?: Prisma.CensusAssistanceMemberUncheckedUpdateManyWithoutStaffNestedInput
+  identitySubmissions?: Prisma.CitizenIdentitySubmissionUncheckedUpdateManyWithoutUserNestedInput
+  identityReviews?: Prisma.CitizenIdentityReviewUncheckedUpdateManyWithoutReviewerNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.CivicReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -14849,6 +16323,8 @@ export type UserCountOutputType = {
   censusReviews: number
   censusAudits: number
   censusRosterMemberships: number
+  identitySubmissions: number
+  identityReviews: number
   sessions: number
   accounts: number
   reports: number
@@ -14897,6 +16373,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   censusReviews?: boolean | UserCountOutputTypeCountCensusReviewsArgs
   censusAudits?: boolean | UserCountOutputTypeCountCensusAuditsArgs
   censusRosterMemberships?: boolean | UserCountOutputTypeCountCensusRosterMembershipsArgs
+  identitySubmissions?: boolean | UserCountOutputTypeCountIdentitySubmissionsArgs
+  identityReviews?: boolean | UserCountOutputTypeCountIdentityReviewsArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
   reports?: boolean | UserCountOutputTypeCountReportsArgs
@@ -14994,6 +16472,20 @@ export type UserCountOutputTypeCountCensusAuditsArgs<ExtArgs extends runtime.Typ
  */
 export type UserCountOutputTypeCountCensusRosterMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CensusAssistanceMemberWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountIdentitySubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CitizenIdentitySubmissionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountIdentityReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CitizenIdentityReviewWhereInput
 }
 
 /**
@@ -15275,6 +16767,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   emailVerified?: boolean
   image?: boolean
   role?: boolean
+  identityStatus?: boolean
+  identityVersion?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   department?: boolean
@@ -15287,6 +16781,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   censusAudits?: boolean | Prisma.User$censusAuditsArgs<ExtArgs>
   censusScope?: boolean | Prisma.User$censusScopeArgs<ExtArgs>
   censusRosterMemberships?: boolean | Prisma.User$censusRosterMembershipsArgs<ExtArgs>
+  identitySubmissions?: boolean | Prisma.User$identitySubmissionsArgs<ExtArgs>
+  identityReviews?: boolean | Prisma.User$identityReviewsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
@@ -15344,13 +16840,15 @@ export type UserSelectScalar = {
   emailVerified?: boolean
   image?: boolean
   role?: boolean
+  identityStatus?: boolean
+  identityVersion?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   department?: boolean
   designation?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "firstName" | "lastName" | "middleInitial" | "hasNoMiddleName" | "phoneNumber" | "email" | "emailVerified" | "image" | "role" | "createdAt" | "updatedAt" | "department" | "designation", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "firstName" | "lastName" | "middleInitial" | "hasNoMiddleName" | "phoneNumber" | "email" | "emailVerified" | "image" | "role" | "identityStatus" | "identityVersion" | "createdAt" | "updatedAt" | "department" | "designation", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   municipalProjectUpdatesReviewed?: boolean | Prisma.User$municipalProjectUpdatesReviewedArgs<ExtArgs>
   municipalProjectUpdatesCreated?: boolean | Prisma.User$municipalProjectUpdatesCreatedArgs<ExtArgs>
@@ -15360,6 +16858,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   censusAudits?: boolean | Prisma.User$censusAuditsArgs<ExtArgs>
   censusScope?: boolean | Prisma.User$censusScopeArgs<ExtArgs>
   censusRosterMemberships?: boolean | Prisma.User$censusRosterMembershipsArgs<ExtArgs>
+  identitySubmissions?: boolean | Prisma.User$identitySubmissionsArgs<ExtArgs>
+  identityReviews?: boolean | Prisma.User$identityReviewsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
@@ -15414,6 +16914,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     censusAudits: Prisma.$CensusAuditPayload<ExtArgs>[]
     censusScope: Prisma.$CensusStaffScopePayload<ExtArgs> | null
     censusRosterMemberships: Prisma.$CensusAssistanceMemberPayload<ExtArgs>[]
+    identitySubmissions: Prisma.$CitizenIdentitySubmissionPayload<ExtArgs>[]
+    identityReviews: Prisma.$CitizenIdentityReviewPayload<ExtArgs>[]
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     accounts: Prisma.$AccountPayload<ExtArgs>[]
     reports: Prisma.$CivicReportPayload<ExtArgs>[]
@@ -15467,6 +16969,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     emailVerified: boolean
     image: string | null
     role: string
+    identityStatus: string
+    identityVersion: number
     createdAt: Date
     updatedAt: Date
     department: string | null
@@ -15819,6 +17323,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   censusAudits<T extends Prisma.User$censusAuditsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$censusAuditsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CensusAuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   censusScope<T extends Prisma.User$censusScopeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$censusScopeArgs<ExtArgs>>): Prisma.Prisma__CensusStaffScopeClient<runtime.Types.Result.GetResult<Prisma.$CensusStaffScopePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   censusRosterMemberships<T extends Prisma.User$censusRosterMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$censusRosterMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CensusAssistanceMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  identitySubmissions<T extends Prisma.User$identitySubmissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$identitySubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CitizenIdentitySubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  identityReviews<T extends Prisma.User$identityReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$identityReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CitizenIdentityReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reports<T extends Prisma.User$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CivicReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -15899,6 +17405,8 @@ export interface UserFieldRefs {
   readonly emailVerified: Prisma.FieldRef<"User", 'Boolean'>
   readonly image: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'String'>
+  readonly identityStatus: Prisma.FieldRef<"User", 'String'>
+  readonly identityVersion: Prisma.FieldRef<"User", 'Int'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly department: Prisma.FieldRef<"User", 'String'>
@@ -16435,6 +17943,54 @@ export type User$censusRosterMembershipsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.CensusAssistanceMemberScalarFieldEnum | Prisma.CensusAssistanceMemberScalarFieldEnum[]
+}
+
+/**
+ * User.identitySubmissions
+ */
+export type User$identitySubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CitizenIdentitySubmission
+   */
+  select?: Prisma.CitizenIdentitySubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CitizenIdentitySubmission
+   */
+  omit?: Prisma.CitizenIdentitySubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CitizenIdentitySubmissionInclude<ExtArgs> | null
+  where?: Prisma.CitizenIdentitySubmissionWhereInput
+  orderBy?: Prisma.CitizenIdentitySubmissionOrderByWithRelationInput | Prisma.CitizenIdentitySubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.CitizenIdentitySubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CitizenIdentitySubmissionScalarFieldEnum | Prisma.CitizenIdentitySubmissionScalarFieldEnum[]
+}
+
+/**
+ * User.identityReviews
+ */
+export type User$identityReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CitizenIdentityReview
+   */
+  select?: Prisma.CitizenIdentityReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CitizenIdentityReview
+   */
+  omit?: Prisma.CitizenIdentityReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CitizenIdentityReviewInclude<ExtArgs> | null
+  where?: Prisma.CitizenIdentityReviewWhereInput
+  orderBy?: Prisma.CitizenIdentityReviewOrderByWithRelationInput | Prisma.CitizenIdentityReviewOrderByWithRelationInput[]
+  cursor?: Prisma.CitizenIdentityReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CitizenIdentityReviewScalarFieldEnum | Prisma.CitizenIdentityReviewScalarFieldEnum[]
 }
 
 /**

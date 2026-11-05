@@ -1,7 +1,7 @@
 import type { ReportStatus } from "./config";
 export type ReportPriority = "LOW" | "NORMAL" | "HIGH" | "URGENT";
 
-export type CivicViewer = { id: string; name: string; email: string; role: string; department?: string | null; designation?: string | null };
+export type CivicViewer = { id: string; name: string; email: string; role: string; identityStatus?: string; identityVersion?: number; department?: string | null; designation?: string | null };
 export type ReportSummary = {
   id: string; trackingId: string; title: string; category: string; barangay: string;
   status: ReportStatus; assignedOffice: string | null; createdAt: string; updatedAt: string;

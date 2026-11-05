@@ -3,6 +3,7 @@ import {prisma} from '@/lib/prisma';
 import type {Prisma} from '@/generated/prisma/client';
 import type {CivicViewer} from '@/features/civic/types';
 import {CivicError} from '@/features/civic/validation';
+import {hasCitizenFeatureAccess} from '@/features/identity/policy';
 import {decodeTags} from '../domain';
 import {rankOpportunities,readiness,type OpportunityProfile} from '../opportunities-domain';
 import {opportunitiesInTransaction} from './opportunities';
@@ -15,8 +16,8 @@ function profileFrom(row:Record<string,unknown>):OpportunityProfile{
  return {skills:decodeTags(String(row.skillsJson||'[]')),qualifications:decodeTags(String(row.qualificationsJson||'[]')),preferredOccupations:decodeTags(String(row.preferredOccupationsJson||'[]')),occupation:typeof row.occupation==='string'?row.occupation:null,education:typeof row.educationLevel==='string'?row.educationLevel:null,preferredArea:String(row.preferredWorkLocation||row.barangay||''),workType:['FULL_TIME','PART_TIME','CONTRACTUAL','PROJECT_BASED','TEMPORARY','INTERNSHIP'].includes(type)?type:null,workArrangement:['ON_SITE','HYBRID','REMOTE'].includes(type)?type:['ON_SITE','HYBRID','REMOTE'].includes(arrangement)?arrangement:null,experienceLevel:experience[duration]??null,trainingInterest:['YES','MAYBE'].includes(String(row.trainingInterest))?true:['NO','NOT_NOW'].includes(String(row.trainingInterest))?false:null,trainingPrograms:decodeTags(String(row.trainingProgramsJson||'[]')),employmentBarriers:decodeTags(String(row.employmentBarriersJson||'[]'))};
 }
 export async function recommendationsInTransaction(tx:Prisma.TransactionClient,userId:string,now=new Date()){
- const user=await tx.user.findUnique({where:{id:userId},select:{role:true}});
- if(user?.role!=='CITIZEN')return {consented:false,eligible:false,profile:emptyProfile(),matches:[],jobs:[],source:'none'};
+ const user=await tx.user.findUnique({where:{id:userId},select:{role:true,identityStatus:true}});
+ if(user?.role!=='CITIZEN'||!hasCitizenFeatureAccess(user))return {consented:false,eligible:false,profile:emptyProfile(),matches:[],jobs:[],source:'none'};
  const consent=await tx.citizenProfileConsent.findUnique({where:{userId}});
  const annual=await tx.communitySurvey.findFirst({where:{userId,status:{in:['SUBMITTED','WITHDRAWN']}},orderBy:{surveyYear:'desc'}});
  const withdrawal=await tx.communitySurveyRevision.findFirst({where:{userId,action:'WITHDRAWN'},orderBy:[{surveyYear:'desc'},{revision:'desc'}],select:{surveyYear:true}});

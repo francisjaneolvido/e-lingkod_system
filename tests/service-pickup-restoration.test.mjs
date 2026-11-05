@@ -1,3 +1,4 @@
+import { createLegacyCitizenFixture, markLegacyCitizenFixture } from './helpers/legacy-citizen-fixture.mjs';
 import {test} from "node:test";
 import assert from "node:assert/strict";
 import {randomUUID} from "node:crypto";
@@ -6,7 +7,7 @@ import {loadServerTypescript} from "./helpers/load-typescript.mjs";
 test("Restored pickup requires accepted staff work, owner confirmation and actual ID-checked release",{skip:!process.env.ELB_B2_TEST_DATABASE,timeout:20000},async t=>{
   assert.match(new URL(process.env.DATABASE_URL).pathname.slice(1),/^elb_b1_test_[a-f0-9]{32}$/);
   const hooks=loadServerTypescript();const {prisma}=await import("../src/lib/prisma.ts"),api=await import("../src/features/services/server/pickup.ts");
-  const user=async role=>{const id=randomUUID();await prisma.user.create({data:{id,name:"Pickup Tester",email:id+"@example.test",role,department:"BPLO"}});return{id,role,name:"Pickup Tester",email:id+"@example.test",department:"BPLO"};};
+  const user=async role=>{const id=randomUUID();await createLegacyCitizenFixture(prisma, {id,name:"Pickup Tester",email:id+"@example.test",role,department:"BPLO"});return{id,role,name:"Pickup Tester",email:id+"@example.test",department:"BPLO"};};
   const citizen=await user("CITIZEN"),other=await user("CITIZEN"),staff=await user("STAFF"),admin=await user("ADMIN"),unassigned=await user("STAFF");
   await prisma.staffPermission.createMany({data:[staff,unassigned].map(u=>({userId:u.id,module:"SERVICES"}))});
   const row=await prisma.serviceRequest.create({data:{trackingId:"TEST-"+randomUUID(),serviceKey:"mayors-business-permit",serviceTitle:"Business Permit",requesterId:citizen.id,purpose:"Isolated pickup test",formDataJson:"{}",status:"READY_FOR_RELEASE",assignedDepartment:"BPLO",assignedStaffId:staff.id,releaseApprovedAt:new Date(),releaseApprovedById:admin.id}});
@@ -84,6 +85,7 @@ test("B2-R4 API rejects ambiguous pickup timestamps and stores explicit offsets 
   try{
     const citizenId=randomUUID(),staffId=randomUUID();
     await prisma.user.createMany({data:[{id:citizenId,name:"Timezone Citizen",email:citizenId+"@example.test",role:"CITIZEN"},{id:staffId,name:"Timezone Staff",email:staffId+"@example.test",role:"STAFF",department:"BPLO"}]});
+    await markLegacyCitizenFixture(prisma, citizenId);
     await prisma.staffPermission.create({data:{userId:staffId,module:"SERVICES"}});
     const row=await prisma.serviceRequest.create({data:{trackingId:"TEST-"+randomUUID(),serviceKey:"mayors-business-permit",serviceTitle:"Timezone permit",requesterId:citizenId,purpose:"Isolated timezone test",formDataJson:"{}",status:"READY_FOR_RELEASE",assignedStaffId:staffId,releaseApprovedAt:new Date()}});
     await prisma.workAssignment.create({data:{module:"SERVICES",entityType:"SERVICE_REQUEST",entityId:row.id,assignedStaffId:staffId,status:"ACCEPTED",acceptedAt:new Date()}});

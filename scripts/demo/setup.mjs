@@ -1,6 +1,7 @@
 import {fixtureIdentity} from './fixture-identity.mjs';
 import {vacancyDetails} from '../../demo/b5-fixtures.mjs';
 import fs from 'node:fs';
+import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { accounts, staffGrants, individualAnswers, establishmentAnswers, vacancyScenarios, datasetVersion, referenceYear } from '../../demo/fixtures/dataset.mjs';
@@ -9,8 +10,9 @@ import { applicationEnvironment } from './config.mjs';
 import { journalStep } from './operation-journal.mjs';
 import { upgradeDemo } from './upgrade.mjs';
 import { populateB3 } from './b3-fixtures.mjs';
+import { seedDemoLegacyIdentity } from './identity-fixtures.mjs';
 
-export async function setup(config) {
+export async function setup(config, { artifactDirectory='demo' }={}) {
   const db = await connect(config.primary, true);
   const { prisma } = await import('../../src/lib/prisma.ts');
   const { auth } = await import('../../src/lib/auth.ts');
@@ -65,6 +67,10 @@ export async function setup(config) {
         }
         assert.equal(user.emailVerified, false);
         return { id: user.id };
+      });
+      await step(`identity:legacy:${account.key}`, async () => {
+        const user=await seedDemoLegacyIdentity(config,prisma,account);
+        return {id:user.id,classification:'LEGACY'};
       });
       viewers[account.key] = await prisma.user.findUniqueOrThrow({ where: { email: account.email } });
     }
@@ -177,11 +183,12 @@ export async function setup(config) {
       const table = await parser.parseUploadedTable(form), checked = parser.mapRows(table, mapping);
       assert.equal(checked.records.length, 6); assert.equal(checked.issues.length, 0);
       const activityName = '[DEMO] Synthetic workforce orientation 2026';
+      const meta = { source: 'DEMO-LEGACY-REGISTRATION', surveyYear: referenceYear, activityName, activityType: 'DEMO_ORIENTATION', implementingOffice: 'PESO', activityDate: '2026-10-01', coverage: 'Synthetic demo activity only', originalPurpose: 'Synthetic demonstration; not actual participants', intendedUse: 'INTERNAL_STATISTICS', notes: '[DEMO] Six activity records; overlap unknown. Never count as six additional unique citizens.' };
       const { validateImport } = await import('../../src/features/census/server/imports.ts');
-      const hash = validateImport({ table, mapping, meta: { source: 'DEMO-LEGACY-REGISTRATION', surveyYear: referenceYear, activityName, activityType: 'DEMO_ORIENTATION', implementingOffice: 'PESO', intendedUse: 'INTERNAL_STATISTICS' } }).fingerprint;
+      const hash = validateImport({ table, mapping, meta }).fingerprint;
       const existing = await prisma.communityImportBatch.findUnique({ where: { fingerprint: hash } });
       if (existing) return { batchId: existing.id };
-      for (const [field, value] of Object.entries({ mapping: JSON.stringify(mapping), source: 'DEMO-LEGACY-REGISTRATION', surveyYear: String(referenceYear), activityName, activityType: 'DEMO_ORIENTATION', implementingOffice: 'PESO', activityDate: '2026-10-01', coverage: 'Synthetic demo activity only', originalPurpose: 'Synthetic demonstration; not actual participants', originalDataSource: 'demo/fixtures/import-accepted.csv', intendedUse: 'INTERNAL_STATISTICS', notes: '[DEMO] Six activity records; overlap unknown. Never count as six additional unique citizens.', previewHash: hash })) form.set(field, value);
+      for (const [field, value] of Object.entries({ ...meta, mapping: JSON.stringify(mapping), surveyYear: String(meta.surveyYear), originalDataSource: 'demo/fixtures/import-accepted.csv', previewHash: hash })) form.set(field, value);
       const handler = await import('../../src/app/api/admin/community-import/commit/route.ts');
       const response = await handler.POST(new Request(`${config.baseURL}/api/admin/community-import/commit`, { method: 'POST', headers: { origin: config.baseURL, cookie }, body: form }));
       const result = await response.json(); if (!response.ok) throw new Error(`Demo import: ${response.status} ${JSON.stringify(result)}`); return result;
@@ -189,10 +196,11 @@ export async function setup(config) {
     await populateB3(db, state);
     await (await import('./b5-fixtures.mjs')).populateB5(db,state);
     const { counts, writeAccounts } = await import('./verify.mjs');
-    await writeAccounts(prisma);
+    await writeAccounts(prisma,{artifactDirectory});
     const actual = await counts(prisma);
-    const earlier=fs.existsSync('demo/expected-counts.json')?JSON.parse(fs.readFileSync('demo/expected-counts.json','utf8')):{};
-    fs.writeFileSync('demo/expected-counts.json', JSON.stringify({datasetVersion,referenceYear,counts:actual,...(earlier.analytics?{analytics:earlier.analytics}:{}),b5:{fixtureVersion:'elb-b5-fixtures-v1',managedVacancies:28,allClearlyDemonstrations:true}},null,2)+'\n');
+    const expectedFile=path.join(artifactDirectory,'expected-counts.json');
+    const earlier=fs.existsSync(expectedFile)?JSON.parse(fs.readFileSync(expectedFile,'utf8')):{};
+    fs.writeFileSync(expectedFile, JSON.stringify({datasetVersion,referenceYear,counts:actual,...(earlier.analytics?{analytics:earlier.analytics}:{}),b5:{fixtureVersion:'elb-b5-fixtures-v1',managedVacancies:28,allClearlyDemonstrations:true}},null,2)+'\n');
     state.ready = true; state.fingerprint = await fingerprint(db); await saveMetadata(db, state);
     console.log('Demo dataset complete. Primary database retained.');
   } finally { await db.query("SELECT RELEASE_LOCK('elb_demo_setup_v1')"); await db.end(); }

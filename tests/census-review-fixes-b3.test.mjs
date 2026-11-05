@@ -1,3 +1,4 @@
+import { createLegacyCitizenFixture, registerLegacyCitizenFixture } from './helpers/legacy-citizen-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -13,7 +14,7 @@ test('B3 independent-review persistent regressions', { skip: !enabled }, async t
   const imports = await import('../src/features/census/server/imports.ts');
   const api = await import('../src/app/api/admin/census/imports/route.ts');
   const origin = process.env.BETTER_AUTH_URL;
-  const account = await auth.api.signUpEmail({ body: { name: 'Ignored client name', firstName: 'Review', lastName: 'Administrator', hasNoMiddleName: true, phoneNumber: '+639001234567', email: 'review.admin@example.test', password: 'B3-review-fixture-2026!' }, returnHeaders: true });
+  const account = await registerLegacyCitizenFixture(auth, prisma, { body: { name: 'Ignored client name', firstName: 'Review', lastName: 'Administrator', hasNoMiddleName: true, phoneNumber: '+639001234567', email: 'review.admin@example.test', password: 'B3-review-fixture-2026!' }, returnHeaders: true });
   const cookie = account.headers.getSetCookie().map(v => v.split(';')[0]).join('; ');
   assert.equal(spawnSync(process.execPath, ['scripts/set-admin.mjs', 'review.admin@example.test'], { env: process.env, stdio: 'ignore', windowsHide: true }).status, 0);
   const admin = await prisma.user.findUniqueOrThrow({ where: { email: 'review.admin@example.test' } });
@@ -44,14 +45,14 @@ test('B3 independent-review persistent regressions', { skip: !enabled }, async t
       assert.equal(JSON.parse(payload.rows[0].rawJson).ageGroup, '25-34');
     });
     await t.test('R2 individual and annual establishment payloads use the same scope as review', async () => {
-      const registered = await auth.api.signUpEmail({ body: { name: 'Ignored client name', firstName: 'Scoped', lastName: 'Reviewer', hasNoMiddleName: true, phoneNumber: '+639001234568', email: 'review.staff@example.test', password: 'B3-review-fixture-2026!' }, returnHeaders: true });
+      const registered = await registerLegacyCitizenFixture(auth, prisma, { body: { name: 'Ignored client name', firstName: 'Scoped', lastName: 'Reviewer', hasNoMiddleName: true, phoneNumber: '+639001234568', email: 'review.staff@example.test', password: 'B3-review-fixture-2026!' }, returnHeaders: true });
       const staffCookie = registered.headers.getSetCookie().map(v => v.split(';')[0]).join('; ');
       const { POST } = await import('../src/app/api/admin/staff/route.ts');
       const grant = await POST(new Request(origin + '/api/admin/staff', { method: 'POST', headers: { origin, cookie, 'content-type': 'application/json' }, body: JSON.stringify({ mode: 'SAVE', email: 'review.staff@example.test', department: 'PESO', designation: 'Scoped reviewer', modules: ['CENSUS'] }) }));
       assert.equal(grant.status, 200);
       const staff = await prisma.user.findUniqueOrThrow({ where: { email: 'review.staff@example.test' } });
       await census.setRecordScope(admin, { staffId: staff.id, barangays: ['Bambang'], expectedVersion: 0 });
-      const citizen = await prisma.user.create({ data: { id: 'review_R2_owner', name: 'Synthetic Record Owner', email: 'review.owner@example.test', role: 'CITIZEN' } });
+      const citizen = await createLegacyCitizenFixture(prisma, { id: 'review_R2_owner', name: 'Synthetic Record Owner', email: 'review.owner@example.test', role: 'CITIZEN' });
       const personal = await import('../src/features/community/server/survey-lifecycle.ts');
       const org = await import('../src/features/establishments/server/data.ts');
       const records = await import('../src/app/api/admin/census/records/route.ts');
@@ -157,7 +158,7 @@ test('B3 independent-review persistent regressions', { skip: !enabled }, async t
     await t.test('R4-B committed staff grants cannot adopt later unrelated profile or designation edits', async t => {
       const { accounts } = await import('../demo/fixtures/dataset.mjs');
       const identity = accounts.find(a => a.email === 'admin.01@example.test');
-      await auth.api.signUpEmail({ body: { ...identity, name: identity.firstName + ' ' + identity.lastName } });
+      await registerLegacyCitizenFixture(auth, prisma, { body: { ...identity, name: identity.firstName + ' ' + identity.lastName } });
       assert.equal(spawnSync(process.execPath, ['scripts/set-admin.mjs', identity.email], { env: process.env, stdio: 'ignore', windowsHide: true }).status, 0);
       const actor = await prisma.user.findUniqueOrThrow({ where: { email: identity.email } });
       const { journalStep } = await import('../scripts/demo/operation-journal.mjs');
@@ -167,7 +168,7 @@ test('B3 independent-review persistent regressions', { skip: !enabled }, async t
       try {
         for (const kind of ['profile', 'designation', 'unchanged']) await t.test(kind, async () => {
           const email = 'grant.' + kind + '@example.test';
-          await auth.api.signUpEmail({ body: { name: 'Ignored', firstName: 'Grant', lastName: 'Recovery', hasNoMiddleName: true, phoneNumber: '+639001234569', email, password: 'B3-review-fixture-2026!' } });
+          await registerLegacyCitizenFixture(auth, prisma, { body: { name: 'Ignored', firstName: 'Grant', lastName: 'Recovery', hasNoMiddleName: true, phoneNumber: '+639001234569', email, password: 'B3-review-fixture-2026!' } });
           let state = { completed: {}, pending: null, fingerprint: digest(await snapshot(db)) };
           const persist = async value => { await db.query('CREATE TABLE IF NOT EXISTS _elb_demo_meta(name VARCHAR(60) PRIMARY KEY,value LONGTEXT)'); await db.query("REPLACE INTO _elb_demo_meta VALUES('grant-review',?)", [JSON.stringify(value)]); };
           const prepare = async () => ({ kind: 'staff-grant', actorId: actor.id, payload: { email, mode: 'SAVE', department: 'PESO', designation: 'Original demo officer', modules: ['CENSUS'] } });

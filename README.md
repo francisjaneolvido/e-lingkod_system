@@ -15,6 +15,10 @@ An integrated LGU management and citizen-services **academic/hackathon prototype
 
 Citizens manage their own records. Staff require explicit module grants and applicable office/barangay scopes; protected pages are not all Admin-only. Admins manage access and authorized reviews. Establishment representatives use Citizen accounts, not a separate Employer role. Matching provides up to five explained suggestions with current optional consent; it neither sends applications/profiles nor guarantees employment. Drafts and revisions are not additional respondents; establishment workforce and imported observations remain separate populations.
 
+## Release setup
+
+New registration requires private ID submission and authenticated Admin review before Citizen feature access. Existing users retain explicit legacy access. See [Citizen identity and migration setup](docs/CITIZEN-IDENTITY-REVIEW.md), [password recovery sender setup](docs/PASSWORD-RECOVERY.md), and [hero photo replacement](docs/hero-photos.md). Real reset delivery requires a configured server-only sender.
+
 ## Quick navigation
 
 - [Local setup](#local-setup) · [Shared sample data](#shared-sample-data)

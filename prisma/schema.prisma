@@ -8,6 +8,48 @@ datasource db {
   provider = "mysql"
 }
 
+model CitizenIdentitySubmission {
+  id String @id @default(cuid()) @db.VarChar(191)
+  userId String @db.VarChar(191)
+  user User @relation("IdentityOwner", fields: [userId], references: [id], onDelete: Restrict)
+  revision Int
+  documentLabel String @db.VarChar(120)
+  submissionKey String @db.VarChar(64)
+  detailsJson String @db.Text
+  mimeType String @db.VarChar(40)
+  byteSize Int
+  sha256 String @db.VarChar(64)
+  data Bytes @db.MediumBlob
+  submittedAt DateTime @default(now())
+  reviews CitizenIdentityReview[]
+  @@unique([userId, revision])
+  @@unique([userId, submissionKey])
+  @@index([submittedAt, id])
+  @@map("citizen_identity_submission")
+}
+
+model CitizenIdentityReview {
+  id String @id @default(cuid()) @db.VarChar(191)
+  submissionId String @db.VarChar(191)
+  submission CitizenIdentitySubmission @relation(fields: [submissionId], references: [id], onDelete: Restrict)
+  reviewerId String @db.VarChar(191)
+  reviewer User @relation("IdentityReviewer", fields: [reviewerId], references: [id], onDelete: Restrict)
+  decision String @db.VarChar(30)
+  reason String @db.VarChar(1200)
+  reviewedAt DateTime @default(now())
+  @@unique([submissionId])
+  @@index([reviewedAt, id])
+  @@map("citizen_identity_review")
+}
+
+model RateLimit {
+  id String @id @db.VarChar(191)
+  key String @unique @db.VarChar(191)
+  count Int
+  lastRequest BigInt
+  @@map("rateLimit")
+}
+
 // IMPORTANT: role is SERVER-OWNED. New registrations are CITIZEN only.
 model User {
   municipalProjectUpdatesReviewed MunicipalProjectUpdate[] @relation("MunicipalProjectUpdateReviewer")
@@ -30,6 +72,11 @@ model User {
   emailVerified Boolean   @default(false)
   image         String?   @db.Text
   role          String    @default("CITIZEN") @db.VarChar(30)
+  // Legacy is assigned by the additive migration only. Public signup cannot set this.
+  identityStatus String @default("SUBMISSION_REQUIRED") @db.VarChar(30)
+  identityVersion Int @default(0)
+  identitySubmissions CitizenIdentitySubmission[] @relation("IdentityOwner")
+  identityReviews CitizenIdentityReview[] @relation("IdentityReviewer")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   sessions      Session[]

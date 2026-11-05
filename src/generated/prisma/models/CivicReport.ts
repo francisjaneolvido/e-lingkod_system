@@ -857,14 +857,6 @@ export type EnumReportPriorityFieldUpdateOperationsInput = {
   set?: $Enums.ReportPriority
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type CivicReportCreateNestedOneWithoutPhotosInput = {
   create?: Prisma.XOR<Prisma.CivicReportCreateWithoutPhotosInput, Prisma.CivicReportUncheckedCreateWithoutPhotosInput>
   connectOrCreate?: Prisma.CivicReportCreateOrConnectWithoutPhotosInput

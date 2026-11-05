@@ -1,3 +1,4 @@
+import { createLegacyCitizenFixture, registerLegacyCitizenFixture } from './helpers/legacy-citizen-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
@@ -17,7 +18,7 @@ test('B4 real annual populations, source separation, authority and aggregate exp
   const base=process.env.BETTER_AUTH_URL||'http://localhost:3103';
   async function register(name) {
     const email='analytics.'+name+'@example.test';
-    const response=await auth.api.signUpEmail({body:{firstName:'Synthetic',lastName:name,hasNoMiddleName:true,phoneNumber:'+639001234567',email,password:'B4-analytics-test-2026!'},returnHeaders:true});
+    const response=await registerLegacyCitizenFixture(auth, prisma, {body:{firstName:'Synthetic',lastName:name,hasNoMiddleName:true,phoneNumber:'+639001234567',email,password:'B4-analytics-test-2026!'},returnHeaders:true});
     return {user:await prisma.user.findUniqueOrThrow({where:{email}}),cookie:response.headers.getSetCookie()[0].split(';')[0]};
   }
   try {
@@ -32,7 +33,7 @@ test('B4 real annual populations, source separation, authority and aggregate exp
     }
     const staff=await prisma.user.findUniqueOrThrow({where:{id:staffLogin.user.id}}),jobs=await prisma.user.findUniqueOrThrow({where:{id:jobsLogin.user.id}});
     await census.setRecordScope(admin,{staffId:staff.id,barangays:['Bambang'],expectedVersion:0});
-    const user=async name=>prisma.user.create({data:{id:'b4-'+name,name:'Synthetic '+name,email:'fixture.'+name+'@example.test',role:'CITIZEN'}});
+    const user=async name=>createLegacyCitizenFixture(prisma, {id:'b4-'+name,name:'Synthetic '+name,email:'fixture.'+name+'@example.test',role:'CITIZEN'});
     const [alice,bob,carol,withdrawn,draft,refusal]=await Promise.all(['alice','bob','carol','withdrawn','draft','refusal'].map(user));
     const answer={status:'SUBMITTED',barangay:'Bambang',ageGroup:'25-34',educationLevel:'COLLEGE',employmentStatus:'EMPLOYED_FULL_TIME',skills:['Welding'],consentAggregated:true};
     async function save(owner,year,patch={}){const state=await personal.ownedSurveyState(owner.id,year);return personal.saveCitizenSurvey({...answer,surveyYear:year,...patch,expectedVersion:state.workspaceVersion,expectedConsentVersion:state.consentVersion,requestKey:randomUUID()},owner);}

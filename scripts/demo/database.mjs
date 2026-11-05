@@ -2,7 +2,7 @@ import mariadb from 'mariadb';
 import { createHash } from 'node:crypto';
 import { guardedTarget, VERSION } from './config.mjs';
 
-export const excludedData = new Set(['session', 'verification', 'staff_invitation']);
+export const excludedData = new Set(['session', 'verification', 'staff_invitation', 'rateLimit', 'ratelimit']);
 export const identifier = name => {
   if (!/^[a-zA-Z0-9_]+$/.test(name)) throw new Error('Unsafe database identifier');
   return '`' + name + '`';

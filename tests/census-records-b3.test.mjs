@@ -1,3 +1,4 @@
+import { createLegacyCitizenFixture } from './helpers/legacy-citizen-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadServerTypescript } from './helpers/load-typescript.mjs';
@@ -7,7 +8,7 @@ test('B3 protected records, traceability, assistance and imports', { skip: !enab
   const census = await import('../src/features/census/server/data.ts');
   const imports = await import('../src/features/census/server/imports.ts');
   const personal = await import('../src/features/community/server/survey-lifecycle.ts');
-  const user = (id, role) => prisma.user.create({ data: { id, name: 'Synthetic ' + id, email: id + '@example.test', role } });
+  const user = (id, role) => createLegacyCitizenFixture(prisma, { id, name: 'Synthetic ' + id, email: id + '@example.test', role });
   const [admin, staff, denied, citizen] = await Promise.all([user('b3-admin', 'ADMIN'), user('b3-staff', 'STAFF'), user('b3-denied', 'STAFF'), user('b3-citizen', 'CITIZEN')]);
   const answers = { surveyYear: 2026, status: 'SUBMITTED', barangay: 'Bambang', ageGroup: '25-34', educationLevel: 'COLLEGE', employmentStatus: 'EMPLOYED_FULL_TIME', skills: ['Data Entry'], consentAggregated: true };
   await personal.saveCitizenSurvey({ ...answers, expectedVersion: 0, expectedConsentVersion: 0, requestKey: 'b3_record_first_revision' }, citizen);

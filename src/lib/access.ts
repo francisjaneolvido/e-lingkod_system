@@ -7,12 +7,13 @@ import { prisma } from "@/lib/prisma";
 import type { CivicViewer } from "@/features/civic/types";
 import { CivicError } from "@/features/civic/validation";
 import { hasModuleAccess, type StaffModule } from "@/lib/staff-access";
+import { hasCitizenFeatureAccess } from "@/features/identity/policy";
 
 export async function viewerFromHeaders(requestHeaders: Headers): Promise<CivicViewer | null> {
   const session = await auth.api.getSession({ headers: requestHeaders });
   if (!session) return null;
   // Always read the current role from MySQL, including after a role is revoked.
-  return prisma.user.findUnique({ where: { id: session.user.id }, select: { id: true, name: true, email: true, role: true, department: true, designation: true } });
+  return prisma.user.findUnique({ where: { id: session.user.id }, select: { id: true, name: true, email: true, role: true, identityStatus: true, identityVersion: true, department: true, designation: true } });
 }
 
 export const currentViewer = cache(async () => viewerFromHeaders(await headers()));
@@ -20,6 +21,7 @@ export const currentViewer = cache(async () => viewerFromHeaders(await headers()
 export async function requirePageViewer(destination: string) {
   const viewer = await currentViewer();
   if (!viewer) redirect(`/login?next=${encodeURIComponent(destination)}`);
+  if (!hasCitizenFeatureAccess(viewer)) redirect('/verification');
   return viewer;
 }
 
@@ -40,6 +42,7 @@ export async function requireCitizenPageViewer(destination: string) {
 export async function requireApiViewer(request: Request, access: boolean | StaffModule = false) {
   const viewer = await viewerFromHeaders(request.headers);
   if (!viewer) throw new CivicError("Please sign in to continue.", 401);
+  if (!hasCitizenFeatureAccess(viewer)) throw new CivicError('Your Citizen account requires ID review. Open Verification status to submit or correct your document.', 403);
   if (access === true && viewer.role !== "ADMIN") throw new CivicError("Super Admin access is required.", 403);
   if (typeof access === "string" && !(await hasModuleAccess(viewer, access))) throw new CivicError("You are not assigned to this LGU module.", 403);
   return viewer;

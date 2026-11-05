@@ -1,3 +1,4 @@
+import { createLegacyCitizenFixture } from './helpers/legacy-citizen-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
@@ -11,7 +12,7 @@ test('B5-R2 opposing personalized ranks acquire global job locks without deadloc
   const {createOpportunity,mutateOpportunity}=await import('../src/features/jobs/server/mutations.ts');
   const {saveCitizenSurvey,changeCitizenConsent}=await import('../src/features/community/server/survey-lifecycle.ts');
   const {personalOpportunities,checkOpportunityNotices}=await import('../src/features/jobs/server/recommendations.ts');
-  const user=async(role,name)=>prisma.user.create({data:{id:randomUUID(),name:'Synthetic '+name,email:randomUUID()+'@example.test',role}});
+  const user=async(role,name)=>createLegacyCitizenFixture(prisma, {id:randomUUID(),name:'Synthetic '+name,email:randomUUID()+'@example.test',role});
   const admin=await user('ADMIN','lock administrator'),a=await user('CITIZEN','welder'),b=await user('CITIZEN','driver');
   const year=new Date().getFullYear();
   for(const [person,occupation] of [[a,'Welder'],[b,'Driver']])await saveCitizenSurvey({surveyYear:year,status:'SUBMITTED',barangay:'Bambang',ageGroup:'25-34',educationLevel:'COLLEGE',employmentStatus:'UNEMPLOYED_LOOKING',skills:['Welding','Driving'],occupation,preferredOccupations:['[DEMO] '+occupation+' lock fixture'],consentAggregated:true,consentOpportunityRecommendations:true,expectedVersion:0,expectedConsentVersion:0,requestKey:randomUUID()},person);

@@ -1,4 +1,5 @@
 import { viewerFromHeaders } from "@/lib/access";
+import {hasCitizenFeatureAccess} from '@/features/identity/policy';
 import { hasModuleAccess } from "@/lib/staff-access";
 import { prisma } from "@/lib/prisma";
 import { departmentMatchesService } from "@/features/services/catalog";
@@ -7,6 +8,7 @@ import { resolveServiceDefinition } from "@/features/services/server/catalog";
 export async function GET(request:Request,{params}:{params:Promise<{documentId:string}>}){
   const viewer=await viewerFromHeaders(request.headers);
   if(!viewer)return new Response("Unauthorized",{status:401});
+  if(!hasCitizenFeatureAccess(viewer))return new Response('ID review required',{status:403});
   const {documentId}=await params;
   const doc=await prisma.serviceRequestDocument.findUnique({where:{id:documentId},include:{request:{select:{requesterId:true,assignedStaffId:true,serviceKey:true}}}});
   if(!doc)return new Response("Not found",{status:404});

@@ -1,3 +1,4 @@
+import { registerLegacyCitizenFixture } from './helpers/legacy-citizen-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
@@ -7,7 +8,7 @@ const enabled=/^elb_b3_test_[a-f0-9]{32}$/.test(process.env.ELB_B3_TEST_DATABASE
 test('B5 persisted ownership, publication, filters, current consent, withdrawal and atomic notice retries',{skip:!enabled},async t=>{
  const hook=loadServerTypescript();const {prisma}=await import('../src/lib/prisma.ts');const {auth}=await import('../src/lib/auth.ts');const origin=process.env.BETTER_AUTH_URL||'http://localhost:3103';
  try{
-  async function register(name){const email='b5.'+name+'@example.test';const r=await auth.api.signUpEmail({body:{email,password:'B5-database-password-2026!',firstName:'Synthetic',lastName:name,hasNoMiddleName:true,phoneNumber:'+639001234567'},returnHeaders:true});return {user:await prisma.user.findUniqueOrThrow({where:{email}}),cookie:r.headers.getSetCookie()[0].split(';')[0]};}
+  async function register(name){const email='b5.'+name+'@example.test';const r=await registerLegacyCitizenFixture(auth, prisma, {body:{email,password:'B5-database-password-2026!',firstName:'Synthetic',lastName:name,hasNoMiddleName:true,phoneNumber:'+639001234567'},returnHeaders:true});return {user:await prisma.user.findUniqueOrThrow({where:{email}}),cookie:r.headers.getSetCookie()[0].split(';')[0]};}
   const administrator=await register('admin');assert.equal(spawnSync(process.execPath,['scripts/set-admin.mjs',administrator.user.email],{env:process.env,encoding:'utf8'}).status,0);const admin=await prisma.user.findUniqueOrThrow({where:{id:administrator.user.id}});
   const a=await register('staffa'),b=await register('staffb'),citizen=await register('citizen'),denied=await register('denied'),censusOnly=await register('census-only');
   const staffAPI=await import('../src/app/api/admin/staff/route.ts');

@@ -101,7 +101,7 @@ export function AuthShell({ children, page }: AuthShellProps) {
         </svg>
         <div className="relative hidden items-center justify-between border-t border-white/55 px-12 py-6 text-xs text-muted-foreground lg:flex 2xl:px-20">
           <span>eLB — Digital public services</span>
-          <span>Hackathon concept · 2026</span>
+          <span>Community services · 2026</span>
         </div>
       </aside>
 
@@ -117,7 +117,7 @@ export function AuthShell({ children, page }: AuthShellProps) {
           </div>
           {children}
           <div className="mt-7 flex items-center justify-center gap-2 text-center text-xs leading-5 text-muted-foreground">
-            <ShieldCheck size={14} className="shrink-0 text-muted-foreground" /> Hackathon prototype · Protected account sign-in
+            <ShieldCheck size={14} className="shrink-0 text-muted-foreground" /> Protected account sign-in
           </div>
           <Link href="/" className="mt-4 flex items-center justify-center gap-1.5 text-xs font-semibold text-muted-foreground transition hover:text-foreground">
             Visit the E-Lingkod Bayan homepage <ArrowUpRight size={13} />

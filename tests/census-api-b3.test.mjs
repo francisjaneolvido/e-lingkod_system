@@ -1,3 +1,4 @@
+import { registerLegacyCitizenFixture } from './helpers/legacy-citizen-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -9,7 +10,7 @@ test('B3 authenticated API scope, review, import and retry boundaries', { skip: 
   const origin = process.env.BETTER_AUTH_URL, password = 'B3-api-password-2026!';
   async function register(lastName) {
     const email = 'api.' + lastName.toLowerCase() + '@example.test';
-    const response = await auth.api.signUpEmail({ body: { firstName: 'Synthetic', lastName, name: 'Ignored client name', email, password, phoneNumber: '+639001234567', hasNoMiddleName: true }, returnHeaders: true });
+    const response = await registerLegacyCitizenFixture(auth, prisma, { body: { firstName: 'Synthetic', lastName, name: 'Ignored client name', email, password, phoneNumber: '+639001234567', hasNoMiddleName: true }, returnHeaders: true });
     return { cookie: response.headers.getSetCookie().map(v => v.split(';')[0]).join('; '), user: await prisma.user.findUniqueOrThrow({ where: { email } }) };
   }
   const request = (path, cookie, body, expectedOrigin = origin) => new Request(origin + path, { method: body ? 'POST' : 'GET', headers: { ...(cookie ? { cookie } : {}), origin: expectedOrigin, 'content-type': 'application/json' }, ...(body ? { body: JSON.stringify(body) } : {}) });

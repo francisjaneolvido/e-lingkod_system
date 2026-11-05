@@ -36,7 +36,7 @@ Use the root setup block to generate real values. It uses .NET's cryptographic r
 
 Next.js may prefer `.env.local` or mode-specific files, and existing process environment variables can override file values. Prisma CLI uses `prisma.config.ts` with `dotenv/config`; the importer and demo runner read their explicit files. Avoid conflicting targets across these mechanisms. To inspect whether a shell override exists **without printing its secret**, run `Test-Path Env:DATABASE_URL`. After intentionally correcting configuration, close/reopen the terminal and restart the app. Never paste an environment dump into an issue.
 
-Normal local use requires no mail provider. Staff invitations can send real email if `RESEND_API_KEY` and `STAFF_INVITE_FROM` are configured; leave them unset for this setup. Do not configure external messaging just to exercise local data.
+Ordinary login and public browsing require no mail provider. Password recovery requires the server-only sender configuration in [Password recovery](PASSWORD-RECOVERY.md), or the explicitly guarded local capture transport for tests. New public registrations require ID submission and authenticated Admin review; see [Citizen identity setup](CITIZEN-IDENTITY-REVIEW.md). Staff invitations can send real email if `RESEND_API_KEY` and `STAFF_INVITE_FROM` are configured; leave them unset for this setup. Do not configure external messaging just to exercise local data.
 
 ## Existing database updates
 

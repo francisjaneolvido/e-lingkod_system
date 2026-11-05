@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Mail, UserRound, Phone, LoaderCircle, AlertCircle, CheckCircle2, Circle } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
-import { getSafeAuthDestination } from "@/lib/auth-redirect";
 import { AuthInput } from "./auth-input";
 import { PasswordField } from "./password-field";
 import { checkRegistration, passwordChecks, type RegistrationFields } from "../registration-validation";
@@ -43,7 +42,7 @@ export function RegisterForm() {
         firstName:string;lastName:string;middleInitial:string;hasNoMiddleName:boolean;phoneNumber:string;
       });
       if (result.error) { setError(result.error.message || "Unable to create account. Please try again."); return; }
-      router.replace(getSafeAuthDestination());
+      router.replace('/verification');
       router.refresh();
     } catch {
       setError("Registration failed. Check that the server and MySQL are running.");
@@ -55,7 +54,7 @@ export function RegisterForm() {
       <div className="mb-5 text-center">
         <span className="mb-2 inline-flex items-center rounded-full bg-muted px-3 py-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">Citizen Registration</span>
         <h2 className="text-[clamp(27px,2.5vw,33px)] font-extrabold leading-tight tracking-tight text-foreground">Create your account<span className="text-warning-foreground">.</span></h2>
-        <p className="mt-2 text-[13px] text-muted-foreground">Complete your details to access citizen services.</p>
+        <p className="mt-2 text-[13px] text-muted-foreground">Create a limited account, then submit your ID for Admin review before using Citizen features.</p>
       </div>
       <form className="space-y-4" noValidate onSubmit={handleSubmit}>
         <div className="grid gap-3 sm:grid-cols-2">
@@ -64,7 +63,7 @@ export function RegisterForm() {
         </div>
         <div>
           <AuthInput id="middleInitial" name="middleInitial" label="Middle Initial *" icon={UserRound} placeholder="M" maxLength={2} value={fields.middleInitial} onChange={e=>update("middleInitial",e.target.value.replace(/[^\p{L}.]/gu, "").slice(0,2))} disabled={pending||fields.hasNoMiddleName} aria-invalid={submitted&&!!messages.middleInitial} />
-          <label className="mt-2 inline-flex items-center gap-2 text-xs text-muted-foreground"><input type="checkbox" checked={fields.hasNoMiddleName} onChange={e=>setFields(prev=>({...prev,hasNoMiddleName:e.target.checked,middleInitial:""}))} disabled={pending} className="size-4 accent-[#14638f]"/> I don't have a middle name</label>
+          <label className="mt-2 inline-flex items-center gap-2 text-xs text-muted-foreground"><input type="checkbox" checked={fields.hasNoMiddleName} onChange={e=>setFields(prev=>({...prev,hasNoMiddleName:e.target.checked,middleInitial:""}))} disabled={pending} className="size-4 accent-[#14638f]"/> I don&apos;t have a middle name</label>
           {message("middleInitial")}
         </div>
         <div><AuthInput id="phoneNumber" name="phoneNumber" label="Philippine Mobile Number *" icon={Phone} type="tel" inputMode="numeric" autoComplete="tel-national" placeholder="09XXXXXXXXX" required maxLength={13} value={fields.phoneNumber} onChange={e=>update("phoneNumber",e.target.value.replace(/(?!^)\+/g, "").replace(/[^\d+]/g, "").slice(0,13))} disabled={pending} aria-invalid={submitted&&!!messages.phoneNumber} hint="11-digit 09XXXXXXXXX or +639XXXXXXXXX; numbers only."/>{message("phoneNumber")}</div>
@@ -75,7 +74,7 @@ export function RegisterForm() {
           </div>{message("password")}
         </div>
         <div><PasswordField id="confirmPassword" name="confirmPassword" label="Confirm Password *" placeholder="Enter password again" autoComplete="new-password" minLength={12} maxLength={128} value={fields.confirmPassword} onChange={e=>update("confirmPassword",e.target.value)} disabled={pending}/>{message("confirmPassword")}{fields.confirmPassword&&fields.confirmPassword===fields.password&&<p className="mt-1 flex items-center gap-1 text-xs text-success"><CheckCircle2 size={14}/> Passwords match</p>}</div>
-        <label className="flex cursor-pointer items-start gap-2.5 pt-1 text-xs leading-5 text-muted-foreground"><input type="checkbox" checked={accepted} onChange={e=>setAccepted(e.target.checked)} required disabled={pending} className="mt-0.5 size-4 shrink-0 accent-[#14638f]"/><span>I agree to the registration notice. Do not use real sensitive information for hackathon demo accounts. Mobile numbers are collected for contact purposes; no SMS verification is implemented yet.</span></label>
+        <label className="flex cursor-pointer items-start gap-2.5 pt-1 text-xs leading-5 text-muted-foreground"><input type="checkbox" checked={accepted} onChange={e=>setAccepted(e.target.checked)} required disabled={pending} className="mt-0.5 size-4 shrink-0 accent-[#14638f]"/><span>I understand that an ID submission and authenticated Admin approval are required for Citizen features. Review usually takes an estimated 24–72 hours, with no automatic approval. My details and ID are used for account review. Mobile numbers are for contact; SMS verification is not available.</span></label>
         {error&&<p role="alert" className="flex items-start gap-2 rounded-xl border border-red-200 bg-danger-soft px-3 py-2.5 text-xs text-destructive"><AlertCircle size={16} className="mt-0.5 shrink-0"/>{error}</p>}
         <button type="submit" disabled={pending||!accepted} className="flex h-[49px] w-full items-center justify-center gap-2 rounded-xl bg-primary text-[13px] font-bold text-white transition hover:bg-primary disabled:cursor-not-allowed disabled:opacity-55 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border">
           {pending?<><LoaderCircle size={17} className="animate-spin"/> Creating account...</>:<>Create account <ArrowRight size={17}/></>}
