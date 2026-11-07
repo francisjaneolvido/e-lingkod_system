@@ -41,7 +41,11 @@
     "predev": "node scripts/generate-prisma-client.mjs",
     "prebuild": "node scripts/generate-prisma-client.mjs",
     "pretypecheck": "node scripts/generate-prisma-client.mjs --if-needed",
-    "pretest:all": "node scripts/generate-prisma-client.mjs --if-needed"
+    "pretest:all": "node scripts/generate-prisma-client.mjs --if-needed",
+    "demo:import:prepare": "node scripts/hackathon/run.mjs prepare",
+    "demo:import:apply": "node scripts/hackathon/run.mjs apply",
+    "demo:import:verify": "node scripts/hackathon/run.mjs verify",
+    "demo:import:report": "node scripts/hackathon/run.mjs report"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { formatPickupTime } from "../pickup-time";
 
 export type PickupRequest = {id:string;version:number;status:string;pickupSlots:Array<{id:string;scheduledAt:string|Date;location:string;instructions:string;status:string;claimantName?:string|null;confirmedClaimantName?:string|null;citizenNote?:string|null;claimedAt?:string|Date|null}>};
-const field="mt-2 w-full rounded-2xl border border-border bg-card px-4 py-3 text-sm text-foreground";
+const field="elb-field mt-2";
 export function CitizenPickupPanel({request}:{request:PickupRequest}){
   const router=useRouter(),[busy,setBusy]=useState(false),[error,setError]=useState(""),[claimant,setClaimant]=useState(""),[note,setNote]=useState("");
   async function respond(slotId:string,action:"CONFIRM"|"REQUEST_CHANGE"){

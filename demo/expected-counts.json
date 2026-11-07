@@ -134,11 +134,12 @@
         "DEMO-B3-SOURCE:2026:REJECTED": 1,
         "DEMO-B3-SOURCE:2026:REVIEW_NEEDED": 3,
         "DEMO-B3-SOURCE:2026:SKIPPED": 1,
-        "LEGACY_UNKNOWN:UNKNOWN:ACCEPTED": 6
+        "DEMO-LEGACY-REGISTRATION:2026:ACCEPTED": 5,
+        "DEMO-LEGACY-REGISTRATION:2026:REJECTED": 1
       },
       "outcomes": {
-        "ACCEPTED": 8,
-        "REJECTED": 1,
+        "ACCEPTED": 7,
+        "REJECTED": 2,
         "REVIEW_NEEDED": 3,
         "SKIPPED": 1
       },

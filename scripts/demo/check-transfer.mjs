@@ -1,10 +1,11 @@
 // Repeatable destructive checks are confined to a newly created disposable demo clone.
 import { randomUUID } from 'node:crypto';
 import assert from 'node:assert/strict';
-import { loadConfig, guardedTarget } from './config.mjs';
+import { loadConfig, guardedTarget, applicationEnvironment } from './config.mjs';
 import { connect, fingerprint, assertReady, identifier } from './database.mjs';
 import { restore } from './transfer.mjs';
 const config = loadConfig();
+Object.assign(process.env, applicationEnvironment(config));
 const url = new URL(config.primary.url);
 url.pathname = `/e_lingkod_bayan_demo_restore_t${randomUUID().replaceAll('-', '')}`;
 const target = guardedTarget(url.href, 'restore');

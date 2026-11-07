@@ -15,7 +15,7 @@ const target=guardedTarget(url.href,'restore'),config={...original,primary:targe
 const artifactDirectory=path.resolve('.scratch/site-release','regressions-demo-setup-'+name.slice(-32));
 fs.mkdirSync(artifactDirectory,{recursive:true});
 fs.copyFileSync('demo/expected-counts.json',path.join(artifactDirectory,'expected-counts.json'));
-const hash=file=>createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const hash=file=>fs.existsSync(file)?createHash('sha256').update(fs.readFileSync(file)).digest('hex'):null;
 const originalFiles=Object.fromEntries(['demo/accounts.csv','demo/expected-counts.json'].map(file=>[file,hash(file)]));
 Object.assign(process.env,applicationEnvironment(config,target),{ELB_DEMO_SETUP_TEST_DATABASE:name,RESEND_API_KEY:'',STAFF_INVITE_FROM:''});
 const {loadServerTypescript}=await import('../tests/helpers/load-typescript.mjs');

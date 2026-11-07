@@ -1,3 +1,4 @@
+import {mysqlRsaOptions} from '../lib/mysql-connection.mjs';
 import mariadb from 'mariadb';
 import { createHash } from 'node:crypto';
 import { guardedTarget, VERSION } from './config.mjs';
@@ -11,11 +12,11 @@ export async function connect(target, create = false) {
   guardedTarget(target.url.href, target.database === 'e_lingkod_bayan_demo' ? 'primary' : 'restore');
   const { host, port, user, password, database } = target;
   if (create) {
-    const admin = await mariadb.createConnection({ host, port, user, password });
+    const admin = await mariadb.createConnection({...mysqlRsaOptions(), host, port, user, password });
     try { await admin.query(`CREATE DATABASE IF NOT EXISTS ${identifier(database)} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`); }
     finally { await admin.end(); }
   }
-  const connection = await mariadb.createConnection({ host, port, user, password, database, dateStrings: true, timezone: '+00:00', bigIntAsNumber: true });
+  const connection = await mariadb.createConnection({...mysqlRsaOptions(), host, port, user, password, database, dateStrings: true, timezone: '+00:00', bigIntAsNumber: true });
   const [row] = await connection.query('SELECT DATABASE() AS db');
   if (row.db !== database) { await connection.end(); throw new Error('Demo target verification failed'); }
   return connection;

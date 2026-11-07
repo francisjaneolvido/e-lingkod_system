@@ -4,6 +4,7 @@ import mariadb from 'mariadb';
 import fs from 'node:fs';
 import path from 'node:path';
 import dotenv from 'dotenv';
+import {mysqlRsaOptions} from './lib/mysql-connection.mjs';
 import { loadConfig, readDemoConfig, applicationEnvironment } from './demo/config.mjs';
 const arguments_ = process.argv.slice(2);
 const configIndex = arguments_.indexOf('--env');
@@ -12,7 +13,7 @@ if (configIndex >= 0 && !configFile) throw Error('--env requires a private demo 
 const config = configFile ? readDemoConfig(dotenv.parse(fs.readFileSync(configFile))) : loadConfig();
 const name = `elb_b3_test_${randomUUID().replaceAll('-', '')}`;
 const url = new URL(config.primary.url); url.pathname = '/' + name;
-const db = await mariadb.createConnection({ host: url.hostname, port: Number(url.port || 3306), user: decodeURIComponent(url.username), password: decodeURIComponent(url.password) });
+const db = await mariadb.createConnection({ ...mysqlRsaOptions(applicationEnvironment(config)), host: url.hostname, port: Number(url.port || 3306), user: decodeURIComponent(url.username), password: decodeURIComponent(url.password) });
 const env = { ...applicationEnvironment(config), DATABASE_URL: url.href, ELB_B3_TEST_DATABASE: name, ELB_MUNICIPAL_TEST_DATABASE: name, ELB_REGRESSION_DEMO_CONFIG:configFile ? path.resolve(configFile) : '', ELB_DEMO_MODE: '', RESEND_API_KEY:'', STAFF_INVITE_FROM:'' };
 try {
   await db.query(`CREATE DATABASE \`${name}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`);

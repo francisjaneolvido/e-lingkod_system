@@ -70,8 +70,17 @@ test('V15 protects cancellation, release notes, and department-scoped staff assi
 
 test('V15 citizen service catalog remains compact and task-oriented', () => {
   assert.match(servicesPage, /What do you need today\?/);
-  assert.match(servicesPage, /Scheduling only if needed/);
-  assert.match(servicesPage, /Track every handoff/);
+  assert.match(servicesPage, /await publishedServiceCatalog\(\)/);
+  assert.match(servicesPage, /href=\{`\/services\/\$\{service\.key\}`\}/);
+  assert.match(servicesPage, /service\.processingOffice/);
+  assert.match(servicesPage, /service\.intakeMode === "PRESCREEN"/);
+  const serviceGuide = read('src/app/services/[serviceKey]/page.tsx');
+  assert.match(serviceGuide, /service\.requirements\.map/);
+  assert.match(serviceGuide, /service\.appointmentMode === "NONE"/);
+  assert.match(serviceGuide, /service\.appointmentMode === "OPTIONAL"/);
+  assert.match(serviceGuide, /hasCitizenFeatureAccess\(viewer\)/);
+  assert.match(serviceGuide, /ID review required/);
+  assert.match(serviceGuide, /Final verification and release\/completion/);
 });
 
 test('V15 changed TS and TSX files parse successfully', () => {

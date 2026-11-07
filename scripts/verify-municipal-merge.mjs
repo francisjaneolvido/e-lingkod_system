@@ -5,19 +5,20 @@ import { randomUUID, createHash } from 'node:crypto';
 import { spawn, spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import mariadb from 'mariadb';
-import { loadConfig } from './demo/config.mjs';
+import { loadConfig, applicationEnvironment } from './demo/config.mjs';
+import {mysqlRsaOptions} from './lib/mysql-connection.mjs';
 
 const config = loadConfig(); // Existing local-only, explicit demo-URL guard.
 const name = `elb_b3_test_${randomUUID().replaceAll('-', '')}`;
 const target = new URL(config.primary.url); target.pathname = '/' + name;
 const scratch = path.resolve('.scratch/municipal-merge');
 fs.mkdirSync(scratch, { recursive: true });
-const env = { ...process.env, DATABASE_URL: target.href, ELB_B3_TEST_DATABASE: name,
+const env = { ...applicationEnvironment(config), DATABASE_URL: target.href, ELB_B3_TEST_DATABASE: name,
   ELB_MUNICIPAL_TEST_DATABASE: name, BETTER_AUTH_SECRET: config.secret,
   BETTER_AUTH_URL: 'http://localhost:3113', NEXT_PUBLIC_APP_URL: 'http://localhost:3113',
   ELB_NEXT_DIST_DIR: '.scratch/municipal-merge/next', NEXT_TELEMETRY_DISABLED: '1',
   ELB_DEMO_MODE: '', PROJECTS_DEMO_MODE: '', RESEND_API_KEY: '', STAFF_INVITE_FROM: '' };
-const db = await mariadb.createConnection({ host: target.hostname, port: Number(target.port || 3306),
+const db = await mariadb.createConnection({ ...mysqlRsaOptions(env), host: target.hostname, port: Number(target.port || 3306),
   user: decodeURIComponent(target.username), password: decodeURIComponent(target.password), multipleStatements: false });
 const run = args => {
   const result = spawnSync(process.execPath, args, { env, stdio: 'inherit', windowsHide: true });

@@ -1,10 +1,23 @@
-import test from 'node:test';
+import test, {after} from 'node:test';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {randomBytes} from 'node:crypto';
 import assert from 'node:assert/strict';
 import { accounts } from '../demo/fixtures/dataset.mjs';
 import { guardedTarget, VERSION } from '../scripts/demo/config.mjs';
 import { assertDemoIdentityFixture, seedDemoLegacyIdentity } from '../scripts/demo/identity-fixtures.mjs';
 import { assertIdentityFreeDemoExport } from '../scripts/demo/transfer.mjs';
 import { demoImportExpectations } from '../scripts/demo/verify.mjs';
+
+// Self-contained synthetic credentials: no private Yesel catalogue or SQL
+// export is required by this maintained regression suite.
+const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'elb-identity-catalogue-'));
+const catalogue=path.join(temporary,'accounts.csv'),previousCatalogue=process.env.DEMO_ACCOUNTS_FILE;
+const quote=value=>'"'+String(value).replaceAll('"','""')+'"';
+fs.writeFileSync(catalogue,['displayName,email,password,role,scenario',...accounts.map(a=>[a.firstName+' '+a.lastName,a.email,randomBytes(20).toString('hex')+'Aa1!',a.role,a.group+':'+a.scenario].map(quote).join(','))].join('\n')+'\n');
+process.env.DEMO_ACCOUNTS_FILE=catalogue;
+after(()=>{if(previousCatalogue===undefined)delete process.env.DEMO_ACCOUNTS_FILE;else process.env.DEMO_ACCOUNTS_FILE=previousCatalogue;fs.rmSync(temporary,{recursive:true});});
 const url='mysql://synthetic:unused@127.0.0.1/e_lingkod_bayan_demo';
 const config={primary:guardedTarget(url)};
 const env={DATABASE_URL:url,ELB_DEMO_MODE:VERSION};

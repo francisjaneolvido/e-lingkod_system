@@ -1,0 +1,97 @@
+{
+  "title": "Los Baños barangay boundaries — UN OCHA COD-AB v03",
+  "license": {
+    "id": "CC-BY-3.0-IGO",
+    "url": "https://creativecommons.org/licenses/by/3.0/igo/",
+    "legalCode": "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
+  },
+  "producer": "UN OCHA Information Systems Section (ISS)",
+  "host": "HDX Data Systems Team",
+  "upstreamSources": [
+    "NAMRIA",
+    "Philippine Statistics Authority"
+  ],
+  "collectionUrl": "https://data.source.coop/hdx/cod-ab/original/phl/latest/phl_admin4/collection.json",
+  "documentationUrl": "https://data.source.coop/hdx/cod-ab/original/phl/latest/phl_admin4/README.md",
+  "hdxDatasetUrl": "https://data.humdata.org/dataset/cod-ab-phl",
+  "psgcUrl": "https://psa.gov.ph/classification/psgc/barangays/0403411000",
+  "accessedOn": "2026-11-06",
+  "sourceVersion": "v03",
+  "sourceValidOn": "2025-02-13",
+  "crs": {
+    "id": "OGC:CRS84",
+    "axisOrder": [
+      "longitude",
+      "latitude"
+    ],
+    "units": "degrees",
+    "basis": "GeoParquet 2.0 absent crs defaults to OGC:CRS84",
+    "specification": "https://geoparquet.org/releases/v2.0.0/"
+  },
+  "original": {
+    "url": "https://data.source.coop/hdx/cod-ab/original/phl/latest/phl_admin4/phl_admin4.parquet",
+    "bytes": 152877761,
+    "sha256": "49096df60471aa6146a49dcd971e0f8b60ae65d5f0ec1158da3c1efb341e803a",
+    "collectionMultihash": "122049096df60471aa6146a49dcd971e0f8b60ae65d5f0ec1158da3c1efb341e803a"
+  },
+  "extract": {
+    "filename": "los-banos.full.geojson",
+    "bytes": 62456,
+    "sha256": "42e4970ac0382827d38487cd5acd950093695f6436b2b80399438675beaa0009",
+    "filter": "adm3_pcode = 'PH0403411'"
+  },
+  "geometry": {
+    "filename": "los-banos.geometry.json",
+    "bytes": 59346,
+    "sha256": "76e239f7414ea470050cd2bcca8a8987c0bcb322017af093287bd5aa418735a1"
+  },
+  "coverage": {
+    "municipalityCode": "0403411000",
+    "sourceMunicipalityCode": "PH0403411",
+    "nationalFeatureCount": 42048,
+    "featureCount": 14,
+    "codes": [
+      "0403411001",
+      "0403411002",
+      "0403411003",
+      "0403411004",
+      "0403411005",
+      "0403411006",
+      "0403411007",
+      "0403411008",
+      "0403411010",
+      "0403411011",
+      "0403411012",
+      "0403411013",
+      "0403411014",
+      "0403411015"
+    ],
+    "bounds": [
+      121.17130939400022,
+      14.109612395000113,
+      121.26622697500034,
+      14.198157195000135
+    ]
+  },
+  "validation": {
+    "allPolygonsValid": true,
+    "verticesIncludingClosingPoints": 1442,
+    "positiveAreaOverlapPairsAbove1eMinus16SquareDegrees": 0,
+    "unionValid": true,
+    "unionComponents": 1,
+    "unionInteriorRings": 0,
+    "allSourceCentersInsidePolygons": true
+  },
+  "transformations": [
+    "Filter source municipality PH0403411",
+    "Remove literal PH prefix from PSGC keys",
+    "Normalize Baybayin (Pob.) and Timugan (Pob.) display names against PSA listing",
+    "Serialize full original boundary coordinates as compact GeoJSON; no rounding, simplification or polygon invention"
+  ],
+  "attribution": "Los Baños barangay boundaries: UN OCHA COD-AB v03; source NAMRIA / Philippine Statistics Authority; source valid_on 2025-02-13. CC BY 3.0 IGO. Extracted and display names normalized; boundary coordinates preserved. No endorsement implied.",
+  "limitations": [
+    "Source valid_on is a dataset field, not proof of a physical boundary survey or legal adjudication.",
+    "HDX package prose lists older counts/dates; the reviewed distribution has 42048 ADM4 records.",
+    "Public geometry conveys no access to private data. Authorize exact original application keys before resolving aliases."
+  ]
+}

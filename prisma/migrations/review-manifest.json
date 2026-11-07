@@ -1,0 +1,121 @@
+{
+  "description": "Reviewed release migration source. Only LF/CRLF transport normalization is accepted. This manifest does not authorize ordinary deployment.",
+  "migrations": [
+    {
+      "name": "20261019045750_init_auth",
+      "sha256LF": "8f7e4aa194f85af43188d0e4ee76091d6728d983a2e14cb813c05b6ee2bfd670"
+    },
+    {
+      "name": "20261019150000_civic_reporting",
+      "sha256LF": "7f4cb23a31c133885696fee443acfc8cdde8b3953fe975b2293f12aeefc83b08"
+    },
+    {
+      "name": "20261020210000_lgu_staff_access",
+      "sha256LF": "11f5bb9539dbe9056258c3867ac50214ca88c835719a33ce6e8f9a1462e300fe"
+    },
+    {
+      "name": "20261020223000_civic_case_assignment",
+      "sha256LF": "438b88ed3dd6141713b5124b744e146c3f07a45b10530d34df823126d260c8b1"
+    },
+    {
+      "name": "20261020234500_staff_invitations",
+      "sha256LF": "fc255207d5c3bf74e15ca72e81a6e9d53f5c16a12b9885ea7a7e2bf2fa98e7f5"
+    },
+    {
+      "name": "20261021000000_resolution_verification",
+      "sha256LF": "ba4c0d9013966f7c8ca710c98a399b5501072af86869714de6a040c2f379aa37"
+    },
+    {
+      "name": "20261021010000_citizen_feedback_reopen",
+      "sha256LF": "59d5a4dab830679d18bf39d80f3a8fbd7e572452ce3ed3e5e057279faf913e01"
+    },
+    {
+      "name": "20261021020000_job_matching",
+      "sha256LF": "137d05a8b4df7157b811507d3b5d10608d9fcb4b8dfe8312ee6052e2c54509db"
+    },
+    {
+      "name": "20261021030000_job_vacancy_verification",
+      "sha256LF": "a432ff75f7adf73062e47012a8a7d68898b0f8c72376d2f841ec904e5643d24f"
+    },
+    {
+      "name": "20261021040000_spes_import_review",
+      "sha256LF": "caaac602f0a947b35fecc93cf5ed299c87502e144c10d13260cba6a9a33d5bc4"
+    },
+    {
+      "name": "20261021120000_citizen_registration_fields",
+      "sha256LF": "9bc84d3a20ffa347494a263dd6c1dfe2f14be24485fb195ece9d961d64dcb9e3"
+    },
+    {
+      "name": "20261022113000_community_employment_profiling",
+      "sha256LF": "ecc808f58f495d93311f078b373cc20966b9f5a2251d469a3f29a3f7d43b0bca"
+    },
+    {
+      "name": "20261022170000_online_lgu_services",
+      "sha256LF": "d6f1c3795911aa58ce9aed9d925d9f2f0a6f143cc9869e032202c4421e917fad"
+    },
+    {
+      "name": "20261022183000_online_lgu_services_verification",
+      "sha256LF": "96f540b5831f666545ba4f3c34892496a2cc51cb8a0a07b9f836229b74ae817e"
+    },
+    {
+      "name": "20261022210000_online_lgu_services_flow_v15",
+      "sha256LF": "3ed24a35538fea6fe58a3af86ed05706212bc8ba249e73f6b2ecc07b798e552a"
+    },
+    {
+      "name": "20261022230000_platform_workflow_v16",
+      "sha256LF": "5a305c528ac564788422c10c53a3ed9d2ea20f9bdfe1a406f843b3a0f275de85"
+    },
+    {
+      "name": "20261022234500_emergency_hotlines_alerts",
+      "sha256LF": "2a947142a9924b3ccd3a50b8d17f7a31073385172abc09057fdd3d249225e31e"
+    },
+    {
+      "name": "20261023030000_citizen_profile_history",
+      "sha256LF": "6c04c64373cf54855f9d7dc2899e326701c638853987f63ad7709ade8fabb2b3"
+    },
+    {
+      "name": "20261023220000_municipal_projects_v1",
+      "sha256LF": "fcfb91022350955d91820005912b3f839913feead65dee622b720eeb6cb2080e"
+    },
+    {
+      "name": "20261023234000_municipal_projects_transparency_v2",
+      "sha256LF": "9b58f13adb693be52302b0cabce3a6ae4035286fd3b699d5053d38ceed11a9e2"
+    },
+    {
+      "name": "20261024000000_municipal_projects_demo_media",
+      "sha256LF": "f069022563963bdfd77600b53aab9ab717ee60e4c4d4b85d4f639b49e65ceb67"
+    },
+    {
+      "name": "20261024010000_establishment_profiling",
+      "sha256LF": "01f2aa466bcc896ba0106b602fbd43616f6a103c33927eb4d2e5e178addf9b5a"
+    },
+    {
+      "name": "20261024011500_restore_service_pickup",
+      "sha256LF": "2b99e6d1a24bff18b57f3f25657dee6b68291fbafd4c12c0570bf22bcf5bad3f"
+    },
+    {
+      "name": "20261024050000_pickup_confirmed_claimant",
+      "sha256LF": "a19e2b20e177c5246094ad0fc771faf80e5207851e39c54e0addede574d6640d"
+    },
+    {
+      "name": "20261024080000_census_records_imports",
+      "sha256LF": "0cb7911097dfe95f5bc60899e81629d90d3f632477b031c9df2cee67fe5bd450"
+    },
+    {
+      "name": "20261024090000_spes_source_year",
+      "sha256LF": "e1a9e8152444a3bd92119e83453c9ac283250005f9d69e17266ae82bce405749"
+    },
+    {
+      "name": "20261024100000_census_ignored_provenance",
+      "sha256LF": "15b0dd8b61c82a0b8056591bd28fd77ba4f7e56ce2eb2b9eb102ee08330d5de7"
+    },
+    {
+      "name": "20261024130000_opportunity_details",
+      "sha256LF": "f14c08d59c1b965a2715a5c96efc74cee277b8e89d9b987441bf6b19b94a9b97"
+    },
+    {
+      "name": "20261105010000_citizen_identity_review",
+      "sha256LF": "0bc85b7dc88ccd554e51ec1f047164b7367127621deb1b81a0e930e439039e09"
+    }
+  ]
+}

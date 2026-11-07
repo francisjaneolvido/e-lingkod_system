@@ -22,6 +22,9 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
+    // Commands run from the application root. Never infer a parent checkout's
+    // lockfile/dependencies when validating or installing in a nested folder.
+    root: process.cwd(),
     rules: {
       // Tailwind transforms the global stylesheet. Leave CSS Modules to Next.js
       // so their class-name exports remain scoped and usable by components.

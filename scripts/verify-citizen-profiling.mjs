@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import dotenv from "dotenv";
 import mariadb from "mariadb";
+import {mysqlRsaOptions} from './lib/mysql-connection.mjs';
 
 const configArgument = process.argv.indexOf('--env');
 if (configArgument >= 0 && !process.argv[configArgument + 1]) throw Error('--env requires a private configuration path.');
@@ -17,7 +18,7 @@ const testUrl = new URL(configured);
 testUrl.pathname = `/${database}`;
 const legacy = process.argv.includes("--legacy");
 const establishments = process.argv.includes("--establishments");
-const connection = await mariadb.createConnection({ host: configured.hostname, port: Number(configured.port || 3306), user: decodeURIComponent(configured.username), password: decodeURIComponent(configured.password), connectTimeout: 5000, multipleStatements: true });
+const connection = await mariadb.createConnection({ ...mysqlRsaOptions(), host: configured.hostname, port: Number(configured.port || 3306), user: decodeURIComponent(configured.username), password: decodeURIComponent(configured.password), connectTimeout: 5000, multipleStatements: true });
 const env = { ...process.env, DATABASE_URL: testUrl.href, ELB_B1_TEST_DATABASE: database, ...(establishments ? { ELB_B2_TEST_DATABASE: database } : {}), ...(legacy ? { ELB_B1_LEGACY_FIXTURES: "1" } : {}), ...(legacy && establishments ? { ELB_B2_PICKUP_LEGACY_FIXTURES: "1" } : {}) };
 try {
   await connection.query(`CREATE DATABASE \`${database}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`);

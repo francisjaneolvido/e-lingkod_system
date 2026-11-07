@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { requirePageViewer } from "@/lib/access";
 import { notificationFeed } from "@/lib/notifications/server";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -11,5 +12,5 @@ export const metadata:Metadata={title:"Notifications | eLingkod Bayan"};
 export default async function NotificationsPage(){
   const viewer=await requirePageViewer("/notifications");
   const feed=await notificationFeed(viewer.id,100);
-  return <><SiteHeader viewer={{name:viewer.name,email:viewer.email,role:viewer.role}}/><main className="min-h-screen bg-background px-5 py-8 sm:px-8"><div className="mx-auto max-w-[900px]"><div className="mb-5"><p className="text-xs font-extrabold uppercase tracking-[.16em] text-muted-foreground">Account activity</p><h1 className="mt-1 text-2xl font-black tracking-tight text-foreground">Notifications</h1><p className="mt-1 text-xs leading-6 text-muted-foreground">One place for citizen request updates, staff work offers and LGU verification activity.</p></div><NotificationCenter initialItems={feed.items} initialUnread={feed.unread}/></div></main><SiteFooter/></>;
+  return <><SiteHeader viewer={{name:viewer.name,email:viewer.email,role:viewer.role}}/><main className="elb-account-main elb-account-wide"><Link href={viewer.role === "CITIZEN" ? "/account" : "/admin"} className="elb-account-return">Back to my account</Link><header className="elb-account-title"><div><h1>Notifications</h1><p>Read updates and follow the next step in your reports and requests.</p></div></header><NotificationCenter initialItems={feed.items} initialUnread={feed.unread}/></main><SiteFooter/></>;
 }

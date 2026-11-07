@@ -1,0 +1,35 @@
+/* Approved revision-2 foundation. Page families own their composition. */
+@font-face{font-family:"Archivo Reference";src:url("/fonts/archivo-variable.ttf") format("truetype");font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+:root{
+  --font-heading:"Archivo Reference",ui-sans-serif,system-ui,sans-serif;
+  --font-brand:"Poppins",ui-sans-serif,system-ui,sans-serif;
+  --surface-content:var(--card);--surface-inset:var(--muted);--surface-raised:var(--card);
+  --shape-task:24px;--shape-group:16px;--shape-control:12px;
+  --space-section:32px;--space-field:16px;--control-height:48px;
+  --elevation-task:-1px -1px 0 #ffffff70,0 8px 28px #153b6310;
+}
+html[data-theme="dark"],html[data-theme="oled"]{--elevation-task:-1px -1px 0 #ffffff08,0 12px 32px #00000028}
+@layer base{
+  h1,h2,h3,h4{font-variation-settings:"wdth" 100;font-weight:650}
+  select{max-inline-size:100%;min-inline-size:0;line-height:1.5;padding-inline-end:2.25rem}
+  option,optgroup{color:var(--foreground);background:var(--popover)}
+  optgroup{font-weight:650}
+  summary{cursor:pointer;text-underline-offset:4px}
+  summary:focus-visible{border-radius:var(--shape-control)}
+  input,select,textarea{scroll-margin-block:100px 24px}
+}
+.elb-utility-brand,.elb-admin-brand,.elb-auth-footer{font-family:var(--font-brand)}
+.elb-field,.elb-profile-field,.elb-workflow-panel label,.elb-form-section label{min-inline-size:0}
+.elb-form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px 24px}
+.service-question-fields{grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));align-items:end}
+.service-question-detail{grid-column:1/-1;min-width:0}
+.elb-builder-remove{display:grid;place-items:center;width:44px;height:44px;flex-shrink:0;border:1px solid var(--input);border-radius:12px;background:var(--card);color:var(--destructive)}
+.elb-builder-remove:hover{background:var(--danger-soft)}
+.elb-service-builder{container-type:inline-size}
+.elb-service-builder :is(input,select,textarea){min-width:0;font-size:16px;line-height:1.5}
+.elb-service-builder select{padding-inline-end:32px}
+.elb-primary-task{background:var(--card);border:1px solid var(--border);border-radius:var(--shape-task);box-shadow:var(--elevation-task)}
+.elb-supporting-detail{border-top:1px solid var(--border);padding-block:20px;color:var(--muted-foreground)}
+.elb-supporting-detail>summary{color:var(--foreground);min-height:44px;padding-block:10px;font-weight:600}
+.elb-supporting-detail[open]>summary{margin-bottom:12px}
+@media print{.elb-primary-task{box-shadow:none;background:white;color:#183247}.elb-supporting-detail{color:#183247}}

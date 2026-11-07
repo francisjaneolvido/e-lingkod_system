@@ -56,7 +56,13 @@ test('B4 real annual populations, source separation, authority and aggregate exp
     await t.test('retained submission, consent purpose, selected years, revisions and withdrawal',async()=>{
       const result=await run(admin);
       assert.equal(result.groups[0].count,3);
-      assert.equal((await run(staff)).groups[0].count,2);
+      const scoped=await run(staff);
+      assert.equal(scoped.groups[0].count,2);
+      assert.equal(result.groups[0].geography.cells.reduce((sum,cell)=>sum+cell.eligible,0),3);
+      assert.equal(scoped.groups[0].geography.cells.length,1);
+      assert.equal(scoped.groups[0].geography.cells[0].filterKey,'Bambang');
+      assert.equal(scoped.groups[0].geography.cells[0].eligible,2);
+      assert.equal(scoped.groups[0].geography.metrics[0].legend.maximum,2);
       assert.equal((await run(admin,{year:'2025'})).groups[0].count,1);
       const text=JSON.stringify(result);
       assert.ok(!text.includes('Unsubmitted secret')&&!text.includes('Previous revision')&&!text.includes('Draft-only skill'));
@@ -83,6 +89,7 @@ test('B4 real annual populations, source separation, authority and aggregate exp
       assert.equal(result.groups[0].count,2);
       const total=result.groups[0].measures.find(m=>m.key==='totalWorkers');
       assert.equal(total.sum,10);assert.equal(total.unknown,1);
+      assert.deepEqual(result.groups[0].geography.cells[0].values['reported-total-workers'],{value:10,denominator:2,known:1,missing:1});
       assert.equal(result.groups[0].measures.find(m=>m.key==='regularWorkers').sum,11);
       assert.equal((await run(admin)).groups[0].count,3);
       assert.equal((await run(staff,{population:'ESTABLISHMENT',year:'2025'})).groups[0].count,0);
@@ -113,6 +120,7 @@ test('B4 real annual populations, source separation, authority and aggregate exp
       await prisma.communityImportRecord.create({data:{...data,originalRowNumber:99}});
       let result=await run(admin,{population:'IMPORTS',source:'A'});
       assert.equal(result.groups[0].count,1);
+      assert.equal(result.groups[0].geography.cells.reduce((sum,cell)=>sum+cell.eligible,0),1);
       assert.equal(result.excluded.identicalStableSourceDuplicates,1);
       const filtered=await run(admin,{population:'IMPORTS',source:'A',age:'65+'});
       assert.equal(filtered.excluded.identicalStableSourceDuplicates??0,0);
@@ -126,6 +134,7 @@ test('B4 real annual populations, source separation, authority and aggregate exp
       await batch('Anonymous real source',2026,'REAL');await batch('Synthetic demo source',2026,'DEMO');await batch('Unknown year',null,'REAL');await batch('Voided source',2026,'REAL','VOIDED');
       const result=await run(staff,{population:'SPES'});
       assert.equal(result.groups[0].count,2);assert.equal(result.groups[0].unit,'source observations');
+      assert.deepEqual(result.groups[0].geography.cells[0].values['recorded-program-interests'],{value:2,denominator:2,known:2,missing:0});
       assert.equal((await run(staff,{population:'SPES',dataset:'ALL'})).groups.length,2);
       assert.equal(result.excluded.unknownSurveyYear,2);
       assert.equal((await run(staff,{population:'SPES',year:'2025'})).groups.length,0);

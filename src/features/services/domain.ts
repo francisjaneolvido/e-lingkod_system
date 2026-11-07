@@ -18,22 +18,22 @@ export const DOCUMENT_VERIFICATION_STATUSES = ["PENDING", "VERIFIED", "REJECTED"
 export type DocumentVerificationStatus = (typeof DOCUMENT_VERIFICATION_STATUSES)[number];
 
 export const SERVICE_STATUS_META: Record<ServiceRequestStatus, { label: string; citizenLabel: string; tone: string }> = {
-  DRAFT: { label: "Draft", citizenLabel: "Draft", tone: "bg-slate-100 text-slate-700" },
-  FOR_TRIAGE: { label: "For screening", citizenLabel: "Submitted for screening", tone: "bg-sky-50 text-sky-700" },
-  FORM_OPEN: { label: "Full form opened", citizenLabel: "Action required", tone: "bg-amber-50 text-amber-800" },
-  SUBMITTED: { label: "Submitted", citizenLabel: "Submitted", tone: "bg-sky-50 text-sky-700" },
-  ASSIGNED: { label: "Assigned", citizenLabel: "Under review", tone: "bg-blue-50 text-blue-700" },
-  UNDER_REVIEW: { label: "Under review", citizenLabel: "Under review", tone: "bg-blue-50 text-blue-700" },
-  ACTION_REQUIRED: { label: "Citizen action required", citizenLabel: "Action required", tone: "bg-amber-50 text-amber-800" },
-  VALIDATED: { label: "Validated", citizenLabel: "Validated", tone: "bg-emerald-50 text-emerald-700" },
-  SCHEDULED: { label: "Schedule options sent", citizenLabel: "Choose schedule", tone: "bg-violet-50 text-violet-700" },
-  APPOINTMENT_CONFIRMED: { label: "Schedule confirmed", citizenLabel: "Scheduled", tone: "bg-violet-50 text-violet-700" },
-  APPOINTMENT_COMPLETED: { label: "Scheduled activity completed", citizenLabel: "LGU processing", tone: "bg-cyan-50 text-cyan-700" },
+  DRAFT: { label: "Draft", citizenLabel: "Draft", tone: "bg-muted text-muted-foreground" },
+  FOR_TRIAGE: { label: "For screening", citizenLabel: "Submitted for screening", tone: "bg-muted text-link" },
+  FORM_OPEN: { label: "Full form opened", citizenLabel: "Action required", tone: "bg-warning-soft text-warning-foreground" },
+  SUBMITTED: { label: "Submitted", citizenLabel: "Submitted", tone: "bg-muted text-link" },
+  ASSIGNED: { label: "Assigned", citizenLabel: "Under review", tone: "bg-muted text-link" },
+  UNDER_REVIEW: { label: "Under review", citizenLabel: "Under review", tone: "bg-muted text-link" },
+  ACTION_REQUIRED: { label: "Citizen action required", citizenLabel: "Action required", tone: "bg-warning-soft text-warning-foreground" },
+  VALIDATED: { label: "Validated", citizenLabel: "Validated", tone: "bg-success-soft text-success" },
+  SCHEDULED: { label: "Schedule options sent", citizenLabel: "Choose schedule", tone: "bg-secondary text-secondary-foreground" },
+  APPOINTMENT_CONFIRMED: { label: "Schedule confirmed", citizenLabel: "Scheduled", tone: "bg-secondary text-secondary-foreground" },
+  APPOINTMENT_COMPLETED: { label: "Scheduled activity completed", citizenLabel: "LGU processing", tone: "bg-muted text-link" },
   FOR_FINAL_VERIFICATION: { label: "For final verification", citizenLabel: "Final review", tone: "bg-indigo-50 text-indigo-700" },
-  READY_FOR_RELEASE: { label: "Ready for release", citizenLabel: "Ready for release", tone: "bg-emerald-50 text-emerald-700" },
-  COMPLETED: { label: "Completed", citizenLabel: "Completed", tone: "bg-emerald-100 text-emerald-800" },
-  DECLINED: { label: "Declined / referred", citizenLabel: "Unable to proceed", tone: "bg-rose-50 text-rose-700" },
-  CANCELLED: { label: "Cancelled", citizenLabel: "Cancelled", tone: "bg-slate-100 text-slate-700" },
+  READY_FOR_RELEASE: { label: "Ready for release", citizenLabel: "Ready for release", tone: "bg-success-soft text-success" },
+  COMPLETED: { label: "Completed", citizenLabel: "Completed", tone: "bg-success-soft text-success" },
+  DECLINED: { label: "Declined / referred", citizenLabel: "Unable to proceed", tone: "bg-danger-soft text-destructive" },
+  CANCELLED: { label: "Cancelled", citizenLabel: "Cancelled", tone: "bg-muted text-muted-foreground" },
 };
 
 

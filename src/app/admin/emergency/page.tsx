@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Emergency & Alerts Desk | eLingkod B
 export default async function EmergencyAdminPage() {
   const viewer = await requireModulePage("/admin/emergency", "EMERGENCY");
   if (viewer.role === "STAFF" && !belongsToEmergencyOffice(viewer.department)) {
-    return <div className="rounded-2xl border border-border bg-warning-soft p-8 text-warning-foreground"><h1 className="text-xl font-extrabold">Emergency desk office restriction</h1><p className="mt-3 text-sm leading-7">Your account has the Emergency module permission but your assigned office is <strong>{viewer.department || "not specified"}</strong>. Ask your Super Admin to assign an appropriate MDRRMO, PIO, Operations Center, MHO or MSWDO office to use this desk.</p></div>;
+    return <div className="rounded-2xl border border-border bg-warning-soft p-8 text-warning-foreground"><h1 className="text-3xl font-semibold tracking-tight text-foreground">Emergency desk office restriction</h1><p className="mt-3 text-sm leading-7">Your account has the Emergency module permission but your assigned office is <strong>{viewer.department || "not specified"}</strong>. Ask your Super Admin to assign an appropriate MDRRMO, PIO, Operations Center, MHO or MSWDO office to use this desk.</p></div>;
   }
   const [hotlines, proposals, alerts] = await Promise.all([
     prisma.emergencyHotline.findMany({ orderBy: { updatedAt: "desc" }, take: 150 }),

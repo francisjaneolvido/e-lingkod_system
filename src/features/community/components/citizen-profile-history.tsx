@@ -23,13 +23,13 @@ function answer(value:unknown):string{
 }
 export function CitizenProfileHistory({entries}:{entries:ProfileHistoryEntry[]}){
   if(!entries.length)return <p className="text-sm text-muted-foreground">No submitted history for this survey year yet. Saved drafts are private and do not contribute to submitted-response statistics.</p>;
-  return <section aria-labelledby="profile-history-title" className="rounded-[24px] border border-border bg-card p-6 sm:p-8">
+  return <section aria-labelledby="profile-history-title" className="elb-profile-panel">
     <h2 id="profile-history-title" className="text-xl font-bold text-foreground">My submitted history</h2>
     <p className="mt-2 text-sm leading-6 text-muted-foreground">Earlier answers stay protected when you update or withdraw a response. Historic consent shown here does not override your current preferences.</p>
     <div className="mt-5 divide-y divide-border">{entries.map(entry=><details key={entry.id} className="py-4">
-      <summary className="cursor-pointer rounded-2xl text-sm font-bold text-foreground focus-visible:outline-2 focus-visible:outline-offset-4">{entry.action==="WITHDRAWN"?"Response withdrawn":"Submitted revision "+entry.revision} · {new Date(entry.createdAt).toLocaleString("en-PH")}</summary>
+      <summary className="flex min-h-11 cursor-pointer items-center rounded-xl text-sm font-semibold text-foreground focus-visible:outline-2 focus-visible:outline-offset-4">{entry.action==="WITHDRAWN"?"Response withdrawn":"Submitted revision "+entry.revision} · {new Date(entry.createdAt).toLocaleString("en-PH")}</summary>
       <p className="mt-3 text-xs text-muted-foreground">Recorded by you. This entry preserves the answers at that time.</p>
-      <dl className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-2">{Object.entries(labels).filter(([key])=>key in entry.answers).map(([key,label])=><div key={key} className="min-w-0"><dt className="text-xs font-bold text-foreground">{label}</dt><dd className="mt-1 whitespace-pre-wrap break-words text-sm leading-6 text-muted-foreground">{answer(entry.answers[key])}</dd></div>)}</dl>
+      <dl className="elb-workflow-answers">{Object.entries(labels).filter(([key])=>key in entry.answers).map(([key,label])=><div key={key} className="elb-workflow-answer"><dt className="text-xs font-bold text-foreground">{label}</dt><dd className="mt-1 whitespace-pre-wrap break-words text-sm leading-6 text-muted-foreground">{answer(entry.answers[key])}</dd></div>)}</dl>
     </details>)}</div>
   </section>;
 }

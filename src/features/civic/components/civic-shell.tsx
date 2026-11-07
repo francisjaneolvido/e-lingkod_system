@@ -9,10 +9,10 @@ import s from "../civic.module.css";
 export function CivicShell({ viewer, active, children }: { viewer: CivicViewer | null; active: "new" | "reports" | "track" | "admin"; children: ReactNode }) {
   return <>
     <SiteHeader viewer={viewer} />
-    <main className={s.page} id="civic-main"><div className={s.wrap}>
-      <div className={s.subnav}>
+    <main className={`${s.page} ${active === "admin" ? "" : "elb-civic-page"}`} id="civic-main"><div className={`${s.wrap} elb-civic-wrap`}>
+      <div className={`${s.subnav} elb-civic-subnav`}>
         <div className={s.crumbs}><Link href="/">Home</Link><ChevronRight size={12} /><span>Civic reporting</span></div>
-        <nav className={s.navlinks} aria-label="Civic reporting">
+        <nav className={`${s.navlinks} elb-civic-navlinks`} aria-label="Civic reporting">
           <Link href="/reports/new" className={active === "new" ? s.activeNav : ""} aria-current={active === "new" ? "page" : undefined}>Report a concern</Link>
           <Link href="/reports" className={active === "reports" ? s.activeNav : ""} aria-current={active === "reports" ? "page" : undefined}>My reports</Link>
           <Link href="/track" className={active === "track" ? s.activeNav : ""} aria-current={active === "track" ? "page" : undefined}>Track a report</Link>

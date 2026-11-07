@@ -93,8 +93,10 @@ test("D08 public analytics fails closed without counts or filter metadata", () =
 });
 
 test("Public census remains private-data free while protected B3 records are separate", () => {
-  assert.match(censusPage, /Public census statistics are not published here/);
-  assert.match(censusPage, /No census records or census statistics are being displayed/);  assert.doesNotMatch(censusPage, /publicEmploymentInsights/);
+  assert.match(censusPage, /Public census statistics are not (?:currently )?published/);
+  assert.match(censusPage, /No individual records or census statistics are displayed/);
+  assert.doesNotMatch(censusPage, /prisma|censusRecords|censusAnalytics|features\/(?:analytics|census|community)\/server/);
+  assert.doesNotMatch(censusPage, /publicEmploymentInsights/);
   assert.doesNotMatch(adminCensus, /adminEmploymentInsights/);
 });
 

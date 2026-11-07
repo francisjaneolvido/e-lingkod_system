@@ -1,3 +1,5 @@
+import {seedImportedLegacy} from './identity.mjs';
+import {requireDemoCredentials} from '../../demo/fixtures/credentials.mjs';
 import {vacancyDetails} from '../../demo/b5-fixtures.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -11,6 +13,7 @@ import { snapshot, digest, writeJson, assertPreserved, readTarget } from './stor
 
 // The journal contains private target snapshots. Never put it in a commit/export.
 export async function importFixtures({db,directory,target,baseURL,fault}) {
+  requireDemoCredentials(accounts);
   const {prisma}=await import('../../src/lib/prisma.ts');
   const {auth}=await import('../../src/lib/auth.ts');
   const personal=await import('../../src/features/community/server/survey-lifecycle.ts');
@@ -62,6 +65,7 @@ export async function importFixtures({db,directory,target,baseURL,fault}) {
         if(await prisma.user.findUnique({where:{email:payload.email}}))throw Error('Account collision; refusing takeover');
         const result=await auth.api.signUpEmail({body:payload});return {id:result.user.id};
       });
+      await step('identity:legacy:'+account.key,()=>({id:registered.id}),()=>seedImportedLegacy({prisma,db,account,state,baseline}));
       viewers[account.key]=await prisma.user.findUniqueOrThrow({where:{id:registered.id}});
       assert.equal(viewers[account.key].email,account.email);
     }

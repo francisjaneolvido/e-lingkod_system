@@ -3,6 +3,7 @@
 import { Fragment, useMemo, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import {ActionGroup} from "@/components/shared/action-group";
 import { Archive, ArrowRight, ArrowUpRight, BarChart3, BriefcaseBusiness, ClipboardList, Filter, MapPin, Plus, Search, ShieldCheck, X } from "lucide-react";
 import { SECTORS, WORK_LABEL, WORK_TYPES } from "../domain";
 import { displayJobStatus, type JobsDashboardData, type ManagedJob } from "./job-types";
@@ -116,10 +117,10 @@ export function JobConsole({data,viewerId,viewerName,asOf,isSuperAdmin,canViewIn
  ];
 
  return <div className="jobs-workspace">
-  <header className="jobs-header"><div><span className="jobs-eyebrow">EMPLOYMENT & LIVELIHOOD / PESO</span><h1>Opportunity Management</h1><p>{isSuperAdmin?"Review submitted vacancies, publish verified listings, and monitor their lifecycle.":"Prepare PESO opportunity listings and submit them for Super Admin verification before they become public."} Signed in as {viewerName}.</p><div className="mt-3 flex flex-wrap gap-2">{canViewInsights&&<Link href="/admin/census/analytics" className="jobs-small-button"><BarChart3 size={14}/> Workforce &amp; social analytics</Link>}{canViewInsights&&<Link href="/admin/jobs/demand" className="jobs-small-button">Protected employer demand</Link>}<Link href="/opportunities" className="jobs-small-button">Citizen view <ArrowUpRight size={13}/></Link></div></div><Link href="/admin/jobs/new" className="jobs-primary-button"><Plus size={17}/> Add opportunity</Link></header>
+  <header className="jobs-header"><div><span className="jobs-eyebrow">Employment and livelihood / PESO</span><h1>Opportunity management</h1><p>{isSuperAdmin?"Review submitted vacancies, publish verified listings, and monitor their lifecycle.":"Prepare PESO opportunity listings and submit them for Super Admin verification before they become public."} Signed in as {viewerName}.</p><ActionGroup label="Opportunity tools">{canViewInsights&&<Link href="/admin/census/analytics" className="jobs-small-button"><BarChart3 size={14}/> Workforce &amp; social analytics</Link>}{canViewInsights&&<Link href="/admin/jobs/demand" className="jobs-small-button">Protected employer demand</Link>}<Link href="/opportunities" className="jobs-small-button">Citizen view <ArrowUpRight size={13}/></Link></ActionGroup></div><Link href="/admin/jobs/new" className="jobs-primary-button"><Plus size={17}/> Add opportunity</Link></header>
 
   <div className="jobs-metrics">
-   {[{label:"Published",value:counts.active,icon:BriefcaseBusiness,view:"PUBLISHED" as QuickView},{label:"My work",value:counts.myWork,icon:ClipboardList,view:"MY_WORK" as QuickView},{label:isSuperAdmin?"Needs verification":"For verification",value:counts.pending,icon:ShieldCheck,view:"REVIEW" as QuickView},{label:"Returned to me",value:counts.returned,icon:ClipboardList,view:"RETURNED" as QuickView}].map(metric=><button type="button" onClick={()=>setQuickView(metric.view)} className="jobs-metric text-left" key={metric.label}><div><span>{metric.label}</span><strong>{metric.value}</strong></div><metric.icon aria-hidden size={20}/></button>)}
+   {[{label:"Published",value:counts.active,icon:BriefcaseBusiness,view:"PUBLISHED" as QuickView},{label:"My work",value:counts.myWork,icon:ClipboardList,view:"MY_WORK" as QuickView},{label:isSuperAdmin?"Needs verification":"For verification",value:counts.pending,icon:ShieldCheck,view:"REVIEW" as QuickView},{label:"Returned to me",value:counts.returned,icon:ClipboardList,view:"RETURNED" as QuickView}].map(metric=><button type="button" onClick={()=>setQuickView(metric.view)} className="jobs-metric text-left" aria-pressed={quickView===metric.view} key={metric.label}><div><span>{metric.label}</span><strong>{metric.value}</strong></div><metric.icon aria-hidden size={20}/></button>)}
   </div>
 
   {(notice||error)&&<div role={error?"alert":"status"} className={`jobs-banner ${error?"jobs-banner--error":"jobs-banner--success"}`}>{error||notice}<button onClick={()=>{setError("");setNotice("");}} title="Dismiss message" aria-label="Dismiss message"><X size={16}/></button></div>}

@@ -2,11 +2,17 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import ts from "typescript";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { loadServerTypescript } from "./helpers/load-typescript.mjs";
+
+loadServerTypescript();
+const { ServiceTile } = await import("../src/features/landing/components/service-tile.tsx");
+const { ServiceDetailDialog } = await import("../src/features/landing/components/service-detail-dialog.tsx");
+const { services: serviceDefinitions } = await import("../src/features/landing/data/services.ts");
 
 const read = (path) => fs.readFileSync(path, "utf8");
-const tile = read("src/features/landing/components/service-tile.tsx");
 const services = read("src/features/landing/sections/services-section.tsx");
-const modal = read("src/features/landing/components/service-detail-dialog.tsx");
 const browser = read("src/features/jobs/components/opportunities-browser.tsx");
 const detail = read("src/app/opportunities/[id]/page.tsx");
 const repo = read("src/features/jobs/server/data.ts");
@@ -26,19 +32,33 @@ const updated = [
 ];
 
 test("Community Employment tile opens the live umbrella module and keeps opportunities available", () => {
-  assert.match(tile, /service\.id === "jobs" \? <Link href="\/community-employment"/);
-  assert.match(tile, /Open module/);
-  assert.match(services, /if \(service\.id === "jobs"\) return <Link href="\/community-employment"/);
-  assert.match(modal, /href="\/community-employment"/);
+  const service = serviceDefinitions.find(item => item.id === "jobs");
+  const tile = renderToStaticMarkup(createElement(ServiceTile, { service, onExplore() {} }));
+  const dialog = renderToStaticMarkup(createElement(ServiceDetailDialog, { service, onClose() {} }));
+  assert.match(tile, /href="\/community-employment"/);
+  assert.match(tile, /Profiling &amp; opportunities/);
+  assert.match(services, /<ServiceTile\b/);
+  assert.match(dialog, /href="\/community-employment"/);
+  assert.match(dialog, /Published opportunities can be explored now/);
+  assert.match(dialog, /do not submit applications/);
 });
 
 test("employment survey and future Census are clearly distinct in services notices", () => {
-  assert.match(tile, /Survey & opportunity discovery · Available/);
+  const jobs = serviceDefinitions.find(item => item.id === "jobs");
+  const census = serviceDefinitions.find(item => item.id === "census");
+  const jobsTile = renderToStaticMarkup(createElement(ServiceTile, { service: jobs, onExplore() {} }));
+  const censusDialog = renderToStaticMarkup(createElement(ServiceDetailDialog, { service: census, onClose() {} }));
+  assert.match(jobsTile, /skills and training interests/);
+  assert.match(censusDialog, /Public census statistics are not currently released/);
+  assert.match(censusDialog, /Individual and establishment records remain protected/);
+  assert.match(censusDialog, /Public and citizen census analytics remain unavailable/);
   assert.match(read("src/features/landing/data/services.ts"), /Community Employment & Livelihood/);
   assert.match(read("src/app/community-employment/page.tsx"), /Citizen Profiling/);
   assert.match(read("src/features/landing/data/services.ts"), /title: "Community Census", shortTitle: "Census · coming soon"/);
   assert.match(read("src/features/landing/data/services.ts"), /belongs to Job Matching \/ Employment & Livelihood, not Census/);
-  assert.match(read("src/components/layout/site-footer.tsx"), /Report a concern, request an LGU service, or explore employment opportunities/);
+  assert.match(read("src/components/layout/site-footer.tsx"), /\/reports\/new/);
+  assert.match(read("src/components/layout/site-footer.tsx"), /\/services/);
+  assert.match(read("src/components/layout/site-footer.tsx"), /\/community-employment|\/opportunities/);
 });
 
 test("citizen cards link to dedicated details instead of expanding into long inline content", () => {

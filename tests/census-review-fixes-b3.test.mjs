@@ -1,3 +1,4 @@
+import {mysqlRsaOptions} from '../scripts/lib/mysql-connection.mjs';
 import { createLegacyCitizenFixture, registerLegacyCitizenFixture } from './helpers/legacy-citizen-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -164,7 +165,7 @@ test('B3 independent-review persistent regressions', { skip: !enabled }, async t
       const { journalStep } = await import('../scripts/demo/operation-journal.mjs');
       const { snapshot, digest } = await import('../scripts/demo/database.mjs');
       const mariadb = (await import('mariadb')).default, url = new URL(process.env.DATABASE_URL);
-      const db = await mariadb.createConnection({ host: url.hostname, port: Number(url.port || 3306), user: decodeURIComponent(url.username), password: decodeURIComponent(url.password), database: url.pathname.slice(1), dateStrings: true, bigIntAsNumber: true });
+      const db = await mariadb.createConnection({ ...mysqlRsaOptions(), host: url.hostname, port: Number(url.port || 3306), user: decodeURIComponent(url.username), password: decodeURIComponent(url.password), database: url.pathname.slice(1), dateStrings: true, bigIntAsNumber: true });
       try {
         for (const kind of ['profile', 'designation', 'unchanged']) await t.test(kind, async () => {
           const email = 'grant.' + kind + '@example.test';

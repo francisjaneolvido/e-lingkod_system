@@ -1,41 +1,42 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  BarChart3, BellRing, BriefcaseBusiness, Building2, ChevronRight,
+  BarChart3, BellRing, BriefcaseBusiness, Building2, ChevronDown, ChevronRight,
   ClipboardList, ExternalLink, FileSpreadsheet, LayoutDashboard,
-  MapPinned, Menu, PanelLeftClose, PanelLeftOpen, ShieldCheck,
+  MapPinned, Menu, PanelLeftClose, PanelLeftOpen,
   UsersRound, UserCog, X,
 } from "lucide-react";
 import { LogoutButton } from "@/features/auth/components/logout-button";
 import type { StaffModule } from "@/lib/staff-modules";
 import { ThemeControl } from "@/components/shared/theme-control";
 import { NotificationBell } from "@/components/notifications/notification-bell";
+import "@/styles/navigation.css";
 
 const navSections = [
-  { title: "OPERATIONS", items: [
+  { title: "Operations", items: [
     { label: "Overview", href: "/admin", icon: LayoutDashboard },
     { label: "Citizen reports", href: "/admin/reports", icon: ClipboardList },
     { label: "Online LGU services", href: "/admin/services", icon: Building2 },
     { label: "Registered citizens", href: "/admin/citizens", icon: UsersRound },
   ] },
-  { title: "PROFILING & OPPORTUNITIES", items: [
+  { title: "Profiling & opportunities", items: [
     { label: "Overview & opportunities", href: "/admin/jobs", icon: BriefcaseBusiness },
     { label: "Workforce analytics", href: "/admin/census/analytics", icon: BarChart3 },
     { label: "Census imports", href: "/admin/census/imports", icon: FileSpreadsheet },
   ] },
-  { title: "OTHER SERVICE MODULES", items: [
+  { title: "Other modules", items: [
     { label: "Protected census records", href: "/admin/census", icon: BarChart3 },
     { label: "Emergency & alerts", href: "/admin/emergency", icon: BellRing },
     { label: "Municipal projects", href: "/admin/projects", icon: MapPinned },
   ] },
-  { title: "INSIGHTS", items: [
+  { title: "Insights", items: [
     { label: "Community Pulse", href: "/admin/pulse", icon: BarChart3 },
   ] },
-  { title: "TEAM MANAGEMENT", items: [
+  { title: "Team", items: [
     { label: "LGU staff", href: "/admin/staff", icon: UserCog },
   ] },
 ] as const;
@@ -66,6 +67,8 @@ const pageMeta: Record<string, {title: string; subtitle: string}> = {
   "/admin/jobs/insights": { title: "Employment insights", subtitle: "Skills, training, barriers and livelihood analytics" },
   "/admin/jobs/data": { title: "Employment data", subtitle: "Historical activity datasets, imports and manual encoding" },
   "/admin/census": { title: "Protected census records", subtitle: "Worker Census & Social Profiling" },
+  "/admin/census/analytics": { title: "Workforce analytics", subtitle: "Protected annual survey aggregates" },
+  "/admin/census/imports": { title: "Census imports", subtitle: "Source records and validation" },
   "/admin/pulse": { title: "Community Pulse", subtitle: "Aggregated cross-system operations" },
   "/admin/profile": { title: "My profile", subtitle: "LGU account" },
 };
@@ -80,6 +83,7 @@ export function AdminShell({ children, name, email, role, modules, department }:
   const superAdmin = role === "ADMIN";
   const canSee = (href: string) => adminOnlyPaths.has(href) ? superAdmin : superAdmin || (href !== "/admin/citizens" && href !== "/admin/staff" && (!modulesByPath[href] || modules.includes(modulesByPath[href])));
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigation=useRef<HTMLElement>(null),background=useRef<HTMLDivElement>(null);
   const [compact, setCompact] = useState(false);
   const matched = Object.keys(pageMeta)
     .filter(href => pathname === href || (href !== "/admin" && pathname.startsWith(`${href}/`)))
@@ -93,9 +97,22 @@ export function AdminShell({ children, name, email, role, modules, department }:
 
   useEffect(() => {
     if (!menuOpen) return;
-    function closeOnEscape(event: KeyboardEvent) { if (event.key === "Escape") setMenuOpen(false); }
-    document.addEventListener("keydown", closeOnEscape);
-    return () => document.removeEventListener("keydown", closeOnEscape);
+    const previous=document.activeElement as HTMLElement|null,node=navigation.current,main=background.current;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    if(main)main.inert=true;
+    node?.querySelector<HTMLButtonElement>('.elb-admin-mobile-close')?.focus();
+    function keyboard(event:KeyboardEvent){
+      if(event.key==='Escape'){event.preventDefault();setMenuOpen(false);return;}
+      if(event.key!=='Tab'||!node)return;
+      const controls=Array.from(node.querySelectorAll<HTMLElement>('a[href],button:not(:disabled),summary,[tabindex="0"]')).filter(control=>control.getClientRects().length>0);
+      const first=controls[0],last=controls.at(-1);
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}
+      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}
+    }
+    function resize(){if(window.innerWidth>=1200)setMenuOpen(false);}
+    document.addEventListener('keydown',keyboard);window.addEventListener('resize',resize);
+    return ()=>{if(main)main.inert=false;document.body.style.overflow=previousOverflow;document.removeEventListener('keydown',keyboard);window.removeEventListener('resize',resize);if(previous?.isConnected)previous.focus();};
   }, [menuOpen]);
 
   function closeMenu() { setMenuOpen(false); }
@@ -104,7 +121,7 @@ export function AdminShell({ children, name, email, role, modules, department }:
     <a href="#admin-content" className="elb-admin-skip">Skip to main content</a>
     {menuOpen && <button type="button" className="elb-admin-backdrop" onClick={closeMenu} aria-label="Close navigation overlay" />}
 
-    <aside className={`elb-admin-sidebar ${menuOpen ? "elb-admin-sidebar--open" : ""}`} aria-label="LGU administration navigation">
+    <aside ref={navigation} className={`elb-admin-sidebar ${menuOpen ? "elb-admin-sidebar--open" : ""}`} aria-label="LGU administration navigation" role={menuOpen?'dialog':undefined} aria-modal={menuOpen?true:undefined}>
       <div className="elb-admin-brand">
         <Link href="/admin" onClick={closeMenu} aria-label="eLingkod Bayan — Admin overview" className="elb-admin-brand-link">
           <Image src="/images/elb-mark.svg" alt="" width={40} height={46} priority className="elb-admin-brand-symbol" />
@@ -123,10 +140,14 @@ export function AdminShell({ children, name, email, role, modules, department }:
       </div>
 
       <div className="elb-admin-nav-scroll">
-        {navSections.filter(section => section.items.some(item => canSee(item.href))).map(section => <div className="elb-admin-section" key={section.title}>
-          <div className="elb-admin-section-label">{section.title}</div>
+        <nav aria-label="Workspace overview" className="elb-admin-navigation">
+          <Link href="/admin" onClick={closeMenu} aria-current={activeHref === "/admin" ? "page" : undefined} title="Overview" className={`elb-admin-nav-link ${activeHref === "/admin" ? "elb-admin-nav-link--active" : ""}`}><LayoutDashboard size={19} aria-hidden="true" /><span className="elb-admin-nav-label">Overview</span></Link>
+        </nav>
+        <p className="elb-admin-nav-current">Current: {meta.title}</p>
+        {navSections.filter(section => section.items.some(item => item.href !== "/admin" && canSee(item.href))).map(section => <details className="elb-admin-nav-group" key={`${section.title}-${activeHref}`} open={section.items.some(item => item.href === activeHref)}>
+          <summary><span>{section.title}</span><ChevronDown size={16} aria-hidden="true" /></summary>
           <nav aria-label={section.title} className="elb-admin-navigation">
-            {section.items.filter(item => canSee(item.href)).map(item => {
+            {section.items.filter(item => item.href !== "/admin" && canSee(item.href)).map(item => {
               const Icon = item.icon;
               const active = activeHref === item.href;
               return <Link key={item.href} href={item.href} onClick={closeMenu} aria-current={active ? "page" : undefined} title={item.label} className={`elb-admin-nav-link ${active ? "elb-admin-nav-link--active" : ""}`}>
@@ -136,7 +157,7 @@ export function AdminShell({ children, name, email, role, modules, department }:
               </Link>;
             })}
           </nav>
-        </div>)}
+        </details>)}
       </div>
 
       <div className="elb-admin-sidebar-bottom">
@@ -144,6 +165,7 @@ export function AdminShell({ children, name, email, role, modules, department }:
         <Link href="/admin/profile" title="Administrator profile" onClick={closeMenu} className="elb-admin-user">
           <span className="elb-admin-avatar">{initials}</span>
           <span className="elb-admin-user-info"><strong>{name}</strong><small>{superAdmin ? "Super Admin" : "LGU Staff"} · {email}</small></span>
+          <span className="elb-admin-compact-label">My profile</span>
           <ChevronRight size={14} className="elb-admin-user-arrow" />
         </Link>
         <div className="elb-admin-logout"><LogoutButton fullWidth /></div>
@@ -153,7 +175,7 @@ export function AdminShell({ children, name, email, role, modules, department }:
       </div>
     </aside>
 
-    <div className="elb-admin-main-column">
+    <div ref={background} className="elb-admin-main-column">
       <header className="elb-admin-topbar">
         <div className="elb-admin-topbar-start">
           <div className="elb-admin-heading-group">
@@ -163,7 +185,7 @@ export function AdminShell({ children, name, email, role, modules, department }:
         </div>
         <div className="elb-admin-topbar-end">
           <NotificationBell variant="admin" />
-          <span className="elb-admin-environment"><ShieldCheck size={15}/> Protected workspace</span>
+          <span className="sr-only">Authorized {role === 'ADMIN' ? 'Admin' : 'Staff'} workspace</span>
           <Link href="/admin/profile" className="elb-admin-topbar-profile" aria-label={`View profile for ${name}`} title="Administrator profile"><span className="elb-admin-topbar-avatar">{initials}</span><span className="elb-admin-topbar-name">{name}</span><ChevronRight size={15}/></Link>
           <button type="button" aria-label="Open navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)} className="elb-admin-menu-toggle"><Menu size={21}/></button>
           <ThemeControl />

@@ -1,6 +1,11 @@
 // Maintained Playwright CLI journey. Requires npm run demo:dev on port 3102.
 // eslint-disable-next-line @typescript-eslint/no-unused-expressions -- CLI evaluates function.
 async page => {
+  const credentials = {}; // PRIVATE_CATALOGUE_INJECTION
+  const requiredEmails = ["individual.02@example.test","establishment.03@example.test","staff.02@example.test","admin.01@example.test"];
+  for (const email of requiredEmails) if (!credentials[email]) throw Error("Generate a private browser journey with scripts/prepare-demo-browser.mjs before running it.");
+  const demoPassword = email => credentials[email];
+
   const base = 'http://localhost:3102';
   const check = (ok, message) => { if (!ok) throw Error(message); };
   const consoleErrors = [], serverErrors = [], networkFailures = [];
@@ -23,7 +28,7 @@ async page => {
     await page.waitForURL(url => url.pathname !== '/login', { timeout: 20000 });
     check(await page.getByRole('complementary', { name: 'Demo environment' }).isVisible(), 'Demo marker missing');
   }
-  await login('individual.02@example.test', 'ElbDemo2026!002');
+  await login('individual.02@example.test', demoPassword("individual.02@example.test"));
   const sizes = [{ width: 1440, height: 1000 }, { width: 820, height: 1180 }, { width: 390, height: 844 }];
   for (const viewport of sizes) {
     await page.setViewportSize(viewport); await page.goto(base + '/community-survey');
@@ -39,7 +44,7 @@ async page => {
   await page.goto(base + '/opportunities');
   await page.getByText('[DEMO]', { exact: false }).filter({ visible: true }).first().waitFor();
   check((await page.locator('body').innerText()).includes('Synthetic Employer'), 'Persisted vacancies absent');
-  await login('establishment.03@example.test', 'ElbDemo2026!083');
+  await login('establishment.03@example.test', demoPassword("establishment.03@example.test"));
   await page.goto(base + '/establishment-survey');
   await page.getByRole('heading', { name: 'Establishment Profiling', exact: true }).waitFor();
   await page.getByRole('button', { name: /Corrected/ }).click();
@@ -48,10 +53,10 @@ async page => {
   check(JSON.stringify(owned).includes('Corrected'), 'Own establishment list missing');
   await page.getByRole('button', { name: 'Next', exact: true }).click();
   check(await page.getByLabel('Line of business / industry', { exact: true }).inputValue(), 'Industry category missing');
-  await login('staff.02@example.test', 'ElbDemo2026!106');
+  await login('staff.02@example.test', demoPassword("staff.02@example.test"));
   const denied = await page.request.post(base + '/api/admin/jobs', { headers: { origin: base }, data: {} });
   check(denied.status() === 403, 'Community-only staff unexpectedly allowed Jobs writes');
-  await login('admin.01@example.test', 'ElbDemo2026!101');
+  await login('admin.01@example.test', demoPassword("admin.01@example.test"));
   await page.goto(base + '/admin/jobs');
   await page.getByText('[DEMO]', { exact: false }).filter({ visible: true }).first().waitFor();
   check((await page.locator('body').innerText()).includes('Needs verification'), 'Admin review workflow absent');

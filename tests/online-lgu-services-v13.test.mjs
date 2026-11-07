@@ -68,7 +68,7 @@ test('staff workflow supports validation, corrections, scheduling and recommenda
 test('SERVICES is a live staff/admin workspace and citizen navigation exposes requests', () => {
   assert.match(adminPage, /requireModulePage\("\/admin\/services","SERVICES"\)/);
   assert.match(staffWorkspace, /canManageServices/);
-  assert.match(staffWorkspace, /ONLINE LGU SERVICES/);
+  assert.match(staffWorkspace, /Online LGU services/i);
   assert.match(header, /services: "\/services"/);
   assert.match(header, /My LGU Requests/);
 });

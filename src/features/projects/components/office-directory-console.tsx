@@ -6,9 +6,9 @@ import { LOS_BANOS_OFFICIAL_CONTACTS } from "@/features/projects/official-los-ba
 
 type Proposal = { id: string; officeName: string; phone: string | null; extension: string | null; email: string | null; officeHours: string | null; address: string | null; notes: string | null; sourceUrl: string; status: string; reviewNote: string | null };
 type Override = { officeName: string; phone: string | null; extension: string | null; email: string | null; officeHours: string | null; address: string | null; notes: string | null; sourceUrl: string; isPublished: boolean; verifiedAt: string };
-const input = "mt-1 h-11 w-full rounded-lg border border-input bg-card px-2 text-xs text-foreground";
+const input = "elb-field mt-2";
 const action = "min-h-11 rounded-lg bg-primary px-3 py-2 text-xs font-bold text-primary-foreground disabled:cursor-not-allowed disabled:border-dashed disabled:text-muted-foreground disabled:bg-muted";
-const secondary = "min-h-11 rounded-lg border border-border px-3 py-2 text-xs font-bold text-foreground disabled:cursor-not-allowed disabled:border-dashed disabled:text-muted-foreground disabled:bg-muted";
+const secondary = "elb-button";
 export function OfficeDirectoryConsole({ admin, department, proposals, overrides }: { admin: boolean; department: string; proposals: Proposal[]; overrides: Override[] }) {
   const router = useRouter();
   const [office, setOffice] = useState(department && LGU_OFFICES.some(x => x.name === department) ? department : "");
@@ -37,7 +37,7 @@ export function OfficeDirectoryConsole({ admin, department, proposals, overrides
     if (ok) setOpen(false);
   }
   return <section className="space-y-3 rounded-xl border border-border bg-card p-3 sm:p-4">
-    <div className="flex flex-wrap items-center justify-between gap-2"><div><h2 className="text-sm font-black text-foreground">Office Contact Directory</h2><p className="mt-0.5 text-xs text-muted-foreground">Official Los Baños website references · Admin-approved corrections</p></div><button type="button" className={secondary} onClick={() => setOpen(v => !v)}>{open ? "Close form" : admin ? "+ Verify or correct contact" : "+ Propose correction"}</button></div>
+    <div className="flex flex-wrap items-center justify-between gap-2"><div><h2 className="text-sm font-semibold text-foreground">Office Contact Directory</h2><p className="mt-0.5 text-xs text-muted-foreground">Official Los Baños website references · Admin-approved corrections</p></div><button type="button" className={secondary} onClick={() => setOpen(v => !v)}>{open ? "Close form" : admin ? "+ Verify or correct contact" : "+ Propose correction"}</button></div>
     <div className="flex flex-wrap gap-2 text-xs text-foreground"><span className="rounded-md bg-muted px-2 py-1">{overrides.filter(x => x.isPublished).length} Admin-verified overrides</span><span className="rounded-md bg-muted px-2 py-1">{proposals.filter(x => x.status === "PENDING_REVIEW").length} pending suggestions</span></div>
     {note && <p role="status" className="rounded-lg bg-muted p-2 text-xs text-foreground">{note}</p>}
     {open && <form onSubmit={save} className="grid gap-2 rounded-xl border border-border bg-muted p-3 sm:grid-cols-2"><p className="text-xs text-foreground sm:col-span-2">Verify the number and all entered details against the linked official source. Missing hours/address should remain blank.</p><label className="text-xs font-semibold text-foreground sm:col-span-2">LGU office<select name="officeName" required value={office} onChange={e => setOffice(e.target.value)} className={input}><option value="">Select office</option>{LGU_OFFICE_GROUPS.map(group => <optgroup key={group} label={group}>{LGU_OFFICES.filter(o => o.group === group).map(o => <option key={o.name}>{o.name}</option>)}</optgroup>)}</select></label>

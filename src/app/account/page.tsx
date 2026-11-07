@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { connection } from "next/server";
 import Link from "next/link";
-import { ArrowRight, CircleUserRound, ClipboardList, Files, ShieldCheck } from "lucide-react";
+import { ArrowRight, CircleUserRound, ClipboardList, Bell, ShieldCheck } from "lucide-react";
 import { requirePageViewer } from "@/lib/access";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -18,29 +18,15 @@ export default async function AccountPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader viewer={viewer} />
-      <main className="mx-auto max-w-[1200px] px-5 py-10 sm:px-8 sm:py-14">
-        <p className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[.15em] text-muted-foreground"><ShieldCheck size={16} /> {viewer.role === "ADMIN" || viewer.role === "STAFF" ? "LGU staff account" : "Signed-in citizen"}</p>
-        <h1 className="mt-3 text-3xl font-extrabold tracking-[-.045em] sm:text-4xl">My Account</h1>
-        <p className="mt-3 text-[13px] leading-7 text-muted-foreground">Welcome, {viewer.name}. Manage your profile and explore your account modules.</p>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <Link href="/account/profile" className="group rounded-2xl border border-border bg-card p-6 transition hover:border-border hover:shadow-md">
-            <CircleUserRound className="text-foreground" size={28} strokeWidth={1.8} />
-            <h2 className="mt-4 font-extrabold">My Profile</h2>
-            <p className="mt-2 text-[12px] leading-6 text-muted-foreground">View your registered account details.</p>
-            <span className="mt-5 inline-flex items-center gap-2 text-[12px] font-bold text-foreground">Open profile <ArrowRight size={15} /></span>
-          </Link>
-          <Link href="/reports" className="rounded-2xl border border-border bg-card p-6 transition hover:border-border hover:shadow-md">
-            <ClipboardList className="text-foreground" size={28} strokeWidth={1.8} />
-            <h2 className="mt-4 font-extrabold">My Reports</h2>
-            <p className="mt-2 text-[12px] leading-6 text-muted-foreground">View your submitted concerns, photos, and progress updates.</p>
-            <span className="mt-5 inline-flex items-center gap-2 text-[12px] font-bold text-foreground">Open my reports <ArrowRight size={15} /></span>
-          </Link>
-          <div className="rounded-2xl border border-border bg-card p-6">
-            <Files className="text-foreground" size={28} strokeWidth={1.8} />
-            <h2 className="mt-4 font-extrabold">My Applications</h2>
-            <p className="mt-2 text-[12px] leading-6 text-muted-foreground">Your service applications will appear after the application workflow is added.</p>
-            <span className="mt-5 inline-block rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground">Coming soon</span>
-          </div>
+      <main className="elb-account-main">
+        <header className="elb-account-title"><div><h1>Welcome, {viewer.name}.</h1><p>Pick up your reports, check account activity, or review your registered details.</p></div><Link href="/reports/new" className="elb-button elb-button-primary">Report a concern <ArrowRight aria-hidden="true" size={17} /></Link></header>
+        <div className="elb-account-grid">
+          <section className="elb-account-section elb-workflow-panel"><h2>Continue a task</h2><div className="elb-account-links">
+            <Link href="/reports" className="elb-account-link"><ClipboardList aria-hidden="true" size={24}/><div><strong>My reports</strong><p>Read updates, view evidence, and follow recorded action.</p></div><ArrowRight aria-hidden="true" size={18}/></Link>
+            <Link href="/notifications" className="elb-account-link"><Bell aria-hidden="true" size={24}/><div><strong>Notifications</strong><p>Catch up on updates across your account.</p></div><ArrowRight aria-hidden="true" size={18}/></Link>
+            <Link href="/account/profile" className="elb-account-link"><CircleUserRound aria-hidden="true" size={24}/><div><strong>My profile</strong><p>View your registered name and email address.</p></div><ArrowRight aria-hidden="true" size={18}/></Link>
+          </div></section>
+          <aside className="elb-account-feature"><ShieldCheck size={24} aria-hidden="true"/><h2>Identity review</h2><p>See your identity review status, any review decisions, and whether a new document is needed.</p><p className="elb-help">Identity review and each service’s eligibility checks are separate.</p><Link href="/verification" className="elb-button">View verification status <ArrowRight aria-hidden="true" size={17}/></Link></aside>
         </div>
       </main>
       <SiteFooter />

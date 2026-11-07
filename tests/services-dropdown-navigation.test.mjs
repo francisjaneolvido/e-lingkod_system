@@ -2,6 +2,11 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import ts from 'typescript';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { loadServerTypescript } from './helpers/load-typescript.mjs';
+loadServerTypescript();
+const { SiteHeader } = await import('../src/components/layout/site-header.tsx');
 
 const header = fs.readFileSync('src/components/layout/site-header.tsx','utf8');
 const definitions = fs.readFileSync('src/features/landing/data/services.ts','utf8');
@@ -38,13 +43,24 @@ test('report shortcuts are removed from the desktop top-level navigation but rem
 });
 
 test('desktop service and community dropdowns are accessible and closable',()=>{
-  assert.match(header,/onMouseEnter=\{\(\) => setServicesOpen\(true\)\}/);
+  const markup = renderToStaticMarkup(createElement(SiteHeader, { viewer: null }));
+  const buttons = markup.match(/<button\b[^>]*>/g) || [];
+  for (const menu of ['elb-services-menu', 'elb-community-menu']) {
+    const trigger = buttons.find(button => button.includes(`aria-controls="${menu}"`));
+    assert.ok(trigger, `${menu} has a rendered button trigger`);
+    assert.match(trigger,/aria-expanded="false"/);
+  }
+  assert.match(header,/onClick=\{toggleServices\}/);
+  assert.match(header,/function toggleServices\(\).*setCommunityOpen\(false\); closeProfile\(\)/);
+  assert.match(header,/onClick=\{toggleCommunity\}/);
   assert.match(header,/aria-expanded=\{servicesOpen\}/);
   assert.match(header,/aria-controls="elb-services-menu"/);
   assert.match(header,/aria-expanded=\{communityOpen\}/);
   assert.match(header,/aria-controls="elb-community-menu"/);
   assert.match(header,/communityDetails\.current\?\.contains/);
   assert.match(header,/event\.key === "Escape"/);
+  assert.match(header,/servicesTrigger\.current\?\.focus\(\)/);
+  assert.match(header,/communityTrigger\.current\?\.focus\(\)/);
 });
 
 test('mobile navigation uses grouped Services and Community accordions',()=>{

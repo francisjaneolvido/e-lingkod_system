@@ -12,19 +12,29 @@ export function loadServerTypescript() {
   return registerHooks({
     resolve(specifier, context, nextResolve) {
       if (specifier === "server-only") return { url: "data:text/javascript,export%20%7B%7D", shortCircuit: true };
-      if (["next/headers", "next/navigation", "next/server"].includes(specifier)) specifier += ".js";
+      if (specifier === "next/image") {
+        // Next's Image CommonJS entry needs its real default export in native ESM.
+        const image = nextResolve("next/image.js", context).url;
+        const source = `import image from ${JSON.stringify(image)}; export default image.default ?? image;`;
+        return { url: "data:text/javascript;base64," + Buffer.from(source).toString("base64"), shortCircuit: true };
+      }
+      if (["next/headers", "next/navigation", "next/server", "next/link", "next/image"].includes(specifier)) specifier += ".js";
       if (specifier.startsWith("@/")) specifier = pathToFileURL(path.resolve("src", specifier.slice(2))).href;
       if (specifier.startsWith("file:") || specifier.startsWith(".")) {
         const url = new URL(specifier, context.parentURL);
-        if (url.protocol === "file:" && !path.extname(fileURLToPath(url)) && fs.existsSync(fileURLToPath(url) + ".ts")) {
-          return { url: url.href + ".ts", shortCircuit: true };
+        if (url.protocol === "file:" && !path.extname(fileURLToPath(url))) {
+          for (const extension of [".ts", ".tsx"]) {
+            if (fs.existsSync(fileURLToPath(url) + extension)) return { url: url.href + extension, shortCircuit: true };
+          }
         }
       }
       return nextResolve(specifier, context);
     },
     load(url, context, nextLoad) {
-      if (url.endsWith(".ts")) {
-        const source = ts.transpileModule(fs.readFileSync(fileURLToPath(url), "utf8"), { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext } }).outputText;
+      // Node markup/domain tests do not render CSS; browser suites verify it.
+      if (url.endsWith(".css")) return { format: "module", source: "export default {};", shortCircuit: true };
+      if (/\.tsx?$/.test(url)) {
+        const source = ts.transpileModule(fs.readFileSync(fileURLToPath(url), "utf8"), { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext, jsx: ts.JsxEmit.ReactJSX }, fileName: fileURLToPath(url) }).outputText;
         return { format: "module", source, shortCircuit: true };
       }
       return nextLoad(url, context);

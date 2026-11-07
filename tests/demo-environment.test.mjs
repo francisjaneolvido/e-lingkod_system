@@ -1,4 +1,5 @@
-import test from 'node:test';
+import test, {after} from 'node:test';
+import {syntheticCatalogue} from './helpers/demo-catalogue.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { verifiedSqlText } from '../scripts/demo/transfer.mjs';
@@ -6,6 +7,8 @@ import { guardedTarget, readDemoConfig, commandTarget } from '../scripts/demo/co
 import { loadServerTypescript } from './helpers/load-typescript.mjs';
 import { safeRow } from '../scripts/demo/database.mjs';
 import { accounts, vacancyScenarios } from '../demo/fixtures/dataset.mjs';
+const catalogue=syntheticCatalogue(accounts);
+after(catalogue.cleanup);
 
 test('SQL transport accepts only byte-equivalent approved LF/CRLF content and preserves escaped row newlines', () => {
   const sql="-- synthetic export\nINSERT INTO example VALUES ('line1\\r\\nline2');\n";

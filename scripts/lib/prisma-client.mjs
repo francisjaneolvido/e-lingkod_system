@@ -24,6 +24,13 @@ function expectedGeneration(){
 }
 
 export function generatePrismaClient(){
+  // A branch that stops tracking the client can leave only our ignored stamp.
+  // Prisma correctly refuses unknown nonempty output directories. Remove only
+  // our own metadata in this empty-client case; never clear other local files.
+  if(fs.existsSync(output)){
+    const remaining=fs.readdirSync(output);
+    if(remaining.length===1&&remaining[0]===path.basename(stamp))fs.unlinkSync(stamp);
+  }
   // generate reads configuration/schema and writes code; it never migrates or
   // queries the configured database. Run the repository-pinned CLI directly.
   const lock=JSON.parse(fs.readFileSync(path.join(root,'package-lock.json'),'utf8'));

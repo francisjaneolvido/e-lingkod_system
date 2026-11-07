@@ -1,17 +1,6 @@
-import fs from 'node:fs';
+import {fixturePassword,readCatalogue} from '../../demo/fixtures/credentials.mjs';
 import { accounts } from '../../demo/fixtures/dataset.mjs';
 import { guardedTarget, VERSION } from './config.mjs';
-
-function csvFields(line) {
-  const fields=[];let value='',quoted=false;
-  for(let index=0;index<line.length;index++){
-    const character=line[index];
-    if(character==='"'){if(quoted&&line[index+1]==='"'){value+='"';index++;}else quoted=!quoted;}
-    else if(character===','&&!quoted){fields.push(value);value='';}else value+=character;
-  }
-  if(quoted)throw Error('Malformed trusted demo identity CSV.');
-  return [...fields,value];
-}
 
 export function assertDemoIdentityFixture(config, account, env=process.env) {
   const primary=config.primary?.database==='e_lingkod_bayan_demo';
@@ -22,9 +11,10 @@ export function assertDemoIdentityFixture(config, account, env=process.env) {
   const known=accounts.find(value=>value.key===account?.key);
   const fields=['key','email','firstName','lastName','hasNoMiddleName','phoneNumber','role','group','scenario'];
   if(!known||!known.email.endsWith('@example.test')||fields.some(field=>known[field]!==account[field]))throw Error('Only exact known synthetic demo fixture identities may be classified as legacy.');
-  const [header,...lines]=fs.readFileSync('demo/accounts.csv','utf8').trim().split(/\r?\n/).map(csvFields);
-  const rows=lines.map(values=>Object.fromEntries(header.map((key,index)=>[key,values[index]]))).filter(row=>row.email===known.email);
-  if(rows.length!==1||rows[0].displayName!==known.firstName+' '+known.lastName||rows[0].password!==known.password||rows[0].role!==known.role||rows[0].scenario!==known.group+':'+known.scenario)
+  const catalogueFile=env.DEMO_ACCOUNTS_FILE||process.env.DEMO_ACCOUNTS_FILE;
+  if(!catalogueFile)throw Error('Set DEMO_ACCOUNTS_FILE to the private synthetic CSV catalogue.');
+  const rows=[...readCatalogue(catalogueFile).values()].filter(row=>row.email===known.email);
+  if(rows.length!==1||(rows[0].displayName!==undefined&&rows[0].displayName!==known.firstName+' '+known.lastName)||rows[0].password!==fixturePassword(known.email,{DEMO_ACCOUNTS_FILE:catalogueFile})||(rows[0].role!==undefined&&rows[0].role!==known.role)||(rows[0].scenario!==undefined&&rows[0].scenario!==known.group+':'+known.scenario))
     throw Error('Known synthetic identity must also match the maintained demo account CSV.');
   return target;
 }
