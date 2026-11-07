@@ -1,3 +1,4 @@
+import {requireDemoCredentials} from '../../demo/fixtures/credentials.mjs';
 import {fixtureIdentity} from './fixture-identity.mjs';
 import {vacancyDetails} from '../../demo/b5-fixtures.mjs';
 import fs from 'node:fs';
@@ -13,6 +14,7 @@ import { populateB3 } from './b3-fixtures.mjs';
 import { seedDemoLegacyIdentity } from './identity-fixtures.mjs';
 
 export async function setup(config, { artifactDirectory='demo' }={}) {
+  requireDemoCredentials(accounts);
   const db = await connect(config.primary, true);
   const { prisma } = await import('../../src/lib/prisma.ts');
   const { auth } = await import('../../src/lib/auth.ts');

@@ -9,10 +9,10 @@ export type PublicHotline = { id: string; title: string; category: string; offic
 export type PublicAlert = { id: string; title: string; details: string; safetyInstructions: string; sourceUrl: string; issuingOffice: string; severity: string; barangays: string[]; publishedAt: string | null; startsAt: string; expiresAt: string };
 const categories: Record<string, string> = { POLICE: "Police", FIRE: "Fire", MEDICAL: "Medical", RESCUE: "Rescue / disaster", BARANGAY: "Barangay", SOCIAL: "Social welfare", UTILITY: "Utilities", OTHER: "Other" };
 const severityColor: Record<string, string> = {
-  CRITICAL: "bg-danger-soft text-destructive border-red-200",
-  WARNING: "bg-orange-100 text-orange-900 border-orange-200",
-  ADVISORY: "bg-amber-100 text-amber-900 border-amber-200",
-  INFORMATION: "bg-sky-100 text-sky-900 border-sky-200",
+  CRITICAL: "bg-danger-soft text-destructive border-destructive",
+  WARNING: "bg-warning-soft text-warning-foreground border-warning-foreground",
+  ADVISORY: "bg-warning-soft text-warning-foreground border-warning-foreground",
+  INFORMATION: "bg-muted text-foreground border-border",
 };
 const categoryIcons: Record<string, typeof ShieldAlert> = { POLICE: ShieldCheck, FIRE: Flame, MEDICAL: HeartPulse, RESCUE: LifeBuoy };
 
@@ -21,6 +21,7 @@ export function PublicEmergency({ hotlines, alerts, dataAvailable }: { hotlines:
   const [category, setCategory] = useState("ALL");
   const [barangay, setBarangay] = useState("ALL");
   const [copied, setCopied] = useState<string | null>(null);
+  const [copyStatus, setCopyStatus] = useState("");
   const filtered = useMemo(() => hotlines.filter(contact =>
     (category === "ALL" || contact.category === category) &&
     [contact.title, contact.office, contact.phone, contact.note || "", categories[contact.category] || ""].join(" ").toLowerCase().includes(search.toLowerCase().trim()),
@@ -28,9 +29,9 @@ export function PublicEmergency({ hotlines, alerts, dataAvailable }: { hotlines:
   const visibleAlerts = useMemo(() => alerts.filter(alert => barangay === "ALL" || alert.barangays.includes(barangay)), [alerts, barangay]);
 
   async function copyNumber(id: string, number: string) {
-    try { await navigator.clipboard.writeText(number); setCopied(id); } catch { setCopied(null); }
+    try { await navigator.clipboard.writeText(number); setCopied(id); setCopyStatus(`Copied ${number}.`); } catch { setCopied(null); setCopyStatus(`Unable to copy. Select the number ${number} to copy it manually.`); }
   }
-  return <main className="min-h-screen bg-background px-4 pb-20 pt-10 text-foreground sm:px-8">
+  return <main className="public-emergency min-h-screen bg-background text-foreground">
     <div className="mx-auto max-w-6xl space-y-8">
       <div className="flex flex-wrap items-center justify-between gap-3"><Link href="/" className="text-sm font-bold text-foreground hover:underline">← Back to eLingkod Bayan</Link><span className="rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold text-muted-foreground">Los Baños, Laguna · Public access</span></div>
       <header className="rounded-3xl bg-primary px-6 py-9 text-white sm:px-10">
@@ -40,7 +41,8 @@ export function PublicEmergency({ hotlines, alerts, dataAvailable }: { hotlines:
         <p className="mt-3 text-xs leading-6 text-on-brand-gold">Calls open your phone dialer; this website does not place a call or dispatch responders automatically.</p>
       </header>
 
-      {!dataAvailable && <div role="alert" className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm font-bold text-amber-900">The live Los Baños directory and advisory feed are currently unavailable. National 911 and Red Cross 143 remain accessible below. Please verify updates directly with official authorities.</div>}
+      {!dataAvailable && <div role="alert" className="rounded-xl border border-warning-foreground bg-warning-soft p-4 text-sm font-semibold text-warning-foreground">The live Los Baños directory and advisory feed are currently unavailable. National 911 and Red Cross 143 remain accessible below. Please verify updates directly with official authorities.</div>}
+      <p role="status" aria-live="polite" className={copyStatus ? "text-sm text-muted-foreground" : "sr-only"}>{copyStatus}</p>
       <section aria-labelledby="emergency-911" className="rounded-3xl border border-red-200 bg-card p-5 shadow-sm sm:p-7">
         <p className="text-xs font-extrabold uppercase tracking-widest text-destructive">Immediate danger? Call now</p>
         <div className="mt-3 flex flex-wrap items-center justify-between gap-5"><div><h2 id="emergency-911" className="text-4xl font-black text-destructive">911</h2><p className="mt-2 text-sm text-foreground">National Emergency Hotline · Police, fire, medical and rescue emergencies</p><a href="https://ehotlines.e.gov.ph/" target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs text-foreground underline">Government source <ExternalLink size={12}/></a></div><a href="tel:911" className="inline-flex min-h-13 w-full items-center justify-center gap-3 rounded-2xl bg-red-700 px-7 py-4 text-base font-extrabold text-white hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700 sm:w-auto"><PhoneCall size={21}/> Call 911</a></div>

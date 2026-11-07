@@ -2,6 +2,7 @@ import { CivicError } from '@/features/civic/validation';
 import { AGE_GROUPS, EDUCATION_LEVELS, EDUCATION_LABELS, EMPLOYMENT_STATUSES, EMPLOYMENT_LABELS } from '@/features/community/domain';
 import { INDUSTRIES, OPERATING_STATUSES } from '@/features/establishments/domain';
 import { LOS_BANOS_BARANGAYS } from '@/features/emergency/domain';
+import type { GeographicSummary } from './geographic-domain';
 
 export const POPULATIONS = ['INDIVIDUAL', 'ESTABLISHMENT', 'IMPORTS', 'SPES'] as const;
 export type Population = typeof POPULATIONS[number];
@@ -115,7 +116,7 @@ export function summarizeAnalytics(rows: AnalyticsRow[], population: Population)
   const considerations=barriers.map(item=>({barrier:item.label,count:item.count,suggestion:/cost|transport/i.test(item.label)?'Explore transport access and outreach options.':/skill|qualif|experience|training/i.test(item.label)?'Explore training, certification or work-experience support.':/child|family|care/i.test(item.label)?'Explore flexible schedules and care-support coordination.':/information|internet/i.test(item.label)?'Explore accessible information and outreach.':/document|requirement/i.test(item.label)?'Explore document and certification assistance.':'Follow up with participants to identify suitable support.'}));
   return {count:rows.length,breakdowns,measures:measures.map(([key,title])=>measure(rows,key,title)),considerations};
 }
-export type AnalyticsGroup = ReturnType<typeof summarizeAnalytics> & {source:string;unit:string};
+export type AnalyticsGroup = ReturnType<typeof summarizeAnalytics> & {source:string;unit:string;geography?:GeographicSummary};
 export type AnalyticsResult = {filters:AnalyticsFilters;groups:AnalyticsGroup[];methodology:string[];excluded:Record<string,number>;rosters:Array<{barangay:string;count:number|null;[key:string]:unknown}>};
 function csvCell(value: unknown) {
   let text=String(value??''); if (/^\s*[=+\-@]/.test(text) || /^[\t\r\n]/.test(text)) text="'"+text;
@@ -131,6 +132,15 @@ export function analyticsCsv(result: AnalyticsResult) {
     for (const d of group.breakdowns) for (const item of d.items) rows.push([...prefix,d.key,item.label,item.count,d.denominator,d.known,d.missing,item.percent]);
     for (const m of group.measures) rows.push([...prefix,m.key,'known-value measure',m.sum,m.denominator,m.known,m.unknown,'',m.mean]);
     for (const c of group.considerations) rows.push([...prefix,'planning_consideration',c.barrier+': '+c.suggestion+' Reported association, not a proven cause.',c.count,group.count]);
+    if (group.geography) {
+      const geography=group.geography;
+      rows.push([...prefix,'geography:scope',geography.scopeRationale]);
+      rows.push([...prefix,'geography:unmapped_eligible','Eligible records without a mapped barangay',geography.unmappedEligible,group.count]);
+      for (const cell of geography.cells) for (const metric of geography.metrics) {
+        const value=cell.values[metric.id];
+        if(value) rows.push([result.filters.population,group.source,metric.unit,result.filters.year,'geography:'+metric.id,cell.barangay+' ['+cell.code+']',value.value,value.denominator,value.known,value.missing]);
+      }
+    }
   }
   for (const [key,count] of Object.entries(result.excluded)) rows.push([result.filters.population,'EXCLUSIONS','records',result.filters.year,key,'',count]);
   for (const roster of result.rosters) rows.push(['ASSISTANCE_ROSTER','Current maintained roster','designated survey-assistance staff','not survey-year based',roster.barangay,roster.count===null?'Not configured / requires confirmation':'Confirmed',roster.count]);

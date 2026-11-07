@@ -18,18 +18,18 @@ export default async function ProfilePage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader viewer={viewer} />
-      <main className="mx-auto max-w-[760px] px-5 py-10 sm:px-8">
-        <Link href="/account" className="text-[12px] font-bold text-foreground hover:underline">← Back to My Account</Link>
-        <div className="mt-6 rounded-3xl border border-border bg-card p-7 shadow-[0_16px_45px_rgba(20,70,100,.05)] sm:p-10">
-          <CircleUserRound size={36} strokeWidth={1.6} className="text-foreground" />
-          <h1 className="mt-4 text-3xl font-extrabold tracking-[-.04em]">My Profile</h1>
-          <p className="mt-2 text-[12px] text-muted-foreground">Read-only profile details from your authenticated account.</p>
-          <dl className="mt-8 space-y-4">
-            <div className="flex items-start gap-3 rounded-xl bg-card p-4"><UserRound size={18} className="mt-1 shrink-0 text-foreground" /><div className="min-w-0"><dt className="text-xs font-semibold text-muted-foreground">Full name</dt><dd className="mt-1 break-words text-[14px] font-bold">{viewer.name}</dd></div></div>
-            <div className="flex items-start gap-3 rounded-xl bg-card p-4"><Mail size={18} className="mt-1 shrink-0 text-foreground" /><div className="min-w-0"><dt className="text-xs font-semibold text-muted-foreground">Email address</dt><dd className="mt-1 break-all text-[14px] font-bold">{viewer.email}</dd></div></div>
+      <main className="elb-account-main elb-account-wide">
+        <Link href="/account" className="elb-account-back">← Back to my account</Link>
+        <header className="elb-account-title mt-6"><div><h1>My profile</h1><p>Your registered name and email address.</p></div></header>
+        <section className="elb-account-section elb-workflow-panel" aria-label="Registered account details">
+          <div className="flex items-center gap-3"><CircleUserRound aria-hidden="true" size={28}/><h2>{viewer.name}</h2></div>
+          <dl className="elb-account-facts">
+            <div><UserRound aria-hidden="true" size={20}/><div><dt>Full name</dt><dd>{viewer.name}</dd></div></div>
+            <div><Mail aria-hidden="true" size={20}/><div className="min-w-0"><dt>Email address</dt><dd>{viewer.email}</dd></div></div>
           </dl>
-          <p className="mt-6 flex items-start gap-2 text-xs leading-6 text-muted-foreground"><LockKeyhole size={16} className="mt-1 shrink-0" /> Profile editing and password management will be added with the account settings feature. Never share your password.</p>
-        </div>
+          <p className="elb-account-note"><LockKeyhole aria-hidden="true" size={18}/>Profile editing and password management are not available on this page. Never share your password.</p>
+          <Link href="/verification" className="elb-button mt-6">View verification status</Link>
+        </section>
       </main>
       <SiteFooter />
     </div>

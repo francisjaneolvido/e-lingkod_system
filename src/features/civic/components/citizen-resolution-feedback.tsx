@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- Photos are served by signed-in, uncached endpoints. */
 import { useState, useTransition, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { AlertTriangle, BadgeCheck, Camera, CheckCircle2, LoaderCircle, RotateCcw, Send, ShieldAlert } from "lucide-react";
+import { AlertTriangle, BadgeCheck, Camera, CheckCircle2, RotateCcw, Send, ShieldAlert } from "lucide-react";
 import type { CitizenResolutionFeedbackView, ReportDetail } from "../types";
 import { formatReportDate } from "../config";
 import s from "../civic.module.css";
@@ -59,7 +59,7 @@ export function CitizenResolutionFeedback({ report, admin = false }: { report: R
 
   if (!report.citizenFeedbacks.length && !canRespond && report.status !== "REOPENED") return null;
   return <section className={s.citizenFeedbackCard} aria-labelledby="citizen-feedback-heading">
-    <div className={s.feedbackHeading}>
+    <div className={`${s.feedbackHeading} elb-civic-feedbackHeading`}>
       <span className={s.feedbackIcon}><ShieldAlert size={19}/></span>
       <div><span className={s.overline}>{admin ? "CITIZEN FEEDBACK · LGU REVIEW" : "CITIZEN CONFIRMATION"}</span>
         <h3 id="citizen-feedback-heading">{admin ? "Citizen response and follow-up" : "Was your concern actually resolved?"}</h3>
@@ -69,9 +69,9 @@ export function CitizenResolutionFeedback({ report, admin = false }: { report: R
     {report.status === "REOPENED" && <div className={s.feedbackReopened}><RotateCcw size={17}/><div><strong>Reopened — awaiting LGU review</strong><p>{admin ? "Review the citizen's reason and attachments below, then move this case to Under review in Case actions." : "Your concern has been sent back to the LGU action desk. You can monitor the next steps below."}</p></div></div>}
     {canRespond && <div className={s.feedbackActions}>
       {mode === "none" ? <div className={s.feedbackButtons}>
-        <button className={s.feedbackConfirmButton} type="button" disabled={pending || refreshing} onClick={() => void submit("CONFIRMED")}><BadgeCheck size={17}/>{pending || refreshing ? "Saving…" : "Confirm resolved"}</button>
-        <button className={s.feedbackDisputeButton} type="button" disabled={pending || refreshing} onClick={() => {setMode("dispute");setError("");}}><RotateCcw size={17}/> Still not resolved</button>
-      </div> : <form onSubmit={(event: FormEvent<HTMLFormElement>) => { event.preventDefault(); void submit("DISPUTED"); }} className={s.feedbackForm}>
+        <button className={`${s.feedbackConfirmButton} elb-civic-feedbackConfirmButton`} type="button" disabled={pending || refreshing} onClick={() => void submit("CONFIRMED")}><BadgeCheck size={17}/>{pending || refreshing ? "Saving…" : "Confirm resolved"}</button>
+        <button className={`${s.feedbackDisputeButton} elb-civic-feedbackDisputeButton`} type="button" disabled={pending || refreshing} onClick={() => {setMode("dispute");setError("");}}><RotateCcw size={17}/> Still not resolved</button>
+      </div> : <form onSubmit={(event: FormEvent<HTMLFormElement>) => { event.preventDefault(); void submit("DISPUTED"); }} className={`${s.feedbackForm} elb-civic-feedbackForm`}>
         <div><label htmlFor="citizen-reopen-reason">What still needs to be fixed? <span aria-hidden="true">*</span></label>
           <textarea id="citizen-reopen-reason" rows={4} minLength={20} maxLength={1500} required value={reason} onChange={e => setReason(e.target.value)} placeholder="Example: The streetlight near the barangay hall is still not working after the repair." />
           <p>Explain the remaining problem clearly (20–1500 characters). Your report will be reopened for Super Admin review.</p></div>
@@ -79,8 +79,8 @@ export function CitizenResolutionFeedback({ report, admin = false }: { report: R
           <input id="citizen-feedback-photos" className={s.feedbackFileInput} type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={e => choosePhotos(e.target.files)} />
           <p>JPG, PNG or WebP · 3 MB each. Do not include faces, IDs, or private information.</p>
           {photos.length > 0 && <span className={s.feedbackFileCount}><Camera size={14}/>{photos.length} photo(s) selected</span>}</div>
-        <div className={s.feedbackButtons}><button className={s.feedbackDisputeButton} type="button" onClick={() => {setMode("none");setError("");}} disabled={pending || refreshing}>Cancel</button>
-          <button className={s.feedbackConfirmButton} type="submit" disabled={pending || refreshing}><Send size={16}/>{pending || refreshing ? "Submitting…" : "Request another review"}</button></div>
+        <div className={s.feedbackButtons}><button className={`${s.feedbackDisputeButton} elb-civic-feedbackDisputeButton`} type="button" onClick={() => {setMode("none");setError("");}} disabled={pending || refreshing}>Cancel</button>
+          <button className={`${s.feedbackConfirmButton} elb-civic-feedbackConfirmButton`} type="submit" disabled={pending || refreshing}><Send size={16}/>{pending || refreshing ? "Submitting…" : "Request another review"}</button></div>
       </form>}
       {error && <p role="alert" className={s.feedbackError}><AlertTriangle size={15}/>{error}</p>}
     </div>}
@@ -88,7 +88,7 @@ export function CitizenResolutionFeedback({ report, admin = false }: { report: R
       <h4>Citizen feedback history</h4>
       <ol>{report.citizenFeedbacks.map(entry => <li key={entry.id}>
         <div className={s.feedbackHistoryHeading}><span className={entry.decision === "CONFIRMED" ? s.feedbackConfirmed : s.feedbackDisputed}>{entry.decision === "CONFIRMED" ? <CheckCircle2 size={14}/> : <RotateCcw size={14}/>}{entry.decision === "CONFIRMED" ? "Resolution confirmed" : "Resolution disputed"}</span><time dateTime={entry.createdAt}>{formatReportDate(entry.createdAt, true)}</time></div>
-        {entry.reason && <p className={s.feedbackReason}>{entry.reason}</p>}
+        {entry.reason && <p className={`${s.feedbackReason} elb-civic-feedbackReason`}>{entry.reason}</p>}
         <CitizenFeedbackImages feedback={entry}/>
       </li>)}</ol>
     </div>}

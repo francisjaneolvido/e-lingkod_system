@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { randomUUID, createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import mariadb from 'mariadb';
+import {mysqlRsaOptions} from '../scripts/lib/mysql-connection.mjs';
 import dotenv from 'dotenv';
 import { loadConfig, readDemoConfig, guardedTarget, applicationEnvironment } from '../scripts/demo/config.mjs';
 import { connect, snapshot, digest, saveMetadata, metadata, identifier } from '../scripts/demo/database.mjs';
@@ -14,7 +15,7 @@ test('R4-A migration interruption postconditions preserve manual rows and new-co
   async function fixture(run) {
     const url = new URL(config.primary.url); url.pathname = '/e_lingkod_bayan_demo_restore_u' + randomUUID().replaceAll('-', '');
     const target = guardedTarget(url.href, 'restore'), db = await connect(target, true);
-    const multi = await mariadb.createConnection({ host: target.host, port: target.port, user: target.user, password: target.password, database: target.database, multipleStatements: true });
+    const multi = await mariadb.createConnection({ ...mysqlRsaOptions(), host: target.host, port: target.port, user: target.user, password: target.password, database: target.database, multipleStatements: true });
     try {
       await multi.query('CREATE TABLE _prisma_migrations (id VARCHAR(36) PRIMARY KEY,checksum VARCHAR(64) NOT NULL,finished_at DATETIME(3),migration_name VARCHAR(255),logs TEXT,rolled_back_at DATETIME(3),started_at DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3),applied_steps_count INT UNSIGNED DEFAULT 0)');
       for (const name of fs.readdirSync('prisma/migrations').filter(n => n < '20261024080000_census_records_imports' && fs.existsSync('prisma/migrations/' + n + '/migration.sql')).sort()) {

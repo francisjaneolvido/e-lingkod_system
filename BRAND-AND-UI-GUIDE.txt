@@ -1,174 +1,185 @@
 eLINGKOD BAYAN — SHARED BRAND AND UI GUIDE
 ========================================
 Identity: eLB | eLingkod Bayan – Los Baños | Report. Act. Resolve.
-Citizen reporting, service requests and authorized LGU workflows; never imply official municipal endorsement.
-Keep public/images/elb-mark.svg. Photography/illustrations are not proof of
-municipal operations, government verification or measured community impact.
+Retain public/images/elb-mark.svg, familiar destinations and the six service
+modules. Images and synthetic examples never establish government endorsement,
+operational capability, verified impact or municipality-wide statistics.
 
-TYPOGRAPHY AND LAYOUT
-Poppins, locally bundled in public/fonts; system sans fallback.
-Body: 16px / 1.6; working controls 14px or larger; supporting labels 12px
-minimum. Headings: 20–24px sections, 30–40px page titles; bold with clear
-hierarchy. Sentence case for actions and labels; plain, specific language.
-Line lengths generally 60–80 characters for explanation paragraphs.
-Spacing scale: 4, 8, 12, 16, 24, 32, 48px. Cards use 16–24px padding,
-16–24px corners; controls use 10–12px corners. Avoid arbitrary microtext.
-Content max width 1344px; outer header/hero max width 1440px.
-Desktop >=1024px; tablet 768–1023px; mobile <768px. Collapse navigation,
-stack forms/cards, wrap labels/actions. Tables scroll within their own region,
-never widen the page. Preserve long names, translated text and zoom usability.
+TYPOGRAPHY
+Headings/numerals: locally bundled Archivo, weights 500–700. Brand: Poppins.
+Body/forms/data:
+locally bundled variable Source Sans 3, weights 200–900; ordinary text 400,
+labels 550–600, emphasis 600–700. Keep both upstream licence notices in
+public/fonts. Source Sans 3 is unmodified Adobe release 3.052R under OFL 1.1.
+No runtime font requests to external services. System sans fallbacks remain.
+Body 16px/1.6; working controls and tables >=14px, fields normally 16px.
+Supporting notes >=12px. Page titles 30–40px; section titles 20–24px; compact
+chart titles 16px. Use tabular numerals for comparisons and numeric columns.
+Use sentence case, balanced headings, specific actions and readable line lengths.
+Do not replace meaningful status text with colour or icons alone.
 
-COLOR SYSTEM — src/app/globals.css + src/styles/design-system.css
-Use semantic utilities/variables, not new hardcoded page palettes.
-Light: white card, white/pale-blue canvas, navy foreground/action (#153B63),
-muted foreground #526B80, teal #08766C, gold #FFBF43.
-Dark: canvas #101B29, card #172638, foreground #E9F2FA, muted #B6C9DA,
-action #245F8D with white text, focus #85CEFF.
-OLED: explicit #000000 canvas (including the protected shell), #0D0D0D cards,
-#141414 nested/muted panels, #1B1B1B popovers/secondary surfaces,
-foreground as Dark; visible #575757 borders and #737373 input boundaries.
-All themes retain the eLB navy/teal/gold identity; never invert photos/logos.
-Tokens: background/foreground; card/card-foreground; primary/primary-foreground;
-secondary; muted/muted-foreground; accent; border/input/ring.
-Status text uses success/destructive/warning-foreground. Filled actions use
-success-solid/danger-solid rather than a bright dark-theme text color.
-Status surfaces use success-soft/danger-soft/warning-soft. Always add labels
-or icons; color alone must not convey status, selection or data meaning.
-Fixed navy/image regions use on-brand-muted, on-brand-gold and on-brand-error; gold actions
-use on-gold. These foregrounds do not follow the page's light/dark ink. Never
-pair white text with a pale accent surface. Legacy white control backgrounds
-must use card, and scoped legacy text variables must follow foreground tokens.
-Sidebar initials and logout hover use the sidebar's dark card surface, with
-white foreground; topbar avatars retain their page-surface pairing. Selected
-filled tabs use primary-foreground for both labels and helper text. Gold focus
-outlines belong on the fixed dark sidebar; content controls use ring. Text on
-photos must pass against the rendered image plus overlay at every breakpoint;
-use a local solid label backing where the photograph is too variable.
+STRUCTURE AND MATERIALS
+Use existing semantic tokens in globals.css/design-system.css; shared systems
+in workspace.css, analytics.css, public.css, account.css and profiling.css.
+Use PageHeading, UtilityHeader, EmptyState and .elb-button/.elb-field/.elb-label/
+.elb-workspace-section/.elb-data-table primitives where appropriate.
+Preserve open sections, divided task lists and compact metric bands. Reserve
+cards for meaningful groups and elevation for controls, menus and overlays.
+Avoid nested cards around every paragraph and repeated promotional banners.
+Spacing: 4,8,12,16,24,32,48px. Main content generally <=1344px; public/header
+<=1440px. Rounded groups 16–24px, fields/actions 12–14px; circular utility44px.
+Lighting comes from top-left; restrained highlights and ambient shadows use
+--shadow-low, --shadow-raised, --shadow-overlay. Never use shadows alone in OLED.
+Frost only real overlapping surfaces, such as sticky headers and modal backdrops.
+No indiscriminate gradients, decorative charts or glass-covered forms.
 
-THEMES AND INTERACTION
-Light, Dark and explicit OLED are available in the site-wide Appearance
-control. Persist the allowlisted selection locally. Initialize it synchronously
-in the document head before body paint; React must not be required for initial
-colors. Unavailable storage falls back safely; do not make login depend on it.
-Keep essential controls visible without hover. Hover is enhancement only.
-Use >=44px primary input/button targets and visible keyboard focus (3px ring,
-3px offset). Check default, hover, focus, selected, disabled, error and loading
-states in every theme. Disabled controls keep readable labels and context.
-Every action has an accurate label. Empty/error/denied states explain the next
-available action. Do not grant protected access to fix an access-denied UI.
-Dialogs have a title, keyboard focus, Escape/close action and return focus.
-Respect reduced motion. Native selects are appropriate for simple choices.
-Do not add a theme/chart dependency without a concrete unmet requirement.
+THEME SURFACES
+Light canvas #F5F8FC, card/raised #FFFFFF, inset #EAF3FA, foreground #183247,
+muted ink #526B80, primary #153B63/white, teal #0A766E, gold #FFBF43/navy.
+Dark canvas #101B29, card #172638, inset #1E3044, raised #24384E,
+foreground #E9F2FA, muted ink #B6C9DA, primary #245F8D/white.
+OLED canvas #000000, card #0D0D0D, inset #141414, raised #1B1B1B.
+Use visible boundaries (#575757 OLED) and input boundaries (#737373 OLED).
+Never paint the whole page with card or muted; retain black between OLED groups.
+Use primary-foreground on filled primary actions; on-brand-* on fixed navy/photo
+surfaces; on-gold on gold. Never invert photos or the brand mark.
+Use success/destructive/warning-foreground with their semantic soft surfaces;
+solid filled actions use success-solid/danger-solid. Status labels remain visible.
+Essential labels/actions must be visible before hover. Normal text >=4.5:1;
+control/focus boundaries >=3:1 on actual rendered surfaces. Evaluate composited
+colours, photographs, alpha and grouping in the browser as well as calculations.
 
-CHARTS AND INSIGHTS
-Use OverviewChart and the existing authorized aggregate results. Blue, teal,
-purple and ochre distinguish series; unknowns are labelled explicitly.
-Bars compare counts within a chart, never separate populations. Show exact
-values, source, survey year/filter context and denominator/multiple-response
-notes. Preserve supplied unknown percentages; never manufacture zero or 100%.
-Provide keyboard/touch highlighting, visible selected state, status text,
-and a complete table alternative. Empty and sparse data need honest messaging.
-Keep the protected endpoint/role/barangay scope, consent and withdrawal rules.
-Never expose identifiable census data or unscoped totals through chart props,
-tooltips, labels, exports or hidden DOM. Public census analytics is deferred.
+APPEARANCE AND GLOBAL UTILITIES
+One compact44px Appearance button cycles Light -> Dark -> OLED -> Light.
+No dropdown, menu or three-option selector. Same rightmost aligned header
+utility position; header height72px, gaps8px, safe responsive gutters.
+The accessible name/title gives current theme and next action; a polite status
+announces changes. Click/Enter/Space/tap preserve focus, scroll and saved input.
+Keep the synchronous allowlisted theme bootstrap before first paint, deterministic
+hydration and safe storage fallback. Do not make authentication depend on storage.
+Headerless loading/error routes retain the fallback control; visible headers own
+their control. Notifications and navigation have named panels, Escape dismissal
+and focus return. Mobile modal navigation traps focus and makes background inert.
 
-SIX CORE MODULES
-1 Civic Reporting: citizen reports/tracking and authorized LGU case handling.
-2 Online LGU Services: requests, documents, appointments and verified release.
-3 Emergency Hotlines & Alerts: maintained directory/advisories; no fabricated
-  official alerts, dispatch capability or unverified emergency contacts.
-4 Municipal Projects & Services: Admin-published projects, separately reviewed
-  progress and source-backed office contacts. Keep fictional demo content clearly
-  labelled; never present it as official municipal records or evidence.
-5 Citizen Profiling: separate individual and establishment surveys, drafts,
-  protected submissions/history and optional matching/program consent.
-6 Worker Census & Social Profiling: protected records/imports and analytical
-  source populations; workforce/social insights, opportunities and readiness.
-  Suggestions do not guarantee eligibility/hiring or forward applications.
-Authentication, permissions, notifications and administration support these
-six modules. They are not additional core features. Demo records/listings and
-simulated review events must stay visibly identified as demonstrations.
+INTERACTION AND MOTION
+Use motion.css shared120/180/260ms durations and shared easing. Restrained press
+compression and state feedback explain actions; drawers reveal with a short
+settling transition. Do not animate fields while typing or translate geographic
+regions. Use transform/opacity for reveals and explicit transition properties.
+Avoid layout jumps, text distortion, hover-only instructions and animation delays.
+Keep44px touch targets, stable hit areas and a visible3px focus ring with3px offset.
+Disabled controls retain readable full-opacity ink, muted fill, dashed boundary,
+native disabled semantics and no press animation. Busy states announce progress.
+Reduced motion removes nonessential movement; text, selection and status remain.
+Dialogs have a name, heading focus, contained keyboard navigation, Close/Escape
+and exact focus return. Touch, keyboard and mouse must reach the same actions.
+Every file chooser has a visible keyboard-operable action and clear limits.
+Validation, empty, denied, unavailable, error, retry and success states explain the
+next available step. Preserve answers/consent when stepping through forms.
 
-NAVIGATION APPEARANCE AND INSIGHT COMPOSITION
-Appearance uses a 44px sun/moon/eclipse button in the public header and
-protected topbar, always the rightmost utility. Group actions with 8px gaps;
-the mobile navigation toggle sits immediately to its left. One activation
-cycles Light -> Dark -> OLED -> Light; there is no menu, popover or switch.
-The accessible name gives current theme and next action. Enter/Space/click/tap
-cycle without moving focus; a polite live status announces the result.
-Auth/unavailable shells retain a fixed top-right fallback without adding height.
-Ignore hidden retained navigation when deciding whether that fallback is needed.
-Notification utilities share the 44px target. Their labelled panel is viewport
-clamped (16px gutter), dismisses on outside interaction/Escape and returns
-keyboard focus on Escape. Portalling prevents filtered headers from trapping
-fixed positioning; panel interactions must not count as outside clicks.
+RESPONSIVE WORKSPACES
+Desktop >=1024px, tablet768–1023px, mobile<768px. At narrow desktop the LGU rail
+becomes a modal navigation drawer to retain useful content width. Tables scroll
+inside their own regions; pages must not overflow horizontally. Wrap long names,
+filenames, actions and localized text. Verify200% zoom, touch and reduced motion.
+Keep public service/report tracking entry points, citizen status/history, review
+queues, annual surveys, staff invitations and role/module/geographic restrictions.
+Recovery, email verification, identity approval and authorization remain separate.
+LEGACY is existing-account access, never a claim of ID verification.
+Do not show migration commands or developer diagnostics in product error flows.
+Print acknowledgements keep white paper/dark ink in every theme; hide utilities
+and controls while retaining request facts, provenance and history. PDFs open
+through protected Open/download actions; do not weaken document sandbox/ownership.
 
-Protected dashboards lead with applied population/year/source and useful
-recorded-value metrics, then complementary compact donut AND bar charts in a 2-column
-grid (3 at >=1400px; 1 at <=650px). Filters follow overview; detailed tables,
-methodology and exports follow filters. Each source gets its own totals and
-units. No merged people/workforce/observations/assignments. Do not draw trends
-without comparable time-series data or use pie charts for overlapping answers.
-Cards:16px padding/radius; gap16px; Poppins16px chart headings,14px working
-controls,12px supporting text; controls/targets remain >=44px even in compact
-charts. Stable category-key colors use existing blue/teal/purple/ochre tokens;
-unknowns use labelled ochre in Light and neutral pale gray in Dark/OLED.
-Donuts require exhaustive mutually exclusive categories with one denominator;
-include unknowns and never use multi-response skills/barriers as slices.
-Use explicit segment boundaries and numbered callouts matching visible legends,
-so repeated stable colors cannot merge categories. Show every category/count/
-percentage; do not silently hide categories or fabricate an Other grouping.
-Bars and exact values are visible by default. Compact tiles have no sort menus
-or report disclosures; full accessible tables and methodology sit below filters.
-Top5 categories are explicitly labelled; full values remain in accessible tables.
-Employment status/type uses compact ranked top-five bars: its 15 supported
-categories make a complete donut legend too tall for an overview. Keep smaller
-exclusive distributions such as education as donuts alongside those bars.
-Selection/hover/focus reports exact count, supplied percentage and denominator;
-highlighting never pretends to apply a filter. Short findings use actual counts,
-label ties and unknowns, and make no causal/population/hiring claims.
+ANALYTICS COMPOSITION AND HONEST DATA
+Lead with the applied population/year/source/geography and concise headline
+metrics. Overview ABOVE filters; detailed tables, complete categories, methodology
+and exports BELOW. Desktop uses two rows of three summary slots; real maps are
+third and sixth. Two columns on tablet, one on mobile. Keep bars AND appropriate
+donuts simultaneously; compact ranked bars suit long/multiselect distributions.
+Donuts require exhaustive mutually exclusive categories and one denominator.
+Include unknowns and segment boundaries; never infer a percentage or invent Other.
+Different source groups/populations remain separate. No manufactured trends,
+municipal population claims, account counts substituted for surveys or decorative
+values. Report denominator, units, survey year, source and missing/unknown context.
+Explicit Apply commits draft filters; reset applies defaults. Keep last applied
+context while loading, abort superseded requests and reject obsolete callbacks.
+Retry performs a fresh request. Charts/maps/details/CSV use the same applied,
+server-authorized response. Exports disappear during unapplied/loading/error states.
+Map/chart selection highlights only; applying a geography filter is a separate,
+explicit action. Incompatible context closes details safely.
 
-Select filters apply immediately; free text waits300ms. Keep applied context
-with results, abort superseded requests and reject stale responses. Retain an
-honestly labelled previous view while updating; exports use the applied response
-and disappear during loading/errors. Reset clears incompatible filters. No fake
-filter controls on server snapshots without an authorized filtering contract.
-Reduce motion for users requesting it. Preserve photo/filled-surface contrast
-rules and public census deferral.
+BARANGAY GEOGRAPHY AND PROTECTED METRICS
+Use only the checked full-fidelity14-region OCHA/NAMRIA/PSA asset and its manifest;
+see docs/barangay-geometry.md. CC BY3.0 IGO, v03, valid-on13 February2025,
+OGC:CRS84. Retain attribution, reproducible tools and pinned hashes. Boundaries
+are indicative, not a legal eligibility determination. Never invent replacement
+polygons. Shared projection/boundaries stay fixed under selection and hover.
+Verify all14 current PSA names/codes, including Malinta0403411015; retain existing
+Tadlac, Timugan (Poblacion), Tuntungin-Putho permission/storage keys. Exact existing
+authorization is applied BEFORE canonical display mapping. Unmapped eligible
+observations remain explicit, without rewriting or silently dropping originals.
+Individual/import maps: eligible respondents/source observations; exact YES
+training-interest count. Establishment maps: eligible annual establishments;
+sum of known totalWorkers only. SPES: eligible source observations; observations
+with at least one recorded nonblank training/program selection, counted once.
+Compute joint geography from the same final eligible source rows, retaining all
+consent, annual snapshot, deduplication, dataset/source and withdrawal rules.
+Known zero differs from missing. Missing-only secondary metrics are unavailable.
+Scales use authorized non-null values only; legends give exact nonoverlapping
+integer bounds, with distinct zero/missing/outside patterns. Dual boundaries keep
+zero regions distinct in all themes without changing heat values. Provide full
+table access, keyboard region selection and aggregate detail drawers.
+Never fetch unauthorized aggregates and hide them. No names, contacts, account
+review state or ID documents enter geographic payloads/details/exports.
+Public census analytics remains deferred.
 
-OLED grouping uses visible borders/dividers and near-black surfaces, not shadows
-alone. Preserve intentional 16px grid gaps and 20-28px section gutters; remove
-accidental wrappers locally rather than compressing the whole site. Keep public
-brand/photo surfaces recognizable. Fixed-primary content uses on-brand foregrounds
-in every theme; page muted ink is unsuitable on a filled hero. Input outlines
-use input (#71879B Light, #6E8AA3 Dark, #737373 OLED) for >=3:1 on their actual
-surfaces; focus uses ring. Normal text requires >=4.5:1. Measure composited alpha,
-gradients and actual photo pixels; inspect grouping in screenshots as well.
-Inactive controls use full-opacity muted ink/surface with a dashed input boundary,
-disabled semantics and not-allowed cursor. Do not fade their entire text layer.
-Fixed-dark sidebar controls use the local card/ink pair. Include ancestor opacity
-when measuring rendered foregrounds, even when the CSS color itself is opaque.
+SIX MODULES
+Civic Reporting; Online LGU Services; Emergency Hotlines & Alerts; Municipal
+Projects & Services; Citizen Profiling; Worker Census & Social Profiling.
+Authentication, identity review, notifications and administration support them.
+Preserve verified source context, demo labels and existing approval workflows.
+Opportunities do not guarantee hiring or eligibility. Do not invent emergency
+dispatch, official alerts, endorsements, government statistics or service capacity.
 
-MATERIAL STATES AND KEYBOARD CONTINUITY
-Shared keyboard focus is an unlayered 3px semantic ring with 3px offset so page
-utility resets cannot erase it. The fixed navy sidebar owns a gold ring. Hidden
-checkbox/radio choices put the ring on their visible label; never use the quiet
-section-border token as a focus indicator. Disabled choice labels retain full
-opacity, muted ink/fill and a dashed input boundary, including selection limits.
-Every file chooser has a visible, keyboard-operable button named with its
-document requirement; a hidden input alone is not a usable upload action.
-Native dialogs are named by their visible heading. Survey Next/Previous/Skip
-focuses and reveals the new step heading without changing answers; appearance
-changes must not move focus or scroll. Emergency extension guidance uses the
-semantic warning foreground on its actual card, with black OLED page canvas.
-Printable request acknowledgements use white paper and dark readable ink in all
-themes. Hide the appearance control in print; retain request facts and history.
-Full-page public/account/service/opportunity containers use background; their
-content cards use card. Do not paint the entire canvas with the card token:
-Dark needs its stepped surfaces and OLED needs black around near-black cards.
-Light destructive ink uses the deeper danger-solid value so it also passes on
-the pale danger-soft surface; Dark/OLED retain their bright error foreground.
-Uploaded-document actions wrap within narrow cards. Images may preview inline;
-PDFs use an explicit protected Open/download action and the browser's viewer.
-Do not leave a blank embedded PDF frame or relax sandbox/security boundaries to
-make one work. Preserve original document bytes and server ownership checks.
+GLOBAL PAGE COMPOSITION
+The shared foundation applies to all page families.
+visual-reference.css retains the landing and analytics compositions.
+Use shallow labelled navigation groups and inline ActionGroup disclosures for
+secondary tools. Keep current location, return paths and essential primary actions
+visible. Compact navigation still needs readable labels, not mystery icons.
+
+The landing is a guided service entrance: labelled native task choices update a
+steady contextual preview and ONE primary next action. Choosing does not navigate
+prematurely. Reserve enough height for the longest supported description, keep
+choice weight/padding stable, and preserve selection through theme changes.
+Keep report tracking (/track), emergency information and the full service directory
+discoverable as contextual secondary paths. Use real photo layering only where
+the caption benefits from it; its 96%-card overlay must pass composited contrast.
+
+The analytics workbench leads with applied context and direct geographic recovery.
+Clear barangay preserves all other applied filters; Reset all filters restores
+individual respondents/current Manila year/all authorised geography/no optional
+filters. Optional applied chips remove one filter. Successful Apply pushes history;
+Back/Forward restores controls/results. Failure does not commit a new URL. Previous
+results must be explicitly labelled during loading/failure, with exports withheld.
+Permission metadata is separate from applied counts: permitted regions outside
+the current view stay navigable WITHOUT their aggregates. Explicit Apply changes
+region. Forbidden regions remain inert. Do not broaden exact stored-key authority.
+
+Use two three-slot desktop rows with maps in slots 3 and 6. Ranked top-three bars
+lead to complete category tables; small exclusive distributions may use a
+horizontal donut/legend. Never fabricate Other. Retain denominator/unknown context,
+all region names, accessible table alternatives, exact-value selection and source
+licensing. Consolidate supporting reading/source notes below the overview.
+
+Reference type: locally bundled Archivo display/headings/numerals, Source Sans 3
+body/controls, familiar Poppins brand. Display 36–48px, page title 28–34px, section
+21–24px, working copy 16–17px, chart labels/metadata 14px. Major task shape24px,
+groups16–20px, controls10–12px, touch targets>=44px. Use the established semantic
+theme palette, top-left highlights and restrained ambient elevation. OLED canvas
+stays true black, with stepped surfaces and visible boundaries.
+Measure SVG text AFTER its screen transformation: reference donut category numbers
+14px, count23.8px and redundant unit12.6px. Do not shrink declared SVG labels to fit
+a compact frame. Native checked state, borders and visible3px focus rings provide
+non-colour feedback; reduced motion retains all state meaning.

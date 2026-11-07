@@ -11,7 +11,7 @@ if (command === 'dev') {
   const db = await connect(target);
   try { if (!(await metadata(db))?.ready) throw new Error('Run demo:setup or demo:restore first'); } finally { await db.end(); }
   console.log(`DEMONSTRATION ONLY — ${target.database} — ${config.baseURL}`);
-  const child = spawn(process.execPath, ['node_modules/next/dist/bin/next', 'dev', '--hostname', 'localhost', '--port', '3102'], { stdio: 'inherit', env: process.env });
+  const child = spawn(process.execPath, ['node_modules/next/dist/bin/next', 'dev', '--hostname', 'localhost', '--port', new URL(config.baseURL).port], { stdio: 'inherit', env: process.env });
   child.on('exit', code => { process.exitCode = code ?? 1; });
 } else {
   const { loadServerTypescript } = await import('../../tests/helpers/load-typescript.mjs');

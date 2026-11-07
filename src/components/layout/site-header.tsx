@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  ArrowRight, ArrowUpRight, BarChart3, Building2, BriefcaseBusiness, ChevronDown, CircleUserRound, ClipboardList,
+  ArrowRight, BarChart3, Building2, BriefcaseBusiness, ChevronDown, CircleUserRound, ClipboardList,
   Files, GraduationCap, Menu, ShieldCheck, UserRound, UsersRound, X,
 } from "lucide-react";
 import { BrandLogo } from "@/components/shared/brand-logo";
@@ -13,6 +13,7 @@ import { services } from "@/features/landing/data/services";
 import { ThemeControl } from "@/components/shared/theme-control";
 import { NotificationBell } from "@/components/notifications/notification-bell";
 import {hasCitizenFeatureAccess} from '@/features/identity/policy';
+import "@/styles/navigation.css";
 
 // Services are drawn from the same six modules as the home page.
 // Unreleased modules point to their existing service previews, never to broken app routes.
@@ -61,6 +62,8 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
   const servicesTrigger = useRef<HTMLButtonElement>(null);
   const communityDetails = useRef<HTMLDivElement>(null);
   const communityTrigger = useRef<HTMLButtonElement>(null);
+  const mobileTrigger = useRef<HTMLButtonElement>(null);
+  const header = useRef<HTMLElement>(null);
   const staffPortal = viewer?.role === "ADMIN" || viewer?.role === "STAFF";
   const notificationsAllowed = Boolean(viewer && hasCitizenFeatureAccess({role:viewer.role||'',identityStatus:viewer.identityStatus}));
   const citizenPortal = viewer?.role === "CITIZEN" && notificationsAllowed;
@@ -72,9 +75,16 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
       }
       if (!servicesDetails.current?.contains(event.target as Node)) setServicesOpen(false);
       if (!communityDetails.current?.contains(event.target as Node)) setCommunityOpen(false);
+      if (!header.current?.contains(event.target as Node)) setOpen(false);
     }
     function closeOnEscape(event: KeyboardEvent) {
+      if (event.defaultPrevented) return;
       if (event.key === "Escape") {
+        if (open) mobileTrigger.current?.focus();
+        if (servicesOpen) servicesTrigger.current?.focus();
+        if (communityOpen) communityTrigger.current?.focus();
+        if (profileDetails.current?.open) profileDetails.current.querySelector("summary")?.focus();
+        setOpen(false);
         profileDetails.current?.removeAttribute("open");
         setServicesOpen(false);
         setMobileServicesOpen(false);
@@ -88,26 +98,58 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
       document.removeEventListener("pointerdown", closeOnOutsideClick);
       document.removeEventListener("keydown", closeOnEscape);
     };
-  }, []);
+  }, [open, servicesOpen, communityOpen]);
+
+  useEffect(() => {
+    if (!open) return;
+    const panel = header.current;
+    const trigger = mobileTrigger.current;
+    const inertNodes: HTMLElement[] = [];
+    let branch = header.current as HTMLElement | null;
+    while (branch && branch !== document.body) {
+      for (const sibling of Array.from(branch.parentElement?.children ?? [])) {
+        if (sibling !== branch && sibling instanceof HTMLElement && !sibling.inert) { sibling.inert = true; inertNodes.push(sibling); }
+      }
+      branch = branch.parentElement;
+    }
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    trigger?.focus();
+    function containFocus(event: KeyboardEvent) {
+      if (event.key !== "Tab" || !panel) return;
+      const controls = Array.from(panel.querySelectorAll<HTMLElement>('a[href],button:not(:disabled),summary,[tabindex="0"]')).filter(node => node.getClientRects().length > 0);
+      const first = controls[0], last = controls.at(-1);
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    }
+    function resize() { if (window.innerWidth >= 1024) setOpen(false); }
+    document.addEventListener("keydown", containFocus);
+    window.addEventListener("resize", resize);
+    return () => {
+      inertNodes.forEach(node => { node.inert = false; });
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", containFocus);
+      window.removeEventListener("resize", resize);
+      trigger?.focus();
+    };
+  }, [open]);
+
+  function closeProfile() { profileDetails.current?.removeAttribute("open"); }
+  function toggleServices() { setServicesOpen(value => !value); setCommunityOpen(false); closeProfile(); }
+  function toggleCommunity() { setCommunityOpen(value => !value); setServicesOpen(false); closeProfile(); }
 
   return (
     <>
-      <div className="border-b border-border bg-muted">
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-5 py-2 text-xs font-medium tracking-wide text-foreground sm:px-8 lg:px-12">
-          <span className="flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5 text-foreground" aria-hidden /> Reports, services and community information</span>
-          <span className="hidden text-muted-foreground sm:block">Your community services portal</span>
-        </div>
-      </div>
-      <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-xl">
-        <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between gap-4 px-5 sm:px-8 lg:h-[82px] lg:px-12">
+      <header ref={header} className="public-site-header elb-navigation-header" role={open ? "dialog" : undefined} aria-modal={open ? true : undefined} aria-label={open ? "Mobile navigation" : undefined} onClick={(event) => {
+        if ((event.target as HTMLElement).closest("a")) setOpen(false);
+      }}>
+        <div className="public-header-inner flex items-center justify-between">
           <BrandLogo />
           <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex xl:gap-8">
             <Link href="/#home" className="text-[12px] font-semibold text-muted-foreground transition hover:text-foreground xl:text-[13px]">Home</Link>
             <div
               ref={servicesDetails}
               className="relative"
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
               onBlur={(event) => {
                 if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setServicesOpen(false);
               }}
@@ -123,20 +165,18 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                 type="button"
                 aria-controls="elb-services-menu"
                 aria-expanded={servicesOpen}
-                onClick={() => setServicesOpen(true)}
+                onClick={toggleServices}
                 className={`flex min-h-11 items-center gap-1.5 rounded-xl px-2 text-[12px] font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border xl:text-[13px] ${servicesOpen ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground"}`}
               >
                 Services <ChevronDown aria-hidden size={15} className={`transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
               </button>
               {servicesOpen && (
-                <div className="absolute left-1/2 top-full z-[80] w-[min(640px,calc(100vw-2rem))] -translate-x-1/2 pt-2">
-                  <div id="elb-services-menu" className="rounded-[22px] border border-border bg-card p-4 shadow-[0_24px_65px_rgba(13,51,83,.17)] xl:p-5">
+                <div className="absolute left-1/2 top-full z-[80] w-[min(520px,calc(100vw-2rem))] -translate-x-1/2 pt-2">
+                  <div id="elb-services-menu" className="elb-public-dropdown rounded-[22px] border border-border bg-card p-4 shadow-[0_24px_65px_rgba(13,51,83,.17)] xl:p-5">
                     <div className="flex items-start justify-between gap-3 border-b border-border px-2 pb-3.5">
                       <div>
-                        <p className="text-xs font-extrabold uppercase tracking-[.14em] text-muted-foreground">eLingkod Bayan</p>
-                        <p className="mt-1 text-[16px] font-extrabold text-foreground">Public services</p>
+                        <p className="text-[16px] font-semibold text-foreground">Public services</p>
                       </div>
-                      <span className="rounded-full bg-muted px-2.5 py-1 text-xs font-semibold text-success">{publicServiceNavigation.filter((service) => service.live).length} available now</span>
                     </div>
                     <div className="mt-3 grid grid-cols-2 gap-1.5">
                       {publicServiceNavigation.map((service) => {
@@ -152,7 +192,6 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                             <span className="min-w-0 flex-1">
                               <span className="block text-[12px] font-extrabold leading-5 text-foreground">{service.title}</span>
                               <span className="mt-0.5 block text-xs leading-[1.5] text-muted-foreground">{staffPortal && service.id === "civic" ? "Manage concerns in your LGU workspace" : service.description}</span>
-                              <span className={`mt-1.5 inline-block text-xs font-bold ${service.live ? "text-success" : "text-muted-foreground"}`}>{service.live ? "Available" : "Preview"}</span>
                             </span>
                           </Link>
                         );
@@ -168,8 +207,6 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
             <div
               ref={communityDetails}
               className="relative"
-              onMouseEnter={() => setCommunityOpen(true)}
-              onMouseLeave={() => setCommunityOpen(false)}
               onBlur={(event) => {
                 if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setCommunityOpen(false);
               }}
@@ -185,17 +222,16 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                 type="button"
                 aria-controls="elb-community-menu"
                 aria-expanded={communityOpen}
-                onClick={() => setCommunityOpen((value) => !value)}
+                onClick={toggleCommunity}
                 className={`flex min-h-11 items-center gap-1.5 rounded-xl px-2 text-[12px] font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border xl:text-[13px] ${communityOpen ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground"}`}
               >
                 Community <ChevronDown aria-hidden size={15} className={`transition-transform duration-200 ${communityOpen ? "rotate-180" : ""}`} />
               </button>
               {communityOpen && (
                 <div className="absolute left-1/2 top-full z-[80] w-[min(390px,calc(100vw-2rem))] -translate-x-1/2 pt-2">
-                  <div id="elb-community-menu" className="rounded-[22px] border border-border bg-card p-3 shadow-[0_24px_65px_rgba(13,51,83,.17)]">
+                  <div id="elb-community-menu" className="elb-public-dropdown rounded-[22px] border border-border bg-card p-3 shadow-[0_24px_65px_rgba(13,51,83,.17)]">
                     <div className="px-3 pb-2 pt-1">
-                      <p className="text-xs font-extrabold uppercase tracking-[.14em] text-muted-foreground">Community</p>
-                      <p className="mt-1 text-[15px] font-extrabold text-foreground">Citizen Profiling & opportunities</p>
+                      <p className="text-[15px] font-semibold text-foreground">Profiling & opportunities</p>
                     </div>
                     <div className="grid gap-1">
                       {(staffPortal
@@ -217,15 +253,21 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
           </nav>
           <div className="elb-header-utilities">
           {viewer ? (
-            <div className="hidden items-center gap-3 lg:flex">
+            <div className="public-header-auth hidden items-center gap-3 lg:flex">
               {notificationsAllowed && <NotificationBell />}
-              <details ref={profileDetails} className="group relative">
+              <details ref={profileDetails} className="group relative" onToggle={(event) => {
+                if (event.currentTarget.open) { setServicesOpen(false); setCommunityOpen(false); }
+              }} onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget as Node | null)) event.currentTarget.open = false;
+              }} onClick={(event) => {
+                if ((event.target as HTMLElement).closest("a")) event.currentTarget.open = false;
+              }}>
                 <summary aria-label="Open account menu" className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-border bg-card px-3.5 py-2 text-xs font-bold text-foreground transition hover:bg-muted [&::-webkit-details-marker]:hidden">
                   <span className="flex size-7 items-center justify-center rounded-full bg-muted text-foreground"><UserRound size={16} /></span>
                   <span className="max-w-[115px] truncate">{viewer.name.split(" ")[0] || "Citizen"}</span>
                   <ChevronDown size={15} className="transition group-open:rotate-180" />
                 </summary>
-                <div className="absolute right-0 top-[calc(100%+10px)] z-50 w-[270px] overflow-hidden rounded-2xl border border-border bg-card p-2 shadow-[0_22px_55px_rgba(15,52,79,.17)]">
+                <div className="elb-profile-panel absolute right-0 top-[calc(100%+10px)] z-50 w-[270px] rounded-2xl border border-border bg-card p-2 shadow-[0_22px_55px_rgba(15,52,79,.17)]">
                   <div className="border-b border-border px-3 py-3">
                     <p className="truncate text-[13px] font-extrabold text-foreground">{viewer.name}</p>
                     <p className="mt-1 truncate text-xs text-muted-foreground">{viewer.email}</p>
@@ -244,26 +286,29 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
               </details>
             </div>
           ) : (
-            <div className="hidden items-center gap-3 lg:flex">
+            <div className="public-header-auth hidden items-center gap-3 lg:flex">
               <Link href="/login" className="rounded-full border border-border px-5 py-2.5 text-xs font-bold text-foreground transition hover:bg-muted">Log in</Link>
-              <Link href="/register" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-xs font-bold text-white transition hover:bg-primary">Create an account <ArrowUpRight size={15}/></Link>
+              <Link href="/register" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-xs font-bold text-white transition hover:bg-primary">Create account</Link>
             </div>
           )}
-          <button type="button" aria-label={open ? "Close menu" : "Open menu"} aria-controls="elb-mobile-menu" aria-expanded={open} onClick={() => { setOpen((current) => !current); setMobileServicesOpen(false); setMobileCommunityOpen(false); }} className="flex h-11 w-11 items-center justify-center rounded-xl border border-border text-foreground lg:hidden">
+          <button ref={mobileTrigger} type="button" aria-label={open ? "Close menu" : "Open menu"} aria-controls="elb-mobile-menu" aria-expanded={open} onClick={() => { setOpen((current) => !current); setServicesOpen(false); setCommunityOpen(false); closeProfile(); setMobileServicesOpen(false); setMobileCommunityOpen(false); }} className="flex h-11 w-11 items-center justify-center rounded-xl border border-border text-foreground lg:hidden">
             {open ? <X size={22}/> : <Menu size={22}/>}
           </button>
           <ThemeControl />
           </div>
         </div>
         {open && (
+          <>
+          <button type="button" className="elb-public-menu-backdrop lg:hidden" aria-label="Close navigation overlay" tabIndex={-1} onClick={() => setOpen(false)} />
           <nav id="elb-mobile-menu" aria-label="Mobile" className="max-h-[calc(100dvh-82px)] overflow-y-auto overscroll-contain border-t border-border bg-card px-5 py-4 shadow-xl sm:px-8 lg:hidden">
             <div className="mx-auto flex max-w-[580px] flex-col gap-1">
+              <div className="elb-public-mobile-heading"><span>Navigation</span></div>
               <Link href="/#home" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted">Home</Link>
               <button
                 type="button"
                 aria-expanded={mobileServicesOpen}
                 aria-controls="elb-mobile-services-menu"
-                onClick={() => setMobileServicesOpen((current) => !current)}
+                onClick={() => { setMobileServicesOpen((current) => !current); setMobileCommunityOpen(false); }}
                 className="flex min-h-11 w-full items-center justify-between rounded-xl bg-muted px-4 py-3 text-left text-sm font-extrabold text-foreground focus-visible:outline-2 focus-visible:outline-border"
               >
                 Services <ChevronDown size={17} aria-hidden className={`transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`} />
@@ -291,7 +336,7 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                 type="button"
                 aria-expanded={mobileCommunityOpen}
                 aria-controls="elb-mobile-community-menu"
-                onClick={() => setMobileCommunityOpen((current) => !current)}
+                onClick={() => { setMobileCommunityOpen((current) => !current); setMobileServicesOpen(false); }}
                 className="flex min-h-11 w-full items-center justify-between rounded-xl bg-muted px-4 py-3 text-left text-sm font-extrabold text-foreground focus-visible:outline-2 focus-visible:outline-border"
               >
                 Community <ChevronDown size={17} aria-hidden className={`transition-transform ${mobileCommunityOpen ? "rotate-180" : ""}`} />
@@ -320,7 +365,7 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
                   {citizenPortal && <Link href="/reports" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><ClipboardList size={17}/> My Reports</Link>}
                   {citizenPortal && <Link href="/services/requests" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><Files size={17}/> My LGU Requests</Link>}
                   {(viewer.role === "ADMIN" || viewer.role === "STAFF") && <Link href="/admin" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-foreground hover:bg-muted"><ShieldCheck size={17}/> LGU workspace</Link>}
-              {notificationsAllowed && <div className="flex items-center justify-between px-4 py-2 text-xs text-muted-foreground"><span>Notifications</span><NotificationBell /></div>}
+              {notificationsAllowed && <div className="px-4 py-2 text-sm text-muted-foreground"><span>Notifications</span><NotificationBell inline /></div>}
                   <div className="px-2 pt-2"><LogoutButton fullWidth /></div>
                 </div>
               ) : (
@@ -331,6 +376,7 @@ export function SiteHeader({ viewer }: { viewer: PortalViewer | null }) {
               )}
             </div>
           </nav>
+          </>
         )}
       </header>
     </>

@@ -17,7 +17,7 @@ test("Projects V2 TypeScript/TSX syntax and local imports", () => {
     const file = ts.createSourceFile(p, src, ts.ScriptTarget.ESNext, true, p.endsWith("tsx") ? ts.ScriptKind.TSX : ts.ScriptKind.TS);
     for (const node of file.statements) if (ts.isImportDeclaration(node) && node.moduleSpecifier && ts.isStringLiteral(node.moduleSpecifier) && node.moduleSpecifier.text.startsWith("@/")) {
       const dest = `src/${node.moduleSpecifier.text.slice(2)}`;
-      assert.ok([`${dest}.ts`,`${dest}.tsx`,`${dest}/index.ts`,`${dest}/index.tsx`].some(fs.existsSync), `${p} missing ${dest}`);
+      assert.ok([dest,`${dest}.ts`,`${dest}.tsx`,`${dest}/index.ts`,`${dest}/index.tsx`].some(fs.existsSync), `${p} missing ${dest}`);
     }
   }
 });

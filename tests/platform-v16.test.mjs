@@ -50,7 +50,10 @@ test('V16 notification center is backed by persisted workflow notifications',()=
   assert.match(notifications,/notificationFeed/);
   assert.match(bell,/View all notifications/);
   assert.match(center,/Mark all read/);
-  assert.match(center,/Workflow updates/);
+  assert.match(center,/fetch\('\/api\/notifications',\{method:'PATCH'/);
+  assert.match(center,/if\(!response\.ok\)/);
+  assert.match(center,/setItems\(list=>list\.map/);
+  assert.match(center,/readAt:new Date\(\)\.toISOString\(\)/);
   assert.match(distribution,/type: "WORK_OFFER"/);
 });
 

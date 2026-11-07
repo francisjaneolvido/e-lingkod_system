@@ -4,6 +4,7 @@ import { randomBytes, randomUUID } from "node:crypto";
 import { readdir, readFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import mariadb from "mariadb";
+import {mysqlRsaOptions} from '../scripts/lib/mysql-connection.mjs';
 import { format } from "node:util";
 import { loadServerTypescript } from "./helpers/load-typescript.mjs";
 import { installNativeAuthBackground } from "./helpers/native-auth-background.mjs";
@@ -112,7 +113,7 @@ test("password recovery real mail capture, auth tokens, transactions and session
       const sessionCount = await prisma.session.count({ where: { userId: user.id } });
       // Trigger is limited to this synthetic account in the guarded disposable schema.
       const database = new URL(process.env.DATABASE_URL);
-      const ddl = await mariadb.createConnection({ host: database.hostname, port: Number(database.port || 3306), user: decodeURIComponent(database.username), password: decodeURIComponent(database.password), database: database.pathname.slice(1) });
+      const ddl = await mariadb.createConnection({ ...mysqlRsaOptions(), host: database.hostname, port: Number(database.port || 3306), user: decodeURIComponent(database.username), password: decodeURIComponent(database.password), database: database.pathname.slice(1) });
       await ddl.query(`CREATE TRIGGER \`${trigger}\` BEFORE UPDATE ON \`account\` FOR EACH ROW BEGIN IF NEW.userId = '${user.id}' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Synthetic password-write failure'; END IF; END`);
       try {
         const diagnostics = [];

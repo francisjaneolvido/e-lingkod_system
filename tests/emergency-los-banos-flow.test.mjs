@@ -2,6 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { loadServerTypescript } from './helpers/load-typescript.mjs';
+loadServerTypescript();
+const { ServiceTile } = await import('../src/features/landing/components/service-tile.tsx');
+const { ServiceDetailDialog } = await import('../src/features/landing/components/service-detail-dialog.tsx');
+const { services } = await import('../src/features/landing/data/services.ts');
 const require = createRequire(import.meta.url);
 const ts = require('typescript');
 function source(path) { return fs.readFileSync(path, 'utf8'); }
@@ -58,7 +65,13 @@ test('Admin is required for publishing and approving contacts',()=>{
   assert.match(api,/requireApiViewer\(request, "EMERGENCY"\)/);
 });
 test('home/service and staff navigation lead to implemented Emergency module',()=>{
-  assert.match(source('src/features/landing/sections/services-section.tsx'),/"\/emergency"/);
+  const service = services.find(item => item.id === 'emergency');
+  const tile = renderToStaticMarkup(createElement(ServiceTile, { service, onExplore() {} }));
+  const dialog = renderToStaticMarkup(createElement(ServiceDetailDialog, { service, onClose() {} }));
+  assert.match(tile,/href="\/emergency"/);
+  assert.match(dialog,/href="\/emergency"/);
+  assert.match(dialog,/accessible without login/);
+  assert.match(source('src/features/landing/sections/services-section.tsx'),/<ServiceTile\b/);
   assert.match(source('src/components/admin/staff-workspace.tsx'),/Emergency desk|Local emergency contacts/);
   assert.match(source('src/components/layout/site-header.tsx'),/emergency: "\/emergency"/);
 });

@@ -1,3 +1,5 @@
+import 'dotenv/config';
+import {mysqlRsaOptions} from '../lib/mysql-connection.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { randomUUID,createHash } from 'node:crypto';
@@ -14,8 +16,11 @@ const settings=dotenv.parse(fs.readFileSync(option('config')||'.env.hackathon.lo
 if(!settings.HACKATHON_DATABASE_URL)throw Error('Explicit HACKATHON_DATABASE_URL required; no DATABASE_URL fallback');
 const baseURL=settings.HACKATHON_AUTH_ORIGIN;
 if(!baseURL||new URL(baseURL).hostname!=='localhost'||new URL(baseURL).protocol!=='http:')throw Error('Explicit local localhost auth origin required');
+process.env.DEMO_ACCOUNTS_FILE=settings.DEMO_ACCOUNTS_FILE;
+process.env.MYSQL_RSA_PUBLIC_KEY_PATH=settings.MYSQL_RSA_PUBLIC_KEY_PATH || process.env.MYSQL_RSA_PUBLIC_KEY_PATH;
 process.env.DATABASE_URL=settings.HACKATHON_DATABASE_URL;
 process.env.BETTER_AUTH_URL=baseURL;process.env.NEXT_PUBLIC_APP_URL=baseURL;
+if(!process.env.BETTER_AUTH_SECRET||process.env.BETTER_AUTH_SECRET.length<32)throw Error('Configure the existing application auth secret before importing.');
 const db=await connectTarget(settings.HACKATHON_DATABASE_URL);
 let hook;
 try{
@@ -29,7 +34,7 @@ try{
     const raw=fs.readFileSync(path.join(directory,'pre-import.sql'),'utf8');
     if(createHash('sha256').update(raw).digest('hex')!==manifest.sha256)throw Error('Private backup integrity mismatch');
     const url=new URL(settings.HACKATHON_DATABASE_URL),name='elb_b3_test_'+randomUUID().replaceAll('-','');
-    const server=await mariadb.createConnection({host:url.hostname,port:Number(url.port||3306),user:decodeURIComponent(url.username),password:decodeURIComponent(url.password),timezone:'+00:00',dateStrings:true,bigIntAsNumber:true});
+    const server=await mariadb.createConnection({...mysqlRsaOptions(),host:url.hostname,port:Number(url.port||3306),user:decodeURIComponent(url.username),password:decodeURIComponent(url.password),timezone:'+00:00',dateStrings:true,bigIntAsNumber:true});
     let verification;
     try{
       await server.query('CREATE DATABASE `'+name+'` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');await server.query('USE `'+name+'`');

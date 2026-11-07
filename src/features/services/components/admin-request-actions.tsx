@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { AlertTriangle, CalendarClock, CheckCircle2, ClipboardCheck, Loader2, Plus, Send, Trash2, UserRoundCheck } from "lucide-react";
 import type { SerializableOnlineServiceDefinition } from "../catalog";
 
-const input = "w-full rounded-xl border border-border bg-card px-3 py-2.5 text-xs text-foreground outline-none transition focus:border-border focus:ring-2 focus:ring-border";
+const input = "elb-field mt-2";
 
 export function AdminRequestActions({ request, service, viewerRole, staff, verificationReady, verifiedRequiredCount, requiredDocumentCount }: {
   request:any;
@@ -75,56 +75,56 @@ export function AdminRequestActions({ request, service, viewerRole, staff, verif
   function addSlot() { if (slots.length < 5) setSlots(current => [...current, ""]); }
   function removeSlot(index:number) { if (slots.length > 2) setSlots(current => current.filter((_,i) => i !== index)); }
 
-  return <div className="space-y-3">
-    <section className="rounded-2xl border border-border bg-card p-4">
-      <div className="flex items-start gap-2"><ClipboardCheck size={16} className="mt-0.5 shrink-0 text-foreground"/><div><h3 className="text-xs font-black text-foreground">Current step</h3><p className="mt-1 text-xs leading-4 text-muted-foreground">{actionHint}</p></div></div>
+  return <div className="elb-service-actions space-y-5">
+    <section className="elb-service-action-section">
+      <div className="flex items-start gap-2"><ClipboardCheck size={16} className="mt-0.5 shrink-0 text-foreground"/><div><h3 className="text-xs font-semibold text-foreground">Current step</h3><p className="mt-1 text-xs leading-4 text-muted-foreground">{actionHint}</p></div></div>
     </section>
 
-    {viewerRole === "ADMIN" && <section className="rounded-2xl border border-border bg-card p-4">
-      <div className="flex items-center gap-2"><UserRoundCheck size={16} className="text-foreground"/><h3 className="text-xs font-black text-foreground">Assignment override</h3></div>
+    {viewerRole === "ADMIN" && <section className="elb-service-action-section">
+      <div className="flex items-center gap-2"><UserRoundCheck size={16} className="text-foreground"/><h3 className="text-xs font-semibold text-foreground">Assignment override</h3></div>
       <p className="mt-1 text-xs leading-4 text-muted-foreground">Normal requests are balanced automatically among eligible {service.processingOffice} staff. Use this only to override or rescue an unaccepted case.</p>
-      {staff.length === 0 && <p className="mt-2 rounded-lg bg-amber-50 p-3 text-xs text-amber-800">No eligible staff for this request yet. Set the right office and enable Online LGU Services in <a href="/admin/staff" className="font-bold underline">Staff Management</a>.</p>}
+      {staff.length === 0 && <p className="mt-2 rounded-lg bg-warning-soft p-3 text-xs text-warning-foreground">No eligible staff for this request yet. Set the right office and enable Online LGU Services in <a href="/admin/staff" className="font-bold underline">Staff Management</a>.</p>}
       <div className="mt-3 grid gap-2">
         <select className={input} value={staffId} onChange={event => setStaffId(event.target.value)}><option value="">Choose staff for manual override</option>{staff.map(person => <option key={person.id} value={person.id}>{person.name} · {person.department || "No department"}{typeof person.activeLoad === "number" ? ` · ${person.activeLoad} active` : ""}</option>)}</select>
-        <button disabled={!staffId || !!busy} onClick={() => call(`/api/admin/services/requests/${request.id}/assign`, "PATCH", { staffId })} className="rounded-xl bg-primary px-3 py-2.5 text-xs font-extrabold text-white disabled:opacity-50">Assign / reassign</button>
+        <button disabled={!staffId || !!busy} onClick={() => call(`/api/admin/services/requests/${request.id}/assign`, "PATCH", { staffId })} className="rounded-xl bg-primary px-3 py-2.5 text-xs font-semibold text-white disabled:opacity-50">Assign / reassign</button>
       </div>
     </section>}
 
-    {reviewStage && <section className="rounded-2xl border border-border bg-card p-4">
-      <div className="flex items-center justify-between gap-2"><h3 className="text-xs font-black text-foreground">Requirements review</h3><span className={`rounded-full px-2 py-1 text-xs font-black ${verificationReady ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>{verifiedRequiredCount}/{requiredDocumentCount} verified</span></div>
+    {reviewStage && <section className="elb-service-action-section">
+      <div className="flex items-center justify-between gap-2"><h3 className="text-xs font-semibold text-foreground">Requirements review</h3><span className={`rounded-full px-2 py-1 text-xs font-semibold ${verificationReady ? "bg-success-soft text-success" : "bg-warning-soft text-warning-foreground"}`}>{verifiedRequiredCount}/{requiredDocumentCount} verified</span></div>
       {!verificationReady && <div className="mt-3 flex gap-2 rounded-xl bg-muted px-3 py-2 text-xs leading-4 text-warning-foreground"><AlertTriangle size={14} className="mt-0.5 shrink-0"/>Validate remains locked until every currently required upload is verified.</div>}
       <textarea className={`${input} mt-3`} rows={2} value={note} onChange={event => setNote(event.target.value)} placeholder="Correction instructions, or optional validation note"/>
       <div className="mt-3 flex flex-wrap gap-2"><ActionButton onClick={() => action("REQUEST_CORRECTION")} label="Request correction" secondary/><ActionButton onClick={() => action("VALIDATE")} label="Validate request" disabled={!verificationReady}/></div>
     </section>}
 
-    {canOfferSchedule && <section className="rounded-2xl border border-border bg-card p-4">
-      <div className="flex items-center justify-between gap-3"><div className="flex items-center gap-2"><CalendarClock size={16} className="text-muted-foreground"/><div><h3 className="text-xs font-black text-foreground">Offer schedule options</h3><p className="mt-0.5 text-xs text-muted-foreground">Citizen chooses one slot. Unselected options close automatically.</p></div></div>{service.appointmentMode === "OPTIONAL" && <span className="rounded-full bg-card px-2 py-1 text-xs font-black text-muted-foreground">OPTIONAL</span>}</div>
+    {canOfferSchedule && <section className="elb-service-action-section">
+      <div className="flex items-center justify-between gap-3"><div className="flex items-center gap-2"><CalendarClock size={16} className="text-muted-foreground"/><div><h3 className="text-xs font-semibold text-foreground">Offer schedule options</h3><p className="mt-0.5 text-xs text-muted-foreground">Citizen chooses one slot. Unselected options close automatically.</p></div></div>{service.appointmentMode === "OPTIONAL" && <span className="rounded-full bg-card px-2 py-1 text-xs font-semibold text-muted-foreground">OPTIONAL</span>}</div>
       <div className="mt-3 space-y-2">{slots.map((slot,index) => <div key={index} className="flex gap-2"><input className={input} type="datetime-local" value={slot} onChange={event => setSlot(index,event.target.value)}/>{slots.length > 2 && <button type="button" onClick={() => removeSlot(index)} className="grid size-10 shrink-0 place-items-center rounded-xl border border-border bg-card text-muted-foreground" aria-label="Remove slot"><Trash2 size={14}/></button>}</div>)}</div>
-      <button type="button" onClick={addSlot} disabled={slots.length >= 5} className="mt-2 inline-flex items-center gap-1 text-xs font-extrabold text-muted-foreground disabled:opacity-40"><Plus size={12}/> Add another slot</button>
+      <button type="button" onClick={addSlot} disabled={slots.length >= 5} className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground disabled:opacity-40"><Plus size={12}/> Add another slot</button>
       <div className="mt-3 grid gap-2"><input className={input} value={location} onChange={event => setLocation(event.target.value)} placeholder="Office / venue"/><textarea className={input} rows={2} value={agenda} onChange={event => setAgenda(event.target.value)} placeholder="Purpose of interview / inspection"/></div>
-      <button disabled={slots.filter(Boolean).length < 2 || !!busy} onClick={() => call(`/api/admin/services/requests/${request.id}/appointment`, "POST", { slots: slots.filter(Boolean).map(scheduledAt => ({ scheduledAt })), location, agenda })} className="mt-3 inline-flex items-center gap-2 rounded-xl bg-primary px-3.5 py-2.5 text-xs font-extrabold text-primary-foreground disabled:opacity-50"><CalendarClock size={14}/> Send schedule options</button>
+      <button disabled={slots.filter(Boolean).length < 2 || !!busy} onClick={() => call(`/api/admin/services/requests/${request.id}/appointment`, "POST", { slots: slots.filter(Boolean).map(scheduledAt => ({ scheduledAt })), location, agenda })} className="mt-3 inline-flex items-center gap-2 rounded-xl bg-primary px-3.5 py-2.5 text-xs font-semibold text-primary-foreground disabled:opacity-50"><CalendarClock size={14}/> Send schedule options</button>
     </section>}
 
-    {primary && !reviewStage && <section className="rounded-2xl border border-border bg-card p-4">
-      <h3 className="text-xs font-black text-foreground">{primary.note ? "Record outcome / recommendation" : "Case action"}</h3>
+    {primary && !reviewStage && <section className="elb-service-action-section">
+      <h3 className="text-xs font-semibold text-foreground">{primary.note ? "Record outcome / recommendation" : "Case action"}</h3>
       {primary.note && <textarea className={`${input} mt-3`} rows={3} value={note} onChange={event => setNote(event.target.value)} placeholder={request.status === "APPOINTMENT_CONFIRMED" ? "Record what happened during the interview / inspection, including findings or next step." : request.status === "READY_FOR_RELEASE" ? "Record how, when and to whom the document/service was released or delivered." : "State your assessment and recommendation clearly."}/>} 
       <div className="mt-3"><ActionButton onClick={() => action(primary.action)} label={primary.label} disabled={primary.disabled}/></div>
     </section>}
 
     {request.status === "SCHEDULED" && <section className="rounded-2xl border border-border bg-card p-4 text-xs leading-4 text-muted-foreground"><strong className="text-foreground">Waiting for citizen selection.</strong><br/>Do not create another set unless the citizen requests new options.</section>}
 
-    {viewerRole === "ADMIN" && request.status === "FOR_FINAL_VERIFICATION" && <section className="rounded-2xl border border-border bg-card p-4">
-      <div className="flex items-center gap-2"><CheckCircle2 size={16} className="text-success"/><h3 className="text-xs font-black text-success">Super Admin verification</h3></div>
+    {viewerRole === "ADMIN" && request.status === "FOR_FINAL_VERIFICATION" && <section className="elb-service-action-section">
+      <div className="flex items-center gap-2"><CheckCircle2 size={16} className="text-success"/><h3 className="text-xs font-semibold text-success">Super Admin verification</h3></div>
       <p className="mt-2 text-xs leading-4 text-muted-foreground">{releaseAlreadyApproved ? "Release was already authorized and staff recorded actual delivery. Verify the completed transaction." : service.completionMode === "RELEASE" ? "Review the staff recommendation and authorize release only when the case record is complete." : "Review the staff assessment and verify completion of the service."}</p>
       <textarea className={`${input} mt-3`} rows={3} value={note} onChange={event => setNote(event.target.value)} placeholder="State the verification basis / final remarks"/>
       <div className="mt-3 flex flex-wrap gap-2">
-        {!releaseAlreadyApproved && service.completionMode === "RELEASE" && <button onClick={() => call(`/api/admin/services/requests/${request.id}/final`, "PATCH", { action: "APPROVE_RELEASE", note })} className="rounded-xl bg-success-solid px-3.5 py-2.5 text-xs font-extrabold text-white">Approve for release</button>}
-        {(service.completionMode === "SERVICE" || releaseAlreadyApproved) && <button onClick={() => call(`/api/admin/services/requests/${request.id}/final`, "PATCH", { action: "VERIFY_COMPLETED", note })} className="rounded-xl bg-primary px-3.5 py-2.5 text-xs font-extrabold text-white">Verify completed</button>}
-        {!releaseAlreadyApproved && <button onClick={() => call(`/api/admin/services/requests/${request.id}/final`, "PATCH", { action: "RETURN_TO_STAFF", note })} className="rounded-xl border border-border bg-card px-3.5 py-2.5 text-xs font-extrabold text-foreground">Return to staff</button>}
+        {!releaseAlreadyApproved && service.completionMode === "RELEASE" && <button onClick={() => call(`/api/admin/services/requests/${request.id}/final`, "PATCH", { action: "APPROVE_RELEASE", note })} className="rounded-xl bg-success-solid px-3.5 py-2.5 text-xs font-semibold text-white">Approve for release</button>}
+        {(service.completionMode === "SERVICE" || releaseAlreadyApproved) && <button onClick={() => call(`/api/admin/services/requests/${request.id}/final`, "PATCH", { action: "VERIFY_COMPLETED", note })} className="rounded-xl bg-primary px-3.5 py-2.5 text-xs font-semibold text-white">Verify completed</button>}
+        {!releaseAlreadyApproved && <button onClick={() => call(`/api/admin/services/requests/${request.id}/final`, "PATCH", { action: "RETURN_TO_STAFF", note })} className="rounded-xl border border-border bg-card px-3.5 py-2.5 text-xs font-semibold text-foreground">Return to staff</button>}
       </div>
     </section>}
 
-    {["FOR_TRIAGE", "SUBMITTED", "ASSIGNED", "UNDER_REVIEW", "ACTION_REQUIRED", "VALIDATED", "SCHEDULED", "APPOINTMENT_CONFIRMED", "APPOINTMENT_COMPLETED"].includes(request.status) && <details className="rounded-2xl border border-border bg-card p-4"><summary className="cursor-pointer text-xs font-extrabold text-destructive">More actions</summary><p className="mt-2 text-xs leading-4 text-muted-foreground">Use only when the request cannot continue or must be referred elsewhere. A reason is required.</p><textarea className={`${input} mt-2`} rows={2} value={note} onChange={event => setNote(event.target.value)} placeholder="Reason for closure / referral"/><button onClick={() => action("DECLINE")} className="mt-2 rounded-xl bg-card px-3 py-2 text-xs font-extrabold text-destructive">Close / refer request</button></details>}
+    {["FOR_TRIAGE", "SUBMITTED", "ASSIGNED", "UNDER_REVIEW", "ACTION_REQUIRED", "VALIDATED", "SCHEDULED", "APPOINTMENT_CONFIRMED", "APPOINTMENT_COMPLETED"].includes(request.status) && <details className="elb-service-action-section"><summary className="cursor-pointer text-xs font-semibold text-destructive">More actions</summary><p className="mt-2 text-xs leading-4 text-muted-foreground">Use only when the request cannot continue or must be referred elsewhere. A reason is required.</p><textarea className={`${input} mt-2`} rows={2} value={note} onChange={event => setNote(event.target.value)} placeholder="Reason for closure / referral"/><button onClick={() => action("DECLINE")} className="mt-2 rounded-xl bg-card px-3 py-2 text-xs font-semibold text-destructive">Close / refer request</button></details>}
 
     {error && <p className="rounded-xl bg-card px-3 py-2.5 text-xs font-semibold text-destructive">{error}</p>}
     {busy && <p className="flex items-center gap-2 text-xs text-muted-foreground"><Loader2 size={13} className="animate-spin"/> Saving action…</p>}
@@ -132,5 +132,5 @@ export function AdminRequestActions({ request, service, viewerRole, staff, verif
 }
 
 function ActionButton({ onClick, label, secondary, disabled }: { onClick:()=>void; label:string; secondary?:boolean; disabled?:boolean }) {
-  return <button disabled={disabled} onClick={onClick} className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2.5 text-xs font-extrabold disabled:cursor-not-allowed disabled:opacity-40 ${secondary ? "border border-border bg-card text-foreground" : "bg-primary text-white"}`}><Send size={13}/>{label}</button>;
+  return <button disabled={disabled} onClick={onClick} className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2.5 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-40 ${secondary ? "border border-border bg-card text-foreground" : "bg-primary text-white"}`}><Send size={13}/>{label}</button>;
 }

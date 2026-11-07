@@ -5,6 +5,7 @@ import type { CivicViewer } from '@/features/civic/types';
 import type { Prisma } from '@/generated/prisma/client';
 import { LOS_BANOS_BARANGAYS } from '@/features/emergency/domain';
 import { list, matchesAnalytics, summarizeAnalytics, type AnalyticsFilters, type AnalyticsRow, type AnalyticsResult } from '../domain';
+import { summarizeGeography } from '../geographic-domain';
 
 // Deliberately omit user IDs, names, emails, contact details, addresses, free
 // feedback and employment-history narratives from the analytical projection.
@@ -46,7 +47,7 @@ async function establishments(tx: Prisma.TransactionClient, scope:string[]|null,
   const rows=await tx.$queryRawUnsafe<{status:string;answers:string|AnalyticsRow}[]>('SELECT status,'+projection+' answers FROM establishment_survey WHERE '+where.join(' AND '),...values);
   const eligible:AnalyticsRow[]=[];
   for(const row of rows){const answers=typeof row.answers==='string'?JSON.parse(row.answers) as AnalyticsRow:row.answers;if(!matchesAnalytics(answers,filters))continue;if(row.status!=='SUBMITTED'){excluded.withdrawnOrUnsubmittedAnnual=(excluded.withdrawnOrUnsubmittedAnnual??0)+1;continue;}eligible.push(answers);}
-  return [{source:'Establishment annual submissions',unit:'establishments',...summarizeAnalytics(eligible,'ESTABLISHMENT')}];
+  return [{source:'Establishment annual submissions',unit:'establishments',...summarizeAnalytics(eligible,'ESTABLISHMENT'),geography:summarizeGeography(eligible,{filters,source:'Establishment annual submissions',unit:'establishments',scope})}];
 }
 const importedSelect = {surveyYear:true,sourceKey:true,outcome:true,participantRef:true,barangay:true,ageGroup:true,educationLevel:true,employmentStatus:true,occupation:true,industry:true,skillsJson:true,trainingInterest:true,trainingCategoriesJson:true,trainingProgramsJson:true,trainingBarriersJson:true,employmentBarriersJson:true,businessSector:true,assistanceNeededJson:true,batch:{select:{surveyYear:true,sourceKey:true}}} satisfies Prisma.CommunityImportRecordSelect;
 async function imported(tx:Prisma.TransactionClient,scope:string[]|null,filters:AnalyticsFilters,excluded:Record<string,number>) {
@@ -82,7 +83,7 @@ async function imported(tx:Prisma.TransactionClient,scope:string[]|null,filters:
   }
   const groups=new Map<string,AnalyticsRow[]>();
   for(const row of accepted){if(!matchesAnalytics(row.answers,filters))continue;const rows=groups.get(row.source)??[];rows.push(row.answers);groups.set(row.source,rows);}
-  return [...groups].sort(([a],[b])=>a.localeCompare(b)).map(([source,rows])=>({source,unit:'source observations',...summarizeAnalytics(rows,'IMPORTS')}));
+  return [...groups].sort(([a],[b])=>a.localeCompare(b)).map(([source,rows])=>({source,unit:'source observations',...summarizeAnalytics(rows,'IMPORTS'),geography:summarizeGeography(rows,{filters,source,unit:'source observations',scope})}));
 }
 async function spes(tx:Prisma.TransactionClient,scope:string[]|null,filters:AnalyticsFilters,excluded:Record<string,number>) {
   const records=await tx.spesSurveyRecord.findMany({where:{...geography(scope,filters),batch:{status:'ACTIVE',...(filters.dataset!=='ALL'?{datasetKind:filters.dataset}:{})}},select:{barangay:true,education:true,skillsJson:true,interestsJson:true,availability:true,batch:{select:{surveyYear:true,sourceLabel:true,datasetKind:true}}}});
@@ -97,7 +98,7 @@ async function spes(tx:Prisma.TransactionClient,scope:string[]|null,filters:Anal
     if(row.batch.surveyYear!==filters.year)continue;
     const source=row.batch.sourceLabel+' ['+row.batch.datasetKind+']',rows=groups.get(source)??[];rows.push(answers);groups.set(source,rows);
   }
-  return [...groups].sort(([a],[b])=>a.localeCompare(b)).map(([source,rows])=>({source,unit:'source observations',...summarizeAnalytics(rows,'SPES')}));
+  return [...groups].sort(([a],[b])=>a.localeCompare(b)).map(([source,rows])=>({source,unit:'source observations',...summarizeAnalytics(rows,'SPES'),geography:summarizeGeography(rows,{filters,source,unit:'source observations',scope})}));
 }
 export async function workforceAnalytics(viewer:CivicViewer, filters:AnalyticsFilters):Promise<AnalyticsResult & {availableBarangays:string[]}> {
   const scope=await recordScope(viewer);
@@ -119,7 +120,7 @@ export async function workforceAnalytics(viewer:CivicViewer, filters:AnalyticsFi
         if(!row.consentAggregated){excluded.noAggregateConsent=(excluded.noAggregateConsent??0)+1;continue;}
         eligible.push(answers);
       }
-      groups=[{source:'Citizen survey',unit:'respondents',...summarizeAnalytics(eligible,'INDIVIDUAL')}];
+      groups=[{source:'Citizen survey',unit:'respondents',...summarizeAnalytics(eligible,'INDIVIDUAL'),geography:summarizeGeography(eligible,{filters,source:'Citizen survey',unit:'respondents',scope})}];
     }
     return {filters,groups,excluded,availableBarangays:scope===null?[...LOS_BANOS_BARANGAYS]:scope,rosters:await rosters(tx,scope,filters),methodology:[
       'Missing or unknown source context cannot establish stable identity: observations remain separate with uncertain overlap, even when local references or answers match.',

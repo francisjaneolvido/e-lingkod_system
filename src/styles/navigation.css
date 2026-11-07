@@ -1,0 +1,48 @@
+/* Bounded navigation and inline secondary workflow disclosures. */
+.elb-action-group { min-width: 0; max-width: 100%; border: 1px solid var(--border); border-radius: 12px; background: var(--card); color: var(--foreground); }
+.elb-action-group > summary { display: flex; min-height: 44px; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; list-style: none; cursor: pointer; font-size: 14px; font-weight: 600; }
+.elb-action-group > summary::-webkit-details-marker, .elb-admin-nav-group > summary::-webkit-details-marker { display: none; }
+.elb-action-group > summary > span { min-width: 0; overflow-wrap: anywhere; }
+.elb-action-group > summary > svg, .elb-admin-nav-group > summary > svg { flex-shrink: 0; transition: transform 180ms ease; }
+.elb-action-group[open] > summary > svg, .elb-admin-nav-group[open] > summary > svg { transform: rotate(180deg); }
+.elb-action-group > summary:hover { background: var(--muted); border-radius: 12px; }
+.elb-action-group-content { display: flex; flex-wrap: wrap; align-items: start; gap: 8px; min-width: 0; padding: 8px 14px 14px; border-top: 1px solid var(--border); }
+.elb-action-group-content > * { max-width: 100%; min-width: 0; overflow-wrap: anywhere; }
+.elb-action-group-content :is(a, button) { min-height: 44px; white-space: normal; }
+.elb-action-group > summary:focus-visible, .elb-admin-nav-group > summary:focus-visible, .elb-navigation-header :is(a, button, summary):focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
+.elb-admin-nav-group { margin-block: 4px; }
+.elb-admin-nav-group > summary { display: flex; min-height: 44px; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 13px; border-radius: 10px; color: var(--foreground); font-size: 14px; font-weight: 600; list-style: none; cursor: pointer; }
+.elb-admin-nav-group > summary:hover { background: var(--muted); }
+.elb-admin-nav-group > summary > span { min-width: 0; overflow-wrap: anywhere; }
+.elb-admin-nav-group > nav { padding-block: 4px 8px; }
+.elb-admin-nav-group .elb-admin-nav-link { margin-left: 10px; padding-left: 12px; }
+.elb-admin-navigation .elb-admin-nav-link, .elb-admin-nav-group .elb-admin-nav-link { min-width: 0; }
+.elb-admin-nav-label { overflow-wrap: anywhere; }
+.elb-admin-nav-current { padding: 4px 13px 10px; color: var(--muted-foreground); font-size: 12px; overflow-wrap: anywhere; }
+.elb-admin-compact-label { display: none; }
+.elb-navigation-header .elb-public-dropdown { max-height: calc(100dvh - 88px); overflow-y: auto; overscroll-behavior: contain; }
+.elb-navigation-header .elb-profile-panel { width: min(300px, calc(100vw - 32px)); max-height: calc(100dvh - 88px); overflow-y: auto; overscroll-behavior: contain; }
+.elb-navigation-header .elb-profile-panel :is(p, a) { overflow-wrap: anywhere; }
+.elb-navigation-header .elb-profile-panel p { white-space: normal; }
+.elb-public-menu-backdrop { position: fixed; inset: 72px 0 0; background: rgb(0 0 0 / .35); }
+.elb-navigation-header #elb-mobile-menu { position: fixed; inset: 72px 0 auto; max-height: calc(100dvh - 72px); padding-bottom: max(20px, env(safe-area-inset-bottom)); }
+.elb-navigation-header #elb-mobile-menu :is(a, button) { min-height: 44px; font-size: 14px; overflow-wrap: anywhere; }
+.elb-public-mobile-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 12px 12px; color: var(--foreground); font-size: 16px; font-weight: 600; }
+.elb-public-mobile-heading button { display: grid; place-items: center; width: 44px; border: 1px solid var(--border); border-radius: 10px; }
+.elb-notifications-inline { min-width: 0; margin-top: 8px; }
+.elb-notifications-inline .elb-notifications-inline-panel { position: static; width: 100%; max-width: 100%; margin-top: 8px; }
+.elb-notifications-inline-panel > div:first-child { flex-wrap: wrap; }
+.elb-notifications-inline-panel :is(strong, p, a) { overflow-wrap: anywhere; }
+@media (min-width: 1200px) {
+  .elb-admin.elb-admin--compact .elb-admin-sidebar { width: 112px; flex-basis: 112px; }
+  .elb-admin--compact .elb-admin-nav-group > summary { justify-content: center; padding-inline: 4px; }
+  .elb-admin--compact .elb-admin-nav-group > summary > span { font-size: 14px; line-height: 1.3; text-align: center; }
+  .elb-admin--compact .elb-admin-nav-group > summary > svg { display: none; }
+  .elb-admin--compact .elb-admin-nav-group .elb-admin-nav-link { margin-left: 0; padding-inline: 0; }
+  .elb-admin.elb-admin--compact .elb-admin-nav-label { display: block; font-size: 14px; line-height: 1.3; text-align: center; white-space: normal; }
+  .elb-admin.elb-admin--compact .elb-admin-nav-link { flex-direction: column; gap: 4px; padding: 8px 4px; }
+  .elb-admin.elb-admin--compact .elb-admin-external > span, .elb-admin.elb-admin--compact .elb-admin-collapse > span, .elb-admin.elb-admin--compact .elb-admin-compact-label { display: block; font-size: 14px; text-align: center; }
+  .elb-admin.elb-admin--compact .elb-admin-external, .elb-admin.elb-admin--compact .elb-admin-user, .elb-admin.elb-admin--compact .elb-admin-collapse { flex-direction: column; gap: 4px; }
+  .elb-admin.elb-admin--compact .elb-admin-logout { display: block; }
+}
+@media (prefers-reduced-motion: reduce) { .elb-action-group > summary > svg, .elb-admin-nav-group > summary > svg { transition: none; } }

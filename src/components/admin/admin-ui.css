@@ -31,14 +31,14 @@
   transition: width .2s ease, flex-basis .2s ease;
   z-index: 45;
 }
-.elb-admin-brand { min-height: 77px; display: flex; align-items: center; padding: 11px 17px 11px 18px; border-bottom: 1px solid rgba(255,255,255,.11); }
+.elb-admin-brand { min-height: 72px; display: flex; align-items: center; padding: 11px 17px 11px 18px; border-bottom: 1px solid rgba(255,255,255,.11); }
 .elb-admin-brand-link { display: flex; gap: 11px; min-width: 0; align-items: center; border-radius: 9px; }
 .elb-admin-brand-link:focus-visible, .elb-admin a:focus-visible, .elb-admin button:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
 .elb-admin-sidebar :is(a,button):focus-visible { outline-color: var(--brand-gold); }
 .elb-admin-brand-symbol { width: 38px; height: 44px; object-fit: contain; flex-shrink: 0; filter: drop-shadow(0 3px 8px rgba(0,0,0,.1)); }
 .elb-admin-brand-copy { display: flex; flex-direction: column; white-space: nowrap; overflow: hidden; line-height: 1.25; }
-.elb-admin-brand-copy strong { font-size: 17px; letter-spacing: -.035em; color: white; font-weight: 800; }
-.elb-admin-brand-copy small { font-size:12px; font-weight: 700; letter-spacing: .12em; color: var(--muted-foreground); margin-top: 3px; }
+.elb-admin-brand-copy strong { font-size: 17px; letter-spacing: -.035em; color: white; font-weight: 600; }
+.elb-admin-brand-copy small { font-size:12px; font-weight: 500; letter-spacing: .02em; color: var(--muted-foreground); margin-top: 3px; }
 .elb-admin-mobile-close { display: none; padding: 8px; color: #fff; margin-left: auto; }
 .elb-admin-context { margin: 14px 16px 5px; min-height: 29px; display: flex; gap: 8px; align-items: center; padding: 6px 9px; border: 1px solid rgba(191,230,244,.15); border-radius: 7px; color: var(--muted-foreground); font-size:12px; letter-spacing: .01em; white-space: nowrap; }
 .elb-admin-context-dot { width: 7px; height: 7px; border-radius: 100%; background: var(--success-solid); box-shadow: 0 0 0 3px rgba(117,200,161,.12); }
@@ -46,9 +46,9 @@
 .elb-admin-nav-scroll { min-height: 0; flex: 1 1 auto; overflow-y: auto; overscroll-behavior: contain; padding: 12px 10px 16px; scrollbar-width: none; -ms-overflow-style: none; }
 .elb-admin-nav-scroll::-webkit-scrollbar { display: none; }
 .elb-admin-section + .elb-admin-section { margin-top: 15px; }
-.elb-admin-section-label { padding: 0 14px; height: 26px; font-size:12px; font-weight: 700; letter-spacing: .17em; color: var(--muted-foreground); display: flex; align-items: center; white-space: nowrap; }
+.elb-admin-section-label { padding: 0 14px; height: 26px; font-size:12px; font-weight: 600; letter-spacing: .04em; color: var(--muted-foreground); display: flex; align-items: center; white-space: nowrap; }
 .elb-admin-navigation { display: flex; flex-direction: column; gap: 2px; }
-.elb-admin-nav-link { position: relative; display: flex; align-items: center; min-height: 40px; gap: 11px; border-radius: 9px; padding: 8px 13px; color: var(--muted-foreground); font-size: 12px; font-weight: 500; text-decoration: none; transition: background .16s ease, color .16s ease; }
+.elb-admin-nav-link { position: relative; display: flex; align-items: center; min-height: 44px; gap: 11px; border-radius: 9px; padding: 8px 13px; color: var(--muted-foreground); font-size: 14px; font-weight: 500; text-decoration: none; transition: background .16s ease, color .16s ease; }
 .elb-admin-nav-link svg { flex-shrink: 0; }
 .elb-admin-nav-link:hover { color: #fff; background: rgba(255,255,255,.09); }
 .elb-admin-nav-link--active { color: var(--foreground) !important; background: var(--card); font-weight: 700; box-shadow: 0 3px 14px rgba(0,0,0,.075); }
@@ -68,19 +68,19 @@
 .elb-admin-user-info small { font-size:12px; margin-top: 4px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: var(--muted-foreground); }
 .elb-admin-user-arrow { flex-shrink: 0; color: var(--muted-foreground); }
 .elb-admin-logout { margin-top: 8px; }
-.elb-admin-logout button { width: 100%; min-height: 34px; border-radius: 8px; font-size:12px; }
+.elb-admin-logout button { width: 100%; min-height: 44px; border-radius: 8px; font-size:14px; }
 .elb-admin-logout button:hover { background: var(--card); }
 .elb-admin-logout [role="alert"] { color: var(--on-brand-error); }
-.elb-admin-collapse { display: flex; align-items: center; gap: 9px; width: 100%; margin-top: 5px; min-height: 32px; padding: 5px 11px; color: var(--muted-foreground); border-radius: 8px; font-size:12px; }
+.elb-admin-collapse { display: flex; align-items: center; gap: 9px; width: 100%; margin-top: 5px; min-height: 44px; padding: 5px 11px; color: var(--muted-foreground); border-radius: 8px; font-size:14px; }
 .elb-admin-collapse:hover { color: #fff; background: rgba(255,255,255,.08); }
 .elb-admin-main-column { min-width: 0; flex: 1 1 0; display: flex; flex-direction: column; min-height: 100vh; }
-.elb-admin-topbar { position: sticky; top: 0; z-index: 25; min-height: 77px; display: flex; align-items: center; justify-content: space-between; gap: 16px; background:var(--card); border-bottom: 1px solid var(--elb-line); padding: 12px clamp(20px,3.4vw,46px); backdrop-filter: blur(12px); }
+.elb-admin-topbar { position: sticky; top: 0; z-index: 25; min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; background:color-mix(in srgb,var(--card) 94%,transparent); border-bottom: 1px solid var(--elb-line); padding: 12px clamp(20px,2.4vw,32px); backdrop-filter: blur(16px); }
 .elb-admin-topbar-start, .elb-admin-topbar-end { display: flex; align-items: center; gap: 16px; min-width: 0; }
 .elb-admin-topbar-end { flex-shrink: 0; }
 .elb-admin-heading-group { display: flex; flex-direction: column; line-height: 1.2; gap: 5px; }
 .elb-admin-breadcrumb { display: flex; gap: 5px; align-items: center; color: var(--muted-foreground); font-size:12px; font-weight: 700; letter-spacing: .10em; white-space: nowrap; }
 .elb-admin-breadcrumb-current { color: var(--foreground); letter-spacing: .02em; text-transform: none; }
-.elb-admin-page-title { color: var(--foreground); font-size: 17px; font-weight: 800; letter-spacing: -.035em; }
+.elb-admin-page-title { color: var(--foreground); font-size: 16px; font-weight: 600; letter-spacing: -.035em; }
 .elb-admin-environment { display: inline-flex; align-items: center; gap: 6px; font-size:12px; font-weight: 700; color: var(--success); background: var(--surface-muted); border-radius: 99px; padding: 9px 11px; white-space: nowrap; }
 .elb-admin-topbar-profile { display: flex; gap: 10px; align-items: center; font-size:12px; font-weight: 700; min-height: 39px; border: 1px solid var(--border); padding: 4px 10px 4px 5px; border-radius: 10px; color: var(--foreground); }
 .elb-admin-topbar-profile:hover { background: var(--card); }
@@ -88,11 +88,11 @@
 .elb-admin-topbar-avatar { width: 29px; height: 29px; border-radius: 7px; font-size:12px; }
 .elb-admin-menu-toggle { display: none; border: 1px solid var(--border); border-radius: 10px; padding: 9px; }
 .elb-admin-content { width: 100%; flex: 1 0 auto; min-width: 0; }
-.elb-admin-content-inner { width: 100%; max-width: 1540px; margin: 0 auto; padding: 27px clamp(20px,3.4vw,46px) 42px; }
+.elb-admin-content-inner { width: 100%; max-width: 1504px; margin: 0 auto; padding: 28px clamp(20px,2.4vw,32px) 40px; }
 .elb-admin-footer { display: flex; justify-content: space-between; gap: 10px; padding: 15px clamp(20px,3.4vw,46px); color: var(--muted-foreground); border-top: 1px solid var(--border); font-size:12px; }
 .elb-admin-backdrop { display: none; }
 /* Collapse with centered icons; retain tooltips through link title attributes. */
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
   .elb-admin--compact .elb-admin-sidebar { width: 76px; flex-basis: 76px; }
   .elb-admin--compact .elb-admin-brand { padding-left: 18px; }
   .elb-admin--compact .elb-admin-brand-copy, .elb-admin--compact .elb-admin-context-copy,
@@ -107,7 +107,7 @@
   .elb-admin--compact .elb-admin-section + .elb-admin-section { padding-top: 16px; border-top: 1px solid rgba(255,255,255,.12); }
   .elb-admin--compact .elb-admin-external, .elb-admin--compact .elb-admin-user, .elb-admin--compact .elb-admin-collapse { justify-content: center; padding-left: 0; padding-right: 0; }
 }
-@media (max-width: 1023px) {
+@media (max-width: 1199px) {
   .elb-admin-sidebar { position: fixed; left: 0; top: 0; height: 100dvh; transform: translateX(-100%); width: 275px; flex-basis: 275px; box-shadow: 20px 0 55px rgba(13,39,65,.12); transition: transform .22s ease; }
   .elb-admin-sidebar--open { transform: translateX(0); }
   .elb-admin-backdrop { display: block; position: fixed; z-index: 44; inset: 0; background: rgba(5,21,35,.6); }
@@ -129,17 +129,17 @@
 }
 
 /* Phase 1 — team directory, citizen registry, and granular permissions */
-.elb-admin-eyebrow { font-size:12px; font-weight: 800; letter-spacing: .17em; color: var(--foreground); }
-.elb-admin-field { width: 100%; height: 41px; padding: 9px 12px; border: 1px solid var(--border); border-radius: 10px; outline: 0; background: var(--card); color: var(--foreground); font-size: 12px; font-weight: 500; transition: border-color .15s, box-shadow .15s; }
+.elb-admin-eyebrow { font-size:12px; font-weight: 600; letter-spacing: .04em; color: var(--foreground); }
+.elb-admin-field { width: 100%; min-height: 44px; padding: 9px 12px; border: 1px solid var(--input); border-radius: 10px; outline: 0; background: var(--card); color: var(--foreground); font-size: 14px; font-weight: 500; transition: border-color .15s, box-shadow .15s; }
 .elb-admin-field:focus { border-color: var(--border); box-shadow: 0 0 0 3px rgba(46,136,174,.13); }
-.elb-admin-primary, .elb-admin-outline, .elb-admin-danger, .elb-admin-pager { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 41px; border-radius: 9px; padding: 9px 16px; font-size: 12px; font-weight: 700; white-space: nowrap; transition: background .15s, border-color .15s; }
+.elb-admin-primary, .elb-admin-outline, .elb-admin-danger, .elb-admin-pager { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; border-radius: 9px; padding: 9px 16px; font-size: 14px; font-weight: 600; white-space: nowrap; transition: background .15s, border-color .15s; }
 .elb-admin-primary { background: var(--primary); color: #fff; }
 .elb-admin-primary:hover { background: var(--primary); }
 .elb-admin-outline, .elb-admin-pager { color: var(--foreground); border: 1px solid var(--border); background: var(--card); }
 .elb-admin-outline:hover, .elb-admin-pager:hover { background: var(--surface-muted); }
 .elb-admin-danger { color: var(--destructive); background: var(--card); border: 1px solid var(--border); }
 .elb-admin-danger:hover { background: var(--card); }
-.elb-admin-primary:disabled, .elb-admin-danger:disabled, .elb-admin-outline:disabled { opacity: .55; cursor: not-allowed; }
+.elb-admin-primary:disabled, .elb-admin-danger:disabled, .elb-admin-outline:disabled { opacity: 1; color:var(--muted-foreground); background:var(--muted); border:1px dashed var(--input); cursor: not-allowed; }
 .elb-admin-module-check { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); font-size:12px; font-weight: 600; color: var(--muted-foreground); cursor: pointer; }
 .elb-admin-module-check--selected { border-color: var(--border); background: var(--surface-muted); color: var(--foreground); }
 .elb-admin-module-check:has(input:focus-visible) { outline: 3px solid var(--ring); outline-offset: 3px; }
@@ -148,17 +148,10 @@
 
 
 /* V8 workspace legibility / fewer nesting scrollbars. */
-.elb-admin-content-inner{max-width:1600px;padding:23px clamp(16px,2.7vw,38px) 50px}
 .elb-admin-content{overflow:visible}
-.elb-admin-topbar{padding-left:clamp(16px,2.7vw,38px);padding-right:clamp(16px,2.7vw,38px)}
 .elb-admin-nav-scroll{scrollbar-width:thin;scrollbar-color:rgba(209,230,242,.4) transparent}
 .elb-admin-nav-scroll::-webkit-scrollbar{display:block;width:4px}
 .elb-admin-nav-scroll::-webkit-scrollbar-thumb{border-radius:6px;background:rgba(209,230,242,.3)}
 .elb-admin-nav-scroll::-webkit-scrollbar-track{background:transparent}
-.elb-admin .elb-admin-primary,.elb-admin .elb-admin-outline,.elb-admin .elb-admin-danger{min-height:43px;font-size:12px}
-.elb-admin .elb-admin-nav-link{min-height:42px}
-.elb-admin .elb-admin-field{font-size:13px}
-.elb-admin .elb-admin-topbar-name{font-size:12px}
-@media(max-width:640px){.elb-admin-content-inner{padding:16px 14px 48px}.elb-admin-topbar{padding:11px 14px}}
 .elb-admin-notification{position:relative;display:grid;width:38px;height:38px;place-items:center;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--foreground);transition:.18s ease}
 .elb-admin-notification:hover{background:var(--surface-muted);border-color:var(--border)}

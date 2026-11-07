@@ -1,3 +1,4 @@
+import {mysqlRsaOptions} from '../lib/mysql-connection.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import mariadb from 'mariadb';
@@ -10,9 +11,9 @@ export async function connectTarget(raw,{test=false}={}) {
   const name=decodeURIComponent(u.pathname.slice(1));
   const isolated=/^elb_b3_test_[a-f0-9]{32}$/.test(name)&&process.env.ELB_B3_TEST_DATABASE===name;
   if(u.protocol!=='mysql:' || !['127.0.0.1','localhost','[::1]'].includes(u.hostname) || (test?!isolated:name!=='e_lingkod_bayan'))throw Error('Explicit local hackathon target guard refused connection');
-  return mariadb.createConnection({host:u.hostname,port:Number(u.port||3306),user:decodeURIComponent(u.username),password:decodeURIComponent(u.password),database:name,dateStrings:true,timezone:'+00:00',bigIntAsNumber:true});
+  return mariadb.createConnection({...mysqlRsaOptions(),host:u.hostname,port:Number(u.port||3306),user:decodeURIComponent(u.username),password:decodeURIComponent(u.password),database:name,dateStrings:true,timezone:'+00:00',bigIntAsNumber:true});
 }
-export async function readTarget(db){const [row]=await db.query('SELECT DATABASE() databaseName,@@hostname hostName,@@port portNumber');return {...row};}
+export async function readTarget(db){const [row]=await db.query('SELECT DATABASE() databaseName,@@hostname hostName,@@port portNumber');return {...row,portNumber:Number(row.portNumber)};}
 export async function assertPreserved(db,baseline) {
   const current=await snapshot(db);
   for(const [table,rows] of Object.entries(baseline)){
@@ -43,7 +44,7 @@ export async function assertMigrationOnly(db,baseline){
 }
 // Full private recovery backup, not the sanitized demo export. It intentionally
 // stays outside Git and includes credentials/PII; no values are logged.
-export async function backupDatabase(db,directory){
+export async function backupDatabase(db,directory,{readSnapshot=snapshot}={}){
   fs.mkdirSync(directory,{recursive:true});
   const file=path.join(directory,'pre-import.sql');
   if(fs.existsSync(file))throw Error('Recovery backup already exists; refusing replacement');
@@ -63,7 +64,7 @@ export async function backupDatabase(db,directory){
     fs.writeFileSync(file,sql,{mode:0o600});
     const manifest={createdAt:new Date().toISOString(),target:await readTarget(db),sha256:createHash('sha256').update(sql).digest('hex'),inventory};
     writeJson(path.join(directory,'backup-manifest.json'),manifest);
-    writeJson(path.join(directory,'pre-migration-baseline.json'),await snapshot(db));
+    writeJson(path.join(directory,'pre-migration-baseline.json'),await readSnapshot(db));
     return manifest;
   }finally{await db.query('ROLLBACK');}
 }

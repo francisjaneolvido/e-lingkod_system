@@ -8,7 +8,7 @@ import { isValidResetPassword, PASSWORD_RESET_PUBLIC_MESSAGE } from "../password
 import { AuthInput } from "./auth-input";
 import { PasswordField } from "./password-field";
 
-const actionClass = "flex min-h-12 w-full items-center justify-center rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground disabled:cursor-wait";
+const actionClass = "elb-button elb-button-primary elb-auth-submit";
 const hydrationSubscribe = () => () => {};
 
 export function RequestPasswordResetForm() {
@@ -29,15 +29,14 @@ export function RequestPasswordResetForm() {
     finally { setPending(false); }
   }
   return <div>
-    <h2 className="text-3xl font-bold tracking-tight">Recover your password</h2>
-    <p className="mb-6 mt-3 text-sm leading-6 text-muted-foreground">Enter the email address you use for eLingkod Bayan. Reset links expire after 30 minutes.</p>
-    <form onSubmit={submit} className="space-y-4" aria-busy={pending}>
+    <div className="elb-auth-heading"><h1>Recover your password</h1><p>Enter the email address you use for eLingkod Bayan. Reset links expire after 30 minutes.</p></div>
+    <form method="post" onSubmit={submit} className="space-y-4" aria-busy={pending}>
       <AuthInput id="recoveryEmail" name="email" label="Email address" icon={Mail} type="email" autoComplete="email" required maxLength={191} disabled={pending}/>
       <button className={actionClass} disabled={pending}>{pending ? "Requesting reset…" : "Send reset email"}</button>
-      <p role="status" className="text-sm leading-6 text-foreground">{message}</p>
-      {error && <p role="alert" className="rounded-xl border border-border bg-danger-soft p-3 text-sm text-destructive">{error}</p>}
+      <p role="status" className="elb-auth-result">{message}</p>
+      {error && <p role="alert" className="elb-account-alert">{error}</p>}
     </form>
-    <Link href="/login" className="mt-6 inline-flex min-h-11 items-center font-semibold text-primary underline underline-offset-4">Back to sign in</Link>
+    <Link href="/login" className="mt-6 inline-flex min-h-11 items-center font-semibold text-link underline underline-offset-4">Back to sign in</Link>
   </div>;
 }
 
@@ -79,17 +78,17 @@ export function ResetPasswordForm() {
     finally { setPending(false); }
   }
   return <div>
-    <h2 className="text-3xl font-bold tracking-tight">Choose a new password</h2>
+    <div className="elb-auth-heading"><h1>Choose a new password</h1></div>
     {complete ? <p role="status" className="my-6 text-sm leading-6">Your password has been reset and your previous sessions have been signed out. Sign in with your new password. Your account role and ID review status are unchanged.</p> : ready && !token ? <p role="alert" className="my-6 text-sm leading-6">Open the full link from your reset email. If the link has expired or was already used, request another email.</p> : <>
       <p className="my-6 text-sm leading-6 text-muted-foreground">Use 12–128 characters, including uppercase and lowercase letters, a number and a symbol. All previous sessions will be signed out.</p>
-      <form onSubmit={submit} className="space-y-4" aria-busy={pending}>
+      <form method="post" onSubmit={submit} className="space-y-4" aria-busy={pending}>
         <PasswordField id="resetPassword" name="newPassword" label="New password" autoComplete="new-password" minLength={12} maxLength={128} disabled={!ready || pending}/>
         <PasswordField id="resetConfirmPassword" name="confirmPassword" label="Confirm new password" autoComplete="new-password" minLength={12} maxLength={128} disabled={!ready || pending}/>
         <button className={actionClass} disabled={!ready || pending}>{pending ? "Resetting password…" : "Reset password"}</button>
-        {error && <p role="alert" className="rounded-xl border border-border bg-danger-soft p-3 text-sm text-destructive">{error}</p>}
+        {error && <p role="alert" className="elb-account-alert">{error}</p>}
       </form>
     </>}
-    {!complete && <Link href="/forgot-password" className="mt-5 flex min-h-11 items-center font-semibold text-primary underline underline-offset-4">Request another reset email</Link>}
-    <Link href="/login" className="mt-3 inline-flex min-h-11 items-center font-semibold text-primary underline underline-offset-4">Back to sign in</Link>
+    {!complete && <Link href="/forgot-password" className="mt-5 flex min-h-11 items-center font-semibold text-link underline underline-offset-4">Request another reset email</Link>}
+    <Link href="/login" className="mt-3 inline-flex min-h-11 items-center font-semibold text-link underline underline-offset-4">Back to sign in</Link>
   </div>;
 }

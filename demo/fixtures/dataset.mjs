@@ -1,3 +1,4 @@
+import {fixturePassword} from './credentials.mjs';
 // Synthetic, reserved-domain fixtures. Reference year never follows wall clock.
 export const datasetVersion = 'elb-demo-2026-v1';
 export const referenceYear = 2026;
@@ -7,7 +8,7 @@ export const accounts = Array.from({ length: 108 }, (_, index) => {
   const group = index < 80 ? 'individual' : index < 100 ? 'establishment' : index < 104 ? 'admin' : 'staff';
   const n = index < 80 ? index : index < 100 ? index - 80 : index < 104 ? index - 100 : index - 104;
   return { key: `${group}-${String(n + 1).padStart(2, '0')}`, index: n, group, firstName: firstNames[index % 20], lastName: lastNames[Math.floor(index / 20)], middleInitial: '', hasNoMiddleName: true,
-    email: `${group}.${String(n + 1).padStart(2, '0')}@example.test`, password: `ElbDemo2026!${String(index + 1).padStart(3, '0')}`, phoneNumber: `+63900${String(index + 1).padStart(7, '0')}`,
+    email: `${group}.${String(n + 1).padStart(2, '0')}@example.test`, get password(){ return fixturePassword(this.email); }, phoneNumber: `+63900${String(index + 1).padStart(7, '0')}`,
     role: group === 'admin' ? 'ADMIN' : group === 'staff' ? 'STAFF' : 'CITIZEN',
     scenario: group === 'individual' ? n < 60 ? 'submitted' : n < 68 ? 'later-draft' : n < 74 ? 'incomplete-draft' : 'withdrawn' : group === 'establishment' ? n < 14 ? 'submitted' : n < 17 ? 'later-draft' : n === 17 ? 'draft-only' : 'withdrawn' : group,
   };

@@ -1,0 +1,2 @@
+import {readFileSync} from 'node:fs';
+export function mysqlRsaOptions(env=process.env){const file=env.MYSQL_RSA_PUBLIC_KEY_PATH?.trim();if(!file)return {};let key;try{key=readFileSync(file,'utf8');}catch{throw Error('MYSQL_RSA_PUBLIC_KEY_PATH must reference this server\'s readable public PEM.');}if(!key.includes('-----BEGIN PUBLIC KEY-----'))throw Error('MySQL RSA configuration requires a public PEM, never a private key.');return {cachingRsaPublicKey:key};}

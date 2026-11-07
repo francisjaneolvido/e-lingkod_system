@@ -13,7 +13,7 @@ export function apiFailure(error: unknown) {
   if (error instanceof CivicError) return json({ error: error.message }, error.status);
   // Never echo database URLs, queries, stack traces, or submitted personal data.
   console.error("[civic] Request failed", error instanceof Error ? error.name : "UnknownError");
-  return json({ error: "The action desk is unavailable right now. Please try again shortly. If setup is new, check that the Civic Reporting migration has been applied." }, 503);
+  return json({ error: "The action desk is unavailable right now. Please try again shortly. Contact your local service desk if the problem continues." }, 503);
 }
 
 export function assertSameOrigin(request: Request) {

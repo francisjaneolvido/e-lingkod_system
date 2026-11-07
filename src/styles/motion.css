@@ -1,0 +1,29 @@
+:root {
+  --motion-quick: 120ms;
+  --motion-state: 180ms;
+  --motion-reveal: 260ms;
+  --ease-out: cubic-bezier(.2,.7,.2,1);
+  --ease-settle: cubic-bezier(.2,.85,.3,1.08);
+}
+@layer base {
+  button, [data-slot="button"], summary { touch-action: manipulation; }
+  button, [data-slot="button"] { transition: background-color var(--motion-state), color var(--motion-state), border-color var(--motion-state), box-shadow var(--motion-state), transform var(--motion-quick) var(--ease-out); }
+  button:active:not(:disabled):not([aria-disabled="true"]) { transform: scale(.98); }
+  input, select, textarea { transition: border-color var(--motion-state), box-shadow var(--motion-state); }
+  a { transition: color var(--motion-state), background-color var(--motion-state), border-color var(--motion-state); }
+  dialog { overscroll-behavior: contain; }
+  dialog[open] { animation: elb-reveal var(--motion-reveal) var(--ease-out); }
+  dialog::backdrop { background: #061a2b80; backdrop-filter: blur(4px); }
+  dialog[open]::backdrop { animation: elb-fade var(--motion-state) var(--ease-out); }
+  summary { cursor: pointer; }
+  summary::marker { color: var(--muted-foreground); }
+}
+.elb-reveal { animation: elb-reveal var(--motion-reveal) var(--ease-out); }
+.elb-progress { transition: width var(--motion-reveal) var(--ease-out); }
+@keyframes elb-reveal { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+@keyframes elb-fade { from { opacity:0; } to { opacity:1; } }
+@media(prefers-reduced-motion:reduce) {
+  :root { --motion-quick:0ms; --motion-state:0ms; --motion-reveal:0ms; }
+  button:active:not(:disabled):not([aria-disabled="true"]) { transform:none; }
+  dialog[open], dialog[open]::backdrop, .elb-reveal { animation:none; }
+}

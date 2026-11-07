@@ -47,3 +47,13 @@ next-env.d.ts
 # Private local AI working material
 /.scratch/
 /.playwright-mcp/
+
+# Reproduced from prisma/schema.prisma with the pinned Prisma generator.
+/src/generated/prisma/
+# Next configuration for isolated verification output; root tsconfig stays tracked.
+/.tsconfig.next-*.json
+
+# Private credential catalogue and generated full demo exports (not additive data).
+/demo/accounts.csv
+/demo/e_lingkod_bayan_demo.sql
+/demo/export-manifest.json

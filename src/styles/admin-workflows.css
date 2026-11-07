@@ -1,0 +1,51 @@
+.elb-admin-workflow { min-width:0; }
+.elb-admin-workflow .elb-admin-sheet { min-width:0; border-block:1px solid var(--border); }
+.elb-admin-workflow .elb-admin-sheet-heading { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; padding-block:1rem; }
+.elb-admin-workflow .elb-admin-sheet-heading h2 { font-family:var(--font-heading); font-size:1.25rem; font-weight:650; }
+.elb-admin-workflow .elb-admin-sheet-heading p { margin-top:.25rem; max-width:72ch; font-size:.9375rem; color:var(--muted-foreground); }
+.elb-admin-workflow .elb-admin-filters { display:grid; grid-template-columns:minmax(14rem,2fr) repeat(4,minmax(0,1fr)); gap:.75rem; padding-bottom:1rem; }
+.elb-admin-workflow .elb-admin-filters > *, .elb-admin-workflow .elb-admin-staff-filters > * { min-width:0; max-width:100%; }
+.elb-admin-workflow .elb-admin-filters select { width:100%; text-overflow:ellipsis; }
+.elb-admin-workflow .elb-admin-service-filters > * { min-width:0; max-width:100%; }
+.elb-admin-workflow .elb-admin-service-filters select { width:100%; text-overflow:ellipsis; }
+.elb-admin-workflow .elb-admin-filter-footer { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:.75rem; padding-bottom:1rem; font-size:.875rem; color:var(--muted-foreground); }
+.elb-admin-workflow .elb-admin-task-band { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-block:1px solid var(--border); }
+.elb-admin-workflow .elb-admin-task-band > a { min-width:0; display:flex; flex-direction:column; justify-content:space-between; gap:.5rem; padding:1rem; border-inline-end:1px solid var(--border); }
+.elb-admin-workflow .elb-admin-task-band > a:last-child { border-inline-end:0; }
+.elb-admin-workflow .elb-admin-task-band > a:hover { background:var(--muted); }
+.elb-admin-workflow .elb-admin-task-band strong { font-family:var(--font-heading); font-size:2rem; line-height:1.1; font-variant-numeric:tabular-nums; }
+.elb-admin-workflow .elb-admin-task-band span { font-weight:600; font-size:.9375rem; }
+.elb-admin-workflow .elb-admin-task-band p { font-size:.875rem; line-height:1.5; color:var(--muted-foreground); }
+.elb-admin-workflow .elb-admin-metric-five { grid-template-columns:repeat(5,minmax(0,1fr)); }
+.elb-admin-workflow .elb-admin-metric-five > a { min-width:0; padding:1rem; border-inline-end:1px solid var(--border); }
+.elb-admin-workflow .elb-admin-metric-five > a:last-child { border:0; }
+.elb-admin-workflow .elb-admin-staff-list { border-top:1px solid var(--border); }
+.elb-admin-workflow .elb-admin-staff-row { min-width:0; border-bottom:1px solid var(--border); }
+.elb-admin-workflow .elb-admin-staff-row h3, .elb-admin-workflow .elb-admin-staff-row span { overflow-wrap:anywhere; }
+.elb-admin-workflow .elb-admin-staff-meta { display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; padding:0 0 1rem; font-size:.875rem; color:var(--muted-foreground); }
+.elb-admin-workflow .elb-admin-staff-filters { display:flex; flex-wrap:wrap; gap:.75rem; padding-block:.75rem; }
+.elb-admin-workflow .elb-admin-staff-filters > label:last-child { flex:1 1 16rem; }
+.elb-admin-workflow .elb-admin-staff-filters select { width:100%; }
+.elb-admin-workflow .elb-admin-staff-tabs { display:flex; flex-wrap:wrap; gap:.25rem; border-bottom:1px solid var(--border); padding-bottom:.5rem; }
+.elb-admin-workflow .elb-admin-office-select { width:100%; min-width:0; text-overflow:ellipsis; }
+.elb-admin-workflow .elb-admin-office-label { display:block; margin-top:.4rem; overflow-wrap:anywhere; font-size:.875rem; line-height:1.4; font-weight:400; color:var(--muted-foreground); }
+.elb-admin-workflow .elb-admin-data { min-width:0; overflow-wrap:anywhere; }
+.elb-admin-workflow .elb-admin-statuses { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; }
+.elb-admin-workflow .elb-admin-statuses > span { overflow-wrap:anywhere; }
+.elb-admin-workflow .elb-admin-detail-section { padding-block:1rem; border-top:1px solid var(--border); }
+.elb-admin-workflow .elb-admin-review-ready { background:var(--success-soft); color:var(--success); }
+.elb-admin-workflow .elb-admin-review-pending { background:var(--warning-soft); color:var(--warning-foreground); }
+.elb-admin-workflow .elb-admin-data-table { font-size:.9375rem; }
+.elb-admin-workflow .elb-admin-data-table th { text-transform:none; letter-spacing:normal; }
+.elb-admin-workflow .elb-admin-data-table td { vertical-align:top; overflow-wrap:anywhere; }
+.elb-admin-workflow .elb-admin-data-table a { display:inline-flex; align-items:center; min-height:44px; }
+.elb-admin-workflow button, .elb-admin-workflow summary { min-height:44px; }
+.elb-admin-workflow :is(button,a,summary,select,input,textarea):focus-visible { outline:3px solid var(--ring); outline-offset:3px; }
+.elb-admin-workflow .elb-admin-history > summary { cursor:pointer; display:flex; align-items:center; font-weight:600; font-size:1rem; }
+@media(max-width:1199px) { .elb-admin-workflow .elb-admin-filters { grid-template-columns:repeat(2,minmax(0,1fr)); } .elb-admin-workflow .elb-admin-filters > label:first-child { grid-column:1/-1; } }
+@media(max-width:639px) {
+ .elb-admin-workflow .elb-admin-filters { grid-template-columns:minmax(0,1fr); }
+ .elb-admin-workflow .elb-admin-task-band, .elb-admin-workflow .elb-admin-metric-five { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .elb-admin-workflow .elb-admin-task-band > a, .elb-admin-workflow .elb-admin-metric-five > a { border-bottom:1px solid var(--border); padding:1rem .5rem; }
+ .elb-admin-workflow .elb-admin-task-band > a:nth-child(2n), .elb-admin-workflow .elb-admin-metric-five > a:nth-child(2n) { border-inline-end:0; }
+}

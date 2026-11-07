@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useSyncExternalStore, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Mail, MoveUpRight, LoaderCircle, AlertCircle } from "lucide-react";
@@ -9,7 +9,9 @@ import { getSafeAuthDestination } from "@/lib/auth-redirect";
 import { AuthInput } from "./auth-input";
 import { PasswordField } from "./password-field";
 
+const subscribeReady = () => () => {};
 export function LoginForm() {
+  const ready = useSyncExternalStore(subscribeReady, () => true, () => false);
   const router = useRouter();
   const [remember, setRemember] = useState(false);
   const [pending, setPending] = useState(false);
@@ -50,30 +52,26 @@ export function LoginForm() {
 
   return (
     <div>
-      <div className="mb-7 text-center lg:mb-8">
-        <span className="mb-3 inline-flex items-center rounded-full bg-muted px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground">Citizen &amp; LGU Staff</span>
-        <h2 className="text-[clamp(27px,2.5vw,35px)] font-extrabold leading-tight tracking-[-0.05em] text-foreground">Welcome Back<span className="text-warning-foreground">!</span></h2>
-        <p className="mt-2 text-[12px] leading-6 text-muted-foreground">Sign in to access reports and community services.</p>
-      </div>
+      <div className="elb-auth-heading"><h1>Sign in</h1><p>Sign in to your reports and community services.</p></div>
 
-      <form className="space-y-4" onSubmit={handleSubmit}>
-        <AuthInput id="loginEmail" name="email" label="Email Address" icon={Mail} type="email" autoComplete="email" placeholder="name@example.com" required disabled={pending} />
-        <PasswordField id="loginPassword" name="password" label="Password" autoComplete="current-password" />
+      <form method="post" className="space-y-4" onSubmit={handleSubmit} aria-busy={pending}>
+        <AuthInput id="loginEmail" name="email" label="Email address" icon={Mail} type="email" autoComplete="email" placeholder="name@example.com" required disabled={!ready || pending} />
+        <PasswordField id="loginPassword" name="password" label="Password" autoComplete="current-password" disabled={pending} />
         <div className="flex flex-wrap items-center justify-between gap-3 pt-0.5">
-          <label className="inline-flex cursor-pointer items-center gap-2 text-xs text-muted-foreground">
+          <label className="elb-auth-check">
             <input type="checkbox" checked={remember} onChange={event => setRemember(event.target.checked)} className="size-4 rounded border-border accent-[#14638f]" />
             Remember me
           </label>
-          <Link href="/forgot-password" className="inline-flex min-h-11 items-center text-sm font-semibold text-primary underline underline-offset-4">Forgot password?</Link>
+          <Link href="/forgot-password" className="inline-flex min-h-11 items-center text-sm font-semibold text-link underline underline-offset-4">Forgot password?</Link>
         </div>
-        {error && <p role="alert" className="flex items-start gap-2 rounded-xl border border-red-200 bg-danger-soft px-3 py-2.5 text-xs text-destructive"><AlertCircle size={16} className="mt-0.5 shrink-0" />{error}</p>}
-        <button type="submit" disabled={pending} className="group flex h-[49px] w-full items-center justify-center gap-2 rounded-xl bg-primary text-[13px] font-bold text-white shadow-[0_12px_22px_rgba(18,85,126,0.14)] transition hover:-translate-y-0.5 hover:bg-primary disabled:cursor-wait disabled:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border">
-          {pending ? <><LoaderCircle size={17} className="animate-spin" /> Signing in...</> : <>Log In <ArrowRight size={17} className="transition group-hover:translate-x-1" /></>}
+        {error && <p role="alert" className="elb-account-alert flex items-start gap-2"><AlertCircle aria-hidden="true" size={16} className="mt-0.5 shrink-0" />{error}</p>}
+        <button type="submit" disabled={pending} className="elb-button elb-button-primary elb-auth-submit">
+          {pending ? <><LoaderCircle aria-hidden="true" size={17} className="animate-spin" /> Signing in…</> : <>Sign in <ArrowRight aria-hidden="true" size={17} className="transition group-hover:translate-x-1" /></>}
         </button>
       </form>
 
-      <Link href="/" className="mt-3 flex h-[47px] items-center justify-center gap-2 rounded-xl border border-border bg-card text-[12px] font-bold text-foreground transition hover:border-border hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border">Continue as Guest <MoveUpRight size={16} /></Link>
-      <p className="mt-6 text-center text-[12px] text-muted-foreground">Don&apos;t have an account?{" "}<Link href="/register" className="font-bold text-foreground underline-offset-4 transition hover:underline">Register here</Link></p>
+      <Link href="/" className="elb-auth-guest">Continue as guest <MoveUpRight aria-hidden="true" size={16} /></Link>
+      <p className="elb-auth-bottom">Don&apos;t have an account?{" "}<Link href="/register" className="font-bold text-foreground underline-offset-4 transition hover:underline">Create an account</Link></p>
     </div>
   );
 }

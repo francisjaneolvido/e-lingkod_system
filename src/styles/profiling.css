@@ -1,0 +1,88 @@
+/* Profiling, census and employment workflows. Components opt in explicitly. */
+.elb-profile-workspace,.elb-workflow { display:grid; gap:1.5rem; min-width:0; color:var(--foreground); }
+.elb-profile-heading,.elb-workflow-heading { display:grid; gap:.75rem; padding:4px 0 16px; border:0; border-radius:0; background:transparent; box-shadow:none; }
+.elb-profile-heading h1,.elb-workflow-heading h1 { margin:0; font-family:var(--font-heading); font-size:clamp(1.8rem,3vw,2.4rem); font-weight:650; line-height:1.15; letter-spacing:-.035em; text-wrap:balance; max-width:32ch; }
+.elb-profile-heading p,.elb-workflow-heading p { max-width:76ch; margin:0; line-height:1.7; }
+.elb-profile-links { display:flex; align-items:center; justify-content:space-between; gap:.75rem; flex-wrap:wrap; }
+.elb-profile-links a { min-height:44px; display:inline-flex; align-items:center; gap:.5rem; font-size:.9375rem; font-weight:600; border-radius:.7rem; }
+.elb-profile-links a:hover { color:var(--link); text-decoration:underline; text-underline-offset:4px; }
+.elb-profile-state { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; padding:1rem 1.25rem; background:var(--surface-inset); border:1px solid var(--border); border-radius:1rem; }
+.elb-profile-state strong { font-size:.9375rem; font-weight:650; }
+.elb-profile-state p { font-size:.875rem; color:var(--muted-foreground); }
+.elb-profile-state[data-dirty="true"] { border-inline-start:4px solid var(--brand-gold); }
+.elb-profile-panel,.elb-workflow-panel { min-width:0; border:1px solid var(--border); border-radius:var(--shape-group); padding:clamp(1.25rem,2.5vw,2rem); background:var(--card); box-shadow:none; }
+.elb-profile-panel > h2,.elb-workflow-panel > h2 { font-size:1.25rem; line-height:1.4; font-weight:650; }
+.elb-profile-survey { overflow:hidden; border:1px solid var(--border); border-radius:1.5rem; background:var(--card); box-shadow:var(--shadow-raised); }
+.elb-profile-intro { padding:1.5rem 2rem; border-bottom:1px solid var(--border); background:var(--surface-inset); }
+.elb-profile-layout { display:grid; grid-template-columns:minmax(0,1fr); }
+.elb-profile-guide { min-width:0; padding:1.25rem; background:var(--surface-inset); border-bottom:1px solid var(--border); }
+.elb-profile-guide > p { font-size:.875rem; color:var(--muted-foreground); line-height:1.6; }
+.elb-profile-steps { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem; margin:.875rem 0 0; padding:0; list-style:none; }
+.elb-profile-step { display:flex; align-items:center; gap:.65rem; width:100%; min-height:48px; padding:.65rem .75rem; border:1px solid transparent; border-radius:.8rem; text-align:left; font-size:.875rem; color:var(--muted-foreground); line-height:1.35; }
+.elb-profile-step-number { display:grid; place-items:center; width:1.75rem; height:1.75rem; flex-shrink:0; border:1px solid var(--input); border-radius:50%; font-size:.75rem; font-weight:700; background:var(--card); font-variant-numeric:tabular-nums; }
+.elb-profile-step[aria-current="step"] { background:var(--card); border-color:var(--input); color:var(--foreground); box-shadow:var(--shadow-low); font-weight:650; }
+.elb-profile-step[aria-current="step"] .elb-profile-step-number { color:var(--primary-foreground); background:var(--primary); border-color:var(--primary); }
+.elb-profile-step:not(:disabled):hover { background:var(--card); border-color:var(--input); color:var(--foreground); }
+.elb-profile-step:disabled { cursor:not-allowed; opacity:1; }
+.elb-profile-workspace .elb-button[aria-pressed="true"] { color:var(--primary-foreground); background:var(--primary); border-color:var(--primary); }
+.elb-profile-content { min-width:0; padding:clamp(1.25rem,3vw,2rem); }
+.elb-profile-field { min-width:0; }
+.elb-profile-field > label { font-size:.9375rem; font-weight:600; line-height:1.5; }
+.elb-profile-control { width:100%; min-width:0; min-height:48px; border:1px solid var(--input); border-radius:.8rem; background:var(--surface-inset); padding:.75rem .9rem; font-size:1rem; color:var(--foreground); box-shadow:inset 0 1px 2px #00000006; }
+.elb-profile-control:hover { border-color:var(--muted-foreground); }
+.elb-profile-control:focus-visible { border-color:var(--ring); box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 18%,transparent); }
+.elb-profile-choice { display:flex; align-items:flex-start; gap:.75rem; min-height:48px; padding:.85rem 1rem; border:1px solid var(--input); border-radius:.85rem; background:var(--card); color:var(--muted-foreground); cursor:pointer; font-size:.9375rem; line-height:1.5; }
+.elb-profile-choice:has(input:checked) { background:var(--surface-inset); color:var(--foreground); border-color:var(--primary); box-shadow:var(--shadow-low); }
+.elb-profile-choice input { width:1.1rem; height:1.1rem; flex-shrink:0; margin-top:.16rem; accent-color:var(--primary); }
+.elb-profile-choice:hover { border-color:var(--muted-foreground); }
+.elb-profile-actions { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.75rem; margin-top:2rem; padding-top:1.25rem; border-top:1px solid var(--border); }
+.elb-profile-progress { width:100%; height:.4rem; border:0; border-radius:99px; overflow:hidden; background:var(--muted); accent-color:var(--primary); }
+.elb-profile-progress::-webkit-progress-bar { background:var(--muted); }.elb-profile-progress::-webkit-progress-value { background:var(--primary); }.elb-profile-progress::-moz-progress-bar { background:var(--primary); }
+.elb-workflow-toolbar { display:flex; gap:.75rem; flex-wrap:wrap; align-items:center; margin-top:1rem; }
+.elb-workflow-filters { display:grid; gap:1rem; margin-top:1.25rem; padding:1.25rem; border:1px solid var(--border); border-radius:1rem; background:var(--surface-inset); align-items:end; }
+.elb-workflow-filters label { display:grid; gap:.5rem; color:var(--foreground); font-size:.875rem; font-weight:600; min-width:0; }
+.elb-workflow-records { display:grid; gap:.875rem; }
+.elb-workflow-record { min-width:0; display:grid; align-content:start; gap:.3rem; padding:1.25rem; border:1px solid var(--border); border-radius:1rem; background:var(--surface-inset); }
+.elb-workflow-record h3 { font-size:1rem; font-weight:650; line-height:1.5; overflow-wrap:anywhere; }
+.elb-workflow-record:has(button:hover),.elb-workflow-record:has(a:hover) { border-color:var(--input); box-shadow:var(--shadow-low); }
+.elb-workflow-answers { margin:1rem 0; display:grid; grid-template-columns:minmax(0,1fr); gap:0 1.5rem; }
+.elb-workflow-answer { min-width:0; padding:.875rem 0; border-bottom:1px solid var(--border); }
+.elb-workflow-answer dt { font-size:.875rem; font-weight:600; color:var(--foreground); }
+.elb-workflow-answer dd { margin-top:.35rem; line-height:1.65; overflow-wrap:anywhere; white-space:pre-wrap; color:var(--muted-foreground); }
+.elb-workflow-dialog { position:fixed; inset:0 0 0 auto; margin:0; width:min(960px,100vw); height:100dvh; max-height:100dvh; overflow-y:auto; overscroll-behavior:contain; padding:clamp(1.25rem,3vw,2rem); border:1px solid var(--border); border-radius:1.25rem 0 0 1.25rem; color:var(--foreground); background:var(--card); box-shadow:var(--shadow-overlay); }
+.elb-workflow-preview { padding:1.25rem; border:1px solid var(--input); border-inline-start:4px solid var(--primary); border-radius:1rem; background:var(--surface-inset); }
+.elb-workflow-table-scroll { max-width:100%; max-height:22rem; overflow:auto; overscroll-behavior:contain; border:1px solid var(--border); border-radius:.85rem; background:var(--card); }
+.elb-workflow-table { width:100%; border-collapse:collapse; text-align:left; font-size:.875rem; line-height:1.6; }
+.elb-workflow-table th,.elb-workflow-table td { padding:.8rem 1rem; vertical-align:top; border-bottom:1px solid var(--border); }
+.elb-workflow-table th { background:var(--surface-inset); color:var(--foreground); font-weight:650; position:sticky; top:0; }
+.elb-workflow-table td:first-child { white-space:nowrap; font-variant-numeric:tabular-nums; }
+.elb-workflow-table tbody tr:last-child td { border-bottom:0; }
+.elb-workflow-stagebar { display:flex; gap:.75rem; flex-wrap:wrap; padding:1rem 1.25rem; border:1px solid var(--border); border-radius:1rem; background:var(--surface-inset); }
+.elb-workflow-stage { display:flex; align-items:center; gap:.5rem; min-height:32px; font-size:.875rem; color:var(--muted-foreground); }
+.elb-workflow-stage[aria-current="step"] { color:var(--foreground); font-weight:650; }
+.elb-workflow-stage span { display:grid; place-items:center; width:1.5rem; height:1.5rem; border:1px solid var(--input); border-radius:50%; background:var(--card); font-size:.75rem; }
+.elb-opportunity-layout { display:grid; gap:1.5rem; grid-template-columns:minmax(0,1fr); }
+.elb-opportunity-filter-grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); }
+.elb-opportunity-list { display:grid; gap:1rem; }
+.elb-opportunity-card { display:grid; align-content:start; gap:.75rem; min-width:0; padding:20px; border:1px solid var(--border); border-radius:16px; background:var(--card); box-shadow:none; }
+.elb-opportunity-card h3 { font-size:1.25rem; font-weight:650; letter-spacing:-.02em; line-height:1.4; }
+.elb-opportunity-card h3 a { color:var(--foreground); text-decoration:none; }
+.elb-opportunity-card h3 a:hover { color:var(--link); text-decoration:underline; text-underline-offset:4px; }
+.elb-opportunity-card > p { color:var(--muted-foreground); line-height:1.6; }
+.elb-opportunity-summary { padding:1rem 1.25rem; border-inline-start:3px solid var(--primary); background:var(--surface-inset); border-radius:0 .85rem .85rem 0; line-height:1.6; }
+.elb-opportunity-detail { display:grid; gap:1.5rem; }
+.elb-opportunity-contact { border:1px solid var(--input); border-radius:1.25rem; padding:1.5rem; background:var(--surface-inset); }
+@media(min-width:700px) { .elb-workflow-filters { grid-template-columns:repeat(2,minmax(0,1fr)); }.elb-workflow-records,.elb-workflow-answers,.elb-opportunity-list { grid-template-columns:repeat(2,minmax(0,1fr)); }.elb-profile-steps { grid-template-columns:repeat(4,minmax(0,1fr)); } }
+@media(min-width:1100px) { .elb-profile-layout { grid-template-columns:240px minmax(0,1fr); }.elb-profile-guide { border-bottom:0; border-right:1px solid var(--border); }.elb-profile-guide .elb-profile-steps { grid-template-columns:minmax(0,1fr); }.elb-workflow-filters { grid-template-columns:repeat(3,minmax(0,1fr)); }.elb-workflow-records { grid-template-columns:repeat(3,minmax(0,1fr)); }.elb-opportunity-layout { grid-template-columns:minmax(0,1fr); align-items:start; }.elb-opportunity-layout > form { position:sticky; top:6rem; }.elb-opportunity-layout > form .elb-workflow-filters { grid-template-columns:minmax(0,1fr); }.elb-opportunity-detail { grid-template-columns:minmax(0,1fr) 340px; align-items:start; }.elb-opportunity-contact { position:sticky; top:6rem; } }
+@media(max-width:480px) { .elb-profile-intro { padding:1.25rem; }.elb-profile-actions > div { width:100%; display:flex; flex-wrap:wrap; }.elb-profile-actions .elb-button { flex:1; }.elb-profile-state { align-items:flex-start; }.elb-profile-steps { gap:.35rem; }.elb-profile-step { padding:.5rem; font-size:.8125rem; gap:.45rem; } }
+@media(prefers-reduced-motion:reduce) { .elb-profile-step,.elb-opportunity-card,.elb-workflow-record { transition:none; } }
+.opportunity-heading{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.elb-return-link{display:inline-flex;align-items:center;min-height:44px;color:var(--link);font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.opportunity-heading h1{margin-top:8px}
+.opportunity-heading p{margin-top:12px;max-width:75ch}
+.opportunity-more-filters{border-block:1px solid var(--border);padding-block:4px}
+.opportunity-more-filters>summary{padding-block:12px;min-height:44px}
+.opportunity-more-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px 24px;padding-block:16px}
+.opportunity-more-fields>label,.elb-opportunity-filter-grid>label{min-inline-size:0;align-content:start}
+.opportunity-more-fields select,.elb-opportunity-filter-grid select{padding-inline-end:36px;line-height:1.5}
+#opportunity-results{scroll-margin-top:100px}

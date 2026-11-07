@@ -4,6 +4,8 @@ import { connection } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { OFFICIAL_NUMBERS, normalizedPhone } from "@/features/emergency/domain";
 import { PublicEmergency, type PublicHotline, type PublicAlert } from "@/features/emergency/components/public-emergency";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
 
 export const metadata: Metadata = { title: "Emergency Hotlines & Alerts | Los Baños | eLingkod Bayan", description: "Emergency numbers and approved local advisories for Los Baños, Laguna." };
 
@@ -36,5 +38,5 @@ export default async function EmergencyPage() {
     severity: row.severity, barangays: JSON.parse(row.barangaysJson) as string[],
     publishedAt: row.publishedAt?.toISOString() ?? null,
     startsAt: row.startsAt.toISOString(), expiresAt: row.expiresAt.toISOString() }));
-  return <PublicEmergency hotlines={hotlines} alerts={alerts} dataAvailable={dataAvailable}/>;
+  return <><SiteHeader viewer={null}/><PublicEmergency hotlines={hotlines} alerts={alerts} dataAvailable={dataAvailable}/><SiteFooter/></>;
 }

@@ -10,5 +10,5 @@ export function CopyTracking({ value }: { value: string }) {
     try { await navigator.clipboard.writeText(value); setCopied(true); setFailed(false); }
     catch { setFailed(true); }
   }
-  return <><button type="button" className={s.iconButton} onClick={copy} aria-label={copied ? "Tracking ID copied" : "Copy tracking ID"} title={copied ? "Copied" : "Copy tracking ID"}>{copied ? <Check size={15} /> : <Copy size={15} />}</button><span className={s.srOnly} role="status">{copied ? "Tracking ID copied." : failed ? `Copy unavailable. Your tracking ID is ${value}.` : ""}</span>{failed && <small className={s.hint}>Select the ID to copy it manually.</small>}</>;
+  return <><button type="button" className={`${s.iconButton} elb-civic-iconButton`} onClick={copy} aria-label={copied ? "Tracking ID copied" : "Copy tracking ID"} title={copied ? "Copied" : "Copy tracking ID"}>{copied ? <Check size={15} /> : <Copy size={15} />}</button><span className={s.srOnly} role="status">{copied ? "Tracking ID copied." : failed ? `Copy unavailable. Your tracking ID is ${value}.` : ""}</span>{failed && <small className={`${s.hint} elb-civic-hint`}>Select the ID to copy it manually.</small>}</>;
 }

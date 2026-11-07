@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { formatPickupTime, manilaPickupInstant, PICKUP_TIME_LABEL } from "../pickup-time";
 import type { PickupRequest } from "./citizen-pickup-panel";
 
-const field="mt-2 w-full rounded-2xl border border-border bg-card px-4 py-3 text-sm text-foreground";
+const field="elb-field mt-2";
 export function StaffPickupPanel({request}:{request:PickupRequest}){
   const router=useRouter(),[busy,setBusy]=useState(false),[error,setError]=useState(""),[scheduledAt,setScheduledAt]=useState(""),[location,setLocation]=useState(""),[instructions,setInstructions]=useState(""),[claimant,setClaimant]=useState(""),[note,setNote]=useState(""),[idVerified,setIdVerified]=useState(false);
   const confirmed=request.pickupSlots.find(slot=>slot.status==="CONFIRMED");
