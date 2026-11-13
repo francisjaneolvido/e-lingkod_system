@@ -1,0 +1,36 @@
+# Never send credentials or database exports into the Docker build context.
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+account.csv
+accounts.csv
+.env.docker.local
+demo/account.csv
+demo/accounts.csv
+.env.docker.local
+demo/e_lingkod_bayan_demo.sql
+demo/export-manifest.json
+
+# Local dependencies, caches, outputs and developer files
+node_modules
+.next
+.next-*
+.next-demo
+out
+build
+coverage
+.git
+.github
+.vscode
+.scratch
+.playwright-mcp
+*.log
+*.tsbuildinfo
+.tsconfig.next-*.json
+src/generated/prisma
+
+# Local dev/experimental data are not needed for a Next production image.
+demo-data
