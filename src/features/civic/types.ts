@@ -6,6 +6,8 @@ export type ReportSummary = {
   id: string; trackingId: string; title: string; category: string; barangay: string;
   status: ReportStatus; assignedOffice: string | null; createdAt: string; updatedAt: string;
   photoId: string | null; reporterName?: string; priority: ReportPriority;
+  description?: string;
+  latitude?: number | null; longitude?: number | null; address?: string;
   assignedStaffId: string | null; assignedStaffName: string | null;
 };
 export type ReportEvent = {
@@ -24,8 +26,8 @@ export type CitizenResolutionFeedbackView = {
 };
 export type ReportDetail = ReportSummary & {
   description: string; address: string; latitude: number | null; longitude: number | null;
-  locationSource: string; gpsAccuracy: number | null; version: number;
-  photos: { id: string }[]; updates: ReportEvent[]; resolutionSubmissions: ResolutionSubmissionView[]; citizenFeedbacks: CitizenResolutionFeedbackView[];
+  locationSource: string; gpsAccuracy: number | null; locationCapturedAt: string | null; version: number;
+  photos: { id: string; validationStatus: string; validationScore: number | null; detectedContent: string | null; validationFeedback: string | null; validatedAt: string | null }[]; updates: ReportEvent[]; resolutionSubmissions: ResolutionSubmissionView[]; citizenFeedbacks: CitizenResolutionFeedbackView[];
   reporter?: { name: string; email: string };
 };
 export type PublicTracking = {
@@ -33,5 +35,5 @@ export type PublicTracking = {
   updatedAt: string; verifiedEvidenceAvailable: boolean; updates: { id: string; status: ReportStatus; createdAt: string }[];
 };
 export type LocationValue = {
-  latitude: string; longitude: string; accuracy: number | null; source: "GPS" | "MANUAL" | "ADDRESS";
+  latitude: string; longitude: string; accuracy: number | null; source: "GPS" | "MANUAL" | "ADDRESS"; capturedAt?: string | null;
 };

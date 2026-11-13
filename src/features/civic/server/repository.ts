@@ -7,6 +7,7 @@ import type { CivicViewer, PublicTracking, ReportDetail, ReportSummary } from ".
 
 const summarySelect = {
   id: true, trackingId: true, title: true, category: true, barangay: true, status: true,
+  latitude: true, longitude: true, address: true, description: true,
   assignedOffice: true, assignedStaffId: true, priority: true, createdAt: true, updatedAt: true,
   assignedStaff: { select: { name: true } },
   photos: { select: { id: true }, orderBy: { createdAt: "asc" as const }, take: 1 },
@@ -16,6 +17,7 @@ type SummaryRow = Prisma.CivicReportGetPayload<{ select: typeof summarySelect }>
 function serializeSummary(row: SummaryRow, admin: boolean): ReportSummary {
   return {
     id: row.id, trackingId: row.trackingId, title: row.title, category: row.category,
+    latitude: admin ? row.latitude : undefined, longitude: admin ? row.longitude : undefined, address: admin ? row.address : undefined, description: admin ? row.description : undefined,
     barangay: row.barangay, status: row.status, assignedOffice: row.assignedOffice,
     assignedStaffId: admin ? row.assignedStaffId : null,
     assignedStaffName: admin ? row.assignedStaff?.name ?? null : null,
@@ -44,8 +46,8 @@ export async function getReport(id: string, viewer: CivicViewer, admin = false):
     where: { id, ...(admin ? reportAdminScope(viewer) : { reporterId: viewer.id }) },
     select: {
       ...summarySelect, description: true, address: true, latitude: true, longitude: true,
-      locationSource: true, gpsAccuracy: true, version: true, reporterId: true,
-      photos: { select: { id: true }, orderBy: { createdAt: "asc" } },
+      locationSource: true, gpsAccuracy: true, locationCapturedAt: true, version: true, reporterId: true,
+      photos: { select: { id: true, validationStatus: true, validationScore: true, detectedContent: true, validationFeedback: true, validatedAt: true }, orderBy: { createdAt: "asc" } },
       citizenFeedbacks: {
         select: { id: true, resolutionSubmissionId: true, decision: true, reason: true, createdAt: true,
           photos: { select: { id: true }, orderBy: { createdAt: "asc" } },
@@ -72,7 +74,8 @@ export async function getReport(id: string, viewer: CivicViewer, admin = false):
   return {
     ...serializeSummary(row, admin), description: row.description, address: row.address,
     latitude: row.latitude, longitude: row.longitude, locationSource: row.locationSource,
-    gpsAccuracy: row.gpsAccuracy, version: row.version, photos: row.photos,
+    gpsAccuracy: row.gpsAccuracy, locationCapturedAt: row.locationCapturedAt?.toISOString() ?? null, version: row.version,
+    photos: row.photos.map(photo => ({ ...photo, validatedAt: photo.validatedAt?.toISOString() ?? null })),
     // Approved evidence remains available to the report owner even after a dispute.
     resolutionSubmissions: row.resolutionSubmissions.map(item => ({
       id: item.id, reviewStatus: item.reviewStatus, remarks: item.remarks,

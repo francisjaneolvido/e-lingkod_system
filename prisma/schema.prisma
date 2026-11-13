@@ -209,6 +209,7 @@ model CivicReport {
   longitude      Float?
   locationSource String            @default("ADDRESS") @db.VarChar(12)
   gpsAccuracy    Float?
+  locationCapturedAt DateTime?
   status         CivicReportStatus @default(SUBMITTED)
   assignedOffice String?           @db.VarChar(120)
   assignedStaffId String?          @db.VarChar(191)
@@ -238,6 +239,11 @@ model ReportPhoto {
   byteSize  Int
   data      Bytes       @db.MediumBlob
   createdAt DateTime    @default(now())
+  validationStatus String @default("PENDING") @db.VarChar(12)
+  validationScore Float?
+  detectedContent String? @db.VarChar(500)
+  validationFeedback String? @db.VarChar(500)
+  validatedAt DateTime?
 
   @@index([reportId])
   @@map("report_photo")

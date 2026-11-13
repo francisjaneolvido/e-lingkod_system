@@ -81,7 +81,7 @@ npm.cmd run demo:setup
 npm.cmd run demo:verify
 ```
 
-`npm ci` installs locked dependencies and generates Prisma Client; explicit generation verifies that step independently. Migration should report all 29 migrations applied or no pending migrations. Setup generates records from distributed fixture definitions and uses the private catalogue for passwords. Verify checks the dataset and authenticates its accounts without printing passwords.
+`npm ci` installs locked dependencies and generates Prisma Client; explicit generation verifies that step independently. Migration should report all available migrations applied or no pending migrations. Setup generates records from distributed fixture definitions and uses the private catalogue for passwords. Verify checks the dataset and authenticates its accounts without printing passwords.
 
 The supported fixture has **108 accounts: 100 Citizens (80 individuals and 20 establishment representatives), four Staff and four Admins**. It includes survey histories, imports, scoped census/assistance examples and labelled demonstration opportunities. This differs from the 111 accounts reported in one developer's ordinary database. See [demo data and access](demo/README.md) for scope and safeguards.
 
@@ -98,6 +98,14 @@ Wait for Next.js to report readiness, then open **http://localhost:3000**. Use a
 Start MySQL first, then run the development command from the repository root. Stop Next.js with Ctrl+C in its terminal. Restarting the website does not reset data. A MySQL Windows service can remain running; a portable server must run separately. See [start/stop instructions](docs/WINDOWS-SETUP.md#daily-start-stop-and-restart). Do not rerun setup/imports as a daily startup step.
 
 For a local production build, stop the development server, run `npm.cmd run build`, then `npm.cmd run start -- --hostname 127.0.0.1 --port 3000`. Build/start does not deploy or migrate the application.
+
+## Civic report GPS and image checks
+
+Add `OPENAI_API_KEY` to your private `.env` to enable new report submissions. The default `OPENAI_VISION_MODEL=gpt-4o-mini` can be changed to another vision model that supports structured output. Each uploaded photo is checked for unsafe content, then assessed against the actual report category and description. Citizens receive a result for each photo; rejected or unclear photos must be replaced. Submission performs the same checks again on the server, so edited browser requests cannot bypass them. If the API is not configured or unavailable, new reports cannot be submitted. Existing reports are unchanged; their older photos show as not checked.
+
+For automatic readable addresses, get a Geoapify Reverse Geocoding key and set `GEOAPIFY_API_KEY` privately in `.env`. Without it, citizens can still enter their own address or landmark and adjust the map pin. Browser GPS requires localhost or HTTPS and the citizen's permission. GPS is requested on opening the form; it captures the citizen device's current position, so citizens should only use it when at the incident site. The saved timestamp and accuracy are estimates supplied by the browser, not independent proof of an incident location. The admin desk map displays saved citizen coordinates for the accessible and currently loaded cases, with category, status and location search filters. OpenStreetMap attribution is included.
+
+After pulling this change, run `npm.cmd ci`, `npm.cmd run db:generate`, `npm.cmd run db:migrate`, then restart the app. Keep API keys out of Git. Test with a relevant image, an unrelated image, a category change, denied GPS permission, and manual location; the AI decisions should be reviewed by LGU staff for important cases.
 
 ## Existing installations and optional services
 
