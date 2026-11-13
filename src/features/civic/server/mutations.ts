@@ -1,51 +1,48 @@
 import "server-only";
 import { randomBytes } from "node:crypto";
-import sharp from "sharp";
 import { prisma } from "@/lib/prisma";
 import { hasModuleAccess } from "@/lib/staff-access";
 import { sameOffice } from "@/lib/report-scope";
-import { MAX_PHOTOS, MAX_PHOTO_BYTES } from "../config";
 import { CivicError, checkTransition, parseAdminUpdate, parseReportForm } from "../validation";
+import { analyzeEvidence, preparePhotos } from "./evidence";
+import { consumeProviderBudget } from "./provider-budget";
 import type { CivicViewer } from "../types";
 import { autoOfferCivicReport, completeWork, manualAssignWork, requireAcceptedWork } from "@/lib/work-distribution/server";
 import { createNotification, notifyAdmins } from "@/lib/notifications/server";
+
+const pendingSubmissions = new Map<string, Promise<{ id: string; trackingId: string; repeated: boolean }>>();
 
 function makeTrackingId() {
   const year = new Intl.DateTimeFormat("en", { year: "numeric", timeZone: "Asia/Manila" }).format(new Date());
   return `ELB-${year}-${randomBytes(6).toString("hex").toUpperCase()}`;
 }
 
-async function preparePhotos(data: FormData) {
-  const files = data.getAll("photos");
-  if (!files.length || files.length > MAX_PHOTOS) throw new CivicError(`Attach 1–${MAX_PHOTOS} photos.`);
-  const photos: { data: Uint8Array<ArrayBuffer>; byteSize: number; mimeType: string }[] = [];
-  for (const file of files) {
-    if (!(file instanceof File) || file.size === 0 || file.size > MAX_PHOTO_BYTES) throw new CivicError("Each photo must be a non-empty image of 3 MB or less.");
-    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) throw new CivicError("Use JPG, PNG, or WebP photos.");
-    try {
-      const input = Buffer.from(await file.arrayBuffer());
-      const metadata = await sharp(input, { limitInputPixels: 24_000_000, animated: false }).metadata();
-      if (!["jpeg", "png", "webp"].includes(metadata.format || "") || (metadata.pages ?? 1) > 1) throw new Error("Unsupported image");
-      // Decode/re-encode to JPEG. This also removes embedded EXIF/GPS metadata.
-      const output = await sharp(input, { limitInputPixels: 24_000_000 }).rotate()
-        .resize({ width: 1920, height: 1920, fit: "inside", withoutEnlargement: true })
-        .jpeg({ quality: 82, mozjpeg: true }).toBuffer();
-      if (output.length > MAX_PHOTO_BYTES) throw new Error("Image too large");
-      photos.push({ data: new Uint8Array(output), byteSize: output.length, mimeType: "image/jpeg" });
-    } catch { throw new CivicError("A photo could not be processed. Choose a valid JPG, PNG, or WebP image under 24 megapixels."); }
-  }
-  return photos;
-}
-
 export async function submitReport(form: FormData, viewer: CivicViewer) {
   if (viewer.role !== "CITIZEN") throw new CivicError("Only citizens can submit reports.", 403);
   const fields = parseReportForm(form);
+  const key = `${viewer.id}:${fields.submissionKey}`;
+  const active = pendingSubmissions.get(key);
+  if (active) return { ...(await active), repeated: true };
+  const pending = createReport(form, viewer, fields);
+  pendingSubmissions.set(key, pending);
+  try { return await pending; }
+  finally { if (pendingSubmissions.get(key) === pending) pendingSubmissions.delete(key); }
+}
+
+async function createReport(form: FormData, viewer: CivicViewer, fields: ReturnType<typeof parseReportForm>) {
   const uniqueSubmission = { reporterId_submissionKey: { reporterId: viewer.id, submissionKey: fields.submissionKey } };
   const existing = await prisma.civicReport.findUnique({ where: uniqueSubmission, select: { id: true, trackingId: true } });
   if (existing) return { ...existing, repeated: true };
   const recentCount = await prisma.civicReport.count({ where: { reporterId: viewer.id, createdAt: { gte: new Date(Date.now() - 60 * 60 * 1000) } } });
   if (recentCount >= 10) throw new CivicError("You have submitted 10 reports this hour. Please wait before sending another concern.", 429);
-  const photos = await preparePhotos(form);
+  const prepared = await preparePhotos(form);
+  await consumeProviderBudget(viewer.id, "AI_SUBMIT", prepared.length);
+  const photos = [];
+  for (const photo of prepared) {
+    const result = await analyzeEvidence(photo.data, fields.category, fields.title, fields.description);
+    if (result.status !== "ACCEPTED") throw new CivicError(result.status === "UNCERTAIN" ? `Photo ${photos.length + 1}: We couldn't confirm the concern. ${result.feedback}` : `Photo ${photos.length + 1} rejected: ${result.feedback}`);
+    photos.push({ ...photo, validationStatus: result.status, validationScore: result.score, detectedContent: result.observations, validationFeedback: result.feedback, validatedAt: result.validatedAt });
+  }
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const report = await prisma.civicReport.create({

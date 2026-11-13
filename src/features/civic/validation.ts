@@ -32,6 +32,13 @@ export function parseReportForm(data: FormData) {
   const locationSource = latitude === null ? "ADDRESS" : requestedSource === "GPS" ? "GPS" : "MANUAL";
   const gpsAccuracy = locationSource === "GPS" ? coordinate(data.get("gpsAccuracy"), "GPS accuracy", 0, 1_000_000) : null;
   if (requestedSource === "GPS" && (latitude === null || gpsAccuracy === null)) throw new CivicError("Capture your GPS location again or use a manual location.");
+  let locationCapturedAt: Date | null = null;
+  if (locationSource === "GPS") {
+    const captured = data.get("locationCapturedAt");
+    if (typeof captured !== "string" || !/^\d{4}-\d{2}-\d{2}T/.test(captured)) throw new CivicError("Capture your GPS location again.");
+    locationCapturedAt = new Date(captured);
+    if (!Number.isFinite(locationCapturedAt.getTime()) || Math.abs(Date.now() - locationCapturedAt.getTime()) > 24 * 3600_000) throw new CivicError("Capture your GPS location again.");
+  }
   if (data.get("confirmed") !== "true") throw new CivicError("Confirm the report details before submitting.");
   return {
     category: category as ReportCategory, submissionKey,
@@ -39,7 +46,7 @@ export function parseReportForm(data: FormData) {
     description: text(data.get("description"), "Description", 20, 2000),
     barangay: text(data.get("barangay"), "Barangay / area", 2, 100),
     address: text(data.get("address"), "Address / landmark", 8, 300),
-    latitude, longitude, locationSource, gpsAccuracy,
+    latitude, longitude, locationSource, gpsAccuracy, locationCapturedAt,
   };
 }
 

@@ -22,8 +22,17 @@ test("address-only reports never invent GPS coordinates", () => {
   assert.equal(result.locationSource, "ADDRESS"); assert.equal(result.gpsAccuracy, null);
 });
 test("valid coordinates at zero are preserved, with GPS accuracy", () => {
-  const form = validForm(); form.set("latitude", "0"); form.set("longitude", "0"); form.set("gpsAccuracy", "15"); form.set("locationSource", "GPS");
+  const form = validForm(); form.set("latitude", "0"); form.set("longitude", "0"); form.set("gpsAccuracy", "15"); form.set("locationSource", "GPS"); form.set("locationCapturedAt", new Date().toISOString());
   const result = parseReportForm(form); assert.equal(result.latitude, 0); assert.equal(result.longitude, 0); assert.equal(result.gpsAccuracy, 15);
+});
+test("location capture time requires valid GPS and cannot be arbitrarily old or in the future", () => {
+  const form = validForm(); form.set("latitude", "14.17"); form.set("longitude", "121.24"); form.set("gpsAccuracy", "15"); form.set("locationSource", "GPS");
+  form.set("locationCapturedAt", new Date().toISOString());
+  assert.ok(parseReportForm(form).locationCapturedAt instanceof Date);
+  form.set("locationCapturedAt", "not-a-date"); assert.throws(() => parseReportForm(form), CivicError);
+  form.set("locationCapturedAt", new Date(Date.now() - 48 * 3600_000).toISOString()); assert.throws(() => parseReportForm(form), CivicError);
+  form.set("locationCapturedAt", new Date().toISOString()); form.set("locationSource", "MANUAL");
+  assert.equal(parseReportForm(form).locationCapturedAt, null);
 });
 test("partial or out-of-range coordinates are rejected", () => {
   for (const [latitude, longitude] of [["14", ""], ["", "120"], ["91", "120"], ["14", "181"], ["NaN", "120"]]) {
@@ -34,6 +43,7 @@ test("partial or out-of-range coordinates are rejected", () => {
 test("GPS cannot be claimed without coordinates and an accuracy reading", () => {
   const form = validForm(); form.set("locationSource", "GPS"); assert.throws(() => parseReportForm(form), CivicError);
   form.set("latitude", "14.5"); form.set("longitude", "120.8"); assert.throws(() => parseReportForm(form), CivicError);
+  form.set("gpsAccuracy", "8"); assert.throws(() => parseReportForm(form), CivicError);
 });
 test("unsupported categories, missing consent, and client-key spoofing are rejected", () => {
   for (const [field, value] of [["category", "ADMIN"], ["confirmed", "false"], ["submissionKey", "duplicate"], ["title", "   "], ["description", "too short"]]) {
