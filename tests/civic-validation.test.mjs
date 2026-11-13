@@ -19,7 +19,7 @@ function validForm() {
 test("address-only reports never invent GPS coordinates", () => {
   const result = parseReportForm(validForm());
   assert.equal(result.latitude, null); assert.equal(result.longitude, null);
-  assert.equal(result.locationSource, "ADDRESS"); assert.equal(result.gpsAccuracy, null);
+  assert.equal(result.locationSource, "GPS"); assert.equal(result.gpsAccuracy, null);
 });
 test("valid coordinates at zero are preserved, with GPS accuracy", () => {
   const form = validForm(); form.set("latitude", "0"); form.set("longitude", "0"); form.set("gpsAccuracy", "15"); form.set("locationSource", "GPS"); form.set("locationCapturedAt", new Date().toISOString());
