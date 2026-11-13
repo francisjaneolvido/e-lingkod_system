@@ -1,3 +1,4 @@
 # These retained, tracked resources must match the LF writers used by tooling.
 /demo/accounts.csv text eol=lf
 /tsconfig.json text eol=lf
+/src/features/geography/los-banos.geometry.json text eol=lf

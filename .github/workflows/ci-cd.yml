@@ -1,0 +1,116 @@
+
+name: e-Lingkod CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: Lint, Test and Build
+    runs-on: ubuntu-latest
+
+    env:
+      DATABASE_URL: mysql://ci:ci@127.0.0.1:3306/elingkod_ci
+      BETTER_AUTH_SECRET: ci-only-placeholder-not-a-real-secret-123456
+      BETTER_AUTH_URL: http://localhost:3000
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Check Code Quality
+        run: npm run lint
+
+      - name: Validate TypeScript
+        run: npm run typecheck
+
+      - name: Run Automated Tests
+        run: npm run test:all
+
+      - name: Build e-Lingkod
+        run: npm run build
+
+  docker:
+    name: Docker Build and Publish
+    needs: ci
+    if: >-
+      github.event_name != 'pull_request' &&
+      (github.ref == 'refs/heads/main' ||
+       startsWith(github.ref, 'refs/tags/v'))
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Set Up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate Docker Metadata
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=tag
+            type=semver,pattern={{version}}
+
+      - name: Build and Publish Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      
+      - name: Verify Demo Secret Configuration
+        if: github.event_name != 'pull_request'
+        env:
+          DEMO_API_KEY: ${{ secrets.DEMO_API_KEY }}
+        run: |
+          if [ -n "$DEMO_API_KEY" ]; then
+            echo "Secret successfully configured."
+          else
+            echo "Secret is missing."
+            exit 1
+          fi
