@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import type { citizenServiceRequest } from "../server/data";
 import { AlertCircle, CalendarClock, CheckCircle2, Circle, Clock3, FileCheck2, Loader2, Printer, RotateCcw, Save, Trash2, Upload } from "lucide-react";
 import type { SerializableOnlineServiceDefinition, ServiceRequirement } from "../catalog";
 import { conditionMatches } from "../catalog";
@@ -11,10 +12,11 @@ import { ServiceFormFields } from "./service-form-fields";
 import { DocumentInlinePreview } from "./document-inline-preview";
 import { CitizenPickupPanel } from "./citizen-pickup-panel";
 
+type CitizenRequest = NonNullable<Awaited<ReturnType<typeof citizenServiceRequest>>>;
 const input = "elb-field mt-2";
 const docTone:Record<string,string> = { PENDING:"bg-warning-soft text-warning-foreground", VERIFIED:"bg-success-soft text-success", REJECTED:"bg-danger-soft text-destructive" };
 
-export function CitizenRequestDetail({ request, service }: { request:any; service:SerializableOnlineServiceDefinition }) {
+export function CitizenRequestDetail({ request, service }: { request:CitizenRequest; service:SerializableOnlineServiceDefinition }) {
   const router = useRouter();
   const status = request.status as ServiceRequestStatus;
   const [purpose,setPurpose] = useState(request.purpose || "");
@@ -33,14 +35,14 @@ export function CitizenRequestDetail({ request, service }: { request:any; servic
   const activeRequirements = useMemo(() => service.requirements.filter(requirement => conditionMatches(requirement.condition, fields)), [service.requirements, fields]);
 
   const docsByKey = useMemo(() => {
-    const map = new Map<string,any>();
+    const map = new Map<string,CitizenRequest["documents"][number]>();
     for (const document of request.documents) if (!map.has(document.requirementKey)) map.set(document.requirementKey, document);
     return map;
   },[request.documents]);
-  const proposedSlots = request.appointments.filter((item:any) => item.status === "PROPOSED");
-  const confirmedAppointment = request.appointments.find((item:any) => item.status === "CONFIRMED") || request.appointments.find((item:any) => item.status === "COMPLETED");
+  const proposedSlots = request.appointments.filter((item) => item.status === "PROPOSED");
+  const confirmedAppointment = request.appointments.find((item) => item.status === "CONFIRMED") || request.appointments.find((item) => item.status === "COMPLETED");
 
-  async function api(url:string, method:string, body?:any) {
+  async function api(url:string, method:string, body?:unknown) {
     setBusy(url+method); setError("");
     try {
       const response=await fetch(url,{method,headers:body instanceof FormData?undefined:{"Content-Type":"application/json"},body:body instanceof FormData?body:body?JSON.stringify(body):undefined});
@@ -99,12 +101,12 @@ export function CitizenRequestDetail({ request, service }: { request:any; servic
           {editable&&<button onClick={submitForReview} disabled={!!busy} className="mt-4 inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-xs font-semibold text-white disabled:opacity-60"><CheckCircle2 size={15}/> Submit for LGU review</button>}
         </section>
 
-        <section className="rounded-[18px] border border-border bg-card p-4"><h2 className="text-xs font-semibold text-foreground">Tracking history</h2><p className="mt-1 text-xs text-muted-foreground">Every citizen-visible handoff, correction, schedule and verification stays here.</p><div className="mt-3 space-y-0">{request.events.map((event:any,index:number)=><div key={event.id} className="relative flex gap-3 pb-4 last:pb-0"><div className="relative z-10 mt-1.5 size-2.5 rounded-full bg-primary ring-4 ring-border"/>{index<request.events.length-1&&<span className="absolute left-[4px] top-4 h-full w-px bg-muted"/>}<div><p className="text-xs font-bold leading-4 text-foreground">{event.note}</p><p className="mt-1 text-xs text-muted-foreground">{new Date(event.createdAt).toLocaleString("en-PH")}</p></div></div>)}</div></section>
+        <section className="rounded-[18px] border border-border bg-card p-4"><h2 className="text-xs font-semibold text-foreground">Tracking history</h2><p className="mt-1 text-xs text-muted-foreground">Every citizen-visible handoff, correction, schedule and verification stays here.</p><div className="mt-3 space-y-0">{request.events.map((event,index)=><div key={event.id} className="relative flex gap-3 pb-4 last:pb-0"><div className="relative z-10 mt-1.5 size-2.5 rounded-full bg-primary ring-4 ring-border"/>{index<request.events.length-1&&<span className="absolute left-[4px] top-4 h-full w-px bg-muted"/>}<div><p className="text-xs font-bold leading-4 text-foreground">{event.note}</p><p className="mt-1 text-xs text-muted-foreground">{new Date(event.createdAt).toLocaleString("en-PH")}</p></div></div>)}</div></section>
       </div>
 
       <aside className="space-y-3 xl:sticky xl:top-4 xl:self-start">
         {service.completionMode === "RELEASE" && request.releaseApprovedAt && ["READY_FOR_RELEASE", "FOR_FINAL_VERIFICATION", "COMPLETED"].includes(status) && <CitizenPickupPanel request={request}/> }
-        {status==="SCHEDULED"&&proposedSlots.length>0&&<section className="rounded-[18px] border border-border bg-card p-4"><div className="flex items-start gap-2.5"><CalendarClock className="mt-0.5 text-muted-foreground" size={17}/><div><h2 className="text-xs font-semibold text-foreground">Choose your schedule</h2><p className="mt-1 text-xs leading-4 text-muted-foreground">Select one available slot. The other options will close automatically.</p></div></div><div className="mt-3 space-y-2">{proposedSlots.map((slot:any)=><button key={slot.id} disabled={!!busy} onClick={()=>selectSlot(slot.id)} className="w-full rounded-xl border border-border bg-card p-3 text-left transition hover:border-border hover:bg-card"><strong className="block text-xs text-foreground">{new Date(slot.scheduledAt).toLocaleString("en-PH",{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}</strong><span className="mt-1 block text-xs leading-4 text-muted-foreground">{slot.location} · {slot.agenda}</span></button>)}</div><textarea className={input} rows={2} value={appointmentNote} onChange={event=>setAppointmentNote(event.target.value)} placeholder="Optional note, or explain why none of the options work."/><button disabled={!appointmentNote.trim()||!!busy} onClick={requestNewSlots} className="mt-2 w-full rounded-xl border border-border bg-card px-3 py-2.5 text-xs font-semibold text-muted-foreground disabled:opacity-40">None work — request new options</button></section>}
+        {status==="SCHEDULED"&&proposedSlots.length>0&&<section className="rounded-[18px] border border-border bg-card p-4"><div className="flex items-start gap-2.5"><CalendarClock className="mt-0.5 text-muted-foreground" size={17}/><div><h2 className="text-xs font-semibold text-foreground">Choose your schedule</h2><p className="mt-1 text-xs leading-4 text-muted-foreground">Select one available slot. The other options will close automatically.</p></div></div><div className="mt-3 space-y-2">{proposedSlots.map(slot=><button key={slot.id} disabled={!!busy} onClick={()=>selectSlot(slot.id)} className="w-full rounded-xl border border-border bg-card p-3 text-left transition hover:border-border hover:bg-card"><strong className="block text-xs text-foreground">{new Date(slot.scheduledAt).toLocaleString("en-PH",{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}</strong><span className="mt-1 block text-xs leading-4 text-muted-foreground">{slot.location} · {slot.agenda}</span></button>)}</div><textarea className={input} rows={2} value={appointmentNote} onChange={event=>setAppointmentNote(event.target.value)} placeholder="Optional note, or explain why none of the options work."/><button disabled={!appointmentNote.trim()||!!busy} onClick={requestNewSlots} className="mt-2 w-full rounded-xl border border-border bg-card px-3 py-2.5 text-xs font-semibold text-muted-foreground disabled:opacity-40">None work — request new options</button></section>}
 
         {confirmedAppointment&&["CONFIRMED","COMPLETED"].includes(confirmedAppointment.status)&&<section className="rounded-[18px] border border-border bg-card p-4"><div className="flex items-start gap-2.5"><CalendarClock className="mt-0.5 text-muted-foreground" size={17}/><div><h2 className="text-xs font-semibold text-foreground">{confirmedAppointment.status==="COMPLETED"?"Scheduled activity completed":"Confirmed schedule"}</h2><p className="mt-1.5 text-xs font-bold text-muted-foreground">{new Date(confirmedAppointment.scheduledAt).toLocaleString("en-PH")}</p><p className="mt-1 text-xs leading-4 text-muted-foreground">{confirmedAppointment.location}<br/>{confirmedAppointment.agenda}</p>{confirmedAppointment.staffNote&&<p className="mt-2 rounded-lg bg-card px-2.5 py-2 text-xs leading-4 text-muted-foreground">Outcome: {confirmedAppointment.staffNote}</p>}</div></div></section>}
 

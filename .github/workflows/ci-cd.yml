@@ -32,6 +32,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
 
+      - name: Verify Demo Secret Configuration
+        if: github.event_name != 'pull_request'
+        env:
+          DEMO_API_KEY: ${{ secrets.DEMO_API_KEY }}
+        run: |
+          if [ -n "$DEMO_API_KEY" ]; then
+            echo "Secret successfully configured."
+          else
+            echo "Secret is missing."
+            exit 1
+          fi
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
@@ -98,19 +110,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Checkout Repository
-        uses: actions/checkout@v6
-
-      
-      - name: Verify Demo Secret Configuration
-        if: github.event_name != 'pull_request'
-        env:
-          DEMO_API_KEY: ${{ secrets.DEMO_API_KEY }}
-        run: |
-          if [ -n "$DEMO_API_KEY" ]; then
-            echo "Secret successfully configured."
-          else
-            echo "Secret is missing."
-            exit 1
-          fi

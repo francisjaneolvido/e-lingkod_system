@@ -2,7 +2,7 @@ import "server-only";
 import { prisma } from "@/lib/prisma";
 import { CivicError } from "@/features/civic/validation";
 import type { CivicViewer } from "@/features/civic/types";
-import type { SerializableOnlineServiceDefinition, ServiceField, ServiceRequirement } from "../catalog";
+import type { SerializableOnlineServiceDefinition, ServiceField, ServiceRequirement, ServiceCategory, IntakeMode, AppointmentMode, CompletionMode } from "../catalog";
 import { serviceConfigForStorage } from "./catalog";
 
 function text(value: unknown, label: string, max: number, min = 1) {
@@ -24,9 +24,20 @@ const APPOINTMENTS = ["NONE","OPTIONAL","INTERVIEW","INSPECTION","PICKUP"];
 const COMPLETION = ["RELEASE","SERVICE"];
 const FIELD_TYPES = ["text","textarea","select","date","number"];
 
-function condition(value: any) {
-  if (!value || typeof value !== "object") return undefined;
-  const field = optional(value.field,80); const values = Array.isArray(value.values) ? value.values.filter((x:any)=>typeof x==="string"&&x.trim()).map((x:string)=>x.trim().slice(0,120)).slice(0,20) : [];
+function asRecord(value: unknown): Record<string, unknown> {
+  return value && typeof value === "object" && !Array.isArray(value)
+    ? value as Record<string, unknown>
+    : {};
+}
+
+function condition(value: unknown) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return undefined;
+  const data = asRecord(value);
+  const field = optional(data.field,80);
+  const values = Array.isArray(data.values)
+    ? data.values.filter((x:unknown): x is string => typeof x==="string" && Boolean(x.trim()))
+        .map((x:string)=>x.trim().slice(0,120)).slice(0,20)
+    : [];
   return field && values.length ? { field, values } : undefined;
 }
 
@@ -34,12 +45,13 @@ function fields(value: unknown): ServiceField[] {
   if (!Array.isArray(value)) throw new CivicError("Service questions must be a list.");
   if (value.length > 60) throw new CivicError("A service can have up to 60 questions.");
   const seen = new Set<string>();
-  return value.map((raw:any,index) => {
+  return value.map((item:unknown,index) => {
+    const raw = asRecord(item);
     const key = optional(raw?.key,80) || `field-${index+1}`;
     if (!/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(key)) throw new CivicError(`Question ${index+1} has an invalid key.`);
     if (seen.has(key)) throw new CivicError(`Question key “${key}” is duplicated.`); seen.add(key);
-    const type = FIELD_TYPES.includes(raw?.type) ? raw.type : "text";
-    const options = type === "select" ? (Array.isArray(raw?.options) ? raw.options.filter((x:any)=>typeof x==="string"&&x.trim()).map((x:string)=>x.trim().slice(0,120)).slice(0,30) : []) : undefined;
+    const type = FIELD_TYPES.includes(String(raw?.type)) ? raw.type : "text";
+    const options = type === "select" ? (Array.isArray(raw?.options) ? raw.options.filter((x:unknown): x is string => typeof x==="string" && Boolean(x.trim())).map((x:string)=>x.trim().slice(0,120)).slice(0,30) : []) : undefined;
     if (type === "select" && !options?.length) throw new CivicError(`Question “${raw?.label || key}” needs at least one option.`);
     return {
       key,
@@ -49,7 +61,7 @@ function fields(value: unknown): ServiceField[] {
       required: raw?.required !== false,
       placeholder: optional(raw?.placeholder,300) || undefined,
       help: optional(raw?.help,500) || undefined,
-      width: ["full","half","third"].includes(raw?.width) ? raw.width : "full",
+      width: ["full","half","third"].includes(String(raw?.width)) ? raw.width : "full",
       options,
       condition: condition(raw?.condition),
     } as ServiceField;
@@ -60,7 +72,8 @@ function requirements(value: unknown): ServiceRequirement[] {
   if (!Array.isArray(value)) throw new CivicError("Requirements must be a list.");
   if (value.length > 40) throw new CivicError("A service can have up to 40 requirements.");
   const seen = new Set<string>();
-  return value.map((raw:any,index) => {
+  return value.map((item:unknown,index) => {
+    const raw = asRecord(item);
     const key = optional(raw?.key,100) || `requirement-${index+1}`;
     if (!/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(key)) throw new CivicError(`Requirement ${index+1} has an invalid key.`);
     if (seen.has(key)) throw new CivicError(`Requirement key “${key}” is duplicated.`); seen.add(key);
@@ -70,11 +83,11 @@ function requirements(value: unknown): ServiceRequirement[] {
 
 export function parseServiceBuilderInput(input: unknown): SerializableOnlineServiceDefinition & { published:boolean; assignmentStrategy:"AUTO_BALANCE"|"MANUAL"; acceptTimeoutMinutes:number } {
   if (!input || typeof input !== "object" || Array.isArray(input)) throw new CivicError("Invalid service configuration.");
-  const d = input as any;
-  const category = CATEGORIES.includes(d.category) ? d.category : "Certificates & Clearances";
-  const intakeMode = INTAKES.includes(d.intakeMode) ? d.intakeMode : "DIRECT";
-  const appointmentMode = APPOINTMENTS.includes(d.appointmentMode) ? d.appointmentMode : "NONE";
-  const completionMode = COMPLETION.includes(d.completionMode) ? d.completionMode : "SERVICE";
+  const d = input as Record<string, unknown>;
+  const category = CATEGORIES.includes(String(d.category)) ? d.category : "Certificates & Clearances";
+  const intakeMode = INTAKES.includes(String(d.intakeMode)) ? d.intakeMode : "DIRECT";
+  const appointmentMode = APPOINTMENTS.includes(String(d.appointmentMode)) ? d.appointmentMode : "NONE";
+  const completionMode = COMPLETION.includes(String(d.completionMode)) ? d.completionMode : "SERVICE";
   const assignmentStrategy = d.assignmentStrategy === "MANUAL" ? "MANUAL" : "AUTO_BALANCE";
   const timeout = Number(d.acceptTimeoutMinutes ?? 120);
   if (!Number.isInteger(timeout) || timeout < 15 || timeout > 1440) throw new CivicError("Staff acceptance window must be between 15 and 1,440 minutes.");
@@ -86,24 +99,24 @@ export function parseServiceBuilderInput(input: unknown): SerializableOnlineServ
     key,
     title: text(d.title,"Service name",180,3),
     shortTitle: optional(d.shortTitle,100) || text(d.title,"Service name",100,3),
-    category: category as any,
+    category: category as ServiceCategory,
     processingOffice: text(d.processingOffice,"Processing office",150,2),
     departmentCode,
-    departmentAliases: Array.isArray(d.departmentAliases) ? d.departmentAliases.filter((x:any)=>typeof x==="string"&&x.trim()).map((x:string)=>x.trim().slice(0,120)).slice(0,20) : [departmentCode],
+    departmentAliases: Array.isArray(d.departmentAliases) ? d.departmentAliases.filter((x:unknown): x is string => typeof x==="string" && Boolean(x.trim())).map((x:string)=>x.trim().slice(0,120)).slice(0,20) : [departmentCode],
     description: text(d.description,"Description",1200,12),
     actionLabel: optional(d.actionLabel,100) || "Start request",
-    intakeMode: intakeMode as any,
-    requiresAppointment: !["NONE","OPTIONAL"].includes(appointmentMode),
-    appointmentMode: appointmentMode as any,
+    intakeMode: intakeMode as IntakeMode,
+    requiresAppointment: !["NONE","OPTIONAL"].includes(String(appointmentMode)),
+    appointmentMode: appointmentMode as AppointmentMode,
     appointmentPurpose: optional(d.appointmentPurpose,220)||undefined,
     purposeLabel: optional(d.purposeLabel,160) || "Purpose / reason for request",
     purposePlaceholder: optional(d.purposePlaceholder,600)||undefined,
-    purposeOptions: Array.isArray(d.purposeOptions) ? d.purposeOptions.filter((x:any)=>typeof x==="string"&&x.trim()).map((x:string)=>x.trim().slice(0,120)).slice(0,30) : undefined,
-    prescreenFieldKeys: Array.isArray(d.prescreenFieldKeys) ? d.prescreenFieldKeys.filter((x:any)=>typeof x==="string").slice(0,20) : undefined,
-    completionMode: completionMode as any,
+    purposeOptions: Array.isArray(d.purposeOptions) ? d.purposeOptions.filter((x:unknown): x is string => typeof x==="string" && Boolean(x.trim())).map((x:string)=>x.trim().slice(0,120)).slice(0,30) : undefined,
+    prescreenFieldKeys: Array.isArray(d.prescreenFieldKeys) ? d.prescreenFieldKeys.filter((x:unknown): x is string => typeof x==="string").slice(0,20) : undefined,
+    completionMode: completionMode as CompletionMode,
     outcomeLabel: optional(d.outcomeLabel,180) || "LGU service outcome",
     serviceNotice: optional(d.serviceNotice,1500) || "Final requirements and processing steps follow the LGU Citizen's Charter and authorized office assessment.",
-    reviewChecklist: Array.isArray(d.reviewChecklist) ? d.reviewChecklist.filter((x:any)=>typeof x==="string"&&x.trim()).map((x:string)=>x.trim().slice(0,400)).slice(0,20) : [],
+    reviewChecklist: Array.isArray(d.reviewChecklist) ? d.reviewChecklist.filter((x:unknown): x is string => typeof x==="string" && Boolean(x.trim())).map((x:string)=>x.trim().slice(0,400)).slice(0,20) : [],
     fields: parsedFields,
     requirements: parsedRequirements,
     feeText: optional(d.feeText,160)||undefined,
@@ -111,7 +124,11 @@ export function parseServiceBuilderInput(input: unknown): SerializableOnlineServ
     assignmentStrategy,
     acceptTimeoutMinutes: timeout,
     published: d.published === true,
-  } as any;
+  } as SerializableOnlineServiceDefinition & {
+    published: boolean;
+    assignmentStrategy: "AUTO_BALANCE" | "MANUAL";
+    acceptTimeoutMinutes: number;
+  };
 }
 
 export async function saveServiceDefinition(input: unknown, viewer: CivicViewer) {

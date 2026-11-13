@@ -14,6 +14,6 @@ export default async function ServiceCatalogAdminPage() {
   return <div className="space-y-5">
     <Link href="/admin/services" className="inline-flex items-center gap-2 text-xs font-bold text-foreground"><ArrowLeft size={15}/> Service Request Desk</Link>
     <header className="elb-page-heading"><div><h1 className="text-3xl font-semibold tracking-tight text-foreground">Service Builder</h1><p className="mt-2 max-w-3xl text-xs leading-6 text-muted-foreground">Configure service questions, requirements, responsible office, fees, processing time, scheduling and fair staff distribution without creating a new page for every service.</p></div><span className="grid size-11 place-items-center rounded-xl bg-muted text-foreground"><Settings2 size={21}/></span></header>
-    <ServiceBuilder initialServices={services as any}/>
+    <ServiceBuilder initialServices={services}/>
   </div>;
 }

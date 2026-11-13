@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
 import { ArrowRight, Building2, CalendarClock, CheckCircle2, FileText, RotateCcw } from "lucide-react";
 import { requireCitizenPageViewer } from "@/lib/access";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -40,4 +41,4 @@ export default async function MyServiceRequests() {
   </div></main><SiteFooter/></>;
 }
 
-function Stat({ icon:Icon, value, label, highlight = false }: { icon:any; value:number; label:string; highlight?:boolean }) { return <div className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 ${highlight ? "border-border bg-card" : "border-border bg-card"}`}><Icon size={15} className={highlight ? "text-warning-foreground" : "text-muted-foreground"}/><div><strong className="block text-lg leading-none text-foreground">{value}</strong><span className="text-xs font-bold text-muted-foreground">{label}</span></div></div>; }
+function Stat({ icon:Icon, value, label, highlight = false }: { icon:LucideIcon; value:number; label:string; highlight?:boolean }) { return <div className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 ${highlight ? "border-border bg-card" : "border-border bg-card"}`}><Icon size={15} className={highlight ? "text-warning-foreground" : "text-muted-foreground"}/><div><strong className="block text-lg leading-none text-foreground">{value}</strong><span className="text-xs font-bold text-muted-foreground">{label}</span></div></div>; }

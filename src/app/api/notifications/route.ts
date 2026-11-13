@@ -12,7 +12,7 @@ export async function PATCH(request: Request) {
   try {
     assertSameOrigin(request);
     const viewer = await requireApiViewer(request);
-    const body = await readJson(request) as any;
+    const body = await readJson(request) as { id?: unknown };
     await markNotificationRead(viewer.id, typeof body?.id === "string" ? body.id : undefined);
     return json({ success: true });
   } catch (error) { return apiFailure(error); }

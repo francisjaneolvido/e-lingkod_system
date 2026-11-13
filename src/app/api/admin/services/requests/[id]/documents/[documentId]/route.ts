@@ -7,7 +7,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     assertSameOrigin(request);
     const viewer = await requireApiViewer(request, "SERVICES");
     const { id, documentId } = await params;
-    await verifyServiceDocument(id, documentId, await readJson(request), viewer);
+    await verifyServiceDocument(id, documentId, (await readJson(request)) as Record<string, unknown>, viewer);
     return json({ success: true });
   } catch (error) {
     return apiFailure(error);

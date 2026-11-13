@@ -183,7 +183,7 @@ function note(input: unknown, label = "Remarks", min = 4, max = 1800) {
   return value;
 }
 
-export async function assignServiceRequest(id: string, input: any, viewer: CivicViewer) {
+export async function assignServiceRequest(id: string, input: Record<string, unknown>, viewer: CivicViewer) {
   if (viewer.role !== "ADMIN") throw new CivicError("Only the Super Admin can assign service requests.", 403);
   const row = await adminRequest(id, viewer);
   const service = await resolveServiceDefinition(row.serviceKey, true);
@@ -204,7 +204,7 @@ export async function assignServiceRequest(id: string, input: any, viewer: Civic
   await createNotification({ userId: staff.id, module: "SERVICES", type: "MANUAL_ASSIGNMENT", title: `${service.shortTitle} assigned to you`, message: "Super Admin assigned this request directly to you.", href: `/admin/services/${id}` });
 }
 
-export async function verifyServiceDocument(requestId: string, documentId: string, input: any, viewer: CivicViewer) {
+export async function verifyServiceDocument(requestId: string, documentId: string, input: Record<string, unknown>, viewer: CivicViewer) {
   const row = await adminRequest(requestId, viewer);
   if (viewer.role === "STAFF") await requireAcceptedWork(viewer, "SERVICES", "SERVICE_REQUEST", requestId);
   if (!["SUBMITTED", "ASSIGNED", "UNDER_REVIEW", "ACTION_REQUIRED"].includes(row.status)) throw new CivicError("Documents can only be verified during requirements review.", 409);
@@ -232,7 +232,7 @@ export async function verifyServiceDocument(requestId: string, documentId: strin
   throw new CivicError("Choose a valid document verification action.");
 }
 
-export async function staffServiceAction(id: string, input: any, viewer: CivicViewer) {
+export async function staffServiceAction(id: string, input: Record<string, unknown>, viewer: CivicViewer) {
   const row = await adminRequest(id, viewer);
   if (viewer.role === "STAFF") await requireAcceptedWork(viewer, "SERVICES", "SERVICE_REQUEST", id);
   const action = String(input?.action || "");
@@ -314,7 +314,7 @@ export async function staffServiceAction(id: string, input: any, viewer: CivicVi
 }
 
 type SlotInput = { scheduledAt?: unknown };
-export async function scheduleServiceAppointment(id: string, input: any, viewer: CivicViewer) {
+export async function scheduleServiceAppointment(id: string, input: Record<string, unknown>, viewer: CivicViewer) {
   const row = await adminRequest(id, viewer);
   if (viewer.role === "STAFF") await requireAcceptedWork(viewer, "SERVICES", "SERVICE_REQUEST", id);
   const service = await resolveServiceDefinition(row.serviceKey, true);
@@ -340,7 +340,7 @@ export async function scheduleServiceAppointment(id: string, input: any, viewer:
   await createNotification({ userId: row.requesterId, module: "SERVICES", type: "SCHEDULE_AVAILABLE", title: "Choose your LGU schedule", message: `${slots.length} schedule options are now available for ${service.shortTitle}.`, href: `/services/requests/${id}` });
 }
 
-export async function citizenAppointmentAction(requestId: string, appointmentId: string, input: any, viewer: CivicViewer) {
+export async function citizenAppointmentAction(requestId: string, appointmentId: string, input: Record<string, unknown>, viewer: CivicViewer) {
   const row = await ownedRequest(requestId, viewer);
   const appointment = await prisma.serviceAppointment.findFirst({ where: { id: appointmentId, requestId }, select: { id: true, status: true, scheduledAt: true } });
   if (!appointment) throw new CivicError("Schedule option not found.", 404);
@@ -368,7 +368,7 @@ export async function citizenAppointmentAction(requestId: string, appointmentId:
   }
 }
 
-export async function adminFinalAction(id: string, input: any, viewer: CivicViewer) {
+export async function adminFinalAction(id: string, input: Record<string, unknown>, viewer: CivicViewer) {
   if (viewer.role !== "ADMIN") throw new CivicError("Super Admin verification is required.", 403);
   const row = await adminRequest(id, viewer);
   const service = await resolveServiceDefinition(row.serviceKey, true);

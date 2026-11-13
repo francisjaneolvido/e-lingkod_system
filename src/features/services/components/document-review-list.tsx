@@ -6,18 +6,27 @@ import { DocumentInlinePreview } from "./document-inline-preview";
 import { CheckCircle2, FileText, Loader2, RotateCcw, XCircle } from "lucide-react";
 import type { ServiceRequirement } from "../catalog";
 
+type ReviewDocument = {
+  id: string;
+  requirementKey: string;
+  fileName: string;
+  mimeType: string;
+  verificationStatus: string;
+  verificationNote: string | null;
+};
+
 const statusTone: Record<string,string> = {
   PENDING: "bg-warning-soft text-warning-foreground border-border",
   VERIFIED: "bg-success-soft text-success border-border",
   REJECTED: "bg-danger-soft text-destructive border-border",
 };
 
-export function DocumentReviewList({ requestId, requirements, documents, reviewEnabled }: { requestId:string; requirements:ServiceRequirement[]; documents:any[]; reviewEnabled:boolean }) {
+export function DocumentReviewList({ requestId, requirements, documents, reviewEnabled }: { requestId:string; requirements:ServiceRequirement[]; documents:ReviewDocument[]; reviewEnabled:boolean }) {
   const router = useRouter();
   const [notes, setNotes] = useState<Record<string,string>>({});
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
-  const latest = new Map<string, any>();
+  const latest = new Map<string, ReviewDocument>();
   for (const document of documents) if (!latest.has(document.requirementKey)) latest.set(document.requirementKey, document);
 
   async function review(documentId:string, action:"VERIFY"|"REJECT") {

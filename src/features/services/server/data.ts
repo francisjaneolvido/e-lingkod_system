@@ -1,5 +1,6 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
+import type { Prisma } from "@/generated/prisma/client";
 import type { CivicViewer } from "@/features/civic/types";
 import { isServiceStatus } from "../domain";
 import { departmentMatchesService } from "../catalog";
@@ -52,7 +53,7 @@ export const workflowViews = serviceWorkflowViews;
 
 export async function adminServiceQueue(viewer: CivicViewer, filters?: { status?: string; serviceKey?: string; mine?: boolean; query?: string; view?: string }) {
   await refreshExpiredWorkOffers();
-  const conditions: any[] = [await serviceScope(viewer)];
+  const conditions: Prisma.ServiceRequestWhereInput[] = [await serviceScope(viewer)];
   if (filters?.status) conditions.push({ status: filters.status });
   else if (filters?.view && serviceWorkflowViews[filters.view]) conditions.push({ status: { in: serviceWorkflowViews[filters.view] } });
   if (filters?.serviceKey) conditions.push({ serviceKey: filters.serviceKey });
