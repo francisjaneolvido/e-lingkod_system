@@ -26,7 +26,7 @@ export function HeroSection({ isLgu = false }: { isLgu?: boolean }) {
     onTouchCancel={() => { touchStart.current = null; }}
     onTouchEnd={event => { const start = touchStart.current; touchStart.current = null; if (!start || !event.changedTouches.length) return; const dx = event.changedTouches[0].clientX - start.x, dy = event.changedTouches[0].clientY - start.y; if (Math.abs(dx) >= 60 && Math.abs(dx) > Math.abs(dy) * 1.5) navigate(dx < 0 ? "next" : "previous"); }}>
     <div className="public-container gateway-shell">
-      <div className="gateway-welcome"><p className="public-location"><MapPin size={17} aria-hidden="true" /> eLingkod Bayan</p><h1 id="elb-hero-heading">Ang serbisyo,<br />nagsisimula sa’yo.</h1><p>A concern to share. A service to find. Start with what you need.</p></div>
+      <div className="gateway-welcome"><p className="public-location"><MapPin size={17} aria-hidden="true" /> eLingkod Bayan</p><h1 id="elb-hero-heading">Ang serbisyo,<br />nagsisimula sa’yo.</h1><p>A concern to share. A service to find. Welcome to e-Lingkod Bayan - Version 2.0!</p></div>
       <div className="gateway-start">
         <fieldset><legend>What would you like to do?</legend><div className="gateway-choices">{intents.map(item => <label key={item.id} className={intent === item.id ? "is-selected" : ""}><input type="radio" name="service-intent" value={item.id} checked={intent === item.id} onChange={() => setIntent(item.id)} /><item.icon size={22} aria-hidden="true" /><span>{item.label}</span></label>)}</div></fieldset>
         <div className="gateway-preview" aria-live="polite" aria-atomic="true"><h2>{selected.title}</h2><p>{selected.description}</p></div>
