@@ -6,7 +6,7 @@ export async function PATCH(request: Request, context: { params: Promise<{ id: s
   try {
     assertSameOrigin(request);
     const viewer = await requireApiViewer(request);
-    const body = await readJson(request) as any;
+    const body = await readJson(request) as { action?: unknown; reason?: unknown };
     const action = body?.action === "DECLINE" ? "DECLINE" : body?.action === "ACCEPT" ? "ACCEPT" : null;
     if (!action) return json({ error: "Choose Accept or Decline." }, 400);
     await acceptOrDeclineWork((await context.params).id, action, viewer, typeof body?.reason === "string" ? body.reason : "");

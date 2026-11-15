@@ -2,16 +2,31 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { AlertTriangle, CalendarClock, CheckCircle2, ClipboardCheck, Loader2, Plus, Send, Trash2, UserRoundCheck } from "lucide-react";
 import type { SerializableOnlineServiceDefinition } from "../catalog";
 
 const input = "elb-field mt-2";
 
+type AdminActionRequest = {
+  id: string;
+  status: string;
+  assignedStaffId: string | null;
+  assignedDepartment: string | null;
+  releaseApprovedAt: Date | string | null;
+};
+type StaffOption = {
+  id: string;
+  name: string;
+  department: string | null;
+  activeLoad?: number;
+};
+
 export function AdminRequestActions({ request, service, viewerRole, staff, verificationReady, verifiedRequiredCount, requiredDocumentCount }: {
-  request:any;
+  request:AdminActionRequest;
   service:SerializableOnlineServiceDefinition;
   viewerRole:string;
-  staff:Array<any>;
+  staff:StaffOption[];
   verificationReady:boolean;
   verifiedRequiredCount:number;
   requiredDocumentCount:number;
@@ -45,7 +60,7 @@ export function AdminRequestActions({ request, service, viewerRole, staff, verif
     return "Actions are limited by the current workflow state to protect the audit trail.";
   }, [request.status, releaseAlreadyApproved, reviewStage, verificationReady, verifiedRequiredCount, requiredDocumentCount, requiredAppointment, service]);
 
-  async function call(url:string, method:string, body:any) {
+  async function call(url:string, method:string, body:unknown) {
     setBusy(url + method);
     setError("");
     try {
@@ -83,7 +98,7 @@ export function AdminRequestActions({ request, service, viewerRole, staff, verif
     {viewerRole === "ADMIN" && <section className="elb-service-action-section">
       <div className="flex items-center gap-2"><UserRoundCheck size={16} className="text-foreground"/><h3 className="text-xs font-semibold text-foreground">Assignment override</h3></div>
       <p className="mt-1 text-xs leading-4 text-muted-foreground">Normal requests are balanced automatically among eligible {service.processingOffice} staff. Use this only to override or rescue an unaccepted case.</p>
-      {staff.length === 0 && <p className="mt-2 rounded-lg bg-warning-soft p-3 text-xs text-warning-foreground">No eligible staff for this request yet. Set the right office and enable Online LGU Services in <a href="/admin/staff" className="font-bold underline">Staff Management</a>.</p>}
+      {staff.length === 0 && <p className="mt-2 rounded-lg bg-warning-soft p-3 text-xs text-warning-foreground">No eligible staff for this request yet. Set the right office and enable Online LGU Services in <Link href="/admin/staff" className="font-bold underline">Staff Management</Link>.</p>}
       <div className="mt-3 grid gap-2">
         <select className={input} value={staffId} onChange={event => setStaffId(event.target.value)}><option value="">Choose staff for manual override</option>{staff.map(person => <option key={person.id} value={person.id}>{person.name} · {person.department || "No department"}{typeof person.activeLoad === "number" ? ` · ${person.activeLoad} active` : ""}</option>)}</select>
         <button disabled={!staffId || !!busy} onClick={() => call(`/api/admin/services/requests/${request.id}/assign`, "PATCH", { staffId })} className="rounded-xl bg-primary px-3 py-2.5 text-xs font-semibold text-white disabled:opacity-50">Assign / reassign</button>

@@ -1,0 +1,46 @@
+# ISOLATED LAB ONLY: does not use or expose the normal Windows MySQL database.
+name: e-lingkod-lab3
+services:
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DOCKER_MYSQL_ROOT_PASSWORD:?Set this in .env.docker.local}
+      MYSQL_DATABASE: e_lingkod_lab3
+      MYSQL_USER: elingkod_app
+      MYSQL_PASSWORD: ${DOCKER_MYSQL_PASSWORD:?Set this in .env.docker.local}
+    volumes:
+      - mysql_lab_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  app:
+    image: e-lingkod:lab3
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_APP_URL: http://localhost:3001
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: mysql://elingkod_app:${DOCKER_MYSQL_PASSWORD:?Set this in .env.docker.local}@db:3306/e_lingkod_lab3
+      MYSQL_RSA_PUBLIC_KEY_PATH: /run/mysql-public.pem
+      BETTER_AUTH_SECRET: ${DOCKER_BETTER_AUTH_SECRET:?Set this in .env.docker.local}
+      BETTER_AUTH_URL: http://localhost:3001
+      NEXT_PUBLIC_APP_URL: http://localhost:3001
+      # New in main after PR #21. Optional for homepage; required for new civic photo submissions.
+      OPENAI_API_KEY: ${DOCKER_OPENAI_API_KEY:-}
+      OPENAI_VISION_MODEL: ${DOCKER_OPENAI_VISION_MODEL:-gpt-4o-mini}
+      GEOAPIFY_API_KEY: ${DOCKER_GEOAPIFY_API_KEY:-}
+    volumes:
+      - ./mysql-public.pem:/run/mysql-public.pem:ro
+    ports:
+      - "127.0.0.1:3001:3000"
+
+volumes:
+  mysql_lab_data:

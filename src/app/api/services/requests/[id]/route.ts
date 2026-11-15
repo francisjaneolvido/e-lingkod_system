@@ -7,7 +7,7 @@ export async function PATCH(request:Request,{params}:{params:Promise<{id:string}
     assertSameOrigin(request);
     const viewer=await requireCitizenApiViewer(request);
     const {id}=await params;
-    const body=await readJson(request) as any;
+    const body=await readJson(request) as { action?: unknown };
     const action=String(body?.action||"UPDATE");
     if(action==="SUBMIT") await submitCitizenServiceRequest(id,viewer);
     else if(action==="CANCEL") await cancelCitizenServiceRequest(id,viewer);

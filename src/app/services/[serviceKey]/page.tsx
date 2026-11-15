@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarClock, CheckCircle2, FileUp, Info, ShieldCheck } from "lucide-react";
 import { currentViewer } from "@/lib/access";
@@ -44,5 +45,5 @@ export default async function ServicePage({ params }: { params: Promise<{service
   </div></main><SiteFooter/></>;
 }
 
-function InfoBlock({ icon:Icon, title, text }: { icon:any; title:string; text:string }) { return <div className="rounded-xl bg-card px-3 py-2.5"><div className="flex items-center gap-2"><Icon size={14} className="text-muted-foreground"/><strong className="text-xs text-foreground">{title}</strong></div><span className="mt-1 block text-xs leading-5 text-muted-foreground">{text}</span></div>; }
+function InfoBlock({ icon:Icon, title, text }: { icon:LucideIcon; title:string; text:string }) { return <div className="rounded-xl bg-card px-3 py-2.5"><div className="flex items-center gap-2"><Icon size={14} className="text-muted-foreground"/><strong className="text-xs text-foreground">{title}</strong></div><span className="mt-1 block text-xs leading-5 text-muted-foreground">{text}</span></div>; }
 function AccessCard({ title, body, href, action }: { title:string; body:string; href:string; action:string }) { return <div className="rounded-[18px] border border-border bg-card p-5"><h2 className="text-base font-semibold text-foreground">{title}</h2><p className="mt-2 text-xs leading-5 text-muted-foreground">{body}</p><Link href={href} className="mt-4 inline-flex rounded-xl bg-primary px-4 py-2.5 text-xs font-semibold text-white">{action}</Link></div>; }

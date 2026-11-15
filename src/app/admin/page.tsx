@@ -46,8 +46,12 @@ export default async function AdminDashboard() {
   }
   if (viewer.role !== "ADMIN") return null;
 
+
+  // The cutoff is used for request-time server database queries.
+  // eslint-disable-next-line react-hooks/purity -- Request-scoped server timestamp.
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-  const agingThreshold = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  const agingThreshold = sevenDaysAgo;
+
   const [statusCounts, recentReports, citizenCount, pendingVacancies, importIssues, recentSurveys, serviceCounts, unassignedServices, agingServices, activeAssignments] = await Promise.all([
     prisma.civicReport.groupBy({ by: ["status"], _count: { _all: true } }),
     listReports(viewer, true, 5),

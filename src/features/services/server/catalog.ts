@@ -1,5 +1,6 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
+import type { ServiceDefinition } from "@/generated/prisma/client";
 import {
   ONLINE_SERVICES,
   serviceByKey,
@@ -17,7 +18,7 @@ function iconFor(service: Pick<SerializableOnlineServiceDefinition, "key" | "cat
   return Building2;
 }
 
-function safeConfig(row: { configJson: string } & Record<string, any>): SerializableOnlineServiceDefinition {
+function safeConfig(row: ServiceDefinition): SerializableOnlineServiceDefinition {
   let parsed: Partial<SerializableOnlineServiceDefinition> = {};
   try { parsed = JSON.parse(row.configJson || "{}"); } catch {}
   const built = serviceByKey(row.key);
@@ -43,12 +44,12 @@ function safeConfig(row: { configJson: string } & Record<string, any>): Serializ
     processingTimeText: row.processingTimeText || undefined,
     assignmentStrategy: row.assignmentStrategy === "MANUAL" ? "MANUAL" : "AUTO_BALANCE",
     acceptTimeoutMinutes: row.acceptTimeoutMinutes,
-    fields: Array.isArray((parsed as any).fields) ? (parsed as any).fields : (built?.fields ?? []),
-    requirements: Array.isArray((parsed as any).requirements) ? (parsed as any).requirements : (built?.requirements ?? []),
-    reviewChecklist: Array.isArray((parsed as any).reviewChecklist) ? (parsed as any).reviewChecklist : (built?.reviewChecklist ?? []),
-    departmentAliases: Array.isArray((parsed as any).departmentAliases) ? (parsed as any).departmentAliases : (built?.departmentAliases ?? [row.departmentCode]),
-    outcomeLabel: (parsed as any).outcomeLabel || built?.outcomeLabel || "LGU service outcome",
-    serviceNotice: (parsed as any).serviceNotice || built?.serviceNotice || "Requirements and processing steps remain subject to the LGU Citizen's Charter.",
+    fields: Array.isArray(parsed.fields) ? parsed.fields : (built?.fields ?? []),
+    requirements: Array.isArray(parsed.requirements) ? parsed.requirements : (built?.requirements ?? []),
+    reviewChecklist: Array.isArray(parsed.reviewChecklist) ? parsed.reviewChecklist : (built?.reviewChecklist ?? []),
+    departmentAliases: Array.isArray(parsed.departmentAliases) ? parsed.departmentAliases : (built?.departmentAliases ?? [row.departmentCode]),
+    outcomeLabel: parsed.outcomeLabel || built?.outcomeLabel || "LGU service outcome",
+    serviceNotice: parsed.serviceNotice || built?.serviceNotice || "Requirements and processing steps remain subject to the LGU Citizen's Charter.",
   } as SerializableOnlineServiceDefinition;
 }
 

@@ -26,7 +26,7 @@ export default async function AdminServiceDetail({ params }: { params: Promise<{
   const staff = viewer.role === "ADMIN" ? await serviceStaffOptions(service.key) : [];
   const status = isServiceStatus(request.status) ? request.status : "DRAFT";
 
-  const latestDocuments = new Map<string, any>();
+  const latestDocuments = new Map<string, (typeof request.documents)[number]>();
   for (const document of request.documents) if (!latestDocuments.has(document.requirementKey)) latestDocuments.set(document.requirementKey, document);
   const requiredRequirements = activeServiceRequirements(service, request.formData || {}).filter(requirement => requirement.required);
   const verifiedRequiredCount = requiredRequirements.filter(requirement => latestDocuments.get(requirement.key)?.verificationStatus === "VERIFIED").length;
@@ -38,7 +38,7 @@ export default async function AdminServiceDetail({ params }: { params: Promise<{
   return <div className="elb-admin-workflow space-y-4">
     <Link href="/admin/services" className="inline-flex items-center gap-2 text-xs font-bold text-foreground"><ArrowLeft size={15}/> Service Request Desk</Link>
 
-    {offeredToViewer && <WorkOfferPanel offer={request.workAssignment as any}/>}
+    {offeredToViewer && request.workAssignment && <WorkOfferPanel offer={request.workAssignment}/>}
 
     <section className="border-b border-border py-4">
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -72,14 +72,14 @@ export default async function AdminServiceDetail({ params }: { params: Promise<{
 
         {request.appointments.length > 0 && <section className="elb-admin-detail-section">
           <div className="flex items-center gap-2"><CalendarClock size={16} className="text-muted-foreground"/><h2 className="text-xs font-semibold text-foreground">Appointment history</h2></div>
-          <div className="mt-3 grid gap-2 sm:grid-cols-2">{request.appointments.map((appointment:any) => <div key={appointment.id} className="rounded-xl border border-border bg-card p-3"><div className="flex items-center justify-between gap-2"><strong className="text-xs text-foreground">{new Date(appointment.scheduledAt).toLocaleString("en-PH")}</strong><span className="rounded-full bg-muted px-2 py-0.5 text-xs font-bold text-muted-foreground">{appointment.status.replaceAll("_", " ")}</span></div><p className="mt-1 text-xs text-muted-foreground">{appointment.location}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{appointment.agenda}</p>{appointment.citizenNote && <p className="mt-2 rounded-lg bg-card px-2.5 py-2 text-xs text-muted-foreground">Citizen note: {appointment.citizenNote}</p>}</div>)}</div>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">{request.appointments.map(appointment => <div key={appointment.id} className="rounded-xl border border-border bg-card p-3"><div className="flex items-center justify-between gap-2"><strong className="text-xs text-foreground">{new Date(appointment.scheduledAt).toLocaleString("en-PH")}</strong><span className="rounded-full bg-muted px-2 py-0.5 text-xs font-bold text-muted-foreground">{appointment.status.replaceAll("_", " ")}</span></div><p className="mt-1 text-xs text-muted-foreground">{appointment.location}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{appointment.agenda}</p>{appointment.citizenNote && <p className="mt-2 rounded-lg bg-card px-2.5 py-2 text-xs text-muted-foreground">Citizen note: {appointment.citizenNote}</p>}</div>)}</div>
         </section>}
 
         {(request.staffRecommendation || request.releaseNote || request.finalNote) && <section className="grid gap-3 sm:grid-cols-3">{request.staffRecommendation && <div className="rounded-[16px] border border-border bg-card p-4"><span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Staff recommendation</span><p className="mt-2 text-xs leading-5 text-foreground">{request.staffRecommendation}</p></div>}{request.releaseNote && <div className="rounded-[16px] border border-border bg-card p-4"><span className="text-xs font-semibold uppercase tracking-wider text-warning-foreground">Release / delivery note</span><p className="mt-2 text-xs leading-5 text-warning-foreground">{request.releaseNote}</p></div>}{request.finalNote && <div className="rounded-[16px] border border-border bg-card p-4"><span className="text-xs font-semibold uppercase tracking-wider text-success">Super Admin verification</span><p className="mt-2 text-xs leading-5 text-success">{request.finalNote}</p></div>}</section>}
 
         <section className="elb-admin-detail-section">
           <h2 className="text-xs font-semibold text-foreground">Audit timeline</h2>
-          <div className="mt-3 space-y-0">{request.events.map((event:any, index:number) => <div key={event.id} className="relative flex gap-3 pb-4 last:pb-0"><span className="relative z-10 mt-1.5 size-2.5 rounded-full bg-primary ring-4 ring-border"/>{index < request.events.length - 1 && <span className="absolute left-[4px] top-4 h-full w-px bg-muted"/>}<div className="min-w-0"><p className="text-xs font-bold leading-5 text-foreground">{event.note}</p><p className="mt-1 text-xs text-muted-foreground">{event.actor?.name || "System"} · {new Date(event.createdAt).toLocaleString("en-PH")} · {event.visibleToCitizen ? "Citizen visible" : "Internal"}</p></div></div>)}</div>
+          <div className="mt-3 space-y-0">{request.events.map((event, index) => <div key={event.id} className="relative flex gap-3 pb-4 last:pb-0"><span className="relative z-10 mt-1.5 size-2.5 rounded-full bg-primary ring-4 ring-border"/>{index < request.events.length - 1 && <span className="absolute left-[4px] top-4 h-full w-px bg-muted"/>}<div className="min-w-0"><p className="text-xs font-bold leading-5 text-foreground">{event.note}</p><p className="mt-1 text-xs text-muted-foreground">{event.actor?.name || "System"} · {new Date(event.createdAt).toLocaleString("en-PH")} · {event.visibleToCitizen ? "Citizen visible" : "Internal"}</p></div></div>)}</div>
         </section>
       </div>
 
